@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,14 @@
 		873EC01826D39057003C3525 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873EC01626D39057003C3525 /* LaunchScreen.storyboard */; };
 		873EC02326D39057003C3525 /* ThingLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873EC02226D39057003C3525 /* ThingLogTests.swift */; };
 		873EC02E26D39057003C3525 /* ThingLogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873EC02D26D39057003C3525 /* ThingLogUITests.swift */; };
+		873EC04126D504BA003C3525 /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC03C26D504BA003C3525 /* RxRelay.xcframework */; };
+		873EC04226D504BA003C3525 /* RxRelay.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC03C26D504BA003C3525 /* RxRelay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		873EC04526D504BA003C3525 /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC03E26D504BA003C3525 /* RxSwift.xcframework */; };
+		873EC04626D504BA003C3525 /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC03E26D504BA003C3525 /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		873EC04726D504BA003C3525 /* RxBlocking.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC03F26D504BA003C3525 /* RxBlocking.xcframework */; };
+		873EC04826D504BA003C3525 /* RxBlocking.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC03F26D504BA003C3525 /* RxBlocking.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		873EC04926D504BA003C3525 /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC04026D504BA003C3525 /* RxCocoa.xcframework */; };
+		873EC04A26D504BA003C3525 /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC04026D504BA003C3525 /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +42,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		873EC04B26D504BA003C3525 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				873EC04826D504BA003C3525 /* RxBlocking.xcframework in Embed Frameworks */,
+				873EC04626D504BA003C3525 /* RxSwift.xcframework in Embed Frameworks */,
+				873EC04A26D504BA003C3525 /* RxCocoa.xcframework in Embed Frameworks */,
+				873EC04226D504BA003C3525 /* RxRelay.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		873EC00526D39055003C3525 /* ThingLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThingLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873EC00826D39055003C3525 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +74,11 @@
 		873EC02926D39057003C3525 /* ThingLogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThingLogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		873EC02D26D39057003C3525 /* ThingLogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogUITests.swift; sourceTree = "<group>"; };
 		873EC02F26D39057003C3525 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		873EC03C26D504BA003C3525 /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRelay.xcframework; path = Carthage/Build/RxRelay.xcframework; sourceTree = "<group>"; };
+		873EC03D26D504BA003C3525 /* RxTest.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxTest.xcframework; path = Carthage/Build/RxTest.xcframework; sourceTree = "<group>"; };
+		873EC03E26D504BA003C3525 /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
+		873EC03F26D504BA003C3525 /* RxBlocking.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxBlocking.xcframework; path = Carthage/Build/RxBlocking.xcframework; sourceTree = "<group>"; };
+		873EC04026D504BA003C3525 /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +86,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				873EC04726D504BA003C3525 /* RxBlocking.xcframework in Frameworks */,
+				873EC04526D504BA003C3525 /* RxSwift.xcframework in Frameworks */,
+				873EC04926D504BA003C3525 /* RxCocoa.xcframework in Frameworks */,
+				873EC04126D504BA003C3525 /* RxRelay.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +117,7 @@
 				873EC02126D39057003C3525 /* ThingLogTests */,
 				873EC02C26D39057003C3525 /* ThingLogUITests */,
 				873EC00626D39055003C3525 /* Products */,
+				873EC03B26D504BA003C3525 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +163,18 @@
 			path = ThingLogUITests;
 			sourceTree = "<group>";
 		};
+		873EC03B26D504BA003C3525 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				873EC03F26D504BA003C3525 /* RxBlocking.xcframework */,
+				873EC04026D504BA003C3525 /* RxCocoa.xcframework */,
+				873EC03C26D504BA003C3525 /* RxRelay.xcframework */,
+				873EC03E26D504BA003C3525 /* RxSwift.xcframework */,
+				873EC03D26D504BA003C3525 /* RxTest.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,6 +185,8 @@
 				873EC00126D39055003C3525 /* Sources */,
 				873EC00226D39055003C3525 /* Frameworks */,
 				873EC00326D39055003C3525 /* Resources */,
+				873EC04B26D504BA003C3525 /* Embed Frameworks */,
+				873EC04C26D504CD003C3525 /* Carthage Run Script */,
 			);
 			buildRules = (
 			);
@@ -251,6 +300,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		873EC04C26D504CD003C3525 /* Carthage Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/RxBlocking.xcframework",
+				"$(SRCROOT)/Carthage/Build/RxCocoa.xcframework",
+				"$(SRCROOT)/Carthage/Build/RxRelay.xcframework",
+				"$(SRCROOT)/Carthage/Build/RxSwift.xcframework",
+			);
+			name = "Carthage Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage outdated --xcode-warnings 2>/dev/null\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		873EC00126D39055003C3525 /* Sources */ = {
