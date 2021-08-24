@@ -23,6 +23,7 @@
 		873EC04826D504BA003C3525 /* RxBlocking.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC03F26D504BA003C3525 /* RxBlocking.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		873EC04926D504BA003C3525 /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC04026D504BA003C3525 /* RxCocoa.xcframework */; };
 		873EC04A26D504BA003C3525 /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC04026D504BA003C3525 /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		873EC04E26D5068F003C3525 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 873EC04D26D5068F003C3525 /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		873EC03E26D504BA003C3525 /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
 		873EC03F26D504BA003C3525 /* RxBlocking.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxBlocking.xcframework; path = Carthage/Build/RxBlocking.xcframework; sourceTree = "<group>"; };
 		873EC04026D504BA003C3525 /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
+		873EC04D26D5068F003C3525 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		873EBFFC26D39055003C3525 = {
 			isa = PBXGroup;
 			children = (
+				873EC04D26D5068F003C3525 /* .swiftlint.yml */,
 				873EC00726D39055003C3525 /* ThingLog */,
 				873EC02126D39057003C3525 /* ThingLogTests */,
 				873EC02C26D39057003C3525 /* ThingLogUITests */,
@@ -134,11 +137,9 @@
 		873EC00726D39055003C3525 /* ThingLog */ = {
 			isa = PBXGroup;
 			children = (
-				873EC00826D39055003C3525 /* AppDelegate.swift */,
-				873EC00A26D39055003C3525 /* SceneDelegate.swift */,
+				873EC05026D50825003C3525 /* SupportingFiles */,
 				873EC00C26D39055003C3525 /* ViewController.swift */,
 				873EC01426D39057003C3525 /* Assets.xcassets */,
-				873EC01626D39057003C3525 /* LaunchScreen.storyboard */,
 				873EC01926D39057003C3525 /* Info.plist */,
 				873EC01126D39055003C3525 /* ThingLog.xcdatamodeld */,
 			);
@@ -175,6 +176,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		873EC05026D50825003C3525 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				873EC00826D39055003C3525 /* AppDelegate.swift */,
+				873EC00A26D39055003C3525 /* SceneDelegate.swift */,
+				873EC01626D39057003C3525 /* LaunchScreen.storyboard */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -187,6 +198,7 @@
 				873EC00326D39055003C3525 /* Resources */,
 				873EC04B26D504BA003C3525 /* Embed Frameworks */,
 				873EC04C26D504CD003C3525 /* Carthage Run Script */,
+				873EC04F26D5077C003C3525 /* SwiftLint Run Script */,
 			);
 			buildRules = (
 			);
@@ -280,6 +292,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				873EC04E26D5068F003C3525 /* .swiftlint.yml in Resources */,
 				873EC01826D39057003C3525 /* LaunchScreen.storyboard in Resources */,
 				873EC01526D39057003C3525 /* Assets.xcassets in Resources */,
 			);
@@ -323,6 +336,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage outdated --xcode-warnings 2>/dev/null\n";
+		};
+		873EC04F26D5077C003C3525 /* SwiftLint Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Adds support for Apple Silicon brew directory\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
