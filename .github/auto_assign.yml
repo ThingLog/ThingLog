@@ -1,0 +1,15 @@
+# 풀 리퀘스트에 리뷰어를 추가하려면 true로 설정한다.
+addReviewers: true
+
+# 풀 리퀘스트에 Assignees를 추가하려면 true로 설정한다.
+addAssignees: author
+
+# A list of reviewers to be added to pull requests (GitHub user name)
+# 풀 리퀘스트 리뷰어 목록 (github user name)
+reviewers: 
+  - jwonyLee
+  - gustn3965
+
+# 풀 리퀘스트에 리뷰어 인원 설정
+# 모든 리뷰어를 추가하려면 0으로 설정한다. (기본값: 0)
+numberOfReviewers: 0
