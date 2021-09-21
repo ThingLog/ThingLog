@@ -27,6 +27,7 @@
 		DB7C04A626F5F281009F5C0A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A526F5F281009F5C0A /* Coordinator.swift */; };
 		DB7C04A826F5F2BB009F5C0A /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */; };
 		DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */; };
+		DB7C04BE26F9BE72009F5C0A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04BD26F9BE72009F5C0A /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		DB7C04A526F5F281009F5C0A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCoordinator.swift; sourceTree = "<group>"; };
+		DB7C04BD26F9BE72009F5C0A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 		873EC00726D39055003C3525 /* ThingLog */ = {
 			isa = PBXGroup;
 			children = (
+				DB7C04BB26F9BE39009F5C0A /* View */,
 				DB7C04A426F5F26B009F5C0A /* Coordinator */,
 				873EC05026D50825003C3525 /* SupportingFiles */,
 				873EC00C26D39055003C3525 /* ViewController.swift */,
@@ -201,6 +204,14 @@
 				DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		DB7C04BB26F9BE39009F5C0A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04BD26F9BE72009F5C0A /* ProfileView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,6 +390,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB7C04BE26F9BE72009F5C0A /* ProfileView.swift in Sources */,
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
 				873EC01326D39055003C3525 /* ThingLog.xcdatamodeld in Sources */,
 				DB7C04A626F5F281009F5C0A /* Coordinator.swift in Sources */,
