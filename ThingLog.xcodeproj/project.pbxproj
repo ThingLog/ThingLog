@@ -28,6 +28,7 @@
 		DB7C04A826F5F2BB009F5C0A /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */; };
 		DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */; };
 		DB7C04BE26F9BE72009F5C0A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04BD26F9BE72009F5C0A /* ProfileView.swift */; };
+		DB7C04C226F9CA6A009F5C0A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04C126F9CA6A009F5C0A /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCoordinator.swift; sourceTree = "<group>"; };
 		DB7C04BD26F9BE72009F5C0A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		DB7C04C126F9CA6A009F5C0A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 		873EC00726D39055003C3525 /* ThingLog */ = {
 			isa = PBXGroup;
 			children = (
+				DB7C04C026F9CA64009F5C0A /* ViewController */,
 				DB7C04BB26F9BE39009F5C0A /* View */,
 				DB7C04A426F5F26B009F5C0A /* Coordinator */,
 				873EC05026D50825003C3525 /* SupportingFiles */,
@@ -212,6 +215,14 @@
 				DB7C04BD26F9BE72009F5C0A /* ProfileView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		DB7C04C026F9CA64009F5C0A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04C126F9CA6A009F5C0A /* HomeViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,6 +406,7 @@
 				873EC01326D39055003C3525 /* ThingLog.xcdatamodeld in Sources */,
 				DB7C04A626F5F281009F5C0A /* Coordinator.swift in Sources */,
 				DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */,
+				DB7C04C226F9CA6A009F5C0A /* HomeViewController.swift in Sources */,
 				873EC00926D39055003C3525 /* AppDelegate.swift in Sources */,
 				873EC00B26D39055003C3525 /* SceneDelegate.swift in Sources */,
 				DB7C04A826F5F2BB009F5C0A /* HomeCoordinator.swift in Sources */,

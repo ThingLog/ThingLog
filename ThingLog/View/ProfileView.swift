@@ -15,18 +15,8 @@ class ProfileView: UIView {
         button.titleLabel?.font = button.titleLabel?.font.withSize(20.0)
         button.setImage(UIImage(named: "modifyText"), for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
-        button.contentEdgeInsets = UIEdgeInsets(
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 8
-        )
-        button.imageEdgeInsets = UIEdgeInsets(
-            top: 0,
-            left: 8,
-            bottom: 0,
-            right: 0
-        )
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         return button
     }()
     
@@ -95,7 +85,6 @@ class ProfileView: UIView {
     func setupView() {
         backgroundColor = .white
         addSubview(horizontalStackView)
-        clipsToBounds = true
         
         userBadgeImageView.layer.cornerRadius = imageHeight / 2
         NSLayoutConstraint.activate([
