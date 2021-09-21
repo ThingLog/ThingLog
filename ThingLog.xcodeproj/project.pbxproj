@@ -27,6 +27,8 @@
 		DB7C04A626F5F281009F5C0A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A526F5F281009F5C0A /* Coordinator.swift */; };
 		DB7C04A826F5F2BB009F5C0A /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */; };
 		DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */; };
+		DB7C04C726F9E693009F5C0A /* UserInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04C626F9E693009F5C0A /* UserInformationViewModel.swift */; };
+		DB7C04CA26F9E69D009F5C0A /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04C926F9E69D009F5C0A /* UserDefaults+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		DB7C04A526F5F281009F5C0A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCoordinator.swift; sourceTree = "<group>"; };
+		DB7C04C626F9E693009F5C0A /* UserInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationViewModel.swift; sourceTree = "<group>"; };
+		DB7C04C926F9E69D009F5C0A /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +147,8 @@
 		873EC00726D39055003C3525 /* ThingLog */ = {
 			isa = PBXGroup;
 			children = (
+				DB7C04C826F9E696009F5C0A /* Extension */,
+				DB7C04C326F9E66F009F5C0A /* ViewModel */,
 				DB7C04A426F5F26B009F5C0A /* Coordinator */,
 				873EC05026D50825003C3525 /* SupportingFiles */,
 				873EC00C26D39055003C3525 /* ViewController.swift */,
@@ -201,6 +207,22 @@
 				DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		DB7C04C326F9E66F009F5C0A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04C626F9E693009F5C0A /* UserInformationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DB7C04C826F9E696009F5C0A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04C926F9E69D009F5C0A /* UserDefaults+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,10 +402,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
+				DB7C04CA26F9E69D009F5C0A /* UserDefaults+.swift in Sources */,
 				873EC01326D39055003C3525 /* ThingLog.xcdatamodeld in Sources */,
 				DB7C04A626F5F281009F5C0A /* Coordinator.swift in Sources */,
 				DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */,
 				873EC00926D39055003C3525 /* AppDelegate.swift in Sources */,
+				DB7C04C726F9E693009F5C0A /* UserInformationViewModel.swift in Sources */,
 				873EC00B26D39055003C3525 /* SceneDelegate.swift in Sources */,
 				DB7C04A826F5F2BB009F5C0A /* HomeCoordinator.swift in Sources */,
 			);
