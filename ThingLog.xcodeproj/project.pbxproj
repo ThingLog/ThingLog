@@ -31,6 +31,11 @@
 		DB7C04E926FB19AE009F5C0A /* ContentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04E826FB19AE009F5C0A /* ContentsCollectionViewCell.swift */; };
 		DB7C04EC26FB1A04009F5C0A /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04EB26FB1A04009F5C0A /* UIView+.swift */; };
 		DB7C04EE26FB1ACE009F5C0A /* ContentsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04ED26FB1ACE009F5C0A /* ContentsTabView.swift */; };
+		DB7C04F026FB1EFF009F5C0A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04EF26FB1EFF009F5C0A /* HomeViewController.swift */; };
+		DB7C04F226FB1F36009F5C0A /* ContentsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04F126FB1F36009F5C0A /* ContentsPageViewController.swift */; };
+		DB7C04F426FB1F45009F5C0A /* BoughtContentsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04F326FB1F45009F5C0A /* BoughtContentsCollectionViewController.swift */; };
+		DB7C04F626FB1F4B009F5C0A /* WishContentsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04F526FB1F4B009F5C0A /* WishContentsCollectionViewController.swift */; };
+		DB7C04F826FB1F52009F5C0A /* GiftContentsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04F726FB1F52009F5C0A /* GiftContentsCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +100,11 @@
 		DB7C04E826FB19AE009F5C0A /* ContentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentsCollectionViewCell.swift; path = ThingLog/ViewController/ContentsCollection/ContentsCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		DB7C04EB26FB1A04009F5C0A /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		DB7C04ED26FB1ACE009F5C0A /* ContentsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsTabView.swift; sourceTree = "<group>"; };
+		DB7C04EF26FB1EFF009F5C0A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		DB7C04F126FB1F36009F5C0A /* ContentsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsPageViewController.swift; sourceTree = "<group>"; };
+		DB7C04F326FB1F45009F5C0A /* BoughtContentsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoughtContentsCollectionViewController.swift; sourceTree = "<group>"; };
+		DB7C04F526FB1F4B009F5C0A /* WishContentsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishContentsCollectionViewController.swift; sourceTree = "<group>"; };
+		DB7C04F726FB1F52009F5C0A /* GiftContentsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftContentsCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				DB7C04E026FB1900009F5C0A /* ContentsCollection */,
+				DB7C04EF26FB1EFF009F5C0A /* HomeViewController.swift */,
+				DB7C04F126FB1F36009F5C0A /* ContentsPageViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -226,6 +238,9 @@
 			isa = PBXGroup;
 			children = (
 				DB7C04E426FB1981009F5C0A /* BaseContentsCollectionViewController.swift */,
+				DB7C04F326FB1F45009F5C0A /* BoughtContentsCollectionViewController.swift */,
+				DB7C04F526FB1F4B009F5C0A /* WishContentsCollectionViewController.swift */,
+				DB7C04F726FB1F52009F5C0A /* GiftContentsCollectionViewController.swift */,
 			);
 			path = ContentsCollection;
 			sourceTree = "<group>";
@@ -432,16 +447,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB7C04EE26FB1ACE009F5C0A /* ContentsTabView.swift in Sources */,
+				DB7C04F426FB1F45009F5C0A /* BoughtContentsCollectionViewController.swift in Sources */,
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
 				DB7C04E526FB1981009F5C0A /* BaseContentsCollectionViewController.swift in Sources */,
 				873EC01326D39055003C3525 /* ThingLog.xcdatamodeld in Sources */,
 				DB7C04A626F5F281009F5C0A /* Coordinator.swift in Sources */,
+				DB7C04F626FB1F4B009F5C0A /* WishContentsCollectionViewController.swift in Sources */,
 				DB7C04EC26FB1A04009F5C0A /* UIView+.swift in Sources */,
+				DB7C04F826FB1F52009F5C0A /* GiftContentsCollectionViewController.swift in Sources */,
+				DB7C04F226FB1F36009F5C0A /* ContentsPageViewController.swift in Sources */,
 				DB7C04E926FB19AE009F5C0A /* ContentsCollectionViewCell.swift in Sources */,
 				DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */,
 				873EC00926D39055003C3525 /* AppDelegate.swift in Sources */,
 				873EC00B26D39055003C3525 /* SceneDelegate.swift in Sources */,
 				DB7C04A826F5F2BB009F5C0A /* HomeCoordinator.swift in Sources */,
+				DB7C04F026FB1EFF009F5C0A /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
