@@ -9,7 +9,7 @@ import CoreData
 import Foundation
 
 protocol PostRepositoryProtocol {
-    func create(_ newPost: Post)
+    func create(_ newPost: Post, completion: @escaping (Result<Bool, Error>) -> Void)
 }
 
 final class PostRepository: PostRepositoryProtocol {
@@ -19,11 +19,12 @@ final class PostRepository: PostRepositoryProtocol {
         self.coreDataStack = coreDataStack
     }
 
-    func create(_ newPost: Post) {
+    func create(_ newPost: Post, completion: @escaping (Result<Bool, Error>) -> Void) {
         coreDataStack.performBackgroundTask { context in
             do {
                 let post: PostEntity = newPost.toEntity(in: context)
                 try context.save()
+                completion(.success(true))
             } catch {
                 fatalError("PostRepository Unresolved error \(error)")
             }
