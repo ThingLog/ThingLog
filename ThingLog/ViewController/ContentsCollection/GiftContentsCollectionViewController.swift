@@ -12,7 +12,11 @@ class GiftContentsCollectionViewController: BaseContentsCollectionViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        collectionView.backgroundColor = .green
         setupBaseCollectionView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        originScrollContentsHeight = collectionView.contentSize.height
     }
 }

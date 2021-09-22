@@ -5,8 +5,8 @@
 //  Created by hyunsu on 2021/09/21.
 //
 
-import UIKit
 import RxSwift
+import UIKit
 
 class ContentsPageViewController: UIPageViewController {
     let controllers: [UIViewController] = [BoughtContentsCollectionViewController(),
@@ -14,7 +14,7 @@ class ContentsPageViewController: UIPageViewController {
                                            GiftContentsCollectionViewController()]
     
     var currentPageIndexSubject: PublishSubject = PublishSubject<Int>()
-    var currentContentsOffsetYSubject: PublishSubject = PublishSubject<CGFloat>()
+    var currentScrollContentsOffsetYSubject: PublishSubject = PublishSubject<CGFloat>()
     var currentPageIndex: Int {
         guard let controller = viewControllers?.first,
               let idx = controllers.firstIndex(of: controller) else {
@@ -33,19 +33,19 @@ class ContentsPageViewController: UIPageViewController {
     }
     
     func setupView() {
-        view.backgroundColor = .gray
+        view.backgroundColor = .white
         dataSource = self
         delegate = self
         setViewControllers([controllers[0]], direction: .forward, animated: true, completion: nil)
     }
     
-    /// 스크롤을 감지하여 위치값을 subscribe한다.
+    /// 스크롤을 감지하여 위치값을 subscribe하여 Subject에 주입시킨다.
     func subscribeControllers() {
         controllers.forEach {
             if let controller: BaseContentsCollectionViewController = $0 as? BaseContentsCollectionViewController {
-                controller.contentsOffsetYSubject
+                controller.scrollOffsetYSubject
                     .subscribe(onNext: { [weak self] in
-                        self?.currentContentsOffsetYSubject.onNext($0)
+                        self?.currentScrollContentsOffsetYSubject.onNext($0)
                     })
                     .disposed(by: controller.disposeBag)
             }

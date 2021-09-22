@@ -9,8 +9,6 @@ import RxSwift
 import UIKit
 
 final class HomeViewController: UIViewController {
-    var coordinator: Coordinator?
-    
     var contentsContainerView: UIView = {
         let view: UIView = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -28,6 +26,9 @@ final class HomeViewController: UIViewController {
         return controller
     }()
     
+    var coordinator: Coordinator?
+    var topAnchorContentsContainerView: NSLayoutConstraint?
+    
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,16 +36,21 @@ final class HomeViewController: UIViewController {
         setupContainerView()
         setupContentsTabView()
         setupPageViewController()
-        subscribePageVeiwController()
+        
+        subscribePageVeiwControllerTransition()
         subscribeContentsTabButton()
+        subscribePageViewControllerScrollOffset()
     }
     
+    // MARK: - Setup
     func setupContainerView() {
         view.addSubview(contentsContainerView)
+        
+        topAnchorContentsContainerView = contentsContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200)
+        topAnchorContentsContainerView?.isActive = true
         NSLayoutConstraint.activate([
             contentsContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             contentsContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            contentsContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
             contentsContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
@@ -71,16 +77,24 @@ final class HomeViewController: UIViewController {
             pageView.bottomAnchor.constraint(equalTo: contentsContainerView.bottomAnchor)
         ])
     }
+}
+
+// MARK: - Subscribe Rx
+extension HomeViewController {
     
-    func subscribePageVeiwController() {
+    /// PageViewController의 page가 전환될 시 subscribe하여 뷰 업데이트를 진행하는 메소드다.
+    func subscribePageVeiwControllerTransition() {
         pageViewController.currentPageIndexSubject
             .subscribe(onNext: { [weak self] index in
                 self?.contentsTabView.updateIndicatorBar(by: index)
                 self?.contentsTabView.updateButton(by: index)
+                self?.changeContentsContainerHeight(viewController: self!.pageViewController.controllers[index] as? BaseContentsCollectionViewController)
             })
             .disposed(by: pageViewController.disposeBag)
     }
     
+    
+    /// ContentsTabButton을 subscribe하여 각 버튼을 누를 시 PageViewController의 page를 전환하는 메소드다.
     func subscribeContentsTabButton() {
         for index in 0..<contentsTabView.buttonStackView.arrangedSubviews.count {
             guard let button: UIButton = contentsTabView.buttonStackView.arrangedSubviews[index] as? UIButton else { return }
@@ -101,10 +115,50 @@ final class HomeViewController: UIViewController {
                         direction = .reverse
                     }
                 }
-                self?.pageViewController.setViewControllers([self!.pageViewController.controllers[index]], direction: direction, animated: true, completion: nil)
+                guard let nextViewController: UIViewController = self?.pageViewController.controllers[index] else { return }
+                self?.pageViewController.setViewControllers([nextViewController], direction: direction, animated: true, completion: { _ in
+                    self?.changeContentsContainerHeight(viewController: nextViewController as? BaseContentsCollectionViewController)
+                })
                 self?.contentsTabView.updateIndicatorBar(by: index)
             }
             .disposed(by: contentsTabView.disposeBag)
+        }
+    }
+    
+    /// PageViewController의 scroll offset을 subscribe 하여 ContainerView 높이를 조절하는 메소드다.
+    func subscribePageViewControllerScrollOffset() {
+        pageViewController.currentScrollContentsOffsetYSubject
+            .subscribe(onNext: { [weak self] dist in
+                UIView.animate(withDuration: 0.1) {
+                    guard let currentConstant = self?.topAnchorContentsContainerView?.constant else { return }
+                    var dist: CGFloat = dist
+                    if dist >= 0 {
+                        dist = max(currentConstant - dist, 50)
+                    } else {
+                        dist = min(currentConstant - dist, 200)
+                    }
+                    self?.topAnchorContentsContainerView?.constant = dist
+                    self?.view.layoutIfNeeded()
+                }
+            })
+            .disposed(by: pageViewController.disposeBag)
+    }
+    
+    /// 콘텐츠 개수가 많은 상황에서 아래로 스크롤한 상태에서 콘텐츠 개수가 적은 페이지로 전환할 시 containerView의 높이를 줄여주는 메소드다.
+    /// - Parameter viewController: 콘텐츠가 적은 페이지의 controller를 넣는다.
+    func changeContentsContainerHeight(viewController: BaseContentsCollectionViewController?) {
+        guard let baseController = viewController else { return }
+        DispatchQueue.main.async {
+            if baseController.originScrollContentsHeight <= baseController.collectionView.frame.height {
+                UIView.animate(withDuration: 0.1) {
+                    self.contentsContainerView.layoutIfNeeded()
+                } completion: { _ in
+                    UIView.animate(withDuration: 0.3) {
+                        self.topAnchorContentsContainerView?.constant = 200
+                        self.contentsContainerView.layoutIfNeeded()
+                    }
+                }
+            }
         }
     }
 }

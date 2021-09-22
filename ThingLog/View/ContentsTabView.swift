@@ -85,7 +85,10 @@ class ContentsTabView: UIView {
             buttonStackView.bottomAnchor.constraint(equalTo: indicatorBar.topAnchor)
         ])
     }
-    
+}
+
+// MARK: - Update 
+extension ContentsTabView {
     /// 선택한 index를 통하여 해당 버튼을 tint 시키고, 그 외 버튼들은 연한 색깔로 변경한다.
     /// - Parameters:
     ///   - index: 선택한 index를 넣는다.

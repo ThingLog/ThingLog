@@ -12,7 +12,15 @@ class WishContentsCollectionViewController: BaseContentsCollectionViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        collectionView.backgroundColor = .blue
         setupBaseCollectionView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        originScrollContentsHeight = collectionView.contentSize.height
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        14
     }
 }

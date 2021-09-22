@@ -21,8 +21,10 @@ class BaseContentsCollectionViewController: UIViewController {
         return collection
     }()
     
-    var contentsOffsetYSubject: PublishSubject = PublishSubject<CGFloat>()
+    var scrollOffsetYSubject: PublishSubject = PublishSubject<CGFloat>()
     var disposeBag: DisposeBag = DisposeBag()
+    var recentScrollOffsetY: CGFloat = 0
+    var originScrollContentsHeight: CGFloat = 0
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -61,6 +63,22 @@ extension BaseContentsCollectionViewController: UICollectionViewDataSource {
 
 extension BaseContentsCollectionViewController: UIScrollViewDelegate, UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        contentsOffsetYSubject.onNext(scrollView.contentOffset.y)
+        if scrollView.contentOffset.y < 0 {
+            // 맨위에 스크롤한 경우
+            scrollOffsetYSubject.onNext(-200)
+            return
+        } else if scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.frame.height {
+            // 이미 맨 아래까지 스크롤한 경우
+            return
+        }
+        let nextOffset: CGFloat = scrollView.contentOffset.y - recentScrollOffsetY
+        
+        if scrollView.contentSize.height > scrollView.frame.height && nextOffset > 0 {
+            scrollOffsetYSubject.onNext(nextOffset)
+        } else if scrollView.contentOffset.y <= scrollView.frame.height / 2 && nextOffset < 0 {
+            // -> 내리기
+            scrollOffsetYSubject.onNext(nextOffset)
+        }
+        recentScrollOffsetY = scrollView.contentOffset.y
     }
 }
