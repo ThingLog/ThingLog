@@ -30,6 +30,7 @@
 		DB7C04E526FB1981009F5C0A /* BaseContentsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04E426FB1981009F5C0A /* BaseContentsCollectionViewController.swift */; };
 		DB7C04E926FB19AE009F5C0A /* ContentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04E826FB19AE009F5C0A /* ContentsCollectionViewCell.swift */; };
 		DB7C04EC26FB1A04009F5C0A /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04EB26FB1A04009F5C0A /* UIView+.swift */; };
+		DB7C04EE26FB1ACE009F5C0A /* ContentsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04ED26FB1ACE009F5C0A /* ContentsTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		DB7C04E426FB1981009F5C0A /* BaseContentsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseContentsCollectionViewController.swift; sourceTree = "<group>"; };
 		DB7C04E826FB19AE009F5C0A /* ContentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentsCollectionViewCell.swift; path = ThingLog/ViewController/ContentsCollection/ContentsCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		DB7C04EB26FB1A04009F5C0A /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		DB7C04ED26FB1ACE009F5C0A /* ContentsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				DB7C04E726FB199A009F5C0A /* CollectionViewCell */,
+				DB7C04ED26FB1ACE009F5C0A /* ContentsTabView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB7C04EE26FB1ACE009F5C0A /* ContentsTabView.swift in Sources */,
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
 				DB7C04E526FB1981009F5C0A /* BaseContentsCollectionViewController.swift in Sources */,
 				873EC01326D39055003C3525 /* ThingLog.xcdatamodeld in Sources */,
