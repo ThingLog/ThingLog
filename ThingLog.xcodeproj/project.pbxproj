@@ -24,6 +24,7 @@
 		873EC04926D504BA003C3525 /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC04026D504BA003C3525 /* RxCocoa.xcframework */; };
 		873EC04A26D504BA003C3525 /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC04026D504BA003C3525 /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		873EC04E26D5068F003C3525 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 873EC04D26D5068F003C3525 /* .swiftlint.yml */; };
+		87F2188326FB5B4100C3FBCA /* ThingLogRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188226FB5B4100C3FBCA /* ThingLogRepositoryTests.swift */; };
 		DB7C04A626F5F281009F5C0A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A526F5F281009F5C0A /* Coordinator.swift */; };
 		DB7C04A826F5F2BB009F5C0A /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */; };
 		DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */; };
@@ -84,6 +85,7 @@
 		873EC03F26D504BA003C3525 /* RxBlocking.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxBlocking.xcframework; path = Carthage/Build/RxBlocking.xcframework; sourceTree = "<group>"; };
 		873EC04026D504BA003C3525 /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
 		873EC04D26D5068F003C3525 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		87F2188226FB5B4100C3FBCA /* ThingLogRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogRepositoryTests.swift; sourceTree = "<group>"; };
 		DB7C04A526F5F281009F5C0A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCoordinator.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				873EC02226D39057003C3525 /* ThingLogTests.swift */,
+				87F2188226FB5B4100C3FBCA /* ThingLogRepositoryTests.swift */,
 				873EC02426D39057003C3525 /* Info.plist */,
 			);
 			path = ThingLogTests;
@@ -394,6 +397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				873EC02326D39057003C3525 /* ThingLogTests.swift in Sources */,
+				87F2188326FB5B4100C3FBCA /* ThingLogRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
