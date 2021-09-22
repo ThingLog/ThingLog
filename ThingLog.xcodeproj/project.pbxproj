@@ -36,6 +36,7 @@
 		DB7C04F426FB1F45009F5C0A /* BoughtContentsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04F326FB1F45009F5C0A /* BoughtContentsCollectionViewController.swift */; };
 		DB7C04F626FB1F4B009F5C0A /* WishContentsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04F526FB1F4B009F5C0A /* WishContentsCollectionViewController.swift */; };
 		DB7C04F826FB1F52009F5C0A /* GiftContentsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04F726FB1F52009F5C0A /* GiftContentsCollectionViewController.swift */; };
+		DB7C04FC26FB27A6009F5C0A /* TemplateImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04FB26FB27A6009F5C0A /* TemplateImageButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,7 @@
 		DB7C04F326FB1F45009F5C0A /* BoughtContentsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoughtContentsCollectionViewController.swift; sourceTree = "<group>"; };
 		DB7C04F526FB1F4B009F5C0A /* WishContentsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishContentsCollectionViewController.swift; sourceTree = "<group>"; };
 		DB7C04F726FB1F52009F5C0A /* GiftContentsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftContentsCollectionViewController.swift; sourceTree = "<group>"; };
+		DB7C04FB26FB27A6009F5C0A /* TemplateImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateImageButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +252,7 @@
 			children = (
 				DB7C04E726FB199A009F5C0A /* CollectionViewCell */,
 				DB7C04ED26FB1ACE009F5C0A /* ContentsTabView.swift */,
+				DB7C04FB26FB27A6009F5C0A /* TemplateImageButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				DB7C04A626F5F281009F5C0A /* Coordinator.swift in Sources */,
 				DB7C04F626FB1F4B009F5C0A /* WishContentsCollectionViewController.swift in Sources */,
 				DB7C04EC26FB1A04009F5C0A /* UIView+.swift in Sources */,
+				DB7C04FC26FB27A6009F5C0A /* TemplateImageButton.swift in Sources */,
 				DB7C04F826FB1F52009F5C0A /* GiftContentsCollectionViewController.swift in Sources */,
 				DB7C04F226FB1F36009F5C0A /* ContentsPageViewController.swift in Sources */,
 				DB7C04E926FB19AE009F5C0A /* ContentsCollectionViewCell.swift in Sources */,

@@ -10,33 +10,19 @@ import UIKit
 
 /// 홈화면 ContentsCollectionView들이 보이는 상단의 탭을 나타내는 뷰다.
 class ContentsTabView: UIView {
-    var boughtButton: UIButton = {
-        let button: UIButton = UIButton()
-        let image: UIImage? = UIImage(named: "bought")?.withRenderingMode(.alwaysTemplate)
-        button.setImage(image, for: .normal)
-        button.setTitle("89", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.tintColor = .black
+    var boughtButton: TemplateImageButton = {
+        let button: TemplateImageButton = TemplateImageButton(imageName: "bought")
+        button.updateColor(.black)
         return button
     }()
-    
-    var wishButton: UIButton = {
-        let button: UIButton = UIButton()
-        let image: UIImage? = UIImage(named: "wish")?.withRenderingMode(.alwaysTemplate)
-        button.setImage(image, for: .normal)
-        button.setTitle("89", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
-        button.tintColor = .gray
+    var wishButton: TemplateImageButton = {
+        let button: TemplateImageButton = TemplateImageButton(imageName: "wish")
+        button.updateColor(.gray)
         return button
     }()
-    
-    var giftButton: UIButton = {
-        let button: UIButton = UIButton()
-        let image: UIImage? = UIImage(named: "gift")?.withRenderingMode(.alwaysTemplate)
-        button.setImage(image, for: .normal)
-        button.setTitle("89", for: .normal)
-        button.setTitleColor(.gray, for: .normal)
-        button.tintColor = .gray
+    var giftButton: TemplateImageButton = {
+        let button: TemplateImageButton = TemplateImageButton(imageName: "gift")
+        button.updateColor(.gray)
         return button
     }()
     
@@ -105,21 +91,18 @@ class ContentsTabView: UIView {
     ///   - index: 선택한 index를 넣는다.
     func updateButton(by index: Int) {
         buttonStackView.arrangedSubviews.forEach {
-            if let button: UIButton = $0 as? UIButton {
+            if let button: TemplateImageButton = $0 as? TemplateImageButton {
                 button.setTitleColor(.gray, for: .normal)
                 button.tintColor = .gray
             }
         }
         switch index {
         case 0:
-            boughtButton.setTitleColor(.black, for: .normal)
-            boughtButton.tintColor = .black
+            boughtButton.updateColor(.black)
         case 1:
-            wishButton.setTitleColor(.black, for: .normal)
-            wishButton.tintColor = .black
+            wishButton.updateColor(.black)
         default:
-            giftButton.setTitleColor(.black, for: .normal)
-            giftButton.tintColor = .black
+            giftButton.updateColor(.black)
         }
     }
     
