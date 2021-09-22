@@ -4,7 +4,8 @@
 //
 //  Created by hyunsu on 2021/09/22.
 //
-
+import RxCocoa
+import RxSwift
 import UIKit
 
 final class HomeViewController: UIViewController {
@@ -34,6 +35,8 @@ final class HomeViewController: UIViewController {
         setupContainerView()
         setupContentsTabView()
         setupPageViewController()
+        subscribePageVeiwController()
+        subscribeContentsTabButton()
     }
     
     func setupContainerView() {
@@ -67,5 +70,41 @@ final class HomeViewController: UIViewController {
             pageView.topAnchor.constraint(equalTo: contentsTabView.bottomAnchor),
             pageView.bottomAnchor.constraint(equalTo: contentsContainerView.bottomAnchor)
         ])
+    }
+    
+    func subscribePageVeiwController() {
+        pageViewController.currentPageIndexSubject
+            .subscribe(onNext: { [weak self] index in
+                self?.contentsTabView.updateIndicatorBar(by: index)
+                self?.contentsTabView.updateButton(by: index)
+            })
+            .disposed(by: pageViewController.disposeBag)
+    }
+    
+    func subscribeContentsTabButton() {
+        for index in 0..<contentsTabView.buttonStackView.arrangedSubviews.count {
+            guard let button: UIButton = contentsTabView.buttonStackView.arrangedSubviews[index] as? UIButton else { return }
+            button.rx.tap.bind { [weak self] in
+                self?.contentsTabView.updateButton(by: index)
+                var direction: UIPageViewController.NavigationDirection = .forward
+                let pageIndex: Int? = self?.pageViewController.currentPageIndex
+                if pageIndex == 0 {
+                    if index == 2 {
+                        direction = .reverse
+                    }
+                } else if pageIndex == 1 {
+                    if index == 0 {
+                        direction = .reverse
+                    }
+                } else if pageIndex == 2 {
+                    if index == 1 {
+                        direction = .reverse
+                    }
+                }
+                self?.pageViewController.setViewControllers([self!.pageViewController.controllers[index]], direction: direction, animated: true, completion: nil)
+                self?.contentsTabView.updateIndicatorBar(by: index)
+            }
+            .disposed(by: contentsTabView.disposeBag)
+        }
     }
 }

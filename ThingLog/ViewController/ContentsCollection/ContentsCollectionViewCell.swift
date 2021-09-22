@@ -9,7 +9,7 @@ import UIKit
 
 class ContentsCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView = {
-        let imageview = UIImageView()
+        let imageview: UIImageView = UIImageView()
         imageview.backgroundColor = .clear
         imageview.translatesAutoresizingMaskIntoConstraints = false
         return imageview

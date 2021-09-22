@@ -5,8 +5,8 @@
 //  Created by hyunsu on 2021/09/21.
 //
 
-import UIKit
 import RxSwift
+import UIKit
 
 class BaseContentsCollectionViewController: UIViewController {
     var collectionView: UICollectionView = {
@@ -46,14 +46,14 @@ class BaseContentsCollectionViewController: UIViewController {
 
 extension BaseContentsCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        100
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        1
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsCollectionViewCell else  { return UICollectionViewCell() }
+        guard let cell: ContentsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsCollectionViewCell else  { return UICollectionViewCell() }
         cell.backgroundColor = UIColor(white: 239.0 / 255.0, alpha: 1.0)
         return cell
     }

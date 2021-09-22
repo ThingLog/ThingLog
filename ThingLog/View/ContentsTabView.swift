@@ -5,13 +5,15 @@
 //  Created by hyunsu on 2021/09/22.
 //
 
+import RxSwift
 import UIKit
 
 /// 홈화면 ContentsCollectionView들이 보이는 상단의 탭을 나타내는 뷰다.
 class ContentsTabView: UIView {
     var boughtButton: UIButton = {
         let button: UIButton = UIButton()
-        button.setImage(UIImage(named: "bought"), for: .normal)
+        let image: UIImage? = UIImage(named: "bought")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
         button.setTitle("89", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.tintColor = .black
@@ -20,7 +22,8 @@ class ContentsTabView: UIView {
     
     var wishButton: UIButton = {
         let button: UIButton = UIButton()
-        button.setImage(UIImage(named: "wish"), for: .normal)
+        let image: UIImage? = UIImage(named: "wish")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
         button.setTitle("89", for: .normal)
         button.setTitleColor(.gray, for: .normal)
         button.tintColor = .gray
@@ -29,7 +32,8 @@ class ContentsTabView: UIView {
     
     var giftButton: UIButton = {
         let button: UIButton = UIButton()
-        button.setImage(UIImage(named: "gift"), for: .normal)
+        let image: UIImage? = UIImage(named: "gift")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(image, for: .normal)
         button.setTitle("89", for: .normal)
         button.setTitleColor(.gray, for: .normal)
         button.tintColor = .gray
@@ -59,6 +63,7 @@ class ContentsTabView: UIView {
     }()
     
     var leadingAnchorIndicatorBar: NSLayoutConstraint?
+    var disposeBag: DisposeBag = DisposeBag() 
     
     override init(frame: CGRect) {
         super.init(frame: frame)

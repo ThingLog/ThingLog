@@ -39,11 +39,10 @@ class ContentsPageViewController: UIPageViewController {
         setViewControllers([controllers[0]], direction: .forward, animated: true, completion: nil)
     }
     
-    
     /// 스크롤을 감지하여 위치값을 subscribe한다.
     func subscribeControllers() {
         controllers.forEach {
-            if let controller = $0 as? BaseContentsCollectionViewController {
+            if let controller: BaseContentsCollectionViewController = $0 as? BaseContentsCollectionViewController {
                 controller.contentsOffsetYSubject
                     .subscribe(onNext: { [weak self] in
                         self?.currentContentsOffsetYSubject.onNext($0)
