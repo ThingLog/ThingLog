@@ -27,6 +27,9 @@
 		DB7C04A626F5F281009F5C0A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A526F5F281009F5C0A /* Coordinator.swift */; };
 		DB7C04A826F5F2BB009F5C0A /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */; };
 		DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */; };
+		DB7C04E526FB1981009F5C0A /* BaseContentsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04E426FB1981009F5C0A /* BaseContentsCollectionViewController.swift */; };
+		DB7C04E926FB19AE009F5C0A /* ContentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04E826FB19AE009F5C0A /* ContentsCollectionViewCell.swift */; };
+		DB7C04EC26FB1A04009F5C0A /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04EB26FB1A04009F5C0A /* UIView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +90,9 @@
 		DB7C04A526F5F281009F5C0A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCoordinator.swift; sourceTree = "<group>"; };
+		DB7C04E426FB1981009F5C0A /* BaseContentsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseContentsCollectionViewController.swift; sourceTree = "<group>"; };
+		DB7C04E826FB19AE009F5C0A /* ContentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContentsCollectionViewCell.swift; path = ThingLog/ViewController/ContentsCollection/ContentsCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		DB7C04EB26FB1A04009F5C0A /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +149,9 @@
 		873EC00726D39055003C3525 /* ThingLog */ = {
 			isa = PBXGroup;
 			children = (
+				DB7C04EA26FB19FE009F5C0A /* Extension */,
+				DB7C04E626FB1990009F5C0A /* View */,
+				DB7C04DF26FB18F4009F5C0A /* ViewController */,
 				DB7C04A426F5F26B009F5C0A /* Coordinator */,
 				873EC05026D50825003C3525 /* SupportingFiles */,
 				873EC00C26D39055003C3525 /* ViewController.swift */,
@@ -201,6 +210,46 @@
 				DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		DB7C04DF26FB18F4009F5C0A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04E026FB1900009F5C0A /* ContentsCollection */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		DB7C04E026FB1900009F5C0A /* ContentsCollection */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04E426FB1981009F5C0A /* BaseContentsCollectionViewController.swift */,
+			);
+			path = ContentsCollection;
+			sourceTree = "<group>";
+		};
+		DB7C04E626FB1990009F5C0A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04E726FB199A009F5C0A /* CollectionViewCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DB7C04E726FB199A009F5C0A /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04E826FB19AE009F5C0A /* ContentsCollectionViewCell.swift */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		DB7C04EA26FB19FE009F5C0A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04EB26FB1A04009F5C0A /* UIView+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,8 +429,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
+				DB7C04E526FB1981009F5C0A /* BaseContentsCollectionViewController.swift in Sources */,
 				873EC01326D39055003C3525 /* ThingLog.xcdatamodeld in Sources */,
 				DB7C04A626F5F281009F5C0A /* Coordinator.swift in Sources */,
+				DB7C04EC26FB1A04009F5C0A /* UIView+.swift in Sources */,
+				DB7C04E926FB19AE009F5C0A /* ContentsCollectionViewCell.swift in Sources */,
 				DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */,
 				873EC00926D39055003C3525 /* AppDelegate.swift in Sources */,
 				873EC00B26D39055003C3525 /* SceneDelegate.swift in Sources */,
