@@ -36,9 +36,18 @@ final class HomeViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        if #available(iOS 15, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = .white
+            appearance.shadowColor = .clear
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+        } else {
+            navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.barTintColor = .white
+            navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        }
         
         let logoView: UILabel = UILabel()
         logoView.text = "띵로그"
