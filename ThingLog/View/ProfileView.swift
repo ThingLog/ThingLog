@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileView: UIView {
+final class ProfileView: UIView {
     var userAliasNameButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("분더카머", for: .normal)
@@ -38,19 +38,19 @@ class ProfileView: UIView {
         return imageView
     }()
     
-    let emptyLeadingView: UIView = {
+    private let emptyLeadingView: UIView = {
         let view: UIView = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let emptyTrailingView: UIView = {
+    private let emptyTrailingView: UIView = {
         let view: UIView = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    lazy var verticalStackView: UIStackView = {
+    private lazy var verticalStackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [userAliasNameButton, userOneLineIntroductionLabel])
         stackView.axis = .vertical
         stackView.spacing = 4
@@ -58,7 +58,7 @@ class ProfileView: UIView {
         return stackView
     }()
     
-    lazy var horizontalStackView: UIStackView = {
+    private lazy var horizontalStackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [ emptyLeadingView,
                                                                      verticalStackView,
                                                                      userBadgeImageView,
@@ -70,7 +70,7 @@ class ProfileView: UIView {
         return stackView
     }()
     
-    let imageHeight: CGFloat = 44
+    private let imageHeight: CGFloat = 44
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -82,7 +82,7 @@ class ProfileView: UIView {
         setupView()
     }
     
-    func setupView() {
+    private func setupView() {
         backgroundColor = .white
         addSubview(horizontalStackView)
         
