@@ -1,0 +1,73 @@
+
+default_platform(:ios)
+
+platform :ios do 
+  desc "build app and upload to testflight"
+  lane :beta do |options|
+    if options[:v] 
+      increment_version_number(
+          version_number: options[:v]
+      )  
+      increment_build_number(
+          build_number: latest_testflight_build_number + 1
+      )
+      build_app(
+        scheme: "ThingLog-Release",
+        configuration: "Release",
+        export_method: "app-store",
+        export_options: {
+          provisioningProfiles: {
+            "com.thingLog.ThingLog" => "ThingLog Appstore"
+          }    
+        }
+      )
+      upload_to_testflight
+      slack(
+        message: "Testflight 배포에 성공했습니다!",
+        slack_url: "https://hooks.slack.com/services/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"
+      )
+    end
+  end
+
+  desc "build app and upload to App Store "
+  lane :release do |options|
+    if options[:v] 
+      increment_version_number(
+          version_number: options[:v]
+      )
+      increment_build_number(
+          build_number: latest_testflight_build_number + 1
+      )
+      build_app(
+        scheme: "ThingLog-Release",
+        configuration: "Release",
+        export_method: "app-store",
+        export_options: {
+          provisioningProfiles: {
+            "com.thingLog.ThingLog" => "ThingLog Appstore",
+          }
+        }
+      )
+      upload_to_app_store(
+        app_version: options[:v],
+        submit_for_review: true,
+        force: true,
+        automatic_release: true,
+        skip_screenshots: true,
+        skip_metadata: false,
+        submission_information: { add_id_info_uses_idfa: false }
+      )
+      slack(
+        message: "App store 배포에 성공했습니다🎉!",
+        slack_url: "https://hooks.slack.com/services/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"
+      )
+    end
+  end
+  error do |lane, exception, options|
+    slack(
+      message: "에러 발생 : #{exception}",
+      success: false,
+      slack_url: "https://hooks.slack.com/services/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"
+    )
+  end
+end
