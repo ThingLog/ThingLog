@@ -9,6 +9,13 @@ import RxSwift
 import UIKit
 
 final class HomeViewController: UIViewController {
+    let profileView: ProfileView = {
+        let profileView: ProfileView = ProfileView()
+        profileView.backgroundColor = .white
+        profileView.translatesAutoresizingMaskIntoConstraints = false
+        return profileView
+    }()
+    
     var contentsContainerView: UIView = {
         let view: UIView = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -27,12 +34,14 @@ final class HomeViewController: UIViewController {
     }()
     
     var coordinator: Coordinator?
-    var topAnchorContentsContainerView: NSLayoutConstraint?
+    var heightAnchorProfileView: NSLayoutConstraint?
+    let profileViewHeight: CGFloat = 54 + 17
     
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        setupView()
+        setupNavigationBar()
         setupContainerView()
         setupContentsTabView()
         setupPageViewController()
@@ -43,14 +52,24 @@ final class HomeViewController: UIViewController {
     }
     
     // MARK: - Setup
+    func setupView() {
+        view.backgroundColor = .white
+        view.addSubview(profileView)
+        heightAnchorProfileView = profileView.heightAnchor.constraint(equalToConstant: profileViewHeight)
+        heightAnchorProfileView?.isActive = true
+        NSLayoutConstraint.activate([
+            profileView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            profileView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        ])
+    }
+
     func setupContainerView() {
         view.addSubview(contentsContainerView)
-        
-        topAnchorContentsContainerView = contentsContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200)
-        topAnchorContentsContainerView?.isActive = true
         NSLayoutConstraint.activate([
             contentsContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             contentsContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentsContainerView.topAnchor.constraint(equalTo: profileView.bottomAnchor),
             contentsContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
@@ -77,11 +96,39 @@ final class HomeViewController: UIViewController {
             pageView.bottomAnchor.constraint(equalTo: contentsContainerView.bottomAnchor)
         ])
     }
+    
+    func setupNavigationBar() {
+        if #available(iOS 15, *) {
+            let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = .white
+            appearance.shadowColor = .clear
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+        } else {
+            navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.barTintColor = .white
+            navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
+        }
+        
+        let logoView: UILabel = UILabel()
+        logoView.text = "띵로그"
+        logoView.textColor = .black
+        logoView.font = UIFont.boldSystemFont(ofSize: 20.0)
+        let logoBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: logoView)
+        navigationItem.leftBarButtonItem = logoBarButtonItem
+        
+        let settingButton: UIButton = UIButton()
+        settingButton.setImage(UIImage(named: "setting"), for: .normal)
+        settingButton.tintColor = .black
+        // settingButton.addTarget(self, action: #selector(showSettingView), for: .touchUpInside)
+        let settingBarButton: UIBarButtonItem = UIBarButtonItem(customView: settingButton)
+        navigationItem.rightBarButtonItem = settingBarButton
+    }
 }
 
 // MARK: - Subscribe Rx
 extension HomeViewController {
-    
     /// PageViewController의 page가 전환될 시 subscribe하여 뷰 업데이트를 진행하는 메소드다.
     func subscribePageVeiwControllerTransition() {
         pageViewController.currentPageIndexSubject
@@ -92,7 +139,6 @@ extension HomeViewController {
             })
             .disposed(by: pageViewController.disposeBag)
     }
-    
     
     /// ContentsTabButton을 subscribe하여 각 버튼을 누를 시 PageViewController의 page를 전환하는 메소드다.
     func subscribeContentsTabButton() {
@@ -130,14 +176,14 @@ extension HomeViewController {
         pageViewController.currentScrollContentsOffsetYSubject
             .subscribe(onNext: { [weak self] dist in
                 UIView.animate(withDuration: 0.1) {
-                    guard let currentConstant = self?.topAnchorContentsContainerView?.constant else { return }
+                    guard let currentConstant = self?.heightAnchorProfileView?.constant else { return }
                     var dist: CGFloat = dist
                     if dist >= 0 {
-                        dist = max(currentConstant - dist, 50)
+                        dist = max(currentConstant - dist, 0)
                     } else {
-                        dist = min(currentConstant - dist, 200)
+                        dist = min(currentConstant - dist, self?.profileViewHeight ?? 54 + 17)
                     }
-                    self?.topAnchorContentsContainerView?.constant = dist
+                    self?.heightAnchorProfileView?.constant = dist
                     self?.view.layoutIfNeeded()
                 }
             })
@@ -154,7 +200,7 @@ extension HomeViewController {
                     self.contentsContainerView.layoutIfNeeded()
                 } completion: { _ in
                     UIView.animate(withDuration: 0.3) {
-                        self.topAnchorContentsContainerView?.constant = 200
+                        self.heightAnchorProfileView?.constant = self.profileViewHeight
                         self.contentsContainerView.layoutIfNeeded()
                     }
                 }

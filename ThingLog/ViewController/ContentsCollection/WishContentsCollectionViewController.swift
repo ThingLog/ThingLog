@@ -20,6 +20,6 @@ class WishContentsCollectionViewController: BaseContentsCollectionViewController
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        14
+        8
     }
 }
