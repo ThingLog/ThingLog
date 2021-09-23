@@ -91,20 +91,13 @@ extension TabBarController {
         guard let view = view else { return }
         view.addSubview(dimmedView)
         constraintDimmedView(to: view)
-        self.view.layoutIfNeeded()
+        view.layoutIfNeeded()
     }
     
     /// ``WriteView``를 숨기거나 나타나도록 하면서 애니메이션을 추가한다.
     /// - Parameter hide: 숨기고자 하는 경우는 true, 나타나고자 하는 경우는 false 이다.
     private func hideWriteViewWithAnimate(_ hide: Bool ) {
-        if !hide {
-            UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
-                self.choiceView.hide(false)
-                self.dimmedView.backgroundColor = .black.withAlphaComponent(0.6)
-                self.rotatePlusButton(isRecovery: false)
-                self.view.layoutIfNeeded()
-            }
-        } else {
+        if hide {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut) {
                 self.choiceView.hide(true)
                 self.dimmedView.backgroundColor = .clear
@@ -113,6 +106,13 @@ extension TabBarController {
             } completion: { _  in
                 if self.choiceView.isShowing { return }
                 self.dimmedView.removeFromSuperview()
+            }
+        } else {
+            UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
+                self.choiceView.hide(false)
+                self.dimmedView.backgroundColor = .black.withAlphaComponent(0.6)
+                self.rotatePlusButton(isRecovery: false)
+                self.view.layoutIfNeeded()
             }
         }
     }
@@ -134,11 +134,11 @@ extension TabBarController {
 extension TabBarController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if viewController == emptyViewController {
-            if !choiceView.isShowing {
+            if choiceView.isShowing {
+                hideWriteViewWithAnimate(true)
+            } else {
                 attachDimmedView(to: viewControllers?[selectedIndex].view)
                 hideWriteViewWithAnimate(false)
-            } else {
-                hideWriteViewWithAnimate(true)
             }
             return false
         } else {
