@@ -17,6 +17,7 @@ final class ProfileView: UIView {
         button.semanticContentAttribute = .forceRightToLeft
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
+        button.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         return button
     }()
     
@@ -25,6 +26,8 @@ final class ProfileView: UIView {
         label.text = "나를 찾는 여정 나를 찾는 여정"
         label.font = label.font.withSize(14.0)
         label.textColor = .gray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return label
     }()
     
@@ -34,7 +37,7 @@ final class ProfileView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.setContentHuggingPriority(.required, for: .horizontal)
         imageView.setContentHuggingPriority(.required, for: .vertical)
-        imageView.backgroundColor = .gray
+        imageView.backgroundColor = UIColor(white: 239.0 / 255.0, alpha: 1.0)
         return imageView
     }()
     
@@ -87,9 +90,11 @@ final class ProfileView: UIView {
         addSubview(horizontalStackView)
         
         userBadgeImageView.layer.cornerRadius = imageHeight / 2
+        
         NSLayoutConstraint.activate([
-            userBadgeImageView.heightAnchor.constraint(equalToConstant: imageHeight),
             userBadgeImageView.widthAnchor.constraint(equalTo: userBadgeImageView.heightAnchor),
+//            userBadgeImageView.heightAnchor.constraint(equalToConstant: imageHeight)
+            userBadgeImageView.heightAnchor.constraint(lessThanOrEqualToConstant: imageHeight),
             
             emptyLeadingView.widthAnchor.constraint(equalToConstant: 0),
             emptyTrailingView.widthAnchor.constraint(equalToConstant: 0),
