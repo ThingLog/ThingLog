@@ -87,8 +87,8 @@ extension HomeViewController {
         pageViewController.currentPageIndexSubject
             .subscribe(onNext: { [weak self] index in
                 self?.contentsTabView.updateIndicatorBar(by: index)
-                self?.contentsTabView.updateButton(by: index)
-                self?.changeContentsContainerHeight(viewController: self!.pageViewController.controllers[index] as? BaseContentsCollectionViewController)
+                self?.contentsTabView.updateButtonTintColor(by: index)
+                self?.changeContentsContainerHeight(viewController: self?.pageViewController.controllers[index] as? BaseContentsCollectionViewController)
             })
             .disposed(by: pageViewController.disposeBag)
     }
@@ -99,7 +99,7 @@ extension HomeViewController {
         for index in 0..<contentsTabView.buttonStackView.arrangedSubviews.count {
             guard let button: UIButton = contentsTabView.buttonStackView.arrangedSubviews[index] as? UIButton else { return }
             button.rx.tap.bind { [weak self] in
-                self?.contentsTabView.updateButton(by: index)
+                self?.contentsTabView.updateButtonTintColor(by: index)
                 var direction: UIPageViewController.NavigationDirection = .forward
                 let pageIndex: Int? = self?.pageViewController.currentPageIndex
                 if pageIndex == 0 {

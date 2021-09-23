@@ -9,7 +9,7 @@ import RxSwift
 import UIKit
 
 /// 홈화면 ContentsCollectionView들이 보이는 상단의 탭을 나타내는 뷰다.
-class ContentsTabView: UIView {
+final class ContentsTabView: UIView {
     var boughtButton: TemplateImageButton = {
         let button: TemplateImageButton = TemplateImageButton(imageName: "bought")
         button.updateColor(.black)
@@ -26,14 +26,14 @@ class ContentsTabView: UIView {
         return button
     }()
     
-    var indicatorBar: UIView = {
+    private var indicatorBar: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    var topBorderLine: UIView = {
+    private var topBorderLine: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = UIColor(white: 239.0 / 255.0, alpha: 1.0)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -48,8 +48,8 @@ class ContentsTabView: UIView {
         return stackView
     }()
     
-    var leadingAnchorIndicatorBar: NSLayoutConstraint?
-    var disposeBag: DisposeBag = DisposeBag() 
+    private var leadingAnchorIndicatorBar: NSLayoutConstraint?
+    var disposeBag: DisposeBag = DisposeBag()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -74,7 +74,6 @@ class ContentsTabView: UIView {
             topBorderLine.topAnchor.constraint(equalTo: topAnchor),
             topBorderLine.heightAnchor.constraint(equalToConstant: 1),
             
-            indicatorBar.trailingAnchor.constraint(equalTo: trailingAnchor),
             indicatorBar.heightAnchor.constraint(equalToConstant: 1),
             indicatorBar.bottomAnchor.constraint(equalTo: bottomAnchor),
             indicatorBar.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1 / 3 ),
@@ -92,7 +91,7 @@ extension ContentsTabView {
     /// 선택한 index를 통하여 해당 버튼을 tint 시키고, 그 외 버튼들은 연한 색깔로 변경한다.
     /// - Parameters:
     ///   - index: 선택한 index를 넣는다.
-    func updateButton(by index: Int) {
+    func updateButtonTintColor(by index: Int) {
         buttonStackView.arrangedSubviews.forEach {
             if let button: TemplateImageButton = $0 as? TemplateImageButton {
                 button.setTitleColor(.gray, for: .normal)
