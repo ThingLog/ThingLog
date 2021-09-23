@@ -15,7 +15,9 @@ final class CategoryCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
-    // TODO: CategoryViewController
     func start() {
+        let categoryViewController: CategoryViewController = CategoryViewController()
+        categoryViewController.coordinator = self 
+        navigationController.pushViewController(categoryViewController, animated: true)
     }
 }
