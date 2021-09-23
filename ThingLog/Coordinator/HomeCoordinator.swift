@@ -15,7 +15,9 @@ final class HomeCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
-    // TODO: HomeViewController
     func start() {
+        let homeViewController: HomeViewController = HomeViewController()
+        homeViewController.coordinator = self 
+        navigationController.pushViewController(homeViewController, animated: true)
     }
 }

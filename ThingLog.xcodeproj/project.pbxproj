@@ -27,6 +27,10 @@
 		DB7C04A626F5F281009F5C0A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A526F5F281009F5C0A /* Coordinator.swift */; };
 		DB7C04A826F5F2BB009F5C0A /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */; };
 		DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */; };
+		DB7C04B226F87548009F5C0A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04B126F87548009F5C0A /* TabBarController.swift */; };
+		DB7C04B426F87823009F5C0A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04B326F87823009F5C0A /* HomeViewController.swift */; };
+		DB7C04B626F8782B009F5C0A /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04B526F8782B009F5C0A /* CategoryViewController.swift */; };
+		DB7C04B926F87BE9009F5C0A /* ChoiceWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04B826F87BE9009F5C0A /* ChoiceWritingView.swift */; };
 		875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +92,10 @@
 		DB7C04A526F5F281009F5C0A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCoordinator.swift; sourceTree = "<group>"; };
+		DB7C04B126F87548009F5C0A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		DB7C04B326F87823009F5C0A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		DB7C04B526F8782B009F5C0A /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		DB7C04B826F87BE9009F5C0A /* ChoiceWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceWritingView.swift; sourceTree = "<group>"; };
 		875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +153,8 @@
 		873EC00726D39055003C3525 /* ThingLog */ = {
 			isa = PBXGroup;
 			children = (
+				DB7C04B726F87BE3009F5C0A /* View */,
+				DB7C04B026F8753C009F5C0A /* ViewController */,
 				DB7C04A426F5F26B009F5C0A /* Coordinator */,
 				875A965E26F0E4DC001BF0D0 /* Model */,
 				873EC05026D50825003C3525 /* SupportingFiles */,
@@ -206,6 +216,24 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		DB7C04B026F8753C009F5C0A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04B126F87548009F5C0A /* TabBarController.swift */,
+				DB7C04B326F87823009F5C0A /* HomeViewController.swift */,
+				DB7C04B526F8782B009F5C0A /* CategoryViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		DB7C04B726F87BE3009F5C0A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04B826F87BE9009F5C0A /* ChoiceWritingView.swift */,
+			);
+			path = View;
+            sourceTree = "<group>";
+        };
 		875A965E26F0E4DC001BF0D0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,9 +418,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB7C04B626F8782B009F5C0A /* CategoryViewController.swift in Sources */,
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
+				DB7C04B226F87548009F5C0A /* TabBarController.swift in Sources */,
 				DB7C04A626F5F281009F5C0A /* Coordinator.swift in Sources */,
+				DB7C04B926F87BE9009F5C0A /* ChoiceWritingView.swift in Sources */,
 				DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */,
+				DB7C04B426F87823009F5C0A /* HomeViewController.swift in Sources */,
 				DB7C04A826F5F2BB009F5C0A /* HomeCoordinator.swift in Sources */,
 				87078B5B26EA44B5007AE242 /* ThingLog.xcdatamodeld in Sources */,
 				873EC00926D39055003C3525 /* AppDelegate.swift in Sources */,
