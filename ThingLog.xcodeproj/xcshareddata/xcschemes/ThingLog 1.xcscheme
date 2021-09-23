@@ -28,26 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "873EC01D26D39057003C3525"
-               BuildableName = "ThingLogTests.xctest"
-               BlueprintName = "ThingLogTests"
-               ReferencedContainer = "container:ThingLog.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "873EC02826D39057003C3525"
-               BuildableName = "ThingLogUITests.xctest"
-               BlueprintName = "ThingLogUITests"
-               ReferencedContainer = "container:ThingLog.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
