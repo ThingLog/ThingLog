@@ -12,30 +12,30 @@ import UIKit
 final class ContentsTabView: UIView {
     var boughtButton: TemplateImageButton = {
         let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenAssets.bought.image)
-        button.updateColor(.black)
+        button.updateColor(SwiftGenColors.black.color)
         return button
     }()
     var wishButton: TemplateImageButton = {
         let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenAssets.wish.image)
-        button.updateColor(.gray)
+        button.updateColor(SwiftGenColors.gray4.color)
         return button
     }()
     var giftButton: TemplateImageButton = {
         let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenAssets.gift.image)
-        button.updateColor(.gray)
+        button.updateColor(SwiftGenColors.gray4.color)
         return button
     }()
     
     private var indicatorBar: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = SwiftGenColors.black.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private var topBorderLine: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = UIColor(white: 239.0 / 255.0, alpha: 1.0)
+        view.backgroundColor = SwiftGenColors.gray5.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -61,7 +61,7 @@ final class ContentsTabView: UIView {
     }
     
     func setupView() {
-        backgroundColor = .white 
+        backgroundColor = SwiftGenColors.white.color
         addSubview(topBorderLine)
         addSubview(indicatorBar)
         addSubview(buttonStackView)
@@ -94,17 +94,17 @@ extension ContentsTabView {
     func updateButtonTintColor(by index: Int) {
         buttonStackView.arrangedSubviews.forEach {
             if let button: TemplateImageButton = $0 as? TemplateImageButton {
-                button.setTitleColor(.gray, for: .normal)
-                button.tintColor = .gray
+                button.setTitleColor(SwiftGenColors.gray4.color, for: .normal)
+                button.tintColor = SwiftGenColors.gray4.color
             }
         }
         switch index {
         case 0:
-            boughtButton.updateColor(.black)
+            boughtButton.updateColor(SwiftGenColors.black.color)
         case 1:
-            wishButton.updateColor(.black)
+            wishButton.updateColor(SwiftGenColors.black.color)
         default:
-            giftButton.updateColor(.black)
+            giftButton.updateColor(SwiftGenColors.black.color)
         }
     }
     

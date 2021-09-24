@@ -11,7 +11,7 @@ import UIKit
 final class HomeViewController: UIViewController {
     let profileView: ProfileView = {
         let profileView: ProfileView = ProfileView()
-        profileView.backgroundColor = .white
+        profileView.backgroundColor = SwiftGenColors.white.color
         profileView.translatesAutoresizingMaskIntoConstraints = false
         return profileView
     }()
@@ -53,7 +53,7 @@ final class HomeViewController: UIViewController {
     
     // MARK: - Setup
     func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = SwiftGenColors.white.color
         view.addSubview(profileView)
         heightAnchorProfileView = profileView.heightAnchor.constraint(equalToConstant: profileViewHeight)
         heightAnchorProfileView?.isActive = true
@@ -101,13 +101,13 @@ final class HomeViewController: UIViewController {
         if #available(iOS 15, *) {
             let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = .white
+            appearance.backgroundColor = SwiftGenColors.white.color
             appearance.shadowColor = .clear
             navigationController?.navigationBar.standardAppearance = appearance
             navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
         } else {
             navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.barTintColor = .white
+            navigationController?.navigationBar.barTintColor = SwiftGenColors.white.color
             navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         }
         
@@ -120,7 +120,7 @@ final class HomeViewController: UIViewController {
         
         let settingButton: UIButton = UIButton()
         settingButton.setImage(SwiftGenAssets.setting.image, for: .normal)
-        settingButton.tintColor = .black
+        settingButton.tintColor = SwiftGenColors.black.color
         // settingButton.addTarget(self, action: #selector(showSettingView), for: .touchUpInside)
         let settingBarButton: UIBarButtonItem = UIBarButtonItem(customView: settingButton)
         navigationItem.rightBarButtonItem = settingBarButton

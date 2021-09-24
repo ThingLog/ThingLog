@@ -32,8 +32,8 @@ final class TabBarController: UITabBarController {
     // MARK: - Setup
     private func setupView() {
         delegate = self
-        tabBar.tintColor = .black // tabbar button 틴트 컬러
-        tabBar.barTintColor = .white // Tabbar background 컬러
+        tabBar.tintColor = SwiftGenColors.black.color // tabbar button 틴트 컬러
+        tabBar.barTintColor = SwiftGenColors.white.color // Tabbar background 컬러
         
         homeCoordinator.start()
         categoryCoordinator.start()

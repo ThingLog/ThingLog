@@ -13,12 +13,12 @@ final class CategoryViewController: UIViewController {
     // MARK: - Life cycle 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = SwiftGenColors.white.color
         
         // Test 
         let label: UILabel = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 100)))
         label.center = view.center
-        label.backgroundColor = .white
+        label.backgroundColor = SwiftGenColors.white.color
         label.textColor = .black
         label.textAlignment = .center
         label.text = "Category"

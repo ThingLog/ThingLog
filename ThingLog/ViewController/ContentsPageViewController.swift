@@ -33,7 +33,7 @@ class ContentsPageViewController: UIPageViewController {
     }
     
     func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = SwiftGenColors.white.color
         dataSource = self
         delegate = self
         setViewControllers([controllers[0]], direction: .forward, animated: true, completion: nil)

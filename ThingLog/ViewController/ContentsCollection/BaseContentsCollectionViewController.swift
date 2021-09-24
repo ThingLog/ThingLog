@@ -29,12 +29,12 @@ class BaseContentsCollectionViewController: UIViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = SwiftGenColors.white.color
     }
     
     func setupBaseCollectionView() {
         view.addSubview(collectionView)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = SwiftGenColors.white.color
         collectionView.dataSource = self
         collectionView.delegate = self
         NSLayoutConstraint.activate([
@@ -56,7 +56,7 @@ extension BaseContentsCollectionViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: ContentsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsCollectionViewCell else  { return UICollectionViewCell() }
-        cell.backgroundColor = UIColor(white: 239.0 / 255.0, alpha: 1.0)
+        cell.backgroundColor = SwiftGenColors.gray5.color
         return cell
     }
 }

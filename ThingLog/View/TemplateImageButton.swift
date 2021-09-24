@@ -14,8 +14,8 @@ class TemplateImageButton: UIButton {
         let image: UIImage? = swiftGenImage.withRenderingMode(.alwaysTemplate)
         setImage(image, for: .normal)
         setTitle("89", for: .normal)
-        setTitleColor(.black, for: .normal)
-        tintColor = .black
+        setTitleColor(SwiftGenColors.black.color, for: .normal)
+        tintColor = SwiftGenColors.black.color
     }
     
     required init?(coder: NSCoder) {

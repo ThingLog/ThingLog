@@ -25,7 +25,7 @@ final class ProfileView: UIView {
         let label: UILabel = UILabel()
         label.text = "나를 찾는 여정 나를 찾는 여정"
         label.font = label.font.withSize(14.0)
-        label.textColor = .gray
+        label.textColor = SwiftGenColors.gray4.color
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return label
@@ -37,7 +37,7 @@ final class ProfileView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.setContentHuggingPriority(.required, for: .horizontal)
         imageView.setContentHuggingPriority(.required, for: .vertical)
-        imageView.backgroundColor = UIColor(white: 239.0 / 255.0, alpha: 1.0)
+        imageView.backgroundColor = SwiftGenColors.gray5.color
         return imageView
     }()
     
@@ -86,7 +86,7 @@ final class ProfileView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = SwiftGenColors.white.color
         addSubview(horizontalStackView)
         
         userBadgeImageView.layer.cornerRadius = imageHeight / 2
