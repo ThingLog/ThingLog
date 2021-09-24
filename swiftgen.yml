@@ -1,0 +1,51 @@
+
+ xcassets:
+   - inputs:
+      - ThingLog/Resource/Colors.xcassets
+     outputs:
+      - templateName: swift5
+        params:
+          forceProvidesNamespaces: true
+          enumName: SwiftGenColors # enum타입 명을 바꾼다.
+          colorTypeName: ColorSwiftGen
+        output: ThingLog/SwiftGen/ColorsAsset.swift
+   - inputs:
+      - ThingLog/Resource/Assets.xcassets
+     outputs:
+      - templateName: swift5
+        params:
+          forceProvidesNamespaces: true
+          enumName: SwiftGenAssets # enum타입 명을 바꾼다.
+          imageTypeName: ImageSwiftGen
+        output: ThingLog/SwiftGen/ImageAssets.swift
+# xcassets
+# https://github.com/SwiftGen/SwiftGen/blob/stable/Documentation/templates/xcassets/swift5.md
+# xcassets:
+#   inputs:
+#     - ThingLog/Resource/Assets.xcassets
+#   outputs:
+#     - templateName: swift5
+#       params:
+#         forceProvidesNamespaces: true
+#         enumName: SwiftGenAssets # enum타입 명을 바꾼다.
+#         allValues: false
+#       output: ThingLog/SwiftGen/ImageAssets.swift
+
+# fonts
+# https://github.com/SwiftGen/SwiftGen/blob/stable/Documentation/templates/fonts/swift5.md
+ fonts:
+   inputs:
+     - ThingLog/Resource/Font
+   outputs:
+     - templateName: swift5
+       params:
+         enumName: SwiftGenFonts # enum타입 명을 바꾼다.
+       output: ThingLog/SwiftGen/Fonts.swift
+
+## 컬러는 따로 colors 를 이용하기 보다는 xcassets에서 정의하는 걸 추천한다.
+## ❗️ We recommend to define your colors in your Assets Catalogs and use the xcassets parser (see above) to generate color constants, instead of using this colors parser described below.
+
+
+
+
+
