@@ -20,8 +20,13 @@ internal typealias AssetColorTypeAlias = ColorSwiftGen.Color
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum SwiftGenColors {
   internal static let black = ColorSwiftGen(name: "black")
-  internal static let lightGray = ColorSwiftGen(name: "lightGray")
-  internal static let middleGray = ColorSwiftGen(name: "middleGray")
+  internal static let gray1 = ColorSwiftGen(name: "gray1")
+  internal static let gray2 = ColorSwiftGen(name: "gray2")
+  internal static let gray3 = ColorSwiftGen(name: "gray3")
+  internal static let gray4 = ColorSwiftGen(name: "gray4")
+  internal static let gray5 = ColorSwiftGen(name: "gray5")
+  internal static let gray6 = ColorSwiftGen(name: "gray6")
+  internal static let white = ColorSwiftGen(name: "white")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
