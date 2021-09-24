@@ -11,17 +11,17 @@ import UIKit
 /// 홈화면 ContentsCollectionView들이 보이는 상단의 탭을 나타내는 뷰다.
 final class ContentsTabView: UIView {
     var boughtButton: TemplateImageButton = {
-        let button: TemplateImageButton = TemplateImageButton(imageName: "bought")
+        let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenAssets.bought.image)
         button.updateColor(.black)
         return button
     }()
     var wishButton: TemplateImageButton = {
-        let button: TemplateImageButton = TemplateImageButton(imageName: "wish")
+        let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenAssets.wish.image)
         button.updateColor(.gray)
         return button
     }()
     var giftButton: TemplateImageButton = {
-        let button: TemplateImageButton = TemplateImageButton(imageName: "gift")
+        let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenAssets.gift.image)
         button.updateColor(.gray)
         return button
     }()

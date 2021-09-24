@@ -39,9 +39,9 @@ final class TabBarController: UITabBarController {
         categoryCoordinator.start()
         
         // TODO: ✅ SwiftGen이용하여 이미지 변경
-        let homeTabImage: UIImage? = UIImage(named: "homeTab")
-        let categoryTabImage: UIImage? = UIImage(named: "categoryTab")
-        let plusTabImage: UIImage? = UIImage(named: "plusTab")?.withRenderingMode(.alwaysOriginal)
+        let homeTabImage: UIImage = SwiftGenAssets.homeTab.image
+        let categoryTabImage: UIImage = SwiftGenAssets.categoryTab.image
+        let plusTabImage: UIImage = SwiftGenAssets.plusTab.image.withRenderingMode(.alwaysOriginal)
         
         let homeTabBar: UITabBarItem = UITabBarItem(title: nil, image: homeTabImage, selectedImage: nil)
         let categoryTabBar: UITabBarItem = UITabBarItem(title: nil, image: categoryTabImage, selectedImage: nil)

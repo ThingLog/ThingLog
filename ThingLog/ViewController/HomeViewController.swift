@@ -119,7 +119,7 @@ final class HomeViewController: UIViewController {
         navigationItem.leftBarButtonItem = logoBarButtonItem
         
         let settingButton: UIButton = UIButton()
-        settingButton.setImage(UIImage(named: "setting"), for: .normal)
+        settingButton.setImage(SwiftGenAssets.setting.image, for: .normal)
         settingButton.tintColor = .black
         // settingButton.addTarget(self, action: #selector(showSettingView), for: .touchUpInside)
         let settingBarButton: UIBarButtonItem = UIBarButtonItem(customView: settingButton)
