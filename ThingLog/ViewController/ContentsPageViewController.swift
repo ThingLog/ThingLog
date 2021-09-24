@@ -79,5 +79,8 @@ extension ContentsPageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         currentPageIndexSubject.onNext(currentPageIndex)
     }
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        print(" ? ? ? ")
+    }
 }
 

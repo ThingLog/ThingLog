@@ -33,7 +33,12 @@ final class TabBarController: UITabBarController {
     private func setupView() {
         delegate = self
         tabBar.tintColor = SwiftGenColors.black.color // tabbar button 틴트 컬러
-        tabBar.barTintColor = SwiftGenColors.white.color // Tabbar background 컬러
+        
+        let appearance: UITabBarAppearance = UITabBarAppearance()
+        appearance.backgroundColor = SwiftGenColors.white.color
+        appearance.shadowColor = SwiftGenColors.gray4.color
+        appearance.shadowImage = UIImage.colorForNavBar(color: SwiftGenColors.gray4.color)
+        tabBar.standardAppearance = appearance
         
         homeCoordinator.start()
         categoryCoordinator.start()
