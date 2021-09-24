@@ -18,6 +18,17 @@ import XCTest
 class ThingLogRepositoryTests: XCTestCase {
     let postRepository: PostRepository = PostRepository()
 
+    override func tearDown() {
+        postRepository.deleteAll { result in
+            switch result {
+            case .success(_):
+                break
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
+
     func test_Post를_하나_만들_수_있다() {
         // given: 필요한 모든 값 설정
         guard let originalImage: UIImage = UIImage(systemName: "heart.fill") else {
@@ -38,7 +49,16 @@ class ThingLogRepositoryTests: XCTestCase {
         // when: 테스트중인 코드 실행
         timeout(3) { exp in
             postRepository.create(newPost) { result in
-                // then: 예상한 결과 확인
+                switch result {
+                case .success(_):
+                    break
+                case .failure(let error):
+                    fatalError(error.localizedDescription)
+                }
+            }
+
+            // then: 예상한 결과 확인
+            postRepository.fetchAll { result in
                 switch result {
                 case .success(_):
                     XCTAssertTrue(true)
@@ -80,6 +100,47 @@ class ThingLogRepositoryTests: XCTestCase {
                     XCTAssertTrue(true)
                 case .failure(let error):
                     XCTAssertTrue(false)
+                    fatalError(error.localizedDescription)
+                }
+            }
+        }
+    }
+
+    func test_모든_Post를_가져올_수_있다() {
+        timeout(3) { exp in
+            // when: 테스트중인 코드 실행
+            postRepository.fetchAll { result in
+                // then: 예상한 결과 확인
+                switch result {
+                case .success(_):
+                    XCTAssertTrue(true)
+                    exp.fulfill()
+                case .failure(let error):
+                    XCTAssertTrue(false)
+                    fatalError(error.localizedDescription)
+                }
+            }
+        }
+    }
+
+    func test_모든_Post를_삭제할_수_있다() {
+        timeout(3) { exp in
+            // when: 테스트중인 코드 실행
+            postRepository.deleteAll { result in
+                switch result {
+                case .success(_):
+                    exp.fulfill()
+                case .failure(let error):
+                    fatalError(error.localizedDescription)
+                }
+            }
+
+            // then: 예상한 결과 확인
+            postRepository.fetchAll { fetchResult in
+                switch fetchResult {
+                case .success(let posts):
+                    XCTAssertEqual(posts.count, 0)
+                case .failure(let error):
                     fatalError(error.localizedDescription)
                 }
             }
