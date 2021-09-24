@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		87078B5B26EA44B5007AE242 /* ThingLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 87078B5926EA44B5007AE242 /* ThingLog.xcdatamodeld */; };
+		8736B3F426FDD55E000433E1 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736B3F326FDD55E000433E1 /* UIFont+.swift */; };
 		873EC00926D39055003C3525 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873EC00826D39055003C3525 /* AppDelegate.swift */; };
 		873EC00B26D39055003C3525 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873EC00A26D39055003C3525 /* SceneDelegate.swift */; };
 		873EC00D26D39055003C3525 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873EC00C26D39055003C3525 /* ViewController.swift */; };
@@ -91,6 +92,7 @@
 
 /* Begin PBXFileReference section */
 		87078B5A26EA44B5007AE242 /* ThingLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ThingLog.xcdatamodel; sourceTree = "<group>"; };
+		8736B3F326FDD55E000433E1 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		873EC00526D39055003C3525 /* ThingLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThingLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873EC00826D39055003C3525 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		873EC00A26D39055003C3525 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 			children = (
 				DB7C04EB26FB1A04009F5C0A /* UIView+.swift */,
 				DB7C04C926F9E69D009F5C0A /* UserDefaults+.swift */,
+				8736B3F326FDD55E000433E1 /* UIFont+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				873EC00926D39055003C3525 /* AppDelegate.swift in Sources */,
 				DB7C04C726F9E693009F5C0A /* UserInformationViewModel.swift in Sources */,
 				873EC00B26D39055003C3525 /* SceneDelegate.swift in Sources */,
+				8736B3F426FDD55E000433E1 /* UIFont+.swift in Sources */,
 				DB7C04F026FB1EFF009F5C0A /* HomeViewController.swift in Sources */,
 				DB331DAB26FDD00A00A629F5 /* Fonts.swift in Sources */,
 				875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */,
