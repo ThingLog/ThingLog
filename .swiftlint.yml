@@ -572,3 +572,4 @@ excluded:
     - ThingLog/*/SceneDelegate.swift
     - ThingLogTests
     - ThingLogUITests
+    - ThingLog/SwiftGen/*
