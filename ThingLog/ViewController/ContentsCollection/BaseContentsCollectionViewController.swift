@@ -56,7 +56,7 @@ extension BaseContentsCollectionViewController: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: ContentsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsCollectionViewCell else  { return UICollectionViewCell() }
-        cell.backgroundColor = SwiftGenColors.gray5.color
+        cell.backgroundColor = SwiftGenColors.gray6.color
         return cell
     }
 }

@@ -11,8 +11,8 @@ final class ProfileView: UIView {
     var userAliasNameButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("분더카머", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = button.titleLabel?.font.withSize(20.0)
+        button.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        button.titleLabel?.font = UIFont.Pretendard.headline3
         button.setImage(SwiftGenAssets.modifyText.image, for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
@@ -24,7 +24,7 @@ final class ProfileView: UIView {
     var userOneLineIntroductionLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "나를 찾는 여정 나를 찾는 여정"
-        label.font = label.font.withSize(14.0)
+        label.font = UIFont.Pretendard.body2
         label.textColor = SwiftGenColors.gray4.color
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
@@ -37,7 +37,7 @@ final class ProfileView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.setContentHuggingPriority(.required, for: .horizontal)
         imageView.setContentHuggingPriority(.required, for: .vertical)
-        imageView.backgroundColor = SwiftGenColors.gray5.color
+        imageView.backgroundColor = SwiftGenColors.gray6.color
         return imageView
     }()
     

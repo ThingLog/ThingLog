@@ -13,16 +13,19 @@ final class ContentsTabView: UIView {
     var boughtButton: TemplateImageButton = {
         let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenAssets.bought.image)
         button.updateColor(SwiftGenColors.black.color)
+        button.titleLabel?.font = UIFont.Pretendard.body2
         return button
     }()
     var wishButton: TemplateImageButton = {
         let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenAssets.wish.image)
         button.updateColor(SwiftGenColors.gray4.color)
+        button.titleLabel?.font = UIFont.Pretendard.body2
         return button
     }()
     var giftButton: TemplateImageButton = {
         let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenAssets.gift.image)
         button.updateColor(SwiftGenColors.gray4.color)
+        button.titleLabel?.font = UIFont.Pretendard.body2
         return button
     }()
     
@@ -35,7 +38,7 @@ final class ContentsTabView: UIView {
     
     private var topBorderLine: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.gray5.color
+        view.backgroundColor = SwiftGenColors.gray6.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

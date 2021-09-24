@@ -113,8 +113,8 @@ final class HomeViewController: UIViewController {
         
         let logoView: UILabel = UILabel()
         logoView.text = "띵로그"
-        logoView.textColor = .black
-        logoView.font = UIFont.boldSystemFont(ofSize: 20.0)
+        logoView.textColor = SwiftGenColors.black.color
+        logoView.font = UIFont.Pretendard.headline3
         let logoBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: logoView)
         navigationItem.leftBarButtonItem = logoBarButtonItem
         

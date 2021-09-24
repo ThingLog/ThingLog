@@ -19,7 +19,7 @@ final class CategoryViewController: UIViewController {
         let label: UILabel = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 100)))
         label.center = view.center
         label.backgroundColor = SwiftGenColors.white.color
-        label.textColor = .black
+        label.textColor = SwiftGenColors.black.color
         label.textAlignment = .center
         label.text = "Category"
         view.addSubview(label)
