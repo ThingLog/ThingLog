@@ -10,6 +10,7 @@ import Foundation
 
 protocol PostRepositoryProtocol {
     func create(_ newPost: Post, completion: @escaping (Result<Bool, Error>) -> Void)
+    func get(withIdentifier identifier: UUID, completion: @escaping (Result<PostEntity, Error>) -> Void)
     func fetchAll(completion: @escaping (Result<[PostEntity], Error>) -> Void)
     func deleteAll(completion: @escaping (Result<Bool, Error>) -> Void)
 }
@@ -29,6 +30,22 @@ final class PostRepository: PostRepositoryProtocol {
                 completion(.success(true))
             } catch {
                 fatalError("PostRepository Unresolved error \(error)")
+            }
+        }
+    }
+
+    func get(withIdentifier identifier: UUID, completion: @escaping (Result<PostEntity, Error>) -> Void) {
+        coreDataStack.performBackgroundTask { context in
+            do {
+                let request: NSFetchRequest = PostEntity.fetchRequest()
+                request.fetchLimit = 1
+                request.predicate = NSPredicate(format: "identifier == %@", identifier as CVarArg)
+                guard let result: PostEntity = try context.fetch(request).first else {
+                    fatalError("Not Found PostEntity")
+                }
+                completion(.success(result))
+            } catch {
+                fatalError("Not Found PostEntity \(error)")
             }
         }
     }
