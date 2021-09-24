@@ -35,7 +35,7 @@ final class HomeViewController: UIViewController {
     
     var coordinator: Coordinator?
     var heightAnchorProfileView: NSLayoutConstraint?
-    let profileViewHeight: CGFloat = 54 + 17
+    let profileViewHeight: CGFloat = 44 + 24 + 16
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -181,7 +181,7 @@ extension HomeViewController {
                     if dist >= 0 {
                         dist = max(currentConstant - dist, 0)
                     } else {
-                        dist = min(currentConstant - dist, self?.profileViewHeight ?? 54 + 17)
+                        dist = min(currentConstant - dist, self?.profileViewHeight ?? 44 + 24 + 16)
                     }
                     self?.heightAnchorProfileView?.constant = dist
                     self?.view.layoutIfNeeded()

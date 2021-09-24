@@ -53,6 +53,13 @@ final class ProfileView: UIView {
         return view
     }()
     
+    private let emptyVerticalView: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        return view
+    }()
+    
     private lazy var verticalStackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [userAliasNameButton, userOneLineIntroductionLabel])
         stackView.axis = .vertical
@@ -73,6 +80,14 @@ final class ProfileView: UIView {
         return stackView
     }()
     
+    private lazy var totalView: UIStackView = {
+        let stackView: UIStackView = UIStackView(arrangedSubviews: [horizontalStackView, emptyVerticalView])
+        stackView.axis = .vertical
+        stackView.spacing = 0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private let imageHeight: CGFloat = 44
     
     override init(frame: CGRect) {
@@ -87,22 +102,23 @@ final class ProfileView: UIView {
     
     private func setupView() {
         backgroundColor = SwiftGenColors.white.color
-        addSubview(horizontalStackView)
+        addSubview(totalView)
         
         userBadgeImageView.layer.cornerRadius = imageHeight / 2
         
         NSLayoutConstraint.activate([
             userBadgeImageView.widthAnchor.constraint(equalTo: userBadgeImageView.heightAnchor),
-//            userBadgeImageView.heightAnchor.constraint(equalToConstant: imageHeight)
             userBadgeImageView.heightAnchor.constraint(lessThanOrEqualToConstant: imageHeight),
             
             emptyLeadingView.widthAnchor.constraint(equalToConstant: 0),
             emptyTrailingView.widthAnchor.constraint(equalToConstant: 0),
             
-            horizontalStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            horizontalStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            horizontalStackView.topAnchor.constraint(equalTo: topAnchor),
-            horizontalStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            totalView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            totalView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            totalView.topAnchor.constraint(equalTo: topAnchor),
+            totalView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            emptyVerticalView.heightAnchor.constraint(equalToConstant: 16)
         ])
     }
 }
