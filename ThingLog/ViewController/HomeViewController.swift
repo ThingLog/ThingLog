@@ -148,16 +148,10 @@ extension HomeViewController {
                 self?.contentsTabView.updateButtonTintColor(by: index)
                 var direction: UIPageViewController.NavigationDirection = .forward
                 let pageIndex: Int? = self?.pageViewController.currentPageIndex
-                if pageIndex == 0 {
-                    if index == 2 {
-                        direction = .reverse
-                    }
-                } else if pageIndex == 1 {
-                    if index == 0 {
-                        direction = .reverse
-                    }
-                } else if pageIndex == 2 {
-                    if index == 1 {
+                if index == 0 {
+                    direction = .reverse
+                } else if index == 1 {
+                    if pageIndex == 2 {
                         direction = .reverse
                     }
                 }
