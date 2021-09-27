@@ -186,6 +186,56 @@ class ThingLogRepositoryTests: XCTestCase {
             }
         }
     }
+
+    func test_Post를_수정할_수_있다() {
+        // given: 필요한 모든 값 설정
+        guard let originalImage: UIImage = UIImage(systemName: "heart.fill") else {
+            fatalError("Not Found system Image")
+        }
+        let updateTitle: String = "Update Post"
+        var newPost: Post = Post(title: "Test Post",
+                                 price: 30_500,
+                                 purchasePlace: "Market",
+                                 contents: "Test Contents...",
+                                 isLike: false,
+                                 type: .init(isDelete: false, type: .bought),
+                                 rating: .init(score: .excellent),
+                                 categories: [Category(title: "Software")],
+                                 attachments: [Attachment(thumbnail: originalImage,
+                                                          imageData: .init(blob: originalImage))],
+                                 comments: nil)
+
+        timeout(15) { exp in
+            postRepository.create(newPost) { result in
+                switch result {
+                case .success(_):
+                    newPost.title = updateTitle
+                    // when: 테스트중인 코드 실행
+                    self.postRepository.update(newPost) { result in
+                        switch result {
+                        case .success(_):
+                            // then: 예상한 결과 확인
+                            self.postRepository.get(withIdentifier: newPost.identifier) { result in
+                                switch result {
+                                case .success(let postEntity):
+                                    XCTAssertEqual(postEntity.title, updateTitle)
+                                    exp.fulfill()
+                                case .failure(let error):
+                                    XCTFail(error.localizedDescription)
+                                    exp.fulfill()
+                                }
+                            }
+                        case .failure(let error):
+                            XCTFail(error.localizedDescription)
+                            exp.fulfill()
+                        }
+                    }
+                case .failure(let error):
+                    XCTFail(error.localizedDescription)
+                }
+            }
+        }
+    }
 }
 
 extension XCTestCase {

@@ -10,11 +10,11 @@ import Foundation
 
 struct Post {
     let identifier: UUID = UUID()
-    let title: String
-    let price: Int
-    let purchasePlace: String?
-    let contents: String?
-    let isLike: Bool
+    var title: String
+    var price: Int
+    var purchasePlace: String?
+    var contents: String?
+    var isLike: Bool
 
     // MARK: Relationship
     let type: PostType
