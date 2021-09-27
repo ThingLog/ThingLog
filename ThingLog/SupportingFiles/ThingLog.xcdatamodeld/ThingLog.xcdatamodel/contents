@@ -17,32 +17,27 @@
         <relationship name="post" toMany="YES" deletionRule="Deny" destinationEntity="Post" inverseName="categories" inverseEntity="Post"/>
     </entity>
     <entity name="Comment" representedClassName="CommentEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="contents" optional="YES" attributeType="String"/>
-        <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="contents" attributeType="String"/>
+        <attribute name="createDate" attributeType="Date" defaultDateTimeInterval="654164520" usesScalarValueType="NO"/>
+        <attribute name="identifier" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="post" maxCount="1" deletionRule="Deny" destinationEntity="Post" inverseName="comments" inverseEntity="Post"/>
     </entity>
     <entity name="ImageData" representedClassName="ImageDataEntity" syncable="YES" codeGenerationType="class">
         <attribute name="blob" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <relationship name="attachment" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Attachment" inverseName="imageData" inverseEntity="Attachment"/>
     </entity>
-    <entity name="Like" representedClassName="LikeEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="post" toMany="YES" deletionRule="Deny" destinationEntity="Post" inverseName="like" inverseEntity="Post"/>
-    </entity>
     <entity name="Post" representedClassName="PostEntity" syncable="YES" codeGenerationType="class">
         <attribute name="contents" optional="YES" attributeType="String"/>
-        <attribute name="createDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="createDate" attributeType="Date" defaultDateTimeInterval="654096120" usesScalarValueType="NO"/>
         <attribute name="deleteDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="identifier" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="price" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="purchaseDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isLike" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="price" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="purchasePlace" optional="YES" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
         <relationship name="attachments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Attachment" inverseName="post" inverseEntity="Attachment"/>
         <relationship name="categories" toMany="YES" deletionRule="Cascade" destinationEntity="Category" inverseName="post" inverseEntity="Category"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Comment" inverseName="post" inverseEntity="Comment"/>
-        <relationship name="like" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Like" inverseName="post" inverseEntity="Like"/>
         <relationship name="rating" maxCount="1" deletionRule="Cascade" destinationEntity="Rating" inverseName="post" inverseEntity="Rating"/>
         <relationship name="type" maxCount="1" deletionRule="Cascade" destinationEntity="PostType" inverseName="post" inverseEntity="PostType"/>
     </entity>
@@ -63,9 +58,8 @@
         <element name="Category" positionX="-7669.173278808594" positionY="-4417.294006347656" width="128" height="88"/>
         <element name="Comment" positionX="-6921.718536376953" positionY="-4342.518676757812" width="128" height="103"/>
         <element name="ImageData" positionX="-7058.579223632812" positionY="-4674.90251159668" width="128" height="73"/>
-        <element name="Like" positionX="-7670.162475585938" positionY="-4296.917922973633" width="128" height="73"/>
-        <element name="Post" positionX="-7234.070434570312" positionY="-4447.350189208984" width="128" height="253"/>
-        <element name="PostType" positionX="-7670.45556640625" positionY="-4200.821716308594" width="128" height="103"/>
+        <element name="Post" positionX="-7234.070434570312" positionY="-4447.350189208984" width="128" height="238"/>
+        <element name="PostType" positionX="-7670.684143066406" positionY="-4199.678771972656" width="128" height="103"/>
         <element name="Rating" positionX="-6921.7568359375" positionY="-4211.929016113281" width="128" height="88"/>
     </elements>
 </model>
