@@ -13,6 +13,7 @@ final class HorizontalCollectionView: UIView {
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumInteritemSpacing = 10
         flowLayout.scrollDirection = .horizontal
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(RoundButtonCollectionViewCell.self, forCellWithReuseIdentifier: RoundButtonCollectionViewCell.reuseIdentifier)
@@ -25,11 +26,6 @@ final class HorizontalCollectionView: UIView {
     // TODO: ⚠️ 추후에 Category 로 변경할 예정입니당  ( CategoryEntity의 객체 )
     var categoryList: [String] = []
     private var selectedIndexCell: IndexPath = IndexPath(item: 0, section: 0)
-    private let maxCollectionViewLeadingConstant: CGFloat = 16.0
-    private let maxCollectionViewTrailingConstant: CGFloat = -16.0
-    private var collectionViewLeadingAnchor: NSLayoutConstraint?
-    private var collectionViewTrailingAnchor: NSLayoutConstraint?
-    private let animationDuration: TimeInterval = 0.1
     private let buttonHeight: CGFloat = 26
     
     // MARK: - Init
@@ -48,12 +44,10 @@ final class HorizontalCollectionView: UIView {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        collectionViewLeadingAnchor = collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: maxCollectionViewLeadingConstant)
-        collectionViewTrailingAnchor = collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0)
-        collectionViewTrailingAnchor?.isActive = true
-        collectionViewLeadingAnchor?.isActive = true
+
         NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
             collectionView.topAnchor.constraint(equalTo: topAnchor)
         ])
@@ -110,30 +104,5 @@ extension HorizontalCollectionView: UICollectionViewDelegateFlowLayout {
         itemSize.width += 20
         itemSize.height = buttonHeight
         return itemSize
-    }
-}
-
-extension HorizontalCollectionView: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let nextOffsetX: CGFloat = scrollView.contentOffset.x
-        
-        // 왼쪽 애니메이션
-        UIView.animate(withDuration: animationDuration) {
-            if nextOffsetX <= 0 {
-                self.collectionViewLeadingAnchor?.constant = self.maxCollectionViewLeadingConstant
-                return
-            }
-            self.collectionViewLeadingAnchor?.constant = max(self.maxCollectionViewLeadingConstant - nextOffsetX, 0)
-        }
-        
-        // 오른쪽 애니메이션
-        UIView.animate(withDuration: animationDuration) {
-            let totalOffsetX: CGFloat = nextOffsetX + scrollView.frame.width
-            if totalOffsetX >= scrollView.contentSize.width {
-                self.collectionViewTrailingAnchor?.constant = self.maxCollectionViewTrailingConstant
-                return
-            }
-            self.collectionViewTrailingAnchor?.constant = min(0, (scrollView.contentSize.width - totalOffsetX + self.maxCollectionViewTrailingConstant))
-        }
     }
 }
