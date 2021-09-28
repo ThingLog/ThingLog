@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 /// 모아보기 - 상단 탭을 클릭할 시 각 탭마다 필요한 드롭박스에 필요한 데이터들을 정의한 객체다.
 enum FilterType {
     case preference, latest, year, month
