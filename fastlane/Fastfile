@@ -23,8 +23,8 @@ platform :ios do
       )
       upload_to_testflight
       slack(
-        message: "Testflight 배포에 성공했습니다!",
-        slack_url: "https://hooks.slack.com/services/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"
+        message:"Testflight 배포에 성공했습니다!",
+        slack_url:"https://hooks.slack.com/services/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"
       )
     end
   end
@@ -58,16 +58,16 @@ platform :ios do
         submission_information: { add_id_info_uses_idfa: false }
       )
       slack(
-        message: "App store 배포에 성공했습니다🎉!",
-        slack_url: "https://hooks.slack.com/services/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"
+        message:"App store 배포에 성공했습니다🎉!",
+        slack_url:"https://hooks.slack.com/services/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"
       )
     end
   end
   error do |lane, exception, options|
     slack(
-      message: "에러 발생 : #{exception}",
+      message:"에러 발생 : #{exception}",
       success: false,
-      slack_url: "https://hooks.slack.com/services/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"
+      slack_url:"https://hooks.slack.com/services/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"
     )
   end
 end
