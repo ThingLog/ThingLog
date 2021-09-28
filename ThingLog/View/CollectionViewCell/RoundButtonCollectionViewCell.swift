@@ -7,18 +7,24 @@
 
 import UIKit
 
-class RoundButtonCollectionViewCell: UICollectionViewCell {
+final class RoundButtonCollectionViewCell: UICollectionViewCell {
     private var button: UIButton = {
         let button: UIButton = UIButton()
-        button.layer.cornerRadius = 13
         button.layer.borderWidth = 1.0
         button.layer.borderColor = SwiftGenColors.gray5.color.cgColor
         button.titleLabel?.font = UIFont.Pretendard.body2
         button.clipsToBounds = true
-        button.backgroundColor = SwiftGenColors.gray5.color
+        button.backgroundColor = SwiftGenColors.white.color
+        button.setTitleColor(SwiftGenColors.gray5.color, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isUserInteractionEnabled = false 
         return button
     }()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        changeButtonColor(isSelected: false)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,6 +37,7 @@ class RoundButtonCollectionViewCell: UICollectionViewCell {
     
     private func setupView() {
         contentView.addSubview(button)
+        contentView.backgroundColor = SwiftGenColors.white.color
         NSLayoutConstraint.activate([
             button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -41,8 +48,9 @@ class RoundButtonCollectionViewCell: UICollectionViewCell {
 }
 
 extension RoundButtonCollectionViewCell {
-    func updateView(title: String) {
+    func updateView(title: String, cornerRadius: CGFloat) {
         button.setTitle(title, for: .normal)
+        button.layer.cornerRadius = cornerRadius
     }
     
     func changeButtonColor(isSelected: Bool) {
