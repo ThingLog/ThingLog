@@ -8,6 +8,8 @@
 import CoreData
 import Foundation
 
+/// Post
+/// 성능 상의 이유로 NSManagedObjectContext를 계속 가지고 있는 NSManagedObject 보다는 Context가 없는 모델 객체를 사용하는 것이 올바르다고 판단하여 별도의 Model 객체가 필요함
 struct Post {
     let identifier: UUID = UUID()
     var title: String

@@ -23,7 +23,7 @@
         <relationship name="post" maxCount="1" deletionRule="Deny" destinationEntity="Post" inverseName="comments" inverseEntity="Post"/>
     </entity>
     <entity name="ImageData" representedClassName="ImageDataEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="blob" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="originalImage" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <relationship name="attachment" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Attachment" inverseName="imageData" inverseEntity="Attachment"/>
     </entity>
     <entity name="Post" representedClassName="PostEntity" syncable="YES" codeGenerationType="class">

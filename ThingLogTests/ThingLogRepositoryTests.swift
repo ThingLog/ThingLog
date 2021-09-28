@@ -43,7 +43,7 @@ class ThingLogRepositoryTests: XCTestCase {
                                  rating: .init(score: .excellent),
                                  categories: [Category(title: "Software")],
                                  attachments: [Attachment(thumbnail: originalImage,
-                                                          imageData: .init(blob: originalImage))],
+                                                          imageData: .init(originalImage: originalImage))],
                                  comments: nil)
 
         // when: 테스트중인 코드 실행
@@ -51,20 +51,18 @@ class ThingLogRepositoryTests: XCTestCase {
             postRepository.create(newPost) { result in
                 switch result {
                 case .success(_):
-                    break
+                    // then: 예상한 결과 확인
+                    self.postRepository.fetchAll { result in
+                        switch result {
+                        case .success(let postEntities):
+                            XCTAssertEqual(postEntities.count, 1)
+                            exp.fulfill()
+                        case .failure(let error):
+                            XCTAssertTrue(false)
+                            fatalError(error.localizedDescription)
+                        }
+                    }
                 case .failure(let error):
-                    fatalError(error.localizedDescription)
-                }
-            }
-
-            // then: 예상한 결과 확인
-            postRepository.fetchAll { result in
-                switch result {
-                case .success(_):
-                    XCTAssertTrue(true)
-                    exp.fulfill()
-                case .failure(let error):
-                    XCTAssertTrue(false)
                     fatalError(error.localizedDescription)
                 }
             }
@@ -86,18 +84,32 @@ class ThingLogRepositoryTests: XCTestCase {
                                      rating: .init(score: .excellent),
                                      categories: [Category(title: "Software")],
                                      attachments: [Attachment(thumbnail: originalImage,
-                                                              imageData: .init(blob: originalImage))],
+                                                              imageData: .init(originalImage: originalImage))],
                                      comments: nil)
             return newPost
         }
+        var postCount: Int = 0
 
-        // when: 테스트중인 코드 실행
-        newPosts.forEach { post in
-            postRepository.create(post) { result in
-                // then: 예상한 결과 확인
+        timeout(10) { exp in
+            // when: 테스트중인 코드 실행
+            newPosts.forEach { post in
+                postRepository.create(post) { result in
+                    switch result {
+                    case .success(_):
+                        postCount += 1
+                    case .failure(let error):
+                        XCTAssertTrue(false)
+                        fatalError(error.localizedDescription)
+                    }
+                }
+            }
+
+            // then: 예상한 결과 확인
+            postRepository.fetchAll { result in
                 switch result {
-                case .success(_):
-                    XCTAssertTrue(true)
+                case .success(let postEntities):
+                    XCTAssertEqual(postCount, postEntities.count)
+                    exp.fulfill()
                 case .failure(let error):
                     XCTAssertTrue(false)
                     fatalError(error.localizedDescription)
@@ -129,17 +141,16 @@ class ThingLogRepositoryTests: XCTestCase {
             postRepository.deleteAll { result in
                 switch result {
                 case .success(_):
-                    exp.fulfill()
-                case .failure(let error):
-                    fatalError(error.localizedDescription)
-                }
-            }
-
-            // then: 예상한 결과 확인
-            postRepository.fetchAll { fetchResult in
-                switch fetchResult {
-                case .success(let posts):
-                    XCTAssertEqual(posts.count, 0)
+                    // then: 예상한 결과 확인
+                    self.postRepository.fetchAll { fetchResult in
+                        switch fetchResult {
+                        case .success(let posts):
+                            XCTAssertEqual(posts.count, 0)
+                            exp.fulfill()
+                        case .failure(let error):
+                            fatalError(error.localizedDescription)
+                        }
+                    }
                 case .failure(let error):
                     fatalError(error.localizedDescription)
                 }
@@ -161,28 +172,27 @@ class ThingLogRepositoryTests: XCTestCase {
                                  rating: .init(score: .excellent),
                                  categories: [Category(title: "Software")],
                                  attachments: [Attachment(thumbnail: originalImage,
-                                                          imageData: .init(blob: originalImage))],
+                                                          imageData: .init(originalImage: originalImage))],
                                  comments: nil)
 
-        timeout(3) { exp in
+        timeout(5) { exp in
             postRepository.create(newPost) { result in
                 switch result {
                 case .success(_):
-                    exp.fulfill()
+                    // when: 테스트중인 코드 실행
+                    self.postRepository.get(withIdentifier: newPost.identifier) { result in
+                        // then: 예상한 결과 확인
+                        switch result {
+                        case .success(let postEntity):
+                            XCTAssertEqual(postEntity.title ?? "", newPost.title)
+                            exp.fulfill()
+                        case .failure(let error):
+                            fatalError(error.localizedDescription)
+                        }
+                    }
                 case .failure(let error):
                     fatalError(error.localizedDescription)
                 }
-            }
-        }
-
-        // when: 테스트중인 코드 실행
-        postRepository.get(withIdentifier: newPost.identifier) { result in
-            // then: 예상한 결과 확인
-            switch result {
-            case .success(let postEntity):
-                XCTAssertEqual(postEntity.title ?? "", newPost.title)
-            case .failure(let error):
-                fatalError(error.localizedDescription)
             }
         }
     }
@@ -202,7 +212,7 @@ class ThingLogRepositoryTests: XCTestCase {
                                  rating: .init(score: .excellent),
                                  categories: [Category(title: "Software")],
                                  attachments: [Attachment(thumbnail: originalImage,
-                                                          imageData: .init(blob: originalImage))],
+                                                          imageData: .init(originalImage: originalImage))],
                                  comments: nil)
 
         timeout(15) { exp in

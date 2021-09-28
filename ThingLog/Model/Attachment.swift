@@ -19,7 +19,7 @@ struct Attachment {
 
 extension Attachment {
     struct ImageData {
-        let blob: UIImage
+        let originalImage: UIImage
     }
 
     func toEntity(in context: NSManagedObjectContext) -> AttachmentEntity {
@@ -34,7 +34,7 @@ extension Attachment {
 extension Attachment.ImageData {
     func toEntity(in context: NSManagedObjectContext) -> ImageDataEntity {
         let entity: ImageDataEntity = ImageDataEntity(context: context)
-        entity.blob = blob.pngData()
+        entity.originalImage = originalImage.pngData()
         return entity
     }
 }
