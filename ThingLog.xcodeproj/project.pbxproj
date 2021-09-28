@@ -55,6 +55,7 @@
 		DBAE8E9826FDB3EE00F536AD /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */; };
 		DBAE8EB126FDBEAE00F536AD /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */; };
 		DBAE8EBB26FDCA7B00F536AD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */; };
+		DBD5455027033D9A00063C98 /* RoundButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				DB7C04E826FB19AE009F5C0A /* ContentsCollectionViewCell.swift */,
+				DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				DB331DAA26FDD00A00A629F5 /* ImageAssets.swift in Sources */,
 				DBAB64A726FE2AFF006D95ED /* UIImage+.swift in Sources */,
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
+				DBD5455027033D9A00063C98 /* RoundButtonCollectionViewCell.swift in Sources */,
 				DB7C04CA26F9E69D009F5C0A /* UserDefaults+.swift in Sources */,
 				DB7C04E526FB1981009F5C0A /* BaseContentsCollectionViewController.swift in Sources */,
 				DB7C04F626FB1F4B009F5C0A /* WishContentsCollectionViewController.swift in Sources */,
