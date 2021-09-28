@@ -75,7 +75,6 @@ final class ProfileView: UIView {
                                                                      emptyTrailingView ])
         stackView.axis = .horizontal
         stackView.alignment = .center
-        stackView.spacing = 44
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -89,6 +88,8 @@ final class ProfileView: UIView {
     }()
     
     private let imageHeight: CGFloat = 44
+    private let emptyWidth: CGFloat = 44
+    private let emptyHeight: CGFloat = 16
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -107,18 +108,18 @@ final class ProfileView: UIView {
         userBadgeImageView.layer.cornerRadius = imageHeight / 2
         
         NSLayoutConstraint.activate([
-            userBadgeImageView.widthAnchor.constraint(equalTo: userBadgeImageView.heightAnchor),
             userBadgeImageView.heightAnchor.constraint(lessThanOrEqualToConstant: imageHeight),
+            userBadgeImageView.widthAnchor.constraint(equalTo: userBadgeImageView.heightAnchor),
             
-            emptyLeadingView.widthAnchor.constraint(equalToConstant: 0),
-            emptyTrailingView.widthAnchor.constraint(equalToConstant: 0),
+            emptyLeadingView.widthAnchor.constraint(equalToConstant: emptyWidth),
+            emptyTrailingView.widthAnchor.constraint(equalToConstant: emptyWidth),
             
             totalView.leadingAnchor.constraint(equalTo: leadingAnchor),
             totalView.trailingAnchor.constraint(equalTo: trailingAnchor),
             totalView.topAnchor.constraint(equalTo: topAnchor),
             totalView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            emptyVerticalView.heightAnchor.constraint(equalToConstant: 16)
+            emptyVerticalView.heightAnchor.constraint(equalToConstant: emptyHeight)
         ])
     }
 }
