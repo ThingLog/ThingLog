@@ -11,7 +11,7 @@ import UIKit
 final class HomeViewController: UIViewController {
     let profileView: ProfileView = {
         let profileView: ProfileView = ProfileView()
-        profileView.backgroundColor = .white
+        profileView.backgroundColor = SwiftGenColors.white.color
         profileView.translatesAutoresizingMaskIntoConstraints = false
         return profileView
     }()
@@ -35,7 +35,7 @@ final class HomeViewController: UIViewController {
     
     var coordinator: Coordinator?
     var heightAnchorProfileView: NSLayoutConstraint?
-    let profileViewHeight: CGFloat = 54 + 17
+    let profileViewHeight: CGFloat = 44 + 24 + 16
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -53,7 +53,7 @@ final class HomeViewController: UIViewController {
     
     // MARK: - Setup
     func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = SwiftGenColors.white.color
         view.addSubview(profileView)
         heightAnchorProfileView = profileView.heightAnchor.constraint(equalToConstant: profileViewHeight)
         heightAnchorProfileView?.isActive = true
@@ -101,26 +101,26 @@ final class HomeViewController: UIViewController {
         if #available(iOS 15, *) {
             let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = .white
+            appearance.backgroundColor = SwiftGenColors.white.color
             appearance.shadowColor = .clear
             navigationController?.navigationBar.standardAppearance = appearance
             navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
         } else {
             navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.barTintColor = .white
+            navigationController?.navigationBar.barTintColor = SwiftGenColors.white.color
             navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         }
         
         let logoView: UILabel = UILabel()
         logoView.text = "띵로그"
-        logoView.textColor = .black
-        logoView.font = UIFont.boldSystemFont(ofSize: 20.0)
+        logoView.textColor = SwiftGenColors.black.color
+        logoView.font = UIFont.Pretendard.headline3
         let logoBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: logoView)
         navigationItem.leftBarButtonItem = logoBarButtonItem
         
         let settingButton: UIButton = UIButton()
-        settingButton.setImage(UIImage(named: "setting"), for: .normal)
-        settingButton.tintColor = .black
+        settingButton.setImage(SwiftGenAssets.setting.image, for: .normal)
+        settingButton.tintColor = SwiftGenColors.black.color
         // settingButton.addTarget(self, action: #selector(showSettingView), for: .touchUpInside)
         let settingBarButton: UIBarButtonItem = UIBarButtonItem(customView: settingButton)
         navigationItem.rightBarButtonItem = settingBarButton
@@ -148,16 +148,10 @@ extension HomeViewController {
                 self?.contentsTabView.updateButtonTintColor(by: index)
                 var direction: UIPageViewController.NavigationDirection = .forward
                 let pageIndex: Int? = self?.pageViewController.currentPageIndex
-                if pageIndex == 0 {
-                    if index == 2 {
-                        direction = .reverse
-                    }
-                } else if pageIndex == 1 {
-                    if index == 0 {
-                        direction = .reverse
-                    }
-                } else if pageIndex == 2 {
-                    if index == 1 {
+                if index == 0 {
+                    direction = .reverse
+                } else if index == 1 {
+                    if pageIndex == 2 {
                         direction = .reverse
                     }
                 }
@@ -181,7 +175,7 @@ extension HomeViewController {
                     if dist >= 0 {
                         dist = max(currentConstant - dist, 0)
                     } else {
-                        dist = min(currentConstant - dist, self?.profileViewHeight ?? 54 + 17)
+                        dist = min(currentConstant - dist, self?.profileViewHeight ?? 44 + 24 + 16)
                     }
                     self?.heightAnchorProfileView?.constant = dist
                     self?.view.layoutIfNeeded()
