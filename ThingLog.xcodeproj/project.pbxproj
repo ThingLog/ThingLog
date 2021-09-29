@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		87078B5B26EA44B5007AE242 /* ThingLog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 87078B5926EA44B5007AE242 /* ThingLog.xcdatamodeld */; };
-		8736B3F426FDD55E000433E1 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736B3F326FDD55E000433E1 /* UIFont+.swift */; };
 		8736B3E326FCB9F3000433E1 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736B3E226FCB9F3000433E1 /* Rating.swift */; };
 		8736B3E526FCBA77000433E1 /* RatingEntity+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736B3E426FCBA77000433E1 /* RatingEntity+.swift */; };
 		8736B3E926FCBE28000433E1 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736B3E826FCBE28000433E1 /* Category.swift */; };
 		8736B3EF26FDC1AD000433E1 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736B3EE26FDC1AD000433E1 /* Comment.swift */; };
 		8736B3F226FDC281000433E1 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736B3F126FDC281000433E1 /* Attachment.swift */; };
+		8736B3F426FDD55E000433E1 /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736B3F326FDD55E000433E1 /* UIFont+.swift */; };
 		8736B3F626FE245A000433E1 /* PostEntity+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736B3F526FE245A000433E1 /* PostEntity+.swift */; };
 		873EC00926D39055003C3525 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873EC00826D39055003C3525 /* AppDelegate.swift */; };
 		873EC00B26D39055003C3525 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873EC00A26D39055003C3525 /* SceneDelegate.swift */; };
@@ -32,6 +32,12 @@
 		873EC04A26D504BA003C3525 /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC04026D504BA003C3525 /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		873EC04E26D5068F003C3525 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 873EC04D26D5068F003C3525 /* .swiftlint.yml */; };
 		875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */; };
+		876C157927044BA0000C1C84 /* PostRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157827044BA0000C1C84 /* PostRepositoryError.swift */; };
+		87F2188326FB5B4100C3FBCA /* ThingLogRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188226FB5B4100C3FBCA /* ThingLogRepositoryTests.swift */; };
+		87F2188626FB5DFB00C3FBCA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188526FB5DFB00C3FBCA /* Post.swift */; };
+		87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188826FB5E9500C3FBCA /* PostRepository.swift */; };
+		87F2188E26FB8ACA00C3FBCA /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188D26FB8ACA00C3FBCA /* PostType.swift */; };
+		87F2189026FB8D6A00C3FBCA /* PostTypeEntity+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */; };
 		DB331DA926FDD00A00A629F5 /* ColorsAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA626FDD00A00A629F5 /* ColorsAsset.swift */; };
 		DB331DAA26FDD00A00A629F5 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA726FDD00A00A629F5 /* ImageAssets.swift */; };
 		DB331DAB26FDD00A00A629F5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA826FDD00A00A629F5 /* Fonts.swift */; };
@@ -60,11 +66,6 @@
 		DBAE8E9826FDB3EE00F536AD /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */; };
 		DBAE8EB126FDBEAE00F536AD /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */; };
 		DBAE8EBB26FDCA7B00F536AD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */; };
-		87F2188326FB5B4100C3FBCA /* ThingLogRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188226FB5B4100C3FBCA /* ThingLogRepositoryTests.swift */; };
-		87F2188626FB5DFB00C3FBCA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188526FB5DFB00C3FBCA /* Post.swift */; };
-		87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188826FB5E9500C3FBCA /* PostRepository.swift */; };
-		87F2188E26FB8ACA00C3FBCA /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188D26FB8ACA00C3FBCA /* PostType.swift */; };
-		87F2189026FB8D6A00C3FBCA /* PostTypeEntity+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,12 +104,12 @@
 
 /* Begin PBXFileReference section */
 		87078B5A26EA44B5007AE242 /* ThingLog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ThingLog.xcdatamodel; sourceTree = "<group>"; };
-		8736B3F326FDD55E000433E1 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		8736B3E226FCB9F3000433E1 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		8736B3E426FCBA77000433E1 /* RatingEntity+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RatingEntity+.swift"; sourceTree = "<group>"; };
 		8736B3E826FCBE28000433E1 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		8736B3EE26FDC1AD000433E1 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		8736B3F126FDC281000433E1 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		8736B3F326FDD55E000433E1 /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		8736B3F526FE245A000433E1 /* PostEntity+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostEntity+.swift"; sourceTree = "<group>"; };
 		873EC00526D39055003C3525 /* ThingLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThingLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873EC00826D39055003C3525 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +131,12 @@
 		873EC04026D504BA003C3525 /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
 		873EC04D26D5068F003C3525 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		876C157827044BA0000C1C84 /* PostRepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepositoryError.swift; sourceTree = "<group>"; };
+		87F2188226FB5B4100C3FBCA /* ThingLogRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogRepositoryTests.swift; sourceTree = "<group>"; };
+		87F2188526FB5DFB00C3FBCA /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		87F2188826FB5E9500C3FBCA /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
+		87F2188D26FB8ACA00C3FBCA /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
+		87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostTypeEntity+.swift"; sourceTree = "<group>"; };
 		DB331DA626FDD00A00A629F5 /* ColorsAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsAsset.swift; sourceTree = "<group>"; };
 		DB331DA726FDD00A00A629F5 /* ImageAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
 		DB331DA826FDD00A00A629F5 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -160,11 +167,6 @@
 		DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		87F2188226FB5B4100C3FBCA /* ThingLogRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogRepositoryTests.swift; sourceTree = "<group>"; };
-		87F2188526FB5DFB00C3FBCA /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		87F2188826FB5E9500C3FBCA /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
-		87F2188D26FB8ACA00C3FBCA /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
-		87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostTypeEntity+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,6 +298,35 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		87F2188726FB5E6000C3FBCA /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				87F2188826FB5E9500C3FBCA /* PostRepository.swift */,
+				876C157827044BA0000C1C84 /* PostRepositoryError.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		87F2188A26FB78B700C3FBCA /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */,
+				8736B3E426FCBA77000433E1 /* RatingEntity+.swift */,
+				8736B3F526FE245A000433E1 /* PostEntity+.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		DB7C04A426F5F26B009F5C0A /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04A526F5F281009F5C0A /* Coordinator.swift */,
+				DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */,
+				DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		DB7C04C326F9E66F009F5C0A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,34 +416,6 @@
 				DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */,
 			);
 			path = Font;
-			sourceTree = "<group>";
-		};
-		87F2188726FB5E6000C3FBCA /* Repository */ = {
-			isa = PBXGroup;
-			children = (
-				87F2188826FB5E9500C3FBCA /* PostRepository.swift */,
-			);
-			path = Repository;
-			sourceTree = "<group>";
-		};
-		87F2188A26FB78B700C3FBCA /* Entity */ = {
-			isa = PBXGroup;
-			children = (
-				87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */,
-				8736B3E426FCBA77000433E1 /* RatingEntity+.swift */,
-				8736B3F526FE245A000433E1 /* PostEntity+.swift */,
-			);
-			path = Entity;
-			sourceTree = "<group>";
-		};
-		DB7C04A426F5F26B009F5C0A /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				DB7C04A526F5F281009F5C0A /* Coordinator.swift */,
-				DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */,
-				DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */,
-			);
-			path = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -639,6 +642,7 @@
 				DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */,
 				873EC00926D39055003C3525 /* AppDelegate.swift in Sources */,
 				DB7C04C726F9E693009F5C0A /* UserInformationViewModel.swift in Sources */,
+				876C157927044BA0000C1C84 /* PostRepositoryError.swift in Sources */,
 				873EC00B26D39055003C3525 /* SceneDelegate.swift in Sources */,
 				8736B3F426FDD55E000433E1 /* UIFont+.swift in Sources */,
 				DB7C04F026FB1EFF009F5C0A /* HomeViewController.swift in Sources */,
