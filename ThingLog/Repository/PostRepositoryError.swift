@@ -12,7 +12,8 @@ enum PostRepositoryError: Error {
     case notFoundContext
     case failedUpdate
     case failedFetch
-    case failedCreate
+    case failedCreatePost
+    case failedCreateCategory
     case failedDelete
 }
 
@@ -27,8 +28,10 @@ extension PostRepositoryError: LocalizedError {
             return "Entity 수정을 실패했습니다."
         case .failedFetch:
             return "Entity 가져오기를 실패했습니다."
-        case .failedCreate:
-            return "Entity 생성을 실패했습니다."
+        case .failedCreatePost:
+            return "PostEntity 생성을 실패했습니다."
+        case .failedCreateCategory:
+            return "CategoryEntity 생성을 실패했습니다."
         case .failedDelete:
             return "Entity 삭제를 실패했습니다."
         }
