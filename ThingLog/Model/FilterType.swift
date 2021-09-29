@@ -25,6 +25,15 @@ enum FilterType {
     }
     
     var defaultValue: String {
-        list[0]
+        switch self {
+        case .month:
+            let curDate: Date = Date()
+            return curDate.stringMonth() + "월"
+        case .year:
+            let curDate: Date = Date()
+            return curDate.stringYear() + "년"
+        default:
+            return list[0]
+        }
     }
 }
