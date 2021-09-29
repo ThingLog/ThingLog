@@ -38,6 +38,14 @@ final class DropBoxView: UIView {
         return tableView
     }()
     
+    // DropBoxView 이외에서도 터치가 발생할 경우 DropBox를 닫기 위한 임시 View이다.
+    private let outsideTouchDetectView: IgnoreTouchView = {
+        let touchDetectView: IgnoreTouchView = IgnoreTouchView(frame: UIScreen.main.bounds)
+        touchDetectView.isUserInteractionEnabled = true
+        touchDetectView.backgroundColor = .clear
+        return touchDetectView
+    }()
+    
     // MARK: - Properties
     var filterType: FilterType
     // TableView를 외부 View에 추가하기 위해 필요한 UIView 프로퍼티
@@ -115,14 +123,44 @@ extension DropBoxView {
     
     @objc
     func clickButton() {
-        self.titleButton.imageView?.contentMode = .center
+        changeButtonImageView()
+    }
+    
+    /// titleButton의 이미지를 변경하는 메서드다.  변경한다면 DropBox ( tableView ) 가 나오거나 사라져야 한다.
+    private func changeButtonImageView() {
+        self.outsideTouchDetectView.removeFromSuperview()
         UIView.animate(withDuration: 0.1) {
             self.titleButton.imageView?.transform = self.isShowingDropBox ? .identity : CGAffineTransform(rotationAngle: .pi)
             self.isShowingDropBox.toggle()
         } completion: { _  in
-            UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .curveEaseInOut) {
-                self.tableViewHeightConstant?.constant = self.isShowingDropBox ? self.maxTableViewHeight : 0
-                self.superView?.layoutIfNeeded()
+            self.showTableView(self.isShowingDropBox)
+        }
+    }
+    
+    private func showTableView(_ bool: Bool) {
+        // outsideTouchDetectView를 superView의 최상단에 부착한 후에, tableView를 superView의 가장 최상단으로 옮긴다.
+        addOutsideTouchDetectView(bool)
+        superView?.bringSubviewToFront(tableView)
+        
+        UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: .curveEaseInOut) {
+            self.tableViewHeightConstant?.constant = bool ? self.maxTableViewHeight : 0
+            self.superView?.layoutIfNeeded()
+        }
+    }
+    
+    /// DropBoxView가 열려있는 상태에서 다른 뷰를 터치할 경우에 DropBoxView를 닫히도록 하기 위하여 outsideTouchDetectView를 추가하는 메서드다.
+    /// - Parameter bool: 추가하는 경우에 true를 넣는다.
+    private func addOutsideTouchDetectView(_ bool: Bool ) {
+        if bool == false { return }
+        superView?.addSubview(outsideTouchDetectView)
+        outsideTouchDetectView.executeClosure = { [weak self] in
+            DispatchQueue.global().asyncAfter(deadline: .now() + 0.15) {
+                DispatchQueue.main.async {
+                    if self?.outsideTouchDetectView.superview != nil {
+                        self?.changeButtonImageView()
+                        self?.outsideTouchDetectView.removeFromSuperview()
+                    }
+                }
             }
         }
     }
@@ -169,5 +207,9 @@ extension DropBoxView: UITableViewDelegate {
         let title: String = filterType.list[indexPath.row]
         updateView(title: title)
         selectFilterTypeSubject.onNext((filterType, title))
+        
+        // cell을 선택한다면 dropBox( tableView )는 사라져야 한다.
+        layoutIfNeeded()
+        changeButtonImageView()
     }
 }
