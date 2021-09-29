@@ -5,12 +5,12 @@
 //  Created by hyunsu on 2021/09/29.
 //
 
-import UIKit
 import RxSwift
+import UIKit
 
 /// 선택시 하단으로 드롭형태로 나타나는 View이다.
 /// ⚠️DropBoxView는 자신이 부모 뷰 계층구조에 속한 이후에 addSubView를 해야한다.
-class DropBoxView: UIView {
+final class DropBoxView: UIView {
     // MARK: - View
     var titleButton: InsetButton = {
         let button: InsetButton = InsetButton()
@@ -20,7 +20,7 @@ class DropBoxView: UIView {
         button.semanticContentAttribute = .forceRightToLeft
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
-        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 9, bottom: 0, right: 9)
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 7, bottom: 0, right: 8)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 2)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 0)
         return button
@@ -52,8 +52,13 @@ class DropBoxView: UIView {
         }
     }
     private var tableViewHeightConstant: NSLayoutConstraint?
-    private var selectIndexPath: IndexPath = IndexPath(row: 0, section: 0)
-
+    private lazy var selectedIndexPath: IndexPath = {
+        guard let index: Int = filterType.list.firstIndex(of: filterType.defaultValue) else {
+            return IndexPath(row: 0, section: 0)
+        }
+        return IndexPath(row: index, section: 0)
+    }()
+    
     var selectFilterTypeSubject: PublishSubject = PublishSubject<(FilterType, String)>()
     
     // MARK: - Init
@@ -99,6 +104,7 @@ class DropBoxView: UIView {
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.topAnchor.constraint(equalTo: bottomAnchor, constant: 1)
         ])
+        tableView.selectRow(at: selectedIndexPath, animated: true, scrollPosition: .top)
     }
 }
 
@@ -136,8 +142,8 @@ extension DropBoxView: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.backgroundColor = SwiftGenColors.white.color
         cell.textLabel?.text = filterType.list[indexPath.row]
-        cell.textLabel?.font = selectIndexPath == indexPath ? UIFont.Pretendard.title3 : UIFont.Pretendard.body3
-        cell.textLabel?.textColor = selectIndexPath == indexPath ? SwiftGenColors.black.color : SwiftGenColors.gray4.color
+        cell.textLabel?.font = selectedIndexPath == indexPath ? UIFont.Pretendard.title3 : UIFont.Pretendard.body3
+        cell.textLabel?.textColor = selectedIndexPath == indexPath ? SwiftGenColors.black.color : SwiftGenColors.gray4.color
         return cell
     }
 }
@@ -149,14 +155,14 @@ extension DropBoxView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 기존에 선택된 cell의 강조를 풀어준다.
-        if let cell: UITableViewCell = tableView.cellForRow(at: selectIndexPath) {
+        if let cell: UITableViewCell = tableView.cellForRow(at: selectedIndexPath) {
             cell.textLabel?.font = UIFont.Pretendard.body3
             cell.textLabel?.textColor = SwiftGenColors.gray4.color
         }
-        selectIndexPath = indexPath
+        selectedIndexPath = indexPath
         
         // 현재 선택된 cell을 강조한다.
-        if let cell: UITableViewCell = tableView.cellForRow(at: selectIndexPath) {
+        if let cell: UITableViewCell = tableView.cellForRow(at: selectedIndexPath) {
             cell.textLabel?.font = UIFont.Pretendard.title3
             cell.textLabel?.textColor = SwiftGenColors.black.color
         }
@@ -165,44 +171,3 @@ extension DropBoxView: UITableViewDelegate {
         selectFilterTypeSubject.onNext((filterType, title))
     }
 }
-//
-//  UIView+Preview.swift
-//  WeatherMood
-//
-//  Created by 이지원 on 2021/07/25.
-//  source: https://dev.to/gualtierofr/preview-uikit-views-in-xcode-3543
-
-import UIKit
-
-#if DEBUG
-import SwiftUI
-
-private struct Preview: UIViewRepresentable {
-    typealias UIViewType = UIView
-    let view: UIViewType
-    
-    func makeUIView(context: Context) -> UIViewType {
-        view
-    }
-    
-    func updateUIView(_ uiView: UIViewType, context: Context) {
-    }
-}
-
-extension UIView {
-    func toPreview() -> some View {
-        Preview(view: self)
-    }
-}
-#endif
-
-
-#if DEBUG
-import SwiftUI
-
-struct CurrentWeatherViewPreview: PreviewProvider {
-    static var previews: some View {
-        DropBoxView(type: .latest).toPreview()
-    }
-}
-#endif

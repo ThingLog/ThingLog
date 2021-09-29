@@ -14,7 +14,7 @@ enum FilterType {
     var list: [String] {
         switch self {
         case .latest:
-            return ["최신순", "오래된 순"]
+            return ["최신순", "오래된순"]
         case .month:
             return Array(1...12).map { String($0) + "월" }
         case .year:
