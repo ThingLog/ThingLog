@@ -34,6 +34,8 @@
 		875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */; };
 		876C157927044BA0000C1C84 /* PostRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157827044BA0000C1C84 /* PostRepositoryError.swift */; };
 		876C157B27044DFF000C1C84 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157A27044DFF000C1C84 /* CategoryEntity.swift */; };
+		876C157D27047B19000C1C84 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157C27047B19000C1C84 /* CategoryRepository.swift */; };
+		876C157F27047B64000C1C84 /* CategoryRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157E27047B64000C1C84 /* CategoryRepositoryError.swift */; };
 		87F2188326FB5B4100C3FBCA /* ThingLogRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188226FB5B4100C3FBCA /* ThingLogRepositoryTests.swift */; };
 		87F2188626FB5DFB00C3FBCA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188526FB5DFB00C3FBCA /* Post.swift */; };
 		87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188826FB5E9500C3FBCA /* PostRepository.swift */; };
@@ -134,6 +136,8 @@
 		875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		876C157827044BA0000C1C84 /* PostRepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepositoryError.swift; sourceTree = "<group>"; };
 		876C157A27044DFF000C1C84 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
+		876C157C27047B19000C1C84 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
+		876C157E27047B64000C1C84 /* CategoryRepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepositoryError.swift; sourceTree = "<group>"; };
 		87F2188226FB5B4100C3FBCA /* ThingLogRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogRepositoryTests.swift; sourceTree = "<group>"; };
 		87F2188526FB5DFB00C3FBCA /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		87F2188826FB5E9500C3FBCA /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
@@ -305,6 +309,8 @@
 			children = (
 				87F2188826FB5E9500C3FBCA /* PostRepository.swift */,
 				876C157827044BA0000C1C84 /* PostRepositoryError.swift */,
+				876C157C27047B19000C1C84 /* CategoryRepository.swift */,
+				876C157E27047B64000C1C84 /* CategoryRepositoryError.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -627,6 +633,7 @@
 				DBAB64A426FCC2C5006D95ED /* Coordinator.swift in Sources */,
 				DB7C04EE26FB1ACE009F5C0A /* ContentsTabView.swift in Sources */,
 				DB7C04F426FB1F45009F5C0A /* BoughtContentsCollectionViewController.swift in Sources */,
+				876C157F27047B64000C1C84 /* CategoryRepositoryError.swift in Sources */,
 				DB331DAA26FDD00A00A629F5 /* ImageAssets.swift in Sources */,
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
 				DB7C04CA26F9E69D009F5C0A /* UserDefaults+.swift in Sources */,
@@ -634,6 +641,7 @@
 				DB7C04F626FB1F4B009F5C0A /* WishContentsCollectionViewController.swift in Sources */,
 				DB7C04EC26FB1A04009F5C0A /* UIView+.swift in Sources */,
 				DB7C04FC26FB27A6009F5C0A /* TemplateImageButton.swift in Sources */,
+				876C157D27047B19000C1C84 /* CategoryRepository.swift in Sources */,
 				DB7C04F826FB1F52009F5C0A /* GiftContentsCollectionViewController.swift in Sources */,
 				DB331DA926FDD00A00A629F5 /* ColorsAsset.swift in Sources */,
 				DB7C04F226FB1F36009F5C0A /* ContentsPageViewController.swift in Sources */,

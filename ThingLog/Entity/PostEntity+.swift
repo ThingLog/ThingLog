@@ -17,5 +17,6 @@ extension PostEntity {
         self.isLike = post.isLike
         self.postType?.pageType = post.postType.type
         self.rating?.scoreType = post.rating.score
+        self.categories = NSSet(array: [post.categories.map { $0.toEntity(in: context) }])
     }
 }

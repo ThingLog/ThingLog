@@ -7,15 +7,12 @@
 
 import CoreData
 import Foundation
-import UIKit
 
 protocol PostRepositoryProtocol {
     func create(_ newPost: Post, completion: @escaping (Result<Bool, PostRepositoryError>) -> Void)
-    func create(_ newCategory: Category, completion: @escaping(Result<Bool, PostRepositoryError>) -> Void)
     func update(_ updatePost: Post, completion: @escaping (Result<Bool, PostRepositoryError>) -> Void)
     func get(withIdentifier identifier: UUID, completion: @escaping (Result<PostEntity, PostRepositoryError>) -> Void)
     func fetchAll(completion: @escaping (Result<[PostEntity], PostRepositoryError>) -> Void)
-    func fetchAllCategory(completion: @escaping (Result<[Category], PostRepositoryError>) -> Void)
     func deleteAll(completion: @escaping (Result<Bool, PostRepositoryError>) -> Void)
 }
 
@@ -38,22 +35,6 @@ final class PostRepository: PostRepositoryProtocol {
                 completion(.success(true))
             } catch {
                 completion(.failure(.failedCreatePost))
-            }
-        }
-    }
-
-    /// CategoryEntity를 새로 추가한다.
-    /// - Parameters:
-    ///   - newCategory: CategoryEntity의 속성을 담은 모델 객체
-    ///   - completion: 결과를 클로저 형태로 반환한다. 성공했을 경우 무조건 true를 반환하며, 실패했을 경우 PostRepositoryError 타입을 반환한다.
-    func create(_ newCategory: Category, completion: @escaping(Result<Bool, PostRepositoryError>) -> Void) {
-        coreDataStack.performBackgroundTask { context in
-            do {
-                let category: CategoryEntity = newCategory.toEntity(in: context)
-                try context.save()
-                completion(.success(true))
-            } catch {
-                completion(.failure(.failedCreateCategory))
             }
         }
     }
@@ -114,21 +95,6 @@ final class PostRepository: PostRepositoryProtocol {
             do {
                 let result: [PostEntity] = try request.execute()
                 completion(.success(result))
-            } catch {
-                completion(.failure(.failedFetch))
-            }
-        }
-    }
-
-    /// 모든 CategoryEntity를 가져와서 Cateogy 타입으로 변환하여 반환한다.
-    /// - Parameter completion: 결과를 클로저 형태로 반환한다. 성공했을 경우 [Category]를 반환하며, 실패했을 경우 PostRepositoryError 타입을 반환한다.
-    func fetchAllCategory(completion: @escaping (Result<[Category], PostRepositoryError>) -> Void) {
-        let request: NSFetchRequest = CategoryEntity.fetchRequest()
-        coreDataStack.mainContext.perform {
-            do {
-                let result: [CategoryEntity] = try request.execute()
-                let categories: [Category] = result.map { $0.toModel() }
-                completion(.success(categories))
             } catch {
                 completion(.failure(.failedFetch))
             }
