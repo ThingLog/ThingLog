@@ -9,8 +9,13 @@ import CoreData
 import Foundation
 
 struct Category {
-    let identifier: UUID = UUID()
+    let identifier: UUID
     let title: String
+
+    init(title: String, identifier: UUID = UUID()) {
+        self.identifier = identifier
+        self.title = title
+    }
 }
 
 extension Category {

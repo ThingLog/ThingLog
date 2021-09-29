@@ -14,6 +14,7 @@ protocol PostRepositoryProtocol {
     func update(_ updatePost: Post, completion: @escaping (Result<Bool, PostRepositoryError>) -> Void)
     func get(withIdentifier identifier: UUID, completion: @escaping (Result<PostEntity, PostRepositoryError>) -> Void)
     func fetchAll(completion: @escaping (Result<[PostEntity], PostRepositoryError>) -> Void)
+    func fetchAllCategory(completion: @escaping (Result<[Category], PostRepositoryError>) -> Void)
     func deleteAll(completion: @escaping (Result<Bool, PostRepositoryError>) -> Void)
 }
 
@@ -96,6 +97,19 @@ final class PostRepository: PostRepositoryProtocol {
             do {
                 let result: [PostEntity] = try request.execute()
                 completion(.success(result))
+            } catch {
+                completion(.failure(.failedFetch))
+            }
+        }
+    }
+
+    func fetchAllCategory(completion: @escaping (Result<[Category], PostRepositoryError>) -> Void) {
+        let request: NSFetchRequest = CategoryEntity.fetchRequest()
+        coreDataStack.mainContext.perform {
+            do {
+                let result: [CategoryEntity] = try request.execute()
+                let categories: [Category] = result.map { $0.toModel() }
+                completion(.success(categories))
             } catch {
                 completion(.failure(.failedFetch))
             }
