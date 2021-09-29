@@ -19,7 +19,7 @@ struct Post {
     var isLike: Bool
 
     // MARK: Relationship
-    let type: PostType
+    let postType: PostType
     let rating: Rating
     let categories: [Category]
     let attachments: [Attachment]
@@ -34,7 +34,7 @@ extension Post {
         entity.price = Int16(price)
         entity.purchasePlace = purchasePlace
         entity.contents = contents
-        entity.type = type.toEntity(in: context)
+        entity.postType = postType.toEntity(in: context)
         entity.isLike = isLike
         entity.rating = rating.toEntity(in: context)
         return entity

@@ -185,7 +185,6 @@ class ThingLogRepositoryTests: XCTestCase {
                         switch result {
                         case .success(let postEntity):
                             XCTAssertEqual(postEntity.title ?? "", newPost.title)
-                            exp.fulfill()
                         case .failure(let error):
                             fatalError(error.localizedDescription)
                         }
@@ -194,6 +193,7 @@ class ThingLogRepositoryTests: XCTestCase {
                     fatalError(error.localizedDescription)
                 }
             }
+            exp.fulfill()
         }
     }
 

@@ -38,14 +38,14 @@
         <relationship name="attachments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Attachment" inverseName="post" inverseEntity="Attachment"/>
         <relationship name="categories" toMany="YES" deletionRule="Cascade" destinationEntity="Category" inverseName="post" inverseEntity="Category"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Comment" inverseName="post" inverseEntity="Comment"/>
+        <relationship name="postType" maxCount="1" deletionRule="Cascade" destinationEntity="PostType" inverseName="post" inverseEntity="PostType"/>
         <relationship name="rating" maxCount="1" deletionRule="Cascade" destinationEntity="Rating" inverseName="post" inverseEntity="Rating"/>
-        <relationship name="type" maxCount="1" deletionRule="Cascade" destinationEntity="PostType" inverseName="post" inverseEntity="PostType"/>
     </entity>
     <entity name="PostType" representedClassName="PostTypeEntity" syncable="YES" codeGenerationType="class">
         <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isDelete" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="post" toMany="YES" deletionRule="Deny" destinationEntity="Post" inverseName="type" inverseEntity="Post"/>
+        <relationship name="post" toMany="YES" deletionRule="Deny" destinationEntity="Post" inverseName="postType" inverseEntity="Post"/>
     </entity>
     <entity name="Rating" representedClassName="RatingEntity" syncable="YES" codeGenerationType="class">
         <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>

@@ -15,7 +15,7 @@ extension PostEntity {
         self.purchasePlace = post.purchasePlace
         self.contents = post.contents
         self.isLike = post.isLike
-        self.type?.pageType = post.type.type
+        self.postType?.pageType = post.postType.type
         self.rating?.scoreType = post.rating.score
     }
 }
