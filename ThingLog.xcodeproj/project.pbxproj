@@ -26,6 +26,8 @@
 		873EC04A26D504BA003C3525 /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC04026D504BA003C3525 /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		873EC04E26D5068F003C3525 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 873EC04D26D5068F003C3525 /* .swiftlint.yml */; };
 		875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */; };
+		DB148C2C2705855A00FDC48F /* CategoryTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C2B2705855A00FDC48F /* CategoryTypeButton.swift */; };
+		DB148C302705863100FDC48F /* CategoryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C2F2705863100FDC48F /* CategoryTabView.swift */; };
 		DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C1F27043CFC00FDC48F /* DropBoxView.swift */; };
 		DB148C222704623200FDC48F /* InsetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C212704623200FDC48F /* InsetButton.swift */; };
 		DB148C26270469B300FDC48F /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C25270469B300FDC48F /* Date+.swift */; };
@@ -59,11 +61,11 @@
 		DBAE8E9826FDB3EE00F536AD /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */; };
 		DBAE8EB126FDBEAE00F536AD /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */; };
 		DBAE8EBB26FDCA7B00F536AD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */; };
-		DBD5455027033D9A00063C98 /* RoundButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */; };
-		DBD545522703409300063C98 /* HorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD545512703409300063C98 /* HorizontalCollectionView.swift */; };
 		DBD5454727032B1C00063C98 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454627032B1C00063C98 /* FilterType.swift */; };
 		DBD5454927032BAA00063C98 /* TopCategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454827032BAA00063C98 /* TopCategoryType.swift */; };
 		DBD5454C27032C6600063C98 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454B27032C6600063C98 /* CategoryViewModel.swift */; };
+		DBD5455027033D9A00063C98 /* RoundButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */; };
+		DBD545522703409300063C98 /* HorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD545512703409300063C98 /* HorizontalCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +125,8 @@
 		873EC04026D504BA003C3525 /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
 		873EC04D26D5068F003C3525 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		DB148C2B2705855A00FDC48F /* CategoryTypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTypeButton.swift; sourceTree = "<group>"; };
+		DB148C2F2705863100FDC48F /* CategoryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTabView.swift; sourceTree = "<group>"; };
 		DB148C1F27043CFC00FDC48F /* DropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropBoxView.swift; sourceTree = "<group>"; };
 		DB148C212704623200FDC48F /* InsetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetButton.swift; sourceTree = "<group>"; };
 		DB148C25270469B300FDC48F /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -158,11 +162,11 @@
 		DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButtonCollectionViewCell.swift; sourceTree = "<group>"; };
-		DBD545512703409300063C98 /* HorizontalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionView.swift; sourceTree = "<group>"; };
 		DBD5454627032B1C00063C98 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
 		DBD5454827032BAA00063C98 /* TopCategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCategoryType.swift; sourceTree = "<group>"; };
 		DBD5454B27032C6600063C98 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		DBD545512703409300063C98 /* HorizontalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,6 +345,8 @@
 				DB148C212704623200FDC48F /* InsetButton.swift */,
 				DB148C272704A1A500FDC48F /* IgnoreTouchView.swift */,
 				DBD545512703409300063C98 /* HorizontalCollectionView.swift */,
+				DB148C2B2705855A00FDC48F /* CategoryTypeButton.swift */,
+				DB148C2F2705863100FDC48F /* CategoryTabView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -610,6 +616,7 @@
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
 				DBD5455027033D9A00063C98 /* RoundButtonCollectionViewCell.swift in Sources */,
 				DB7C04CA26F9E69D009F5C0A /* UserDefaults+.swift in Sources */,
+				DB148C2C2705855A00FDC48F /* CategoryTypeButton.swift in Sources */,
 				DB7C04E526FB1981009F5C0A /* BaseContentsCollectionViewController.swift in Sources */,
 				DB7C04F626FB1F4B009F5C0A /* WishContentsCollectionViewController.swift in Sources */,
 				DB148C222704623200FDC48F /* InsetButton.swift in Sources */,
@@ -619,6 +626,7 @@
 				DBD5454927032BAA00063C98 /* TopCategoryType.swift in Sources */,
 				DB331DA926FDD00A00A629F5 /* ColorsAsset.swift in Sources */,
 				DB7C04F226FB1F36009F5C0A /* ContentsPageViewController.swift in Sources */,
+				DB148C302705863100FDC48F /* CategoryTabView.swift in Sources */,
 				DB7C04E926FB19AE009F5C0A /* ContentsCollectionViewCell.swift in Sources */,
 				DB7C04BE26F9BE72009F5C0A /* ProfileView.swift in Sources */,
 				DB7C04B626F8782B009F5C0A /* CategoryViewController.swift in Sources */,
