@@ -31,10 +31,7 @@ final class CategoryViewController: UIViewController {
             navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         }
         
-        let logoView: UILabel = UILabel()
-        logoView.text = "모아보기"
-        logoView.textColor = SwiftGenColors.black.color
-        logoView.font = UIFont.Pretendard.headline3
+        let logoView: LogoView = LogoView("모아보기")
         let logoBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: logoView)
         navigationItem.leftBarButtonItem = logoBarButtonItem
         
