@@ -33,7 +33,7 @@ class ContentsPageViewController: UIPageViewController {
     }
     
     func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = SwiftGenColors.white.color
         dataSource = self
         delegate = self
         setViewControllers([controllers[0]], direction: .forward, animated: true, completion: nil)
@@ -56,16 +56,22 @@ class ContentsPageViewController: UIPageViewController {
 extension ContentsPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = controllers.firstIndex(of: viewController) else { return nil }
-        var previousIndex: Int = index - 1
-        previousIndex = previousIndex < 0 ? controllers.count - 1 : previousIndex
-        return controllers[previousIndex]
+        let previousIndex: Int = index - 1
+        if previousIndex < 0 {
+            return nil
+        } else {
+            return controllers[previousIndex]
+        }
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let index = controllers.firstIndex(of: viewController) else { return nil }
-        var afterIndex: Int = index + 1
-        afterIndex = afterIndex >= controllers.count ? 0 : afterIndex
-        return controllers[afterIndex]
+        let afterIndex: Int = index + 1
+        if afterIndex >= controllers.count {
+            return nil
+        } else {
+            return controllers[afterIndex]
+        }
     }
 }
 

@@ -11,9 +11,9 @@ final class ProfileView: UIView {
     var userAliasNameButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("분더카머", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = button.titleLabel?.font.withSize(20.0)
-        button.setImage(UIImage(named: "modifyText"), for: .normal)
+        button.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        button.titleLabel?.font = UIFont.Pretendard.headline3
+        button.setImage(SwiftGenAssets.modifyText.image, for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
@@ -24,8 +24,8 @@ final class ProfileView: UIView {
     var userOneLineIntroductionLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "나를 찾는 여정 나를 찾는 여정"
-        label.font = label.font.withSize(14.0)
-        label.textColor = .gray
+        label.font = UIFont.Pretendard.body2
+        label.textColor = SwiftGenColors.gray4.color
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return label
@@ -37,7 +37,7 @@ final class ProfileView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.setContentHuggingPriority(.required, for: .horizontal)
         imageView.setContentHuggingPriority(.required, for: .vertical)
-        imageView.backgroundColor = UIColor(white: 239.0 / 255.0, alpha: 1.0)
+        imageView.backgroundColor = SwiftGenColors.gray6.color
         return imageView
     }()
     
@@ -50,6 +50,13 @@ final class ProfileView: UIView {
     private let emptyTrailingView: UIView = {
         let view: UIView = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let emptyVerticalView: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return view
     }()
     
@@ -68,12 +75,21 @@ final class ProfileView: UIView {
                                                                      emptyTrailingView ])
         stackView.axis = .horizontal
         stackView.alignment = .center
-        stackView.spacing = 44
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var totalView: UIStackView = {
+        let stackView: UIStackView = UIStackView(arrangedSubviews: [horizontalStackView, emptyVerticalView])
+        stackView.axis = .vertical
+        stackView.spacing = 0
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
     private let imageHeight: CGFloat = 44
+    private let emptyWidth: CGFloat = 44
+    private let emptyHeight: CGFloat = 16
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -86,23 +102,24 @@ final class ProfileView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .white
-        addSubview(horizontalStackView)
+        backgroundColor = SwiftGenColors.white.color
+        addSubview(totalView)
         
         userBadgeImageView.layer.cornerRadius = imageHeight / 2
         
         NSLayoutConstraint.activate([
-            userBadgeImageView.widthAnchor.constraint(equalTo: userBadgeImageView.heightAnchor),
-//            userBadgeImageView.heightAnchor.constraint(equalToConstant: imageHeight)
             userBadgeImageView.heightAnchor.constraint(lessThanOrEqualToConstant: imageHeight),
+            userBadgeImageView.widthAnchor.constraint(equalTo: userBadgeImageView.heightAnchor),
             
-            emptyLeadingView.widthAnchor.constraint(equalToConstant: 0),
-            emptyTrailingView.widthAnchor.constraint(equalToConstant: 0),
+            emptyLeadingView.widthAnchor.constraint(equalToConstant: emptyWidth),
+            emptyTrailingView.widthAnchor.constraint(equalToConstant: emptyWidth),
             
-            horizontalStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            horizontalStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            horizontalStackView.topAnchor.constraint(equalTo: topAnchor),
-            horizontalStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            totalView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            totalView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            totalView.topAnchor.constraint(equalTo: topAnchor),
+            totalView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            emptyVerticalView.heightAnchor.constraint(equalToConstant: emptyHeight)
         ])
     }
 }
