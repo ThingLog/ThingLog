@@ -26,6 +26,7 @@
 		873EC04A26D504BA003C3525 /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC04026D504BA003C3525 /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		873EC04E26D5068F003C3525 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 873EC04D26D5068F003C3525 /* .swiftlint.yml */; };
 		875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */; };
+		DB148C2C2705855A00FDC48F /* CategoryTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C2B2705855A00FDC48F /* CategoryTypeButton.swift */; };
 		DB331DA926FDD00A00A629F5 /* ColorsAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA626FDD00A00A629F5 /* ColorsAsset.swift */; };
 		DB331DAA26FDD00A00A629F5 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA726FDD00A00A629F5 /* ImageAssets.swift */; };
 		DB331DAB26FDD00A00A629F5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA826FDD00A00A629F5 /* Fonts.swift */; };
@@ -119,6 +120,7 @@
 		873EC04026D504BA003C3525 /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
 		873EC04D26D5068F003C3525 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		DB148C2B2705855A00FDC48F /* CategoryTypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTypeButton.swift; sourceTree = "<group>"; };
 		DB331DA626FDD00A00A629F5 /* ColorsAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsAsset.swift; sourceTree = "<group>"; };
 		DB331DA726FDD00A00A629F5 /* ImageAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
 		DB331DA826FDD00A00A629F5 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				DB7C04BD26F9BE72009F5C0A /* ProfileView.swift */,
 				DB7C04B826F87BE9009F5C0A /* ChoiceWritingView.swift */,
 				DBD545512703409300063C98 /* HorizontalCollectionView.swift */,
+				DB148C2B2705855A00FDC48F /* CategoryTypeButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
 				DBD5455027033D9A00063C98 /* RoundButtonCollectionViewCell.swift in Sources */,
 				DB7C04CA26F9E69D009F5C0A /* UserDefaults+.swift in Sources */,
+				DB148C2C2705855A00FDC48F /* CategoryTypeButton.swift in Sources */,
 				DB7C04E526FB1981009F5C0A /* BaseContentsCollectionViewController.swift in Sources */,
 				DB7C04F626FB1F4B009F5C0A /* WishContentsCollectionViewController.swift in Sources */,
 				DB7C04EC26FB1A04009F5C0A /* UIView+.swift in Sources */,
