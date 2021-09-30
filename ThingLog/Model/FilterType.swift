@@ -28,10 +28,10 @@ enum FilterType {
         switch self {
         case .month:
             let curDate: Date = Date()
-            return curDate.stringMonth() + "월"
+            return curDate.toString(.month) + "월"
         case .year:
             let curDate: Date = Date()
-            return curDate.stringYear() + "년"
+            return curDate.toString(.year) + "년"
         default:
             return list[0]
         }

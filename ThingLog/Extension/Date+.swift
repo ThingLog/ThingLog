@@ -8,18 +8,10 @@
 import Foundation
 
 extension Date {
-    /// 해당Date의 *일만 string으로 가져온다.
-    func stringDay() -> String {
-        String(Calendar.current.component(.day, from: self))
-    }
-    
-    /// 해당Date의 *월만 string으로 가져온다.
-    func stringMonth() -> String {
-        String(Calendar.current.component(.month, from: self))
-    }
-    
-    /// 해당Date의 *년만 string으로 가져온다.
-    func stringYear() -> String {
-        String(Calendar.current.component(.year, from: self))
+    /// component에 맞는 문자열을 반환한다.
+    /// - Parameter component: 예시: 일 - .day , 월 - .month, 년 - .year
+    /// - Returns: 문자열을 반환한다.
+    func toString(_ component: Calendar.Component) -> String {
+        String(Calendar.current.component(component, from: self))
     }
 }
