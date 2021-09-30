@@ -36,6 +36,8 @@ final class CategoryTabView: UIView {
     
     var topCategoryTypeSubject: PublishSubject<TopCategoryType> = PublishSubject()
     
+    let marginConstant: CGFloat = 15.0
+    
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,8 +57,8 @@ final class CategoryTabView: UIView {
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            emptyLeadingView.widthAnchor.constraint(equalToConstant: 15),
-            emptyTrailingView.widthAnchor.constraint(equalToConstant: 15)
+            emptyLeadingView.widthAnchor.constraint(equalToConstant: marginConstant),
+            emptyTrailingView.widthAnchor.constraint(equalToConstant: marginConstant)
         ])
     }
     
