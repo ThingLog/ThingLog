@@ -17,7 +17,8 @@ final class ChoiceWritingView: UIView {
         titles.forEach {
             let button: UIButton = UIButton()
             button.setTitle($0, for: .normal)
-            button.setTitleColor(.black, for: .normal)
+            button.titleLabel?.font = UIFont.Pretendard.body3
+            button.setTitleColor(SwiftGenColors.black.color, for: .normal)
             writeView.addArrangedSubview(button)
         }
         writeView.translatesAutoresizingMaskIntoConstraints = false
@@ -51,7 +52,7 @@ final class ChoiceWritingView: UIView {
         ])
         heightConstraint?.isActive = true
         
-        backgroundColor = .white
+        backgroundColor = SwiftGenColors.white.color
         clipsToBounds = true
         layer.cornerRadius = 17.0
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -67,7 +68,7 @@ extension ChoiceWritingView {
     private func dimButtonTitle(_ dimmed: Bool) {
         choiceView.arrangedSubviews.forEach {
             if let button: UIButton = $0 as? UIButton {
-                button.setTitleColor((dimmed ? .white : .black), for: .normal)
+                button.setTitleColor((dimmed ? SwiftGenColors.white.color : SwiftGenColors.black.color), for: .normal)
             }
         }
     }
