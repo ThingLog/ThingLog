@@ -19,11 +19,11 @@ struct Post {
     var isLike: Bool
 
     // MARK: Relationship
-    let postType: PostType
-    let rating: Rating
-    let categories: [Category]
-    let attachments: [Attachment]
-    let comments: [Comment]?
+    var postType: PostType
+    var rating: Rating
+    var categories: [Category]
+    var attachments: [Attachment]
+    var comments: [Comment]?
 }
 
 extension Post {
@@ -38,7 +38,12 @@ extension Post {
         entity.isLike = isLike
         entity.rating = rating.toEntity(in: context)
         categories.forEach { category in
-            entity.addToCategories(category.toEntity(in: context))
+            let categoryEntity: CategoryEntity = category.toEntity(in: context)
+            entity.addToCategories(categoryEntity)
+        }
+        attachments.forEach { attachment in
+            let attachmentEntity: AttachmentEntity = attachment.toEntity(in: context)
+            entity.addToAttachments(attachmentEntity)
         }
         return entity
     }

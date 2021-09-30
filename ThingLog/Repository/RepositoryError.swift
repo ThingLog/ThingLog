@@ -7,30 +7,30 @@
 
 import Foundation
 
-enum PostRepositoryError: Error {
+enum RepositoryError: Error {
     case notFoundEntity
     case notFoundContext
     case failedUpdate
     case failedFetch
-    case failedCreatePost
+    case failedCreate
     case failedDelete
 }
 
-extension PostRepositoryError: LocalizedError {
+extension RepositoryError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .notFoundEntity:
-            return "PostEntity를 찾을 수 없습니다."
+            return "Entity를 찾을 수 없습니다."
         case .notFoundContext:
             return "Context를 찾을 수 없습니다."
         case .failedUpdate:
-            return "PostEntity 수정을 실패했습니다."
+            return "Entity 수정을 실패했습니다."
         case .failedFetch:
-            return "PostEntity 가져오기를 실패했습니다."
-        case .failedCreatePost:
-            return "PostEntity 생성을 실패했습니다."
+            return "Entity 가져오기를 실패했습니다."
+        case .failedCreate:
+            return "Entity 생성을 실패했습니다."
         case .failedDelete:
-            return "PostEntity 삭제를 실패했습니다."
+            return "Entity 삭제를 실패했습니다."
         }
     }
 }

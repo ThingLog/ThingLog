@@ -17,12 +17,13 @@ extension PostEntity {
         self.isLike = post.isLike
         self.postType?.pageType = post.postType.type
         self.rating?.scoreType = post.rating.score
-        if let categories = self.categories {
+        if let categories: NSSet = self.categories {
             self.removeFromCategories(categories)
         }
         post.categories.forEach { [weak self] category in
             guard let self = self else { return }
-            self.addToCategories(category.toEntity(in: context))
+            let categoryEntity: CategoryEntity = category.toEntity(in: context)
+            self.addToCategories(categoryEntity)
         }
     }
 }

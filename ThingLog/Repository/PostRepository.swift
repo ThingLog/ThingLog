@@ -9,11 +9,11 @@ import CoreData
 import Foundation
 
 protocol PostRepositoryProtocol {
-    func create(_ newPost: Post, completion: @escaping (Result<Bool, PostRepositoryError>) -> Void)
-    func update(_ updatePost: Post, completion: @escaping (Result<Bool, PostRepositoryError>) -> Void)
-    func get(withIdentifier identifier: UUID, completion: @escaping (Result<PostEntity, PostRepositoryError>) -> Void)
-    func fetchAll(completion: @escaping (Result<[PostEntity], PostRepositoryError>) -> Void)
-    func deleteAll(completion: @escaping (Result<Bool, PostRepositoryError>) -> Void)
+    func create(_ newPost: Post, completion: @escaping (Result<Bool, RepositoryError>) -> Void)
+    func update(_ updatePost: Post, completion: @escaping (Result<Bool, RepositoryError>) -> Void)
+    func get(withIdentifier identifier: UUID, completion: @escaping (Result<PostEntity, RepositoryError>) -> Void)
+    func fetchAll(completion: @escaping (Result<[PostEntity], RepositoryError>) -> Void)
+    func deleteAll(completion: @escaping (Result<Bool, RepositoryError>) -> Void)
 }
 
 final class PostRepository: PostRepositoryProtocol {
@@ -27,14 +27,14 @@ final class PostRepository: PostRepositoryProtocol {
     /// - Parameters:
     ///   - newPost: PostEntity의 속성을 담은 모델 객체
     ///   - completion: 결과를 클로저 형태로 반환한다. 성공했을 경우 무조건 true를 반환하며, 실패했을 경우 PostRepositoryError 타입을 반환한다.
-    func create(_ newPost: Post, completion: @escaping (Result<Bool, PostRepositoryError>) -> Void) {
+    func create(_ newPost: Post, completion: @escaping (Result<Bool, RepositoryError>) -> Void) {
         coreDataStack.performBackgroundTask { context in
             do {
                 let post: PostEntity = newPost.toEntity(in: context)
                 try context.save()
                 completion(.success(true))
             } catch {
-                completion(.failure(.failedCreatePost))
+                completion(.failure(.failedCreate))
             }
         }
     }
@@ -43,7 +43,7 @@ final class PostRepository: PostRepositoryProtocol {
     /// - Parameters:
     ///   - updatePost: PostEntity의 속성을 담은 모델 객체, identifier 속성을 통해 PostEntity를 가져오고 변경 사항을 반영한다.
     ///   - completion: 결과를 클로저 형태로 반환한다. 성공했을 경우 무조건 true를 반환하며, 실패했을 경우 PostRepositoryError 타입을 반환한다.
-    func update(_ updatePost: Post, completion: @escaping (Result<Bool, PostRepositoryError>) -> Void) {
+    func update(_ updatePost: Post, completion: @escaping (Result<Bool, RepositoryError>) -> Void) {
         get(withIdentifier: updatePost.identifier) { result in
             switch result {
             case .success(let postEntity):
@@ -69,7 +69,7 @@ final class PostRepository: PostRepositoryProtocol {
     /// - Parameters:
     ///   - identifier: PostEntity를 찾기 위한 UUID 속성
     ///   - completion: 결과를 클로저 형태로 반환한다. 성공했을 경우 PostEntity를 반환하며, 실패했을 경우 PostRepositoryError 타입을 반환한다.
-    func get(withIdentifier identifier: UUID, completion: @escaping (Result<PostEntity, PostRepositoryError>) -> Void) {
+    func get(withIdentifier identifier: UUID, completion: @escaping (Result<PostEntity, RepositoryError>) -> Void) {
         let request: NSFetchRequest = PostEntity.fetchRequest()
         request.fetchLimit = 1
         request.predicate = NSPredicate(format: "identifier == %@", identifier as CVarArg)
@@ -89,7 +89,7 @@ final class PostRepository: PostRepositoryProtocol {
 
     /// 모든 PostEntity를 가져와서 반환한다.
     /// - Parameter completion: 결과를 클로저 형태로 반환한다. 성공했을 경우 [PostEntity]를 반환하며, 실패했을 경우 PostRepositoryError 타입을 반환한다.
-    func fetchAll(completion: @escaping (Result<[PostEntity], PostRepositoryError>) -> Void) {
+    func fetchAll(completion: @escaping (Result<[PostEntity], RepositoryError>) -> Void) {
         let request: NSFetchRequest = PostEntity.fetchRequest()
         coreDataStack.mainContext.perform {
             do {
@@ -103,7 +103,7 @@ final class PostRepository: PostRepositoryProtocol {
 
     /// Core Data에 저장된 모든 PostEntity를 삭제한다.
     /// - Parameter completion: 결과를 클로저 형태로 반환한다. 성공했을 경우 true를 반환하며, 실패했을 경우 PostRepositoryError 타입을 반환한다.
-    func deleteAll(completion: @escaping (Result<Bool, PostRepositoryError>) -> Void) {
+    func deleteAll(completion: @escaping (Result<Bool, RepositoryError>) -> Void) {
         coreDataStack.performBackgroundTask { context in
             do {
                 let request: NSFetchRequest = PostEntity.fetchRequest()
