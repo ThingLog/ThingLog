@@ -17,6 +17,12 @@ extension PostEntity {
         self.isLike = post.isLike
         self.postType?.pageType = post.postType.type
         self.rating?.scoreType = post.rating.score
-        self.categories = NSSet(array: [post.categories.map { $0.toEntity(in: context) }])
+        if let categories = self.categories {
+            self.removeFromCategories(categories)
+        }
+        post.categories.forEach { [weak self] category in
+            guard let self = self else { return }
+            self.addToCategories(category.toEntity(in: context))
+        }
     }
 }

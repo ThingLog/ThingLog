@@ -14,9 +14,11 @@
 
 import XCTest
 @testable import ThingLog
+import CoreData
 
 class ThingLogRepositoryTests: XCTestCase {
     let postRepository: PostRepository = PostRepository()
+    let categoryRepository: CategoryRepository = CategoryRepository(fetchedResultsControllerDelegate: nil)
 
     override func tearDown() {
         postRepository.deleteAll { result in
@@ -31,6 +33,7 @@ class ThingLogRepositoryTests: XCTestCase {
 
     func test_Post를_하나_만들_수_있다() {
         // given: 필요한 모든 값 설정
+        deleteAllEntity()
         guard let originalImage: UIImage = UIImage(systemName: "heart.fill") else {
             fatalError("Not Found system Image")
         }
@@ -39,9 +42,9 @@ class ThingLogRepositoryTests: XCTestCase {
                                  purchasePlace: "Market",
                                  contents: "Test Contents...",
                                  isLike: false,
-                                 type: .init(isDelete: false, type: .bought),
+                                 postType: .init(isDelete: false, type: .bought),
                                  rating: .init(score: .excellent),
-                                 categories: [Category(title: "Software")],
+                                 categories: [Category(title: "Software"), Category(title: "Computer")],
                                  attachments: [Attachment(thumbnail: originalImage,
                                                           imageData: .init(originalImage: originalImage))],
                                  comments: nil)
@@ -71,6 +74,7 @@ class ThingLogRepositoryTests: XCTestCase {
 
     func test_Post를_3개_만들_수_있다() {
         // given: 필요한 모든 값 설정
+        deleteAllEntity()
         guard let originalImage: UIImage = UIImage(systemName: "heart.fill") else {
             fatalError("Not Found system Image")
         }
@@ -80,7 +84,7 @@ class ThingLogRepositoryTests: XCTestCase {
                                      purchasePlace: "Market",
                                      contents: "Test Contents \(i)...",
                                      isLike: false,
-                                     type: .init(isDelete: false, type: .bought),
+                                     postType: .init(isDelete: false, type: .bought),
                                      rating: .init(score: .excellent),
                                      categories: [Category(title: "Software")],
                                      attachments: [Attachment(thumbnail: originalImage,
@@ -90,8 +94,8 @@ class ThingLogRepositoryTests: XCTestCase {
         }
         var postCount: Int = 0
 
+        // when: 테스트중인 코드 실행
         timeout(10) { exp in
-            // when: 테스트중인 코드 실행
             newPosts.forEach { post in
                 postRepository.create(post) { result in
                     switch result {
@@ -103,8 +107,11 @@ class ThingLogRepositoryTests: XCTestCase {
                     }
                 }
             }
+            exp.fulfill()
+        }
 
-            // then: 예상한 결과 확인
+        // then: 예상한 결과 확인
+        timeout(3) { exp in
             postRepository.fetchAll { result in
                 switch result {
                 case .success(let postEntities):
@@ -160,6 +167,7 @@ class ThingLogRepositoryTests: XCTestCase {
 
     func test_특정_Post를_하나_가져올_수_있다() {
         // given: 필요한 모든 값 설정
+        deleteAllEntity()
         guard let originalImage: UIImage = UIImage(systemName: "heart.fill") else {
             fatalError("Not Found system Image")
         }
@@ -168,7 +176,7 @@ class ThingLogRepositoryTests: XCTestCase {
                                  purchasePlace: "Market",
                                  contents: "Test Contents...",
                                  isLike: false,
-                                 type: .init(isDelete: false, type: .bought),
+                                 postType: .init(isDelete: false, type: .bought),
                                  rating: .init(score: .excellent),
                                  categories: [Category(title: "Software")],
                                  attachments: [Attachment(thumbnail: originalImage,
@@ -199,6 +207,7 @@ class ThingLogRepositoryTests: XCTestCase {
 
     func test_Post를_수정할_수_있다() {
         // given: 필요한 모든 값 설정
+        deleteAllEntity()
         guard let originalImage: UIImage = UIImage(systemName: "heart.fill") else {
             fatalError("Not Found system Image")
         }
@@ -208,7 +217,7 @@ class ThingLogRepositoryTests: XCTestCase {
                                  purchasePlace: "Market",
                                  contents: "Test Contents...",
                                  isLike: false,
-                                 type: .init(isDelete: false, type: .bought),
+                                 postType: .init(isDelete: false, type: .bought),
                                  rating: .init(score: .excellent),
                                  categories: [Category(title: "Software")],
                                  attachments: [Attachment(thumbnail: originalImage,
@@ -229,22 +238,108 @@ class ThingLogRepositoryTests: XCTestCase {
                                 switch result {
                                 case .success(let postEntity):
                                     XCTAssertEqual(postEntity.title, updateTitle)
-                                    exp.fulfill()
                                 case .failure(let error):
                                     XCTFail(error.localizedDescription)
-                                    exp.fulfill()
                                 }
                             }
                         case .failure(let error):
                             XCTFail(error.localizedDescription)
-                            exp.fulfill()
                         }
                     }
                 case .failure(let error):
                     XCTFail(error.localizedDescription)
                 }
             }
+            exp.fulfill()
         }
+    }
+
+    func test_Category를_하나_추가할_수_있다() {
+        // given: 필요한 모든 값 설정
+        deleteAllEntity()
+        let newCategory: ThingLog.Category = Category.init(title: "학용품")
+
+        // when: 테스트중인 코드 실행
+        categoryRepository.create(newCategory) { result in
+            switch result {
+            case .success(_):
+                // then: 예상한 결과 확인
+                XCTAssertEqual(self.categoryRepository.fetchedResultsController.fetchedObjects?.count ?? 1, 1)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    func test_중복된_Category가_있는지_알_수_있다() {
+        // given: 필요한 모든 값 설정
+        deleteAllEntity()
+        let duplicate: String = "컴퓨터"
+        let newCategory: ThingLog.Category = Category.init(title: duplicate)
+
+        timeout(3) { exp in
+            categoryRepository.create(newCategory) { result in
+                switch result {
+                case .success(_):
+                    // when: 테스트중인 코드 실행
+                    self.categoryRepository.find(with: duplicate) { isFind, _ in
+                        // then: 예상한 결과 확인
+                        XCTAssertTrue(isFind)
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            exp.fulfill()
+        }
+    }
+
+    func test_모든_Category를_가져올_수_있다() {
+        // given: 필요한 모든 값 설정
+        deleteAllEntity()
+        let newCategories: [ThingLog.Category] = (1...3).map { i in
+            let newCategory: ThingLog.Category = .init(title: "학용품 \(i)")
+            return newCategory
+        }
+
+        // when: 테스트중인 코드 실행
+        timeout(5) { exp in
+            newCategories.forEach { newCategory in
+                categoryRepository.create(newCategory) { result in
+                    switch result {
+                    case .success(_):
+                        print("success")
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+            exp.fulfill()
+        }
+
+        // then: 예상한 결과 확인
+        XCTAssertEqual(categoryRepository.fetchedResultsController.fetchedObjects?.count, newCategories.count)
+    }
+
+    func test_모든_Category를_삭제할_수_있다() {
+        timeout(5) { exp in
+            categoryRepository.deleteAll { result in
+                switch result {
+                case .success(_):
+                    XCTAssertEqual(self.categoryRepository.fetchedResultsController.fetchedObjects?.count ?? 0, 0)
+                    exp.fulfill()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+}
+
+extension ThingLogRepositoryTests {
+    func deleteAllEntity() {
+        categoryRepository.deleteAll { _ in }
+        postRepository.deleteAll { _ in }
     }
 }
 

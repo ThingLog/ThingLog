@@ -10,7 +10,9 @@ import Foundation
 
 protocol CategoryRepositoryProtocol {
     func create(_ newCategory: Category, completion: @escaping(Result<Bool, CategoryRepositoryError>) -> Void)
+    func find(with categoryName: String, completion: @escaping ((Bool, CategoryEntity?) -> Void))
     func fetchAll(completion: @escaping (Result<[Category], CategoryRepositoryError>) -> Void)
+    func deleteAll(completion: @escaping (Result<Bool, CategoryRepositoryError>) -> Void)
 }
 
 final class CategoryRepository: CategoryRepositoryProtocol {
@@ -57,6 +59,26 @@ final class CategoryRepository: CategoryRepositoryProtocol {
         }
     }
 
+    /// 중복 Category 생성을 방지하기 위한 메서드, Category title으로 Entity가 있는지 찾는다.
+    /// - Parameters:
+    ///   - categoryName: Category 이름
+    ///   - completion: 결과를 클로저 형태로 반환한다. categoryName과 동일한 CategoryEntity가 있으면 true를 반환하며, 없는 경우 false를 반환한다.
+    func find(with categoryName: String, completion: @escaping ((Bool, CategoryEntity?) -> Void)) {
+        let fetchRequest: NSFetchRequest<CategoryEntity> = CategoryEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "title == %@", categoryName)
+
+        coreDataStack.mainContext.performAndWait {
+            do {
+                if let find: CategoryEntity = try fetchRequest.execute().first {
+                    completion(true, find)
+                }
+                completion(false, nil)
+            } catch {
+                completion(false, nil)
+            }
+        }
+    }
+
     /// 모든 CategoryEntity를 가져와서 Cateogy 타입으로 변환하여 반환한다.
     /// - Parameter completion: 결과를 클로저 형태로 반환한다. 성공했을 경우 [Category]를 반환하며, 실패했을 경우 PostRepositoryError 타입을 반환한다.
     func fetchAll(completion: @escaping (Result<[Category], CategoryRepositoryError>) -> Void) {
@@ -68,6 +90,22 @@ final class CategoryRepository: CategoryRepositoryProtocol {
                 completion(.success(categories))
             } catch {
                 completion(.failure(.failedFetch))
+            }
+        }
+    }
+
+    /// Core Data에 저장된 모든 CategoryEntity를 삭제한다.
+    /// - Parameter completion: 결과를 클로저 형태로 반환한다. 성공했을 경우 true를 반환하며, 실패했을 경우 CategoryRepositoryError 타입을 반환한다.
+    func deleteAll(completion: @escaping (Result<Bool, CategoryRepositoryError>) -> Void) {
+        coreDataStack.performBackgroundTask { context in
+            do {
+                let request: NSFetchRequest = CategoryEntity.fetchRequest()
+                let result: [CategoryEntity] = try context.fetch(request)
+                result.forEach { context.delete($0) }
+                try context.save()
+                completion(.success(true))
+            } catch {
+                completion(.failure(.failedDelete))
             }
         }
     }

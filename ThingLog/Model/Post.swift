@@ -37,6 +37,9 @@ extension Post {
         entity.postType = postType.toEntity(in: context)
         entity.isLike = isLike
         entity.rating = rating.toEntity(in: context)
+        categories.forEach { category in
+            entity.addToCategories(category.toEntity(in: context))
+        }
         return entity
     }
 }
