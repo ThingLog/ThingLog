@@ -20,4 +20,9 @@ final class CategoryTypeButton: UIButton {
         self.type = .category
         super.init(coder: coder)
     }
+    
+    func updateColor(isTint: Bool) {
+        titleLabel?.font = isTint ? UIFont.Pretendard.title2 : UIFont.Pretendard.body2
+        setTitleColor(isTint ? SwiftGenColors.black.color : SwiftGenColors.gray4.color, for: .normal)
+    }
 }
