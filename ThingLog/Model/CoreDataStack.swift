@@ -26,6 +26,7 @@ final class CoreDataStack {
     }()
 
     var mainContext: NSManagedObjectContext { persistentContainer.viewContext }
+    lazy var backgroundContext: NSManagedObjectContext = persistentContainer.newBackgroundContext()
 
     func saveContext() {
         let context: NSManagedObjectContext = persistentContainer.viewContext

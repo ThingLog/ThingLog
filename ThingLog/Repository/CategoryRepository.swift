@@ -48,7 +48,8 @@ final class CategoryRepository: CategoryRepositoryProtocol {
     ///   - newCategory: CategoryEntity의 속성을 담은 모델 객체
     ///   - completion: 결과를 클로저 형태로 반환한다. 성공했을 경우 무조건 true를 반환하며, 실패했을 경우 PostRepositoryError 타입을 반환한다.
     func create(_ newCategory: Category, completion: @escaping(Result<Bool, RepositoryError>) -> Void) {
-        coreDataStack.performBackgroundTask { context in
+        let context: NSManagedObjectContext = coreDataStack.mainContext
+        context.perform {
             do {
                 let category: CategoryEntity = newCategory.toEntity(in: context)
                 try context.save()
@@ -64,10 +65,11 @@ final class CategoryRepository: CategoryRepositoryProtocol {
     ///   - categoryName: Category 이름
     ///   - completion: 결과를 클로저 형태로 반환한다. categoryName과 동일한 CategoryEntity가 있으면 true를 반환하며, 없는 경우 false를 반환한다.
     func find(with categoryName: String, completion: @escaping ((Bool, CategoryEntity?) -> Void)) {
+        let context: NSManagedObjectContext = coreDataStack.mainContext
         let fetchRequest: NSFetchRequest<CategoryEntity> = CategoryEntity.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "title == %@", categoryName)
 
-        coreDataStack.mainContext.performAndWait {
+        context.performAndWait {
             do {
                 if let find: CategoryEntity = try fetchRequest.execute().first {
                     completion(true, find)
@@ -83,8 +85,9 @@ final class CategoryRepository: CategoryRepositoryProtocol {
     /// 모든 CategoryEntity를 가져와서 Cateogy 타입으로 변환하여 반환한다.
     /// - Parameter completion: 결과를 클로저 형태로 반환한다. 성공했을 경우 [Category]를 반환하며, 실패했을 경우 PostRepositoryError 타입을 반환한다.
     func fetchAll(completion: @escaping (Result<[Category], RepositoryError>) -> Void) {
+        let context: NSManagedObjectContext = coreDataStack.mainContext
         let request: NSFetchRequest = CategoryEntity.fetchRequest()
-        coreDataStack.mainContext.perform {
+        context.perform {
             do {
                 let result: [CategoryEntity] = try request.execute()
                 let categories: [Category] = result.map { $0.toModel() }
@@ -95,10 +98,25 @@ final class CategoryRepository: CategoryRepositoryProtocol {
         }
     }
 
+    /// indexPath에 해당하는 Category를 삭제한다.
+    /// - Parameter indexPath: UITableView 혹은 UICollectionView에서 삭제하려는 카테고리의 indexPath를 받는다.
+    func delete(at indexPath: IndexPath) {
+        let context: NSManagedObjectContext = fetchedResultsController.managedObjectContext
+        context.performAndWait {
+            context.delete(fetchedResultsController.object(at: indexPath))
+            do {
+                try context.save()
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
+
     /// Core Data에 저장된 모든 CategoryEntity를 삭제한다.
     /// - Parameter completion: 결과를 클로저 형태로 반환한다. 성공했을 경우 true를 반환하며, 실패했을 경우 CategoryRepositoryError 타입을 반환한다.
     func deleteAll(completion: @escaping (Result<Bool, RepositoryError>) -> Void) {
-        coreDataStack.performBackgroundTask { context in
+        let context: NSManagedObjectContext = coreDataStack.mainContext
+        context.perform {
             do {
                 let request: NSFetchRequest = CategoryEntity.fetchRequest()
                 let result: [CategoryEntity] = try context.fetch(request)

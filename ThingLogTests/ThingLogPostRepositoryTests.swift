@@ -17,7 +17,7 @@ import XCTest
 import CoreData
 
 class ThingLogPostRepositoryTests: XCTestCase {
-    let postRepository: PostRepository = PostRepository()
+    let postRepository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
     let categoryRepository: CategoryRepository = CategoryRepository(fetchedResultsControllerDelegate: nil)
 
     override func tearDown() {
