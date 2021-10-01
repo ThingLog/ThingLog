@@ -5,6 +5,7 @@
 //  Created by hyunsu on 2021/09/28.
 //
 
+import RxSwift
 import UIKit
 
 /// 모아보기에서 최상단 카테고리 - "카테고리"를 선택했을 때, `CategoryEntity`들을 `horizontal`로 스크롤 가능한 뷰를 구성하기위한 뷰입니다.
@@ -27,6 +28,9 @@ final class HorizontalCollectionView: UIView {
     var categoryList: [String] = []
     private var selectedIndexCell: IndexPath = IndexPath(item: 0, section: 0)
     private let buttonHeight: CGFloat = 26
+    
+    // 특정 Category를 선택할 때 마다 전달하기 위한 subject입니다.
+    var categoryTitleSubject: PublishSubject<String> = PublishSubject()
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -92,6 +96,7 @@ extension HorizontalCollectionView: UICollectionViewDelegate {
             cell.changeButtonColor(isSelected: false)
         }
         selectedIndexCell = indexPath
+        categoryTitleSubject.onNext(categoryList[indexPath.row])
     }
 }
 
