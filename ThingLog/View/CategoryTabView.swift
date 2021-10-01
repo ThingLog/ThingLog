@@ -35,6 +35,7 @@ final class CategoryTabView: UIView {
     private var selectedButton: CategoryTypeButton?
     
     var topCategoryTypeSubject: PublishSubject<TopCategoryType> = PublishSubject()
+    var previousTopCateogryType: TopCategoryType = .total
     
     let marginConstant: CGFloat = 15.0
     
@@ -85,6 +86,11 @@ final class CategoryTabView: UIView {
         selectedButton?.updateColor(isTint: false)
         sender.updateColor(isTint: true)
         selectedButton = sender
+        // 같은 탭의 클릭은 무시하기 위함이다.
+        if previousTopCateogryType == sender.type {
+            return
+        }
+        previousTopCateogryType = sender.type
         topCategoryTypeSubject.onNext(sender.type)
     }
 }
