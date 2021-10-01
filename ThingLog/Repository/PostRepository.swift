@@ -47,17 +47,14 @@ final class PostRepository: PostRepositoryProtocol {
         get(withIdentifier: updatePost.identifier) { result in
             switch result {
             case .success(let postEntity):
-                guard let context: NSManagedObjectContext = postEntity.managedObjectContext else {
-                    completion(.failure(.notFoundContext))
-                    return
-                }
-
-                do {
-                    postEntity.update(with: updatePost, in: context)
-                    try context.save()
-                    completion(.success(true))
-                } catch {
-                    completion(.failure(.failedUpdate))
+                self.coreDataStack.performBackgroundTask { context in
+                    do {
+                        postEntity.update(with: updatePost, in: context)
+                        try context.save()
+                        completion(.success(true))
+                    } catch {
+                        completion(.failure(.failedUpdate))
+                    }
                 }
             case .failure(let error):
                 completion(.failure(error))

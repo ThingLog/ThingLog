@@ -18,6 +18,7 @@ import CoreData
 
 class ThingLogPostRepositoryTests: XCTestCase {
     let postRepository: PostRepository = PostRepository()
+    let categoryRepository: CategoryRepository = CategoryRepository(fetchedResultsControllerDelegate: nil)
 
     override func tearDown() {
         deleteAllEntity()
@@ -218,6 +219,104 @@ class ThingLogPostRepositoryTests: XCTestCase {
             }
         }
     }
+
+    func test_Post의_카테고리를_변경할_수_있다() {
+        // given: 필요한 모든 값 설정
+        deleteAllEntity()
+        guard let originalImage: UIImage = UIImage(systemName: "heart.fill") else {
+            fatalError("Not Found system Image")
+        }
+        var newPost: Post = Post(title: "Test Post",
+                                 price: 30_500,
+                                 purchasePlace: "Market",
+                                 contents: "Test Contents...",
+                                 isLike: false,
+                                 postType: .init(isDelete: false, type: .bought),
+                                 rating: .init(score: .excellent),
+                                 categories: [Category(title: "Software")],
+                                 attachments: [Attachment(thumbnail: originalImage,
+                                                          imageData: .init(originalImage: originalImage))],
+                                 comments: nil)
+        let newCategory: ThingLog.Category = .init(title: "Hardware")
+        create(newPost)
+        newPost.categories = [newCategory]
+
+        // when: 테스트중인 코드 실행
+        timeout(10) { exp in
+            postRepository.update(newPost) { result in
+                switch result {
+                case .success(_):
+                    // then: 예상한 결과 확인
+                    self.postRepository.get(withIdentifier: newPost.identifier) { result in
+                        exp.fulfill()
+                        switch result {
+                        case .success(let postEntity):
+                            if let categories: [CategoryEntity] = postEntity.categories?.allObjects as? [CategoryEntity],
+                               let firstCategory: CategoryEntity = categories.first {
+                                XCTAssertEqual(firstCategory.title ?? "", newCategory.title)
+                            } else {
+                                XCTFail("Not Found Categories")
+                            }
+                        case .failure(let error):
+                            XCTFail(error.localizedDescription)
+                        }
+                    }
+                case .failure(let error):
+                    XCTFail(error.localizedDescription)
+                }
+            }
+        }
+    }
+
+    func test_Post의_카테고리를_삭제할_수_있다() {
+        // given: 필요한 모든 값 설정
+        deleteAllEntity()
+        guard let originalImage: UIImage = UIImage(systemName: "heart.fill") else {
+            fatalError("Not Found system Image")
+        }
+        var categories: [ThingLog.Category] = [
+            .init(title: "Software"),
+            .init(title: "Hardware"),
+            .init(title: "Life")
+        ]
+        var newPost: Post = Post(title: "Test Post",
+                                 price: 30_500,
+                                 purchasePlace: "Market",
+                                 contents: "Test Contents...",
+                                 isLike: false,
+                                 postType: .init(isDelete: false, type: .bought),
+                                 rating: .init(score: .excellent),
+                                 categories: categories,
+                                 attachments: [Attachment(thumbnail: originalImage,
+                                                          imageData: .init(originalImage: originalImage))],
+                                 comments: nil)
+        create(newPost)
+
+        // when: 테스트중인 코드 실행
+        categories.removeLast()
+        newPost.categories = categories
+        timeout(15) { exp in
+            postRepository.update(newPost) { updateResult in
+                switch updateResult {
+                case .success(_):
+                    self.postRepository.get(withIdentifier: newPost.identifier) { getResult in
+                        exp.fulfill()
+                        switch getResult {
+                        case .success(let postEntity):
+                            // then: 예상한 결과 확인
+                            XCTAssertEqual(
+                                (self.categoryRepository.fetchedResultsController.fetchedObjects?.count == 3),
+                                (postEntity.categories?.count == newPost.categories.count))
+                        case .failure(let error):
+                            XCTFail(error.localizedDescription)
+                        }
+                    }
+                case .failure(let error):
+                    XCTFail(error.localizedDescription)
+                }
+            }
+        }
+    }
 }
 
 extension ThingLogPostRepositoryTests {
@@ -238,10 +337,17 @@ extension ThingLogPostRepositoryTests {
     func deleteAllEntity() {
         timeout(10) { exp in
             postRepository.deleteAll { result in
-                exp.fulfill()
                 switch result {
                 case .success(_):
-                    XCTAssert(true)
+                    self.categoryRepository.deleteAll { categoryResult in
+                        exp.fulfill()
+                        switch categoryResult {
+                        case .success(_):
+                            XCTAssert(true)
+                        case .failure(let error):
+                            XCTFail(error.localizedDescription)
+                        }
+                    }
                 case .failure(let error):
                     XCTFail(error.localizedDescription)
                 }
