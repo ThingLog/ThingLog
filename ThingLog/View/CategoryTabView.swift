@@ -35,7 +35,7 @@ final class CategoryTabView: UIView {
     private var selectedButton: CategoryTypeButton?
     
     var topCategoryTypeSubject: PublishSubject<TopCategoryType> = PublishSubject()
-    var previousTopCateogryType: TopCategoryType = .total
+    private var previousTopCateogryType: TopCategoryType = .total
     
     let marginConstant: CGFloat = 15.0
     

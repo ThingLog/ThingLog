@@ -50,14 +50,14 @@ final class CategoryViewController: UIViewController {
     // MARK: - Setup
     func setupCategoryView() {
         view.addSubview(categoryView)
-        let safeLayoutGide: UILayoutGuide = view.safeAreaLayoutGuide
+        let safeLayoutGuide: UILayoutGuide = view.safeAreaLayoutGuide
         categoryViewHeightConstriant = categoryView.heightAnchor.constraint(equalToConstant: categoryView.normalHeight)
         self.currentCategoryHeight = categoryView.normalHeight
         categoryViewHeightConstriant?.isActive = true
         NSLayoutConstraint.activate([
-            categoryView.leadingAnchor.constraint(equalTo: safeLayoutGide.leadingAnchor),
-            categoryView.trailingAnchor.constraint(equalTo: safeLayoutGide.trailingAnchor),
-            categoryView.topAnchor.constraint(equalTo: safeLayoutGide.topAnchor)
+            categoryView.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor),
+            categoryView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor),
+            categoryView.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor)
         ])
     }
     
