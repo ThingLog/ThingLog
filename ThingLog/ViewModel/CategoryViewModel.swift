@@ -12,7 +12,16 @@ import Foundation
 /// 모아보기에서 각 뷰들의 액션에 따라 프로퍼티들을 변경하도록 하여, `fetchRequest`를 호출한다.
 final class CategoryViewModel {
     // MARK: - Properties
-    var currentTopCategoryType: TopCategoryType  // 모아보기 최상단 탭
+    // 모아보기 최상단 탭
+    var currentTopCategoryType: TopCategoryType {
+        // 최상 단 탭이 변경될 때 SubCategoryType 및 FilterType을 초기화한다.
+        didSet {
+            if currentTopCategoryType != .category {
+                currentSubCategoryType = nil
+            }
+            currentFilterType = currentTopCategoryType.filterTypes.map { ($0, $0.defaultValue) }
+        }
+    }
     var currentSubCategoryType: String?          /// 최상단 탭이 `카테고리`인 경우
     var currentFilterType: [(type: FilterType, value: String)]
     var fetchResultController: NSFetchedResultsController<PostEntity>?
