@@ -34,7 +34,7 @@ final class DropBoxView: UIView {
         tableView.isScrollEnabled = true
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
         tableView.clipsToBounds = true
-        tableView.showsVerticalScrollIndicator = false 
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     
@@ -51,6 +51,8 @@ final class DropBoxView: UIView {
     // TableView를 외부 View에 추가하기 위해 필요한 UIView 프로퍼티
     private var superView: UIView?
     private var isShowingDropBox: Bool = false
+    // 최초로 버튼을 클릭했는지 여부를 확인하기 위한 프로퍼티이다.
+    private var isFirstClickButton: Bool = true
     private let tableViewCellHeight: CGFloat = 28
     private var maxTableViewHeight: CGFloat {
         if filterType.list.count >= 4 {
@@ -83,10 +85,6 @@ final class DropBoxView: UIView {
         super.init(coder: coder)
     }
     
-    override func didMoveToSuperview() {
-        setupTableView()
-    }
-    
     // MARK: - Setup
     private func setupView() {
         backgroundColor = SwiftGenColors.white.color
@@ -112,7 +110,8 @@ final class DropBoxView: UIView {
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.topAnchor.constraint(equalTo: bottomAnchor, constant: 1)
         ])
-        tableView.selectRow(at: selectedIndexPath, animated: true, scrollPosition: .top)
+        superView?.layoutIfNeeded()
+        tableView.selectRow(at: selectedIndexPath, animated: false, scrollPosition: .top)
     }
 }
 
@@ -123,6 +122,12 @@ extension DropBoxView {
     
     @objc
     func clickButton() {
+        // TableView ( dropBox )를 버튼을 최초로 클릭했을 때 constraint를 지정한다.
+        if isFirstClickButton {
+            setupTableView()
+            isFirstClickButton = false
+        }
+        
         changeButtonImageView()
     }
     
@@ -179,6 +184,7 @@ extension DropBoxView: UITableViewDataSource {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
         cell.selectionStyle = .none
         cell.backgroundColor = SwiftGenColors.white.color
+        cell.contentView.backgroundColor = SwiftGenColors.white.color
         cell.textLabel?.text = filterType.list[indexPath.row]
         cell.textLabel?.font = selectedIndexPath == indexPath ? UIFont.Pretendard.title3 : UIFont.Pretendard.body3
         cell.textLabel?.textColor = selectedIndexPath == indexPath ? SwiftGenColors.black.color : SwiftGenColors.gray4.color
