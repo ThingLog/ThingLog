@@ -21,6 +21,13 @@ import UIKit
  }
  
  */
+
+/// CustomTextField의 TextField Delagete이다.
+protocol CustomTextFieldDelegate: AnyObject {
+    func customTextFieldDidChangeSelection(_ textField: UITextField)
+    func customTextFieldShouldReturn(_ textField: UITextField) -> Bool
+}
+
 /// TextField 와 backbutton을 담고있는 View다.
 final class CustomTextField: UIView {
     // MARK: - View
@@ -53,7 +60,7 @@ final class CustomTextField: UIView {
         return imageView
     }()
     
-    var textField: UITextField = {
+    private var textField: UITextField = {
         let textField: UITextField = UITextField()
         textField.backgroundColor = .clear
         textField.font = UIFont.Pretendard.body2
@@ -90,6 +97,8 @@ final class CustomTextField: UIView {
     private let navigationBarLeading: CGFloat = 22
     private let navigationBarTrailing: CGFloat = -16
     private var isOnNavigationbar: Bool = false
+    
+    weak var delegate: CustomTextFieldDelegate?
     
     // MARK: - Init
     /// 해당 뷰를 초기화하는 메서드다.
@@ -135,7 +144,9 @@ extension CustomTextField {
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+        
         setupTextFieldView()
+        setupTextField()
     }
     
     // textField와 searchIcon을 담은 iConTextFieldStackView를 TextFieldView에 추가한다.
@@ -151,5 +162,21 @@ extension CustomTextField {
             searchIcon.heightAnchor.constraint(equalToConstant: iconHeight),
             searchIcon.widthAnchor.constraint(equalTo: searchIcon.heightAnchor)
         ])
+    }
+    
+    private func setupTextField() {
+        textField.delegate = self
+    }
+}
+
+extension CustomTextField: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        changeBackButton(isBackMode: false)
+        delegate?.customTextFieldDidChangeSelection(textField)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return delegate?.customTextFieldShouldReturn(textField) ?? true
     }
 }
