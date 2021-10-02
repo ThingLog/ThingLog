@@ -27,4 +27,9 @@ final class CategoryCoordinator: Coordinator {
         searchViewController.coordinator = self
         navigationController.pushViewController(searchViewController, animated: true)
     }
+    
+    /// 현재 뷰컨트롤러를 걷어내어 뒤로 이동한다. 
+    func back() {
+        navigationController.popViewController(animated: true)
+    }
 }
