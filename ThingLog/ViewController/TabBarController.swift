@@ -42,8 +42,7 @@ final class TabBarController: UITabBarController {
         
         homeCoordinator.start()
         categoryCoordinator.start()
-        
-        // TODO: ✅ SwiftGen이용하여 이미지 변경
+
         let homeTabImage: UIImage = SwiftGenAssets.homeTab.image
         let categoryTabImage: UIImage = SwiftGenAssets.categoryTab.image
         let plusTabImage: UIImage = SwiftGenAssets.plusTab.image.withRenderingMode(.alwaysOriginal)

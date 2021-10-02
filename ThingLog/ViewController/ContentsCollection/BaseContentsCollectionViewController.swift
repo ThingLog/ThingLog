@@ -63,7 +63,7 @@ extension BaseContentsCollectionViewController: UICollectionViewDataSource {
 
 extension BaseContentsCollectionViewController: UIScrollViewDelegate, UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y < 0 {
+        if scrollView.contentOffset.y <= 0 {
             // 맨위에 스크롤한 경우
             scrollOffsetYSubject.onNext(-200)
             return

@@ -21,10 +21,13 @@ internal typealias AssetImageTypeAlias = ImageSwiftGen.Image
 internal enum SwiftGenAssets {
   internal static let bought = ImageSwiftGen(name: "bought")
   internal static let categoryTab = ImageSwiftGen(name: "categoryTab")
+  internal static let chevronDown = ImageSwiftGen(name: "chevronDown")
+  internal static let chevronUp = ImageSwiftGen(name: "chevronUp")
   internal static let gift = ImageSwiftGen(name: "gift")
   internal static let homeTab = ImageSwiftGen(name: "homeTab")
   internal static let modifyText = ImageSwiftGen(name: "modifyText")
   internal static let plusTab = ImageSwiftGen(name: "plusTab")
+  internal static let search = ImageSwiftGen(name: "search")
   internal static let setting = ImageSwiftGen(name: "setting")
   internal static let wish = ImageSwiftGen(name: "wish")
 }

@@ -111,10 +111,7 @@ final class HomeViewController: UIViewController {
             navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         }
         
-        let logoView: UILabel = UILabel()
-        logoView.text = "띵로그"
-        logoView.textColor = SwiftGenColors.black.color
-        logoView.font = UIFont.Pretendard.headline3
+        let logoView: LogoView = LogoView("띵로그")
         let logoBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: logoView)
         navigationItem.leftBarButtonItem = logoBarButtonItem
         
