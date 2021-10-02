@@ -63,8 +63,9 @@ extension ChoiceWritingView {
 
     private func dimButtonTitle(_ dimmed: Bool) {
         choiceView.arrangedSubviews.forEach {
-            if let button: UIButton = $0 as? UIButton {
-                button.setTitleColor((dimmed ? .white : .black), for: .normal)
+            if let button: WriteTypeButton = $0 as? WriteTypeButton {
+                button.setIcon(dimmed ? true : false)
+                button.setColor(dimmed ? .white : .black)
             }
         }
     }

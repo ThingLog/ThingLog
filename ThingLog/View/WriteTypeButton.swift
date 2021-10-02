@@ -81,3 +81,13 @@ final class WriteTypeButton: UIView {
         }
     }
 }
+
+extension WriteTypeButton {
+    func setIcon(_ isHidden: Bool) {
+        iconView.image = isHidden ? nil : type?.image
+    }
+
+    func setColor(_ color: UIColor) {
+        self.textLabel.textColor = color
+    }
+}
