@@ -18,9 +18,35 @@ final class CategoryView: UIView {
         return categoryTabView
     }()
     
+    private lazy var borderLineStackView: UIStackView = {
+        let stackView: UIStackView = UIStackView(arrangedSubviews: [
+            borderLineLeadingView,
+            borderLineView,
+            borderLineTrailingView
+        ])
+        stackView.axis = .horizontal
+        stackView.backgroundColor = SwiftGenColors.white.color
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private var borderLineView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = SwiftGenColors.gray5.color
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private var borderLineLeadingView: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = SwiftGenColors.white.color
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private var borderLineTrailingView: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -37,7 +63,7 @@ final class CategoryView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [
             categoryTapView,
-            borderLineView,
+            borderLineStackView,
             horizontalCollectionView,
             categoryFilterView
         ])
@@ -102,6 +128,8 @@ final class CategoryView: UIView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            borderLineLeadingView.widthAnchor.constraint(equalToConstant: 10),
+            borderLineTrailingView.widthAnchor.constraint(equalToConstant: 10),
             const1,
             const3,
             const2
