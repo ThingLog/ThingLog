@@ -47,6 +47,7 @@
 		DB148C282704A1A600FDC48F /* IgnoreTouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C272704A1A500FDC48F /* IgnoreTouchView.swift */; };
 		DB148C2C2705855A00FDC48F /* CategoryTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C2B2705855A00FDC48F /* CategoryTypeButton.swift */; };
 		DB148C302705863100FDC48F /* CategoryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C2F2705863100FDC48F /* CategoryTabView.swift */; };
+		DB1745B72708700200EF083E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1745B62708700200EF083E /* CustomTextField.swift */; };
 		DB331DA926FDD00A00A629F5 /* ColorsAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA626FDD00A00A629F5 /* ColorsAsset.swift */; };
 		DB331DAA26FDD00A00A629F5 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA726FDD00A00A629F5 /* ImageAssets.swift */; };
 		DB331DAB26FDD00A00A629F5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA826FDD00A00A629F5 /* Fonts.swift */; };
@@ -79,9 +80,9 @@
 		DBAE8E9826FDB3EE00F536AD /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */; };
 		DBAE8EB126FDBEAE00F536AD /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */; };
 		DBAE8EBB26FDCA7B00F536AD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */; };
-		DBD2244B27085DFB004C5184 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2244A27085DFB004C5184 /* SearchViewController.swift */; };
 		DBD2244527085651004C5184 /* CategoryViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2244427085651004C5184 /* CategoryViewController+setup.swift */; };
 		DBD2244727085671004C5184 /* CategoryViewController+subscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2244627085671004C5184 /* CategoryViewController+subscribe.swift */; };
+		DBD2244B27085DFB004C5184 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2244A27085DFB004C5184 /* SearchViewController.swift */; };
 		DBD5454727032B1C00063C98 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454627032B1C00063C98 /* FilterType.swift */; };
 		DBD5454927032BAA00063C98 /* TopCategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454827032BAA00063C98 /* TopCategoryType.swift */; };
 		DBD5454C27032C6600063C98 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454B27032C6600063C98 /* CategoryViewModel.swift */; };
@@ -167,6 +168,7 @@
 		DB148C272704A1A500FDC48F /* IgnoreTouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnoreTouchView.swift; sourceTree = "<group>"; };
 		DB148C2B2705855A00FDC48F /* CategoryTypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTypeButton.swift; sourceTree = "<group>"; };
 		DB148C2F2705863100FDC48F /* CategoryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTabView.swift; sourceTree = "<group>"; };
+		DB1745B62708700200EF083E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		DB331DA626FDD00A00A629F5 /* ColorsAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsAsset.swift; sourceTree = "<group>"; };
 		DB331DA726FDD00A00A629F5 /* ImageAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
 		DB331DA826FDD00A00A629F5 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -201,9 +203,9 @@
 		DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		DBD2244A27085DFB004C5184 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DBD2244427085651004C5184 /* CategoryViewController+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryViewController+setup.swift"; sourceTree = "<group>"; };
 		DBD2244627085671004C5184 /* CategoryViewController+subscribe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryViewController+subscribe.swift"; sourceTree = "<group>"; };
+		DBD2244A27085DFB004C5184 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DBD5454627032B1C00063C98 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
 		DBD5454827032BAA00063C98 /* TopCategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCategoryType.swift; sourceTree = "<group>"; };
 		DBD5454B27032C6600063C98 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
@@ -393,7 +395,7 @@
 				DB7C04B526F8782B009F5C0A /* CategoryViewController.swift */,
 				DBD2244427085651004C5184 /* CategoryViewController+setup.swift */,
 				DBD2244627085671004C5184 /* CategoryViewController+subscribe.swift */,
-                DBD2244A27085DFB004C5184 /* SearchViewController.swift */,
+				DBD2244A27085DFB004C5184 /* SearchViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -426,6 +428,7 @@
 				DB148C2F2705863100FDC48F /* CategoryTabView.swift */,
 				DB8BF6802706D89E00FD5FDB /* CategoryFilterView.swift */,
 				DB8BF6822706DA7900FD5FDB /* CategoryView.swift */,
+				DB1745B62708700200EF083E /* CustomTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -740,6 +743,7 @@
 				876C157B27044DFF000C1C84 /* CategoryEntity.swift in Sources */,
 				87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */,
 				8736B3F626FE245A000433E1 /* PostEntity+.swift in Sources */,
+				DB1745B72708700200EF083E /* CustomTextField.swift in Sources */,
 				87F2189026FB8D6A00C3FBCA /* PostTypeEntity+.swift in Sources */,
 				875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */,
 				8736B3F226FDC281000433E1 /* Attachment.swift in Sources */,
