@@ -25,14 +25,26 @@ final class CategoryViewController: UIViewController {
         return view
     }()
     
+    // 아래로 스크롤 할 시 나타나는 버튼으로, 누르면 최상단으로 스크롤해주는 기능을 가지는 Button이다.
+    var topButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.setImage(SwiftGenAssets.chevronUp.image, for: .normal)
+        button.backgroundColor = SwiftGenColors.white.color
+        button.alpha = 0
+        button.isHidden = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(clickTopButton), for: .touchUpInside)
+        return button
+    }()
+    
     let contentsViewController: BaseContentsCollectionViewController = BaseContentsCollectionViewController()
-       
+    
     var viewModel: CategoryViewModel = CategoryViewModel()
-
+    
     var categoryViewHeightConstriant: NSLayoutConstraint?
     var currentCategoryHeight: CGFloat = 0
     var disposeBag: DisposeBag = DisposeBag()
-
+    
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +53,12 @@ final class CategoryViewController: UIViewController {
         setupCategoryView()
         setupContainerView()
         setupContentsController()
+        setupTopButton()
         
         subscribeCategoryView()
         subscribeCategoryFilterView()
         subscribeHorizontalCollectionView()
+        subscribeBaseControllerScrollOffset()
     }
     
     // MARK: - Setup
@@ -59,6 +73,19 @@ final class CategoryViewController: UIViewController {
             categoryView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor),
             categoryView.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor)
         ])
+    }
+    
+    func setupTopButton() {
+        view.addSubview(topButton)
+        let safeLayoutGuide: UILayoutGuide = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            topButton.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor, constant: -26),
+            topButton.bottomAnchor.constraint(equalTo: safeLayoutGuide.bottomAnchor, constant: -29),
+            topButton.widthAnchor.constraint(equalToConstant: 44),
+            topButton.heightAnchor.constraint(equalToConstant: 44)
+        ])
+        topButton.layer.cornerRadius = 22
+        topButton.clipsToBounds = true
     }
     
     func setupContainerView() {
@@ -167,7 +194,7 @@ extension CategoryViewController {
                 UIView.animate(withDuration: 0.2) {
                     self?.categoryViewHeightConstriant?.constant = type == .category ? self?.categoryView.maxHeight ?? 0 : self?.categoryView.normalHeight ?? 0
                     self?.currentCategoryHeight = type == .category ? self?.categoryView.maxHeight ?? 0 : self?.categoryView.normalHeight ?? 0
-
+                    
                     self?.view.layoutIfNeeded()
                 }
                 
@@ -184,11 +211,58 @@ extension CategoryViewController {
                         "학용품", "다이어리", "학용품", "다이어리", "학용품", "다이어리", "학용품", "다이어리",
                         "학용품", "다이어리", "학용품", "다이어리", "학용품", "다이어리", "학용품", "다이어리"
                     ]
+                    self?.categoryView.horizontalCollectionView.isCollapse = false
                     self?.categoryView.horizontalCollectionView.reloadData()
                 }
                 
                 self?.testViewModel()
             })
             .disposed(by: disposeBag)
+    }
+    
+    /// CollectionView 스크롤을 subscribe 하여 상단 탭을 애니메이션 한다.
+    func subscribeBaseControllerScrollOffset() {
+        contentsViewController.scrollOffsetYSubject
+            .subscribe(onNext: { [weak self] dist in
+                if dist >= 0 {
+                    self?.categoryView.horizontalCollectionView.isCollapse = true
+                    self?.view.layoutIfNeeded()
+                } else if self?.categoryViewHeightConstriant?.constant == self?.categoryView.maxHeight {
+                    self?.categoryView.horizontalCollectionView.isCollapse = false
+                    self?.view.layoutIfNeeded()
+                }
+                
+                guard let currentConstant = self?.categoryViewHeightConstriant?.constant else { return }
+                var dist: CGFloat = dist
+                
+                // 카테고리 사라질 때
+                if dist >= 0 {
+                    dist = max(currentConstant - dist, 0)
+                } else {
+                    // 카테고리 나타날 때
+                    dist = min(currentConstant - dist, self?.currentCategoryHeight ?? 0)
+                    self?.showTopButton(false)
+                }
+                
+                if dist <= 1 {
+                    self?.showTopButton(true)
+                }
+                
+                self?.categoryViewHeightConstriant?.constant = dist
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+extension CategoryViewController {
+    @objc
+    func clickTopButton() {
+        self.contentsViewController.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+        showTopButton(true)
+    }
+    
+    private func showTopButton(_ bool: Bool) {
+        self.topButton.isHidden = !bool
+        self.topButton.alpha = bool ? 1 : 0
     }
 }
