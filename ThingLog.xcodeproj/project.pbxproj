@@ -64,6 +64,8 @@
 		DBAE8E9826FDB3EE00F536AD /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */; };
 		DBAE8EB126FDBEAE00F536AD /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */; };
 		DBAE8EBB26FDCA7B00F536AD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */; };
+		DBD2244527085651004C5184 /* CategoryViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2244427085651004C5184 /* CategoryViewController+setup.swift */; };
+		DBD2244727085671004C5184 /* CategoryViewController+subscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2244627085671004C5184 /* CategoryViewController+subscribe.swift */; };
 		DBD5454727032B1C00063C98 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454627032B1C00063C98 /* FilterType.swift */; };
 		DBD5454927032BAA00063C98 /* TopCategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454827032BAA00063C98 /* TopCategoryType.swift */; };
 		DBD5454C27032C6600063C98 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454B27032C6600063C98 /* CategoryViewModel.swift */; };
@@ -168,6 +170,8 @@
 		DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		DBD2244427085651004C5184 /* CategoryViewController+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryViewController+setup.swift"; sourceTree = "<group>"; };
+		DBD2244627085671004C5184 /* CategoryViewController+subscribe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryViewController+subscribe.swift"; sourceTree = "<group>"; };
 		DBD5454627032B1C00063C98 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
 		DBD5454827032BAA00063C98 /* TopCategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCategoryType.swift; sourceTree = "<group>"; };
 		DBD5454B27032C6600063C98 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
@@ -324,6 +328,8 @@
 				DB7C04F126FB1F36009F5C0A /* ContentsPageViewController.swift */,
 				DB7C04B126F87548009F5C0A /* TabBarController.swift */,
 				DB7C04B526F8782B009F5C0A /* CategoryViewController.swift */,
+				DBD2244427085651004C5184 /* CategoryViewController+setup.swift */,
+				DBD2244627085671004C5184 /* CategoryViewController+subscribe.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -616,6 +622,7 @@
 				DBAB64A526FCC2F8006D95ED /* HomeCoordinator.swift in Sources */,
 				DBD545522703409300063C98 /* HorizontalCollectionView.swift in Sources */,
 				DBAB64A426FCC2C5006D95ED /* Coordinator.swift in Sources */,
+				DBD2244727085671004C5184 /* CategoryViewController+subscribe.swift in Sources */,
 				DB7C04EE26FB1ACE009F5C0A /* ContentsTabView.swift in Sources */,
 				DB7C04F426FB1F45009F5C0A /* BoughtContentsCollectionViewController.swift in Sources */,
 				DB331DAA26FDD00A00A629F5 /* ImageAssets.swift in Sources */,
@@ -635,6 +642,7 @@
 				DB7C04F826FB1F52009F5C0A /* GiftContentsCollectionViewController.swift in Sources */,
 				DBD5454927032BAA00063C98 /* TopCategoryType.swift in Sources */,
 				DB331DA926FDD00A00A629F5 /* ColorsAsset.swift in Sources */,
+				DBD2244527085651004C5184 /* CategoryViewController+setup.swift in Sources */,
 				DB7C04F226FB1F36009F5C0A /* ContentsPageViewController.swift in Sources */,
 				DB148C302705863100FDC48F /* CategoryTabView.swift in Sources */,
 				DB7C04E926FB19AE009F5C0A /* ContentsCollectionViewCell.swift in Sources */,

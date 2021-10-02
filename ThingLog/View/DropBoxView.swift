@@ -88,6 +88,8 @@ final class DropBoxView: UIView {
     // MARK: - Setup
     private func setupView() {
         backgroundColor = SwiftGenColors.white.color
+        clipsToBounds = true
+        
         addSubview(titleButton)
         superView?.addSubview(tableView)
         bringSubviewToFront(tableView)

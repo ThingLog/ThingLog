@@ -32,6 +32,17 @@ final class HorizontalCollectionView: UIView {
     // 특정 Category를 선택할 때 마다 전달하기 위한 subject입니다.
     var categoryTitleSubject: PublishSubject<String> = PublishSubject()
     
+    // 이를 통해 CollectionView Cell Size를 동적으로 관리한다. 
+    var isCollapse: Bool = false {
+        didSet {
+            // 같은 요청은 무시하기 위함
+            if oldValue == isCollapse {
+                return
+            }
+            collectionView.reloadData()
+        }
+    }
+    
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -107,7 +118,7 @@ extension HorizontalCollectionView: UICollectionViewDelegateFlowLayout {
             NSAttributedString.Key.font: UIFont.Pretendard.body2
         ])
         itemSize.width += 20
-        itemSize.height = buttonHeight
+        itemSize.height = isCollapse ? 0 : buttonHeight
         return itemSize
     }
 }
