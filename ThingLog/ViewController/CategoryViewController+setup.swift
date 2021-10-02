@@ -84,6 +84,9 @@ extension CategoryViewController {
         let searchButton: UIButton = UIButton()
         searchButton.setImage(SwiftGenAssets.search.image, for: .normal)
         searchButton.tintColor = SwiftGenColors.black.color
+        searchButton.rx.tap.bind { [weak self] in
+            self?.coordinator?.showSearchViewController()
+        }
         
         let settingButton: UIButton = UIButton()
         settingButton.setImage(SwiftGenAssets.setting.image, for: .normal)

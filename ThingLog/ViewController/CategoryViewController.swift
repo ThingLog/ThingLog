@@ -8,7 +8,7 @@ import RxSwift
 import UIKit
 
 final class CategoryViewController: UIViewController {
-    var coordinator: Coordinator?
+    var coordinator: CategoryCoordinator?
     
     lazy var categoryView: CategoryView = {
         let categoryView: CategoryView = CategoryView(superView: view)
