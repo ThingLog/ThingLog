@@ -8,7 +8,7 @@ import RxSwift
 import UIKit
 
 final class CategoryViewController: UIViewController {
-    var coordinator: Coordinator?
+    var coordinator: CategoryCoordinator?
     
     lazy var categoryView: CategoryView = {
         let categoryView: CategoryView = CategoryView(superView: view)
@@ -108,6 +108,10 @@ final class CategoryViewController: UIViewController {
         let searchButton: UIButton = UIButton()
         searchButton.setImage(SwiftGenAssets.search.image, for: .normal)
         searchButton.tintColor = SwiftGenColors.black.color
+        searchButton.rx.tap.bind { [weak self] in
+            self?.coordinator?.showSearchViewController()
+        }
+        .disposed(by: disposeBag)
         
         let settingButton: UIButton = UIButton()
         settingButton.setImage(SwiftGenAssets.setting.image, for: .normal)

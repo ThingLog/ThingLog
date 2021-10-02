@@ -20,4 +20,11 @@ final class CategoryCoordinator: Coordinator {
         categoryViewController.coordinator = self 
         navigationController.pushViewController(categoryViewController, animated: true)
     }
+    
+    /// 검색화면으로 이동하기 위한 메서드다. 
+    func showSearchViewController() {
+        let searchViewController: SearchViewController = SearchViewController()
+        searchViewController.coordinator = self
+        navigationController.pushViewController(searchViewController, animated: true)
+    }
 }
