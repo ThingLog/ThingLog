@@ -91,6 +91,7 @@ final class CustomTextField: UIView {
     }()
     
     // MARK: - Properties
+    private let backImage: UIImage? = SwiftGenAssets.back.image.withRenderingMode(.alwaysTemplate)
     private let iconHeight: CGFloat = 20
     private let textFieldViewLeading: CGFloat = 10
     private let textFieldViewTrialing: CGFloat = -19
@@ -130,7 +131,7 @@ final class CustomTextField: UIView {
     }
     
     func changeBackButton(isBackMode: Bool) {
-        backButton.imageView?.isHidden = !isBackMode
+        backButton.setImage(isBackMode ? backImage : nil, for: .normal)
         backButton.setTitle(isBackMode ? "" : "닫기", for: .normal)
     }
 }
@@ -142,7 +143,9 @@ extension CustomTextField {
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            backButton.widthAnchor.constraint(equalToConstant: 28)
         ])
         
         setupTextFieldView()
@@ -171,7 +174,6 @@ extension CustomTextField {
 
 extension CustomTextField: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        changeBackButton(isBackMode: false)
         delegate?.customTextFieldDidChangeSelection(textField)
     }
     
