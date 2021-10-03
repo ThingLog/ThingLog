@@ -19,6 +19,7 @@ internal typealias AssetImageTypeAlias = ImageSwiftGen.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum SwiftGenAssets {
+  internal static let back = ImageSwiftGen(name: "back")
   internal static let bought = ImageSwiftGen(name: "bought")
   internal static let categoryTab = ImageSwiftGen(name: "categoryTab")
   internal static let chevronDown = ImageSwiftGen(name: "chevronDown")
