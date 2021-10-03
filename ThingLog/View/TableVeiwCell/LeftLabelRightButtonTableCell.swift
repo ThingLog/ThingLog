@@ -102,7 +102,7 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupView() {
+    private func setupView() {
         contentView.backgroundColor = SwiftGenColors.white.color
         contentView.addSubview(stackView)
         
