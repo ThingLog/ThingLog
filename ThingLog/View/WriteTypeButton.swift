@@ -7,24 +7,28 @@
 
 import UIKit
 
+/// WriteType에 따라 이미지와 텍스트를 갖고 있는 뷰
+/// ChoiceWritingView에서 쓰이는 버튼
 final class WriteTypeButton: UIView {
-    var type: WriteType?
-    private let iconWidth: CGFloat = 24.0
-
+    // MARK: View Properties
     private let iconView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
-        imageView.tintColor = .systemGray
+        imageView.tintColor = SwiftGenColors.black.color
         return imageView
     }()
     private let textLabel: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.Pretendard.body3
-        label.textColor = .label
+        label.textColor = SwiftGenColors.black.color
         return label
     }()
+
+    // MARK: Properties
+    var type: WriteType?
+    private let iconWidth: CGFloat = 24.0
 
     override init(frame: CGRect) {
         super.init(frame: frame)

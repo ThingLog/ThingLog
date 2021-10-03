@@ -48,7 +48,7 @@ final class ChoiceWritingView: UIView {
         ])
         heightConstraint?.isActive = true
 
-        backgroundColor = .white
+        backgroundColor = SwiftGenColors.white.color
         clipsToBounds = true
         layer.cornerRadius = 17.0
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -65,7 +65,7 @@ extension ChoiceWritingView {
         choiceView.arrangedSubviews.forEach {
             if let button: WriteTypeButton = $0 as? WriteTypeButton {
                 button.setIcon(dimmed ? true : false)
-                button.setColor(dimmed ? .white : .black)
+                button.setColor(dimmed ? SwiftGenColors.white.color : SwiftGenColors.black.color)
             }
         }
     }
