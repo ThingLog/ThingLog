@@ -37,6 +37,7 @@
 		876C157927044BA0000C1C84 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157827044BA0000C1C84 /* RepositoryError.swift */; };
 		876C157B27044DFF000C1C84 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157A27044DFF000C1C84 /* CategoryEntity.swift */; };
 		876C157D27047B19000C1C84 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157C27047B19000C1C84 /* CategoryRepository.swift */; };
+		87BB17A72709898F0088B847 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB17A62709898F0088B847 /* WriteViewController.swift */; };
 		87BEF07B2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF07A2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift */; };
 		87F2188326FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188226FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift */; };
 		87F2188626FB5DFB00C3FBCA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188526FB5DFB00C3FBCA /* Post.swift */; };
@@ -159,6 +160,7 @@
 		876C157827044BA0000C1C84 /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
 		876C157A27044DFF000C1C84 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
 		876C157C27047B19000C1C84 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
+		87BB17A62709898F0088B847 /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		87BEF07A2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogCategoryRepositoryTests.swift; sourceTree = "<group>"; };
 		87F2188226FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogPostRepositoryTests.swift; sourceTree = "<group>"; };
 		87F2188526FB5DFB00C3FBCA /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				DBD2244427085651004C5184 /* CategoryViewController+setup.swift */,
 				DBD2244627085671004C5184 /* CategoryViewController+subscribe.swift */,
 				DBD2244A27085DFB004C5184 /* SearchViewController.swift */,
+				87BB17A62709898F0088B847 /* WriteViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -716,6 +719,7 @@
 				DBD5454927032BAA00063C98 /* TopCategoryType.swift in Sources */,
 				DB331DA926FDD00A00A629F5 /* ColorsAsset.swift in Sources */,
 				DBD2244527085651004C5184 /* CategoryViewController+setup.swift in Sources */,
+				87BB17A72709898F0088B847 /* WriteViewController.swift in Sources */,
 				DB7C04F226FB1F36009F5C0A /* ContentsPageViewController.swift in Sources */,
 				DB148C302705863100FDC48F /* CategoryTabView.swift in Sources */,
 				DB7C04E926FB19AE009F5C0A /* ContentsCollectionViewCell.swift in Sources */,
