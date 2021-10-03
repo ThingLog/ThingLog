@@ -11,4 +11,5 @@ extension UserDefaults {
     static var userAliasName: String { "userAliasName" }
     static var userOneLineIntroduction: String { "userOneLineIntroduction" }
     static var isAutomatedDarkMode: String { "isAutomatedDarkMode" }
+    static var recentSearchData: String{ "recentSearchData" }
 }
