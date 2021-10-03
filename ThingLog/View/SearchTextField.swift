@@ -1,5 +1,5 @@
 //
-//  CustomTextField.swift
+//  SearchTextField.swift
 //  ThingLog
 //
 //  Created by hyunsu on 2021/10/02.
@@ -23,13 +23,13 @@ import UIKit
  */
 
 /// CustomTextField의 TextField Delagete이다.
-protocol CustomTextFieldDelegate: AnyObject {
+protocol SearchTextFieldDelegate: AnyObject {
     func customTextFieldDidChangeSelection(_ textField: UITextField)
     func customTextFieldShouldReturn(_ textField: UITextField) -> Bool
 }
 
 /// TextField 와 backbutton을 담고있는 View다.
-final class CustomTextField: UIView {
+final class SearchTextField: UIView {
     // MARK: - View
     var backButton: TemplateImageButton = {
         let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenAssets.back.image)
@@ -99,7 +99,7 @@ final class CustomTextField: UIView {
     private let navigationBarTrailing: CGFloat = -16
     private var isOnNavigationbar: Bool = false
     
-    weak var delegate: CustomTextFieldDelegate?
+    weak var delegate: SearchTextFieldDelegate?
     
     // MARK: - Init
     /// 해당 뷰를 초기화하는 메서드다.
@@ -136,7 +136,7 @@ final class CustomTextField: UIView {
     }
 }
 
-extension CustomTextField {
+extension SearchTextField {
     private func setupView() {
         addSubview(stackView)
         NSLayoutConstraint.activate([
@@ -172,7 +172,7 @@ extension CustomTextField {
     }
 }
 
-extension CustomTextField: UITextFieldDelegate {
+extension SearchTextField: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         delegate?.customTextFieldDidChangeSelection(textField)
     }

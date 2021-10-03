@@ -12,14 +12,14 @@ import UIKit
 final class SearchViewController: UIViewController {
     var coordinator: CategoryCoordinator?
     
-    let customTextField: CustomTextField = {
-        let customTextField: CustomTextField = CustomTextField(isOnNavigationbar: true)
+    private let searchTextField: SearchTextField = {
+        let customTextField: SearchTextField = SearchTextField(isOnNavigationbar: true)
         customTextField.translatesAutoresizingMaskIntoConstraints = false
         return customTextField
     }()
     
     // 검색결과 에따른 물건리스트가 나오고 있는지 판별하기 위한 프로퍼티
-    var isShowingResults: Bool = false
+    private var isShowingResults: Bool = false
     var disposeBag: DisposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -32,10 +32,10 @@ final class SearchViewController: UIViewController {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
-        customTextField.endEditing(true)
+        searchTextField.endEditing(true)
     }
     
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         if #available(iOS 15, *) {
             let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
@@ -49,18 +49,18 @@ final class SearchViewController: UIViewController {
             navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         }
         navigationItem.setHidesBackButton(true, animated: false)
-        navigationItem.titleView = customTextField
-        customTextField.delegate = self
+        navigationItem.titleView = searchTextField
+        searchTextField.delegate = self
     }
     
     /// CustomTextField에 BackButton을 subscribe 한다.
-    func subscribeBackButton() {
-        customTextField.backButton.rx.tap.bind { [weak self] in
+    private func subscribeBackButton() {
+        searchTextField.backButton.rx.tap.bind { [weak self] in
             if self?.isShowingResults == true {
                 // 최근 검색어 리스트로 변경.
-                self?.customTextField.endEditing(true)
+                self?.searchTextField.endEditing(true)
                 self?.isShowingResults = false
-                self?.customTextField.changeBackButton(isBackMode: true)
+                self?.searchTextField.changeBackButton(isBackMode: true)
             } else {
                 // 뒤로 간다 ( 모아보기 화면으로 간다 )
                 self?.coordinator?.back()
@@ -70,10 +70,10 @@ final class SearchViewController: UIViewController {
     }
 }
 
-extension SearchViewController: CustomTextFieldDelegate {
+extension SearchViewController: SearchTextFieldDelegate {
     func customTextFieldDidChangeSelection(_ textField: UITextField) {
         isShowingResults = true
-        customTextField.changeBackButton(isBackMode: false)
+        searchTextField.changeBackButton(isBackMode: false)
         print(textField.text)
     }
     
