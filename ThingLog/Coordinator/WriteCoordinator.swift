@@ -27,6 +27,7 @@ final class WriteCoordinator: Coordinator {
     func showWriteViewController(with type: WriteType) {
         let writeViewController: WriteViewController = WriteViewController()
         writeViewController.coordinator = self
+        writeViewController.viewModel = WriteViewModel(writeType: type)
         navigationController.modalPresentationStyle = .fullScreen
         navigationController.pushViewController(writeViewController, animated: true)
         parentViewController?.present(navigationController, animated: true)
