@@ -47,7 +47,7 @@ class ThingLogRecentSearchDataTests: XCTestCase {
                 .disposed(by: disposeBag)
             
             self.recentViewModel.add("hiii")
-            self.recentViewModel.remove(0)
+            self.recentViewModel.remove(at: 0)
         }
     }
     
@@ -62,7 +62,7 @@ class ThingLogRecentSearchDataTests: XCTestCase {
     func test_최근검색어_삭제할수있다() {
         recentViewModel.removeAll()
         recentViewModel.add("hi")
-        recentViewModel.remove(0)
+        recentViewModel.remove(at: 0)
         XCTAssertTrue((UserDefaults.standard.value(forKey: UserDefaults.recentSearchData) as? [String])?.count == 0)
     }
 }

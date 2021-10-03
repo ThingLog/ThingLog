@@ -21,6 +21,7 @@ struct RecentSearchDataViewModel {
         }
     }
     
+    private let maxSaveCount: Int = 20
     init() {
         guard let recentDatas = UserDefaults.standard.value(forKey: UserDefaults.recentSearchData) as? [String] else {
             _recentSearchData = []
@@ -36,7 +37,7 @@ struct RecentSearchDataViewModel {
             return
         }
         
-        if _recentSearchData.count == 20 {
+        if _recentSearchData.count == maxSaveCount {
             var newRecent: [String] = _recentSearchData
             newRecent.insert(searchData, at: 0)
             newRecent.removeLast()
@@ -48,7 +49,7 @@ struct RecentSearchDataViewModel {
     
     /// index에 해당하는 최근검색어를 삭제한다.
     /// - Parameter index: 삭제하고자 하는 index를 주입한다.
-    mutating func remove(_ index: Int) {
+    mutating func remove(at index: Int) {
         if index < _recentSearchData.count {
             _recentSearchData.remove(at: index)
         }
