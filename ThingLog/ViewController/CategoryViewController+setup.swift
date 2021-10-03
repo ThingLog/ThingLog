@@ -87,6 +87,7 @@ extension CategoryViewController {
         searchButton.rx.tap.bind { [weak self] in
             self?.coordinator?.showSearchViewController()
         }
+        .disposed(by: disposeBag)
         
         let settingButton: UIButton = UIButton()
         settingButton.setImage(SwiftGenAssets.setting.image, for: .normal)
