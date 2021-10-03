@@ -30,7 +30,6 @@ final class TabBarController: UITabBarController {
     }()
 
     // MARK: - Properties
-    let writeTypeSubject: PublishSubject<WriteType> = PublishSubject<WriteType>()
     private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - Life cycle
@@ -101,7 +100,7 @@ final class TabBarController: UITabBarController {
     }
 
     private func bindWriteType() {
-        writeTypeSubject
+        choiceView.selectedWriteTypeSubject
             .bind { [weak self] type in
                 guard let self = self else { return }
                 self.touchDimmedView()

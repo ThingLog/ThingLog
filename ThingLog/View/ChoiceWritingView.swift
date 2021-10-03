@@ -24,8 +24,10 @@ final class ChoiceWritingView: UIView {
         return writeView
     }()
 
+    let selectedWriteTypeSubject: PublishSubject<WriteType> = PublishSubject<WriteType>()
     private var heightConstraint: NSLayoutConstraint?
     private let heightMax: CGFloat = 90.0
+    private let disposeBag: DisposeBag = DisposeBag()
 
     // MARK: - Init
     override init(frame: CGRect) {
@@ -95,11 +97,9 @@ extension ChoiceWritingView {
     /// - Parameter sender: sender를 이용해 tap한 뷰를 가려낸다.
     private func tappedWriteButton(_ sender: UITapGestureRecognizer) {
         guard let button: WriteTypeButton = sender.view as? WriteTypeButton,
-              let type: WriteType = button.type,
-              let parentViewController: TabBarController = findParentViewController() as? TabBarController else {
+              let type: WriteType = button.type else {
                   return
               }
-
-        parentViewController.writeTypeSubject.onNext(type)
+        selectedWriteTypeSubject.onNext(type)
     }
 }
