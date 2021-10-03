@@ -54,6 +54,7 @@
 		DB148C2C2705855A00FDC48F /* CategoryTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C2B2705855A00FDC48F /* CategoryTypeButton.swift */; };
 		DB148C302705863100FDC48F /* CategoryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C2F2705863100FDC48F /* CategoryTabView.swift */; };
 		DB1745B72708700200EF083E /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1745B62708700200EF083E /* SearchTextField.swift */; };
+		DB1745B927098E8A00EF083E /* RecentSearchDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1745B827098E8A00EF083E /* RecentSearchDataViewModel.swift */; };
 		DB331DA926FDD00A00A629F5 /* ColorsAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA626FDD00A00A629F5 /* ColorsAsset.swift */; };
 		DB331DAA26FDD00A00A629F5 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA726FDD00A00A629F5 /* ImageAssets.swift */; };
 		DB331DAB26FDD00A00A629F5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA826FDD00A00A629F5 /* Fonts.swift */; };
@@ -77,6 +78,7 @@
 		DB8BF6792705D25700FD5FDB /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6782705D25700FD5FDB /* LogoView.swift */; };
 		DB8BF6812706D89E00FD5FDB /* CategoryFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6802706D89E00FD5FDB /* CategoryFilterView.swift */; };
 		DB8BF6832706DA7900FD5FDB /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6822706DA7900FD5FDB /* CategoryView.swift */; };
+		DBA0F8192709A79A009553FC /* ThingLogRecentSearchDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0F8182709A79A009553FC /* ThingLogRecentSearchDataTests.swift */; };
 		DBA1FD4526FB701C00F50DE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DBA1FD4726FB701C00F50DE5 /* InfoPlist.strings */; };
 		DBAB64A426FCC2C5006D95ED /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A526F5F281009F5C0A /* Coordinator.swift */; };
 		DBAB64A526FCC2F8006D95ED /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */; };
@@ -181,6 +183,7 @@
 		DB148C2B2705855A00FDC48F /* CategoryTypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTypeButton.swift; sourceTree = "<group>"; };
 		DB148C2F2705863100FDC48F /* CategoryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTabView.swift; sourceTree = "<group>"; };
 		DB1745B62708700200EF083E /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
+		DB1745B827098E8A00EF083E /* RecentSearchDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchDataViewModel.swift; sourceTree = "<group>"; };
 		DB331DA626FDD00A00A629F5 /* ColorsAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsAsset.swift; sourceTree = "<group>"; };
 		DB331DA726FDD00A00A629F5 /* ImageAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
 		DB331DA826FDD00A00A629F5 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
@@ -206,6 +209,7 @@
 		DB8BF6782705D25700FD5FDB /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		DB8BF6802706D89E00FD5FDB /* CategoryFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilterView.swift; sourceTree = "<group>"; };
 		DB8BF6822706DA7900FD5FDB /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		DBA0F8182709A79A009553FC /* ThingLogRecentSearchDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogRecentSearchDataTests.swift; sourceTree = "<group>"; };
 		DBA1FD3C26FB6F1D00F50DE5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		DBA1FD4626FB701C00F50DE5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DBA1FD4826FB701F00F50DE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -302,6 +306,7 @@
 				873EC02226D39057003C3525 /* ThingLogTests.swift */,
 				87F2188226FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift */,
 				87BEF07A2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift */,
+				DBA0F8182709A79A009553FC /* ThingLogRecentSearchDataTests.swift */,
 				873EC02426D39057003C3525 /* Info.plist */,
 			);
 			path = ThingLogTests;
@@ -395,6 +400,7 @@
 			children = (
 				DB7C04C626F9E693009F5C0A /* UserInformationViewModel.swift */,
 				DBD5454B27032C6600063C98 /* CategoryViewModel.swift */,
+				DB1745B827098E8A00EF083E /* RecentSearchDataViewModel.swift */,
 				87BB17AA27098D760088B847 /* WriteViewModel.swift */,
 			);
 			path = ViewModel;
@@ -737,6 +743,7 @@
 				DB148C302705863100FDC48F /* CategoryTabView.swift in Sources */,
 				DB7C04E926FB19AE009F5C0A /* ContentsCollectionViewCell.swift in Sources */,
 				DB7C04BE26F9BE72009F5C0A /* ProfileView.swift in Sources */,
+				DB1745B927098E8A00EF083E /* RecentSearchDataViewModel.swift in Sources */,
 				DB7C04B626F8782B009F5C0A /* CategoryViewController.swift in Sources */,
 				DB148C282704A1A600FDC48F /* IgnoreTouchView.swift in Sources */,
 				DB7C04B226F87548009F5C0A /* TabBarController.swift in Sources */,
@@ -779,6 +786,7 @@
 			files = (
 				873EC02326D39057003C3525 /* ThingLogTests.swift in Sources */,
 				87BEF07B2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift in Sources */,
+				DBA0F8192709A79A009553FC /* ThingLogRecentSearchDataTests.swift in Sources */,
 				87F2188326FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
