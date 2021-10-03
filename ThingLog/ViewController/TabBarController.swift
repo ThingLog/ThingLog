@@ -7,10 +7,18 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 final class TabBarController: UITabBarController {
     let homeCoordinator: HomeCoordinator = HomeCoordinator(navigationController: UINavigationController())
     let categoryCoordinator: CategoryCoordinator = CategoryCoordinator(navigationController: UINavigationController())
     let emptyViewController: UIViewController = UIViewController()
+    private lazy var writeCoordinator: WriteCoordinator = {
+        let coordinator: WriteCoordinator = .init(navigationController: UINavigationController(),
+                                                  parentViewController: self)
+        return coordinator
+    }()
     
     // MARK: - View
     let choiceView: ChoiceWritingView = ChoiceWritingView()
@@ -20,6 +28,9 @@ final class TabBarController: UITabBarController {
         dimmed.isUserInteractionEnabled = true
         return dimmed
     }()
+
+    // MARK: - Properties
+    private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -27,6 +38,7 @@ final class TabBarController: UITabBarController {
         setupView()
         setupWriteView()
         setupDimmedView()
+        bindWriteType()
     }
     
     // MARK: - Setup
@@ -85,6 +97,16 @@ final class TabBarController: UITabBarController {
             dimmedView.topAnchor.constraint(equalTo: view.topAnchor),
             dimmedView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+
+    private func bindWriteType() {
+        choiceView.selectedWriteTypeSubject
+            .bind { [weak self] type in
+                guard let self = self else { return }
+                self.touchDimmedView()
+                self.writeCoordinator.showWriteViewController(with: type)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
