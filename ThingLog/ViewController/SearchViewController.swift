@@ -18,7 +18,7 @@ final class SearchViewController: UIViewController {
         return customTextField
     }()
     
-    var recentSearchView: RecentSearchView = {
+    private var recentSearchView: RecentSearchView = {
         let tableView: RecentSearchView = RecentSearchView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -32,10 +32,10 @@ final class SearchViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = SwiftGenColors.white.color
         setupNavigationBar()
+        setupRecentSearchView()
         
         subscribeBackButton()
-        setupTableView()
-        bind()
+        subscribeRecentSearchView()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -43,8 +43,8 @@ final class SearchViewController: UIViewController {
         searchTextField.endEditing(true)
     }
     
-    func setupTableView() {
-        let safeLayout = view.safeAreaLayoutGuide
+    private func setupRecentSearchView() {
+        let safeLayout: UILayoutGuide = view.safeAreaLayoutGuide
         view.addSubview(recentSearchView)
         
         NSLayoutConstraint.activate([
@@ -89,7 +89,8 @@ final class SearchViewController: UIViewController {
         .disposed(by: disposeBag)
     }
     
-    func bind() {
+    private func subscribeRecentSearchView() {
+        // 자동저장 끄기 버튼 subscribe
         recentSearchView.autoSaveButton.rx.tap
             .bind { [weak self] in
                 self?.recentSearchView.isAutoSaveMode.toggle()
@@ -98,13 +99,12 @@ final class SearchViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        // 전체 삭제 버튼 subscribe
         recentSearchView.clearTotalButton.rx.tap
             .bind { [weak self] in
                 self?.recentSearchView.testData = []
                 self?.recentSearchView.informationStackView.isHidden = false
-                self?.recentSearchView.layoutSubviews()
-                self?.recentSearchView.tableView.reloadData()
-                
+                self?.recentSearchView.tableView.isHidden = true
             }
             .disposed(by: disposeBag)
     }
@@ -114,18 +114,19 @@ extension SearchViewController: SearchTextFieldDelegate {
     func customTextFieldDidChangeSelection(_ textField: UITextField) {
         isShowingResults = true
         searchTextField.changeBackButton(isBackMode: false)
-        print(textField.text)
     }
     
     func customTextFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print(textField.text)
-        recentSearchView.informationStackView.isHidden = true
-        recentSearchView.testData.append(textField.text!)
-        recentSearchView.layoutSubviews()
-        recentSearchView.tableView.reloadData()
-        
-//        recentSearchView.layoutSubviews()
-//        recentSearchView.layoutSubviews()
+        if recentSearchView.isAutoSaveMode {
+            recentSearchView.testData.append(textField.text!)
+            recentSearchView.tableView.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                self.recentSearchView.tableView.isHidden = false
+                self.recentSearchView.informationStackView.isHidden = true
+                self.recentSearchView.layoutSubviews()
+                self.recentSearchView.layoutSubviews()
+            }
+        }
         return true
     }
 }
