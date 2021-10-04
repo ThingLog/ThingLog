@@ -23,6 +23,7 @@ internal enum SwiftGenAssets {
   internal static let bought = ImageSwiftGen(name: "bought")
   internal static let categoryTab = ImageSwiftGen(name: "categoryTab")
   internal static let chevronDown = ImageSwiftGen(name: "chevronDown")
+  internal static let chevronRight = ImageSwiftGen(name: "chevronRight")
   internal static let chevronUp = ImageSwiftGen(name: "chevronUp")
   internal static let clear = ImageSwiftGen(name: "clear")
   internal static let gift = ImageSwiftGen(name: "gift")
