@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// 글쓰기 화면에 들어가는 선택한 사진을 삭제할 때 쓰이는 버튼
 final class CloseButtonView: UICollectionReusableView {
     // MARK: View
     private let button: UIButton = {
@@ -30,7 +31,7 @@ final class CloseButtonView: UICollectionReusableView {
 }
 
 extension CloseButtonView {
-    func configure() {
+    private func configure() {
         addSubview(button)
 
         NSLayoutConstraint.activate([
