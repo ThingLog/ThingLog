@@ -111,12 +111,12 @@ final class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: SearchTextFieldDelegate {
-    func customTextFieldDidChangeSelection(_ textField: UITextField) {
+    func searchTextFieldDidChangeSelection(_ textField: UITextField) {
         isShowingResults = true
         searchTextField.changeBackButton(isBackMode: false)
     }
     
-    func customTextFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func searchTextFieldShouldReturn(_ textField: UITextField) -> Bool {
         if recentSearchView.isAutoSaveMode {
             recentSearchView.testData.append(textField.text!)
             recentSearchView.tableView.reloadData()

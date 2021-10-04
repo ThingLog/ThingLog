@@ -24,8 +24,8 @@ import UIKit
 
 /// CustomTextField의 TextField Delagete이다.
 protocol SearchTextFieldDelegate: AnyObject {
-    func customTextFieldDidChangeSelection(_ textField: UITextField)
-    func customTextFieldShouldReturn(_ textField: UITextField) -> Bool
+    func searchTextFieldDidChangeSelection(_ textField: UITextField)
+    func searchTextFieldShouldReturn(_ textField: UITextField) -> Bool
 }
 
 /// TextField 와 backbutton을 담고있는 View다.
@@ -174,11 +174,11 @@ extension SearchTextField {
 
 extension SearchTextField: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        delegate?.customTextFieldDidChangeSelection(textField)
+        delegate?.searchTextFieldDidChangeSelection(textField)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        return delegate?.customTextFieldShouldReturn(textField) ?? true
+        return delegate?.searchTextFieldShouldReturn(textField) ?? true
     }
 }
