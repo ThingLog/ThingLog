@@ -43,12 +43,11 @@ final class RecentSearchView: UIView {
     // MARK: - VIew
     private let emptyLeadingView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
-    private var recentTitleLabel: UILabel = {
+    private let recentTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.title2
         label.text = "최근 검색"
@@ -57,7 +56,7 @@ final class RecentSearchView: UIView {
         return label
     }()
     
-    var clearTotalButton: UIButton = {
+    let clearTotalButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("전체 삭제", for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.body2
@@ -68,12 +67,11 @@ final class RecentSearchView: UIView {
 
     private let emptyTrailingView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    var informationLabel: UILabel = {
+    let informationLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "최근 검색어 내역이 없습니다"
         label.font = UIFont.Pretendard.body1
@@ -83,14 +81,14 @@ final class RecentSearchView: UIView {
         return label
     }()
     
-    private var informationBorderLineView: UIView = {
+    private let informationBorderLineView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = SwiftGenColors.gray4.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    var autoSaveButton: UIButton = {
+    let autoSaveButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("자동저장 끄기", for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.title3
@@ -99,23 +97,20 @@ final class RecentSearchView: UIView {
         return button
     }()
     
-    private var autoSaveLeadingEmptyView: UIView = {
+    private let autoSaveLeadingEmptyView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private var autoSaveTopEmptyView: UIView = {
+    private let autoSaveTopEmptyView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private var autoSaveTrailingEmptyView: UIView = {
+    private let autoSaveTrailingEmptyView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return view
@@ -153,7 +148,7 @@ final class RecentSearchView: UIView {
         return stackView
     }()
     
-    var tableView: UITableView = {
+    let tableView: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.separatorStyle = .none
         tableView.backgroundColor = SwiftGenColors.white.color
