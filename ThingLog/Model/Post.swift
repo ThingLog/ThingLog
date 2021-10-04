@@ -16,6 +16,7 @@ struct Post {
     var price: Int
     var purchasePlace: String?
     var contents: String?
+    var giftGiver: String?
     var isLike: Bool
 
     // MARK: Relationship
@@ -34,6 +35,7 @@ extension Post {
         entity.price = Int16(price)
         entity.purchasePlace = purchasePlace
         entity.contents = contents
+        entity.giftGiver = giftGiver
         entity.postType = postType.toEntity(in: context)
         entity.isLike = isLike
         entity.rating = rating.toEntity(in: context)
