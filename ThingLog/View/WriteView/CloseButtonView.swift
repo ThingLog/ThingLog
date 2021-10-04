@@ -11,7 +11,7 @@ import UIKit
 final class CloseButtonView: UICollectionReusableView {
     // MARK: View
     private let button: UIButton = {
-        let button = UIButton()
+        let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(SwiftGenAssets.closeBadge.image, for: .normal)
         return button

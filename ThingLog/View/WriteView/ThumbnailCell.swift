@@ -20,6 +20,7 @@ final class ThumbnailCell: UICollectionViewCell {
         super.init(frame: frame)
         configure()
     }
+
     required init?(coder: NSCoder) {
         fatalError("not implemnted")
     }
@@ -31,7 +32,6 @@ extension ThumbnailCell {
         contentView.layer.borderColor = SwiftGenColors.gray5.color.cgColor
         contentView.layer.borderWidth = 1
         contentView.layer.cornerRadius = 4
-        contentView.layer.zPosition = -100
 
         addSubview(imageView)
 
