@@ -18,6 +18,12 @@ final class SearchViewController: UIViewController {
         return customTextField
     }()
     
+    private var recentSearchView: RecentSearchView = {
+        let tableView: RecentSearchView = RecentSearchView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
     // 검색결과 에따른 물건리스트가 나오고 있는지 판별하기 위한 프로퍼티
     private var isShowingResults: Bool = false
     var disposeBag: DisposeBag = DisposeBag()
@@ -26,13 +32,27 @@ final class SearchViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = SwiftGenColors.white.color
         setupNavigationBar()
+        setupRecentSearchView()
         
         subscribeBackButton()
+        subscribeRecentSearchView()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
         searchTextField.endEditing(true)
+    }
+    
+    private func setupRecentSearchView() {
+        let safeLayout: UILayoutGuide = view.safeAreaLayoutGuide
+        view.addSubview(recentSearchView)
+        
+        NSLayoutConstraint.activate([
+            recentSearchView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor),
+            recentSearchView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor),
+            recentSearchView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor),
+            recentSearchView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 6)
+        ])
     }
     
     private func setupNavigationBar() {
@@ -68,17 +88,44 @@ final class SearchViewController: UIViewController {
         }
         .disposed(by: disposeBag)
     }
+    
+    private func subscribeRecentSearchView() {
+        // 자동저장 끄기 버튼 subscribe
+        recentSearchView.autoSaveButton.rx.tap
+            .bind { [weak self] in
+                self?.recentSearchView.isAutoSaveMode.toggle()
+                self?.recentSearchView.updateInformationLabel()
+                self?.recentSearchView.layoutSubviews()
+            }
+            .disposed(by: disposeBag)
+        
+        // 전체 삭제 버튼 subscribe
+        recentSearchView.clearTotalButton.rx.tap
+            .bind { [weak self] in
+                self?.recentSearchView.testData = []
+                self?.recentSearchView.informationStackView.isHidden = false
+                self?.recentSearchView.tableView.isHidden = true
+            }
+            .disposed(by: disposeBag)
+    }
 }
 
 extension SearchViewController: SearchTextFieldDelegate {
     func customTextFieldDidChangeSelection(_ textField: UITextField) {
         isShowingResults = true
         searchTextField.changeBackButton(isBackMode: false)
-        print(textField.text)
     }
     
     func customTextFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print(textField.text)
+        if recentSearchView.isAutoSaveMode {
+            recentSearchView.testData.append(textField.text!)
+            recentSearchView.tableView.reloadData()
+            recentSearchView.tableView.isHidden = false
+            recentSearchView.informationStackView.isHidden = true
+            recentSearchView.layoutSubviews()
+            recentSearchView.layoutSubviews()
+        }
         return true
     }
 }
+
