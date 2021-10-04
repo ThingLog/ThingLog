@@ -14,6 +14,7 @@ extension PostEntity {
         self.price = Int16(post.price)
         self.purchasePlace = post.purchasePlace
         self.contents = post.contents
+        self.giftGiver = post.giftGiver
         self.isLike = post.isLike
         self.postType?.pageType = post.postType.type
         self.rating?.scoreType = post.rating.score
