@@ -10,7 +10,7 @@ import RxSwift
 
 /// 최근검색어 데이터를 관리하는 ViewModel이다.
 /// recentSearchData를 susbscribe하여 손쉽게 tableView를 reload, update하도록 한다.
-struct RecentSearchDataViewModel {
+class RecentSearchDataViewModel: RecentSearchDataViewModelProtocol {
     lazy var recentSearchDataSubject: BehaviorSubject<[String]> = BehaviorSubject(value: _recentSearchData )
     
     private var _recentSearchData: [String] = [] {
@@ -32,7 +32,7 @@ struct RecentSearchDataViewModel {
     
     /// 새로운 최근검색어를 추가한다.
     /// - Parameter searchData: 추가하고자 하는 검색어를 주입한다.
-    mutating func add(_ searchData: String) {
+    func add(_ searchData: String) {
         if _recentSearchData.contains(searchData) {
             return
         }
@@ -49,13 +49,13 @@ struct RecentSearchDataViewModel {
     
     /// index에 해당하는 최근검색어를 삭제한다.
     /// - Parameter index: 삭제하고자 하는 index를 주입한다.
-    mutating func remove(at index: Int) {
+    func remove(at index: Int) {
         if index < _recentSearchData.count {
             _recentSearchData.remove(at: index)
         }
     }
     
-    mutating func removeAll() {
+    func removeAll() {
         _recentSearchData = []
     }
 }
