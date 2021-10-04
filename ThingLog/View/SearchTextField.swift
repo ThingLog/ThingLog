@@ -97,6 +97,7 @@ final class SearchTextField: UIView {
     private let textFieldViewTrialing: CGFloat = -19
     private let navigationBarLeading: CGFloat = 22
     private let navigationBarTrailing: CGFloat = -16
+    private let textFieldHeightOnNavigationBar: CGFloat = 40
     private var isOnNavigationbar: Bool = false
     
     weak var delegate: SearchTextFieldDelegate?
@@ -122,8 +123,8 @@ final class SearchTextField: UIView {
         guard let superView: UIView = superview else { return }
         
         NSLayoutConstraint.activate([
-            topAnchor.constraint(equalTo: superView.topAnchor),
-            bottomAnchor.constraint(equalTo: superView.bottomAnchor),
+            centerYAnchor.constraint(equalTo: superView.centerYAnchor),
+            heightAnchor.constraint(equalToConstant: textFieldHeightOnNavigationBar),
             leadingAnchor.constraint(equalTo: superView.leadingAnchor, constant: navigationBarLeading),
             trailingAnchor.constraint(equalTo: superView.trailingAnchor, constant: navigationBarTrailing)
         ])
