@@ -24,14 +24,23 @@ import UIKit
  }
  
  rightStackView: UIStackView - Vertical  {
-    [dateLabel,
+    [dateTopEmptyView,
+     dateLabel,
      categoryAndPostTitleStackView,
      contentsLabel ]
  }
- stackView: UIStackView - Horizontal  {
-    [ iamgeView,
+ 
+ imageWithRightStackView: UIStackView - Horizontal {
+    [iamgeView,
      rightStackView ]
  }
+ 
+ stackView: UIStackView - Veritcal   {
+    [topBortderLineView,
+     imageWithRightStackView,
+     bottomBorderLineView]
+ }
+
  */
 
 /// 좌측에는 이미지가 있고, 우측에는 기록날짜, 카테고리, 물건이름, 내용(최대3줄) 을 담는 Cell이다.
@@ -42,6 +51,12 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         imageview.backgroundColor = SwiftGenColors.gray5.color
         imageview.translatesAutoresizingMaskIntoConstraints = false
         return imageview
+    }()
+    
+    private let dateTopEmptyView: UIView  = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let dateLabel: UILabel = {
@@ -136,6 +151,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
 
     private lazy var rightStackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [
+                                                    dateTopEmptyView,
                                                     dateLabel,
                                                     categoryAndPostTitleStackView,
                                                     contentsLabel])
@@ -146,13 +162,37 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    private lazy var stackView: UIStackView = {
+    private lazy var imageWithRightStackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [
                                                     imageView,
                                                     rightStackView])
         stackView.axis = .horizontal
         stackView.spacing = 6
         stackView.alignment = .top
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let topBortderLineView: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = SwiftGenColors.gray5.color
+        return view
+    }()
+    
+    private let bottomBorderLineView: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = SwiftGenColors.gray5.color
+        return view
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView: UIStackView = UIStackView(arrangedSubviews: [
+                                                    topBortderLineView,
+                                                    imageWithRightStackView,
+                                                    bottomBorderLineView])
+        stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -175,8 +215,13 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
-            imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
-            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
+            imageView.heightAnchor.constraint(equalTo: imageWithRightStackView.heightAnchor),
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
+            
+            bottomBorderLineView.heightAnchor.constraint(equalToConstant: 0.5),
+            topBortderLineView.heightAnchor.constraint(equalToConstant: 0.5),
+            
+            dateTopEmptyView.heightAnchor.constraint(equalToConstant: 4)
         ])
     }
     
