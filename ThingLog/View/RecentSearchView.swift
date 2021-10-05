@@ -4,37 +4,37 @@
 //
 //  Created by hyunsu on 2021/10/03.
 //
-
+import RxSwift
 import UIKit
 /*
  headerStackView: UIStackView - horizontal  {
-    [ emptyLeadingView,
-      recentTitleLabel,
-      clearTotalButton,
-      emptyTrailingView]
+ [ emptyLeadingView,
+ recentTitleLabel,
+ clearTotalButton,
+ emptyTrailingView]
  }
  
  informationStackView: UIStackView - vertical  {
-    [ informationLabel,
-      informationBorderLineView ]
+ [ informationLabel,
+ informationBorderLineView ]
  }
  
  autoSaveContenstStackView: UIStackView - Horizontal {
-    [ autoSaveLeadingEmptyView,
-      autoSaveButton,
-      autoSaveTrailingEmptyView ]
+ [ autoSaveLeadingEmptyView,
+ autoSaveButton,
+ autoSaveTrailingEmptyView ]
  }
  
  autoSaveStackView: UIStackView - vertical {
-    [ autoSaveTopEmptyView,
-      autoSaveContenstStackView ]
+ [ autoSaveTopEmptyView,
+ autoSaveContenstStackView ]
  }
  
  stackView: UIStackView - vertical {
-    [ headerStackView,
-      informationStackView,
-      tableView,
-      autoSaveStackView]
+ [ headerStackView,
+ informationStackView,
+ tableView,
+ autoSaveStackView]
  }
  
  */
@@ -43,15 +43,17 @@ final class RecentSearchView: UIView {
     // MARK: - VIew
     private let emptyLeadingView: UIView = {
         let view: UIView = UIView()
+        view.setContentHuggingPriority(.required, for: .horizontal)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     private let recentTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.title2
         label.text = "최근 검색"
         label.textColor = SwiftGenColors.black.color
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -62,11 +64,13 @@ final class RecentSearchView: UIView {
         button.titleLabel?.font = UIFont.Pretendard.body2
         button.setTitleColor(SwiftGenColors.gray3.color, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return button
     }()
-
+    
     private let emptyTrailingView: UIView = {
         let view: UIView = UIView()
+        view.setContentHuggingPriority(.required, for: .horizontal)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -84,6 +88,7 @@ final class RecentSearchView: UIView {
     private let informationBorderLineView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = SwiftGenColors.gray4.color
+        view.setContentCompressionResistancePriority(.required, for: .vertical)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -151,6 +156,8 @@ final class RecentSearchView: UIView {
     let tableView: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.separatorStyle = .none
+        tableView.showsHorizontalScrollIndicator = false
+        tableView.showsVerticalScrollIndicator = false 
         tableView.backgroundColor = SwiftGenColors.white.color
         tableView.register(LeftLabelRightButtonTableCell.self, forCellReuseIdentifier: LeftLabelRightButtonTableCell.reuseIdentifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -177,33 +184,40 @@ final class RecentSearchView: UIView {
             tableView,
             autoSaveStackView
         ])
-        
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
     // MARK: - Properties
+    var recentSearchDataViewModel: RecentSearchDataViewModelProtocol
+    
     private let emptyViewWidth: CGFloat = 18
     private let autoSaveEmptyViewWidth: CGFloat = 30
     private let informationLabelHeight: CGFloat = 147
     private var tableViewHeightConstraint: NSLayoutConstraint?
     private let autoSaveStackViewHeight: CGFloat = 40
     
-    var isAutoSaveMode: Bool = true {
-        didSet {
-            autoSaveButton.setTitle(isAutoSaveMode ? "자동저장 끄기" : "자동저장 켜기", for: .normal)
-        }
-    }
+    var selectedIndexPathSubject: PublishSubject<String> = PublishSubject() 
+    var disposeBag: DisposeBag = DisposeBag()
     
-    // TODO: ⚠️ RecentSearchDataModel로 변경예정
-    var testData: [String] = (0..<5).map { _ in  String("활성화") }
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    // MARK: - Init
+    
+    /// 초기화하는 메서드며, 최근검색 데이터 모델을 주입한다.
+    /// - Parameter recentSearchDataViewModel: 필요한 최근검색 데이터 모델을 주입한다.
+    init(recentSearchDataViewModel: RecentSearchDataViewModelProtocol) {
+        self.recentSearchDataViewModel = recentSearchDataViewModel
+        super.init(frame: .zero)
         setupView()
+        setupTableView()
+        
+        subscribeViewModel()
+        subscribeClearButton()
+        subscribeAutoSaveButton()
     }
     
     required init?(coder: NSCoder) {
+        self.recentSearchDataViewModel = RecentSearchDataViewModel()
         super.init(coder: coder)
     }
     
@@ -211,7 +225,7 @@ final class RecentSearchView: UIView {
         // stackView안에서 tableView의 높이를 동적으로 관리하기 위함이다.
         tableViewHeightConstraint?.constant = tableView.contentSize.height
         layoutIfNeeded()
-        tableView.isScrollEnabled = tableView.bounds.height < tableView.contentSize.height
+        tableView.isScrollEnabled = floor(tableView.bounds.height) < floor(tableView.contentSize.height)
     }
     
     private func setupView() {
@@ -220,6 +234,11 @@ final class RecentSearchView: UIView {
         
         tableViewHeightConstraint = tableView.heightAnchor.constraint(lessThanOrEqualToConstant: 0)
         tableViewHeightConstraint?.isActive = true
+        tableViewHeightConstraint?.priority = .defaultLow
+        
+        let autoSaveStackViewConstraint = autoSaveStackView.heightAnchor.constraint(greaterThanOrEqualToConstant: autoSaveStackViewHeight)
+        autoSaveStackViewConstraint.priority = .defaultHigh
+        autoSaveStackViewConstraint.isActive = true
         
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -234,39 +253,8 @@ final class RecentSearchView: UIView {
             informationStackView.heightAnchor.constraint(equalToConstant: informationLabelHeight),
             informationBorderLineView.heightAnchor.constraint(equalToConstant: 0.5),
             autoSaveTopEmptyView.heightAnchor.constraint(equalToConstant: 5),
-            autoSaveStackView.heightAnchor.constraint(greaterThanOrEqualToConstant: autoSaveStackViewHeight)
+            
         ])
-        
-        tableView.dataSource = self
         informationStackView.isHidden = true
-    }
-    
-    /// 최근 검색어 내역이 없거나, 검색어 저장 기능이 꺼져있는 경우를 표시하기 위해 업데이트하는 메서드다
-    func updateInformationLabel() {
-        if isAutoSaveMode {
-            informationStackView.isHidden = !testData.isEmpty
-            tableView.isHidden = testData.isEmpty
-            informationLabel.text = "최근 검색어 내역이 없습니다"
-        } else {
-            informationStackView.isHidden = false
-            informationLabel.text = "검색어 저장 기능이 꺼져 있습니다"
-            tableView.isHidden = true
-        }
-    }
-}
-
-extension RecentSearchView: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        testData.count
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: LeftLabelRightButtonTableCell.reuseIdentifier, for: indexPath) as? LeftLabelRightButtonTableCell else { return UITableViewCell() }
-        cell.updateLeftLabelTitle(testData[indexPath.row])
-        return cell
     }
 }

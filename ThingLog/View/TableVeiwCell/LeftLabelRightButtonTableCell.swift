@@ -4,7 +4,7 @@
 //
 //  Created by hyunsu on 2021/10/03.
 //
-
+import RxSwift
 import UIKit
 /* 구조
  contentsStackView: UIStackView  {
@@ -92,6 +92,12 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
     private let rightButtonWidth: CGFloat = 40
     private let paddingConstraint: CGFloat = 16
     private let leadingEmptyViewWidth: CGFloat = 10
+    var disposeBag: DisposeBag = DisposeBag()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
