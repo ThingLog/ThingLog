@@ -24,6 +24,7 @@ final class CameraButtonCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "0/10"
         label.font = UIFont.Pretendard.caption
+        label.textColor = SwiftGenColors.black.color
         label.sizeToFit()
         label.setContentHuggingPriority(.required, for: .vertical)
         return label
