@@ -12,22 +12,46 @@ import RxSwift
 /// recentSearchData를 susbscribe하여 손쉽게 tableView를 reload, update하도록 한다.
 class RecentSearchDataViewModel: RecentSearchDataViewModelProtocol {
     lazy var recentSearchDataSubject: BehaviorSubject<[String]> = BehaviorSubject(value: _recentSearchData )
+    lazy var isAutoSaveModeSubject: BehaviorSubject<Bool> = BehaviorSubject(value: _isAutoSaveMode)
     
+    var isRecentSearchDataEmpty: Bool {
+        _recentSearchData.isEmpty
+    }
+    
+    var isAutoSaveMode: Bool {
+        _isAutoSaveMode
+    }
+    
+    private var _isAutoSaveMode: Bool = true {
+        didSet {
+            // 변경되면 UserDefaults를 갱신하고, Subject에 주입한다.
+            UserDefaults.standard.setValue(_isAutoSaveMode,
+                                           forKey: UserDefaults.isAutoSaveMode)
+            isAutoSaveModeSubject.onNext(_isAutoSaveMode)
+        }
+    }
     private var _recentSearchData: [String] = [] {
         didSet {
             // 변경되면 UserDefaults를 갱신하고, Subject에 주입한다.
-            UserDefaults.standard.setValue(_recentSearchData, forKey: UserDefaults.recentSearchData)
+            UserDefaults.standard.setValue(_recentSearchData,
+                                           forKey: UserDefaults.recentSearchData)
             recentSearchDataSubject.onNext(_recentSearchData)
         }
     }
     
     private let maxSaveCount: Int = 20
     init() {
-        guard let recentDatas = UserDefaults.standard.value(forKey: UserDefaults.recentSearchData) as? [String] else {
+        if let recentDatas: [String] = UserDefaults.standard.value(forKey: UserDefaults.recentSearchData) as? [String] {
+            _recentSearchData = recentDatas
+        } else {
             _recentSearchData = []
-            return
         }
-        _recentSearchData = recentDatas
+        
+        if let isAutoSaveMode: Bool = UserDefaults.standard.value(forKey: UserDefaults.isAutoSaveMode) as? Bool {
+            _isAutoSaveMode = isAutoSaveMode
+        } else {
+            _isAutoSaveMode = true
+        }
     }
     
     /// 새로운 최근검색어를 추가한다.
@@ -57,5 +81,9 @@ class RecentSearchDataViewModel: RecentSearchDataViewModelProtocol {
     
     func removeAll() {
         _recentSearchData = []
+    }
+    
+    func changeAutoSaveMode(isAuto: Bool) {
+        _isAutoSaveMode = isAuto
     }
 }

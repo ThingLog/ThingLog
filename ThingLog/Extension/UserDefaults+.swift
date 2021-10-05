@@ -12,4 +12,5 @@ extension UserDefaults {
     static var userOneLineIntroduction: String { "userOneLineIntroduction" }
     static var isAutomatedDarkMode: String { "isAutomatedDarkMode" }
     static var recentSearchData: String { "recentSearchData" }
+    static var isAutoSaveMode: String { "isAutoSaveMode" }
 }
