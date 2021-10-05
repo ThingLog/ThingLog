@@ -49,23 +49,34 @@ final class ThumbnailCell: UICollectionViewCell {
 
 extension ThumbnailCell {
     private func setupView() {
-        contentView.clipsToBounds = false
         closeButton.layer.cornerRadius = closeButtonWidth / 2
 
-        contentView.addSubview(imageView)
-        contentView.addSubview(closeButton)
+        let containerView: UIView = {
+            let view: UIView = UIView()
+            view.translatesAutoresizingMaskIntoConstraints = false
+            return view
+        }()
+
+        containerView.addSubview(imageView)
+        containerView.addSubview(closeButton)
+        contentView.addSubview(containerView)
 
         NSLayoutConstraint.activate([
+            // containerView
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             // imageView
-            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: closeButtonWidth / 2),
+            imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -(closeButtonWidth / 2)),
+            imageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
             // closeButton
             closeButton.widthAnchor.constraint(equalToConstant: closeButtonWidth),
             closeButton.heightAnchor.constraint(equalTo: closeButton.widthAnchor),
-            closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: closeButtonWidth / 2),
-            closeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: -(closeButtonWidth / 2))
+            closeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            closeButton.topAnchor.constraint(equalTo: containerView.topAnchor)
         ])
     }
 
