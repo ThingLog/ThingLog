@@ -33,6 +33,7 @@ extension Post {
         entity.identifier = identifier
         entity.title = title
         entity.price = Int16(price)
+        entity.createDate = Date()
         entity.purchasePlace = purchasePlace
         entity.contents = contents
         entity.giftGiver = giftGiver
