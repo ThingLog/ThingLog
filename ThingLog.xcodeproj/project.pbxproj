@@ -83,6 +83,10 @@
 		DBA0F8192709A79A009553FC /* ThingLogRecentSearchDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0F8182709A79A009553FC /* ThingLogRecentSearchDataTests.swift */; };
 		DBA0F81C2709B390009553FC /* LeftLabelRightButtonTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0F81B2709B390009553FC /* LeftLabelRightButtonTableCell.swift */; };
 		DBA0F81E2709BD41009553FC /* RecentSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0F81D2709BD41009553FC /* RecentSearchView.swift */; };
+		DBA0F820270AF0A4009553FC /* ResultCollectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0F81F270AF0A4009553FC /* ResultCollectionSection.swift */; };
+		DBA0F822270AF656009553FC /* ContentsDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0F821270AF656009553FC /* ContentsDetailCollectionViewCell.swift */; };
+		DBA0F825270B07D8009553FC /* LeftLabelRightButtonHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0F824270B07D8009553FC /* LeftLabelRightButtonHeaderView.swift */; };
+		DBA0F829270B26A0009553FC /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0F828270B26A0009553FC /* SearchResultsViewController.swift */; };
 		DBA1FD4526FB701C00F50DE5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DBA1FD4726FB701C00F50DE5 /* InfoPlist.strings */; };
 		DBAB64A426FCC2C5006D95ED /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A526F5F281009F5C0A /* Coordinator.swift */; };
 		DBAB64A526FCC2F8006D95ED /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */; };
@@ -218,6 +222,10 @@
 		DBA0F8182709A79A009553FC /* ThingLogRecentSearchDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogRecentSearchDataTests.swift; sourceTree = "<group>"; };
 		DBA0F81B2709B390009553FC /* LeftLabelRightButtonTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftLabelRightButtonTableCell.swift; sourceTree = "<group>"; };
 		DBA0F81D2709BD41009553FC /* RecentSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchView.swift; sourceTree = "<group>"; };
+		DBA0F81F270AF0A4009553FC /* ResultCollectionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCollectionSection.swift; sourceTree = "<group>"; };
+		DBA0F821270AF656009553FC /* ContentsDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		DBA0F824270B07D8009553FC /* LeftLabelRightButtonHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftLabelRightButtonHeaderView.swift; sourceTree = "<group>"; };
+		DBA0F828270B26A0009553FC /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		DBA1FD3C26FB6F1D00F50DE5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		DBA1FD4626FB701C00F50DE5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DBA1FD4826FB701F00F50DE5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -367,6 +375,7 @@
 				DBD5454627032B1C00063C98 /* FilterType.swift */,
 				DBD5454827032BAA00063C98 /* TopCategoryType.swift */,
 				876243DF2708701B00BDA1DC /* WriteType.swift */,
+				DBA0F81F270AF0A4009553FC /* ResultCollectionSection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -427,6 +436,7 @@
 				DBD2244A27085DFB004C5184 /* SearchViewController.swift */,
 				87BB17A62709898F0088B847 /* WriteViewController.swift */,
 				87BB17AC27098F480088B847 /* WriteViewController+setup.swift */,
+				DBA0F828270B26A0009553FC /* SearchResultsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -445,6 +455,7 @@
 		DB7C04E626FB1990009F5C0A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DBA0F823270B079B009553FC /* HeaderView */,
 				DBA0F81A2709B37C009553FC /* TableVeiwCell */,
 				DB7C04E726FB199A009F5C0A /* CollectionViewCell */,
 				DB7C04ED26FB1ACE009F5C0A /* ContentsTabView.swift */,
@@ -474,6 +485,7 @@
 				DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */,
 				87DAEB1A270BEAE50038C487 /* CameraButtonCell.swift */,
 				87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */,
+				DBA0F821270AF656009553FC /* ContentsDetailCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -496,6 +508,14 @@
 				DBA0F81B2709B390009553FC /* LeftLabelRightButtonTableCell.swift */,
 			);
 			path = TableVeiwCell;
+			sourceTree = "<group>";
+		};
+		DBA0F823270B079B009553FC /* HeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				DBA0F824270B07D8009553FC /* LeftLabelRightButtonHeaderView.swift */,
+			);
+			path = HeaderView;
 			sourceTree = "<group>";
 		};
 		DBAE8E9126FDAE7500F536AD /* SwiftGen */ = {
@@ -738,6 +758,7 @@
 				DBD2244727085671004C5184 /* CategoryViewController+subscribe.swift in Sources */,
 				DB7C04EE26FB1ACE009F5C0A /* ContentsTabView.swift in Sources */,
 				DB7C04F426FB1F45009F5C0A /* BoughtContentsCollectionViewController.swift in Sources */,
+				DBA0F820270AF0A4009553FC /* ResultCollectionSection.swift in Sources */,
 				DB331DAA26FDD00A00A629F5 /* ImageAssets.swift in Sources */,
 				876243E02708701B00BDA1DC /* WriteType.swift in Sources */,
 				DBD5454727032B1C00063C98 /* FilterType.swift in Sources */,
@@ -772,12 +793,14 @@
 				DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */,
 				876C157927044BA0000C1C84 /* RepositoryError.swift in Sources */,
 				DB8BF6792705D25700FD5FDB /* LogoView.swift in Sources */,
+				DBA0F829270B26A0009553FC /* SearchResultsViewController.swift in Sources */,
 				87078B5B26EA44B5007AE242 /* ThingLog.xcdatamodeld in Sources */,
 				873EC00926D39055003C3525 /* AppDelegate.swift in Sources */,
 				87DAEB1B270BEAE50038C487 /* CameraButtonCell.swift in Sources */,
 				DBD2244B27085DFB004C5184 /* SearchViewController.swift in Sources */,
 				DB7C04C726F9E693009F5C0A /* UserInformationViewModel.swift in Sources */,
 				DB8BF6832706DA7900FD5FDB /* CategoryView.swift in Sources */,
+				DBA0F825270B07D8009553FC /* LeftLabelRightButtonHeaderView.swift in Sources */,
 				873EC00B26D39055003C3525 /* SceneDelegate.swift in Sources */,
 				87BB17AD27098F480088B847 /* WriteViewController+setup.swift in Sources */,
 				8736B3F426FDD55E000433E1 /* UIFont+.swift in Sources */,
@@ -787,6 +810,7 @@
 				DB331DAB26FDD00A00A629F5 /* Fonts.swift in Sources */,
 				8736B3E526FCBA77000433E1 /* RatingEntity+.swift in Sources */,
 				87F2188626FB5DFB00C3FBCA /* Post.swift in Sources */,
+				DBA0F822270AF656009553FC /* ContentsDetailCollectionViewCell.swift in Sources */,
 				8736B3EF26FDC1AD000433E1 /* Comment.swift in Sources */,
 				8736B3E326FCB9F3000433E1 /* Rating.swift in Sources */,
 				87BB17AB27098D760088B847 /* WriteViewModel.swift in Sources */,
