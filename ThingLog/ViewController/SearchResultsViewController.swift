@@ -73,7 +73,8 @@ extension SearchResultsViewController: UICollectionViewDataSource, UICollectionV
                 return UICollectionReusableView()
             }
             
-            headerView.updateTitle(title: ResultCollectionSection.init(rawValue: indexPath.section)?.headerTitle)
+            headerView.updateTitle(title: ResultCollectionSection.init(rawValue: indexPath.section)?.headerTitle,
+                                   subTitle: "10 건")
             return headerView
         } else {
             return UICollectionReusableView()

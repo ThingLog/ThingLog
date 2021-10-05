@@ -18,11 +18,20 @@ final class SearchViewController: UIViewController {
         return customTextField
     }()
     
-    private var recentSearchView: RecentSearchView = {
-        let tableView: RecentSearchView = RecentSearchView()
+    private lazy var recentSearchView: RecentSearchView = {
+        let tableView: RecentSearchView = RecentSearchView(recentSearchDataViewModel: recentSearchDataViewModel)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    
+    private let containerView: UIView = {
+        let containerView: UIView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        return containerView
+    }()
+    
+    // MARK: - Properties
+    private let recentSearchDataViewModel: RecentSearchDataViewModel = RecentSearchDataViewModel()
     
     // 검색결과 에따른 물건리스트가 나오고 있는지 판별하기 위한 프로퍼티
     private var isShowingResults: Bool = false
@@ -32,10 +41,16 @@ final class SearchViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = SwiftGenColors.white.color
         setupNavigationBar()
+        setupContainerView()
         setupRecentSearchView()
         
         subscribeBackButton()
-        subscribeRecentSearchView()
+        subscribeTableViewSelectIndex()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        recentSearchView.layoutSubviews()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -43,15 +58,27 @@ final class SearchViewController: UIViewController {
         searchTextField.endEditing(true)
     }
     
-    private func setupRecentSearchView() {
+    // MARK: - Setup
+    private func setupContainerView() {
         let safeLayout: UILayoutGuide = view.safeAreaLayoutGuide
-        view.addSubview(recentSearchView)
+        view.addSubview(containerView)
         
         NSLayoutConstraint.activate([
-            recentSearchView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor),
-            recentSearchView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor),
-            recentSearchView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor),
-            recentSearchView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 6)
+            containerView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor),
+            containerView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 6)
+        ])
+    }
+    
+    private func setupRecentSearchView() {
+        containerView.addSubview(recentSearchView)
+
+        NSLayoutConstraint.activate([
+            recentSearchView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            recentSearchView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            recentSearchView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            recentSearchView.topAnchor.constraint(equalTo: containerView.topAnchor)
         ])
     }
     
@@ -73,6 +100,7 @@ final class SearchViewController: UIViewController {
         searchTextField.delegate = self
     }
     
+    // MARK: - Subscribe
     /// CustomTextField에 BackButton을 subscribe 한다.
     private func subscribeBackButton() {
         searchTextField.backButton.rx.tap.bind { [weak self] in
@@ -89,22 +117,12 @@ final class SearchViewController: UIViewController {
         .disposed(by: disposeBag)
     }
     
-    private func subscribeRecentSearchView() {
-        // 자동저장 끄기 버튼 subscribe
-        recentSearchView.autoSaveButton.rx.tap
-            .bind { [weak self] in
-                self?.recentSearchView.isAutoSaveMode.toggle()
-                self?.recentSearchView.updateInformationLabel()
-                self?.recentSearchView.layoutSubviews()
-            }
-            .disposed(by: disposeBag)
-        
-        // 전체 삭제 버튼 subscribe
-        recentSearchView.clearTotalButton.rx.tap
-            .bind { [weak self] in
-                self?.recentSearchView.testData = []
-                self?.recentSearchView.informationStackView.isHidden = false
-                self?.recentSearchView.tableView.isHidden = true
+    /// 최근검색어의 테이블뷰 셀을 선택했을 때 subscribe합니다.
+    private func subscribeTableViewSelectIndex() {
+        recentSearchView.selectedIndexPathSubject
+            .bind { [weak self] keyword in
+                // TODO: - ⚠️ 검색결과로 이동하기 위한 로직 추가
+                print(keyword)
             }
             .disposed(by: disposeBag)
     }
@@ -117,15 +135,9 @@ extension SearchViewController: SearchTextFieldDelegate {
     }
     
     func searchTextFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if recentSearchView.isAutoSaveMode {
-            recentSearchView.testData.append(textField.text!)
-            recentSearchView.tableView.reloadData()
-            recentSearchView.tableView.isHidden = false
-            recentSearchView.informationStackView.isHidden = true
-            recentSearchView.layoutSubviews()
-            recentSearchView.layoutSubviews()
+        if recentSearchDataViewModel.isAutoSaveMode {
+            recentSearchDataViewModel.add(textField.text!)
         }
         return true
     }
 }
-

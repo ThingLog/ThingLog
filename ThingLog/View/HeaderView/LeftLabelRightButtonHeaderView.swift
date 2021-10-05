@@ -52,6 +52,7 @@ class LeftLabelRightButtonHeaderView: UICollectionReusableView {
         button.semanticContentAttribute = .forceRightToLeft
         button.translatesAutoresizingMaskIntoConstraints = false
         button.imageView?.contentMode = .scaleAspectFit
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return button
     }()
     
