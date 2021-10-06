@@ -19,6 +19,7 @@ struct Post {
     var giftGiver: String?
     var isLike: Bool
     var deleteDate: Date?
+    let createDate: Date
 
     // MARK: Relationship
     var postType: PostType
@@ -26,6 +27,22 @@ struct Post {
     var categories: [Category]
     var attachments: [Attachment]
     var comments: [Comment]?
+
+    init(title: String, price: Int, purchasePlace: String?, contents: String?, giftGiver: String?, postType: PostType, rating: Rating, categories: [Category], attachments: [Attachment], comments: [Comment]? = nil, deleteDate: Date? = nil, isLike: Bool = false, createDate: Date = Date()) {
+        self.title = title
+        self.price = price
+        self.purchasePlace = purchasePlace
+        self.contents = contents
+        self.giftGiver = giftGiver
+        self.deleteDate = deleteDate
+        self.isLike = isLike
+        self.createDate = createDate
+        self.postType = postType
+        self.rating = rating
+        self.categories = categories
+        self.attachments = attachments
+        self.comments = comments
+    }
 }
 
 extension Post {
@@ -34,7 +51,7 @@ extension Post {
         entity.identifier = identifier
         entity.title = title
         entity.price = Int16(price)
-        entity.createDate = Date()
+        entity.createDate = createDate
         entity.purchasePlace = purchasePlace
         entity.contents = contents
         entity.giftGiver = giftGiver
