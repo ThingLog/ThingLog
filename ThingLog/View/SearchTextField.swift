@@ -68,6 +68,8 @@ final class SearchTextField: UIView {
         textField.textColor = SwiftGenColors.gray3.color
         textField.clearButtonMode = .whileEditing
         if let button: UIButton = textField.value(forKey: "clearButton") as? UIButton {
+            let templateImage: UIImage? = button.imageView?.image?.withRenderingMode(.alwaysTemplate)
+            button.setImage(templateImage, for: .normal)
             button.tintColor = SwiftGenColors.gray3.color
         }
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -131,9 +133,8 @@ final class SearchTextField: UIView {
         textFieldView.layer.cornerRadius = bounds.height / 2
     }
     
-    func changeBackButton(isBackMode: Bool) {
-        backButton.setImage(isBackMode ? backImage : nil, for: .normal)
-        backButton.setTitle(isBackMode ? "" : "닫기", for: .normal)
+    func changeTextField(by text: String) {
+        textField.text = text
     }
 }
 
@@ -151,6 +152,7 @@ extension SearchTextField {
         
         setupTextFieldView()
         setupTextField()
+        setupToolBar()
     }
     
     // textField와 searchIcon을 담은 iConTextFieldStackView를 TextFieldView에 추가한다.
@@ -166,6 +168,30 @@ extension SearchTextField {
             searchIcon.heightAnchor.constraint(equalToConstant: iconHeight),
             searchIcon.widthAnchor.constraint(equalTo: searchIcon.heightAnchor)
         ])
+    }
+    
+    func setupToolBar() {
+        let keyboardToolBar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        keyboardToolBar.barStyle = .default
+        let cancleButton: UIButton = {
+            let button: UIButton = UIButton()
+            button.titleLabel?.font = UIFont.Pretendard.title2
+            button.setTitle("취소", for: .normal)
+            button.setTitleColor(SwiftGenColors.systemBlue.color, for: .normal)
+            button.addTarget(self, action: #selector(cancleKeyboard), for: .touchUpInside)
+            return button
+        }()
+        let cancleBarButton: UIBarButtonItem = UIBarButtonItem(customView: cancleButton)
+        cancleBarButton.tintColor = SwiftGenColors.black.color
+        keyboardToolBar.barTintColor = SwiftGenColors.gray6.color
+        keyboardToolBar.items = [cancleBarButton, UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
+        keyboardToolBar.sizeToFit()
+        textField.inputAccessoryView = keyboardToolBar
+    }
+    
+    @objc
+    private func cancleKeyboard() {
+        textField.endEditing(true)
     }
     
     private func setupTextField() {

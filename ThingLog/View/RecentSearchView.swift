@@ -32,6 +32,7 @@ import UIKit
  
  stackView: UIStackView - vertical {
  [ headerStackView,
+ emptyHeightView,
  informationStackView,
  tableView,
  autoSaveStackView]
@@ -177,9 +178,16 @@ final class RecentSearchView: UIView {
         return stackView
     }()
     
+    private let emptyHeightView: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var stackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [
             headerStackView,
+            emptyHeightView,
             informationStackView,
             tableView,
             autoSaveStackView
@@ -197,6 +205,8 @@ final class RecentSearchView: UIView {
     private let informationLabelHeight: CGFloat = 147
     private var tableViewHeightConstraint: NSLayoutConstraint?
     private let autoSaveStackViewHeight: CGFloat = 40
+    private let headerStackViewHeight: CGFloat = 44
+    private let emptyHeightViewHeight: CGFloat = 14
     
     var selectedIndexPathSubject: PublishSubject<String> = PublishSubject() 
     var disposeBag: DisposeBag = DisposeBag()
@@ -249,6 +259,8 @@ final class RecentSearchView: UIView {
             emptyLeadingView.widthAnchor.constraint(equalToConstant: emptyViewWidth),
             emptyTrailingView.widthAnchor.constraint(equalToConstant: emptyViewWidth),
             
+            emptyHeightView.heightAnchor.constraint(equalToConstant: emptyHeightViewHeight),
+            headerStackView.heightAnchor.constraint(equalToConstant: headerStackViewHeight),
             autoSaveLeadingEmptyView.widthAnchor.constraint(equalToConstant: autoSaveEmptyViewWidth),
             informationStackView.heightAnchor.constraint(equalToConstant: informationLabelHeight),
             informationBorderLineView.heightAnchor.constraint(equalToConstant: 0.5),

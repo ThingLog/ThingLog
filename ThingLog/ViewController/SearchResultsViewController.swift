@@ -8,7 +8,7 @@ import UIKit
 
 /// 검색홈에서 검색결과에 CollectionView형태로 보여주는 Controller다.
 class SearchResultsViewController: UIViewController {
-    var collectionView: UICollectionView = {
+    let collectionView: UICollectionView = {
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: ResultCollectionSection.resultsCollectionViewLayout())
         collectionView.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier)
         collectionView.register(ContentsDetailCollectionViewCell.self, forCellWithReuseIdentifier: ContentsDetailCollectionViewCell.reuseIdentifier)
@@ -18,11 +18,30 @@ class SearchResultsViewController: UIViewController {
         return collectionView
     }()
     
+    lazy var totalFilterView: CategoryFilterView = {
+        let view: CategoryFilterView = CategoryFilterView(superView: view)
+        view.updateResultTotalLabel(by: "검색결과 " + "15" + "건")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // TODO: ⚠️ NSFetchResultsController가질 예정 
+    private let totalFilterViewHeight: CGFloat = 44.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTotalFilterView()
         setupCollectionView()
+    }
+    
+    func setupTotalFilterView() {
+        view.addSubview(totalFilterView)
+        NSLayoutConstraint.activate([
+            totalFilterView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            totalFilterView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            totalFilterView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            totalFilterView.heightAnchor.constraint(equalToConstant: totalFilterViewHeight)
+        ])
     }
     
     func setupCollectionView() {
@@ -30,7 +49,7 @@ class SearchResultsViewController: UIViewController {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: totalFilterView.bottomAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         collectionView.dataSource = self
