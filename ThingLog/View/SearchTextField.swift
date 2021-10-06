@@ -131,9 +131,8 @@ final class SearchTextField: UIView {
         textFieldView.layer.cornerRadius = bounds.height / 2
     }
     
-    func changeBackButton(isBackMode: Bool) {
-        backButton.setImage(isBackMode ? backImage : nil, for: .normal)
-        backButton.setTitle(isBackMode ? "" : "닫기", for: .normal)
+    func changeTextField(by text: String) {
+        textField.text = text
     }
 }
 
