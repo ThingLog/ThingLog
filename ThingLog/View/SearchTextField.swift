@@ -68,6 +68,8 @@ final class SearchTextField: UIView {
         textField.textColor = SwiftGenColors.gray3.color
         textField.clearButtonMode = .whileEditing
         if let button: UIButton = textField.value(forKey: "clearButton") as? UIButton {
+            let templateImage: UIImage? = button.imageView?.image?.withRenderingMode(.alwaysTemplate)
+            button.setImage(templateImage, for: .normal)
             button.tintColor = SwiftGenColors.gray3.color
         }
         textField.translatesAutoresizingMaskIntoConstraints = false
