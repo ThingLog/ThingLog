@@ -151,6 +151,7 @@ extension SearchTextField {
         
         setupTextFieldView()
         setupTextField()
+        setupToolBar()
     }
     
     // textField와 searchIcon을 담은 iConTextFieldStackView를 TextFieldView에 추가한다.
@@ -166,6 +167,22 @@ extension SearchTextField {
             searchIcon.heightAnchor.constraint(equalToConstant: iconHeight),
             searchIcon.widthAnchor.constraint(equalTo: searchIcon.heightAnchor)
         ])
+    }
+    
+    func setupToolBar() {
+        let numberToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        numberToolbar.barStyle = .default
+        let action: UIBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancleKeyboard))
+        action.tintColor = SwiftGenColors.black.color
+        numberToolbar.barTintColor = SwiftGenColors.gray6.color
+        numberToolbar.items = [action]
+        numberToolbar.sizeToFit()
+        textField.inputAccessoryView = numberToolbar
+    }
+    
+    @objc
+    private func cancleKeyboard() {
+        textField.endEditing(true)
     }
     
     private func setupTextField() {
