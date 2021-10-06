@@ -26,6 +26,7 @@ internal enum SwiftGenColors {
   internal static let gray4 = ColorSwiftGen(name: "gray4")
   internal static let gray5 = ColorSwiftGen(name: "gray5")
   internal static let gray6 = ColorSwiftGen(name: "gray6")
+  internal static let systemBlue = ColorSwiftGen(name: "systemBlue")
   internal static let white = ColorSwiftGen(name: "white")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

@@ -177,23 +177,37 @@ final class SearchViewController: UIViewController {
 
 extension SearchViewController: SearchTextFieldDelegate {
     func searchTextFieldDidChangeSelection(_ textField: UITextField) {
-        guard let text = textField.text,
-              !text.isEmpty,
-              !text.filter({ $0 != " " }).isEmpty else {
+        guard let text: String = checkTextField(textField.text) else {
             showSearchResultsViewController(false)
             isShowingResults = false
             return
         }
+        print(text)
         isShowingResults = true
     }
     
     func searchTextFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if recentSearchDataViewModel.isAutoSaveMode {
-            recentSearchDataViewModel.add(textField.text!)
+        if let text: String = checkTextField(textField.text) {
+            if recentSearchDataViewModel.isAutoSaveMode {
+                recentSearchDataViewModel.add(textField.text!)
+            }
+            // TODO: - ⚠️ 키워드를 통해서 NSFetchRequest + NSFetchResultsController 생성하여 업데이트
+            print(text)
+            showSearchResultsViewController(true)
         }
-        // TODO: - ⚠️ 키워드를 통해서 NSFetchRequest + NSFetchResultsController 생성하여 업데이트
-        showSearchResultsViewController(true)
         hideKeyboard()
         return true
+    }
+    
+    /// 공백만 포함된 경우를 체크한다.
+    /// - Parameter text: String 옵셔널 타입을 주입한다.
+    /// - Returns: 공백일 경우는 nil, 그렇지 않은 경우는 String이 된다.
+    func checkTextField(_ text: String? ) -> String? {
+        guard let text = text,
+              !text.isEmpty,
+              !text.filter({ $0 != " " }).isEmpty else {
+            return nil
+        }
+        return text
     }
 }

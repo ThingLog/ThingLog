@@ -88,7 +88,7 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
     }()
     
     // MARK: - Properties
-    private let emptyViewHeight: CGFloat = 9
+    private let emptyViewHeight: CGFloat = 11
     private let rightButtonWidth: CGFloat = 40
     private let paddingConstraint: CGFloat = 16
     private let leadingEmptyViewWidth: CGFloat = 10

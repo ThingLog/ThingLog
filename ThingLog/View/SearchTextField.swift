@@ -171,14 +171,22 @@ extension SearchTextField {
     }
     
     func setupToolBar() {
-        let numberToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
-        numberToolbar.barStyle = .default
-        let action: UIBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(cancleKeyboard))
-        action.tintColor = SwiftGenColors.black.color
-        numberToolbar.barTintColor = SwiftGenColors.gray6.color
-        numberToolbar.items = [action]
-        numberToolbar.sizeToFit()
-        textField.inputAccessoryView = numberToolbar
+        let keyboardToolBar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        keyboardToolBar.barStyle = .default
+        let cancleButton: UIButton = {
+            let button: UIButton = UIButton()
+            button.titleLabel?.font = UIFont.Pretendard.title2
+            button.setTitle("취소", for: .normal)
+            button.setTitleColor(SwiftGenColors.systemBlue.color, for: .normal)
+            button.addTarget(self, action: #selector(cancleKeyboard), for: .touchUpInside)
+            return button
+        }()
+        let cancleBarButton: UIBarButtonItem = UIBarButtonItem(customView: cancleButton)
+        cancleBarButton.tintColor = SwiftGenColors.black.color
+        keyboardToolBar.barTintColor = SwiftGenColors.gray6.color
+        keyboardToolBar.items = [cancleBarButton, UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
+        keyboardToolBar.sizeToFit()
+        textField.inputAccessoryView = keyboardToolBar
     }
     
     @objc
