@@ -27,6 +27,7 @@
         <relationship name="attachment" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Attachment" inverseName="imageData" inverseEntity="Attachment"/>
     </entity>
     <entity name="Post" representedClassName="PostEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="categoryCount" optional="YES" attributeType="Integer 64" derived="YES" derivationExpression="categories.@count" usesScalarValueType="YES"/>
         <attribute name="contents" optional="YES" attributeType="String"/>
         <attribute name="createDate" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="deleteDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -59,7 +60,7 @@
         <element name="Category" positionX="-7669.173278808594" positionY="-4417.294006347656" width="128" height="74"/>
         <element name="Comment" positionX="-6921.718536376953" positionY="-4342.518676757812" width="128" height="103"/>
         <element name="ImageData" positionX="-7058.579223632812" positionY="-4674.90251159668" width="128" height="73"/>
-        <element name="Post" positionX="-7234.070434570312" positionY="-4447.350189208984" width="128" height="253"/>
+        <element name="Post" positionX="-7234.070434570312" positionY="-4447.350189208984" width="128" height="254"/>
         <element name="PostType" positionX="-7670.684143066406" positionY="-4199.678771972656" width="128" height="103"/>
         <element name="Rating" positionX="-6921.7568359375" positionY="-4211.929016113281" width="128" height="88"/>
     </elements>
