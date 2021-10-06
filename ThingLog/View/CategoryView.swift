@@ -99,6 +99,7 @@ final class CategoryView: UIView {
         self.categoryFilterView = {
             let categoryFilterView: CategoryFilterView = CategoryFilterView(superView: superView)
             categoryFilterView.setContentCompressionResistancePriority(.required, for: .vertical)
+            categoryFilterView.updateDropBoxView(.total, superView: superView)
             return categoryFilterView
         }()
         
@@ -108,6 +109,7 @@ final class CategoryView: UIView {
     
     required init?(coder: NSCoder) {
         self.categoryFilterView = CategoryFilterView(superView: UIView())
+        
         self.superView = UIView()
         super.init(coder: coder)
     }
