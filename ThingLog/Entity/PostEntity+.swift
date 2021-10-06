@@ -26,5 +26,6 @@ extension PostEntity {
             let categoryEntity: CategoryEntity = category.toEntity(in: context)
             self.addToCategories(categoryEntity)
         }
+        self.deleteDate = post.deleteDate
     }
 }

@@ -18,6 +18,7 @@ struct Post {
     var contents: String?
     var giftGiver: String?
     var isLike: Bool
+    var deleteDate: Date?
 
     // MARK: Relationship
     var postType: PostType
