@@ -317,6 +317,85 @@ class ThingLogPostRepositoryTests: XCTestCase {
             }
         }
     }
+
+    func test_PostType을_변경할_수_있다() {
+        // given: 필요한 모든 값 설정
+        clearAllCoreData()
+        guard let originalImage: UIImage = UIImage(systemName: "heart.fill") else {
+            fatalError("Not Found system Image")
+        }
+        var categories: [ThingLog.Category] = [
+            .init(title: "Software"),
+            .init(title: "Hardware"),
+            .init(title: "Life")
+        ]
+        var newPost1: Post = Post(title: "Test Post",
+                                 price: 30_500,
+                                 purchasePlace: "Market",
+                                 contents: "Test Contents...",
+                                 isLike: false,
+                                 postType: .init(isDelete: false, type: .bought),
+                                 rating: .init(score: .excellent),
+                                 categories: categories,
+                                 attachments: [Attachment(thumbnail: originalImage,
+                                                          imageData: .init(originalImage: originalImage))],
+                                 comments: nil)
+        var newPost2: Post = Post(title: "Test Post",
+                                 price: 30_500,
+                                 purchasePlace: "Market",
+                                 contents: "Test Contents...",
+                                 isLike: false,
+                                 postType: .init(isDelete: false, type: .bought),
+                                 rating: .init(score: .excellent),
+                                 categories: categories,
+                                 attachments: [Attachment(thumbnail: originalImage,
+                                                          imageData: .init(originalImage: originalImage))],
+                                 comments: nil)
+        create(newPost1)
+        create(newPost2)
+        let context: NSManagedObjectContext = CoreDataStack.shared.mainContext
+        lazy var fetchedResultsController: NSFetchedResultsController<PostTypeEntity> = {
+            let fetchRequest: NSFetchRequest<PostTypeEntity> = PostTypeEntity.fetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "type", ascending: false)]
+
+            let controller: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                                    managedObjectContext: context,
+                                                                                    sectionNameKeyPath: nil, cacheName: nil)
+            do {
+                try controller.performFetch()
+            } catch {
+                let nserror: NSError = error as NSError
+                fatalError("###\(#function): Failed to performFetch: \(nserror), \(nserror.userInfo)")
+            }
+            return controller
+        }()
+        print("😎 before update : ", fetchedResultsController.fetchedObjects)
+
+        // when: 테스트중인 코드 실행
+        newPost1.postType = .init(isDelete: false, type: .gift)
+        timeout(15) { exp in
+            postRepository.update(newPost1) { updateResult in
+                switch updateResult {
+                case .success(_):
+                    self.postRepository.get(withIdentifier: newPost1.identifier) { getResult in
+                        exp.fulfill()
+                        switch getResult {
+                        case .success(let postEntity):
+                            // then: 예상한 결과 확인
+                            print("⚡️ \(fetchedResultsController.fetchedObjects)")
+                            XCTAssertEqual(fetchedResultsController.fetchedObjects?.count == 2,
+                                           postEntity.postType?.pageType == PageType.gift)
+                            print("🥰", fetchedResultsController.fetchedObjects?.count)
+                        case .failure(let error):
+                            XCTFail(error.localizedDescription)
+                        }
+                    }
+                case .failure(let error):
+                    XCTFail(error.localizedDescription)
+                }
+            }
+        }
+    }
 }
 
 extension ThingLogPostRepositoryTests {
@@ -386,6 +465,35 @@ extension XCTestCase {
         waitForExpectations(timeout: timeout) { error in
             guard let error = error else { return }
             XCTFail("Timeout error: \(error)")
+        }
+    }
+
+    func clearAllCoreData() {
+        let persistentContainer: NSPersistentContainer = {
+            let container: NSPersistentContainer = NSPersistentContainer(name: "ThingLog")
+
+            container.loadPersistentStores { _, error in
+                if let error: NSError = error as NSError? {
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+            }
+            return container
+        }()
+        let entities = persistentContainer.managedObjectModel.entities
+        entities.compactMap({ $0.name }).forEach(clearDeepObjectEntity)
+    }
+
+    func clearDeepObjectEntity(_ entity: String) {
+        let context = CoreDataStack.shared.mainContext
+
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+        } catch {
+            print ("There was an error")
         }
     }
 }
