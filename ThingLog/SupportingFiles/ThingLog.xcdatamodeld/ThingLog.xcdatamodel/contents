@@ -20,7 +20,7 @@
         <attribute name="contents" attributeType="String"/>
         <attribute name="createDate" attributeType="Date" defaultDateTimeInterval="654164520" usesScalarValueType="NO"/>
         <attribute name="identifier" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="post" maxCount="1" deletionRule="Deny" destinationEntity="Post" inverseName="comments" inverseEntity="Post"/>
+        <relationship name="post" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="comments" inverseEntity="Post"/>
     </entity>
     <entity name="ImageData" representedClassName="ImageDataEntity" syncable="YES" codeGenerationType="class">
         <attribute name="originalImage" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
@@ -39,14 +39,14 @@
         <relationship name="attachments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Attachment" inverseName="post" inverseEntity="Attachment"/>
         <relationship name="categories" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="posts" inverseEntity="Category"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Comment" inverseName="post" inverseEntity="Comment"/>
-        <relationship name="postType" maxCount="1" deletionRule="Cascade" destinationEntity="PostType" inverseName="post" inverseEntity="PostType"/>
+        <relationship name="postType" maxCount="1" deletionRule="Nullify" destinationEntity="PostType" inverseName="post" inverseEntity="PostType"/>
         <relationship name="rating" maxCount="1" deletionRule="Cascade" destinationEntity="Rating" inverseName="post" inverseEntity="Rating"/>
     </entity>
     <entity name="PostType" representedClassName="PostTypeEntity" syncable="YES" codeGenerationType="class">
         <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isDelete" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="post" toMany="YES" deletionRule="Deny" destinationEntity="Post" inverseName="postType" inverseEntity="Post"/>
+        <relationship name="post" toMany="YES" deletionRule="Nullify" destinationEntity="Post" inverseName="postType" inverseEntity="Post"/>
     </entity>
     <entity name="Rating" representedClassName="RatingEntity" syncable="YES" codeGenerationType="class">
         <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
