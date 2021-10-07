@@ -49,7 +49,6 @@ extension CategoryViewController {
     /// 하단에 스크롤 가능한 컬렉션뷰를 나타내는 BaseViewController를 셋업한다.
     func setupContentsController() {
         addChild(contentsViewController)
-        contentsViewController.setupBaseCollectionView()
         
         contentsContainerView.addSubview(contentsViewController.view)
         let contentsView: UIView = contentsViewController.view

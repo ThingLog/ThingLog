@@ -9,9 +9,9 @@ import RxSwift
 import UIKit
 
 class ContentsPageViewController: UIPageViewController {
-    let controllers: [UIViewController] = [BoughtContentsCollectionViewController(),
-                                           WishContentsCollectionViewController(),
-                                           GiftContentsCollectionViewController()]
+    let controllers: [UIViewController] = [BoughtContentsCollectionViewController(willHideFilterView: true),
+                                           WishContentsCollectionViewController(willHideFilterView: true),
+                                           GiftContentsCollectionViewController(willHideFilterView: true)]
     
     var currentPageIndexSubject: PublishSubject = PublishSubject<Int>()
     var currentScrollContentsOffsetYSubject: PublishSubject = PublishSubject<CGFloat>()
