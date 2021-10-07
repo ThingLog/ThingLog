@@ -99,6 +99,9 @@
 		DBAE8E9826FDB3EE00F536AD /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */; };
 		DBAE8EB126FDBEAE00F536AD /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */; };
 		DBAE8EBB26FDCA7B00F536AD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */; };
+		DBC45A9C270F24B800AB9499 /* DummyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC45A9B270F24B800AB9499 /* DummyProtocol.swift */; };
+		DBC45A9E270F25E400AB9499 /* ThingLogPostCategoryRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC45A9D270F25E400AB9499 /* ThingLogPostCategoryRequestTests.swift */; };
+		DBC45AA0270F266800AB9499 /* ThingLogPostSearchRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC45A9F270F266800AB9499 /* ThingLogPostSearchRequestTests.swift */; };
 		DBD2244527085651004C5184 /* CategoryViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2244427085651004C5184 /* CategoryViewController+setup.swift */; };
 		DBD2244727085671004C5184 /* CategoryViewController+subscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2244627085671004C5184 /* CategoryViewController+subscribe.swift */; };
 		DBD2244B27085DFB004C5184 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2244A27085DFB004C5184 /* SearchViewController.swift */; };
@@ -241,6 +244,9 @@
 		DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		DBC45A9B270F24B800AB9499 /* DummyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyProtocol.swift; sourceTree = "<group>"; };
+		DBC45A9D270F25E400AB9499 /* ThingLogPostCategoryRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogPostCategoryRequestTests.swift; sourceTree = "<group>"; };
+		DBC45A9F270F266800AB9499 /* ThingLogPostSearchRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogPostSearchRequestTests.swift; sourceTree = "<group>"; };
 		DBD2244427085651004C5184 /* CategoryViewController+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryViewController+setup.swift"; sourceTree = "<group>"; };
 		DBD2244627085671004C5184 /* CategoryViewController+subscribe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryViewController+subscribe.swift"; sourceTree = "<group>"; };
 		DBD2244A27085DFB004C5184 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -330,6 +336,9 @@
 				87BEF07A2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift */,
 				DBA0F8182709A79A009553FC /* ThingLogRecentSearchDataTests.swift */,
 				873EC02426D39057003C3525 /* Info.plist */,
+				DBC45A9B270F24B800AB9499 /* DummyProtocol.swift */,
+				DBC45A9D270F25E400AB9499 /* ThingLogPostCategoryRequestTests.swift */,
+				DBC45A9F270F266800AB9499 /* ThingLogPostSearchRequestTests.swift */,
 			);
 			path = ThingLogTests;
 			sourceTree = "<group>";
@@ -845,8 +854,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				873EC02326D39057003C3525 /* ThingLogTests.swift in Sources */,
+				DBC45A9E270F25E400AB9499 /* ThingLogPostCategoryRequestTests.swift in Sources */,
 				87BEF07B2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift in Sources */,
+				DBC45AA0270F266800AB9499 /* ThingLogPostSearchRequestTests.swift in Sources */,
 				DBA0F8192709A79A009553FC /* ThingLogRecentSearchDataTests.swift in Sources */,
+				DBC45A9C270F24B800AB9499 /* DummyProtocol.swift in Sources */,
 				87F2188326FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
