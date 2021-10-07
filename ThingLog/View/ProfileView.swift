@@ -91,6 +91,9 @@ final class ProfileView: UIView {
     private let emptyWidth: CGFloat = 44
     private let emptyHeight: CGFloat = 16
     
+    // 배지이미지를 저장하기 위한 프로퍼티
+    var badgeImage: UIImage?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -121,5 +124,21 @@ final class ProfileView: UIView {
             
             emptyVerticalView.heightAnchor.constraint(equalToConstant: emptyHeight)
         ])
+    }
+}
+
+extension ProfileView {
+    /// 배지 이미지 뷰를 변경하기 위한 메서드다
+    /// - Parameter image: 변경하고자 하는 이미지를 주입한다.
+    func updateBadgeView(image: UIImage?) {
+        badgeImage = image
+        userBadgeImageView.image = badgeImage
+    }
+    
+    /// 배지 이미지 뷰를 숨기거나 나타내기 위한 메소드다.
+    /// - Parameter bool: 숨기고자 하는 경우는 true, 그렇지 않다면 false를 넣는다.
+    func hideBadgeView(_ bool: Bool) {
+        userBadgeImageView.backgroundColor = bool ? .clear : SwiftGenColors.gray6.color
+        userBadgeImageView.image = bool ? nil : badgeImage
     }
 }
