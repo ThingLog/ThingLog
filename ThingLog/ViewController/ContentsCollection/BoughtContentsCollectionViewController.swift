@@ -11,7 +11,6 @@ class BoughtContentsCollectionViewController: BaseContentsCollectionViewControll
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBaseCollectionView()
     }
     
     override func viewDidAppear(_ animated: Bool) {

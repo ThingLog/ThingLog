@@ -37,7 +37,7 @@ final class CategoryViewController: UIViewController {
         return button
     }()
     
-    let contentsViewController: BaseContentsCollectionViewController = BaseContentsCollectionViewController()
+    let contentsViewController: BaseContentsCollectionViewController = BaseContentsCollectionViewController(willHideFilterView: true)
     
     var viewModel: CategoryViewModel = CategoryViewModel()
     

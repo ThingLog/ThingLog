@@ -1,19 +1,19 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
+      "filename" : "chevronDown.png",
       "scale" : "1x",
-      "filename" : "chevronDown.png"
+      "idiom" : "universal"
     },
     {
-      "idiom" : "universal",
       "filename" : "chevronDown@2x.png",
+      "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "scale" : "3x",
       "idiom" : "universal",
-      "filename" : "chevronDown@3x.png"
+      "filename" : "chevronDown@3x.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

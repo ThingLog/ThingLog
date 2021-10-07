@@ -70,7 +70,7 @@ final class SearchViewController: UIViewController {
             containerView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor),
             containerView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor),
-            containerView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 6)
+            containerView.topAnchor.constraint(equalTo: safeLayout.topAnchor)
         ])
     }
     
@@ -123,14 +123,7 @@ final class SearchViewController: UIViewController {
     /// CustomTextField에 BackButton을 subscribe 한다.
     private func subscribeBackButton() {
         searchTextField.backButton.rx.tap.bind { [weak self] in
-            if self?.isShowingResults == true {
-                // 최근 검색어 리스트로 변경.
-                self?.hideKeyboard()
-                self?.showSearchResultsViewController(false)
-            } else {
-                // 뒤로 간다 ( 모아보기 화면으로 간다 )
-                self?.coordinator?.back()
-            }
+            self?.coordinator?.back()
         }
         .disposed(by: disposeBag)
     }
@@ -167,6 +160,7 @@ final class SearchViewController: UIViewController {
     /// - Parameter bool: 보여주고자 할때는 true, 그렇지 않다면 false를 넣는다.
     private func showSearchResultsViewController(_ bool: Bool ) {
         searchResultsViewController.view.isHidden = !bool
+        searchResultsViewController.isAllContentsShowing = false 
         isShowingResults = bool
     }
     

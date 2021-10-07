@@ -206,7 +206,7 @@ final class RecentSearchView: UIView {
     private var tableViewHeightConstraint: NSLayoutConstraint?
     private let autoSaveStackViewHeight: CGFloat = 40
     private let headerStackViewHeight: CGFloat = 44
-    private let emptyHeightViewHeight: CGFloat = 14
+    private let emptyHeightViewHeight: CGFloat = 11
     
     var selectedIndexPathSubject: PublishSubject<String> = PublishSubject() 
     var disposeBag: DisposeBag = DisposeBag()
