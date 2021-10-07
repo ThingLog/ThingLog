@@ -4,7 +4,7 @@
 //
 //  Created by hyunsu on 2021/10/04.
 //
-
+import RxSwift
 import UIKit
 
 /// 좌측에 titleLabel과 subTitleLabel을, 우측에 button을 가지는 Collection HeaderView다.
@@ -66,6 +66,11 @@ class LeftLabelRightButtonHeaderView: UICollectionReusableView {
     }()
     
     private let paddingLeadingTrailingConstraint: CGFloat = 18
+    var disposeBag: DisposeBag = DisposeBag()
+    
+    override func prepareForReuse() {
+        disposeBag = DisposeBag()
+    }
     
     // MARK: - Init
     override init(frame: CGRect) {

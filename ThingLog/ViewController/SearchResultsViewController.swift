@@ -25,13 +25,27 @@ class SearchResultsViewController: UIViewController {
         return view
     }()
     
+    private var resultsGridViewContorller: BaseContentsCollectionViewController = {
+        let controller: BaseContentsCollectionViewController = BaseContentsCollectionViewController(willHideFilterView: false)
+        controller.view.translatesAutoresizingMaskIntoConstraints = false
+        return controller
+    }()
+    
     // TODO: ⚠️ NSFetchResultsController가질 예정 
     private let totalFilterViewHeight: CGFloat = 44.0
+    
+    // 모두보기 눌러서 allContentsViewContorller가 보여지고 있는지 확인하는 프로퍼티
+    var isAllCntentsShowing: Bool = false {
+        didSet {
+            resultsGridViewContorller.view.isHidden = !isAllCntentsShowing
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTotalFilterView()
         setupCollectionView()
+        setupAllContentsViewContorller()
     }
     
     func setupTotalFilterView() {
@@ -53,6 +67,19 @@ class SearchResultsViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         collectionView.dataSource = self
+    }
+    
+    func setupAllContentsViewContorller() {
+        addChild(resultsGridViewContorller)
+        let allView: UIView = resultsGridViewContorller.view
+        view.addSubview(allView)
+        NSLayoutConstraint.activate([
+            allView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            allView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            allView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            allView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        allView.isHidden = true
     }
 }
 
@@ -92,8 +119,16 @@ extension SearchResultsViewController: UICollectionViewDataSource, UICollectionV
                 return UICollectionReusableView()
             }
             
-            headerView.updateTitle(title: ResultCollectionSection.init(rawValue: indexPath.section)?.headerTitle,
+            let headerTitle: String? = ResultCollectionSection.init(rawValue: indexPath.section)?.headerTitle
+            headerView.updateTitle(title: headerTitle,
                                    subTitle: "10 건")
+            headerView.rightButton.rx.tap
+                .bind { [weak self] in
+                    self?.isAllCntentsShowing = true
+                    self?.resultsGridViewContorller.resultsFilterView.updateTitleLabel(by: headerTitle)
+                    // TODO: ⚠️ 데이터 바인딩 하기
+                }
+                .disposed(by: headerView.disposeBag)
             return headerView
         } else {
             return UICollectionReusableView()

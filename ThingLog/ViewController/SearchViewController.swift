@@ -124,6 +124,10 @@ final class SearchViewController: UIViewController {
     private func subscribeBackButton() {
         searchTextField.backButton.rx.tap.bind { [weak self] in
             if self?.isShowingResults == true {
+                if self?.searchResultsViewController.isAllCntentsShowing == true {
+                    self?.searchResultsViewController.isAllCntentsShowing.toggle()
+                    return
+                }
                 // 최근 검색어 리스트로 변경.
                 self?.hideKeyboard()
                 self?.showSearchResultsViewController(false)
