@@ -32,9 +32,9 @@ class SearchResultsViewController: UIViewController {
     private let totalFilterViewHeight: CGFloat = 44.0
     
     // 모두보기 눌러서 allContentsViewContorller가 보여지고 있는지 확인하는 프로퍼티
-    var isAllCntentsShowing: Bool = false {
+    var isAllContentsShowing: Bool = false {
         didSet {
-            showGridCollectionView(isAllCntentsShowing)
+            showGridCollectionView(isAllContentsShowing)
         }
     }
     
@@ -133,9 +133,9 @@ extension SearchResultsViewController: UICollectionViewDataSource, UICollectionV
             // 모두보기 선택시, 글내용인 경우만 PostContentsCollectionViewController를 보여준다.
             headerView.rightButton.rx.tap
                 .bind { [weak self] in
-                    self?.isAllCntentsShowing = false
+                    self?.isAllContentsShowing = false
                     self?.selectedCollectionViewController = section == .postContents ? PostContentsCollectionViewController(willHideFilterView: false) : BaseContentsCollectionViewController(willHideFilterView: false)
-                    self?.isAllCntentsShowing = true
+                    self?.isAllContentsShowing = true
                     self?.selectedCollectionViewController?.resultsFilterView.updateTitleLabel(by: headerTitle)
                     // TODO: ⚠️ 데이터 바인딩 하기
                 }
