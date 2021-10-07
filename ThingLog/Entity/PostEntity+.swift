@@ -11,7 +11,7 @@ import Foundation
 extension PostEntity {
     func update(with post: Post, in context: NSManagedObjectContext) {
         self.title = post.title
-        self.price = Int16(post.price)
+        self.price = Int64(post.price)
         self.purchasePlace = post.purchasePlace
         self.contents = post.contents
         self.giftGiver = post.giftGiver
@@ -26,5 +26,6 @@ extension PostEntity {
             let categoryEntity: CategoryEntity = category.toEntity(in: context)
             self.addToCategories(categoryEntity)
         }
+        self.deleteDate = post.deleteDate
     }
 }

@@ -30,17 +30,17 @@ class ThingLogPostRepositoryTests: XCTestCase {
         guard let originalImage: UIImage = UIImage(systemName: "heart.fill") else {
             fatalError("Not Found system Image")
         }
-        let newPost: Post = Post(title: "Test Post",
-                                 price: 30_500,
-                                 purchasePlace: "Market",
-                                 contents: "Test Contents...",
-                                 isLike: false,
-                                 postType: .init(isDelete: false, type: .bought),
-                                 rating: .init(score: .excellent),
-                                 categories: [Category(title: "Software"), Category(title: "Computer")],
-                                 attachments: [Attachment(thumbnail: originalImage,
-                                                          imageData: .init(originalImage: originalImage))],
-                                 comments: nil)
+
+        let newPost: Post = .init(title: "Test Post",
+                                  price: 30_500,
+                                  purchasePlace: "Market",
+                                  contents: "Test Contents...",
+                                  giftGiver: nil,
+                                  postType: .init(isDelete: false, type: .bought),
+                                  rating: .init(score: .excellent),
+                                  categories: [Category(title: "Software"), Category(title: "Computer")],
+                                  attachments: [Attachment(thumbnail: originalImage,
+                                                           imageData: .init(originalImage: originalImage))])
 
         // when: 테스트중인 코드 실행
         timeout(3) { exp in
@@ -142,17 +142,17 @@ class ThingLogPostRepositoryTests: XCTestCase {
         guard let originalImage: UIImage = UIImage(systemName: "heart.fill") else {
             fatalError("Not Found system Image")
         }
-        let newPost: Post = Post(title: "Find Post",
-                                 price: 10_500,
-                                 purchasePlace: "Market",
-                                 contents: "Test Contents...",
-                                 isLike: false,
-                                 postType: .init(isDelete: false, type: .bought),
-                                 rating: .init(score: .excellent),
-                                 categories: [Category(title: "Software")],
-                                 attachments: [Attachment(thumbnail: originalImage,
-                                                          imageData: .init(originalImage: originalImage))],
-                                 comments: nil)
+
+        let newPost: Post = .init(title: "Test Post",
+                                  price: 30_500,
+                                  purchasePlace: "Market",
+                                  contents: "Test Contents...",
+                                  giftGiver: nil,
+                                  postType: .init(isDelete: false, type: .bought),
+                                  rating: .init(score: .excellent),
+                                  categories: [Category(title: "Software")],
+                                  attachments: [Attachment(thumbnail: originalImage,
+                                                           imageData: .init(originalImage: originalImage))])
 
         timeout(5) { exp in
             postRepository.create(newPost) { result in
@@ -183,17 +183,16 @@ class ThingLogPostRepositoryTests: XCTestCase {
             fatalError("Not Found system Image")
         }
         let updateTitle: String = "Update Post"
-        var newPost: Post = Post(title: "Test Post",
-                                 price: 30_500,
-                                 purchasePlace: "Market",
-                                 contents: "Test Contents...",
-                                 isLike: false,
-                                 postType: .init(isDelete: false, type: .bought),
-                                 rating: .init(score: .excellent),
-                                 categories: [Category(title: "Software")],
-                                 attachments: [Attachment(thumbnail: originalImage,
-                                                          imageData: .init(originalImage: originalImage))],
-                                 comments: nil)
+        var newPost: Post = .init(title: "Test Post",
+                                  price: 30_500,
+                                  purchasePlace: "Market",
+                                  contents: "Test Contents...",
+                                  giftGiver: nil,
+                                  postType: .init(isDelete: false, type: .bought),
+                                  rating: .init(score: .excellent),
+                                  categories: [Category(title: "Software")],
+                                  attachments: [Attachment(thumbnail: originalImage,
+                                                           imageData: .init(originalImage: originalImage))])
 
         create(newPost)
 
@@ -226,17 +225,16 @@ class ThingLogPostRepositoryTests: XCTestCase {
         guard let originalImage: UIImage = UIImage(systemName: "heart.fill") else {
             fatalError("Not Found system Image")
         }
-        var newPost: Post = Post(title: "Test Post",
-                                 price: 30_500,
-                                 purchasePlace: "Market",
-                                 contents: "Test Contents...",
-                                 isLike: false,
-                                 postType: .init(isDelete: false, type: .bought),
-                                 rating: .init(score: .excellent),
-                                 categories: [Category(title: "Software")],
-                                 attachments: [Attachment(thumbnail: originalImage,
-                                                          imageData: .init(originalImage: originalImage))],
-                                 comments: nil)
+        var newPost: Post = .init(title: "Test Post",
+                                  price: 30_500,
+                                  purchasePlace: "Market",
+                                  contents: "Test Contents...",
+                                  giftGiver: nil,
+                                  postType: .init(isDelete: false, type: .bought),
+                                  rating: .init(score: .excellent),
+                                  categories: [Category(title: "Software")],
+                                  attachments: [Attachment(thumbnail: originalImage,
+                                                           imageData: .init(originalImage: originalImage))])
         let newCategory: ThingLog.Category = .init(title: "Hardware")
         create(newPost)
         newPost.categories = [newCategory]
@@ -279,17 +277,16 @@ class ThingLogPostRepositoryTests: XCTestCase {
             .init(title: "Hardware"),
             .init(title: "Life")
         ]
-        var newPost: Post = Post(title: "Test Post",
-                                 price: 30_500,
-                                 purchasePlace: "Market",
-                                 contents: "Test Contents...",
-                                 isLike: false,
-                                 postType: .init(isDelete: false, type: .bought),
-                                 rating: .init(score: .excellent),
-                                 categories: categories,
-                                 attachments: [Attachment(thumbnail: originalImage,
-                                                          imageData: .init(originalImage: originalImage))],
-                                 comments: nil)
+        var newPost: Post = .init(title: "Test Post",
+                                  price: 30_500,
+                                  purchasePlace: "Market",
+                                  contents: "Test Contents...",
+                                  giftGiver: nil,
+                                  postType: .init(isDelete: false, type: .bought),
+                                  rating: .init(score: .excellent),
+                                  categories: categories,
+                                  attachments: [Attachment(thumbnail: originalImage,
+                                                           imageData: .init(originalImage: originalImage))])
         create(newPost)
 
         // when: 테스트중인 코드 실행
@@ -314,6 +311,87 @@ class ThingLogPostRepositoryTests: XCTestCase {
                 case .failure(let error):
                     XCTFail(error.localizedDescription)
                 }
+            }
+        }
+    }
+
+    func test_Post의_PostType을_변경하면_PostType_객체도_변경된다() {
+        // given: 필요한 모든 값 설정
+        clearAllCoreData()
+        guard let originalImage: UIImage = UIImage(systemName: "heart.fill") else {
+            fatalError("Not Found system Image")
+        }
+        var categories: [ThingLog.Category] = [
+            .init(title: "Software"),
+            .init(title: "Hardware"),
+            .init(title: "Life")
+        ]
+        var newPost: Post = .init(title: "Test Post",
+                                  price: 30_500,
+                                  purchasePlace: "Market",
+                                  contents: "Test Contents...",
+                                  giftGiver: nil,
+                                  postType: .init(isDelete: false, type: .bought),
+                                  rating: .init(score: .excellent),
+                                  categories: categories,
+                                  attachments: [Attachment(thumbnail: originalImage,
+                                                           imageData: .init(originalImage: originalImage))])
+        create(newPost)
+
+        // when: 테스트중인 코드 실행
+        newPost.postType = .init(isDelete: false, type: .gift)
+        timeout(15) { exp in
+            postRepository.update(newPost) { updateResult in
+                switch updateResult {
+                case .success(_):
+                    self.postRepository.get(withIdentifier: newPost.identifier) { getResult in
+                        exp.fulfill()
+                        switch getResult {
+                        case .success(let postEntity):
+                            // then: 예상한 결과 확인
+                            let context: NSManagedObjectContext = CoreDataStack.shared.mainContext
+                            let request: NSFetchRequest = PostTypeEntity.fetchRequest()
+                            context.performAndWait {
+                                do {
+                                    let postTypeEntities: [PostTypeEntity] = try request.execute()
+                                    XCTAssertEqual(postTypeEntities.count == 1,
+                                                   postEntity.postType?.pageType == PageType.gift)
+                                } catch {
+                                    XCTFail(error.localizedDescription)
+                                }
+                            }
+                        case .failure(let error):
+                            XCTFail(error.localizedDescription)
+                        }
+                    }
+                case .failure(let error):
+                    XCTFail(error.localizedDescription)
+                }
+            }
+        }
+    }
+
+    func test_Post를_삭제하면_PostType도_삭제된다() {
+        // given: 필요한 모든 값 설정
+        clearAllCoreData()
+        guard let newPost = dummyPost(1).first else {
+            XCTFail("Failed create dummy post")
+            return
+        }
+        create(newPost)
+
+        // when: 테스트중인 코드 실행
+        deleteAllEntity()
+        // then: 예상한 결과 확인
+        let context: NSManagedObjectContext = CoreDataStack.shared.mainContext
+        let request: NSFetchRequest = PostTypeEntity.fetchRequest()
+        context.performAndWait {
+            do {
+                let postTypeEntities: [PostTypeEntity] = try request.execute()
+                XCTAssertEqual(postTypeEntities.count == 0,
+                               postRepository.fetchedResultsController.fetchedObjects?.count == 0)
+            } catch {
+                XCTFail(error.localizedDescription)
             }
         }
     }
@@ -361,17 +439,16 @@ extension ThingLogPostRepositoryTests {
         }
 
         let newPosts: [Post] = (1...count).map { i in
-            let newPost: Post = Post(title: "Test Post \(i)",
-                                     price: 500 * i,
-                                     purchasePlace: "Market",
-                                     contents: "Test Contents \(i)...",
-                                     isLike: false,
-                                     postType: .init(isDelete: false, type: .bought),
-                                     rating: .init(score: .excellent),
-                                     categories: [Category(title: "Software")],
-                                     attachments: [Attachment(thumbnail: originalImage,
-                                                              imageData: .init(originalImage: originalImage))],
-                                     comments: nil)
+            let newPost: Post = .init(title: "Test Post \(i)",
+                                      price: 500 * i,
+                                      purchasePlace: "Market",
+                                      contents: "Test Contents \(i)...",
+                                      giftGiver: nil,
+                                      postType: .init(isDelete: false, type: .bought),
+                                      rating: .init(score: .excellent),
+                                      categories: [Category(title: "Software")],
+                                      attachments: [Attachment(thumbnail: originalImage,
+                                                               imageData: .init(originalImage: originalImage))])
             return newPost
         }
         return newPosts
@@ -386,6 +463,35 @@ extension XCTestCase {
         waitForExpectations(timeout: timeout) { error in
             guard let error = error else { return }
             XCTFail("Timeout error: \(error)")
+        }
+    }
+
+    func clearAllCoreData() {
+        let persistentContainer: NSPersistentContainer = {
+            let container: NSPersistentContainer = NSPersistentContainer(name: "ThingLog")
+
+            container.loadPersistentStores { _, error in
+                if let error: NSError = error as NSError? {
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+            }
+            return container
+        }()
+        let entities = persistentContainer.managedObjectModel.entities
+        entities.compactMap({ $0.name }).forEach(clearAllObjectEntity)
+    }
+
+    func clearAllObjectEntity(_ entity: String) {
+        let context = CoreDataStack.shared.mainContext
+
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+        } catch {
+            print ("There was an error")
         }
     }
 }

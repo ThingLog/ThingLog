@@ -21,6 +21,9 @@ struct PostType {
 }
 
 extension PostType {
+    /// PostType Entity를 반환한다.
+    /// - Parameter context: PostType Entity를 생성하기 위한 NSManagedObjectContext
+    /// - Returns: PostType Entity를 생성한다.
     func toEntity(in context: NSManagedObjectContext) -> PostTypeEntity {
         let entity: PostTypeEntity = PostTypeEntity(context: context)
         entity.identifier = identifier
