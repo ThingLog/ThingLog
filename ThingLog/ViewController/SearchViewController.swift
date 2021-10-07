@@ -70,7 +70,7 @@ final class SearchViewController: UIViewController {
             containerView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor),
             containerView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor),
-            containerView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 6)
+            containerView.topAnchor.constraint(equalTo: safeLayout.topAnchor)
         ])
     }
     
@@ -171,6 +171,7 @@ final class SearchViewController: UIViewController {
     /// - Parameter bool: 보여주고자 할때는 true, 그렇지 않다면 false를 넣는다.
     private func showSearchResultsViewController(_ bool: Bool ) {
         searchResultsViewController.view.isHidden = !bool
+        searchResultsViewController.isAllCntentsShowing = false 
         isShowingResults = bool
     }
     
