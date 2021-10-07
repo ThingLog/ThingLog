@@ -50,7 +50,7 @@ extension Post {
         let entity: PostEntity = .init(context: context)
         entity.identifier = identifier
         entity.title = title
-        entity.price = Int16(price)
+        entity.price = Int64(price)
         entity.createDate = createDate
         entity.purchasePlace = purchasePlace
         entity.contents = contents
