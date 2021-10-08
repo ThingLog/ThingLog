@@ -66,7 +66,7 @@ class ThingLogPostCategoryRequestTests: XCTestCase, DummyProtocol {
             create($0)
         }
         // 제일 높은
-        let targetDate: Date = Date().day(by: 3)!
+        let targetDate: Date = Date().offset(3, byAdding: .day)!
         let targetCount: Int = posts.filter { $0.createDate == targetDate }.count
         
         let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()

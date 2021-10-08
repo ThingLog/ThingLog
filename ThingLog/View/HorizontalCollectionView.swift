@@ -4,7 +4,7 @@
 //
 //  Created by hyunsu on 2021/09/28.
 //
-
+import CoreData
 import RxSwift
 import UIKit
 
@@ -24,8 +24,14 @@ final class HorizontalCollectionView: UIView {
     }()
     
     // MARK: - Properties
-    // TODO: ⚠️ 추후에 Category 로 변경할 예정입니당  ( CategoryEntity의 객체 )
-    var categoryList: [String] = []
+    var fetchResultController: NSFetchedResultsController<CategoryEntity>? {
+        didSet {
+            fetchResultController?.delegate = self
+        }
+    }
+    // CoreData가 외부에서 변경될 때 호출하는 클로저다
+    var completionBlock: ((Int) -> Void)?
+    
     private var selectedIndexCell: IndexPath = IndexPath(item: 0, section: 0)
     private let buttonHeight: CGFloat = 26
     
@@ -33,7 +39,7 @@ final class HorizontalCollectionView: UIView {
     var categoryTitleSubject: PublishSubject<String> = PublishSubject()
     
     // 이를 통해 CollectionView Cell Size를 동적으로 관리한다. 
-    var isCollapse: Bool = false {
+    var isCollapse: Bool = true {
         didSet {
             // 같은 요청은 무시하기 위함
             if oldValue == isCollapse {
@@ -76,7 +82,7 @@ final class HorizontalCollectionView: UIView {
 
 extension HorizontalCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        categoryList.count
+        fetchResultController?.fetchedObjects?.count ?? 0
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -85,11 +91,15 @@ extension HorizontalCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoundButtonCollectionViewCell.reuseIdentifier, for: indexPath) as? RoundButtonCollectionViewCell else { return UICollectionViewCell() }
-        
+        guard let item = fetchResultController?.fetchedObjects else {
+            return cell
+        }
+    
         if selectedIndexCell == indexPath {
             cell.changeButtonColor(isSelected: true)
+            categoryTitleSubject.onNext(item[indexPath.row].title ?? "")
         }
-        cell.updateView(title: categoryList[indexPath.item], cornerRadius: buttonHeight / 2)
+        cell.updateView(title: item[indexPath.item].title ?? "", cornerRadius: buttonHeight / 2)
         
         return cell
     }
@@ -106,14 +116,31 @@ extension HorizontalCollectionView: UICollectionViewDelegate {
            let cell: RoundButtonCollectionViewCell = collectionView.cellForItem(at: selectedIndexCell) as? RoundButtonCollectionViewCell {
             cell.changeButtonColor(isSelected: false)
         }
+        
         selectedIndexCell = indexPath
-        categoryTitleSubject.onNext(categoryList[indexPath.row])
+        
+        guard let item = fetchResultController?.fetchedObjects else {
+            return
+        }
+        
+        categoryTitleSubject.onNext(item[indexPath.row].title ?? "")
+    }
+}
+
+extension HorizontalCollectionView: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        collectionView.reloadData()
+        completionBlock?(controller.fetchedObjects?.count ?? 0)
     }
 }
 
 extension HorizontalCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let item: String = categoryList[indexPath.row]
+        guard let categories = fetchResultController?.fetchedObjects else {
+            return CGSize(width: 0, height: 0)
+        }
+        
+        let item: String = categories[indexPath.row].title ?? ""
         var itemSize: CGSize = item.size(withAttributes: [
             NSAttributedString.Key.font: UIFont.Pretendard.body2
         ])

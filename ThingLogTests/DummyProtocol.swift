@@ -48,7 +48,7 @@ extension DummyProtocol {
                                                               imageData: .init(originalImage: originalImage))],
                                      comments: nil,
                                      isLike: [true,false].randomElement()!,
-                                     createDate: Date().day(by: i)!)
+                                     createDate: Date().offset(i, byAdding: .day)!)
             return newPost
         }.shuffled()
         return newPosts

@@ -5,6 +5,7 @@
 //  Created by hyunsu on 2021/09/21.
 //
 
+import CoreData
 import RxSwift
 import UIKit
 
@@ -27,6 +28,15 @@ class BaseContentsCollectionViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    // MARK: - Properties
+    var fetchResultController: NSFetchedResultsController<PostEntity>? {
+        didSet {
+            fetchResultController?.delegate = self
+        }
+    }
+    // CoreData가 외부에서 변경될 때 호출하는 클로저다
+    var completionBlock: ((Int) -> Void)?
     
     var scrollOffsetYSubject: PublishSubject = PublishSubject<CGFloat>()
     var disposeBag: DisposeBag = DisposeBag()
@@ -83,7 +93,7 @@ class BaseContentsCollectionViewController: UIViewController {
 
 extension BaseContentsCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        100
+        fetchResultController?.fetchedObjects?.count ?? 0
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -91,9 +101,25 @@ extension BaseContentsCollectionViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell: ContentsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsCollectionViewCell else  { return UICollectionViewCell() }
+        guard let cell: ContentsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath)as? ContentsCollectionViewCell else  {
+            return UICollectionViewCell()
+        }
+        
+        if let item: PostEntity = fetchResultController?.fetchedObjects?[indexPath.item],
+           let data: Data = (item.attachments?.allObjects as? [AttachmentEntity])?.first?.thumbnail {
+            cell.imageView.image = UIImage(data: data)
+            cell.updateView(item)
+        }
+        
         cell.backgroundColor = SwiftGenColors.gray6.color
         return cell
+    }
+}
+
+extension BaseContentsCollectionViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        collectionView.reloadData()
+        completionBlock?(controller.fetchedObjects?.count ?? 0)
     }
 }
 
