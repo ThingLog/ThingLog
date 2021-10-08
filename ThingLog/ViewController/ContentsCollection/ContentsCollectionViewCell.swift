@@ -15,7 +15,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         return imageview
     }()
     
-    let smallIconView: UIImageView = {
+    private let smallIconView: UIImageView = {
         let image: UIImage? = UIImage(systemName: "square.on.square.fill")
         let imageView: UIImageView = UIImageView(image: image)
         imageView.transform = CGAffineTransform(rotationAngle: .pi)

@@ -166,6 +166,7 @@ extension HomeViewController {
     func subscribePageViewControllerScrollOffset() {
         pageViewController.currentScrollContentsOffsetYSubject
             .subscribe(onNext: { [weak self] dist in
+                // 최상단으로 스크롤했을 때
                 if dist == -200 {
                     self?.profileView.hideBadgeView(false)
                 }

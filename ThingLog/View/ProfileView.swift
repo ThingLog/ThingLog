@@ -92,7 +92,7 @@ final class ProfileView: UIView {
     private let emptyHeight: CGFloat = 16
     
     // 배지이미지를 저장하기 위한 프로퍼티
-    var badgeImage: UIImage?
+    private var badgeImage: UIImage?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
