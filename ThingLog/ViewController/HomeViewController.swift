@@ -166,16 +166,23 @@ extension HomeViewController {
     func subscribePageViewControllerScrollOffset() {
         pageViewController.currentScrollContentsOffsetYSubject
             .subscribe(onNext: { [weak self] dist in
+                // 최상단으로 스크롤했을 때
+                if dist == -200 {
+                    self?.profileView.hideBadgeView(false)
+                }
                 UIView.animate(withDuration: 0.1) {
                     guard let currentConstant = self?.heightAnchorProfileView?.constant else { return }
                     var dist: CGFloat = dist
                     if dist >= 0 {
                         dist = max(currentConstant - dist, 0)
+                        self?.profileView.hideBadgeView(true)
                     } else {
                         dist = min(currentConstant - dist, self?.profileViewHeight ?? 44 + 24 + 16)
+                        if dist >= 44 {
+                            self?.profileView.hideBadgeView(false)
+                        }
                     }
                     self?.heightAnchorProfileView?.constant = dist
-                    self?.view.layoutIfNeeded()
                 }
             })
             .disposed(by: pageViewController.disposeBag)
@@ -192,7 +199,9 @@ extension HomeViewController {
                 } completion: { _ in
                     UIView.animate(withDuration: 0.3) {
                         self.heightAnchorProfileView?.constant = self.profileViewHeight
-                        self.contentsContainerView.layoutIfNeeded()
+                        self.view.layoutIfNeeded()
+                    } completion: { _ in
+                        self.profileView.hideBadgeView(false)
                     }
                 }
             }

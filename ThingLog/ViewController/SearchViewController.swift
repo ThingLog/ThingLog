@@ -30,6 +30,15 @@ final class SearchViewController: UIViewController {
         return containerView
     }()
     
+    // 검색결과가 없는 경우에 보여주는 뷰다
+    private let emptyView: EmptyResultsView = {
+        let view: EmptyResultsView = EmptyResultsView()
+        view.isHidden = true
+        view.backgroundColor = SwiftGenColors.white.color
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let searchResultsViewController: SearchResultsViewController = SearchResultsViewController()
     
     // MARK: - Properties
@@ -46,6 +55,7 @@ final class SearchViewController: UIViewController {
         setupContainerView()
         setupRecentSearchView()
         setupSearchResultsViewContorller()
+        setupEmptyView()
         
         subscribeBackButton()
         subscribeTableViewSelectIndex()
@@ -119,6 +129,17 @@ final class SearchViewController: UIViewController {
         searchTextField.delegate = self
     }
     
+    func setupEmptyView() {
+        view.addSubview(emptyView)
+        let safeLayout: UILayoutGuide = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            emptyView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor),
+            emptyView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor),
+            emptyView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor),
+            emptyView.topAnchor.constraint(equalTo: safeLayout.topAnchor)
+        ])
+    }
+    
     // MARK: - Subscribe
     /// CustomTextField에 BackButton을 subscribe 한다.
     private func subscribeBackButton() {
@@ -187,7 +208,9 @@ extension SearchViewController: SearchTextFieldDelegate {
             }
             // TODO: - ⚠️ 키워드를 통해서 NSFetchRequest + NSFetchResultsController 생성하여 업데이트
             print(text)
-            showSearchResultsViewController(true)
+            emptyView.isHidden = false
+            emptyView.updateTitle(text) // TODO: ⚠️ 테스트 
+//            showSearchResultsViewController(true)
         }
         hideKeyboard()
         return true

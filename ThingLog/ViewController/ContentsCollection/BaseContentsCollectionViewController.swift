@@ -29,6 +29,14 @@ class BaseContentsCollectionViewController: UIViewController {
         return view
     }()
     
+    // Post가 없는 경우에 보여주는 뷰다
+    var emptyView: EmptyPostView = {
+        let view: EmptyPostView = EmptyPostView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isHidden = true
+        return view
+    }()
+    
     // MARK: - Properties
     var fetchResultController: NSFetchedResultsController<PostEntity>? {
         didSet {
@@ -61,6 +69,7 @@ class BaseContentsCollectionViewController: UIViewController {
         view.backgroundColor = SwiftGenColors.white.color
         setupResultFilterView()
         setupBaseCollectionView()
+        setupEmptyView()
         
         // 드롭박스가 가장 상단에 나타나야하기 때문에 collectionView 세팅 이후에 추가해야한다. 
         resultsFilterView.updateDropBoxView(.total, superView: view)
@@ -89,11 +98,23 @@ class BaseContentsCollectionViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    func setupEmptyView() {
+        view.addSubview(emptyView)
+        NSLayoutConstraint.activate([
+            emptyView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            emptyView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            emptyView.topAnchor.constraint(equalTo: resultsFilterView.bottomAnchor),
+            emptyView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
 }
 
 extension BaseContentsCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        fetchResultController?.fetchedObjects?.count ?? 0
+        let numberOfItems: Int  = fetchResultController?.fetchedObjects?.count ?? 0
+        emptyView.isHidden = numberOfItems != 0
+        return numberOfItems
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
