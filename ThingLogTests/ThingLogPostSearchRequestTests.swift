@@ -100,7 +100,28 @@ class ThingLogPostSearchTests: XCTestCase, DummyProtocol {
     }
     
     func test_특정_선물준_사람으로_post들을_가져올_수_있다() {
+        let posts = dummyPost(20)
         
+        posts.forEach {
+            create($0)
+        }
+        
+        let targetGiver: String = "현수"
+        let targetCount: Int = posts.filter { $0.giftGiver == targetGiver }.count
+        
+        let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "giftGiver CONTAINS %@", targetGiver)
+        request.sortDescriptors = [NSSortDescriptor(key: "createDate", ascending: false)]
+        
+        timeout(0.3) { exp in
+            context.perform {
+                let list = try! request.execute()
+                exp.fulfill()
+                print(list.count, targetCount)
+                list.forEach { print($0.purchasePlace)}
+                XCTAssertTrue(list.count == targetCount)
+            }
+        }
     }
     
     func test_특정_구매처판매처로_post들을_가져올_수_있다() {

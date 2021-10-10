@@ -20,7 +20,7 @@ class ThingLogPostCategoryRequestTests: XCTestCase, DummyProtocol {
         deleteAllEntity()
     }
 
-    func test_년도와_9월로_Date타입으로_yyyMM_포멧으로는_만들_수_없다() {
+    func test_월이_한글자인_경우에_yyyyM_포멧이면_Date_타입을_만들_수_없다() {
         let year: String = "2021"
         let month: String = "9"
         let dateFormatter: DateFormatter = DateFormatter()
@@ -108,7 +108,7 @@ class ThingLogPostCategoryRequestTests: XCTestCase, DummyProtocol {
         }
     }
     
-    func test_특정_카테고리가_특정_문자열이_포함된_카테고리로_post들을_최신순으로_가져올_수_있다() throws {
+    func test_특정_문자열이_포함된_카테고리의_Post들을_최신순으로_가져올_수_있다() throws {
         let posts = dummyPost(10)
         
         posts.forEach {
