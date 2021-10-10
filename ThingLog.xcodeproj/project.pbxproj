@@ -65,6 +65,7 @@
 		DB3A5165270FFE0C003B529D /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3A5164270FFE0C003B529D /* String+.swift */; };
 		DB3A516927103B3E003B529D /* EmptyPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3A516827103B3E003B529D /* EmptyPostView.swift */; };
 		DB3A516B27103DC4003B529D /* EmptyResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3A516A27103DC4003B529D /* EmptyResultsView.swift */; };
+		DB69095D2712B5EB00BB54E4 /* ThingLogPostTypeRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69095C2712B5EB00BB54E4 /* ThingLogPostTypeRequestTest.swift */; };
 		DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */; };
 		DB7C04B226F87548009F5C0A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04B126F87548009F5C0A /* TabBarController.swift */; };
 		DB7C04B626F8782B009F5C0A /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04B526F8782B009F5C0A /* CategoryViewController.swift */; };
@@ -211,6 +212,7 @@
 		DB3A5164270FFE0C003B529D /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		DB3A516827103B3E003B529D /* EmptyPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPostView.swift; sourceTree = "<group>"; };
 		DB3A516A27103DC4003B529D /* EmptyResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyResultsView.swift; sourceTree = "<group>"; };
+		DB69095C2712B5EB00BB54E4 /* ThingLogPostTypeRequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogPostTypeRequestTest.swift; sourceTree = "<group>"; };
 		DB7C04A526F5F281009F5C0A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		DB7C04A926F5F308009F5C0A /* CategoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCoordinator.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 				DBC45A9B270F24B800AB9499 /* DummyProtocol.swift */,
 				DBC45A9D270F25E400AB9499 /* ThingLogPostCategoryRequestTests.swift */,
 				DBC45A9F270F266800AB9499 /* ThingLogPostSearchRequestTests.swift */,
+				DB69095C2712B5EB00BB54E4 /* ThingLogPostTypeRequestTest.swift */,
 			);
 			path = ThingLogTests;
 			sourceTree = "<group>";
@@ -868,6 +871,7 @@
 				873EC02326D39057003C3525 /* ThingLogTests.swift in Sources */,
 				DBC45A9E270F25E400AB9499 /* ThingLogPostCategoryRequestTests.swift in Sources */,
 				87BEF07B2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift in Sources */,
+				DB69095D2712B5EB00BB54E4 /* ThingLogPostTypeRequestTest.swift in Sources */,
 				DBC45AA0270F266800AB9499 /* ThingLogPostSearchRequestTests.swift in Sources */,
 				DBA0F8192709A79A009553FC /* ThingLogRecentSearchDataTests.swift in Sources */,
 				DBC45A9C270F24B800AB9499 /* DummyProtocol.swift in Sources */,
