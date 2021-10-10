@@ -104,7 +104,14 @@ final class TabBarController: UITabBarController {
             .bind { [weak self] type in
                 guard let self = self else { return }
                 self.touchDimmedView()
-                self.writeCoordinator.showWriteViewController(with: type)
+                
+                // Test Code
+                if type == .bought {
+                    makeDummy()
+                } else {
+                    deleteAllEntity()
+                }
+//                self.writeCoordinator.showWriteViewController(with: type)
             }
             .disposed(by: disposeBag)
     }

@@ -51,25 +51,43 @@ final class CategoryViewModel {
         let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
         var predicates: [NSPredicate] = [NSPredicate]()
         if let subType: String = currentSubCategoryType {
-            // TODO: ⚠️ releationShip - Category 배열 - title 작성
-            predicates.append(NSPredicate(format: "", subType as String ))
+            predicates.append(NSPredicate(format: "ANY categories.title == %@", subType))
         }
+        var yearMonth: String = ""
+        
         currentFilterType.forEach {
             switch $0.type {
             case .latest:
                 let isAscending: Bool = $0.value == "최신순" ? false : true
                 request.sortDescriptors = [NSSortDescriptor(key: "createDate", ascending: isAscending)]
-                
-            // TODO: ⚠️ month, year 합쳐서 createDate로 NSPredicate 작성
             case .month:
-                predicates.append(NSPredicate(format: "month == %@", $0.value))
+                if $0.value.count == 2 {
+                    yearMonth += "0"+$0.value
+                } else {
+                    yearMonth += $0.value
+                }
             case .year:
-                predicates.append(NSPredicate(format: "year == %@", $0.value))
+                yearMonth += $0.value
             case .preference:
-                // TODO: ⚠️ releationShip - rating - score 작성
-                request.sortDescriptors = [NSSortDescriptor(key: "rating.score", ascending: true)]
+                // 높은순, 낮은순은 최상단 탭이 좋아요, 만족도, 가격 탭일 경우에만 해당한다.
+                switch currentTopCategoryType {
+                case .like:
+                request.sortDescriptors = [NSSortDescriptor(key: "isLike", ascending: $0.value == "낮은순")]
+                case .preference:
+                    request.sortDescriptors = [NSSortDescriptor(key: "rating.score", ascending: $0.value == "낮은순")]
+                case .price:
+                    request.sortDescriptors = [NSSortDescriptor(key: "price", ascending: $0.value == "낮은순")]
+                default:
+                    return
+                }
             }
         }
+        
+        if let startDate: Date = yearMonth.convertToDate(dateFormat: "yyyy년MM월"),
+           let endDate: Date = startDate.offset(+1, byAdding: .month) {
+            predicates.append(NSPredicate(format: "createDate < %@ AND createDate >= %@", endDate as NSDate, startDate as NSDate))
+        }
+        
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         return request
     }

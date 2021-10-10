@@ -40,6 +40,7 @@ final class CategoryViewController: UIViewController {
     let contentsViewController: BaseContentsCollectionViewController = BaseContentsCollectionViewController(willHideFilterView: true)
     
     var viewModel: CategoryViewModel = CategoryViewModel()
+    let categoryRepo: CategoryRepository = CategoryRepository(fetchedResultsControllerDelegate: nil)
     
     var categoryViewHeightConstriant: NSLayoutConstraint?
     var currentCategoryHeight: CGFloat = 0
@@ -59,6 +60,12 @@ final class CategoryViewController: UIViewController {
         subscribeCategoryFilterView()
         subscribeHorizontalCollectionView()
         subscribeBaseControllerScrollOffset()
+        
+        fetchAllPosts()
+        fetchAllCategory()
+        
+        setupHorizontalColletionCompletion()
+        setupContentsViewControllerCompletion()
     }
 }
 

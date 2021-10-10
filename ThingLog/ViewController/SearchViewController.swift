@@ -138,7 +138,6 @@ final class SearchViewController: UIViewController {
             emptyView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor),
             emptyView.topAnchor.constraint(equalTo: safeLayout.topAnchor)
         ])
-        
     }
     
     // MARK: - Subscribe

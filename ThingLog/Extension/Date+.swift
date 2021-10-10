@@ -14,4 +14,17 @@ extension Date {
     func toString(_ component: Calendar.Component) -> String {
         String(Calendar.current.component(component, from: self))
     }
+    
+    /// 특정날짜만큼 지난 날짜를 반환한다.
+    /// - Parameters:
+    ///   - offset: 이전, 이후 날짜 만큼의 offset을 지정한다.
+    ///   - type: 일별, 월별로 타입을 지정하여, 타입만큼의 offset을 지정하도록 한다.
+    /// - Returns: 지나거나 이전의 날짜의 옵셔널을 반환한다.
+    /// offset이 1일경우 1type 이후 날짜를 반환하고, offset이 -1인경우에 1type 이전 날짜를 반환한다.
+    func offset(_ offset: Int, byAdding type: Calendar.Component) -> Date? {
+        var calendar: Calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        let end: Date? = Calendar.current.date(byAdding: type, value: offset, to: calendar.startOfDay(for: self))
+        return end
+    }
 }
