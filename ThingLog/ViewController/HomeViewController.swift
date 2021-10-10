@@ -33,9 +33,11 @@ final class HomeViewController: UIViewController {
         return controller
     }()
     
-    var coordinator: Coordinator?
+    var coordinator: HomeCoordinator?
     var heightAnchorProfileView: NSLayoutConstraint?
     let profileViewHeight: CGFloat = 44 + 24 + 16
+    
+    var disposeBag: DisposeBag = DisposeBag() 
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -118,7 +120,11 @@ final class HomeViewController: UIViewController {
         let settingButton: UIButton = UIButton()
         settingButton.setImage(SwiftGenAssets.setting.image, for: .normal)
         settingButton.tintColor = SwiftGenColors.black.color
-        // settingButton.addTarget(self, action: #selector(showSettingView), for: .touchUpInside)
+        settingButton.rx.tap
+            .bind { [weak self] in
+                self?.coordinator?.showSettingViewController()
+            }
+            .disposed(by: disposeBag)
         let settingBarButton: UIBarButtonItem = UIBarButtonItem(customView: settingButton)
         navigationItem.rightBarButtonItem = settingBarButton
     }
