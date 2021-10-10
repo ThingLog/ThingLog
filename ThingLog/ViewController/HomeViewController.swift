@@ -195,7 +195,8 @@ extension HomeViewController {
     func changeContentsContainerHeight(viewController: BaseContentsCollectionViewController?) {
         guard let baseController = viewController else { return }
         DispatchQueue.main.async {
-            if baseController.originScrollContentsHeight <= baseController.collectionView.frame.height {
+            if baseController.originScrollContentsHeight <= baseController.collectionView.frame.height ||
+                baseController.collectionView.contentOffset.y == 0 {
                 UIView.animate(withDuration: 0.1) {
                     self.contentsContainerView.layoutIfNeeded()
                 } completion: { _ in
