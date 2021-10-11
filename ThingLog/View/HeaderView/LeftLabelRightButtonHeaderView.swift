@@ -92,7 +92,7 @@ class LeftLabelRightButtonHeaderView: UICollectionReusableView {
         ])
     }
     
-    func updateTitle(title: String?, subTitle: String? = nil ) {
+    func updateTitle(title: String?, subTitle: String? = nil) {
         titleLabel.text = title
         subTitleLabel.text = subTitle
     }

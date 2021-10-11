@@ -14,7 +14,7 @@ class BaseContentsCollectionViewController: UIViewController {
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumInteritemSpacing = 1
         flowLayout.minimumLineSpacing = 1
-        flowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 2 ) / 3, height: (UIScreen.main.bounds.width - 2 ) / 3)
+        flowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 2) / 3, height: (UIScreen.main.bounds.width - 2) / 3)
         flowLayout.sectionHeadersPinToVisibleBounds = true
         let collection: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier)
@@ -72,8 +72,10 @@ class BaseContentsCollectionViewController: UIViewController {
         setupBaseCollectionView()
         setupEmptyView()
         
-        // 드롭박스가 가장 상단에 나타나야하기 때문에 collectionView 세팅 이후에 추가해야한다. 
+        // 드롭박스가 가장 상단에 나타나야하기 때문에 collectionView 세팅 이후에 추가해야한다.
         resultsFilterView.updateDropBoxView(.total, superView: view)
+        
+        subscribeDropBox()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -105,6 +107,30 @@ class BaseContentsCollectionViewController: UIViewController {
         ])
     }
     
+    /// 드롭박스를 subscribe하여, 최신순/오래된 순인 경우에 fetchResultController의 sortDescriptor를 변경하여 다시 fetch한다.
+    func subscribeDropBox() {
+        resultsFilterView.stackView.arrangedSubviews.forEach {
+            guard let dropBox: DropBoxView = $0 as? DropBoxView else {
+                return
+            }
+            dropBox.selectFilterTypeSubject
+                .subscribe( onNext: { [weak self] (value: (FilterType, String)) in
+                    // ViewModel 변경
+                    if value.0 == .latest {
+                        self?.fetchResultController?.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createDate", ascending: !(value.1 == "최신순"))]
+                        
+                        do {
+                            try self?.fetchResultController?.performFetch()
+                            self?.collectionView.reloadData()
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                })
+                .disposed(by: disposeBag)
+        }
+    }
+    
     func setupEmptyView() {
         view.addSubview(emptyView)
         NSLayoutConstraint.activate([
@@ -134,7 +160,6 @@ extension BaseContentsCollectionViewController: UICollectionViewDataSource {
         
         if let item: PostEntity = fetchResultController?.fetchedObjects?[indexPath.item],
            let data: Data = (item.attachments?.allObjects as? [AttachmentEntity])?.first?.thumbnail {
-            cell.imageView.image = UIImage(data: data)
             cell.updateView(item)
         }
         

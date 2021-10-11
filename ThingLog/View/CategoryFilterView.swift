@@ -126,7 +126,7 @@ extension CategoryFilterView {
     /// - Parameters:
     ///   - type: 클릭한 카테고리의 탭의 타입( TopCategoryType ) 을 넣는다.
     ///   - superView: 현재 해당 뷰가 뷰 계층 구조에서 최상단에 속해있는 view를 넣는다. ( VIewController의 View를 넣는다 )
-    func updateDropBoxView(_ type: TopCategoryType?, superView: UIView ) {
+    func updateDropBoxView(_ type: TopCategoryType?, superView: UIView) {
         // 기존 stackView를 모두 제거한다.
         stackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
@@ -154,7 +154,7 @@ extension CategoryFilterView {
     
     /// 결과에 따른 총 게시물 검색 수를 변경하기 위한 메서드다.
     /// - Parameter totalCount: 총 게시물 검색 수를 지정한다.
-    func updateResultTotalLabel(by title: String ) {
+    func updateResultTotalLabel(by title: String) {
         resultTotalLabel.text = title
     }
     

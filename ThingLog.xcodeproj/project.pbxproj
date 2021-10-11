@@ -65,6 +65,7 @@
 		DB3A5165270FFE0C003B529D /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3A5164270FFE0C003B529D /* String+.swift */; };
 		DB3A516927103B3E003B529D /* EmptyPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3A516827103B3E003B529D /* EmptyPostView.swift */; };
 		DB3A516B27103DC4003B529D /* EmptyResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3A516A27103DC4003B529D /* EmptyResultsView.swift */; };
+		DB69095F2712C55F00BB54E4 /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69095E2712C55F00BB54E4 /* SearchResultsViewModel.swift */; };
 		DB6909612712DA8100BB54E4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6909602712DA8100BB54E4 /* SettingViewController.swift */; };
 		DB6909632712DB0800BB54E4 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6909622712DB0800BB54E4 /* SettingCoordinator.swift */; };
 		DB69095D2712B5EB00BB54E4 /* ThingLogPostTypeRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69095C2712B5EB00BB54E4 /* ThingLogPostTypeRequestTest.swift */; };
@@ -211,6 +212,7 @@
 		DB3A5164270FFE0C003B529D /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		DB3A516827103B3E003B529D /* EmptyPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPostView.swift; sourceTree = "<group>"; };
 		DB3A516A27103DC4003B529D /* EmptyResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyResultsView.swift; sourceTree = "<group>"; };
+		DB69095E2712C55F00BB54E4 /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
 		DB6909602712DA8100BB54E4 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		DB6909622712DB0800BB54E4 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		DB69095C2712B5EB00BB54E4 /* ThingLogPostTypeRequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogPostTypeRequestTest.swift; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 				DB1745B827098E8A00EF083E /* RecentSearchDataViewModel.swift */,
 				87BB17AA27098D760088B847 /* WriteViewModel.swift */,
 				DB87730B270B430C00401961 /* RecentSearchDataViewModelProtocol.swift */,
+				DB69095E2712C55F00BB54E4 /* SearchResultsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -816,6 +819,7 @@
 				DB1745B927098E8A00EF083E /* RecentSearchDataViewModel.swift in Sources */,
 				DB7C04B626F8782B009F5C0A /* CategoryViewController.swift in Sources */,
 				DB148C282704A1A600FDC48F /* IgnoreTouchView.swift in Sources */,
+				DB69095F2712C55F00BB54E4 /* SearchResultsViewModel.swift in Sources */,
 				DB7C04B226F87548009F5C0A /* TabBarController.swift in Sources */,
 				DB7C04B926F87BE9009F5C0A /* ChoiceWritingView.swift in Sources */,
 				DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */,

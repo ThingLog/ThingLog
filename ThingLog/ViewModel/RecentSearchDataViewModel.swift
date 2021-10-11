@@ -11,7 +11,7 @@ import RxSwift
 /// 최근검색어 데이터를 관리하는 ViewModel이다.
 /// recentSearchData를 susbscribe하여 손쉽게 tableView를 reload, update하도록 한다.
 class RecentSearchDataViewModel: RecentSearchDataViewModelProtocol {
-    lazy var recentSearchDataSubject: BehaviorSubject<[String]> = BehaviorSubject(value: _recentSearchData )
+    lazy var recentSearchDataSubject: BehaviorSubject<[String]> = BehaviorSubject(value: _recentSearchData)
     lazy var isAutoSaveModeSubject: BehaviorSubject<Bool> = BehaviorSubject(value: _isAutoSaveMode)
     
     var isRecentSearchDataEmpty: Bool {

@@ -8,14 +8,15 @@ import UIKit
 
 /// 검색결과 `글내용`의 모두보기 선택시 나타나는 뷰컨트롤러이다. CollectionView만 변경하여 서브클래싱했다.
 class PostContentsCollectionViewController: BaseContentsCollectionViewController {
-    // TODO: ⚠️ NSFetchResultsController가질 예정
+    // 글내용의 특정 키워드를 강조하기 위해 필요한 프로퍼티
+    var keyWord: String?
     
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    // 기존의 CollectionViewLayout을 변경한다. 
+    // 기존의 CollectionViewLayout을 변경한다.
     override func setupBaseCollectionView() {
         let itemSize: NSCollectionLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
 
@@ -47,21 +48,12 @@ class PostContentsCollectionViewController: BaseContentsCollectionViewController
 }
 
 extension PostContentsCollectionViewController {
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // Test
-        100
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // 글 내용
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsDetailCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsDetailCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.updateView()
-        return cell 
+        cell.updateView(post: fetchResultController?.fetchedObjects?[indexPath.item], keyWord: keyWord)
+        return cell
     }
 }

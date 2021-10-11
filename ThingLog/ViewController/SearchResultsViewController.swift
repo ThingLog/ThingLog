@@ -4,6 +4,7 @@
 //
 //  Created by hyunsu on 2021/10/04.
 //
+import CoreData
 import UIKit
 
 /// 검색홈에서 검색결과에 CollectionView형태로 보여주는 Controller다.
@@ -26,9 +27,17 @@ class SearchResultsViewController: UIViewController {
     }()
     
     /// 섹션 - 모두보기 탭시 나타나는 CollectionViewController로, 현재 선택된 CollectionViewController가 나타난다.
-    private var selectedCollectionViewController: BaseContentsCollectionViewController?
+    private var selectedCollectionViewController: BaseContentsCollectionViewController? {
+        didSet {
+            selectedCollectionViewController?.completionBlock = { [weak self] postCount in
+                self?.selectedCollectionViewController?.resultsFilterView.updateResultTotalLabel(by: "\(postCount)건")
+            }
+        }
+    }
     
-    // TODO: ⚠️ NSFetchResultsController가질 예정 
+    // 셀들의 데이터를 제공하는 ViewModel
+    var viewModel: SearchResultsViewModel = SearchResultsViewModel()
+    
     private let totalFilterViewHeight: CGFloat = 44.0
     
     // 모두보기 눌러서 allContentsViewContorller가 보여지고 있는지 확인하는 프로퍼티
@@ -66,7 +75,7 @@ class SearchResultsViewController: UIViewController {
         ])
         collectionView.dataSource = self
     }
-
+    
     /// 모두보기 버튼 탭시 나타날 여부를 결정한다.
     /// - Parameter bool: 나타나자고자 할 때 true를, 그렇지 않다면 false를 넣는다.
     private func showGridCollectionView(_ bool: Bool) {
@@ -95,11 +104,12 @@ extension SearchResultsViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // Test
-        if ResultCollectionSection.postContents.section == section {
-            return 3
+        // 글내용의 경우 최대 3개만 보여주도록 한다.
+        if section == ResultCollectionSection.postContents.section {
+            let count: Int = viewModel.fetchedResultsControllers[section].fetchedObjects?.count ?? 0
+            return min(count, 3)
         }
-        return 100
+        return viewModel.fetchedResultsControllers[section].fetchedObjects?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -108,7 +118,8 @@ extension SearchResultsViewController: UICollectionViewDataSource, UICollectionV
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsDetailCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsDetailCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.updateView()
+            let post: PostEntity? = viewModel.fetchedResultsControllers[indexPath.section].fetchedObjects?[indexPath.item]
+            cell.updateView(post: post, keyWord: viewModel.keyWord)
             return cell
             
             // 그외 ( 카테고리, 물건이름, 선물받은, 거래처/판매처 )
@@ -126,18 +137,40 @@ extension SearchResultsViewController: UICollectionViewDataSource, UICollectionV
             }
             
             let section: ResultCollectionSection? = ResultCollectionSection.init(rawValue: indexPath.section)
+            let fetchedResultsControllers: NSFetchedResultsController<PostEntity> = viewModel.fetchedResultsControllers[indexPath.section]
             let headerTitle: String? = section?.headerTitle
+            let postCount: Int = fetchedResultsControllers.fetchedObjects?.count ?? 0
+            
+            // HeaderView 업데이트
             headerView.updateTitle(title: headerTitle,
-                                   subTitle: "10 건")
+                                   subTitle: "\(postCount) 건")
+            if (section == .postContents && postCount <= 3) || postCount == 0 {
+                headerView.rightButton.isHidden = true
+            } else {
+                headerView.rightButton.isHidden = false
+            }
             
             // 모두보기 선택시, 글내용인 경우만 PostContentsCollectionViewController를 보여준다.
             headerView.rightButton.rx.tap
                 .bind { [weak self] in
                     self?.isAllContentsShowing = false
-                    self?.selectedCollectionViewController = section == .postContents ? PostContentsCollectionViewController(willHideFilterView: false) : BaseContentsCollectionViewController(willHideFilterView: false)
+                    // 섹션 타입으로 특정 Controller로 초기화하고
+                    if section == .postContents {
+                        let postController: PostContentsCollectionViewController = PostContentsCollectionViewController(willHideFilterView: false)
+                        postController.keyWord = self?.viewModel.keyWord
+                        self?.selectedCollectionViewController = postController
+                    } else {
+                        self?.selectedCollectionViewController = BaseContentsCollectionViewController(willHideFilterView: false)
+                    }
+                    
+                    // 해당 controller에 resultsController를 주입한다.
+                    self?.selectedCollectionViewController?.fetchResultController = fetchedResultsControllers
+                    
                     self?.isAllContentsShowing = true
+                    
+                    // 해당 controller의 filterView를 업데이트 한다.
                     self?.selectedCollectionViewController?.resultsFilterView.updateTitleLabel(by: headerTitle)
-                    // TODO: ⚠️ 데이터 바인딩 하기
+                    self?.selectedCollectionViewController?.resultsFilterView.updateResultTotalLabel(by: "\(postCount)건")
                 }
                 .disposed(by: headerView.disposeBag)
             return headerView

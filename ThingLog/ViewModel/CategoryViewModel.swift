@@ -38,7 +38,7 @@ final class CategoryViewModel {
     /// - Parameters:
     ///   - type: 해당 범주의 타입을 주입한다.
     ///   - value: 해당 범주의 변경한 데이터를 주입한다.
-    func changeCurrentFilterType( type: FilterType, value: String ) {
+    func changeCurrentFilterType( type: FilterType, value: String) {
         guard let index = currentTopCategoryType.filterTypes.firstIndex(of: type) else {
             return
         }
@@ -94,7 +94,7 @@ final class CategoryViewModel {
     
     /// 현재 상태에 따른 `NSfetchRequest`를 통하여 `NSFetchResultController`를 초기화하여 데이터를 가져와 completion 블록을 호출한다.
     /// - Parameter completion: NSfetchResultsController의 데이터를 사용할 컬렉션뷰를 reload하도록 한다.
-    func fetchRequest(_ completion: @escaping (Result<Bool, Error>) -> Void ) {
+    func fetchRequest(_ completion: @escaping (Result<Bool, Error>) -> Void) {
         let request: NSFetchRequest<PostEntity> = currentNSFetchRequest()
         request.fetchBatchSize = batchSize
         fetchResultController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.shared.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
