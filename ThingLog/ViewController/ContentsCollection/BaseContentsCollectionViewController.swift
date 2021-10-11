@@ -14,7 +14,7 @@ class BaseContentsCollectionViewController: UIViewController {
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumInteritemSpacing = 1
         flowLayout.minimumLineSpacing = 1
-        flowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 2 ) / 3, height: (UIScreen.main.bounds.width - 2 ) / 3)
+        flowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 2) / 3, height: (UIScreen.main.bounds.width - 2) / 3)
         flowLayout.sectionHeadersPinToVisibleBounds = true
         let collection: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier)

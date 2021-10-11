@@ -62,13 +62,13 @@ final class EmptyResultsView: UIView {
 
 extension EmptyResultsView {
     // 검색결과 없습니다를 title과 함께 붙여 업데이트하는 메서드다
-    func updateTitle(_ title: String ) {
+    func updateTitle(_ title: String) {
         let text: String = title + "의 검색결과가 없습니다"
         label.text = text
         let attributedStr: NSMutableAttributedString = NSMutableAttributedString(string: text)
         attributedStr.addAttribute(NSAttributedString.Key.foregroundColor,
                                    value: SwiftGenColors.systemRed.color,
-                                   range: (text as NSString).range(of: title) )
+                                   range: (text as NSString).range(of: title))
         label.attributedText = attributedStr
     }
 }

@@ -23,7 +23,7 @@ class ThingLogRecentSearchDataTests: XCTestCase {
                     count += 1
                     if count == 2 {
                         exp.fulfill()
-                        XCTAssertTrue(val.count == 1 )
+                        XCTAssertTrue(val.count == 1)
                     }
                 }
                 .disposed(by: disposeBag)
@@ -41,7 +41,7 @@ class ThingLogRecentSearchDataTests: XCTestCase {
                     count += 1
                     if count == 3 {
                         exp.fulfill()
-                        XCTAssertTrue(val.count == 0 )
+                        XCTAssertTrue(val.count == 0)
                     }
                 }
                 .disposed(by: disposeBag)

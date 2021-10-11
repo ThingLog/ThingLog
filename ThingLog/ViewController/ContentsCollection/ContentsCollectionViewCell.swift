@@ -25,6 +25,15 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private let smallIconView: UIImageView = {
+        let image: UIImage? = UIImage(systemName: "square.on.square.fill")
+        let imageView: UIImageView = UIImageView(image: image)
+        imageView.transform = CGAffineTransform(rotationAngle: .pi)
+        imageView.tintColor = SwiftGenColors.white.color
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -36,11 +45,17 @@ class ContentsCollectionViewCell: UICollectionViewCell {
     
     func setupView() {
         contentView.addSubview(imageView)
+        contentView.addSubview(smallIconView)
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            smallIconView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7),
+            smallIconView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -7),
+            smallIconView.widthAnchor.constraint(equalToConstant: 10),
+            smallIconView.heightAnchor.constraint(equalToConstant: 10),
             imageView.heightAnchor.constraint(equalToConstant: 124),
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
         ])
@@ -56,16 +71,16 @@ class ContentsCollectionViewCell: UICollectionViewCell {
             testLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
-
+    
     /// PostEntity를 기반으로 뷰를 업데이트한다.
     /// - Parameter postEntity: 특정 PostEntity를 주입한다.
     func updateView(_ postEntity: PostEntity) {
         var text: String = ""
         text += "제목: " + postEntity.title!
-        text += "\n카테고리: " + (postEntity.categories?.allObjects as? [CategoryEntity])!.map{ $0.title! }.joined(separator: " - ") + "\(postEntity.categories?.count ?? 0 )"
+        text += "\n카테고리: " + (postEntity.categories?.allObjects as? [CategoryEntity])!.map { $0.title! }.joined(separator: " - ") + "\(postEntity.categories?.count ?? 0)"
         text += "\n가격: " + String(postEntity.price)
-        text += "\n" + ( postEntity.isLike ? "좋아요" : "싫어요" )
-        text += "\n날짜: " + (postEntity.createDate!.toString(.year))  + "." + (postEntity.createDate!.toString(.month)) +  "." + (postEntity.createDate!.toString(.day))
+        text += "\n" + (postEntity.isLike ? "좋아요" : "싫어요")
+        text += "\n날짜: " + (postEntity.createDate!.toString(.year)) + "." + (postEntity.createDate!.toString(.month)) + "." + (postEntity.createDate!.toString(.day))
         text += "\n만족도: " + String(postEntity.rating!.score)
         testLabel.text = text
     }

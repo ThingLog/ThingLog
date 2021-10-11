@@ -26,7 +26,7 @@ class ThingLogPostCategoryRequestTests: XCTestCase, DummyProtocol {
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMM"
         let date = dateFormatter.date(from: year+month)
-        XCTAssert(date == nil )
+        XCTAssert(date == nil)
     }
     
     func test_년도와_월로_Date타입으로_만들수_있다() {
@@ -35,7 +35,7 @@ class ThingLogPostCategoryRequestTests: XCTestCase, DummyProtocol {
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMM"
         let date = dateFormatter.date(from: year+month)
-        XCTAssert(date != nil )
+        XCTAssert(date != nil)
     }
     
     // MARK: - Test
@@ -91,7 +91,7 @@ class ThingLogPostCategoryRequestTests: XCTestCase, DummyProtocol {
         }
         // 제일 높은
         let targetCategoryTitle: String = "가전"
-        let targetCount: Int = posts.filter { $0.categories.contains(where: {$0.title == targetCategoryTitle} )}.count
+        let targetCount: Int = posts.filter { $0.categories.contains(where: {$0.title == targetCategoryTitle})}.count
         
         let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
         request.predicate = NSPredicate(format: "ANY categories.title == %@", targetCategoryTitle)
@@ -116,7 +116,7 @@ class ThingLogPostCategoryRequestTests: XCTestCase, DummyProtocol {
         }
         // 제일 높은
         let targetCategoryTitle: String = "가"
-        let targetCount: Int = posts.filter { $0.categories.contains(where: {$0.title.contains( targetCategoryTitle)} )}.count
+        let targetCount: Int = posts.filter { $0.categories.contains(where: {$0.title.contains( targetCategoryTitle)})}.count
         
         let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
         request.predicate = NSPredicate(format: "ANY categories.title CONTAINS %@", targetCategoryTitle)

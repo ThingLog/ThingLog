@@ -79,7 +79,7 @@ final class ContentsTabView: UIView {
             
             indicatorBar.heightAnchor.constraint(equalToConstant: 1),
             indicatorBar.bottomAnchor.constraint(equalTo: bottomAnchor),
-            indicatorBar.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1 / 3 ),
+            indicatorBar.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1 / 3),
             
             buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -113,9 +113,9 @@ extension ContentsTabView {
     
     /// 선택한 index를 통하여 indicatorBar를 애니메이션으로 움직이는 메소드다.
     /// - Parameter index: 선택한 index를 넣는다.
-    func updateIndicatorBar(by index: Int ) {
+    func updateIndicatorBar(by index: Int) {
         UIView.animate(withDuration: 0.3) {
-            self.leadingAnchorIndicatorBar?.constant = (UIScreen.main.bounds.width / 3 ) * CGFloat(index)
+            self.leadingAnchorIndicatorBar?.constant = (UIScreen.main.bounds.width / 3) * CGFloat(index)
             self.layoutIfNeeded()
         }
     }

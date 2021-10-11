@@ -175,7 +175,7 @@ final class SearchViewController: UIViewController {
     
     /// 검색결과화면을 보여주거나 숨기고자 한다.
     /// - Parameter bool: 보여주고자 할때는 true, 그렇지 않다면 false를 넣는다.
-    private func showSearchResultsViewController(_ bool: Bool, keyWord: String? = nil ) {
+    private func showSearchResultsViewController(_ bool: Bool, keyWord: String? = nil) {
         if bool {
             fetchAllPost(by: keyWord)
         } else {
@@ -186,7 +186,7 @@ final class SearchViewController: UIViewController {
     
     /// 검색한 키워드로 조건에 맞는 Post들을 모두 찾는다.
     /// - Parameter keyWord: 검색하고자 하는 키워드를 넣는다.
-    private func fetchAllPost(by keyWord: String? = nil ) {
+    private func fetchAllPost(by keyWord: String? = nil) {
         guard let keyWord: String = keyWord else {
             return
         }
@@ -233,7 +233,7 @@ extension SearchViewController: SearchTextFieldDelegate {
     /// 공백만 포함된 경우를 체크한다.
     /// - Parameter text: String 옵셔널 타입을 주입한다.
     /// - Returns: 공백일 경우는 nil, 그렇지 않은 경우는 String이 된다.
-    func checkTextField(_ text: String? ) -> String? {
+    func checkTextField(_ text: String?) -> String? {
         guard let text = text,
               !text.isEmpty,
               !text.filter({ $0 != " " }).isEmpty else {

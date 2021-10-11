@@ -89,7 +89,7 @@ final class TabBarController: UITabBarController {
         dimmedView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchDimmedView)))
     }
     
-    private func constraintDimmedView(to view: UIView ) {
+    private func constraintDimmedView(to view: UIView) {
         dimmedView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             dimmedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -120,7 +120,7 @@ final class TabBarController: UITabBarController {
 // MARK: - Action
 extension TabBarController {
     /// 현재 선택된 viewController의 최상단에 dimmedView를 부착한다.
-    func attachDimmedView(to view: UIView? ) {
+    func attachDimmedView(to view: UIView?) {
         guard let view = view else { return }
         view.addSubview(dimmedView)
         constraintDimmedView(to: view)
@@ -129,7 +129,7 @@ extension TabBarController {
     
     /// ``WriteView``를 숨기거나 나타나도록 하면서 애니메이션을 추가한다.
     /// - Parameter hide: 숨기고자 하는 경우는 true, 나타나고자 하는 경우는 false 이다.
-    private func hideWriteViewWithAnimate(_ hide: Bool ) {
+    private func hideWriteViewWithAnimate(_ hide: Bool) {
         if hide {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut) {
                 self.choiceView.hide(true)
@@ -150,7 +150,7 @@ extension TabBarController {
         }
     }
     
-    private func rotatePlusButton(isRecovery recovery: Bool ) {
+    private func rotatePlusButton(isRecovery recovery: Bool) {
         let imageView: UIImageView? = tabBar.subviews[2].subviews.first as? UIImageView
         imageView?.contentMode = .center
         imageView?.transform = recovery ? .identity : CGAffineTransform(rotationAngle: .pi / 4)

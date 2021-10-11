@@ -53,7 +53,7 @@ final class SearchResultsViewModel {
     /// - Parameters:
     ///   - keyWord: 검색하고자 하는 키워드를 주입한다.
     ///   - completion: 찾은 데이터의 개수를 파라미터로 전달한다.
-    func fetchAllRequest(keyWord: String, _ completion: @escaping (Int) -> Void ) {
+    func fetchAllRequest(keyWord: String, _ completion: @escaping (Int) -> Void) {
         self.keyWord = keyWord
         var searchedTotalCount: Int = 0
         

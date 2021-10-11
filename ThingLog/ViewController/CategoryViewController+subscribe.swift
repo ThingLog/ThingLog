@@ -61,7 +61,7 @@ extension CategoryViewController {
                 self?.viewModel.currentTopCategoryType = type
                 
                 // 2. DropBox 변경
-                self?.categoryView.categoryFilterView.updateDropBoxView(type, superView: self?.view ?? UIView() )
+                self?.categoryView.categoryFilterView.updateDropBoxView(type, superView: self?.view ?? UIView())
                 self?.view.layoutIfNeeded()
                 
                 // 3. DropBox가 전부 변경되므로 subscribe한다.
@@ -109,12 +109,12 @@ extension CategoryViewController {
     }
     
     /// 카테고리의 서브카테고리 뷰의 높이를 변경하는 메서드다
-    private func hideHorizontalCollectionView(_ bool: Bool ) {
+    private func hideHorizontalCollectionView(_ bool: Bool) {
         let subCategoryCount: Int = categoryRepo.fetchedResultsController.fetchedObjects?.count ?? 0
         
         UIView.animate(withDuration: 0.2) {
-            self.categoryViewHeightConstriant?.constant = (bool || subCategoryCount == 0 ) ? self.categoryView.normalHeight :  self.categoryView.maxHeight
-            self.currentCategoryHeight = (bool || subCategoryCount == 0 ) ? self.categoryView.normalHeight: self.categoryView.maxHeight
+            self.categoryViewHeightConstriant?.constant = (bool || subCategoryCount == 0) ? self.categoryView.normalHeight :  self.categoryView.maxHeight
+            self.currentCategoryHeight = (bool || subCategoryCount == 0) ? self.categoryView.normalHeight: self.categoryView.maxHeight
             self.view.layoutIfNeeded()
             self.categoryView.horizontalCollectionView.isCollapse = bool
         }
@@ -138,7 +138,7 @@ extension CategoryViewController {
 
     /// CategoryView의 하단에 fetch된 Post개시물의 개수를 업데이트하는 메서드다
     /// - Parameter fetchedCount: fetch된 Post개시물의 개수를 주입한다.
-    private func updateResultsCountView(fetchedCount: Int? ) {
+    private func updateResultsCountView(fetchedCount: Int?) {
         self.categoryView.categoryFilterView.updateResultTotalLabel(by: "총" + String(fetchedCount ?? 0) + "건")
     }
 }

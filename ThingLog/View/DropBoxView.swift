@@ -157,7 +157,7 @@ extension DropBoxView {
     
     /// DropBoxView가 열려있는 상태에서 다른 뷰를 터치할 경우에 DropBoxView를 닫히도록 하기 위하여 outsideTouchDetectView를 추가하는 메서드다.
     /// - Parameter bool: 추가하는 경우에 true를 넣는다.
-    private func addOutsideTouchDetectView(_ bool: Bool ) {
+    private func addOutsideTouchDetectView(_ bool: Bool) {
         if bool == false { return }
         superView?.addSubview(outsideTouchDetectView)
         outsideTouchDetectView.executeClosure = { [weak self] in

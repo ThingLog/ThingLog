@@ -126,7 +126,7 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
         ])
     }
     
-    func updateLeftLabelTitle(_ title: String ) {
+    func updateLeftLabelTitle(_ title: String) {
         leftLabel.text = title
     }
 }

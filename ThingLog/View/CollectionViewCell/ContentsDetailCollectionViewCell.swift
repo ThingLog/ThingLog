@@ -162,10 +162,17 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
+    private let rightStackViewTrailing: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var imageWithRightStackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [
                                                     imageView,
-                                                    rightStackView])
+                                                    rightStackView,
+                                                    rightStackViewTrailing])
         stackView.axis = .horizontal
         stackView.spacing = 6
         stackView.alignment = .top
@@ -226,7 +233,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
     }
     
     /// PostEntity객체로 뷰들을 업데이트한다.
-    func updateView(post: PostEntity? = nil, keyWord: String? = nil  ) {
+    func updateView(post: PostEntity? = nil, keyWord: String? = nil) {
         // 날짜
         if let post: PostEntity = post {
             if let createDate: Date = post.createDate {
@@ -251,12 +258,12 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         let nsStr: NSString = contents as NSString
         let range: NSRange = nsStr.range(of: keyWord)
         if range.location == Int.max { return }
-        contentsLabel.text = nsStr.substring(from: range.location)
+        let newContents: String = nsStr.substring(from: range.location)
         
-        let attributedStr: NSMutableAttributedString = NSMutableAttributedString(string: contentsLabel.text!)
+        let attributedStr: NSMutableAttributedString = NSMutableAttributedString(string: newContents)
         attributedStr.addAttribute(NSAttributedString.Key.foregroundColor,
                                    value: UIColor.systemRed,
-                                   range: (contentsLabel.text! as NSString).range(of: keyWord) )
+                                   range: (newContents as NSString).range(of: keyWord))
         contentsLabel.attributedText = attributedStr
     }
 }

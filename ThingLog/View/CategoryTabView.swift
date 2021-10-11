@@ -69,7 +69,7 @@ final class CategoryTabView: UIView {
         for idx in cases.indices {
             let type: TopCategoryType = cases[idx]
             let categoryTypeButton: CategoryTypeButton = CategoryTypeButton(type: type)
-            categoryTypeButton.updateColor(isTint: idx == 0 )
+            categoryTypeButton.updateColor(isTint: idx == 0)
             categoryTypeButton.setTitle(type.rawValue, for: .normal)
             categoryTypeButton.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
             stackView.addArrangedSubview(categoryTypeButton)
