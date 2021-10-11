@@ -49,6 +49,8 @@ final class HomeViewController: UIViewController {
         subscribePageVeiwControllerTransition()
         subscribeContentsTabButton()
         subscribePageViewControllerScrollOffset()
+        
+        fetchAllPost()
     }
     
     // MARK: - Setup
@@ -63,7 +65,7 @@ final class HomeViewController: UIViewController {
             profileView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
     }
-
+    
     func setupContainerView() {
         view.addSubview(contentsContainerView)
         NSLayoutConstraint.activate([
@@ -193,7 +195,8 @@ extension HomeViewController {
     func changeContentsContainerHeight(viewController: BaseContentsCollectionViewController?) {
         guard let baseController = viewController else { return }
         DispatchQueue.main.async {
-            if baseController.originScrollContentsHeight <= baseController.collectionView.frame.height {
+            if baseController.originScrollContentsHeight <= baseController.collectionView.frame.height ||
+                baseController.collectionView.contentOffset.y == 0 {
                 UIView.animate(withDuration: 0.1) {
                     self.contentsContainerView.layoutIfNeeded()
                 } completion: { _ in
@@ -204,6 +207,33 @@ extension HomeViewController {
                         self.profileView.hideBadgeView(false)
                     }
                 }
+            }
+        }
+    }
+    
+    /// pageViewController의 각 타입에 따라 Post들을 가져온다.
+    func fetchAllPost() {
+        for idx in 0..<pageViewController.controllers.count {
+            // PageViewController에 속한 뷰컨트롤러를 찾고, BaseContents로 캐스팅한다.
+            let controller: UIViewController = pageViewController.controllers[idx]
+            guard let baseController: BaseContentsCollectionViewController = controller as? BaseContentsCollectionViewController else {
+                return
+            }
+            
+            // idx로 PageType을 찾고, 그에 맞는 NSFetchResulstsController를 주입한다.
+            let postRepo: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
+            guard let pageType = PageType(rawValue: Int16(idx)) else { return }
+            postRepo.pageType = pageType
+            baseController.fetchResultController = postRepo.fetchedResultsController
+            baseController.collectionView.reloadData()
+            
+            // PageType으로 특정 탭 버튼을 찾아 업데이트한다.
+            let pageTypeButton: UIButton = contentsTabView.pageTypeButton(by: pageType)
+            let count: Int = postRepo.fetchedResultsController.fetchedObjects?.count ?? 0
+            pageTypeButton.setTitle(String(count), for: .normal)
+            
+            baseController.completionBlock = { [weak self] updatedFetchedCount in
+                pageTypeButton.setTitle(String(updatedFetchedCount), for: .normal)
             }
         }
     }

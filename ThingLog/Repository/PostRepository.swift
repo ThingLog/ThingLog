@@ -19,6 +19,17 @@ protocol PostRepositoryProtocol {
 final class PostRepository: PostRepositoryProtocol {
     private let coreDataStack: CoreDataStack
     private weak var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate?
+    
+    /// 홈에서 PostType별로 갖고 오기 위해 필요한 프로퍼티다
+    var pageType: PageType?
+    
+    /// 홈에서 PostType별로 갖고 오기 위한 fetchRequest다
+    var fetchRequestByPageType: NSFetchRequest<PostEntity>? {
+        let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "postType.type == %d", pageType?.rawValue ?? 0)
+        request.sortDescriptors = [NSSortDescriptor(key: "createDate", ascending: false)]
+        return request
+    }
 
     init(fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate?,
         coreDataStack: CoreDataStack = CoreDataStack.shared) {
@@ -27,9 +38,14 @@ final class PostRepository: PostRepositoryProtocol {
     }
 
     lazy var fetchedResultsController: NSFetchedResultsController<PostEntity> = {
-        let fetchRequest: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: false)]
-
+        var fetchRequest: NSFetchRequest<PostEntity>
+        if let request = fetchRequestByPageType {
+           fetchRequest = request
+        } else {
+            fetchRequest = PostEntity.fetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: false)]
+        }
+        
         let controller: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                                 managedObjectContext: coreDataStack.mainContext,
                                                                                 sectionNameKeyPath: nil, cacheName: nil)
