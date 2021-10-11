@@ -63,6 +63,7 @@ class BaseContentsCollectionViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +74,11 @@ class BaseContentsCollectionViewController: UIViewController {
         
         // 드롭박스가 가장 상단에 나타나야하기 때문에 collectionView 세팅 이후에 추가해야한다. 
         resultsFilterView.updateDropBoxView(.total, superView: view)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        originScrollContentsHeight = collectionView.contentSize.height
     }
     
     func setupResultFilterView() {
