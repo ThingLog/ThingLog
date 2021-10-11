@@ -1,5 +1,5 @@
 //
-//  CategoryViewController+setup.swift
+//  EasyLookViewController+setup.swift
 //  ThingLog
 //
 //  Created by hyunsu on 2021/10/02.
@@ -7,18 +7,18 @@
 
 import UIKit
 
-extension CategoryViewController {
+extension EasyLookViewController {
     // MARK: - Setup
-    func setupCategoryView() {
-        view.addSubview(categoryView)
+    func setupEasyLookTopView() {
+        view.addSubview(easyLookTopView)
         let safeLayoutGuide: UILayoutGuide = view.safeAreaLayoutGuide
-        categoryViewHeightConstriant = categoryView.heightAnchor.constraint(equalToConstant: categoryView.normalHeight)
-        self.currentCategoryHeight = categoryView.normalHeight
-        categoryViewHeightConstriant?.isActive = true
+        easyLookTopViewHeightConstriant = easyLookTopView.heightAnchor.constraint(equalToConstant: easyLookTopView.normalHeight)
+        self.currentEasyLookTopViewHeight = easyLookTopView.normalHeight
+        easyLookTopViewHeightConstriant?.isActive = true
         NSLayoutConstraint.activate([
-            categoryView.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor),
-            categoryView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor),
-            categoryView.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor)
+            easyLookTopView.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor),
+            easyLookTopView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor),
+            easyLookTopView.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor)
         ])
     }
     
@@ -41,7 +41,7 @@ extension CategoryViewController {
         NSLayoutConstraint.activate([
             contentsContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             contentsContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            contentsContainerView.topAnchor.constraint(equalTo: categoryView.bottomAnchor),
+            contentsContainerView.topAnchor.constraint(equalTo: easyLookTopView.bottomAnchor),
             contentsContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }

@@ -12,7 +12,7 @@ import RxSwift
 
 final class TabBarController: UITabBarController {
     let homeCoordinator: HomeCoordinator = HomeCoordinator(navigationController: UINavigationController())
-    let categoryCoordinator: CategoryCoordinator = CategoryCoordinator(navigationController: UINavigationController())
+    let easyLookCoordinator: EasyLookCoordinator = EasyLookCoordinator(navigationController: UINavigationController())
     let emptyViewController: UIViewController = UIViewController()
     private lazy var writeCoordinator: WriteCoordinator = {
         let coordinator: WriteCoordinator = .init(navigationController: UINavigationController(),
@@ -53,27 +53,27 @@ final class TabBarController: UITabBarController {
         tabBar.standardAppearance = appearance
         
         homeCoordinator.start()
-        categoryCoordinator.start()
+        easyLookCoordinator.start()
 
         let homeTabImage: UIImage = SwiftGenAssets.homeTab.image
-        let categoryTabImage: UIImage = SwiftGenAssets.categoryTab.image
+        let easyLookTabImage: UIImage = SwiftGenAssets.easyLookTab.image
         let plusTabImage: UIImage = SwiftGenAssets.plusTab.image.withRenderingMode(.alwaysOriginal)
         
         let homeTabBar: UITabBarItem = UITabBarItem(title: nil, image: homeTabImage, selectedImage: nil)
-        let categoryTabBar: UITabBarItem = UITabBarItem(title: nil, image: categoryTabImage, selectedImage: nil)
+        let easyLookTabBar: UITabBarItem = UITabBarItem(title: nil, image: easyLookTabImage, selectedImage: nil)
         let plusTabBar: UITabBarItem = UITabBarItem(title: nil, image: plusTabImage, selectedImage: nil)
         
         homeTabBar.imageInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -5, right: 0)
         plusTabBar.imageInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -5, right: 0)
-        categoryTabBar.imageInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -5, right: 0)
+        easyLookTabBar.imageInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -5, right: 0)
         
         homeCoordinator.navigationController.tabBarItem = homeTabBar
-        categoryCoordinator.navigationController.tabBarItem = categoryTabBar
+        easyLookCoordinator.navigationController.tabBarItem = easyLookTabBar
         emptyViewController.tabBarItem = plusTabBar
         
         viewControllers = [homeCoordinator.navigationController,
                            emptyViewController,
-                           categoryCoordinator.navigationController]
+                           easyLookCoordinator.navigationController]
     }
     
     private func setupWriteView() {

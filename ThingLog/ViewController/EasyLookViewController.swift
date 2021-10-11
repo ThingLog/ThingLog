@@ -1,5 +1,5 @@
 //
-//  CategoryViewController.swift
+//  EasyLookViewController.swift
 //  ThingLog
 //
 //  Created by hyunsu on 2021/09/20.
@@ -7,14 +7,14 @@
 import RxSwift
 import UIKit
 
-final class CategoryViewController: UIViewController {
-    var coordinator: CategoryCoordinator?
+final class EasyLookViewController: UIViewController {
+    var coordinator: EasyLookCoordinator?
     
-    lazy var categoryView: CategoryView = {
-        let categoryView: CategoryView = CategoryView(superView: view)
-        categoryView.translatesAutoresizingMaskIntoConstraints = false
+    lazy var easyLookTopView: EasyLookTopView = {
+        let easyLookTopView: EasyLookTopView = EasyLookTopView(superView: view)
+        easyLookTopView.translatesAutoresizingMaskIntoConstraints = false
         view.setContentCompressionResistancePriority(.required, for: .vertical)
-        return categoryView
+        return easyLookTopView
     }()
     
     // 게시물들을 보여주는 CollectioView가 담길 View이다.
@@ -39,11 +39,11 @@ final class CategoryViewController: UIViewController {
     
     let contentsViewController: BaseContentsCollectionViewController = BaseContentsCollectionViewController(willHideFilterView: true)
     
-    var viewModel: CategoryViewModel = CategoryViewModel()
+    var viewModel: EasyLookViewModel = EasyLookViewModel()
     let categoryRepo: CategoryRepository = CategoryRepository(fetchedResultsControllerDelegate: nil)
     
-    var categoryViewHeightConstriant: NSLayoutConstraint?
-    var currentCategoryHeight: CGFloat = 0
+    var easyLookTopViewHeightConstriant: NSLayoutConstraint?
+    var currentEasyLookTopViewHeight: CGFloat = 0
     var disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - Life cycle
@@ -51,13 +51,13 @@ final class CategoryViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = SwiftGenColors.white.color
         setupNavigationBar()
-        setupCategoryView()
+        setupEasyLookTopView()
         setupContainerView()
         setupContentsController()
         setupTopButton()
         
-        subscribeCategoryView()
-        subscribeCategoryFilterView()
+        subscribeEasyLookTapView()
+        subscribeResultsWithDropBoxView()
         subscribeHorizontalCollectionView()
         subscribeBaseControllerScrollOffset()
         
@@ -69,7 +69,7 @@ final class CategoryViewController: UIViewController {
     }
 }
 
-extension CategoryViewController {
+extension EasyLookViewController {
     @objc
     func clickTopButton() {
         self.contentsViewController.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)

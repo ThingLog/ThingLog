@@ -10,7 +10,7 @@ import UIKit
 
 /// 검색화면을 보여주는 ViewController다.
 final class SearchViewController: UIViewController {
-    var coordinator: CategoryCoordinator?
+    var coordinator: EasyLookCoordinator?
     
     private let searchTextField: SearchTextField = {
         let customTextField: SearchTextField = SearchTextField(isOnNavigationbar: true)

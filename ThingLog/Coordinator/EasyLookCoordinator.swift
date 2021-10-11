@@ -1,5 +1,5 @@
 //
-//  CategoryCoordinator.swift
+//  EasyLookCoordinator.swift
 //  ThingLog
 //
 //  Created by hyunsu on 2021/09/18.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CategoryCoordinator: Coordinator {
+final class EasyLookCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     
@@ -16,9 +16,9 @@ final class CategoryCoordinator: Coordinator {
     }
     
     func start() {
-        let categoryViewController: CategoryViewController = CategoryViewController()
-        categoryViewController.coordinator = self 
-        navigationController.pushViewController(categoryViewController, animated: true)
+        let easyLookViewController: EasyLookViewController = EasyLookViewController()
+        easyLookViewController.coordinator = self 
+        navigationController.pushViewController(easyLookViewController, animated: true)
     }
     
     /// 검색화면으로 이동하기 위한 메서드다. 

@@ -7,11 +7,11 @@
 
 import UIKit
 
-/// CategoryTapView에 들어가는 Button에 TopCategoryType을 프로퍼티로 가지는 UIButton이다.
-final class CategoryTypeButton: UIButton {
-    var type: TopCategoryType
+/// EasyLookTabView에 들어가는 Button에 EasyLookTopTabType을 프로퍼티로 가지는 UIButton이다.
+final class EasyLookTabTypeButton: UIButton {
+    var type: EasyLookTabType
     
-    init(type: TopCategoryType) {
+    init(type: EasyLookTabType) {
         self.type = type
         super.init(frame: .zero)
     }
