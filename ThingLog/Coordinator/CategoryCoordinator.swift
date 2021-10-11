@@ -32,4 +32,10 @@ final class CategoryCoordinator: Coordinator {
     func back() {
         navigationController.popViewController(animated: true)
     }
+    
+    /// 설정화면으로 이동하기 위한 메서드다
+    func showSettingViewController() {
+        let settingCoordinator: SettingCoordinator = SettingCoordinator(navigationController: navigationController)
+        settingCoordinator.start()
+    }
 }
