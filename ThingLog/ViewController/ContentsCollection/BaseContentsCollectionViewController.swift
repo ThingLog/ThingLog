@@ -23,8 +23,8 @@ class BaseContentsCollectionViewController: UIViewController {
     }()
     
     // 검색결과 - 모두보기 버튼 클릭시, 상단에 필요한 FilterView다. 재사용하기 위해 추가했다. 필요하지 않는 경우에는 숨긴다.
-    lazy var resultsFilterView: CategoryFilterView = {
-        let view: CategoryFilterView = CategoryFilterView(superView: self.view)
+    lazy var resultsFilterView: ResultsWithDropBoxView = {
+        let view: ResultsWithDropBoxView = ResultsWithDropBoxView(superView: self.view)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -144,7 +144,7 @@ class BaseContentsCollectionViewController: UIViewController {
 
 extension BaseContentsCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let numberOfItems: Int  = fetchResultController?.fetchedObjects?.count ?? 0
+        let numberOfItems: Int = fetchResultController?.fetchedObjects?.count ?? 0
         emptyView.isHidden = numberOfItems != 0
         return numberOfItems
     }
@@ -154,7 +154,7 @@ extension BaseContentsCollectionViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell: ContentsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath)as? ContentsCollectionViewCell else  {
+        guard let cell: ContentsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath)as? ContentsCollectionViewCell else {
             return UICollectionViewCell()
         }
         

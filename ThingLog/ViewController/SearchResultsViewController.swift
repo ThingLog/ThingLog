@@ -19,8 +19,8 @@ class SearchResultsViewController: UIViewController {
         return collectionView
     }()
     
-    lazy var totalFilterView: CategoryFilterView = {
-        let view: CategoryFilterView = CategoryFilterView(superView: view)
+    lazy var totalFilterView: ResultsWithDropBoxView = {
+        let view: ResultsWithDropBoxView = ResultsWithDropBoxView(superView: view)
         view.updateResultTotalLabel(by: "검색결과 " + "15" + "건")
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

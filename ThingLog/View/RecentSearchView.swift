@@ -246,7 +246,7 @@ final class RecentSearchView: UIView {
         tableViewHeightConstraint?.isActive = true
         tableViewHeightConstraint?.priority = .defaultLow
         
-        let autoSaveStackViewConstraint = autoSaveStackView.heightAnchor.constraint(greaterThanOrEqualToConstant: autoSaveStackViewHeight)
+        let autoSaveStackViewConstraint: NSLayoutConstraint = autoSaveStackView.heightAnchor.constraint(greaterThanOrEqualToConstant: autoSaveStackViewHeight)
         autoSaveStackViewConstraint.priority = .defaultHigh
         autoSaveStackViewConstraint.isActive = true
         
@@ -264,8 +264,7 @@ final class RecentSearchView: UIView {
             autoSaveLeadingEmptyView.widthAnchor.constraint(equalToConstant: autoSaveEmptyViewWidth),
             informationStackView.heightAnchor.constraint(equalToConstant: informationLabelHeight),
             informationBorderLineView.heightAnchor.constraint(equalToConstant: 0.5),
-            autoSaveTopEmptyView.heightAnchor.constraint(equalToConstant: 5),
-            
+            autoSaveTopEmptyView.heightAnchor.constraint(equalToConstant: 5)
         ])
         informationStackView.isHidden = true
     }

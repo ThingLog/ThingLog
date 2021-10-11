@@ -10,10 +10,10 @@ import Foundation
 
 /// 모아보기 홈에서 상단의 탭들의 선택에 따른 `NSFetchRequest<PostEntity>`를 쉽게 생성하여 `NSFetchResultsController`를 호출하도록 한다.
 /// 모아보기에서 각 뷰들의 액션에 따라 프로퍼티들을 변경하도록 하여, `fetchRequest`를 호출한다.
-final class CategoryViewModel {
+final class EasyLookViewModel {
     // MARK: - Properties
     // 모아보기 최상단 탭
-    var currentTopCategoryType: TopCategoryType {
+    var currentTopCategoryType: EasyLookTabType {
         // 최상 단 탭이 변경될 때 SubCategoryType 및 FilterType을 초기화한다.
         didSet {
             if currentTopCategoryType != .category {

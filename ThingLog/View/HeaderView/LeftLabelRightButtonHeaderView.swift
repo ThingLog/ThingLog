@@ -69,6 +69,7 @@ class LeftLabelRightButtonHeaderView: UICollectionReusableView {
     var disposeBag: DisposeBag = DisposeBag()
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         disposeBag = DisposeBag()
     }
     
