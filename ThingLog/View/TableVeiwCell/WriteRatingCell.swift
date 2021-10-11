@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// 글쓰기 화면에서 만족도를 입력할 때 사용하는 셀
 final class WriteRatingCell: UITableViewCell {
     private let label: UILabel = {
         let label: UILabel = UILabel()
@@ -55,7 +56,7 @@ extension WriteRatingCell {
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingLabelTopBottom),
             label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingLabelTopBottom),
             // Rating View
-            ratingView.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: paddingLabelTrailing),
+            ratingView.leadingAnchor.constraint(lessThanOrEqualTo: label.trailingAnchor, constant: paddingLabelTrailing),
             ratingView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingRatingTopBottom),
             ratingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -paddingRatingTrailing),
             ratingView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingLabelTopBottom)

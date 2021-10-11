@@ -7,10 +7,12 @@
 
 import UIKit
 
+/// 글쓰기 화면에서 WriteTextViewCell의 높이를 동적으로 변경하기 위한 프로토콜
 protocol WriteTextViewCellDelegate: AnyObject {
     func updateTextViewHeight(_ cell: WriteTextViewCell, _ textView: UITextView)
 }
 
+/// 글쓰기 화면에서 자유 글쓰기를 입력할 때 사용하는 셀
 final class WriteTextViewCell: UITableViewCell {
     private let textView: UITextView = {
         let textView: UITextView = UITextView()

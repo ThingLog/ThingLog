@@ -15,7 +15,7 @@ final class RatingView: UIView {
     var currentRating: Int = 0
     private var buttons: [UIButton] = []
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
+        let stackView: UIStackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing

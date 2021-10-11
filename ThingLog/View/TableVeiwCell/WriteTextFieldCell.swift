@@ -10,22 +10,19 @@ import UIKit
 import RxCocoa
 import RxSwift
 
+/// 글쓰기 화면에서 `물건 이름`, `가격` 등을 입력할 때 사용하는 셀
 final class WriteTextFieldCell: UITableViewCell {
     private let textField: UITextField = {
         let textField: UITextField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont.Pretendard.body1
         textField.textColor = SwiftGenColors.black.color
-        textField.clearButtonMode = .never
+        let clearButton: UIButton = UIButton(type: .custom)
+        clearButton.setImage(SwiftGenAssets.clear.image, for: .normal)
+        clearButton.contentMode = .scaleAspectFit
+        textField.rightView = clearButton
+        textField.rightViewMode = .never
         return textField
-    }()
-
-    private let clearButton: UIButton = {
-        let button: UIButton = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(SwiftGenAssets.clear.image, for: .normal)
-        button.isHidden = true
-        return button
     }()
 
     var placeholder: String? {
@@ -67,15 +64,12 @@ extension WriteTextFieldCell {
         selectionStyle = .none
 
         contentView.addSubview(textField)
-        contentView.addSubview(clearButton)
 
         NSLayoutConstraint.activate([
             textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: paddingLeadingTrailing),
             textField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingTopBottom),
-            textField.trailingAnchor.constraint(equalTo: clearButton.leadingAnchor),
-            textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingTopBottom),
-            clearButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor),
-            clearButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -paddingLeadingTrailing)
+            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -paddingLeadingTrailing),
+            textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingTopBottom)
         ])
 
         textField.delegate = self
@@ -85,15 +79,20 @@ extension WriteTextFieldCell {
         textField.rx.text.orEmpty
             .map { $0.isEmpty }
             .bind { [weak self] isEmpty in
-                self?.clearButton.isHidden = isEmpty
+                self?.textField.rightViewMode = isEmpty ? .never : .always
             }
             .disposed(by: disposeBag)
 
-        clearButton.rx.tap
+        (textField.rightView as? UIButton)?.rx.tap
             .bind { [weak self] _ in
-                self?.textField.text = ""
-                self?.textField.sendActions(for: .valueChanged)
+                self?.clearTextField()
             }.disposed(by: disposeBag)
+    }
+
+    @objc
+    private func clearTextField() {
+        textField.text = ""
+        textField.sendActions(for: .valueChanged)
     }
 }
 
