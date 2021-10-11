@@ -162,7 +162,7 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
     private func setupView() {
         contentView.backgroundColor = SwiftGenColors.white.color
         contentView.addSubview(stackView)
-        
+        selectionStyle = .none
         borderLineHeightConstraint = borderLineView.heightAnchor.constraint(equalToConstant: 0.5)
         borderLineHeightConstraint?.isActive = true
         NSLayoutConstraint.activate([
