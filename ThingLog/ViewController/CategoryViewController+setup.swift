@@ -91,7 +91,12 @@ extension CategoryViewController {
         let settingButton: UIButton = UIButton()
         settingButton.setImage(SwiftGenAssets.setting.image, for: .normal)
         settingButton.tintColor = SwiftGenColors.black.color
-        // settingButton.addTarget(self, action: #selector(showSettingView), for: .touchUpInside)
+        settingButton.rx.tap
+            .bind { [weak self] in
+                self?.coordinator?.showSettingViewController()
+            }
+            .disposed(by: disposeBag)
+        
         let settingBarButton: UIBarButtonItem = UIBarButtonItem(customView: settingButton)
         let searchBarButton: UIBarButtonItem = UIBarButtonItem(customView: searchButton)
         let spacingBarButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)

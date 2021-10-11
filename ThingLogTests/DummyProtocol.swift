@@ -28,7 +28,7 @@ extension DummyProtocol {
         let categoryList: [String] = ["문구", "가전", "화장품", "운동", "옷"]
         let titleNameList: [String] = ["아이폰","맥북","아이폰11","아이패드프로","애플워치"]
         let purchasePlaceList: [String] = ["강남","서울","경기","제주"]
-        
+        let pageTypeList: [PageType] = [.bought, .gift, .wish]
         
         let newPosts: [Post] = (1...count).map { i in
             var categories = [Category.init(title: "")]
@@ -41,7 +41,7 @@ extension DummyProtocol {
                                      purchasePlace: purchasePlaceList.randomElement()!,
                                      contents: "Test Contents \(titleNameList.randomElement()!)...",
                                      giftGiver: "현수",
-                                     postType: .init(isDelete: false, type: .bought),
+                                     postType: .init(isDelete: false, type: pageTypeList.randomElement()!),
                                      rating: Rating(score: ScoreType(rawValue: Int16.random(in: 0..<5))!),
                                      categories: categories,
                                      attachments: [Attachment(thumbnail: originalImage,

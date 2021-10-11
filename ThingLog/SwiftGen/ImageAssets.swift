@@ -31,6 +31,7 @@ internal enum SwiftGenAssets {
   internal static let gift = ImageSwiftGen(name: "gift")
   internal static let homeTab = ImageSwiftGen(name: "homeTab")
   internal static let modifyText = ImageSwiftGen(name: "modifyText")
+  internal static let paddingBack = ImageSwiftGen(name: "paddingBack")
   internal static let plusTab = ImageSwiftGen(name: "plusTab")
   internal static let search = ImageSwiftGen(name: "search")
   internal static let setting = ImageSwiftGen(name: "setting")

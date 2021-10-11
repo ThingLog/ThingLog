@@ -89,7 +89,7 @@ final class ContentsTabView: UIView {
     }
 }
 
-// MARK: - Update 
+// MARK: - Update
 extension ContentsTabView {
     /// 선택한 index를 통하여 해당 버튼을 tint 시키고, 그 외 버튼들은 연한 색깔로 변경한다.
     /// - Parameters:
@@ -117,6 +117,20 @@ extension ContentsTabView {
         UIView.animate(withDuration: 0.3) {
             self.leadingAnchorIndicatorBar?.constant = (UIScreen.main.bounds.width / 3) * CGFloat(index)
             self.layoutIfNeeded()
+        }
+    }
+    
+    /// PageType으로 특정 버튼을 반환하는 메소드다 ( 홈화면에서 사용하기 위해 )
+    /// - Parameter pageType: PageType을 주입한다.
+    /// - Returns: PageType에 맞는 버튼을 반환한다.
+    func pageTypeButton(by pageType: PageType) -> UIButton {
+        switch pageType {
+        case .bought:
+            return boughtButton
+        case .gift:
+            return giftButton
+        case .wish:
+            return wishButton
         }
     }
 }
