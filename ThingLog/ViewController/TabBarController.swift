@@ -111,7 +111,7 @@ final class TabBarController: UITabBarController {
                 } else {
                     deleteAllEntity()
                 }
-//                self.writeCoordinator.showWriteViewController(with: type)
+                self.writeCoordinator.showWriteViewController(with: type)
             }
             .disposed(by: disposeBag)
     }

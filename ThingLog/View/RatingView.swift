@@ -8,11 +8,6 @@
 import UIKit
 
 final class RatingView: UIView {
-    var maxCount: Int = 5 {
-        didSet { setupRatingButton() }
-    }
-
-    var currentRating: Int = 0
     private var buttons: [UIButton] = []
     private lazy var stackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
@@ -25,6 +20,12 @@ final class RatingView: UIView {
 
     private let fillImage: UIImage = SwiftGenAssets.rating.image.withTintColor(SwiftGenColors.black.color)
     private let emptyImage: UIImage = SwiftGenAssets.rating.image
+
+    // Mark: Properties
+    var maxCount: Int = 5 {
+        didSet { setupRatingButton() }
+    }
+    var currentRating: Int = 0
 
     override init(frame: CGRect) {
         super.init(frame: frame)

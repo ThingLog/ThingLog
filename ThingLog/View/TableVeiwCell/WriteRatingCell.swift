@@ -22,11 +22,14 @@ final class WriteRatingCell: UITableViewCell {
     private let ratingView: RatingView = {
         let ratingView: RatingView = RatingView()
         ratingView.translatesAutoresizingMaskIntoConstraints = false
+        ratingView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        ratingView.setContentHuggingPriority(.defaultLow, for: .vertical)
         return ratingView
     }()
 
     var currentRating: Int { ratingView.currentRating }
-    private let paddingLabelLeading: CGFloat = 31.0
+    private let paddingLabelMinLeading: CGFloat = 10.0
+    private let paddingLabelLeading: CGFloat = 26.0
     private let paddingLabelTrailing: CGFloat = 60.0
     private let paddingLabelTopBottom: CGFloat = 20.0
     private let paddingRatingTopBottom: CGFloat = 18.0
@@ -50,15 +53,22 @@ extension WriteRatingCell {
         contentView.addSubview(label)
         contentView.addSubview(ratingView)
 
+        let ratingViewLeadingConstraint: NSLayoutConstraint = ratingView.leadingAnchor.constraint(lessThanOrEqualTo: label.trailingAnchor, constant: paddingLabelTrailing)
+        ratingViewLeadingConstraint.priority = .defaultHigh
+        ratingViewLeadingConstraint.isActive = true
+
+        let ratingViewTrailingConstraint: NSLayoutConstraint = ratingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -paddingRatingTrailing)
+        ratingViewTrailingConstraint.priority = .defaultLow
+        ratingViewTrailingConstraint.isActive = true
+
         NSLayoutConstraint.activate([
             // Rating Label
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: paddingLabelLeading),
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingLabelTopBottom),
             label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingLabelTopBottom),
             // Rating View
-            ratingView.leadingAnchor.constraint(lessThanOrEqualTo: label.trailingAnchor, constant: paddingLabelTrailing),
+            ratingView.leadingAnchor.constraint(greaterThanOrEqualTo: label.trailingAnchor, constant: paddingLabelMinLeading),
             ratingView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingRatingTopBottom),
-            ratingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -paddingRatingTrailing),
             ratingView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingLabelTopBottom)
         ])
     }
