@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
+/// 글쓰기 화면에서 `물건 이름`, `가격` 등을 입력할 때 사용하는 셀
 final class WriteTextFieldCell: UITableViewCell {
     private let textField: UITextField = {
         let textField: UITextField = UITextField()

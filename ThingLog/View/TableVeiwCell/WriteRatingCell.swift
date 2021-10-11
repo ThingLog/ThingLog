@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// 글쓰기 화면에서 만족도를 입력할 때 사용하는 셀
 final class WriteRatingCell: UITableViewCell {
     private let label: UILabel = {
         let label: UILabel = UILabel()
