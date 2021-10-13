@@ -32,4 +32,11 @@ final class WriteCoordinator: Coordinator {
         navigationController.pushViewController(writeViewController, animated: true)
         parentViewController?.present(navigationController, animated: true)
     }
+
+    /// CategoryViewController로 이동한다.
+    func showCategoryViewController() {
+        let categoryViewController: CategoryViewController = CategoryViewController()
+        categoryViewController.coordinator = self
+        navigationController.pushViewController(categoryViewController, animated: true)
+    }
 }
