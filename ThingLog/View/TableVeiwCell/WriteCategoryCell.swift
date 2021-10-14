@@ -30,6 +30,7 @@ final class WriteCategoryCell: UITableViewCell {
                                                      collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.isHidden = true
+        collectionView.backgroundColor = SwiftGenColors.white.color
         return collectionView
     }()
 
