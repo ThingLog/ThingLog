@@ -106,12 +106,12 @@ final class TabBarController: UITabBarController {
                 self.touchDimmedView()
                 
                 // Test Code
-                if type == .bought {
-                    makeDummy()
-                } else {
-                    deleteAllEntity()
-                }
-//                self.writeCoordinator.showWriteViewController(with: type)
+//                if type == .bought {
+//                    makeDummy()
+//                } else {
+//                    deleteAllEntity()
+//                }
+                self.writeCoordinator.showWriteViewController(with: type)
             }
             .disposed(by: disposeBag)
     }
