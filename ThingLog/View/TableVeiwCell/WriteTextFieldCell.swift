@@ -122,6 +122,20 @@ extension WriteTextFieldCell {
 }
 
 extension WriteTextFieldCell: UITextFieldDelegate {
+    /// textField.keyboardType == .numberPad 일 때 커서의 움직임을 제한한다. (항상 끝으로 고정)
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField.keyboardType != .numberPad { return }
+
+        if let selectedRange: UITextRange = textField.selectedTextRange {
+            let cursorPosition: Int = textField.offset(from: textField.beginningOfDocument, to: selectedRange.start)
+
+            if cursorPosition != 0 {
+                let endPosition: UITextPosition = textField.endOfDocument
+                textField.selectedTextRange = textField.textRange(from: endPosition, to: endPosition)
+            }
+        }
+    }
+
     /// textField.keyboardType == .numberPad 일 때 세 자리 단위마다 , 를 붙여 반환한다.
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField.keyboardType != .numberPad { return true }
@@ -130,12 +144,14 @@ extension WriteTextFieldCell: UITextFieldDelegate {
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 0
 
+        // 문자열 전처리
         let text: String = textField.text ?? ""
         let newString: String = (text as NSString).replacingCharacters(in: range, with: string)
         let numberWithoutCommas: String = newString.replacingOccurrences(of: ",", with: "")
         var removeCharacter: String = numberWithoutCommas.replacingOccurrences(of: " 원", with: "")
         removeCharacter = removeCharacter.trimmingCharacters(in: .whitespacesAndNewlines)
 
+        // 백스페이스가 입력되는 경우 처리
         if string.isEmpty {
             if removeCharacter.count == 1 {
                 textField.text = ""
@@ -147,17 +163,19 @@ extension WriteTextFieldCell: UITextFieldDelegate {
             removeCharacter = removeLast
         }
 
-        guard var number = formatter.number(from: removeCharacter) else {
+        // 숫자가 아닌 문자열이 들어온 경우 textField를 비운다.
+        guard var number: NSNumber = formatter.number(from: removeCharacter) else {
             textField.text = nil
             textField.sendActions(for: .valueChanged)
             return false
         }
 
-        // TODO: 가격의 최대 입력 값 변경
-        if Int(truncating: number) > Int.max {
-            number = NSNumber(value: Int.max)
+        // 입력 값이 999_999_999 보다 큰 경우 999_999_999로 변경
+        if Int(truncating: number) > 999_999_999 {
+            number = NSNumber(value: 999_999_999)
         }
 
+        // 3자리마다 , 삽입
         var formattedString: String? = formatter.string(from: number)
         if string == "." && range.location == textField.text?.count {
             formattedString = formattedString?.appending(".")
