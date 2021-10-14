@@ -49,6 +49,7 @@
 		87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188826FB5E9500C3FBCA /* PostRepository.swift */; };
 		87F2188E26FB8ACA00C3FBCA /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188D26FB8ACA00C3FBCA /* PostType.swift */; };
 		87F2189026FB8D6A00C3FBCA /* PostTypeEntity+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */; };
+		DB05B03C271853CE0067DB17 /* LeftRightButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */; };
 		DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C1F27043CFC00FDC48F /* DropBoxView.swift */; };
 		DB148C222704623200FDC48F /* InsetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C212704623200FDC48F /* InsetButton.swift */; };
 		DB148C26270469B300FDC48F /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C25270469B300FDC48F /* Date+.swift */; };
@@ -197,6 +198,7 @@
 		87F2188826FB5E9500C3FBCA /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		87F2188D26FB8ACA00C3FBCA /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
 		87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostTypeEntity+.swift"; sourceTree = "<group>"; };
+		DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRightButtonView.swift; sourceTree = "<group>"; };
 		DB148C1F27043CFC00FDC48F /* DropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropBoxView.swift; sourceTree = "<group>"; };
 		DB148C212704623200FDC48F /* InsetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetButton.swift; sourceTree = "<group>"; };
 		DB148C25270469B300FDC48F /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 				DBD545512703409300063C98 /* HorizontalCollectionView.swift */,
 				DB148C272704A1A500FDC48F /* IgnoreTouchView.swift */,
 				DB148C212704623200FDC48F /* InsetButton.swift */,
+				DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */,
 				DB8BF6782705D25700FD5FDB /* LogoView.swift */,
 				DB7C04BD26F9BE72009F5C0A /* ProfileView.swift */,
 				DBA0F81D2709BD41009553FC /* RecentSearchView.swift */,
@@ -783,6 +786,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB05B03C271853CE0067DB17 /* LeftRightButtonView.swift in Sources */,
 				87BB17A927098A720088B847 /* WriteCoordinator.swift in Sources */,
 				DBAB64A526FCC2F8006D95ED /* HomeCoordinator.swift in Sources */,
 				DBD545522703409300063C98 /* HorizontalCollectionView.swift in Sources */,
