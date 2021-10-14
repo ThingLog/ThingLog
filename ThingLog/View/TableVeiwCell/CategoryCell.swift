@@ -35,6 +35,7 @@ final class CategoryCell: UITableViewCell {
         button.layer.borderColor = SwiftGenColors.black.color.cgColor
         button.titleLabel?.font = UIFont.Pretendard.body3
         button.setTitleColor(SwiftGenColors.white.color, for: .normal)
+        button.isUserInteractionEnabled = false
         return button
     }()
 
