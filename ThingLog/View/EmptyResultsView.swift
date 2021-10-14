@@ -16,7 +16,7 @@ final class EmptyResultsView: UIView {
         return view
     }()
     
-    private let label: UILabel = {
+    let label: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.body2
         label.textColor = SwiftGenColors.black.color

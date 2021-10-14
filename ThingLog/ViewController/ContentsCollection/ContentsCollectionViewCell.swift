@@ -48,7 +48,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
     }()
     
     // 하단에 그라데이션을 강조하기 위한 뷰다 ( 주로 휴지통 화면에서 사용된다 )
-    private let bottomGradientView: UIView = {
+    let bottomGradientView: UIView = {
         let view: UIView = UIView()
         view.alpha = 0.6
         view.isHidden = true
@@ -93,6 +93,8 @@ class ContentsCollectionViewCell: UICollectionViewCell {
     }
     
     func setupView() {
+        clipsToBounds = true
+        
         contentView.addSubview(imageView)
         contentView.addSubview(smallIconView)
         contentView.addSubview(bottomGradientView)
