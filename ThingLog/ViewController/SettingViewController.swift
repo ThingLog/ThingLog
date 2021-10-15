@@ -127,6 +127,13 @@ extension SettingViewController: UITableViewDataSource {
                                     buttonType: .withToggleButton,
                                     borderLineHeight: .with1Height,
                                     borderLineColor: .withGray5)
+                cell.rightToggleButton.setOn(UserInformationViewModel.shared.isAutomatedDarkMode, animated: false)
+                cell.rightToggleButton.rx.isOn
+                    .bind { bool in
+                        UserInformationViewModel.shared.isAutomatedDarkMode = bool
+                    }
+                    .disposed(by: cell.disposeBag)
+                
             case .editCategory:
                 cell.changeViewType(labelType: .withBody1,
                                     buttonType: .withChevronRight,
