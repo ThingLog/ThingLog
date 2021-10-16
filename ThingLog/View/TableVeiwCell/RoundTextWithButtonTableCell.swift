@@ -1,5 +1,5 @@
 //
-//  CategoryCell.swift
+//  RoundTextWithButtonTableCell.swift
 //  ThingLog
 //
 //  Created by 이지원 on 2021/10/13.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CategoryCell: UITableViewCell {
+final class RoundTextWithButtonTableCell: UITableViewCell {
     private let nameLabel: PaddingLabel = {
         let label: PaddingLabel = PaddingLabel(padding: .init(top: 1, left: 8, bottom: 1, right: 8))
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +62,7 @@ final class CategoryCell: UITableViewCell {
     }
 }
 
-extension CategoryCell {
+extension RoundTextWithButtonTableCell {
     private func setupView() {
         selectionStyle = .none
 

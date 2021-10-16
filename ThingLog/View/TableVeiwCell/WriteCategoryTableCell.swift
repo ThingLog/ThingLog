@@ -1,5 +1,5 @@
 //
-//  WriteCategoryCell.swift
+//  WriteCategoryTableCell.swift
 //  ThingLog
 //
 //  Created by 이지원 on 2021/10/13.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WriteCategoryCell: UITableViewCell {
+final class WriteCategoryTableCell: UITableViewCell {
     private let categoryLabel: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +81,7 @@ final class WriteCategoryCell: UITableViewCell {
     private func setupCollectionView() {
         contentView.addSubview(collectionView)
 
-        collectionView.register(SelectedCategoryCell.self, forCellWithReuseIdentifier: SelectedCategoryCell.reuseIdentifier)
+        collectionView.register(RoundTextWithButtonCollectionCell.self, forCellWithReuseIdentifier: RoundTextWithButtonCollectionCell.reuseIdentifier)
 
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: paddingLeading),
@@ -114,14 +114,14 @@ final class WriteCategoryCell: UITableViewCell {
     }
 }
 
-extension WriteCategoryCell: UICollectionViewDataSource {
+extension WriteCategoryTableCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         categories.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell: SelectedCategoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedCategoryCell.reuseIdentifier, for: indexPath) as? SelectedCategoryCell else {
-            return SelectedCategoryCell()
+        guard let cell: RoundTextWithButtonCollectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: RoundTextWithButtonCollectionCell.reuseIdentifier, for: indexPath) as? RoundTextWithButtonCollectionCell else {
+            return RoundTextWithButtonCollectionCell()
         }
 
         cell.configure(text: categories[indexPath.row])

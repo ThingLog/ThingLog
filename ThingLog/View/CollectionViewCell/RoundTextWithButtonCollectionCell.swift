@@ -1,5 +1,5 @@
 //
-//  SelectedCategoryCell.swift
+//  RoundTextWithButtonCollectionCell.swift
 //  ThingLog
 //
 //  Created by 이지원 on 2021/10/13.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SelectedCategoryCell: UICollectionViewCell {
+final class RoundTextWithButtonCollectionCell: UICollectionViewCell {
     private let label: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +44,7 @@ final class SelectedCategoryCell: UICollectionViewCell {
     }
 }
 
-extension SelectedCategoryCell {
+extension RoundTextWithButtonCollectionCell {
     private func setupView() {
         contentView.layer.cornerRadius = 10
         contentView.backgroundColor = SwiftGenColors.gray6.color
