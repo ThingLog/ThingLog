@@ -12,8 +12,8 @@ import RxSwift
 
 /// 글쓰기 화면에서 `물건 이름`, `가격` 등을 입력할 때 사용하는 셀
 final class WriteTextFieldCell: UITableViewCell {
-    private let textField: UITextField = {
-        let textField: UITextField = UITextField()
+    private let textField: DisableSelectionTextField = {
+        let textField: DisableSelectionTextField = DisableSelectionTextField(isSelection: true)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont.Pretendard.body1
         textField.textColor = SwiftGenColors.black.color
@@ -38,6 +38,7 @@ final class WriteTextFieldCell: UITableViewCell {
     var keyboardType: UIKeyboardType = .default {
         didSet {
             textField.keyboardType = keyboardType
+            textField.isSelection = keyboardType == .numberPad ? false : true
         }
     }
 
@@ -122,20 +123,6 @@ extension WriteTextFieldCell {
 }
 
 extension WriteTextFieldCell: UITextFieldDelegate {
-    /// textField.keyboardType == .numberPad 일 때 커서의 움직임을 제한한다. (항상 끝으로 고정)
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField.keyboardType != .numberPad { return }
-
-        if let selectedRange: UITextRange = textField.selectedTextRange {
-            let cursorPosition: Int = textField.offset(from: textField.beginningOfDocument, to: selectedRange.start)
-
-            if cursorPosition != 0 {
-                let endPosition: UITextPosition = textField.endOfDocument
-                textField.selectedTextRange = textField.textRange(from: endPosition, to: endPosition)
-            }
-        }
-    }
-
     /// textField.keyboardType == .numberPad 일 때 세 자리 단위마다 , 를 붙여 반환한다.
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField.keyboardType != .numberPad { return true }

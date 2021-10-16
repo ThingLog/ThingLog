@@ -31,6 +31,7 @@
 		873EC04926D504BA003C3525 /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC04026D504BA003C3525 /* RxCocoa.xcframework */; };
 		873EC04A26D504BA003C3525 /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC04026D504BA003C3525 /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		873EC04E26D5068F003C3525 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 873EC04D26D5068F003C3525 /* .swiftlint.yml */; };
+		874D92F7271AD0A9005FF8F3 /* DisableSelectionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D92F6271AD0A9005FF8F3 /* DisableSelectionTextField.swift */; };
 		875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */; };
 		876243E02708701B00BDA1DC /* WriteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876243DF2708701B00BDA1DC /* WriteType.swift */; };
 		876243E22708704800BDA1DC /* WriteTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876243E12708704800BDA1DC /* WriteTypeButton.swift */; };
@@ -179,6 +180,7 @@
 		873EC03F26D504BA003C3525 /* RxBlocking.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxBlocking.xcframework; path = Carthage/Build/RxBlocking.xcframework; sourceTree = "<group>"; };
 		873EC04026D504BA003C3525 /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
 		873EC04D26D5068F003C3525 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		874D92F6271AD0A9005FF8F3 /* DisableSelectionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableSelectionTextField.swift; sourceTree = "<group>"; };
 		875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		876243DF2708701B00BDA1DC /* WriteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteType.swift; sourceTree = "<group>"; };
 		876243E12708704800BDA1DC /* WriteTypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTypeButton.swift; sourceTree = "<group>"; };
@@ -480,29 +482,30 @@
 		DB7C04E626FB1990009F5C0A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DBA0F823270B079B009553FC /* HeaderView */,
-				DBA0F81A2709B37C009553FC /* TableVeiwCell */,
+				DB8BF6802706D89E00FD5FDB /* CategoryFilterView.swift */,
+				DB148C2F2705863100FDC48F /* CategoryTabView.swift */,
+				DB148C2B2705855A00FDC48F /* CategoryTypeButton.swift */,
+				DB8BF6822706DA7900FD5FDB /* CategoryView.swift */,
+				DB7C04B826F87BE9009F5C0A /* ChoiceWritingView.swift */,
 				DB7C04E726FB199A009F5C0A /* CollectionViewCell */,
 				DB7C04ED26FB1ACE009F5C0A /* ContentsTabView.swift */,
-				DB7C04FB26FB27A6009F5C0A /* TemplateImageButton.swift */,
-				DB7C04BD26F9BE72009F5C0A /* ProfileView.swift */,
-				DB7C04B826F87BE9009F5C0A /* ChoiceWritingView.swift */,
+				874D92F6271AD0A9005FF8F3 /* DisableSelectionTextField.swift */,
 				DB148C1F27043CFC00FDC48F /* DropBoxView.swift */,
-				DB148C212704623200FDC48F /* InsetButton.swift */,
-				DB148C272704A1A500FDC48F /* IgnoreTouchView.swift */,
+				DB3A516827103B3E003B529D /* EmptyPostView.swift */,
+				DB3A516A27103DC4003B529D /* EmptyResultsView.swift */,
+				DBA0F823270B079B009553FC /* HeaderView */,
 				DBD545512703409300063C98 /* HorizontalCollectionView.swift */,
+				DB148C272704A1A500FDC48F /* IgnoreTouchView.swift */,
+				DB148C212704623200FDC48F /* InsetButton.swift */,
 				DB8BF6782705D25700FD5FDB /* LogoView.swift */,
-				DB148C2B2705855A00FDC48F /* CategoryTypeButton.swift */,
-				DB148C2F2705863100FDC48F /* CategoryTabView.swift */,
-				DB8BF6802706D89E00FD5FDB /* CategoryFilterView.swift */,
-				DB8BF6822706DA7900FD5FDB /* CategoryView.swift */,
-				DB1745B62708700200EF083E /* SearchTextField.swift */,
-				876243E12708704800BDA1DC /* WriteTypeButton.swift */,
+				DB7C04BD26F9BE72009F5C0A /* ProfileView.swift */,
+				87A86C8E27141507008FB3F0 /* RatingView.swift */,
 				DBA0F81D2709BD41009553FC /* RecentSearchView.swift */,
 				DB37EC76270C307C00030D9A /* RecentSearchView+update.swift */,
-				DB3A516A27103DC4003B529D /* EmptyResultsView.swift */,
-				DB3A516827103B3E003B529D /* EmptyPostView.swift */,
-				87A86C8E27141507008FB3F0 /* RatingView.swift */,
+				DB1745B62708700200EF083E /* SearchTextField.swift */,
+				DBA0F81A2709B37C009553FC /* TableVeiwCell */,
+				DB7C04FB26FB27A6009F5C0A /* TemplateImageButton.swift */,
+				876243E12708704800BDA1DC /* WriteTypeButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -827,6 +830,7 @@
 				DB7C04B926F87BE9009F5C0A /* ChoiceWritingView.swift in Sources */,
 				DB7C04AA26F5F308009F5C0A /* CategoryCoordinator.swift in Sources */,
 				876C157927044BA0000C1C84 /* RepositoryError.swift in Sources */,
+				874D92F7271AD0A9005FF8F3 /* DisableSelectionTextField.swift in Sources */,
 				DB8BF6792705D25700FD5FDB /* LogoView.swift in Sources */,
 				DBA0F829270B26A0009553FC /* SearchResultsViewController.swift in Sources */,
 				87078B5B26EA44B5007AE242 /* ThingLog.xcdatamodeld in Sources */,
