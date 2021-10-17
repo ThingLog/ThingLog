@@ -72,21 +72,11 @@ final class SettingViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: topBorderLineView.bottomAnchor)
         ])
         tableView.dataSource = self
+        tableView.delegate = self
     }
     
     func setupNavigationBar() {
-        if #available(iOS 15, *) {
-            let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = SwiftGenColors.white.color
-            appearance.shadowColor = .clear
-            navigationController?.navigationBar.standardAppearance = appearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-        } else {
-            navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.barTintColor = SwiftGenColors.white.color
-            navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        }
+        setupBaseNavigationBar()
         
         let logoView: LogoView = LogoView("설정", font: UIFont.Pretendard.headline4)
         navigationItem.titleView = logoView
@@ -147,5 +137,20 @@ extension SettingViewController: UITableViewDataSource {
             }
         }
         return cell
+    }
+}
+
+extension SettingViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cellType: TableViewCellType = TableViewCellType(rawValue: indexPath.row) {
+            switch cellType {
+            case .darkMode:
+                return
+            case .editCategory:
+                return
+            case .trash:
+                coordinator?.showTrashViewController()
+            }
+        }
     }
 }

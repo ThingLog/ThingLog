@@ -54,6 +54,9 @@
 		87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188826FB5E9500C3FBCA /* PostRepository.swift */; };
 		87F2188E26FB8ACA00C3FBCA /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188D26FB8ACA00C3FBCA /* PostType.swift */; };
 		87F2189026FB8D6A00C3FBCA /* PostTypeEntity+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */; };
+		DB05B03C271853CE0067DB17 /* LeftRightButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */; };
+		DB05B03E27185B780067DB17 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03D27185B780067DB17 /* TrashViewController.swift */; };
+		DB05B04027185C500067DB17 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03F27185C500067DB17 /* UIViewController+.swift */; };
 		DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C1F27043CFC00FDC48F /* DropBoxView.swift */; };
 		DB148C222704623200FDC48F /* InsetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C212704623200FDC48F /* InsetButton.swift */; };
 		DB148C26270469B300FDC48F /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C25270469B300FDC48F /* Date+.swift */; };
@@ -62,6 +65,7 @@
 		DB148C302705863100FDC48F /* EasyLookTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C2F2705863100FDC48F /* EasyLookTabView.swift */; };
 		DB1745B72708700200EF083E /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1745B62708700200EF083E /* SearchTextField.swift */; };
 		DB1745B927098E8A00EF083E /* RecentSearchDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1745B827098E8A00EF083E /* RecentSearchDataViewModel.swift */; };
+		DB22327E27183378002ED30D /* TwoLabelVerticalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22327D27183378002ED30D /* TwoLabelVerticalHeaderView.swift */; };
 		DB22B6BE270ECA20005F9971 /* PostContentsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22B6BD270ECA20005F9971 /* PostContentsCollectionViewController.swift */; };
 		DB331DA926FDD00A00A629F5 /* ColorsAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA626FDD00A00A629F5 /* ColorsAsset.swift */; };
 		DB331DAA26FDD00A00A629F5 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA726FDD00A00A629F5 /* ImageAssets.swift */; };
@@ -206,6 +210,9 @@
 		87F2188826FB5E9500C3FBCA /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		87F2188D26FB8ACA00C3FBCA /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
 		87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostTypeEntity+.swift"; sourceTree = "<group>"; };
+		DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRightButtonView.swift; sourceTree = "<group>"; };
+		DB05B03D27185B780067DB17 /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
+		DB05B03F27185C500067DB17 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		DB148C1F27043CFC00FDC48F /* DropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropBoxView.swift; sourceTree = "<group>"; };
 		DB148C212704623200FDC48F /* InsetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetButton.swift; sourceTree = "<group>"; };
 		DB148C25270469B300FDC48F /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -214,6 +221,7 @@
 		DB148C2F2705863100FDC48F /* EasyLookTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookTabView.swift; sourceTree = "<group>"; };
 		DB1745B62708700200EF083E /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		DB1745B827098E8A00EF083E /* RecentSearchDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchDataViewModel.swift; sourceTree = "<group>"; };
+		DB22327D27183378002ED30D /* TwoLabelVerticalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoLabelVerticalHeaderView.swift; sourceTree = "<group>"; };
 		DB22B6BD270ECA20005F9971 /* PostContentsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentsCollectionViewController.swift; sourceTree = "<group>"; };
 		DB331DA626FDD00A00A629F5 /* ColorsAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsAsset.swift; sourceTree = "<group>"; };
 		DB331DA726FDD00A00A629F5 /* ImageAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
@@ -474,6 +482,7 @@
 				DBD2244A27085DFB004C5184 /* SearchViewController.swift */,
 				DB6909602712DA8100BB54E4 /* SettingViewController.swift */,
 				DB7C04B126F87548009F5C0A /* TabBarController.swift */,
+				DB05B03D27185B780067DB17 /* TrashViewController.swift */,
 				87BB17A62709898F0088B847 /* WriteViewController.swift */,
 				87BB17AC27098F480088B847 /* WriteViewController+setup.swift */,
 			);
@@ -505,6 +514,7 @@
 				DBD545512703409300063C98 /* HorizontalCollectionView.swift */,
 				DB148C272704A1A500FDC48F /* IgnoreTouchView.swift */,
 				DB148C212704623200FDC48F /* InsetButton.swift */,
+				DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */,
 				DB8BF6782705D25700FD5FDB /* LogoView.swift */,
 				8738E1CC271708F80069BB80 /* PaddingLabel.swift */,
 				DB7C04BD26F9BE72009F5C0A /* ProfileView.swift */,
@@ -541,6 +551,7 @@
 				DBAB64A626FE2AFF006D95ED /* UIImage+.swift */,
 				DB7C04EB26FB1A04009F5C0A /* UIView+.swift */,
 				DB7C04C926F9E69D009F5C0A /* UserDefaults+.swift */,
+				DB05B03F27185C500067DB17 /* UIViewController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -559,6 +570,7 @@
 			isa = PBXGroup;
 			children = (
 				DBA0F824270B07D8009553FC /* LeftLabelRightButtonHeaderView.swift */,
+				DB22327D27183378002ED30D /* TwoLabelVerticalHeaderView.swift */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -795,6 +807,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB05B03C271853CE0067DB17 /* LeftRightButtonView.swift in Sources */,
 				87BB17A927098A720088B847 /* WriteCoordinator.swift in Sources */,
 				DBAB64A526FCC2F8006D95ED /* HomeCoordinator.swift in Sources */,
 				DBD545522703409300063C98 /* HorizontalCollectionView.swift in Sources */,
@@ -810,6 +823,7 @@
 				DBAB64A726FE2AFF006D95ED /* UIImage+.swift in Sources */,
 				DB3A516B27103DC4003B529D /* EmptyResultsView.swift in Sources */,
 				DB148C26270469B300FDC48F /* Date+.swift in Sources */,
+				DB22327E27183378002ED30D /* TwoLabelVerticalHeaderView.swift in Sources */,
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
 				DB6909632712DB0800BB54E4 /* SettingCoordinator.swift in Sources */,
 				DBD5455027033D9A00063C98 /* RoundButtonCollectionViewCell.swift in Sources */,
@@ -853,6 +867,8 @@
 				DBA0F825270B07D8009553FC /* LeftLabelRightButtonHeaderView.swift in Sources */,
 				873EC00B26D39055003C3525 /* SceneDelegate.swift in Sources */,
 				87BB17AD27098F480088B847 /* WriteViewController+setup.swift in Sources */,
+				DB05B04027185C500067DB17 /* UIViewController+.swift in Sources */,
+				DB05B03E27185B780067DB17 /* TrashViewController.swift in Sources */,
 				8736B3F426FDD55E000433E1 /* UIFont+.swift in Sources */,
 				DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */,
 				DB7C04F026FB1EFF009F5C0A /* HomeViewController.swift in Sources */,

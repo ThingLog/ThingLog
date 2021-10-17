@@ -19,10 +19,18 @@ final class SettingCoordinator: Coordinator {
     func start() {
         let settingViewController: SettingViewController = SettingViewController()
         settingViewController.coordinator = self
+        settingViewController.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(settingViewController, animated: true)
     }
     
     func back() {
         navigationController.popViewController(animated: true)
+    }
+    
+    func showTrashViewController() {
+        let trashViewController: TrashViewController = TrashViewController()
+        trashViewController.coordinator = self
+        trashViewController.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(trashViewController, animated: true)
     }
 }
