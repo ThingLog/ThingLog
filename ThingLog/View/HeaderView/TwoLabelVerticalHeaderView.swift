@@ -83,13 +83,13 @@ class TwoLabelVerticalHeaderView: UICollectionReusableView {
         ])
     }
     
-    /// 상단의 제목을 변경하기 위한 메소드다
+    /// 상단의 제목을 변경하기 위한 메소드다.
     /// - Parameter title: 변경하고자 하는 상단의 제목을 주입한다.
     func updateTitle(by title: String?) {
         titleLabel.text = title
     }
     
-    /// 하단의 부제목을 변경하기 위한 메소드다
+    /// 하단의 부제목을 변경하기 위한 메소드다.
     /// - Parameter subTitle: 변경하고자 하는 하단의 부제목을 주입한다.
     func updateSubTitle(by subTitle: String?) {
         subTitleLabel.text = subTitle

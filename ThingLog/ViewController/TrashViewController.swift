@@ -43,7 +43,7 @@ final class TrashViewController: UIViewController {
         return stackView
     }()
     
-    // 휴지통에 데이터가 없는 경우에 보여주는 뷰다
+    // 휴지통에 데이터가 없는 경우에 보여주는 뷰다.
     private var emptyView: EmptyResultsView = {
         let view: EmptyResultsView = EmptyResultsView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +59,7 @@ final class TrashViewController: UIViewController {
             fetchResultController?.delegate = self
         }
     }
-    // CoreData가 외부에서 변경될 때 호출하는 클로저다
+    // CoreData가 외부에서 변경될 때 호출하는 클로저다.
     var completionBlock: ((Int) -> Void)?
     
     /// 현재 휴지통에서 복구또는 삭제 기능을 활성화한 상태인지를 확인하기 위한 프로퍼티다. 활성화한 상태는 true이다.
@@ -166,9 +166,7 @@ extension TrashViewController: UICollectionViewDataSource {
         }
         
         // 휴지통에서 사용할 경우, ContentsCollectionViewCell의 뷰를 약간 조정한다.
-        cell.smallIconView.isHidden = true
-        cell.bottomGradientView.isHidden = false
-        cell.bottomLabel.isHidden = false
+        cell.setupForTrashView()
         cell.checkButton.isHidden = !isEditMode
         
         cell.backgroundColor = .systemGray

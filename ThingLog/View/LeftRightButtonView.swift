@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// 왼쪽, 오른쪽 각각 버튼을 가지는 뷰다. 왼쪽 버튼이 강조되어 있다 ( 휴지통에서 주로 사용된다 )
+/// 왼쪽, 오른쪽 각각 버튼을 가지는 뷰다. 왼쪽 버튼이 강조되어 있다. ( 휴지통에서 주로 사용된다. )
 class LeftRightButtonView: UIView {
     let leftButton: UIButton = {
         let button: UIButton = UIButton()

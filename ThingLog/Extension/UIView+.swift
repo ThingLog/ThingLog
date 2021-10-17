@@ -31,16 +31,14 @@ extension UIView {
                      startPoint: CGPoint,
                      endPoint: CGPoint) {
         if let sublayers: [CALayer] = layer.sublayers {
-            for sublayer in sublayers {
-                if sublayer.name == "customGradient" {
-                    return
-                }
+            for sublayer in sublayers where sublayer.name == "customGradient"{
+                return
             }
         }
  
         let gradient: CAGradientLayer = CAGradientLayer()
         gradient.colors = [startColor.cgColor, endColor.cgColor]
-        gradient.locations = [0.0 , 1.0]
+        gradient.locations = [0.0, 1.0]
         gradient.startPoint = startPoint
         gradient.endPoint = endPoint
         gradient.frame = bounds

@@ -11,7 +11,7 @@ import UIKit
 ///
 /// 기본적인 구성으로는 imageView, smallIconView 로 구성된다. smallIconView는 이미지가 여러개인 경우에 표시한다.
 ///
-/// 추가적으로 하단의 그라데이션뷰와, 하단의 label, 우측상단의 체크버튼이 존재한다. ( 이는 휴지통 화면에서 재사용하기 위해 존재한다 )
+/// 추가적으로 하단의 그라데이션뷰와, 하단의 label, 우측상단의 체크버튼이 존재한다. ( 이는 휴지통 화면에서 재사용하기 위해 존재한다. )
 /// ```swift
 /// // 휴지통 화면에서 사용하고자 하는 경우
 /// cell.smallIconView.isHidden = true
@@ -47,7 +47,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    // 하단에 그라데이션을 강조하기 위한 뷰다 ( 주로 휴지통 화면에서 사용된다 )
+    // 하단에 그라데이션을 강조하기 위한 뷰다. ( 주로 휴지통 화면에서 사용된다. )
     let bottomGradientView: UIView = {
         let view: UIView = UIView()
         view.alpha = 0.6
@@ -56,7 +56,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    // 하단에 정보를 표시하기 위한 Label이다 ( 주로 휴지통 화면에서 몇일 남았는지를 알려주기 위해 사용된다 )
+    // 하단에 정보를 표시하기 위한 Label이다. ( 주로 휴지통 화면에서 몇일 남았는지를 알려주기 위해 사용된다. )
     let bottomLabel: UILabel = {
         let label: UILabel = UILabel()
         label.textColor = SwiftGenColors.white.color
@@ -70,7 +70,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    /// 우측 상단에 체크하기 위한 버튼이다. ( 주로 휴지통 화면에서 삭제 또는 복구하기 위해 사용되는 버튼이다 )
+    /// 우측 상단에 체크하기 위한 버튼이다. ( 주로 휴지통 화면에서 삭제 또는 복구하기 위해 사용되는 버튼이다. )
     let checkButton: UIButton = {
         let button: UIButton = UIButton()
         button.layer.borderWidth = 1
@@ -92,7 +92,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
-    func setupView() {
+    private func setupView() {
         clipsToBounds = true
         
         contentView.addSubview(imageView)
@@ -165,5 +165,14 @@ class ContentsCollectionViewCell: UICollectionViewCell {
                                        endColor: .clear,
                                        startPoint: CGPoint(x: 0.0, y: 1.0),
                                        endPoint: CGPoint(x: 0.0, y: 0.0))
+    }
+}
+
+extension ContentsCollectionViewCell {
+    /// 휴지통화면에서 사용하고자 하는 경우에 내부 뷰들을 보여주거나 숨김처리 하는 메서드다.
+    func setupForTrashView() {
+        smallIconView.isHidden = true
+        bottomGradientView.isHidden = false
+        bottomLabel.isHidden = false
     }
 }
