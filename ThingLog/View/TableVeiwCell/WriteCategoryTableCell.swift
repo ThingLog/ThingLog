@@ -7,6 +7,8 @@
 
 import UIKit
 
+/// 글쓰기 화면에서 카테고리 항목을 나타내는 셀
+/// 카테고리가 선택되어 있다면 CollectionView를 통해 선택된 카테고리 항목을 보여주고, 선택되어 있지 않다면 Label을 보여준다.
 final class WriteCategoryTableCell: UITableViewCell {
     private let categoryLabel: UILabel = {
         let label: UILabel = UILabel()
@@ -81,7 +83,7 @@ final class WriteCategoryTableCell: UITableViewCell {
     private func setupCollectionView() {
         contentView.addSubview(collectionView)
 
-        collectionView.register(RoundTextWithButtonCollectionCell.self, forCellWithReuseIdentifier: RoundTextWithButtonCollectionCell.reuseIdentifier)
+        collectionView.register(LabelWithButtonRoundCollectionCell.self, forCellWithReuseIdentifier: LabelWithButtonRoundCollectionCell.reuseIdentifier)
 
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: paddingLeading),
@@ -120,8 +122,8 @@ extension WriteCategoryTableCell: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell: RoundTextWithButtonCollectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: RoundTextWithButtonCollectionCell.reuseIdentifier, for: indexPath) as? RoundTextWithButtonCollectionCell else {
-            return RoundTextWithButtonCollectionCell()
+        guard let cell: LabelWithButtonRoundCollectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelWithButtonRoundCollectionCell.reuseIdentifier, for: indexPath) as? LabelWithButtonRoundCollectionCell else {
+            return LabelWithButtonRoundCollectionCell()
         }
 
         cell.configure(text: categories[indexPath.row])

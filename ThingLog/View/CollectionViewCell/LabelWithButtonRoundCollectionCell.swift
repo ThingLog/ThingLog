@@ -1,5 +1,5 @@
 //
-//  RoundTextWithButtonCollectionCell.swift
+//  LabelWithButtonRoundCollectionCell.swift
 //  ThingLog
 //
 //  Created by 이지원 on 2021/10/13.
@@ -7,7 +7,10 @@
 
 import UIKit
 
-final class RoundTextWithButtonCollectionCell: UICollectionViewCell {
+/// 글쓰기 화면에서 선택된 카테고리를 보여주기 위한 셀
+///
+/// [이미지](https://www.notion.so/TextWithButtonRoundCollectionCell-977a80b4d4274f04bbea32dce171e35f)
+final class LabelWithButtonRoundCollectionCell: UICollectionViewCell {
     private let label: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
