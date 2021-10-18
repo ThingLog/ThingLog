@@ -20,4 +20,10 @@ final class HomeCoordinator: Coordinator {
         homeViewController.coordinator = self 
         navigationController.pushViewController(homeViewController, animated: true)
     }
+    
+    /// 설정화면으로 이동하기 위한 메서드다
+    func showSettingViewController() {
+        let settingCoordinator: SettingCoordinator = SettingCoordinator(navigationController: navigationController)
+        settingCoordinator.start()
+    }
 }

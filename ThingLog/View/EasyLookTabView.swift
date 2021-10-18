@@ -1,5 +1,5 @@
 //
-//  CategoryTabView.swift
+//  EasyLookTabView.swift
 //  ThingLog
 //
 //  Created by hyunsu on 2021/09/30.
@@ -7,8 +7,8 @@
 import RxSwift
 import UIKit
 
-/// 모아보기 - 최상단에 탭에 나타나기 위한 뷰이다. TopCategoryType 으로 탭들을 결정한다.
-final class CategoryTabView: UIView {
+/// 모아보기 - 최상단에 탭에 나타나기 위한 뷰이다. EasyLookTopTabType 으로 탭들을 결정한다.
+final class EasyLookTabView: UIView {
     // MARK: - View
     private var emptyLeadingView: UIView = {
         let view: UIView = UIView()
@@ -32,10 +32,10 @@ final class CategoryTabView: UIView {
     }()
     
     // MARK: - Properties
-    private var selectedButton: CategoryTypeButton?
+    private var selectedButton: EasyLookTabTypeButton?
     
-    var topCategoryTypeSubject: PublishSubject<TopCategoryType> = PublishSubject()
-    private var previousTopCateogryType: TopCategoryType = .total
+    var easyLookTopTabTypeSubject: PublishSubject<EasyLookTabType> = PublishSubject()
+    private var previousTopCateogryType: EasyLookTabType = .total
     
     let marginConstant: CGFloat = 15.0
     
@@ -65,16 +65,16 @@ final class CategoryTabView: UIView {
     
     private func addView() {
         stackView.addArrangedSubview(emptyLeadingView)
-        let cases: [TopCategoryType] = TopCategoryType.allCases
+        let cases: [EasyLookTabType] = EasyLookTabType.allCases
         for idx in cases.indices {
-            let type: TopCategoryType = cases[idx]
-            let categoryTypeButton: CategoryTypeButton = CategoryTypeButton(type: type)
-            categoryTypeButton.updateColor(isTint: idx == 0 )
-            categoryTypeButton.setTitle(type.rawValue, for: .normal)
-            categoryTypeButton.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
-            stackView.addArrangedSubview(categoryTypeButton)
+            let type: EasyLookTabType = cases[idx]
+            let easyLookTabTypeButton: EasyLookTabTypeButton = EasyLookTabTypeButton(type: type)
+            easyLookTabTypeButton.updateColor(isTint: idx == 0)
+            easyLookTabTypeButton.setTitle(type.rawValue, for: .normal)
+            easyLookTabTypeButton.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
+            stackView.addArrangedSubview(easyLookTabTypeButton)
             if idx == 0 {
-                selectedButton = categoryTypeButton
+                selectedButton = easyLookTabTypeButton
             }
         }
         stackView.addArrangedSubview(emptyTrailingView)
@@ -82,7 +82,7 @@ final class CategoryTabView: UIView {
     }
     
     @objc
-    private func clickButton(_ sender: CategoryTypeButton) {
+    private func clickButton(_ sender: EasyLookTabTypeButton) {
         selectedButton?.updateColor(isTint: false)
         sender.updateColor(isTint: true)
         selectedButton = sender
@@ -91,7 +91,7 @@ final class CategoryTabView: UIView {
             return
         }
         previousTopCateogryType = sender.type
-        topCategoryTypeSubject.onNext(sender.type)
+        easyLookTopTabTypeSubject.onNext(sender.type)
     }
 }
 

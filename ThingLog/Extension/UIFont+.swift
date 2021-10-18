@@ -11,6 +11,7 @@ protocol FontTextStyle {
     static var headline1: UIFont { get }
     static var headline2: UIFont { get }
     static var headline3: UIFont { get }
+    static var headline4: UIFont { get }
     static var title1: UIFont { get }
     static var title2: UIFont { get }
     static var title3: UIFont { get }
@@ -27,6 +28,7 @@ extension UIFont {
         static var headline1: UIFont { SwiftGenFonts.Pretendard.bold.font(size: 34.0) }
         static var headline2: UIFont { SwiftGenFonts.Pretendard.bold.font(size: 24.0) }
         static var headline3: UIFont { SwiftGenFonts.Pretendard.bold.font(size: 20.0) }
+        static var headline4: UIFont { SwiftGenFonts.Pretendard.bold.font(size: 18.0) }
         static var title1: UIFont { SwiftGenFonts.Pretendard.bold.font(size: 16.0) }
         static var title2: UIFont { SwiftGenFonts.Pretendard.bold.font(size: 14.0) }
         static var title3: UIFont { SwiftGenFonts.Pretendard.semiBold.font(size: 12.0) }

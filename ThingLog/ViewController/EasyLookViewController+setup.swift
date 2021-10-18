@@ -1,5 +1,5 @@
 //
-//  CategoryViewController+setup.swift
+//  EasyLookViewController+setup.swift
 //  ThingLog
 //
 //  Created by hyunsu on 2021/10/02.
@@ -7,18 +7,18 @@
 
 import UIKit
 
-extension CategoryViewController {
+extension EasyLookViewController {
     // MARK: - Setup
-    func setupCategoryView() {
-        view.addSubview(categoryView)
+    func setupEasyLookTopView() {
+        view.addSubview(easyLookTopView)
         let safeLayoutGuide: UILayoutGuide = view.safeAreaLayoutGuide
-        categoryViewHeightConstriant = categoryView.heightAnchor.constraint(equalToConstant: categoryView.normalHeight)
-        self.currentCategoryHeight = categoryView.normalHeight
-        categoryViewHeightConstriant?.isActive = true
+        easyLookTopViewHeightConstriant = easyLookTopView.heightAnchor.constraint(equalToConstant: easyLookTopView.normalHeight)
+        self.currentEasyLookTopViewHeight = easyLookTopView.normalHeight
+        easyLookTopViewHeightConstriant?.isActive = true
         NSLayoutConstraint.activate([
-            categoryView.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor),
-            categoryView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor),
-            categoryView.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor)
+            easyLookTopView.leadingAnchor.constraint(equalTo: safeLayoutGuide.leadingAnchor),
+            easyLookTopView.trailingAnchor.constraint(equalTo: safeLayoutGuide.trailingAnchor),
+            easyLookTopView.topAnchor.constraint(equalTo: safeLayoutGuide.topAnchor)
         ])
     }
     
@@ -41,7 +41,7 @@ extension CategoryViewController {
         NSLayoutConstraint.activate([
             contentsContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             contentsContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            contentsContainerView.topAnchor.constraint(equalTo: categoryView.bottomAnchor),
+            contentsContainerView.topAnchor.constraint(equalTo: easyLookTopView.bottomAnchor),
             contentsContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
@@ -63,18 +63,7 @@ extension CategoryViewController {
     }
     
     func setupNavigationBar() {
-        if #available(iOS 15, *) {
-            let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = SwiftGenColors.white.color
-            appearance.shadowColor = .clear
-            navigationController?.navigationBar.standardAppearance = appearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-        } else {
-            navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.barTintColor = SwiftGenColors.white.color
-            navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        }
+        setupBaseNavigationBar()
         
         let logoView: LogoView = LogoView("모아보기")
         let logoBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: logoView)
@@ -91,7 +80,12 @@ extension CategoryViewController {
         let settingButton: UIButton = UIButton()
         settingButton.setImage(SwiftGenAssets.setting.image, for: .normal)
         settingButton.tintColor = SwiftGenColors.black.color
-        // settingButton.addTarget(self, action: #selector(showSettingView), for: .touchUpInside)
+        settingButton.rx.tap
+            .bind { [weak self] in
+                self?.coordinator?.showSettingViewController()
+            }
+            .disposed(by: disposeBag)
+        
         let settingBarButton: UIBarButtonItem = UIBarButtonItem(customView: settingButton)
         let searchBarButton: UIBarButtonItem = UIBarButtonItem(customView: searchButton)
         let spacingBarButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)

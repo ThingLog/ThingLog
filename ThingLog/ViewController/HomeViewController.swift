@@ -33,9 +33,11 @@ final class HomeViewController: UIViewController {
         return controller
     }()
     
-    var coordinator: Coordinator?
+    var coordinator: HomeCoordinator?
     var heightAnchorProfileView: NSLayoutConstraint?
     let profileViewHeight: CGFloat = 44 + 24 + 16
+    
+    var disposeBag: DisposeBag = DisposeBag() 
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -49,6 +51,7 @@ final class HomeViewController: UIViewController {
         subscribePageVeiwControllerTransition()
         subscribeContentsTabButton()
         subscribePageViewControllerScrollOffset()
+        subscribeInformationViewModel()
         
         fetchAllPost()
     }
@@ -100,18 +103,7 @@ final class HomeViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        if #available(iOS 15, *) {
-            let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = SwiftGenColors.white.color
-            appearance.shadowColor = .clear
-            navigationController?.navigationBar.standardAppearance = appearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-        } else {
-            navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.barTintColor = SwiftGenColors.white.color
-            navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        }
+        setupBaseNavigationBar()
         
         let logoView: LogoView = LogoView("띵로그")
         let logoBarButtonItem: UIBarButtonItem = UIBarButtonItem(customView: logoView)
@@ -120,7 +112,11 @@ final class HomeViewController: UIViewController {
         let settingButton: UIButton = UIButton()
         settingButton.setImage(SwiftGenAssets.setting.image, for: .normal)
         settingButton.tintColor = SwiftGenColors.black.color
-        // settingButton.addTarget(self, action: #selector(showSettingView), for: .touchUpInside)
+        settingButton.rx.tap
+            .bind { [weak self] in
+                self?.coordinator?.showSettingViewController()
+            }
+            .disposed(by: disposeBag)
         let settingBarButton: UIBarButtonItem = UIBarButtonItem(customView: settingButton)
         navigationItem.rightBarButtonItem = settingBarButton
     }
@@ -188,6 +184,21 @@ extension HomeViewController {
                 }
             })
             .disposed(by: pageViewController.disposeBag)
+    }
+    
+    /// 사용자의 정보 ( 이름, 한줄 소개 ) 를 subscribe한다. 
+    func subscribeInformationViewModel() {
+        UserInformationViewModel.shared.userAliasNameSubject
+            .bind { [weak self] name in
+                self?.profileView.userAliasNameButton.setTitle(name ?? "분더카머", for: .normal)
+            }
+            .disposed(by: disposeBag)
+        
+        UserInformationViewModel.shared.userOneLineIntroductionSubject
+            .bind { [weak self] introduction in
+                self?.profileView.userOneLineIntroductionLabel.text = introduction ?? "나를 찾는 여정 나를 찾는 여정"
+            }
+            .disposed(by: disposeBag)
     }
     
     /// 콘텐츠 개수가 많은 상황에서 아래로 스크롤한 상태에서 콘텐츠 개수가 적은 페이지로 전환할 시 containerView의 높이를 줄여주는 메소드다.

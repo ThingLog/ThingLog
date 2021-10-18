@@ -1,5 +1,5 @@
 //
-//  CategoryFilterView.swift
+//  ResultsWithDropBoxView.swift
 //  ThingLog
 //
 //  Created by hyunsu on 2021/10/01.
@@ -26,7 +26,7 @@ import UIKit
 /// 모아보기 - 상단 카테고리 탭에서 선택에 따라 검색결과 및 `DropBoxView`들을 구성하는 View다.
 ///
 /// 검색결과에서 모두보기 버튼 클릭할 경우 상단에 재사용하기 위해 `titleLabel`을 추가했다. 모아보기에서는 `titleLabel`을 숨김처리한다. 
-final class CategoryFilterView: UIView {
+final class ResultsWithDropBoxView: UIView {
     // MARK: - View
     private let emptyView: UIView = {
         let view: UIView = UIView()
@@ -121,12 +121,12 @@ final class CategoryFilterView: UIView {
     }
 }
 
-extension CategoryFilterView {
+extension ResultsWithDropBoxView {
     /// 상단 카테고리의 탭을 클릭할 때 마다 DropBoxView의 구성을 변경하기 위한 메소드이다.
     /// - Parameters:
-    ///   - type: 클릭한 카테고리의 탭의 타입( TopCategoryType ) 을 넣는다.
+    ///   - type: 클릭한 카테고리의 탭의 타입( EasyLookTabType ) 을 넣는다.
     ///   - superView: 현재 해당 뷰가 뷰 계층 구조에서 최상단에 속해있는 view를 넣는다. ( VIewController의 View를 넣는다 )
-    func updateDropBoxView(_ type: TopCategoryType?, superView: UIView ) {
+    func updateDropBoxView(_ type: EasyLookTabType?, superView: UIView) {
         // 기존 stackView를 모두 제거한다.
         stackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
@@ -154,7 +154,7 @@ extension CategoryFilterView {
     
     /// 결과에 따른 총 게시물 검색 수를 변경하기 위한 메서드다.
     /// - Parameter totalCount: 총 게시물 검색 수를 지정한다.
-    func updateResultTotalLabel(by title: String ) {
+    func updateResultTotalLabel(by title: String) {
         resultTotalLabel.text = title
     }
     

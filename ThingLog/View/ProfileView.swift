@@ -15,8 +15,8 @@ final class ProfileView: UIView {
         button.titleLabel?.font = UIFont.Pretendard.headline3
         button.setImage(SwiftGenAssets.modifyText.image, for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 0)
         button.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         return button
     }()

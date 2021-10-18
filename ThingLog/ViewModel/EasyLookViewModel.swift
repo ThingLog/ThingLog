@@ -10,10 +10,10 @@ import Foundation
 
 /// 모아보기 홈에서 상단의 탭들의 선택에 따른 `NSFetchRequest<PostEntity>`를 쉽게 생성하여 `NSFetchResultsController`를 호출하도록 한다.
 /// 모아보기에서 각 뷰들의 액션에 따라 프로퍼티들을 변경하도록 하여, `fetchRequest`를 호출한다.
-final class CategoryViewModel {
+final class EasyLookViewModel {
     // MARK: - Properties
     // 모아보기 최상단 탭
-    var currentTopCategoryType: TopCategoryType {
+    var currentTopCategoryType: EasyLookTabType {
         // 최상 단 탭이 변경될 때 SubCategoryType 및 FilterType을 초기화한다.
         didSet {
             if currentTopCategoryType != .category {
@@ -38,7 +38,7 @@ final class CategoryViewModel {
     /// - Parameters:
     ///   - type: 해당 범주의 타입을 주입한다.
     ///   - value: 해당 범주의 변경한 데이터를 주입한다.
-    func changeCurrentFilterType( type: FilterType, value: String ) {
+    func changeCurrentFilterType( type: FilterType, value: String) {
         guard let index = currentTopCategoryType.filterTypes.firstIndex(of: type) else {
             return
         }
@@ -94,7 +94,7 @@ final class CategoryViewModel {
     
     /// 현재 상태에 따른 `NSfetchRequest`를 통하여 `NSFetchResultController`를 초기화하여 데이터를 가져와 completion 블록을 호출한다.
     /// - Parameter completion: NSfetchResultsController의 데이터를 사용할 컬렉션뷰를 reload하도록 한다.
-    func fetchRequest(_ completion: @escaping (Result<Bool, Error>) -> Void ) {
+    func fetchRequest(_ completion: @escaping (Result<Bool, Error>) -> Void) {
         let request: NSFetchRequest<PostEntity> = currentNSFetchRequest()
         request.fetchBatchSize = batchSize
         fetchResultController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.shared.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)

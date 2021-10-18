@@ -69,6 +69,7 @@ class LeftLabelRightButtonHeaderView: UICollectionReusableView {
     var disposeBag: DisposeBag = DisposeBag()
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         disposeBag = DisposeBag()
     }
     
@@ -92,7 +93,7 @@ class LeftLabelRightButtonHeaderView: UICollectionReusableView {
         ])
     }
     
-    func updateTitle(title: String?, subTitle: String? = nil ) {
+    func updateTitle(title: String?, subTitle: String? = nil) {
         titleLabel.text = title
         subTitleLabel.text = subTitle
     }

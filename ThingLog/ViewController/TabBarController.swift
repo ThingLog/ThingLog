@@ -12,7 +12,7 @@ import RxSwift
 
 final class TabBarController: UITabBarController {
     let homeCoordinator: HomeCoordinator = HomeCoordinator(navigationController: UINavigationController())
-    let categoryCoordinator: CategoryCoordinator = CategoryCoordinator(navigationController: UINavigationController())
+    let easyLookCoordinator: EasyLookCoordinator = EasyLookCoordinator(navigationController: UINavigationController())
     let emptyViewController: UIViewController = UIViewController()
     private lazy var writeCoordinator: WriteCoordinator = {
         let coordinator: WriteCoordinator = .init(navigationController: UINavigationController(),
@@ -53,27 +53,27 @@ final class TabBarController: UITabBarController {
         tabBar.standardAppearance = appearance
         
         homeCoordinator.start()
-        categoryCoordinator.start()
+        easyLookCoordinator.start()
 
         let homeTabImage: UIImage = SwiftGenAssets.homeTab.image
-        let categoryTabImage: UIImage = SwiftGenAssets.categoryTab.image
+        let easyLookTabImage: UIImage = SwiftGenAssets.easyLookTab.image
         let plusTabImage: UIImage = SwiftGenAssets.plusTab.image.withRenderingMode(.alwaysOriginal)
         
         let homeTabBar: UITabBarItem = UITabBarItem(title: nil, image: homeTabImage, selectedImage: nil)
-        let categoryTabBar: UITabBarItem = UITabBarItem(title: nil, image: categoryTabImage, selectedImage: nil)
+        let easyLookTabBar: UITabBarItem = UITabBarItem(title: nil, image: easyLookTabImage, selectedImage: nil)
         let plusTabBar: UITabBarItem = UITabBarItem(title: nil, image: plusTabImage, selectedImage: nil)
         
         homeTabBar.imageInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -5, right: 0)
         plusTabBar.imageInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -5, right: 0)
-        categoryTabBar.imageInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -5, right: 0)
+        easyLookTabBar.imageInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -5, right: 0)
         
         homeCoordinator.navigationController.tabBarItem = homeTabBar
-        categoryCoordinator.navigationController.tabBarItem = categoryTabBar
+        easyLookCoordinator.navigationController.tabBarItem = easyLookTabBar
         emptyViewController.tabBarItem = plusTabBar
         
         viewControllers = [homeCoordinator.navigationController,
                            emptyViewController,
-                           categoryCoordinator.navigationController]
+                           easyLookCoordinator.navigationController]
     }
     
     private func setupWriteView() {
@@ -89,7 +89,7 @@ final class TabBarController: UITabBarController {
         dimmedView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(touchDimmedView)))
     }
     
-    private func constraintDimmedView(to view: UIView ) {
+    private func constraintDimmedView(to view: UIView) {
         dimmedView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             dimmedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -106,11 +106,11 @@ final class TabBarController: UITabBarController {
                 self.touchDimmedView()
                 
                 // Test Code
-                if type == .bought {
-                    makeDummy()
-                } else {
-                    deleteAllEntity()
-                }
+//                if type == .bought {
+//                    makeDummy()
+//                } else {
+//                    deleteAllEntity()
+//                }
                 self.writeCoordinator.showWriteViewController(with: type)
             }
             .disposed(by: disposeBag)
@@ -120,7 +120,7 @@ final class TabBarController: UITabBarController {
 // MARK: - Action
 extension TabBarController {
     /// 현재 선택된 viewController의 최상단에 dimmedView를 부착한다.
-    func attachDimmedView(to view: UIView? ) {
+    func attachDimmedView(to view: UIView?) {
         guard let view = view else { return }
         view.addSubview(dimmedView)
         constraintDimmedView(to: view)
@@ -129,7 +129,7 @@ extension TabBarController {
     
     /// ``WriteView``를 숨기거나 나타나도록 하면서 애니메이션을 추가한다.
     /// - Parameter hide: 숨기고자 하는 경우는 true, 나타나고자 하는 경우는 false 이다.
-    private func hideWriteViewWithAnimate(_ hide: Bool ) {
+    private func hideWriteViewWithAnimate(_ hide: Bool) {
         if hide {
             UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut) {
                 self.choiceView.hide(true)
@@ -150,7 +150,7 @@ extension TabBarController {
         }
     }
     
-    private func rotatePlusButton(isRecovery recovery: Bool ) {
+    private func rotatePlusButton(isRecovery recovery: Bool) {
         let imageView: UIImageView? = tabBar.subviews[2].subviews.first as? UIImageView
         imageView?.contentMode = .center
         imageView?.transform = recovery ? .identity : CGAffineTransform(rotationAngle: .pi / 4)

@@ -4,13 +4,13 @@
 //
 //  Created by hyunsu on 2021/10/02.
 //
-
+import CoreData
 import RxSwift
 import UIKit
 
 /// 검색화면을 보여주는 ViewController다.
 final class SearchViewController: UIViewController {
-    var coordinator: CategoryCoordinator?
+    var coordinator: EasyLookCoordinator?
     
     private let searchTextField: SearchTextField = {
         let customTextField: SearchTextField = SearchTextField(isOnNavigationbar: true)
@@ -44,8 +44,6 @@ final class SearchViewController: UIViewController {
     // MARK: - Properties
     private let recentSearchDataViewModel: RecentSearchDataViewModel = RecentSearchDataViewModel()
     
-    // 검색결과 에따른 물건리스트가 나오고 있는지 판별하기 위한 프로퍼티
-    private var isShowingResults: Bool = false
     var disposeBag: DisposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -153,11 +151,9 @@ final class SearchViewController: UIViewController {
     private func subscribeTableViewSelectIndex() {
         recentSearchView.selectedIndexPathSubject
             .bind { [weak self] keyword in
-                // TODO: - ⚠️ 검색결과로 이동하기 위한 로직 추가
-                print(keyword)
                 self?.hideKeyboard()
                 self?.searchTextField.changeTextField(by: keyword)
-                self?.showSearchResultsViewController(true)
+                self?.showSearchResultsViewController(true, keyWord: keyword)
             }
             .disposed(by: disposeBag)
     }
@@ -179,10 +175,34 @@ final class SearchViewController: UIViewController {
     
     /// 검색결과화면을 보여주거나 숨기고자 한다.
     /// - Parameter bool: 보여주고자 할때는 true, 그렇지 않다면 false를 넣는다.
-    private func showSearchResultsViewController(_ bool: Bool ) {
-        searchResultsViewController.view.isHidden = !bool
-        searchResultsViewController.isAllContentsShowing = false 
-        isShowingResults = bool
+    private func showSearchResultsViewController(_ bool: Bool, keyWord: String? = nil) {
+        if bool {
+            fetchAllPost(by: keyWord)
+        } else {
+            self.searchResultsViewController.view.isHidden = true
+            self.emptyView.isHidden = true
+        }
+    }
+    
+    /// 검색한 키워드로 조건에 맞는 Post들을 모두 찾는다.
+    /// - Parameter keyWord: 검색하고자 하는 키워드를 넣는다.
+    private func fetchAllPost(by keyWord: String? = nil) {
+        guard let keyWord: String = keyWord else {
+            return
+        }
+        searchResultsViewController.viewModel.fetchAllRequest(keyWord: keyWord) { searchedCount in
+            if searchedCount != 0 {
+                self.searchResultsViewController.viewModel.fetchedResultsControllers.forEach {
+                    $0.delegate = self
+                }
+                self.searchResultsViewController.collectionView.reloadData()
+                self.searchResultsViewController.totalFilterView.updateResultTotalLabel(by: "검색결과 \(searchedCount)건")
+            }
+            self.searchResultsViewController.view.isHidden = searchedCount == 0
+            self.searchResultsViewController.isAllContentsShowing = false
+            self.emptyView.isHidden = searchedCount != 0
+            self.emptyView.updateTitle(keyWord)
+        }
     }
     
     private func hideKeyboard() {
@@ -194,11 +214,9 @@ extension SearchViewController: SearchTextFieldDelegate {
     func searchTextFieldDidChangeSelection(_ textField: UITextField) {
         guard let text: String = checkTextField(textField.text) else {
             showSearchResultsViewController(false)
-            isShowingResults = false
             return
         }
-        print(text)
-        isShowingResults = true
+        showSearchResultsViewController(true, keyWord: text)
     }
     
     func searchTextFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -206,11 +224,7 @@ extension SearchViewController: SearchTextFieldDelegate {
             if recentSearchDataViewModel.isAutoSaveMode {
                 recentSearchDataViewModel.add(textField.text!)
             }
-            // TODO: - ⚠️ 키워드를 통해서 NSFetchRequest + NSFetchResultsController 생성하여 업데이트
-            print(text)
-            emptyView.isHidden = false
-            emptyView.updateTitle(text) // TODO: ⚠️ 테스트 
-//            showSearchResultsViewController(true)
+            showSearchResultsViewController(true, keyWord: text)
         }
         hideKeyboard()
         return true
@@ -219,12 +233,19 @@ extension SearchViewController: SearchTextFieldDelegate {
     /// 공백만 포함된 경우를 체크한다.
     /// - Parameter text: String 옵셔널 타입을 주입한다.
     /// - Returns: 공백일 경우는 nil, 그렇지 않은 경우는 String이 된다.
-    func checkTextField(_ text: String? ) -> String? {
+    func checkTextField(_ text: String?) -> String? {
         guard let text = text,
               !text.isEmpty,
               !text.filter({ $0 != " " }).isEmpty else {
             return nil
         }
         return text
+    }
+}
+
+// SearchViewController에서 하는 이유는, SearchResultsViewController에서 하게되면 총 검색결과 갯수들을 싱크하는데 있어서 어려움이 있고, 이를 실시간으로 반영하기 보다는 검색홈으로 가도록 하는 로직을 구성했다. 검색홈으로 가는 로직을 위해서는 SearchViewController에서 delegate를 구현하는게 훨씬 간단하다.
+extension SearchViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        showSearchResultsViewController(false)
     }
 }

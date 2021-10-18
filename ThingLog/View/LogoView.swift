@@ -9,11 +9,11 @@ import UIKit.UILabel
 
 /// NavigationBar에 좌측에 들어가는 Logo를 가지는 Label이다.
 final class LogoView: UILabel {
-    init(_ title: String) {
+    init(_ title: String, font: UIFont = UIFont.Pretendard.headline3) {
         super.init(frame: .zero)
         text = title
         textColor = SwiftGenColors.black.color
-        font = UIFont.Pretendard.headline3
+        self.font = font
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)

@@ -4,43 +4,43 @@
 //
 //  Created by hyunsu on 2021/10/04.
 //
-
+import CoreData
 import UIKit
 /*
  
  categoryStackView: UIStackView - Horizontal {
-    [_categoryLabel,
-     categoryLabel]
+ [_categoryLabel,
+ categoryLabel]
  }
  
  postTitleStackView: UIStackView - Horizontal {
-    [_postTitleLabel,
-     postTitleLabel]
+ [_postTitleLabel,
+ postTitleLabel]
  }
  
  categoryAndPostTitleStackView: UIStackView - Horizontal  {
-    [categoryStackView,
-     postTitleStackView]
+ [categoryStackView,
+ postTitleStackView]
  }
  
  rightStackView: UIStackView - Vertical  {
-    [dateTopEmptyView,
-     dateLabel,
-     categoryAndPostTitleStackView,
-     contentsLabel ]
+ [dateTopEmptyView,
+ dateLabel,
+ categoryAndPostTitleStackView,
+ contentsLabel ]
  }
  
  imageWithRightStackView: UIStackView - Horizontal {
-    [iamgeView,
-     rightStackView ]
+ [iamgeView,
+ rightStackView ]
  }
  
  stackView: UIStackView - Veritcal   {
-    [topBortderLineView,
-     imageWithRightStackView,
-     bottomBorderLineView]
+ [topBortderLineView,
+ imageWithRightStackView,
+ bottomBorderLineView]
  }
-
+ 
  */
 
 /// 좌측에는 이미지가 있고, 우측에는 기록날짜, 카테고리, 물건이름, 내용(최대3줄) 을 담는 Cell이다.
@@ -148,7 +148,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     private lazy var rightStackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [
                                                     dateTopEmptyView,
@@ -162,10 +162,17 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
+    private let rightStackViewTrailing: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var imageWithRightStackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [
                                                     imageView,
-                                                    rightStackView])
+                                                    rightStackView,
+                                                    rightStackViewTrailing])
         stackView.axis = .horizontal
         stackView.spacing = 6
         stackView.alignment = .top
@@ -226,12 +233,37 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
     }
     
     /// PostEntity객체로 뷰들을 업데이트한다.
-    func updateView() { // TODO: ⚠️ by post: PostEntity
+    func updateView(post: PostEntity? = nil, keyWord: String? = nil) {
         // 날짜
-        dateLabel.text = "2021.06.18"
-        categoryLabel.text = "학용품"
-        postTitleLabel.text = "현수"
-        contentsLabel.text = "내가 제일 좋아하는 노트브랜드 먕먕 오늘 또 사버렸다. 내가 제일 좋아하는 노트브랜드 먕먕 오늘 또 사버렸다. 내가 제일 좋아하는 노트브랜드 먕먕 오늘 또 사버렸다."
-//        categoryLabel.text = post.categories
+        if let post: PostEntity = post {
+            if let createDate: Date = post.createDate {
+                dateLabel.text = createDate.toString(.year) + "." + createDate.toString(.month) + "." + createDate.toString(.day)
+            }
+            categoryLabel.text = (post.categories?.allObjects as? [CategoryEntity])?.first?.title
+            postTitleLabel.text = post.title
+            contentsLabel.text = post.contents
+            
+            guard let contents: String = post.contents,
+                  let keyWord = keyWord else {
+                return
+            }
+            tintTextOnContentsLabel(keyWord: keyWord, contents: contents)
+            return
+        }
+    }
+    
+    /// contentsLabel에 특정 키워드만 빨갛게 강조하는 메서드다.
+    private func tintTextOnContentsLabel(keyWord: String, contents: String) {
+        // ⚠️ Post 키워드만 강조하는 로직 추가하기
+        let nsStr: NSString = contents as NSString
+        let range: NSRange = nsStr.range(of: keyWord)
+        if range.location == Int.max { return }
+        let newContents: String = nsStr.substring(from: range.location)
+        
+        let attributedStr: NSMutableAttributedString = NSMutableAttributedString(string: newContents)
+        attributedStr.addAttribute(NSAttributedString.Key.foregroundColor,
+                                   value: UIColor.systemRed,
+                                   range: (newContents as NSString).range(of: keyWord))
+        contentsLabel.attributedText = attributedStr
     }
 }

@@ -1,5 +1,5 @@
 //
-//  CategoryView.swift
+//  EasyLookTopView.swift
 //  ThingLog
 //
 //  Created by hyunsu on 2021/10/01.
@@ -9,13 +9,13 @@ import RxSwift
 import UIKit
 
 /// 모아보기 최상단에 뷰를 구성하는 뷰이다.
-final class CategoryView: UIView {
+final class EasyLookTopView: UIView {
     // MARK: - View
-    var categoryTapView: CategoryTabView = {
-        let categoryTabView: CategoryTabView = CategoryTabView()
-        categoryTabView.translatesAutoresizingMaskIntoConstraints = false
-        categoryTabView.setContentCompressionResistancePriority(.required, for: .vertical)
-        return categoryTabView
+    var easyLookTabView: EasyLookTabView = {
+        let easyLookTabView: EasyLookTabView = EasyLookTabView()
+        easyLookTabView.translatesAutoresizingMaskIntoConstraints = false
+        easyLookTabView.setContentCompressionResistancePriority(.required, for: .vertical)
+        return easyLookTabView
     }()
     
     private lazy var borderLineStackView: UIStackView = {
@@ -58,14 +58,14 @@ final class CategoryView: UIView {
         return horizontalCollectionView
     }()
     
-    var categoryFilterView: CategoryFilterView
+    var resultsWithDropBoxView: ResultsWithDropBoxView
     
     private lazy var stackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [
-            categoryTapView,
+            easyLookTabView,
             borderLineStackView,
             horizontalCollectionView,
-            categoryFilterView
+            resultsWithDropBoxView
         ])
         stackView.axis = .vertical
         stackView.backgroundColor = SwiftGenColors.white.color
@@ -96,8 +96,8 @@ final class CategoryView: UIView {
     /// - Parameter superView: ViewController의 view를 주입한다.
     init(superView: UIView) {
         self.superView = superView
-        self.categoryFilterView = {
-            let categoryFilterView: CategoryFilterView = CategoryFilterView(superView: superView)
+        self.resultsWithDropBoxView = {
+            let categoryFilterView: ResultsWithDropBoxView = ResultsWithDropBoxView(superView: superView)
             categoryFilterView.setContentCompressionResistancePriority(.required, for: .vertical)
             categoryFilterView.updateDropBoxView(.total, superView: superView)
             return categoryFilterView
@@ -108,7 +108,7 @@ final class CategoryView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        self.categoryFilterView = CategoryFilterView(superView: UIView())
+        self.resultsWithDropBoxView = ResultsWithDropBoxView(superView: UIView())
         
         self.superView = UIView()
         super.init(coder: coder)
@@ -117,9 +117,9 @@ final class CategoryView: UIView {
     private func setupView() {
         addSubview(stackView)
         
-        let const1: NSLayoutConstraint = categoryTapView.heightAnchor.constraint(equalToConstant: categoryContentsConstraint)
+        let const1: NSLayoutConstraint = easyLookTabView.heightAnchor.constraint(equalToConstant: categoryContentsConstraint)
         let const2: NSLayoutConstraint = borderLineView.heightAnchor.constraint(equalToConstant: borderLineHeightConstraint)
-        let const3: NSLayoutConstraint = categoryFilterView.heightAnchor.constraint(equalToConstant: categoryContentsConstraint)
+        let const3: NSLayoutConstraint = resultsWithDropBoxView.heightAnchor.constraint(equalToConstant: categoryContentsConstraint)
         
         const1.priority = UILayoutPriority(rawValue: 900)
         const2.priority = UILayoutPriority(rawValue: 800)

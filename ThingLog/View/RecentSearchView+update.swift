@@ -19,7 +19,7 @@ extension RecentSearchView {
 
     /// 자동저장 기능이 켜져있거나 꺼져있을 때 필요한 뷰 전환 메서드다.
     /// - Parameter bool: 자동저장 기능이 켜져있다면 true, 그렇지 않다면 false 를 주입한다.
-    private func updateRecentView(_ bool: Bool ) {
+    private func updateRecentView(_ bool: Bool) {
         updateInformationLabel(isAutoSaveMode: bool)
         autoSaveButton.setTitle(bool ? "자동저장 끄기" : "자동저장 켜기", for: .normal)
         

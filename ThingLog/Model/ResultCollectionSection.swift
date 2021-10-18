@@ -40,17 +40,21 @@ enum ResultCollectionSection: Int, CaseIterable {
     
     static func resultsCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         let layout: UICollectionViewCompositionalLayout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _ : NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection in
-            let groupHeight: NSCollectionLayoutDimension = sectionIndex == ResultCollectionSection.postContents.section ? .absolute(110) :  .absolute(124)
-            let groupWidth: NSCollectionLayoutDimension = sectionIndex == ResultCollectionSection.postContents.section ? .fractionalWidth(1.0) : .absolute(124)
+            let isPostContentsSection: Bool = sectionIndex == ResultCollectionSection.postContents.section
+            
+            let groupHeight: NSCollectionLayoutDimension = isPostContentsSection ? .estimated(1) :  .estimated(1)
+            let groupWidth: NSCollectionLayoutDimension = isPostContentsSection ? .fractionalWidth(1.0) : .absolute(124)
 
-            let itemWidth: NSCollectionLayoutDimension = sectionIndex == ResultCollectionSection.postContents.section ? .fractionalWidth(1.0) : .fractionalHeight(1.0)
-            let itemSize: NSCollectionLayoutSize = NSCollectionLayoutSize(widthDimension: itemWidth, heightDimension: .fractionalHeight(1.0))
+            let itemWidth: NSCollectionLayoutDimension = isPostContentsSection ? .fractionalWidth(1.0) : .estimated(1.0)
+            let itemHeight: NSCollectionLayoutDimension = isPostContentsSection ? .absolute(110) : .estimated(1.0)
+            
+            let itemSize: NSCollectionLayoutSize = NSCollectionLayoutSize(widthDimension: itemWidth, heightDimension: itemHeight)
 
             let item: NSCollectionLayoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
             let groupSize: NSCollectionLayoutSize = NSCollectionLayoutSize(widthDimension: groupWidth, heightDimension: groupHeight)
             
             var group: NSCollectionLayoutGroup
-            if sectionIndex == ResultCollectionSection.postContents.section {
+            if isPostContentsSection {
                 group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
             } else {
                 group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
@@ -58,9 +62,9 @@ enum ResultCollectionSection: Int, CaseIterable {
             
             let header: NSCollectionLayoutBoundarySupplementaryItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44)), elementKind: ResultCollectionSection.sectionHeaderKind, alignment: .topLeading)
             let section: NSCollectionLayoutSection = NSCollectionLayoutSection(group: group)
-            section.orthogonalScrollingBehavior = sectionIndex == ResultCollectionSection.postContents.section ? .none : .continuous
+            section.orthogonalScrollingBehavior = isPostContentsSection ? .none : .continuous
             section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
-            section.interGroupSpacing = sectionIndex == ResultCollectionSection.postContents.section ? 16.0 : 1
+            section.interGroupSpacing = isPostContentsSection ? 16.0 : 1
             section.boundarySupplementaryItems = [header]
             
             return section
