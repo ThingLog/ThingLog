@@ -34,6 +34,8 @@
 		873EC04926D504BA003C3525 /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC04026D504BA003C3525 /* RxCocoa.xcframework */; };
 		873EC04A26D504BA003C3525 /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC04026D504BA003C3525 /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		873EC04E26D5068F003C3525 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 873EC04D26D5068F003C3525 /* .swiftlint.yml */; };
+		874D92F7271AD0A9005FF8F3 /* DisableSelectionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D92F6271AD0A9005FF8F3 /* DisableSelectionTextField.swift */; };
+		874D92F9271AD672005FF8F3 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D92F8271AD672005FF8F3 /* DummyData.swift */; };
 		875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */; };
 		876243E02708701B00BDA1DC /* WriteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876243DF2708701B00BDA1DC /* WriteType.swift */; };
 		876243E22708704800BDA1DC /* WriteTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876243E12708704800BDA1DC /* WriteTypeButton.swift */; };
@@ -42,6 +44,10 @@
 		876C157D27047B19000C1C84 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157C27047B19000C1C84 /* CategoryRepository.swift */; };
 		87B1B6552715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */; };
 		87B1B6572715E2F0001EA889 /* WriteCategoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1B6562715E2F0001EA889 /* WriteCategoryTableCell.swift */; };
+		87A86C8B2714139F008FB3F0 /* WriteTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8A2714139F008FB3F0 /* WriteTextFieldCell.swift */; };
+		87A86C8D271414D2008FB3F0 /* WriteRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8C271414D2008FB3F0 /* WriteRatingCell.swift */; };
+		87A86C8F27141507008FB3F0 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8E27141507008FB3F0 /* RatingView.swift */; };
+		87A86C9127141576008FB3F0 /* WriteTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C9027141576008FB3F0 /* WriteTextViewCell.swift */; };
 		87BB17A72709898F0088B847 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB17A62709898F0088B847 /* WriteViewController.swift */; };
 		87BB17A927098A720088B847 /* WriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB17A827098A720088B847 /* WriteCoordinator.swift */; };
 		87BB17AB27098D760088B847 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB17AA27098D760088B847 /* WriteViewModel.swift */; };
@@ -54,6 +60,9 @@
 		87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188826FB5E9500C3FBCA /* PostRepository.swift */; };
 		87F2188E26FB8ACA00C3FBCA /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188D26FB8ACA00C3FBCA /* PostType.swift */; };
 		87F2189026FB8D6A00C3FBCA /* PostTypeEntity+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */; };
+		DB05B03C271853CE0067DB17 /* LeftRightButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */; };
+		DB05B03E27185B780067DB17 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03D27185B780067DB17 /* TrashViewController.swift */; };
+		DB05B04027185C500067DB17 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03F27185C500067DB17 /* UIViewController+.swift */; };
 		DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C1F27043CFC00FDC48F /* DropBoxView.swift */; };
 		DB148C222704623200FDC48F /* InsetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C212704623200FDC48F /* InsetButton.swift */; };
 		DB148C26270469B300FDC48F /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C25270469B300FDC48F /* Date+.swift */; };
@@ -62,6 +71,7 @@
 		DB148C302705863100FDC48F /* EasyLookTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C2F2705863100FDC48F /* EasyLookTabView.swift */; };
 		DB1745B72708700200EF083E /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1745B62708700200EF083E /* SearchTextField.swift */; };
 		DB1745B927098E8A00EF083E /* RecentSearchDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1745B827098E8A00EF083E /* RecentSearchDataViewModel.swift */; };
+		DB22327E27183378002ED30D /* TwoLabelVerticalHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22327D27183378002ED30D /* TwoLabelVerticalHeaderView.swift */; };
 		DB22B6BE270ECA20005F9971 /* PostContentsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22B6BD270ECA20005F9971 /* PostContentsCollectionViewController.swift */; };
 		DB331DA926FDD00A00A629F5 /* ColorsAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA626FDD00A00A629F5 /* ColorsAsset.swift */; };
 		DB331DAA26FDD00A00A629F5 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB331DA726FDD00A00A629F5 /* ImageAssets.swift */; };
@@ -186,6 +196,8 @@
 		873EC03F26D504BA003C3525 /* RxBlocking.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxBlocking.xcframework; path = Carthage/Build/RxBlocking.xcframework; sourceTree = "<group>"; };
 		873EC04026D504BA003C3525 /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
 		873EC04D26D5068F003C3525 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		874D92F6271AD0A9005FF8F3 /* DisableSelectionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableSelectionTextField.swift; sourceTree = "<group>"; };
+		874D92F8271AD672005FF8F3 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		876243DF2708701B00BDA1DC /* WriteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteType.swift; sourceTree = "<group>"; };
 		876243E12708704800BDA1DC /* WriteTypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTypeButton.swift; sourceTree = "<group>"; };
@@ -194,6 +206,10 @@
 		876C157C27047B19000C1C84 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
 		87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithButtonRoundCollectionCell.swift; sourceTree = "<group>"; };
 		87B1B6562715E2F0001EA889 /* WriteCategoryTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCategoryTableCell.swift; sourceTree = "<group>"; };
+		87A86C8A2714139F008FB3F0 /* WriteTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTextFieldCell.swift; sourceTree = "<group>"; };
+		87A86C8C271414D2008FB3F0 /* WriteRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRatingCell.swift; sourceTree = "<group>"; };
+		87A86C8E27141507008FB3F0 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
+		87A86C9027141576008FB3F0 /* WriteTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTextViewCell.swift; sourceTree = "<group>"; };
 		87BB17A62709898F0088B847 /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		87BB17A827098A720088B847 /* WriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCoordinator.swift; sourceTree = "<group>"; };
 		87BB17AA27098D760088B847 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
@@ -206,6 +222,9 @@
 		87F2188826FB5E9500C3FBCA /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		87F2188D26FB8ACA00C3FBCA /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
 		87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostTypeEntity+.swift"; sourceTree = "<group>"; };
+		DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRightButtonView.swift; sourceTree = "<group>"; };
+		DB05B03D27185B780067DB17 /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
+		DB05B03F27185C500067DB17 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		DB148C1F27043CFC00FDC48F /* DropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropBoxView.swift; sourceTree = "<group>"; };
 		DB148C212704623200FDC48F /* InsetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetButton.swift; sourceTree = "<group>"; };
 		DB148C25270469B300FDC48F /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -214,6 +233,7 @@
 		DB148C2F2705863100FDC48F /* EasyLookTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookTabView.swift; sourceTree = "<group>"; };
 		DB1745B62708700200EF083E /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		DB1745B827098E8A00EF083E /* RecentSearchDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchDataViewModel.swift; sourceTree = "<group>"; };
+		DB22327D27183378002ED30D /* TwoLabelVerticalHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoLabelVerticalHeaderView.swift; sourceTree = "<group>"; };
 		DB22B6BD270ECA20005F9971 /* PostContentsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentsCollectionViewController.swift; sourceTree = "<group>"; };
 		DB331DA626FDD00A00A629F5 /* ColorsAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsAsset.swift; sourceTree = "<group>"; };
 		DB331DA726FDD00A00A629F5 /* ImageAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
@@ -386,6 +406,9 @@
 		873EC05026D50825003C3525 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				874D92F8271AD672005FF8F3 /* DummyData.swift */,
+				873EC01926D39057003C3525 /* Info.plist */,
+				87078B5926EA44B5007AE242 /* ThingLog.xcdatamodeld */,
 				873EC00826D39055003C3525 /* AppDelegate.swift */,
 				873EC01926D39057003C3525 /* Info.plist */,
 				DBA1FD4726FB701C00F50DE5 /* InfoPlist.strings */,
@@ -474,6 +497,7 @@
 				DBD2244A27085DFB004C5184 /* SearchViewController.swift */,
 				DB6909602712DA8100BB54E4 /* SettingViewController.swift */,
 				DB7C04B126F87548009F5C0A /* TabBarController.swift */,
+				DB05B03D27185B780067DB17 /* TrashViewController.swift */,
 				87BB17A62709898F0088B847 /* WriteViewController.swift */,
 				87BB17AC27098F480088B847 /* WriteViewController+setup.swift */,
 			);
@@ -492,6 +516,11 @@
 		DB7C04E626FB1990009F5C0A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DB8BF6802706D89E00FD5FDB /* CategoryFilterView.swift */,
+				DB148C2F2705863100FDC48F /* CategoryTabView.swift */,
+				DB148C2B2705855A00FDC48F /* CategoryTypeButton.swift */,
+				DB8BF6822706DA7900FD5FDB /* CategoryView.swift */,
+				874D92F6271AD0A9005FF8F3 /* DisableSelectionTextField.swift */,
 				DB7C04B826F87BE9009F5C0A /* ChoiceWritingView.swift */,
 				DB7C04E726FB199A009F5C0A /* CollectionViewCell */,
 				DB7C04ED26FB1ACE009F5C0A /* ContentsTabView.swift */,
@@ -505,6 +534,8 @@
 				DBD545512703409300063C98 /* HorizontalCollectionView.swift */,
 				DB148C272704A1A500FDC48F /* IgnoreTouchView.swift */,
 				DB148C212704623200FDC48F /* InsetButton.swift */,
+				87A86C8E27141507008FB3F0 /* RatingView.swift */,
+				DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */,
 				DB8BF6782705D25700FD5FDB /* LogoView.swift */,
 				8738E1CC271708F80069BB80 /* PaddingLabel.swift */,
 				DB7C04BD26F9BE72009F5C0A /* ProfileView.swift */,
@@ -541,6 +572,7 @@
 				DBAB64A626FE2AFF006D95ED /* UIImage+.swift */,
 				DB7C04EB26FB1A04009F5C0A /* UIView+.swift */,
 				DB7C04C926F9E69D009F5C0A /* UserDefaults+.swift */,
+				DB05B03F27185C500067DB17 /* UIViewController+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -551,6 +583,9 @@
 				8738E1CE271709660069BB80 /* RoundLabelWithButtonTableCell.swift */,
 				DBA0F81B2709B390009553FC /* LeftLabelRightButtonTableCell.swift */,
 				87B1B6562715E2F0001EA889 /* WriteCategoryTableCell.swift */,
+				87A86C8A2714139F008FB3F0 /* WriteTextFieldCell.swift */,
+				87A86C8C271414D2008FB3F0 /* WriteRatingCell.swift */,
+				87A86C9027141576008FB3F0 /* WriteTextViewCell.swift */,
 			);
 			path = TableVeiwCell;
 			sourceTree = "<group>";
@@ -559,6 +594,7 @@
 			isa = PBXGroup;
 			children = (
 				DBA0F824270B07D8009553FC /* LeftLabelRightButtonHeaderView.swift */,
+				DB22327D27183378002ED30D /* TwoLabelVerticalHeaderView.swift */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -795,6 +831,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87A86C8D271414D2008FB3F0 /* WriteRatingCell.swift in Sources */,
+				DB05B03C271853CE0067DB17 /* LeftRightButtonView.swift in Sources */,
 				87BB17A927098A720088B847 /* WriteCoordinator.swift in Sources */,
 				DBAB64A526FCC2F8006D95ED /* HomeCoordinator.swift in Sources */,
 				DBD545522703409300063C98 /* HorizontalCollectionView.swift in Sources */,
@@ -810,6 +848,7 @@
 				DBAB64A726FE2AFF006D95ED /* UIImage+.swift in Sources */,
 				DB3A516B27103DC4003B529D /* EmptyResultsView.swift in Sources */,
 				DB148C26270469B300FDC48F /* Date+.swift in Sources */,
+				DB22327E27183378002ED30D /* TwoLabelVerticalHeaderView.swift in Sources */,
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
 				DB6909632712DB0800BB54E4 /* SettingCoordinator.swift in Sources */,
 				DBD5455027033D9A00063C98 /* RoundButtonCollectionViewCell.swift in Sources */,
@@ -829,6 +868,7 @@
 				DB331DA926FDD00A00A629F5 /* ColorsAsset.swift in Sources */,
 				DBD2244527085651004C5184 /* EasyLookViewController+setup.swift in Sources */,
 				87BB17A72709898F0088B847 /* WriteViewController.swift in Sources */,
+				87A86C9127141576008FB3F0 /* WriteTextViewCell.swift in Sources */,
 				DB7C04F226FB1F36009F5C0A /* ContentsPageViewController.swift in Sources */,
 				DB148C302705863100FDC48F /* EasyLookTabView.swift in Sources */,
 				DB3A5165270FFE0C003B529D /* String+.swift in Sources */,
@@ -842,10 +882,12 @@
 				DB7C04B926F87BE9009F5C0A /* ChoiceWritingView.swift in Sources */,
 				DB7C04AA26F5F308009F5C0A /* EasyLookCoordinator.swift in Sources */,
 				876C157927044BA0000C1C84 /* RepositoryError.swift in Sources */,
+				874D92F7271AD0A9005FF8F3 /* DisableSelectionTextField.swift in Sources */,
 				DB8BF6792705D25700FD5FDB /* LogoView.swift in Sources */,
 				DBA0F829270B26A0009553FC /* SearchResultsViewController.swift in Sources */,
 				87078B5B26EA44B5007AE242 /* ThingLog.xcdatamodeld in Sources */,
 				873EC00926D39055003C3525 /* AppDelegate.swift in Sources */,
+				87A86C8B2714139F008FB3F0 /* WriteTextFieldCell.swift in Sources */,
 				87DAEB1B270BEAE50038C487 /* CameraButtonCell.swift in Sources */,
 				DBD2244B27085DFB004C5184 /* SearchViewController.swift in Sources */,
 				DB7C04C726F9E693009F5C0A /* UserInformationViewModel.swift in Sources */,
@@ -853,7 +895,11 @@
 				DBA0F825270B07D8009553FC /* LeftLabelRightButtonHeaderView.swift in Sources */,
 				873EC00B26D39055003C3525 /* SceneDelegate.swift in Sources */,
 				87BB17AD27098F480088B847 /* WriteViewController+setup.swift in Sources */,
+				DB05B04027185C500067DB17 /* UIViewController+.swift in Sources */,
+				DB05B03E27185B780067DB17 /* TrashViewController.swift in Sources */,
 				8736B3F426FDD55E000433E1 /* UIFont+.swift in Sources */,
+				DBD5454C27032C6600063C98 /* CategoryViewModel.swift in Sources */,
+				87A86C8F27141507008FB3F0 /* RatingView.swift in Sources */,
 				DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */,
 				DB7C04F026FB1EFF009F5C0A /* HomeViewController.swift in Sources */,
 				DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */,
@@ -861,6 +907,7 @@
 				8736B3E526FCBA77000433E1 /* RatingEntity+.swift in Sources */,
 				87F2188626FB5DFB00C3FBCA /* Post.swift in Sources */,
 				DBA0F822270AF656009553FC /* ContentsDetailCollectionViewCell.swift in Sources */,
+				874D92F9271AD672005FF8F3 /* DummyData.swift in Sources */,
 				8736B3EF26FDC1AD000433E1 /* Comment.swift in Sources */,
 				8736B3E326FCB9F3000433E1 /* Rating.swift in Sources */,
 				87BB17AB27098D760088B847 /* WriteViewModel.swift in Sources */,
