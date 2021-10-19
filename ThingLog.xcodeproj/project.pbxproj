@@ -42,12 +42,12 @@
 		876C157927044BA0000C1C84 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157827044BA0000C1C84 /* RepositoryError.swift */; };
 		876C157B27044DFF000C1C84 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157A27044DFF000C1C84 /* CategoryEntity.swift */; };
 		876C157D27047B19000C1C84 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157C27047B19000C1C84 /* CategoryRepository.swift */; };
-		87B1B6552715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */; };
-		87B1B6572715E2F0001EA889 /* WriteCategoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1B6562715E2F0001EA889 /* WriteCategoryTableCell.swift */; };
 		87A86C8B2714139F008FB3F0 /* WriteTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8A2714139F008FB3F0 /* WriteTextFieldCell.swift */; };
 		87A86C8D271414D2008FB3F0 /* WriteRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8C271414D2008FB3F0 /* WriteRatingCell.swift */; };
 		87A86C8F27141507008FB3F0 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8E27141507008FB3F0 /* RatingView.swift */; };
 		87A86C9127141576008FB3F0 /* WriteTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C9027141576008FB3F0 /* WriteTextViewCell.swift */; };
+		87B1B6552715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */; };
+		87B1B6572715E2F0001EA889 /* WriteCategoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1B6562715E2F0001EA889 /* WriteCategoryTableCell.swift */; };
 		87BB17A72709898F0088B847 /* WriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB17A62709898F0088B847 /* WriteViewController.swift */; };
 		87BB17A927098A720088B847 /* WriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB17A827098A720088B847 /* WriteCoordinator.swift */; };
 		87BB17AB27098D760088B847 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB17AA27098D760088B847 /* WriteViewModel.swift */; };
@@ -63,6 +63,7 @@
 		DB05B03C271853CE0067DB17 /* LeftRightButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */; };
 		DB05B03E27185B780067DB17 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03D27185B780067DB17 /* TrashViewController.swift */; };
 		DB05B04027185C500067DB17 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03F27185C500067DB17 /* UIViewController+.swift */; };
+		DB05B04C271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */; };
 		DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C1F27043CFC00FDC48F /* DropBoxView.swift */; };
 		DB148C222704623200FDC48F /* InsetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C212704623200FDC48F /* InsetButton.swift */; };
 		DB148C26270469B300FDC48F /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C25270469B300FDC48F /* Date+.swift */; };
@@ -204,12 +205,12 @@
 		876C157827044BA0000C1C84 /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
 		876C157A27044DFF000C1C84 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
 		876C157C27047B19000C1C84 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
-		87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithButtonRoundCollectionCell.swift; sourceTree = "<group>"; };
-		87B1B6562715E2F0001EA889 /* WriteCategoryTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCategoryTableCell.swift; sourceTree = "<group>"; };
 		87A86C8A2714139F008FB3F0 /* WriteTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTextFieldCell.swift; sourceTree = "<group>"; };
 		87A86C8C271414D2008FB3F0 /* WriteRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRatingCell.swift; sourceTree = "<group>"; };
 		87A86C8E27141507008FB3F0 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		87A86C9027141576008FB3F0 /* WriteTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTextViewCell.swift; sourceTree = "<group>"; };
+		87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithButtonRoundCollectionCell.swift; sourceTree = "<group>"; };
+		87B1B6562715E2F0001EA889 /* WriteCategoryTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCategoryTableCell.swift; sourceTree = "<group>"; };
 		87BB17A62709898F0088B847 /* WriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewController.swift; sourceTree = "<group>"; };
 		87BB17A827098A720088B847 /* WriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCoordinator.swift; sourceTree = "<group>"; };
 		87BB17AA27098D760088B847 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
@@ -225,6 +226,7 @@
 		DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRightButtonView.swift; sourceTree = "<group>"; };
 		DB05B03D27185B780067DB17 /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		DB05B03F27185C500067DB17 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithLabelWithButtonCollectionCell.swift; sourceTree = "<group>"; };
 		DB148C1F27043CFC00FDC48F /* DropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropBoxView.swift; sourceTree = "<group>"; };
 		DB148C212704623200FDC48F /* InsetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetButton.swift; sourceTree = "<group>"; };
 		DB148C25270469B300FDC48F /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -407,8 +409,6 @@
 			isa = PBXGroup;
 			children = (
 				874D92F8271AD672005FF8F3 /* DummyData.swift */,
-				873EC01926D39057003C3525 /* Info.plist */,
-				87078B5926EA44B5007AE242 /* ThingLog.xcdatamodeld */,
 				873EC00826D39055003C3525 /* AppDelegate.swift */,
 				873EC01926D39057003C3525 /* Info.plist */,
 				DBA1FD4726FB701C00F50DE5 /* InfoPlist.strings */,
@@ -516,10 +516,6 @@
 		DB7C04E626FB1990009F5C0A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DB8BF6802706D89E00FD5FDB /* CategoryFilterView.swift */,
-				DB148C2F2705863100FDC48F /* CategoryTabView.swift */,
-				DB148C2B2705855A00FDC48F /* CategoryTypeButton.swift */,
-				DB8BF6822706DA7900FD5FDB /* CategoryView.swift */,
 				874D92F6271AD0A9005FF8F3 /* DisableSelectionTextField.swift */,
 				DB7C04B826F87BE9009F5C0A /* ChoiceWritingView.swift */,
 				DB7C04E726FB199A009F5C0A /* CollectionViewCell */,
@@ -546,6 +542,7 @@
 				DBA0F81A2709B37C009553FC /* TableVeiwCell */,
 				DB7C04FB26FB27A6009F5C0A /* TemplateImageButton.swift */,
 				876243E12708704800BDA1DC /* WriteTypeButton.swift */,
+				DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -841,6 +838,7 @@
 				DBD2244727085671004C5184 /* EasyLookViewController+subscribe.swift in Sources */,
 				8738E1CB271705220069BB80 /* CategoryViewController.swift in Sources */,
 				DB7C04EE26FB1ACE009F5C0A /* ContentsTabView.swift in Sources */,
+				DB05B04C271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift in Sources */,
 				DBA0F820270AF0A4009553FC /* ResultCollectionSection.swift in Sources */,
 				DB331DAA26FDD00A00A629F5 /* ImageAssets.swift in Sources */,
 				876243E02708701B00BDA1DC /* WriteType.swift in Sources */,
@@ -898,7 +896,7 @@
 				DB05B04027185C500067DB17 /* UIViewController+.swift in Sources */,
 				DB05B03E27185B780067DB17 /* TrashViewController.swift in Sources */,
 				8736B3F426FDD55E000433E1 /* UIFont+.swift in Sources */,
-				DBD5454C27032C6600063C98 /* CategoryViewModel.swift in Sources */,
+				DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */,
 				87A86C8F27141507008FB3F0 /* RatingView.swift in Sources */,
 				DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */,
 				DB7C04F026FB1EFF009F5C0A /* HomeViewController.swift in Sources */,

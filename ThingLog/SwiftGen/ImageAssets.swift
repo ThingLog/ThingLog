@@ -36,6 +36,7 @@ internal enum SwiftGenAssets {
   internal static let rating = ImageSwiftGen(name: "rating")
   internal static let search = ImageSwiftGen(name: "search")
   internal static let setting = ImageSwiftGen(name: "setting")
+  internal static let textdelete = ImageSwiftGen(name: "textdelete")
   internal static let wish = ImageSwiftGen(name: "wish")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
