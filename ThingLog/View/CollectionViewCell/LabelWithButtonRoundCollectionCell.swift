@@ -47,7 +47,7 @@ final class LabelWithButtonRoundCollectionCell: UICollectionViewCell {
     }
 }
 
-extension RoundTextWithButtonCollectionCell {
+extension LabelWithButtonRoundCollectionCell {
     private func setupView() {
         contentView.layer.cornerRadius = 10
         contentView.backgroundColor = SwiftGenColors.gray6.color
