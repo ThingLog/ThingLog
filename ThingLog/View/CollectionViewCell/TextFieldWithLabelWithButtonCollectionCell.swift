@@ -10,7 +10,7 @@ import UIKit
 
 /// 왼쪽에 텍스트필드를 가지며, 오른쪽에는 텍스트의 개수를 카운팅 하는 Label과, clear버튼이 있는 CollectionViewCell이다.
 /// [이미지](https://www.notion.so/TextFieldWithLabelWithButtonCollectionCell-a6fdcf9396044ee3a58daf5a669192a5)
-class TextFieldWithLabelWithButtonCollectionCell: UICollectionViewCell {
+final class TextFieldWithLabelWithButtonCollectionCell: UICollectionViewCell {
     let textField: DisableSelectionTextField = {
         let textField: DisableSelectionTextField = DisableSelectionTextField()
         textField.font = UIFont.Pretendard.body1

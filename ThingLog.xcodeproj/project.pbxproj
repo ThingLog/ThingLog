@@ -64,6 +64,7 @@
 		DB05B03E27185B780067DB17 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03D27185B780067DB17 /* TrashViewController.swift */; };
 		DB05B04027185C500067DB17 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03F27185C500067DB17 /* UIViewController+.swift */; };
 		DB05B04C271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */; };
+		DB05B04E271F09260067DB17 /* LoginTopHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B04D271F09260067DB17 /* LoginTopHeaderView.swift */; };
 		DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C1F27043CFC00FDC48F /* DropBoxView.swift */; };
 		DB148C222704623200FDC48F /* InsetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C212704623200FDC48F /* InsetButton.swift */; };
 		DB148C26270469B300FDC48F /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C25270469B300FDC48F /* Date+.swift */; };
@@ -227,6 +228,7 @@
 		DB05B03D27185B780067DB17 /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		DB05B03F27185C500067DB17 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithLabelWithButtonCollectionCell.swift; sourceTree = "<group>"; };
+		DB05B04D271F09260067DB17 /* LoginTopHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTopHeaderView.swift; sourceTree = "<group>"; };
 		DB148C1F27043CFC00FDC48F /* DropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropBoxView.swift; sourceTree = "<group>"; };
 		DB148C212704623200FDC48F /* InsetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetButton.swift; sourceTree = "<group>"; };
 		DB148C25270469B300FDC48F /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -542,7 +544,6 @@
 				DBA0F81A2709B37C009553FC /* TableVeiwCell */,
 				DB7C04FB26FB27A6009F5C0A /* TemplateImageButton.swift */,
 				876243E12708704800BDA1DC /* WriteTypeButton.swift */,
-				DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -553,8 +554,9 @@
 				87DAEB1A270BEAE50038C487 /* CameraButtonCell.swift */,
 				DB7C04E826FB19AE009F5C0A /* ContentsCollectionViewCell.swift */,
 				DBA0F821270AF656009553FC /* ContentsDetailCollectionViewCell.swift */,
-				DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */,
 				87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */,
+				DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */,
+				DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */,
 				87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */,
 			);
 			path = CollectionViewCell;
@@ -591,6 +593,7 @@
 			isa = PBXGroup;
 			children = (
 				DBA0F824270B07D8009553FC /* LeftLabelRightButtonHeaderView.swift */,
+				DB05B04D271F09260067DB17 /* LoginTopHeaderView.swift */,
 				DB22327D27183378002ED30D /* TwoLabelVerticalHeaderView.swift */,
 			);
 			path = HeaderView;
@@ -899,6 +902,7 @@
 				DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */,
 				87A86C8F27141507008FB3F0 /* RatingView.swift in Sources */,
 				DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */,
+				DB05B04E271F09260067DB17 /* LoginTopHeaderView.swift in Sources */,
 				DB7C04F026FB1EFF009F5C0A /* HomeViewController.swift in Sources */,
 				DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */,
 				DB331DAB26FDD00A00A629F5 /* Fonts.swift in Sources */,
