@@ -1,5 +1,5 @@
 //
-//  CategoryCell.swift
+//  RoundTextWithButtonTableCell.swift
 //  ThingLog
 //
 //  Created by 이지원 on 2021/10/13.
@@ -7,7 +7,10 @@
 
 import UIKit
 
-final class CategoryCell: UITableViewCell {
+/// 카테고리 화면에서 카테고리를 선택할 때 사용하는 셀
+///
+/// [이미지](https://www.notion.so/RoundLabelWithButtonTableCell-6f22273ede304c1caf3e6170dbcd3a50)
+final class RoundLabelWithButtonTableCell: UITableViewCell {
     private let nameLabel: PaddingLabel = {
         let label: PaddingLabel = PaddingLabel(padding: .init(top: 1, left: 8, bottom: 1, right: 8))
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +65,7 @@ final class CategoryCell: UITableViewCell {
     }
 }
 
-extension CategoryCell {
+extension RoundLabelWithButtonTableCell {
     private func setupView() {
         selectionStyle = .none
 
