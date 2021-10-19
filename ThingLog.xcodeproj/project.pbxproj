@@ -130,7 +130,7 @@
 		DBD5454727032B1C00063C98 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454627032B1C00063C98 /* FilterType.swift */; };
 		DBD5454927032BAA00063C98 /* EasyLookTabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454827032BAA00063C98 /* EasyLookTabType.swift */; };
 		DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454B27032C6600063C98 /* EasyLookViewModel.swift */; };
-		DBD5455027033D9A00063C98 /* RoundButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */; };
+		DBD5455027033D9A00063C98 /* ButtonRoundCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454F27033D9A00063C98 /* ButtonRoundCollectionCell.swift */; };
 		DBD545522703409300063C98 /* HorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD545512703409300063C98 /* HorizontalCollectionView.swift */; };
 /* End PBXBuildFile section */
 
@@ -297,7 +297,7 @@
 		DBD5454627032B1C00063C98 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
 		DBD5454827032BAA00063C98 /* EasyLookTabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookTabType.swift; sourceTree = "<group>"; };
 		DBD5454B27032C6600063C98 /* EasyLookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookViewModel.swift; sourceTree = "<group>"; };
-		DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		DBD5454F27033D9A00063C98 /* ButtonRoundCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonRoundCollectionCell.swift; sourceTree = "<group>"; };
 		DBD545512703409300063C98 /* HorizontalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -558,7 +558,7 @@
 				DB7C04E826FB19AE009F5C0A /* ContentsCollectionViewCell.swift */,
 				DBA0F821270AF656009553FC /* ContentsDetailCollectionViewCell.swift */,
 				87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */,
-				DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */,
+				DBD5454F27033D9A00063C98 /* ButtonRoundCollectionCell.swift */,
 				DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */,
 				87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */,
 			);
@@ -855,7 +855,7 @@
 				DB22327E27183378002ED30D /* TwoLabelVerticalHeaderView.swift in Sources */,
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
 				DB6909632712DB0800BB54E4 /* SettingCoordinator.swift in Sources */,
-				DBD5455027033D9A00063C98 /* RoundButtonCollectionViewCell.swift in Sources */,
+				DBD5455027033D9A00063C98 /* ButtonRoundCollectionCell.swift in Sources */,
 				DB7C04CA26F9E69D009F5C0A /* UserDefaults+.swift in Sources */,
 				DB148C2C2705855A00FDC48F /* EasyLookTabTypeButton.swift in Sources */,
 				DB7C04E526FB1981009F5C0A /* BaseContentsCollectionViewController.swift in Sources */,

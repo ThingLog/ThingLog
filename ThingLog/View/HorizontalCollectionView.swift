@@ -17,7 +17,7 @@ final class HorizontalCollectionView: UIView {
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(RoundButtonCollectionViewCell.self, forCellWithReuseIdentifier: RoundButtonCollectionViewCell.reuseIdentifier)
+        collectionView.register(ButtonRoundCollectionCell.self, forCellWithReuseIdentifier: ButtonRoundCollectionCell.reuseIdentifier)
         collectionView.backgroundColor = SwiftGenColors.white.color
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
@@ -90,7 +90,7 @@ extension HorizontalCollectionView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoundButtonCollectionViewCell.reuseIdentifier, for: indexPath) as? RoundButtonCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ButtonRoundCollectionCell.reuseIdentifier, for: indexPath) as? ButtonRoundCollectionCell else { return UICollectionViewCell() }
         guard let item = fetchResultController?.fetchedObjects else {
             return cell
         }
@@ -107,13 +107,13 @@ extension HorizontalCollectionView: UICollectionViewDataSource {
 
 extension HorizontalCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? RoundButtonCollectionViewCell else {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ButtonRoundCollectionCell else {
             return
         }
         cell.changeButtonColor(isSelected: true)
         
         if selectedIndexCell != indexPath,
-           let cell: RoundButtonCollectionViewCell = collectionView.cellForItem(at: selectedIndexCell) as? RoundButtonCollectionViewCell {
+           let cell: ButtonRoundCollectionCell = collectionView.cellForItem(at: selectedIndexCell) as? ButtonRoundCollectionCell {
             cell.changeButtonColor(isSelected: false)
         }
         
