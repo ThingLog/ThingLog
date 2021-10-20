@@ -37,7 +37,7 @@ final class HomeViewController: UIViewController {
     var heightAnchorProfileView: NSLayoutConstraint?
     let profileViewHeight: CGFloat = 44 + 24 + 16
     
-    var disposeBag: DisposeBag = DisposeBag() 
+    var disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -52,6 +52,7 @@ final class HomeViewController: UIViewController {
         subscribeContentsTabButton()
         subscribePageViewControllerScrollOffset()
         subscribeInformationViewModel()
+        subscribeProfilerEditButton()
         
         fetchAllPost()
     }
@@ -186,7 +187,7 @@ extension HomeViewController {
             .disposed(by: pageViewController.disposeBag)
     }
     
-    /// 사용자의 정보 ( 이름, 한줄 소개 ) 를 subscribe한다. 
+    /// 사용자의 정보 ( 이름, 한줄 소개 ) 를 subscribe한다.
     func subscribeInformationViewModel() {
         UserInformationViewModel.shared.userAliasNameSubject
             .bind { [weak self] name in
@@ -199,6 +200,13 @@ extension HomeViewController {
                 self?.profileView.userOneLineIntroductionLabel.text = introduction ?? "나를 찾는 여정 나를 찾는 여정"
             }
             .disposed(by: disposeBag)
+    }
+    
+    func subscribeProfilerEditButton() {
+        profileView.userAliasNameButton.rx.tap.bind { [weak self] in
+            self?.coordinator?.showLoginViewController()
+        }
+        .disposed(by: disposeBag)
     }
     
     /// 콘텐츠 개수가 많은 상황에서 아래로 스크롤한 상태에서 콘텐츠 개수가 적은 페이지로 전환할 시 containerView의 높이를 줄여주는 메소드다.
@@ -249,3 +257,4 @@ extension HomeViewController {
         }
     }
 }
+
