@@ -27,6 +27,7 @@ internal enum SwiftGenAssets {
   internal static let chevronUp = ImageSwiftGen(name: "chevronUp")
   internal static let clear = ImageSwiftGen(name: "clear")
   internal static let closeBadge = ImageSwiftGen(name: "closeBadge")
+  internal static let closeBig = ImageSwiftGen(name: "closeBig")
   internal static let easyLookTab = ImageSwiftGen(name: "easyLookTab")
   internal static let gift = ImageSwiftGen(name: "gift")
   internal static let homeTab = ImageSwiftGen(name: "homeTab")
@@ -36,6 +37,7 @@ internal enum SwiftGenAssets {
   internal static let rating = ImageSwiftGen(name: "rating")
   internal static let search = ImageSwiftGen(name: "search")
   internal static let setting = ImageSwiftGen(name: "setting")
+  internal static let textdelete = ImageSwiftGen(name: "textdelete")
   internal static let wish = ImageSwiftGen(name: "wish")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

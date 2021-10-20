@@ -17,7 +17,7 @@ final class HomeCoordinator: Coordinator {
     
     func start() {
         let homeViewController: HomeViewController = HomeViewController()
-        homeViewController.coordinator = self 
+        homeViewController.coordinator = self
         navigationController.pushViewController(homeViewController, animated: true)
     }
     
@@ -25,5 +25,16 @@ final class HomeCoordinator: Coordinator {
     func showSettingViewController() {
         let settingCoordinator: SettingCoordinator = SettingCoordinator(navigationController: navigationController)
         settingCoordinator.start()
+    }
+    
+    func showLoginViewController() {
+        let loginViewController: LoginViewController = LoginViewController(isLogin: false)
+        loginViewController.coordinator = self
+        loginViewController.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(loginViewController, animated: true)
+    }
+    
+    func back() {
+        navigationController.popViewController(animated: true)
     }
 }

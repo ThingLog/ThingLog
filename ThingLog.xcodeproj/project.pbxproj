@@ -64,6 +64,12 @@
 		DB05B03E27185B780067DB17 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03D27185B780067DB17 /* TrashViewController.swift */; };
 		DB05B04027185C500067DB17 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03F27185C500067DB17 /* UIViewController+.swift */; };
 		DB05B058271FFEF80067DB17 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DB05B057271FFEF80067DB17 /* Settings.bundle */; };
+		DB05B04C271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */; };
+		DB05B04E271F09260067DB17 /* LoginTopHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B04D271F09260067DB17 /* LoginTopHeaderView.swift */; };
+		DB05B050271F0AB00067DB17 /* LoginCollectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B04F271F0AB00067DB17 /* LoginCollectionSection.swift */; };
+		DB05B052271F0D4B0067DB17 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B051271F0D4B0067DB17 /* LoginViewController.swift */; };
+		DB05B054271FEABB0067DB17 /* LoginViewController+dequeueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B053271FEABB0067DB17 /* LoginViewController+dequeueCell.swift */; };
+		DB05B056271FEAFA0067DB17 /* LoginViewController+subscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B055271FEAFA0067DB17 /* LoginViewController+subscribe.swift */; };
 		DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C1F27043CFC00FDC48F /* DropBoxView.swift */; };
 		DB148C222704623200FDC48F /* InsetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C212704623200FDC48F /* InsetButton.swift */; };
 		DB148C26270469B300FDC48F /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB148C25270469B300FDC48F /* Date+.swift */; };
@@ -128,7 +134,7 @@
 		DBD5454727032B1C00063C98 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454627032B1C00063C98 /* FilterType.swift */; };
 		DBD5454927032BAA00063C98 /* EasyLookTabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454827032BAA00063C98 /* EasyLookTabType.swift */; };
 		DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454B27032C6600063C98 /* EasyLookViewModel.swift */; };
-		DBD5455027033D9A00063C98 /* RoundButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */; };
+		DBD5455027033D9A00063C98 /* ButtonRoundCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454F27033D9A00063C98 /* ButtonRoundCollectionCell.swift */; };
 		DBD545522703409300063C98 /* HorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD545512703409300063C98 /* HorizontalCollectionView.swift */; };
 /* End PBXBuildFile section */
 
@@ -227,6 +233,12 @@
 		DB05B03D27185B780067DB17 /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		DB05B03F27185C500067DB17 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		DB05B057271FFEF80067DB17 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithLabelWithButtonCollectionCell.swift; sourceTree = "<group>"; };
+		DB05B04D271F09260067DB17 /* LoginTopHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTopHeaderView.swift; sourceTree = "<group>"; };
+		DB05B04F271F0AB00067DB17 /* LoginCollectionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCollectionSection.swift; sourceTree = "<group>"; };
+		DB05B051271F0D4B0067DB17 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		DB05B053271FEABB0067DB17 /* LoginViewController+dequeueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+dequeueCell.swift"; sourceTree = "<group>"; };
+		DB05B055271FEAFA0067DB17 /* LoginViewController+subscribe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginViewController+subscribe.swift"; sourceTree = "<group>"; };
 		DB148C1F27043CFC00FDC48F /* DropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropBoxView.swift; sourceTree = "<group>"; };
 		DB148C212704623200FDC48F /* InsetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetButton.swift; sourceTree = "<group>"; };
 		DB148C25270469B300FDC48F /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -293,7 +305,7 @@
 		DBD5454627032B1C00063C98 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
 		DBD5454827032BAA00063C98 /* EasyLookTabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookTabType.swift; sourceTree = "<group>"; };
 		DBD5454B27032C6600063C98 /* EasyLookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookViewModel.swift; sourceTree = "<group>"; };
-		DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		DBD5454F27033D9A00063C98 /* ButtonRoundCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonRoundCollectionCell.swift; sourceTree = "<group>"; };
 		DBD545512703409300063C98 /* HorizontalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -429,6 +441,7 @@
 				875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */,
 				DBD5454827032BAA00063C98 /* EasyLookTabType.swift */,
 				DBD5454627032B1C00063C98 /* FilterType.swift */,
+				DB05B04F271F0AB00067DB17 /* LoginCollectionSection.swift */,
 				87F2188526FB5DFB00C3FBCA /* Post.swift */,
 				87F2188D26FB8ACA00C3FBCA /* PostType.swift */,
 				8736B3E226FCB9F3000433E1 /* Rating.swift */,
@@ -494,6 +507,9 @@
 				DBD2244427085651004C5184 /* EasyLookViewController+setup.swift */,
 				DBD2244627085671004C5184 /* EasyLookViewController+subscribe.swift */,
 				DB7C04EF26FB1EFF009F5C0A /* HomeViewController.swift */,
+				DB05B051271F0D4B0067DB17 /* LoginViewController.swift */,
+				DB05B053271FEABB0067DB17 /* LoginViewController+dequeueCell.swift */,
+				DB05B055271FEAFA0067DB17 /* LoginViewController+subscribe.swift */,
 				DBA0F828270B26A0009553FC /* SearchResultsViewController.swift */,
 				DBD2244A27085DFB004C5184 /* SearchViewController.swift */,
 				DB6909602712DA8100BB54E4 /* SettingViewController.swift */,
@@ -517,10 +533,10 @@
 		DB7C04E626FB1990009F5C0A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				874D92F6271AD0A9005FF8F3 /* DisableSelectionTextField.swift */,
 				DB7C04B826F87BE9009F5C0A /* ChoiceWritingView.swift */,
 				DB7C04E726FB199A009F5C0A /* CollectionViewCell */,
 				DB7C04ED26FB1ACE009F5C0A /* ContentsTabView.swift */,
+				874D92F6271AD0A9005FF8F3 /* DisableSelectionTextField.swift */,
 				DB148C1F27043CFC00FDC48F /* DropBoxView.swift */,
 				DB148C2B2705855A00FDC48F /* EasyLookTabTypeButton.swift */,
 				DB148C2F2705863100FDC48F /* EasyLookTabView.swift */,
@@ -531,11 +547,11 @@
 				DBD545512703409300063C98 /* HorizontalCollectionView.swift */,
 				DB148C272704A1A500FDC48F /* IgnoreTouchView.swift */,
 				DB148C212704623200FDC48F /* InsetButton.swift */,
-				87A86C8E27141507008FB3F0 /* RatingView.swift */,
 				DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */,
 				DB8BF6782705D25700FD5FDB /* LogoView.swift */,
 				8738E1CC271708F80069BB80 /* PaddingLabel.swift */,
 				DB7C04BD26F9BE72009F5C0A /* ProfileView.swift */,
+				87A86C8E27141507008FB3F0 /* RatingView.swift */,
 				DBA0F81D2709BD41009553FC /* RecentSearchView.swift */,
 				DB37EC76270C307C00030D9A /* RecentSearchView+update.swift */,
 				DB8BF6802706D89E00FD5FDB /* ResultsWithDropBoxView.swift */,
@@ -553,8 +569,9 @@
 				87DAEB1A270BEAE50038C487 /* CameraButtonCell.swift */,
 				DB7C04E826FB19AE009F5C0A /* ContentsCollectionViewCell.swift */,
 				DBA0F821270AF656009553FC /* ContentsDetailCollectionViewCell.swift */,
-				DBD5454F27033D9A00063C98 /* RoundButtonCollectionViewCell.swift */,
 				87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */,
+				DBD5454F27033D9A00063C98 /* ButtonRoundCollectionCell.swift */,
+				DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */,
 				87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */,
 			);
 			path = CollectionViewCell;
@@ -591,6 +608,7 @@
 			isa = PBXGroup;
 			children = (
 				DBA0F824270B07D8009553FC /* LeftLabelRightButtonHeaderView.swift */,
+				DB05B04D271F09260067DB17 /* LoginTopHeaderView.swift */,
 				DB22327D27183378002ED30D /* TwoLabelVerticalHeaderView.swift */,
 			);
 			path = HeaderView;
@@ -839,7 +857,9 @@
 				DBD2244727085671004C5184 /* EasyLookViewController+subscribe.swift in Sources */,
 				8738E1CB271705220069BB80 /* CategoryViewController.swift in Sources */,
 				DB7C04EE26FB1ACE009F5C0A /* ContentsTabView.swift in Sources */,
+				DB05B04C271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift in Sources */,
 				DBA0F820270AF0A4009553FC /* ResultCollectionSection.swift in Sources */,
+				DB05B056271FEAFA0067DB17 /* LoginViewController+subscribe.swift in Sources */,
 				DB331DAA26FDD00A00A629F5 /* ImageAssets.swift in Sources */,
 				876243E02708701B00BDA1DC /* WriteType.swift in Sources */,
 				DBD5454727032B1C00063C98 /* FilterType.swift in Sources */,
@@ -849,14 +869,16 @@
 				DB22327E27183378002ED30D /* TwoLabelVerticalHeaderView.swift in Sources */,
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
 				DB6909632712DB0800BB54E4 /* SettingCoordinator.swift in Sources */,
-				DBD5455027033D9A00063C98 /* RoundButtonCollectionViewCell.swift in Sources */,
+				DBD5455027033D9A00063C98 /* ButtonRoundCollectionCell.swift in Sources */,
 				DB7C04CA26F9E69D009F5C0A /* UserDefaults+.swift in Sources */,
 				DB148C2C2705855A00FDC48F /* EasyLookTabTypeButton.swift in Sources */,
 				DB7C04E526FB1981009F5C0A /* BaseContentsCollectionViewController.swift in Sources */,
 				DB8BF6812706D89E00FD5FDB /* ResultsWithDropBoxView.swift in Sources */,
 				DB148C222704623200FDC48F /* InsetButton.swift in Sources */,
+				DB05B054271FEABB0067DB17 /* LoginViewController+dequeueCell.swift in Sources */,
 				DB7C04EC26FB1A04009F5C0A /* UIView+.swift in Sources */,
 				DB7C04FC26FB27A6009F5C0A /* TemplateImageButton.swift in Sources */,
+				DB05B050271F0AB00067DB17 /* LoginCollectionSection.swift in Sources */,
 				876243E22708704800BDA1DC /* WriteTypeButton.swift in Sources */,
 				8738E1CF271709660069BB80 /* RoundLabelWithButtonTableCell.swift in Sources */,
 				DB37EC77270C307C00030D9A /* RecentSearchView+update.swift in Sources */,
@@ -876,6 +898,7 @@
 				DB7C04B626F8782B009F5C0A /* EasyLookViewController.swift in Sources */,
 				DB148C282704A1A600FDC48F /* IgnoreTouchView.swift in Sources */,
 				DB69095F2712C55F00BB54E4 /* SearchResultsViewModel.swift in Sources */,
+				DB05B052271F0D4B0067DB17 /* LoginViewController.swift in Sources */,
 				DB7C04B226F87548009F5C0A /* TabBarController.swift in Sources */,
 				DB7C04B926F87BE9009F5C0A /* ChoiceWritingView.swift in Sources */,
 				DB7C04AA26F5F308009F5C0A /* EasyLookCoordinator.swift in Sources */,
@@ -899,6 +922,7 @@
 				DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */,
 				87A86C8F27141507008FB3F0 /* RatingView.swift in Sources */,
 				DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */,
+				DB05B04E271F09260067DB17 /* LoginTopHeaderView.swift in Sources */,
 				DB7C04F026FB1EFF009F5C0A /* HomeViewController.swift in Sources */,
 				DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */,
 				DB331DAB26FDD00A00A629F5 /* Fonts.swift in Sources */,

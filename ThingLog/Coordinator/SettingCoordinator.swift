@@ -33,4 +33,11 @@ final class SettingCoordinator: Coordinator {
         trashViewController.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(trashViewController, animated: true)
     }
+    
+    func showLoginViewController() {
+        let loginViewController: LoginViewController = LoginViewController(isLogin: true)
+        loginViewController.coordinator = self
+        loginViewController.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(loginViewController, animated: true)
+    }
 }
