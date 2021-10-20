@@ -14,6 +14,9 @@ final class SettingViewController: UIViewController {
         case darkMode = 0
         case editCategory = 1
         case trash = 2
+        case login = 3
+        case addDummyData = 4
+        case deleteDummyData = 5
         
         var title: String {
             switch self {
@@ -23,6 +26,12 @@ final class SettingViewController: UIViewController {
                 return "카테고리 수정"
             case .trash:
                 return "휴지통"
+            case .login:
+                return "로그인 화면 ( 테스트 )"
+            case .addDummyData:
+                return "랜덤 데이터 400개 추가"
+            case .deleteDummyData:
+                return "랜덤 데이터 모두 삭제"
             }
         }
     }
@@ -124,12 +133,7 @@ extension SettingViewController: UITableViewDataSource {
                     }
                     .disposed(by: cell.disposeBag)
                 
-            case .editCategory:
-                cell.changeViewType(labelType: .withBody1,
-                                    buttonType: .withChevronRight,
-                                    borderLineHeight: .with1Height,
-                                    borderLineColor: .withGray5)
-            case .trash:
+            case .editCategory, .trash, .login, .addDummyData, .deleteDummyData:
                 cell.changeViewType(labelType: .withBody1,
                                     buttonType: .withChevronRight,
                                     borderLineHeight: .with1Height,
@@ -150,6 +154,12 @@ extension SettingViewController: UITableViewDelegate {
                 return
             case .trash:
                 coordinator?.showTrashViewController()
+            case .login:
+                coordinator?.showLoginViewController()
+            case .addDummyData:
+                makeDummy()
+            case .deleteDummyData:
+                deleteAllEntity()
             }
         }
     }

@@ -141,6 +141,11 @@ extension TabBarController {
                 self.dimmedView.removeFromSuperview()
             }
         } else {
+            // 다른 뷰컨트롤러에서 탭바를 숨긴다음에는 다시 홈화면으로 올 경우, 탭바가 가장 앞으로 나타나게 되고, 그와 관련한 constraint가 삭제되는 이슈 때문에 추가적으로 코드를 넣었다.
+            view.bringSubviewToFront(choiceView)
+            choiceView.bottomAnchor.constraint(equalTo: tabBar.topAnchor, constant: 0).isActive = true
+            view.layoutIfNeeded()
+            
             UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
                 self.choiceView.hide(false)
                 self.dimmedView.backgroundColor = .black.withAlphaComponent(0.6)
@@ -183,3 +188,4 @@ extension TabBarController: UITabBarControllerDelegate {
         }
     }
 }
+

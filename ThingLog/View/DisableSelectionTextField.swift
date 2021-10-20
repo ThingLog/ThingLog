@@ -12,6 +12,11 @@ import UIKit
 final class DisableSelectionTextField: UITextField {
     var isSelection: Bool = true
 
+    /// 키보드가 나타날려고 할 때, 동작하기 위한 클로저다
+    var becomeFirstResponderCompletion: (() -> Void)?
+    /// 키보드가 사라질 때, 동작하기 위한 클로저다 
+    var resignFirstResponderCompletion: (() -> Void)?
+    
     init(isSelection: Bool) {
         super.init(frame: .zero)
         self.isSelection = isSelection
@@ -47,5 +52,15 @@ final class DisableSelectionTextField: UITextField {
             let endPosition: UITextPosition = self.endOfDocument
             return super.caretRect(for: endPosition)
         }
+    }
+    
+    override func becomeFirstResponder() -> Bool {
+        becomeFirstResponderCompletion?()
+        return super.becomeFirstResponder()
+    }
+    
+    override func resignFirstResponder() -> Bool {
+        resignFirstResponderCompletion?()
+        return super.resignFirstResponder()
     }
 }

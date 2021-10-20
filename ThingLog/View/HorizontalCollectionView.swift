@@ -17,7 +17,7 @@ final class HorizontalCollectionView: UIView {
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(RoundButtonCollectionViewCell.self, forCellWithReuseIdentifier: RoundButtonCollectionViewCell.reuseIdentifier)
+        collectionView.register(ButtonRoundCollectionCell.self, forCellWithReuseIdentifier: ButtonRoundCollectionCell.reuseIdentifier)
         collectionView.backgroundColor = SwiftGenColors.white.color
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
@@ -32,7 +32,8 @@ final class HorizontalCollectionView: UIView {
     // CoreData가 외부에서 변경될 때 호출하는 클로저다
     var completionBlock: ((Int) -> Void)?
     
-    private var selectedIndexCell: IndexPath = IndexPath(item: 0, section: 0)
+    // 이전의 선택한 셀을 찾기 위한 프로퍼티입니다.
+    private var selectedIndexCell: (indexPath: IndexPath, cell: ButtonRoundCollectionCell) = (IndexPath(row: 0, section: 0), ButtonRoundCollectionCell())
     private let buttonHeight: CGFloat = 26
     
     // 특정 Category를 선택할 때 마다 전달하기 위한 subject입니다.
@@ -65,7 +66,7 @@ final class HorizontalCollectionView: UIView {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-
+        
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -90,34 +91,47 @@ extension HorizontalCollectionView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoundButtonCollectionViewCell.reuseIdentifier, for: indexPath) as? RoundButtonCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ButtonRoundCollectionCell.reuseIdentifier, for: indexPath) as? ButtonRoundCollectionCell else { return UICollectionViewCell() }
         guard let item = fetchResultController?.fetchedObjects else {
             return cell
         }
-    
-        if selectedIndexCell == indexPath {
-            cell.changeButtonColor(isSelected: true)
+        
+        if selectedIndexCell.indexPath == indexPath {
+            changeButtonColor(isSelected: true, cell: cell)
             categoryTitleSubject.onNext(item[indexPath.row].title ?? "")
+        } else {
+            changeButtonColor(isSelected: false, cell: cell)
         }
+        
         cell.updateView(title: item[indexPath.item].title ?? "", cornerRadius: buttonHeight / 2)
         
         return cell
+    }
+    
+    /// ButtonRoundCollectionCell의 색을 강조하거나 강조하지 않는다.
+    private func changeButtonColor(isSelected: Bool, cell: ButtonRoundCollectionCell) {
+        cell.changeColor(borderColor: SwiftGenColors.gray5.color,
+                         backgroundColor: isSelected ? SwiftGenColors.gray5.color : SwiftGenColors.white.color,
+                         textColor: isSelected ? SwiftGenColors.white.color : SwiftGenColors.gray5.color)
     }
 }
 
 extension HorizontalCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? RoundButtonCollectionViewCell else {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ButtonRoundCollectionCell else {
             return
         }
-        cell.changeButtonColor(isSelected: true)
+        changeButtonColor(isSelected: true, cell: cell)
         
-        if selectedIndexCell != indexPath,
-           let cell: RoundButtonCollectionViewCell = collectionView.cellForItem(at: selectedIndexCell) as? RoundButtonCollectionViewCell {
-            cell.changeButtonColor(isSelected: false)
+        // 이전의 선택한 셀이 안보이는 경우에는 cellForItem(at) 으로 찾을 수 없기 때문에, 이전의 저장한 셀에서 색을 변경한다.
+        if selectedIndexCell.indexPath != indexPath {
+            changeButtonColor(isSelected: false, cell: selectedIndexCell.cell)
+            if let cell: ButtonRoundCollectionCell = collectionView.cellForItem(at: selectedIndexCell.indexPath) as? ButtonRoundCollectionCell {
+                changeButtonColor(isSelected: false, cell: cell)
+            }
         }
         
-        selectedIndexCell = indexPath
+        selectedIndexCell = (indexPath, cell)
         
         guard let item = fetchResultController?.fetchedObjects else {
             return
