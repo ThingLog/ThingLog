@@ -27,6 +27,7 @@ internal enum SwiftGenAssets {
   internal static let chevronUp = ImageSwiftGen(name: "chevronUp")
   internal static let clear = ImageSwiftGen(name: "clear")
   internal static let closeBadge = ImageSwiftGen(name: "closeBadge")
+  internal static let closeBig = ImageSwiftGen(name: "closeBig")
   internal static let easyLookTab = ImageSwiftGen(name: "easyLookTab")
   internal static let gift = ImageSwiftGen(name: "gift")
   internal static let homeTab = ImageSwiftGen(name: "homeTab")
