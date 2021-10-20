@@ -63,6 +63,7 @@
 		DB05B03C271853CE0067DB17 /* LeftRightButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */; };
 		DB05B03E27185B780067DB17 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03D27185B780067DB17 /* TrashViewController.swift */; };
 		DB05B04027185C500067DB17 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03F27185C500067DB17 /* UIViewController+.swift */; };
+		DB05B058271FFEF80067DB17 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DB05B057271FFEF80067DB17 /* Settings.bundle */; };
 		DB05B04C271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */; };
 		DB05B04E271F09260067DB17 /* LoginTopHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B04D271F09260067DB17 /* LoginTopHeaderView.swift */; };
 		DB05B050271F0AB00067DB17 /* LoginCollectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B04F271F0AB00067DB17 /* LoginCollectionSection.swift */; };
@@ -231,6 +232,7 @@
 		DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRightButtonView.swift; sourceTree = "<group>"; };
 		DB05B03D27185B780067DB17 /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		DB05B03F27185C500067DB17 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		DB05B057271FFEF80067DB17 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithLabelWithButtonCollectionCell.swift; sourceTree = "<group>"; };
 		DB05B04D271F09260067DB17 /* LoginTopHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTopHeaderView.swift; sourceTree = "<group>"; };
 		DB05B04F271F0AB00067DB17 /* LoginCollectionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCollectionSection.swift; sourceTree = "<group>"; };
@@ -418,12 +420,13 @@
 		873EC05026D50825003C3525 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				874D92F8271AD672005FF8F3 /* DummyData.swift */,
 				873EC00826D39055003C3525 /* AppDelegate.swift */,
+				874D92F8271AD672005FF8F3 /* DummyData.swift */,
 				873EC01926D39057003C3525 /* Info.plist */,
 				DBA1FD4726FB701C00F50DE5 /* InfoPlist.strings */,
 				873EC01626D39057003C3525 /* LaunchScreen.storyboard */,
 				873EC00A26D39055003C3525 /* SceneDelegate.swift */,
+				DB05B057271FFEF80067DB17 /* Settings.bundle */,
 				87078B5926EA44B5007AE242 /* ThingLog.xcdatamodeld */,
 			);
 			path = SupportingFiles;
@@ -751,6 +754,7 @@
 			files = (
 				DBAE8EBB26FDCA7B00F536AD /* Colors.xcassets in Resources */,
 				873EC04E26D5068F003C3525 /* .swiftlint.yml in Resources */,
+				DB05B058271FFEF80067DB17 /* Settings.bundle in Resources */,
 				DBAE8E9726FDB3EE00F536AD /* Pretendard-Regular.otf in Resources */,
 				DBAE8E9826FDB3EE00F536AD /* Pretendard-SemiBold.otf in Resources */,
 				DBAE8EB126FDBEAE00F536AD /* swiftgen.yml in Resources */,

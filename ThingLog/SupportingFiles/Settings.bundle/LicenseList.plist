@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>StringsTable</key>
+	<string>LicenesList</string>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Licenses</string>
+		</dict>
+        
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>RxSwift</string>
+			<key>File</key>
+			<string>RxSwiftLicense</string>
+		</dict>
+        <dict>
+            <key>Type</key>
+            <string>PSChildPaneSpecifier</string>
+            <key>Title</key>
+            <string>SwiftGen</string>
+            <key>File</key>
+            <string>SwiftGenLicense</string>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSChildPaneSpecifier</string>
+            <key>Title</key>
+            <string>SwiftLint</string>
+            <key>File</key>
+            <string>SwiftLintLicense</string>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSChildPaneSpecifier</string>
+            <key>Title</key>
+            <string>Fastlane</string>
+            <key>File</key>
+            <string>FastlaneLicense</string>
+        </dict>
+	</array>
+</dict>
+</plist>
