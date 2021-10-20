@@ -52,7 +52,7 @@ final class HomeViewController: UIViewController {
         subscribeContentsTabButton()
         subscribePageViewControllerScrollOffset()
         subscribeInformationViewModel()
-        subscribeProfilerEditButton()
+        subscribeProfileEditButton()
         
         fetchAllPost()
     }
@@ -202,7 +202,7 @@ extension HomeViewController {
             .disposed(by: disposeBag)
     }
     
-    func subscribeProfilerEditButton() {
+    func subscribeProfileEditButton() {
         profileView.userAliasNameButton.rx.tap.bind { [weak self] in
             self?.coordinator?.showLoginViewController()
         }

@@ -60,7 +60,7 @@ extension LoginViewController {
         cell.clearButton.rx.tap.bind { [weak self] in
             cell.textField.text = nil
             cell.hideCountingLabelAndClearButton(true)
-            // ⚠️test1() 메서드와 같이 작용해야하는 코드
+            // ⚠️test1_Tint() 메서드와 같이 작용해야하는 코드
 //            if let selectedIndex: IndexPath = self?.selectedIndexRecommend {
 //                guard let cell = collectionView.cellForItem(at: selectedIndex) as? ButtonRoundCollectionCell else {
 //                    return

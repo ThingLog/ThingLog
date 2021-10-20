@@ -24,7 +24,6 @@ final class TextFieldWithLabelWithButtonCollectionCell: UICollectionViewCell {
     let countingLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.body2
-        label.text = "    "
         label.textColor = SwiftGenColors.gray3.color
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.required, for: .horizontal)
@@ -198,6 +197,8 @@ extension TextFieldWithLabelWithButtonCollectionCell {
 
 extension TextFieldWithLabelWithButtonCollectionCell: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
+        
+        // textField의 text를 최대 maxTextCount 개수까지만 보여주도록 한다.
         var counting: Int = textField.text?.count ?? 0
         if counting > maxTextCount {
             textField.text = Array((textField.text ?? "").map { String($0) }[0..<maxTextCount]).joined()

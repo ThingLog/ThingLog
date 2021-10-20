@@ -215,7 +215,7 @@ extension LoginViewController: UICollectionViewDelegate {
         if indexPath.section == LoginCollectionSection.recommand.section {
             guard let cell = collectionView.cellForItem(at: indexPath) as? ButtonRoundCollectionCell else { return
             }
-            //            test1(cell: cell, indexPath: indexPath)
+            //            test1_Tint(cell: cell, indexPath: indexPath)
             test2_Tint(cell: cell, indexPath: indexPath)
             
             // 한 줄 소개 입력창에 반영
@@ -223,7 +223,7 @@ extension LoginViewController: UICollectionViewDelegate {
             }
             textFieldCell.textField.text = recommendList[indexPath.item]
             
-            // ⚠️test1() 메서드와 같이 작용해야하는 코드
+            // ⚠️test1_Tint() 메서드와 같이 작용해야하는 코드
             //            textFieldCell.textField.text = selectedIndexRecommend == nil ? "" : recommendList[indexPath.item]
         }
     }
@@ -233,19 +233,18 @@ extension LoginViewController {
     /// 셀의 버튼의 섹을 강조하거나 강조하지 않도록 하는 메서드다.
     private func tint(_ cell: ButtonRoundCollectionCell, _ bool: Bool) {
         UIView.animate(withDuration: 0.2) {
-            cell.changeColor(layerColor: SwiftGenColors.gray3.color,
+            cell.changeColor(borderColor: SwiftGenColors.gray3.color,
                              backgroundColor: bool ? SwiftGenColors.gray5.color : SwiftGenColors.white.color ,
                              textColor: SwiftGenColors.black.color )
         } completion: { _  in
             UIView.animate(withDuration: 0.2) {
-                cell.changeColor(layerColor: SwiftGenColors.gray3.color,
+                cell.changeColor(borderColor: SwiftGenColors.gray3.color,
                                  backgroundColor: !bool ? SwiftGenColors.gray5.color : SwiftGenColors.white.color ,
                                  textColor: SwiftGenColors.black.color )
             }
         }
     }
     
-    // ⚠️test1() 메서드와 같이 작용해야하는 코드
     /// 기존 와이어프레임이 제안한 코드
     private func test1_Tint(cell: ButtonRoundCollectionCell, indexPath: IndexPath) {
         if let beforeIndex: IndexPath = selectedIndexRecommend {

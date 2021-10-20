@@ -27,11 +27,6 @@ final class ButtonRoundCollectionCell: UICollectionViewCell {
         return button
     }()
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        changeButtonColor(isSelected: false)
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -58,20 +53,16 @@ extension ButtonRoundCollectionCell {
         button.setTitle(title, for: .normal)
         button.layer.cornerRadius = cornerRadius
     }
-    
-    func changeButtonColor(isSelected: Bool) {
-        button.backgroundColor = isSelected ? SwiftGenColors.gray5.color : SwiftGenColors.white.color
-        button.setTitleColor(isSelected ? SwiftGenColors.white.color : SwiftGenColors.gray5.color, for: .normal)
-    }
+
     /// 버튼의 layer의 두께를 조절한다. default로는 1이다.
-    func setButtonLayerBorderWidth(_ width: CGFloat) {
+    func changeButtonLayerBorderWidth(_ width: CGFloat) {
         button.layer.borderWidth = width
     }
     
-    /// 버튼의 lyaer, background, text 컬러를 변경한다.
-    func changeColor(layerColor: UIColor, backgroundColor: UIColor, textColor: UIColor) {
+    /// 버튼의 layer, background, text 컬러를 변경한다.
+    func changeColor(borderColor: UIColor, backgroundColor: UIColor, textColor: UIColor) {
         button.backgroundColor = backgroundColor
-        button.layer.borderColor = layerColor.cgColor
+        button.layer.borderColor = borderColor.cgColor
         button.setTitleColor(textColor, for: .normal)
     }
 }
