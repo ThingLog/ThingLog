@@ -57,16 +57,9 @@ extension LoginViewController {
                 self?.moveTo(indexPath: indexPath, collectionView: collectionView)
             }.disposed(by: cell.disposeBag)
         
-        cell.clearButton.rx.tap.bind { [weak self] in
+        cell.clearButton.rx.tap.bind { 
             cell.textField.text = nil
             cell.hideCountingLabelAndClearButton(true)
-            // ⚠️test1_Tint() 메서드와 같이 작용해야하는 코드
-//            if let selectedIndex: IndexPath = self?.selectedIndexRecommend {
-//                guard let cell = collectionView.cellForItem(at: selectedIndex) as? ButtonRoundCollectionCell else {
-//                    return
-//                }
-//                self?.tint(cell, false)
-//            }
         }
         .disposed(by: cell.disposeBag)
         

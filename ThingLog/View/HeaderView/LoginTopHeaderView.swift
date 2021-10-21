@@ -21,8 +21,11 @@ final class LoginTopHeaderView: UICollectionReusableView {
         return label
     }()
     
-    let laterButton: UIButton = {
-        let button: UIButton = UIButton()
+    let laterButton: InsetButton = {
+        let button: InsetButton = InsetButton()
+        // text에 button 크기를 딱 맞춘다 ( 위아래 패딩 값을 없애기 위함 )
+        button.titleEdgeInsets = UIEdgeInsets(top: .leastNormalMagnitude, left: .leastNormalMagnitude, bottom: .leastNormalMagnitude, right: .leastNormalMagnitude)
+        button.contentEdgeInsets = UIEdgeInsets(top: .leastNormalMagnitude, left: .leastNormalMagnitude, bottom: .leastNormalMagnitude, right: .leastNormalMagnitude)
         button.titleLabel?.font = UIFont.Pretendard.body1
         button.setTitleColor(SwiftGenColors.black.color, for: .normal)
         button.setTitle("나중에", for: .normal)
