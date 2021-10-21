@@ -17,6 +17,9 @@ final class SettingViewController: UIViewController {
         case login = 3
         case addDummyData = 4
         case deleteDummyData = 5
+        case alert1 = 6
+        case alert2 = 7
+        case alert3 = 8
         
         var title: String {
             switch self {
@@ -32,6 +35,12 @@ final class SettingViewController: UIViewController {
                 return "랜덤 데이터 400개 추가"
             case .deleteDummyData:
                 return "랜덤 데이터 모두 삭제"
+            case .alert1:
+                return "기본 Alert"
+            case .alert2:
+                return "내용과 버튼 하나만 있는 Alert"
+            case .alert3:
+                return "제목과 텍스트필드, 두개의 버튼 있는 Alert"
             }
         }
     }
@@ -133,7 +142,7 @@ extension SettingViewController: UITableViewDataSource {
                     }
                     .disposed(by: cell.disposeBag)
                 
-            case .editCategory, .trash, .login, .addDummyData, .deleteDummyData:
+            case .editCategory, .trash, .login, .addDummyData, .deleteDummyData, .alert1, .alert2, .alert3:
                 cell.changeViewType(labelType: .withBody1,
                                     buttonType: .withChevronRight,
                                     borderLineHeight: .with1Height,
@@ -160,7 +169,51 @@ extension SettingViewController: UITableViewDelegate {
                 makeDummy()
             case .deleteDummyData:
                 deleteAllEntity()
+            case .alert1:
+                showAlert1()
+            case .alert2:
+                showAlert2()
+            case .alert3:
+                showAlert3()
+                
             }
+            
         }
     }
+    func showAlert1() {
+        let alert = AlertViewController()
+        alert.modalPresentationStyle = .overFullScreen
+        alert.leftButton.rx.tap.bind {
+            alert.dismiss(animated: false, completion: nil)
+        }
+        present(alert, animated: false, completion: nil)
+    }
+    
+    func showAlert2() {
+        let alert = AlertViewController()
+        alert.modalPresentationStyle = .overFullScreen
+        alert.hideTitleLabel()
+        alert.hideRightButton()
+        alert.hideTextField()
+        alert.changeContentsText("이미지는 최대 10개까지 첨부할 수 있어요")
+        alert.leftButton.setTitle("확인", for: .normal)
+        alert.leftButton.rx.tap.bind {
+            alert.dismiss(animated: false, completion: nil)
+        }
+        present(alert, animated: false, completion: nil)
+    }
+    
+    func showAlert3() {
+        let alert = AlertViewController()
+        alert.hideContentsLabel()
+        alert.titleLabel.text = "카테고리 수정"
+        alert.leftButton.setTitle("취소", for: .normal)
+        alert.rightButton.setTitle("확인", for: .normal)
+        alert.modalPresentationStyle = .overFullScreen
+        alert.leftButton.rx.tap.bind {
+            alert.dismiss(animated: false, completion: nil)
+        }
+        present(alert, animated: false, completion: nil)
+    }
 }
+

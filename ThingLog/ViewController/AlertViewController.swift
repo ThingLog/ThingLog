@@ -283,7 +283,7 @@ final class AlertViewController: UIViewController {
             trailingContentsPaddingView.widthAnchor.constraint(equalToConstant: paddingWidth),
             topPaddingViewOnTextField.heightAnchor.constraint(equalToConstant: paddingHeight),
             
-            contentStackView.heightAnchor.constraint(equalToConstant: contentsHeight),
+            contentStackView.heightAnchor.constraint(greaterThanOrEqualToConstant: contentsHeight),
             textField.heightAnchor.constraint(equalToConstant: textFieldHeight)
         ])
     }
