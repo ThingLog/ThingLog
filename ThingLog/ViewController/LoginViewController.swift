@@ -44,8 +44,6 @@ final class LoginViewController: UIViewController {
     var isLogin: Bool
     // TextFeild가 강조된 경우에만 스크롤이 더 가능하기 위해 필요한 프로퍼티다.
     var isEditMode: Bool = false
-    // ⚠️ test1()메서드를 사용하지 않는다면 필요없다.
-    var selectedIndexRecommend: IndexPath?
     
     let recommendList: [String] = ["나를 찾는 여정", "미니멀리즘", "건강한 소비 습관", "취향모음", "물건의 역사", "물건을 통해 나를 본다"]
     var disposeBag: DisposeBag = DisposeBag()
@@ -215,22 +213,18 @@ extension LoginViewController: UICollectionViewDelegate {
         if indexPath.section == LoginCollectionSection.recommand.section {
             guard let cell = collectionView.cellForItem(at: indexPath) as? ButtonRoundCollectionCell else { return
             }
-            //            test1_Tint(cell: cell, indexPath: indexPath)
-            test2_Tint(cell: cell, indexPath: indexPath)
+            tint(cell, true)
             
             // 한 줄 소개 입력창에 반영
             guard let textFieldCell = collectionView.cellForItem(at: IndexPath(item: 0, section: LoginCollectionSection.userOneLine.section)) as? TextFieldWithLabelWithButtonCollectionCell else { return
             }
             textFieldCell.textField.text = recommendList[indexPath.item]
-            
-            // ⚠️test1_Tint() 메서드와 같이 작용해야하는 코드
-            //            textFieldCell.textField.text = selectedIndexRecommend == nil ? "" : recommendList[indexPath.item]
         }
     }
 }
 
 extension LoginViewController {
-    /// 셀의 버튼의 섹을 강조하거나 강조하지 않도록 하는 메서드다.
+    /// 셀의 버튼의 섹을 잠시 강조하는 메서드다
     private func tint(_ cell: ButtonRoundCollectionCell, _ bool: Bool) {
         UIView.animate(withDuration: 0.2) {
             cell.changeColor(borderColor: SwiftGenColors.gray3.color,
@@ -243,30 +237,5 @@ extension LoginViewController {
                                  textColor: SwiftGenColors.black.color )
             }
         }
-    }
-    
-    /// 기존 와이어프레임이 제안한 코드
-    private func test1_Tint(cell: ButtonRoundCollectionCell, indexPath: IndexPath) {
-        if let beforeIndex: IndexPath = selectedIndexRecommend {
-            if beforeIndex == indexPath {
-                tint(cell, false)
-                selectedIndexRecommend = nil
-            } else {
-                guard let beforeCell = collectionView.cellForItem(at: beforeIndex) as? ButtonRoundCollectionCell else { return
-                }
-                tint(beforeCell, false)
-                tint(cell, true)
-                selectedIndexRecommend = indexPath
-            }
-        } else {
-            tint(cell, true)
-            selectedIndexRecommend = indexPath
-        }
-    }
-    
-    /// 내가 제안하고 싶은 코드
-    /// 왜냐하면, test1처럼 하게 되면, 관련된 인터렉션이 굉장히 많다. 그에 따라 코드가 복잡해지는 단점이 있다. 그리고 선택했을 때, 해당 텍스트를 수정하는 경우에는 또 강조를 풀어야하는지, 만약 그렇다면, 텍스트를 수정하다가 다시 원래대로 선택했던 문장으로 바꾸게 된다면, 또 강조를 해야하는지, 등의 논리적인 흐름에 문제가 있다라고 생각한다. 그래서 항상 강조되있기 보다는 잠시 반짝거리도록 바꾸는게 훨씬 코드가 깔끔하고, 추가적으로 발생할 수 있는 상황에 대해서 대비할 코드가 거의 없다라는 장점이 더 크다라고 생각한다.
-    private func test2_Tint(cell: ButtonRoundCollectionCell, indexPath: IndexPath) {
-        tint(cell, true)
     }
 }

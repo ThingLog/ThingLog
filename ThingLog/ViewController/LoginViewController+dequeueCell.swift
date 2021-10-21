@@ -27,13 +27,6 @@ extension LoginViewController {
                          backgroundColor: SwiftGenColors.white.color,
                          textColor: SwiftGenColors.black.color)
         cell.updateView(title: item, cornerRadius: 30 / 2)
-        
-        // ⚠️test1_Tint() 메서드와 같이 작용해야하는 코드
-        //        if let selectedIndex: IndexPath = selectedIndexRecommend {
-        //            if selectedIndex == indexPath {
-        //                tint(cell, true)
-        //            }
-        //        }
         return cell
     }
     
