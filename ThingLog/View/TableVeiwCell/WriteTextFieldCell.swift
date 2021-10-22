@@ -43,10 +43,16 @@ final class WriteTextFieldCell: UITableViewCell {
     }
 
     var text: String? { textField.text }
+    var isEditingSubject: PublishSubject<Bool> = PublishSubject<Bool>()
 
-    private let disposeBag: DisposeBag = DisposeBag()
+    private(set) var disposeBag: DisposeBag = DisposeBag()
     private let paddingLeadingTrailing: CGFloat = 26.0
     private let paddingTopBottom: CGFloat = 20.0
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -101,12 +107,16 @@ extension WriteTextFieldCell {
             .map { $0.isEmpty }
             .bind { [weak self] isEmpty in
                 self?.textField.rightViewMode = isEmpty ? .never : .always
-            }
-            .disposed(by: disposeBag)
+            }.disposed(by: disposeBag)
 
         (textField.rightView as? UIButton)?.rx.tap
             .bind { [weak self] _ in
                 self?.clearTextField()
+            }.disposed(by: disposeBag)
+
+        textField.rx.controlEvent(.editingDidBegin)
+            .bind { [weak self] _ in
+                self?.isEditingSubject.onNext(true)
             }.disposed(by: disposeBag)
     }
 

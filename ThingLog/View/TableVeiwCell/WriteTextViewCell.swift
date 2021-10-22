@@ -7,6 +7,9 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 /// 글쓰기 화면에서 WriteTextViewCell의 높이를 동적으로 변경하기 위한 프로토콜
 protocol WriteTextViewCellDelegate: AnyObject {
     func updateTextViewHeight(_ cell: WriteTextViewCell, _ textView: UITextView)
@@ -26,9 +29,16 @@ final class WriteTextViewCell: UITableViewCell {
         return textView
     }()
 
+    var isEditingSubject: PublishSubject<Bool> = PublishSubject<Bool>()
     weak var delegate: WriteTextViewCellDelegate?
+    private(set) var disposeBag: DisposeBag = DisposeBag()
     private let paddingLeadingTrailing: CGFloat = 23.0
     private let paddingTopBottom: CGFloat = 24.0
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -56,6 +66,11 @@ extension WriteTextViewCell {
         ])
 
         textView.delegate = self
+
+        textView.rx.didBeginEditing
+            .bind { [weak self] in
+                self?.isEditingSubject.onNext(true)
+            }.disposed(by: disposeBag)
     }
 
     private func setupToolbar() {

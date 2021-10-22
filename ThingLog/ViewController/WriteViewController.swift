@@ -106,6 +106,11 @@ extension WriteViewController: UITableViewDataSource {
             cell.keyboardType = viewModel?.typeInfo[indexPath.row].keyboardType ?? .default
             cell.placeholder = viewModel?.typeInfo[indexPath.row].placeholder
 
+            cell.isEditingSubject
+                .bind { _ in
+                    tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                }.disposed(by: cell.disposeBag)
+
             return cell
         case .rating:
             guard let cell: WriteRatingCell = tableView.dequeueReusableCell(withIdentifier: WriteRatingCell.reuseIdentifier, for: indexPath) as? WriteRatingCell else {
@@ -118,6 +123,11 @@ extension WriteViewController: UITableViewDataSource {
             }
 
             cell.delegate = self
+
+            cell.isEditingSubject
+                .bind { _ in
+                    tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                }.disposed(by: cell.disposeBag)
 
             return cell
         default:
