@@ -61,6 +61,8 @@ extension WriteViewController {
         tableView.register(WriteTextFieldCell.self, forCellReuseIdentifier: WriteTextFieldCell.reuseIdentifier)
         tableView.register(WriteRatingCell.self, forCellReuseIdentifier: WriteRatingCell.reuseIdentifier)
         tableView.register(WriteTextViewCell.self, forCellReuseIdentifier: WriteTextViewCell.reuseIdentifier)
+
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(endEditing(sender:))))
     }
 
     func setupBind() {
@@ -86,5 +88,13 @@ extension WriteViewController {
                 self.tableView.contentInset = insets
             }
             .disposed(by: disposeBag)
+    }
+
+    @objc
+    func endEditing(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            view.endEditing(true)
+        }
+        sender.cancelsTouchesInView = false
     }
 }

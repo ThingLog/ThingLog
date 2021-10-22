@@ -118,6 +118,19 @@ extension WriteTextFieldCell {
             .bind { [weak self] _ in
                 self?.isEditingSubject.onNext(true)
             }.disposed(by: disposeBag)
+
+        textField.rx.controlEvent(.editingDidEnd)
+            .bind { [weak self] _ in
+                self?.textField.rightViewMode = .never
+            }.disposed(by: disposeBag)
+
+        textField.rx.controlEvent([.editingDidBegin, .editingChanged, .valueChanged])
+            .withLatestFrom(textField.rx.text.orEmpty)
+            .map { $0.isEmpty }
+            .bind { [weak self] isEmpty in
+                self?.textField.rightViewMode = isEmpty ? .never : .always
+            }
+            .disposed(by: disposeBag)
     }
 
     @objc
@@ -152,6 +165,7 @@ extension WriteTextFieldCell: UITextFieldDelegate {
         if string.isEmpty {
             if removeCharacter.count == 1 {
                 textField.text = ""
+                textField.sendActions(for: .valueChanged)
                 return false
             }
             let startIndex: String.Index = removeCharacter.index(removeCharacter.startIndex, offsetBy: 0)

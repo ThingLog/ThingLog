@@ -137,7 +137,7 @@ extension WriteViewController: UITableViewDataSource {
 }
 
 // MARK: - Delegate
-extension WriteViewController: WriteTextViewCellDelegate, UITextViewDelegate {
+extension WriteViewController: WriteTextViewCellDelegate {
     func updateTextViewHeight(_ cell: WriteTextViewCell, _ textView: UITextView) {
         DispatchQueue.main.async { [weak tableView] in
             tableView?.beginUpdates()
