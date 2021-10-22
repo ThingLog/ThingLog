@@ -7,6 +7,9 @@
 
 import UIKit
 
+/// 홈화면 상단에 유저 `닉네임`, 유저 `한 줄 소개` 및 `벳지` 이미지를 보여주는 뷰다. [이미지](https://www.notion.so/ProfileView-2ec81d3153944a198ed01320a070cf63)
+///
+/// `HomeViewController`에서 사용
 final class ProfileView: UIView {
     var userAliasNameButton: UIButton = {
         let button: UIButton = UIButton()
@@ -17,7 +20,7 @@ final class ProfileView: UIView {
         button.semanticContentAttribute = .forceRightToLeft
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
-        button.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        button.setContentCompressionResistancePriority(.required, for: .vertical)
         return button
     }()
     
@@ -29,6 +32,12 @@ final class ProfileView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return label
+    }()
+    
+    private let paddingViewBetweenLabel: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     var userBadgeImageView: UIImageView = {
@@ -61,9 +70,10 @@ final class ProfileView: UIView {
     }()
     
     private lazy var verticalStackView: UIStackView = {
-        let stackView: UIStackView = UIStackView(arrangedSubviews: [userAliasNameButton, userOneLineIntroductionLabel])
+        let stackView: UIStackView = UIStackView(arrangedSubviews: [userAliasNameButton,
+                                                                    paddingViewBetweenLabel,
+                                                                    userOneLineIntroductionLabel])
         stackView.axis = .vertical
-        stackView.spacing = 4
         stackView.alignment = .leading
         return stackView
     }()
@@ -90,6 +100,7 @@ final class ProfileView: UIView {
     private let imageHeight: CGFloat = 44
     private let emptyWidth: CGFloat = 44
     private let emptyHeight: CGFloat = 16
+    private let paddingViewHeight: CGFloat = 4
     
     // 배지이미지를 저장하기 위한 프로퍼티
     private var badgeImage: UIImage?
@@ -109,6 +120,13 @@ final class ProfileView: UIView {
         addSubview(totalView)
         
         userBadgeImageView.layer.cornerRadius = imageHeight / 2
+        let emptyVerticalConstraint: NSLayoutConstraint = emptyVerticalView.heightAnchor.constraint(equalToConstant: emptyHeight)
+        emptyVerticalConstraint.isActive =  true
+        emptyVerticalConstraint.priority = .defaultHigh
+        
+        let paddingViewConstraint: NSLayoutConstraint = paddingViewBetweenLabel.heightAnchor.constraint(equalToConstant: paddingViewHeight)
+        paddingViewConstraint.isActive = true
+        paddingViewConstraint.priority = .defaultHigh
         
         NSLayoutConstraint.activate([
             userBadgeImageView.heightAnchor.constraint(lessThanOrEqualToConstant: imageHeight),
@@ -120,9 +138,7 @@ final class ProfileView: UIView {
             totalView.leadingAnchor.constraint(equalTo: leadingAnchor),
             totalView.trailingAnchor.constraint(equalTo: trailingAnchor),
             totalView.topAnchor.constraint(equalTo: topAnchor),
-            totalView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            emptyVerticalView.heightAnchor.constraint(equalToConstant: emptyHeight)
+            totalView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }
