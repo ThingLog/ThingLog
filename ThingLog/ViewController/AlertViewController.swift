@@ -246,7 +246,7 @@ final class AlertViewController: UIViewController {
                 self.alertView.transform = .identity
             } completion: { _ in
                 self.alertView.isHidden = true
-                UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseInOut) {
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseInOut) {
                     self.view.backgroundColor = .clear
                     self.view.layoutIfNeeded()
                 } completion: { _ in
