@@ -8,26 +8,6 @@
 import UIKit
 
 extension WriteViewController {
-    /// WriteType 값이 넘어왔는 지 확인하기 위한 뷰를 구성하는 메서드.
-    /// 이후 화면 구성에서 삭제할 예정
-    func setupTestView() {
-        guard let viewModel = viewModel else {
-            return
-        }
-
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "\(viewModel.writeType)"
-        label.textColor = SwiftGenColors.black.color
-
-        view.addSubview(label)
-
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-    }
-
     func setupNavigationBar() {
         if #available(iOS 15, *) {
             let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
@@ -58,5 +38,53 @@ extension WriteViewController {
         }.disposed(by: disposeBag)
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: closeButton)
+    }
+
+    func setupView() {
+        view.addSubview(tableView)
+        view.addSubview(doneButton)
+
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: doneButton.topAnchor),
+            doneButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            doneButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            doneButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+
+        tableView.dataSource = self
+        tableView.register(WriteImageTableCell.self, forCellReuseIdentifier: WriteImageTableCell.reuseIdentifier)
+        tableView.register(WriteTextFieldCell.self, forCellReuseIdentifier: WriteTextFieldCell.reuseIdentifier)
+        tableView.register(WriteRatingCell.self, forCellReuseIdentifier: WriteRatingCell.reuseIdentifier)
+        tableView.register(WriteTextViewCell.self, forCellReuseIdentifier: WriteTextViewCell.reuseIdentifier)
+    }
+
+    func setupBind() {
+        // 키보드가 올라왔을 때 키보드 높이만큼 하단 여백 추가
+        NotificationCenter.default.rx
+            .notification(UIResponder.keyboardWillShowNotification, object: nil)
+            .map { notification -> CGFloat in
+                (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
+            }
+            .bind { [weak self] height in
+                guard let self = self else { return }
+                let insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: height, right: 0)
+                self.tableView.contentInset = insets
+            }
+            .disposed(by: disposeBag)
+
+        // 키보드가 내려갔을 때 하단 여백 삭제
+        NotificationCenter.default.rx
+            .notification(UIResponder.keyboardWillHideNotification, object: nil)
+            .bind { [weak self] _ in
+                guard let self = self else { return }
+                let insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+                self.tableView.contentInset = insets
+            }
+            .disposed(by: disposeBag)
     }
 }

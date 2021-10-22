@@ -29,7 +29,6 @@ final class WriteTextViewCell: UITableViewCell {
     weak var delegate: WriteTextViewCellDelegate?
     private let paddingLeadingTrailing: CGFloat = 23.0
     private let paddingTopBottom: CGFloat = 24.0
-    private let minHeight: CGFloat = 975.0
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -53,8 +52,7 @@ extension WriteTextViewCell {
             textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: paddingLeadingTrailing),
             textView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingTopBottom),
             textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -paddingLeadingTrailing),
-            textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingTopBottom),
-            textView.heightAnchor.constraint(greaterThanOrEqualToConstant: minHeight)
+            textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingTopBottom)
         ])
 
         textView.delegate = self
