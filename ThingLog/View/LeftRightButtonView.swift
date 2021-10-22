@@ -60,18 +60,29 @@ class LeftRightButtonView: UIView {
     func setupView() {
         addSubview(stackView)
         addSubview(topLineView)
+        
+        let window = UIApplication.shared.windows.first
+        let bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
+        
+        let topLineConstraint: NSLayoutConstraint = topLineView.heightAnchor.constraint(equalToConstant: 0.5)
+        topLineConstraint.isActive = true
+        topLineConstraint.priority = .defaultHigh
+        
+        let borderLineConstraint: NSLayoutConstraint = borderLine.widthAnchor.constraint(equalToConstant: 0.5)
+        borderLineConstraint.isActive = true
+        borderLineConstraint.priority = .defaultHigh
+                    
         NSLayoutConstraint.activate([
             topLineView.leadingAnchor.constraint(equalTo: leadingAnchor),
             topLineView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            topLineView.heightAnchor.constraint(equalToConstant: 0.5),
+            
             topLineView.topAnchor.constraint(equalTo: topAnchor),
             
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.topAnchor.constraint(equalTo: topLineView.bottomAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            borderLine.widthAnchor.constraint(equalToConstant: 0.5),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -bottomPadding),
+ 
             leftButton.widthAnchor.constraint(equalTo: rightButton.widthAnchor)
         ])
     }
