@@ -10,6 +10,7 @@ import UIKit
 final class WriteViewModel {
     enum Section: Int, CaseIterable {
         case image
+        case category
         case type
         case rating
         case free
@@ -29,7 +30,7 @@ final class WriteViewModel {
         }
     }
     // Section 마다 표시할 항목의 개수
-    lazy var itemCount: [Int] = [1, typeInfo.count, 1, 1]
+    lazy var itemCount: [Int] = [1, 1, typeInfo.count, 1, 1]
 
     init(writeType: WriteType) {
         self.writeType = writeType

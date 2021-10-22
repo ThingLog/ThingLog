@@ -50,6 +50,8 @@ final class WriteCategoryTableCell: UITableViewCell {
     private let paddingLeading: CGFloat = 26.0
     private let paddingTrailing: CGFloat = 28.0
     private let paddingTopBottom: CGFloat = 20.0
+    private let indicatorButtonSize: CGFloat = 40.0
+    private let indicatorButtonTopBottom: CGFloat = 8.0
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -72,9 +74,9 @@ final class WriteCategoryTableCell: UITableViewCell {
             categoryLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingTopBottom),
             categoryLabel.trailingAnchor.constraint(equalTo: indicatorButton.leadingAnchor),
             categoryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingTopBottom),
-            indicatorButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingTopBottom),
+            indicatorButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: indicatorButtonTopBottom),
             indicatorButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -paddingTrailing),
-            indicatorButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingTopBottom)
+            indicatorButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -indicatorButtonTopBottom)
         ])
 
         indicatorButton.addTarget(self, action: #selector(tappedIndicatorButton), for: .touchUpInside)
@@ -89,7 +91,7 @@ final class WriteCategoryTableCell: UITableViewCell {
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: paddingLeading),
             collectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingTopBottom),
             collectionView.trailingAnchor.constraint(equalTo: indicatorButton.leadingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingTopBottom)
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -indicatorButtonTopBottom)
         ])
 
         collectionView.dataSource = self

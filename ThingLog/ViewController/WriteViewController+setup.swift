@@ -58,6 +58,7 @@ extension WriteViewController {
 
         tableView.dataSource = self
         tableView.register(WriteImageTableCell.self, forCellReuseIdentifier: WriteImageTableCell.reuseIdentifier)
+        tableView.register(WriteCategoryTableCell.self, forCellReuseIdentifier: WriteCategoryTableCell.reuseIdentifier)
         tableView.register(WriteTextFieldCell.self, forCellReuseIdentifier: WriteTextFieldCell.reuseIdentifier)
         tableView.register(WriteRatingCell.self, forCellReuseIdentifier: WriteRatingCell.reuseIdentifier)
         tableView.register(WriteTextViewCell.self, forCellReuseIdentifier: WriteTextViewCell.reuseIdentifier)
