@@ -17,6 +17,7 @@ final class CameraButtonCollectionCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFit
         imageView.sizeToFit()
         imageView.setContentHuggingPriority(.required, for: .vertical)
+        imageView.setContentHuggingPriority(.required, for: .horizontal)
         return imageView
     }()
 
@@ -28,6 +29,7 @@ final class CameraButtonCollectionCell: UICollectionViewCell {
         label.textColor = SwiftGenColors.black.color
         label.sizeToFit()
         label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
 
@@ -107,6 +109,7 @@ extension CameraButtonCollectionCell {
             emptyBottomView.heightAnchor.constraint(equalToConstant: emptyViewHeight),
             emptyTopView.widthAnchor.constraint(equalToConstant: emptyViewWidth),
             emptyBottomView.widthAnchor.constraint(equalToConstant: emptyViewWidth),
+            iconImageView.heightAnchor.constraint(equalToConstant: 18)
         ])
     }
 }

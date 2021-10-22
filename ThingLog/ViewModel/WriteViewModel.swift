@@ -11,14 +11,15 @@ final class WriteViewModel {
     enum Section: Int, CaseIterable {
         case image
         case category
+        /// 물건 이름, 가격 등 WriteTextField를 사용하는 항목을 나타내는 섹션
         case type
         case rating
-        case free
+        case contents
     }
 
     // MARK: - Properties
     var writeType: WriteType
-    // WriteTextFieldCell을 표시할 때 필요한 keyboardType, placeholder 구성
+    /// WriteTextFieldCell을 표시할 때 필요한 keyboardType, placeholder 구성. writeType에 따라 개수가 다르다.
     var typeInfo: [(keyboardType: UIKeyboardType, placeholder: String)] {
         switch writeType {
         case .bought:

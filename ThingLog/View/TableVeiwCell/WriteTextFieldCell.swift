@@ -86,18 +86,18 @@ extension WriteTextFieldCell {
     private func setupToolbar() {
         let keyboardToolBar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         keyboardToolBar.barStyle = .default
-        let cancleButton: UIButton = {
+        let successButton: UIButton = {
             let button: UIButton = UIButton()
             button.titleLabel?.font = UIFont.Pretendard.title2
-            button.setTitle("취소", for: .normal)
+            button.setTitle("완료", for: .normal)
             button.setTitleColor(SwiftGenColors.systemBlue.color, for: .normal)
             button.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
             return button
         }()
-        let cancleBarButton: UIBarButtonItem = UIBarButtonItem(customView: cancleButton)
-        cancleBarButton.tintColor = SwiftGenColors.black.color
+        let successBarButton: UIBarButtonItem = UIBarButtonItem(customView: successButton)
+        successBarButton.tintColor = SwiftGenColors.black.color
         keyboardToolBar.barTintColor = SwiftGenColors.gray6.color
-        keyboardToolBar.items = [cancleBarButton, UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
+        keyboardToolBar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), successBarButton]
         keyboardToolBar.sizeToFit()
         textField.inputAccessoryView = keyboardToolBar
     }

@@ -51,7 +51,7 @@ extension WriteViewController {
             tableView.bottomAnchor.constraint(equalTo: doneButton.topAnchor),
             doneButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             doneButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            doneButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            doneButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
         tableView.estimatedRowHeight = UITableView.automaticDimension

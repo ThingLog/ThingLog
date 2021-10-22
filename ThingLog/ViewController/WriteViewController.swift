@@ -52,6 +52,13 @@ final class WriteViewController: UIViewController {
         setupBind()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        doneButton.heightAnchor.constraint(equalToConstant: doneButton.frame.height + view.safeAreaInsets.bottom).isActive = true
+        doneButton.titleEdgeInsets = UIEdgeInsets(top: -view.safeAreaInsets.bottom, left: 0, bottom: 0, right: 0)
+    }
+
     @objc
     /// 글쓰기 화면을 닫는다.
     /// 글쓰기 화면을 닫기 전에 alert 팝업을 띄워 다시 한 번 사용자에게 묻는다.
@@ -126,7 +133,7 @@ extension WriteViewController: UITableViewDataSource {
                 return WriteRatingCell()
             }
             return cell
-        case .free:
+        case .contents:
             guard let cell: WriteTextViewCell = tableView.dequeueReusableCell(withIdentifier: WriteTextViewCell.reuseIdentifier, for: indexPath) as? WriteTextViewCell else {
                 return WriteTextViewCell()
             }
