@@ -11,7 +11,7 @@ import UIKit
 /// 휴지통 화면을 구성하는 뷰컨트롤러이다.
 final class TrashViewController: UIViewController {
     var coordinator: SettingCoordinator?
-
+    
     /// 네비게이션바 우측에 있는 선택or취소 버튼이다
     let editButton: UIButton = UIButton()
     
@@ -24,7 +24,7 @@ final class TrashViewController: UIViewController {
         flowLayout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: 100)
         let collection: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collection.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier)
-        collection.register(TwoLabelVerticalHeaderView.self, forSupplementaryViewOfKind: TwoLabelVerticalHeaderView.reuseIdentifier, withReuseIdentifier: TwoLabelVerticalHeaderView.reuseIdentifier)
+        collection.register(TwoLabelVerticalHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TwoLabelVerticalHeaderView.reuseIdentifier)
         
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
@@ -200,7 +200,7 @@ extension TrashViewController {
                 alert.changeContentsText("정말 삭제 하시겠어요?\n이 동작은 취소할 수 없습니다")
                 
                 alert.leftButton.rx.tap.bind {
-                    self?.changeEditButton(isCurrentEditMode: true)
+                    self?.changeEditButton(isCurrentEditMode: false)
                     alert.dismiss(animated: false, completion: nil)
                 }
                 .disposed(by: alert.disposeBag)
@@ -258,7 +258,7 @@ extension TrashViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: TwoLabelVerticalHeaderView.reuseIdentifier, withReuseIdentifier: TwoLabelVerticalHeaderView.reuseIdentifier, for: indexPath) as? TwoLabelVerticalHeaderView else {
+        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TwoLabelVerticalHeaderView.reuseIdentifier, for: indexPath) as? TwoLabelVerticalHeaderView else {
             return UICollectionReusableView()
         }
         return headerView
@@ -277,7 +277,7 @@ extension TrashViewController: UICollectionViewDelegate {
                 deleteStorage.append(indexPath.item)
                 cell.changeCheckButton(isSelected: true)
             }
-
+            
             var deleteStorageCount: String = String(deleteStorage.count)
             if deleteStorageCount == "0" {
                 deleteStorageCount = ""
