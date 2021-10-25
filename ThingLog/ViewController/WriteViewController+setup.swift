@@ -75,36 +75,21 @@ extension WriteViewController {
             .bind { [weak self] _ in
                 guard let self = self else { return }
                 DispatchQueue.main.async {
-                    self.removeTableViewBottomInset()
+                    self.setupTableViewBottomInset(0)
                 }
             }.disposed(by: disposeBag)
     }
 
-    /// TableView 하단에 여백을 추가한다.
-    /// - Parameter height: 테이블 뷰 하단에 들어간 높이
+    /// TableView 하단에 여백을 지정한다.
+    /// - Parameter height: 테이블 뷰 하단에 들어갈 높이
     private func setupTableViewBottomInset(_ height: CGFloat) {
         var inset: UIEdgeInsets = self.tableView.contentInset
         inset.bottom = height
         UIView.animate(withDuration: 0.3) {
             self.tableView.contentInset = inset
         }
-        inset = self.tableView.verticalScrollIndicatorInsets
-        inset.bottom = height
-        UIView.animate(withDuration: 0.3) {
-            self.tableView.scrollIndicatorInsets = inset
-        }
-    }
-
-    /// TableView 하단에 있는 여백을 삭제한다.
-    private func removeTableViewBottomInset() {
-        var inset: UIEdgeInsets = tableView.contentInset
-        inset.bottom = 0
-        UIView.animate(withDuration: 0.3) {
-            self.tableView.contentInset = inset
-        }
-
         inset = tableView.verticalScrollIndicatorInsets
-        inset.bottom = 0
+        inset.bottom = height
         UIView.animate(withDuration: 0.3) {
             self.tableView.scrollIndicatorInsets = inset
         }

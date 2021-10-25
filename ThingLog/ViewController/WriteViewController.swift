@@ -39,9 +39,19 @@ final class WriteViewController: UIViewController {
     }()
 
     // MARK: - Properties
-    var coordinator: Coordinator?
-    var viewModel: WriteViewModel?
+    var coordinator: WriteCoordinator?
+    private var viewModel: WriteViewModel
     let disposeBag: DisposeBag = DisposeBag()
+
+    init(viewModel: WriteViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,9 +89,7 @@ final class WriteViewController: UIViewController {
 
         alertController.rightButton.rx.tap.bind { [weak self] in
             alertController.dismiss(animated: false) {
-                self?.navigationController?.dismiss(animated: true, completion: {
-                    self?.navigationController?.viewControllers.removeAll()
-                })
+                self?.coordinator?.dismissViewController()
             }
         }.disposed(by: disposeBag)
 
@@ -112,7 +120,7 @@ extension WriteViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel?.itemCount[section] ?? 0
+        viewModel.itemCount[section] ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -135,8 +143,8 @@ extension WriteViewController: UITableViewDataSource {
                 return WriteTextFieldCell()
             }
 
-            cell.keyboardType = viewModel?.typeInfo[indexPath.row].keyboardType ?? .default
-            cell.placeholder = viewModel?.typeInfo[indexPath.row].placeholder
+            cell.keyboardType = viewModel.typeInfo[indexPath.row].keyboardType ?? .default
+            cell.placeholder = viewModel.typeInfo[indexPath.row].placeholder
 
             cell.isEditingSubject
                 .bind { [weak self] _ in
@@ -160,9 +168,8 @@ extension WriteViewController: UITableViewDataSource {
             }
 
             cell.delegate = self
-
-            cell.isEditingSubject
-                .bind { [weak self] _ in
+            cell.textView.rx.didBeginEditing
+                .bind { [weak self] in
                     self?.scrollToCurrentRow(at: indexPath)
                 }.disposed(by: cell.disposeBag)
 
@@ -175,7 +182,7 @@ extension WriteViewController: UITableViewDataSource {
 
 // MARK: - Delegate
 extension WriteViewController: WriteTextViewCellDelegate {
-    func updateTextViewHeight(_ cell: WriteTextViewCell, _ textView: UITextView) {
+    func updateTextViewHeight() {
         DispatchQueue.main.async { [weak tableView] in
             tableView?.beginUpdates()
             tableView?.endUpdates()

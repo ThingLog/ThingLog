@@ -12,12 +12,12 @@ import RxSwift
 
 /// 글쓰기 화면에서 WriteTextViewCell의 높이를 동적으로 변경하기 위한 프로토콜
 protocol WriteTextViewCellDelegate: AnyObject {
-    func updateTextViewHeight(_ cell: WriteTextViewCell, _ textView: UITextView)
+    func updateTextViewHeight()
 }
 
 /// 글쓰기 화면에서 자유 글쓰기를 입력할 때 사용하는 셀
 final class WriteTextViewCell: UITableViewCell {
-    private let textView: UITextView = {
+    let textView: UITextView = {
         let textView: UITextView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isEditable = true
@@ -34,6 +34,7 @@ final class WriteTextViewCell: UITableViewCell {
     private(set) var disposeBag: DisposeBag = DisposeBag()
     private let paddingLeadingTrailing: CGFloat = 23.0
     private let paddingTopBottom: CGFloat = 24.0
+    private let minHeight: CGFloat = 380.0
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -55,6 +56,7 @@ final class WriteTextViewCell: UITableViewCell {
 extension WriteTextViewCell {
     private func setupView() {
         selectionStyle = .none
+        separatorInset = .zero
 
         contentView.addSubview(textView)
 
@@ -62,15 +64,11 @@ extension WriteTextViewCell {
             textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: paddingLeadingTrailing),
             textView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingTopBottom),
             textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -paddingLeadingTrailing),
-            textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingTopBottom)
+            textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingTopBottom),
+            textView.heightAnchor.constraint(equalToConstant: minHeight)
         ])
 
         textView.delegate = self
-
-        textView.rx.didBeginEditing
-            .bind { [weak self] in
-                self?.isEditingSubject.onNext(true)
-            }.disposed(by: disposeBag)
     }
 
     private func setupToolbar() {
@@ -115,7 +113,7 @@ extension WriteTextViewCell: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {
         if let delegate: WriteTextViewCellDelegate = delegate {
-            delegate.updateTextViewHeight(self, textView)
+            delegate.updateTextViewHeight()
         }
     }
 }

@@ -25,9 +25,9 @@ final class WriteCoordinator: Coordinator {
     /// WriteViewController로 이동한다.
     /// - Parameter type: WriteType에 따라 ViewModel을 생성하기 위해 필요하다.
     func showWriteViewController(with type: WriteType) {
-        let writeViewController: WriteViewController = WriteViewController()
+        let viewModel: WriteViewModel = WriteViewModel(writeType: type)
+        let writeViewController: WriteViewController = WriteViewController(viewModel: viewModel)
         writeViewController.coordinator = self
-        writeViewController.viewModel = WriteViewModel(writeType: type)
         navigationController.modalPresentationStyle = .fullScreen
         navigationController.pushViewController(writeViewController, animated: true)
         parentViewController?.present(navigationController, animated: true)
@@ -38,5 +38,12 @@ final class WriteCoordinator: Coordinator {
         let categoryViewController: CategoryViewController = CategoryViewController()
         categoryViewController.coordinator = self
         navigationController.pushViewController(categoryViewController, animated: true)
+    }
+
+    /// naviagtionController를 dismiss 한다.
+    func dismissViewController() {
+        navigationController.dismiss(animated: true) {
+            self.navigationController.viewControllers.removeAll()
+        }
     }
 }
