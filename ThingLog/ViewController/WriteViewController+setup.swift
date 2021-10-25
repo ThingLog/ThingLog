@@ -9,19 +9,8 @@ import UIKit
 
 extension WriteViewController {
     func setupNavigationBar() {
-        if #available(iOS 15, *) {
-            let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = SwiftGenColors.white.color
-            appearance.shadowColor = .clear
-            navigationController?.navigationBar.standardAppearance = appearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-        } else {
-            navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.barTintColor = SwiftGenColors.white.color
-            navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        }
-
+        setupBaseNavigationBar()
+        
         let logoView: LogoView = LogoView("글쓰기")
         navigationItem.titleView = logoView
 
@@ -62,40 +51,62 @@ extension WriteViewController {
         tableView.register(WriteTextFieldCell.self, forCellReuseIdentifier: WriteTextFieldCell.reuseIdentifier)
         tableView.register(WriteRatingCell.self, forCellReuseIdentifier: WriteRatingCell.reuseIdentifier)
         tableView.register(WriteTextViewCell.self, forCellReuseIdentifier: WriteTextViewCell.reuseIdentifier)
-
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(endEditing(sender:))))
     }
 
-    func setupBind() {
-        // 키보드가 올라왔을 때 키보드 높이만큼 하단 여백 추가
+    /// 키보드가 올라왔을 때 키보드 높이만큼 하단 여백 추가
+    func bindKeyboardWillShow() {
         NotificationCenter.default.rx
             .notification(UIResponder.keyboardWillShowNotification, object: nil)
             .map { notification -> CGFloat in
-                (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
+                (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
             }
             .bind { [weak self] height in
                 guard let self = self else { return }
-                let insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: height, right: 0)
-                self.tableView.contentInset = insets
-            }
-            .disposed(by: disposeBag)
+                DispatchQueue.main.async {
+                    self.setupTableViewBottomInset(height)
+                }
+            }.disposed(by: disposeBag)
+    }
 
-        // 키보드가 내려갔을 때 하단 여백 삭제
+    /// 키보드가 내려갔을 때 하단 여백 삭제
+    func bindKeyboardWillHide() {
         NotificationCenter.default.rx
             .notification(UIResponder.keyboardWillHideNotification, object: nil)
             .bind { [weak self] _ in
                 guard let self = self else { return }
-                let insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-                self.tableView.contentInset = insets
-            }
-            .disposed(by: disposeBag)
+                DispatchQueue.main.async {
+                    self.removeTableViewBottomInset()
+                }
+            }.disposed(by: disposeBag)
     }
 
-    @objc
-    func endEditing(sender: UITapGestureRecognizer) {
-        if sender.state == .ended {
-            view.endEditing(true)
+    /// TableView 하단에 여백을 추가한다.
+    /// - Parameter height: 테이블 뷰 하단에 들어간 높이
+    private func setupTableViewBottomInset(_ height: CGFloat) {
+        var inset: UIEdgeInsets = self.tableView.contentInset
+        inset.bottom = height
+        UIView.animate(withDuration: 0.3) {
+            self.tableView.contentInset = inset
         }
-        sender.cancelsTouchesInView = false
+        inset = self.tableView.verticalScrollIndicatorInsets
+        inset.bottom = height
+        UIView.animate(withDuration: 0.3) {
+            self.tableView.scrollIndicatorInsets = inset
+        }
+    }
+
+    /// TableView 하단에 있는 여백을 삭제한다.
+    private func removeTableViewBottomInset() {
+        var inset: UIEdgeInsets = tableView.contentInset
+        inset.bottom = 0
+        UIView.animate(withDuration: 0.3) {
+            self.tableView.contentInset = inset
+        }
+
+        inset = tableView.verticalScrollIndicatorInsets
+        inset.bottom = 0
+        UIView.animate(withDuration: 0.3) {
+            self.tableView.scrollIndicatorInsets = inset
+        }
     }
 }

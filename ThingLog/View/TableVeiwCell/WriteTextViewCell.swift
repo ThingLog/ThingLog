@@ -94,7 +94,7 @@ extension WriteTextViewCell {
 
     @objc
     private func dismissKeyboard() {
-        textView.endEditing(true)
+        textView.resignFirstResponder()
     }
 }
 

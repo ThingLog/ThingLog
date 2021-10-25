@@ -114,7 +114,7 @@ extension WriteTextFieldCell {
                 self?.clearTextField()
             }.disposed(by: disposeBag)
 
-        textField.rx.controlEvent(.editingDidBegin)
+        textField.rx.controlEvent([.editingDidBegin, .touchUpInside])
             .bind { [weak self] _ in
                 self?.isEditingSubject.onNext(true)
             }.disposed(by: disposeBag)
@@ -135,7 +135,7 @@ extension WriteTextFieldCell {
 
     @objc
     private func dismissKeyboard() {
-        textField.endEditing(true)
+        textField.resignFirstResponder()
     }
 
     @objc

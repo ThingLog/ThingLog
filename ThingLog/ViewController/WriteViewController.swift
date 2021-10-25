@@ -49,7 +49,8 @@ final class WriteViewController: UIViewController {
 
         setupNavigationBar()
         setupView()
-        setupBind()
+        bindKeyboardWillShow()
+        bindKeyboardWillHide()
     }
 
     override func viewDidLayoutSubviews() {
@@ -87,6 +88,21 @@ final class WriteViewController: UIViewController {
         alertController.modalPresentationStyle = .overFullScreen
         present(alertController, animated: false, completion: nil)
     }
+
+    func scrollToCurrentRow(at indexPath: IndexPath) {
+        if indexPath.section == WriteViewModel.Section.type.rawValue {
+            let rowRect: CGRect = tableView.rectForRow(at: indexPath)
+            UIView.animate(withDuration: 0.3) {
+                self.tableView.scrollRectToVisible(rowRect, animated: false)
+            }
+        } else if indexPath.section == WriteViewModel.Section.contents.rawValue {
+            let bottomOffset: CGPoint = CGPoint(x: 0,
+                                                y: tableView.contentSize.height - tableView.bounds.height + tableView.contentInset.bottom)
+            UIView.animate(withDuration: 0.3) {
+                self.tableView.setContentOffset(bottomOffset, animated: false)
+            }
+        }
+    }
 }
 
 // MARK: - DataSource
@@ -123,8 +139,8 @@ extension WriteViewController: UITableViewDataSource {
             cell.placeholder = viewModel?.typeInfo[indexPath.row].placeholder
 
             cell.isEditingSubject
-                .bind { _ in
-                    tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                .bind { [weak self] _ in
+                    self?.scrollToCurrentRow(at: indexPath)
                 }.disposed(by: cell.disposeBag)
 
             return cell
@@ -132,6 +148,11 @@ extension WriteViewController: UITableViewDataSource {
             guard let cell: WriteRatingCell = tableView.dequeueReusableCell(withIdentifier: WriteRatingCell.reuseIdentifier, for: indexPath) as? WriteRatingCell else {
                 return WriteRatingCell()
             }
+
+            cell.selectRatingBlock = { [weak self] in
+                self?.view.endEditing(true)
+            }
+
             return cell
         case .contents:
             guard let cell: WriteTextViewCell = tableView.dequeueReusableCell(withIdentifier: WriteTextViewCell.reuseIdentifier, for: indexPath) as? WriteTextViewCell else {
@@ -141,8 +162,8 @@ extension WriteViewController: UITableViewDataSource {
             cell.delegate = self
 
             cell.isEditingSubject
-                .bind { _ in
-                    tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                .bind { [weak self] _ in
+                    self?.scrollToCurrentRow(at: indexPath)
                 }.disposed(by: cell.disposeBag)
 
             return cell
