@@ -26,9 +26,11 @@ final class WriteViewController: UIViewController {
 
         tableView.tableHeaderView = headerLabel
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
+        /* iOS 15.0 에서 tableFooterView 에 생기는 separator 제거 코드
         if #available(iOS 15.0, *) {
             tableView.sectionHeaderTopPadding = 0
         }
+         */
         return tableView
     }()
 
