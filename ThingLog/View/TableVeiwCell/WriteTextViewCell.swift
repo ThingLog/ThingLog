@@ -7,14 +7,17 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 /// 글쓰기 화면에서 WriteTextViewCell의 높이를 동적으로 변경하기 위한 프로토콜
 protocol WriteTextViewCellDelegate: AnyObject {
-    func updateTextViewHeight(_ cell: WriteTextViewCell, _ textView: UITextView)
+    func updateTextViewHeight()
 }
 
 /// 글쓰기 화면에서 자유 글쓰기를 입력할 때 사용하는 셀
 final class WriteTextViewCell: UITableViewCell {
-    private let textView: UITextView = {
+    let textView: UITextView = {
         let textView: UITextView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isEditable = true
@@ -26,10 +29,17 @@ final class WriteTextViewCell: UITableViewCell {
         return textView
     }()
 
+    var isEditingSubject: PublishSubject<Bool> = PublishSubject<Bool>()
     weak var delegate: WriteTextViewCellDelegate?
+    private(set) var disposeBag: DisposeBag = DisposeBag()
     private let paddingLeadingTrailing: CGFloat = 23.0
     private let paddingTopBottom: CGFloat = 24.0
-    private let minHeight: CGFloat = 975.0
+    private let minHeight: CGFloat = 380.0
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -46,6 +56,7 @@ final class WriteTextViewCell: UITableViewCell {
 extension WriteTextViewCell {
     private func setupView() {
         selectionStyle = .none
+        separatorInset = .zero
 
         contentView.addSubview(textView)
 
@@ -54,7 +65,7 @@ extension WriteTextViewCell {
             textView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingTopBottom),
             textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -paddingLeadingTrailing),
             textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingTopBottom),
-            textView.heightAnchor.constraint(greaterThanOrEqualToConstant: minHeight)
+            textView.heightAnchor.constraint(equalToConstant: minHeight)
         ])
 
         textView.delegate = self
@@ -63,25 +74,25 @@ extension WriteTextViewCell {
     private func setupToolbar() {
         let keyboardToolBar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         keyboardToolBar.barStyle = .default
-        let cancleButton: UIButton = {
+        let successButton: UIButton = {
             let button: UIButton = UIButton()
             button.titleLabel?.font = UIFont.Pretendard.title2
-            button.setTitle("취소", for: .normal)
+            button.setTitle("완료", for: .normal)
             button.setTitleColor(SwiftGenColors.systemBlue.color, for: .normal)
             button.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
             return button
         }()
-        let cancleBarButton: UIBarButtonItem = UIBarButtonItem(customView: cancleButton)
-        cancleBarButton.tintColor = SwiftGenColors.black.color
+        let successBarButton: UIBarButtonItem = UIBarButtonItem(customView: successButton)
+        successBarButton.tintColor = SwiftGenColors.black.color
         keyboardToolBar.barTintColor = SwiftGenColors.gray6.color
-        keyboardToolBar.items = [cancleBarButton, UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
+        keyboardToolBar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), successBarButton]
         keyboardToolBar.sizeToFit()
         textView.inputAccessoryView = keyboardToolBar
     }
 
     @objc
     private func dismissKeyboard() {
-        textView.endEditing(true)
+        textView.resignFirstResponder()
     }
 }
 
@@ -102,7 +113,7 @@ extension WriteTextViewCell: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {
         if let delegate: WriteTextViewCellDelegate = delegate {
-            delegate.updateTextViewHeight(self, textView)
+            delegate.updateTextViewHeight()
         }
     }
 }

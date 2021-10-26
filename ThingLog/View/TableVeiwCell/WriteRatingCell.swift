@@ -27,7 +27,14 @@ final class WriteRatingCell: UITableViewCell {
         return ratingView
     }()
 
+    /// 현재 선택한 만족도를 숫자로 반환한다.
     var currentRating: Int { ratingView.currentRating }
+    /// 만족도 버튼을 선택했을 때 호출할 클로저
+    var selectRatingBlock: (() -> Void)? {
+        didSet {
+            ratingView.didTapButtonBlock = selectRatingBlock
+        }
+    }
     private let paddingLabelMinLeading: CGFloat = 10.0
     private let paddingLabelLeading: CGFloat = 26.0
     private let paddingLabelTrailing: CGFloat = 60.0

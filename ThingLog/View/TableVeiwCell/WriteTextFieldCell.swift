@@ -43,10 +43,16 @@ final class WriteTextFieldCell: UITableViewCell {
     }
 
     var text: String? { textField.text }
+    var isEditingSubject: PublishSubject<Bool> = PublishSubject<Bool>()
 
-    private let disposeBag: DisposeBag = DisposeBag()
+    private(set) var disposeBag: DisposeBag = DisposeBag()
     private let paddingLeadingTrailing: CGFloat = 26.0
     private let paddingTopBottom: CGFloat = 20.0
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -80,18 +86,18 @@ extension WriteTextFieldCell {
     private func setupToolbar() {
         let keyboardToolBar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         keyboardToolBar.barStyle = .default
-        let cancleButton: UIButton = {
+        let successButton: UIButton = {
             let button: UIButton = UIButton()
             button.titleLabel?.font = UIFont.Pretendard.title2
-            button.setTitle("취소", for: .normal)
+            button.setTitle("완료", for: .normal)
             button.setTitleColor(SwiftGenColors.systemBlue.color, for: .normal)
             button.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
             return button
         }()
-        let cancleBarButton: UIBarButtonItem = UIBarButtonItem(customView: cancleButton)
-        cancleBarButton.tintColor = SwiftGenColors.black.color
+        let successBarButton: UIBarButtonItem = UIBarButtonItem(customView: successButton)
+        successBarButton.tintColor = SwiftGenColors.black.color
         keyboardToolBar.barTintColor = SwiftGenColors.gray6.color
-        keyboardToolBar.items = [cancleBarButton, UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
+        keyboardToolBar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), successBarButton]
         keyboardToolBar.sizeToFit()
         textField.inputAccessoryView = keyboardToolBar
     }
@@ -101,18 +107,35 @@ extension WriteTextFieldCell {
             .map { $0.isEmpty }
             .bind { [weak self] isEmpty in
                 self?.textField.rightViewMode = isEmpty ? .never : .always
-            }
-            .disposed(by: disposeBag)
+            }.disposed(by: disposeBag)
 
         (textField.rightView as? UIButton)?.rx.tap
             .bind { [weak self] _ in
                 self?.clearTextField()
             }.disposed(by: disposeBag)
+
+        textField.rx.controlEvent([.editingDidBegin, .touchUpInside])
+            .bind { [weak self] _ in
+                self?.isEditingSubject.onNext(true)
+            }.disposed(by: disposeBag)
+
+        textField.rx.controlEvent(.editingDidEnd)
+            .bind { [weak self] _ in
+                self?.textField.rightViewMode = .never
+            }.disposed(by: disposeBag)
+
+        textField.rx.controlEvent([.editingDidBegin, .editingChanged, .valueChanged])
+            .withLatestFrom(textField.rx.text.orEmpty)
+            .map { $0.isEmpty }
+            .bind { [weak self] isEmpty in
+                self?.textField.rightViewMode = isEmpty ? .never : .always
+            }
+            .disposed(by: disposeBag)
     }
 
     @objc
     private func dismissKeyboard() {
-        textField.endEditing(true)
+        textField.resignFirstResponder()
     }
 
     @objc
@@ -142,6 +165,7 @@ extension WriteTextFieldCell: UITextFieldDelegate {
         if string.isEmpty {
             if removeCharacter.count == 1 {
                 textField.text = ""
+                textField.sendActions(for: .valueChanged)
                 return false
             }
             let startIndex: String.Index = removeCharacter.index(removeCharacter.startIndex, offsetBy: 0)

@@ -21,11 +21,13 @@ final class RatingView: UIView {
     private let fillImage: UIImage = SwiftGenAssets.rating.image.withTintColor(SwiftGenColors.black.color)
     private let emptyImage: UIImage = SwiftGenAssets.rating.image
 
-    // Mark: Properties
+    // MARK: - Properties
     var maxCount: Int = 5 {
         didSet { setupRatingButton() }
     }
     var currentRating: Int = 0
+    /// 버튼을 선택했을 때 호출할 클로저
+    var didTapButtonBlock: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -64,6 +66,8 @@ extension RatingView {
 
     @objc
     private func didTapButton(_ sender: UIButton) {
+        didTapButtonBlock?()
+
         let end: Int = sender.tag
 
         (0...end).forEach { buttons[$0].setImage(fillImage, for: .normal) }

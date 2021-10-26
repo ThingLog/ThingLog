@@ -1,5 +1,5 @@
 //
-//  CameraButtonCell.swift
+//  CameraButtonCollectionCell.swift
 //  ThingLog
 //
 //  Created by 이지원 on 2021/10/05.
@@ -8,7 +8,8 @@
 import UIKit
 
 /// 글쓰기 화면에 들어가는 사진 등록 버튼
-final class CameraButtonCell: UICollectionViewCell {
+/// ![이미지](https://www.notion.so/CameraButtonCollectionCell-72aa2d9a582c4bea9d60f66d4eb8dc34)
+final class CameraButtonCollectionCell: UICollectionViewCell {
     private let iconImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -16,6 +17,7 @@ final class CameraButtonCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFit
         imageView.sizeToFit()
         imageView.setContentHuggingPriority(.required, for: .vertical)
+        imageView.setContentHuggingPriority(.required, for: .horizontal)
         return imageView
     }()
 
@@ -27,6 +29,7 @@ final class CameraButtonCell: UICollectionViewCell {
         label.textColor = SwiftGenColors.black.color
         label.sizeToFit()
         label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
 
@@ -71,7 +74,7 @@ final class CameraButtonCell: UICollectionViewCell {
     }
 }
 
-extension CameraButtonCell {
+extension CameraButtonCollectionCell {
     private func setupView() {
         let backgroundView: UIView = {
             let view: UIView = UIView()
@@ -106,6 +109,7 @@ extension CameraButtonCell {
             emptyBottomView.heightAnchor.constraint(equalToConstant: emptyViewHeight),
             emptyTopView.widthAnchor.constraint(equalToConstant: emptyViewWidth),
             emptyBottomView.widthAnchor.constraint(equalToConstant: emptyViewWidth),
+            iconImageView.heightAnchor.constraint(equalToConstant: 18)
         ])
     }
 }
