@@ -39,11 +39,20 @@ final class LoginViewController: UIViewController {
         return collection
     }()
     
+    private lazy var loginButton: RoundCenterTextButton = {
+        let button: RoundCenterTextButton = RoundCenterTextButton(cornerRadius: loginButtonHeight / 2)
+        button.setTitle("로그인하기", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     // MARK: - Properties
     // 로그인 화면인 경우와 아닌 경우에 뷰를 다르게 보여주기 위해 필요한 프로퍼티다.
     var isLogin: Bool
     // TextFeild가 강조된 경우에만 스크롤이 더 가능하기 위해 필요한 프로퍼티다.
     var isEditMode: Bool = false
+    
+    private let loginButtonHeight: CGFloat = 56
     
     let recommendList: [String] = ["나를 찾는 여정", "미니멀리즘", "건강한 소비 습관", "취향모음", "물건의 역사", "물건을 통해 나를 본다"]
     var disposeBag: DisposeBag = DisposeBag()
@@ -64,19 +73,27 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = SwiftGenColors.white.color
-        setupCollectionView()
+        setupView()
         setupNavigationBar()
+        
+        subscribeLoginButton()
     }
     
     // MARK: - Setup
     // TODO: ⚠️ 지원님이 글쓰기 화면에서 구현하실 하단의 검은색버튼 뷰를 재활용하여 추가할 예정이다.
-    private func setupCollectionView() {
+    private func setupView() {
         view.addSubview(collectionView)
+        view.addSubview(loginButton)
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: loginButton.topAnchor, constant: -20),
+            
+            loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            loginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            loginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            loginButton.heightAnchor.constraint(equalToConstant: isLogin ? loginButtonHeight : 0)
         ])
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -142,6 +159,25 @@ final class LoginViewController: UIViewController {
     }
 }
 
+extension LoginViewController {
+    func subscribeLoginButton() {
+        loginButton.rx.tap.bind { [weak self] in
+            self?.enterTabBarViewController()
+        }.disposed(by: disposeBag)
+    }
+    
+    /// 탭바 화면으로 넘어가는 메소드다
+    private func enterTabBarViewController() {
+        if let rootCordinator: RootCoordinator = coordinator as? RootCoordinator {
+            rootCordinator.showTabBarController()
+            
+            // 테스트를 위해서, 설정화면에서 호출한 경우,
+        } else if let rootCordinator: SettingCoordinator = coordinator as? SettingCoordinator {
+            rootCordinator.back()
+        }
+    }
+}
+
 // MARK: - Collection DataSource
 extension LoginViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -194,13 +230,7 @@ extension LoginViewController: UICollectionViewDataSource {
             }
             // 다음에 하기 버튼 클릭시 바로 탭바 화면으로 넘어간다.
             login.laterButton.rx.tap.bind { [weak self] in 
-                if let rootCordinator: RootCoordinator = self?.coordinator as? RootCoordinator {
-                    rootCordinator.showTabBarController()
-                
-                // 테스트를 위해서, 설정화면에서 호출한 경우,
-                } else if let rootCordinator: SettingCoordinator = self?.coordinator as? SettingCoordinator {
-                    rootCordinator.back()
-                }
+                self?.enterTabBarViewController()
             }.disposed(by: login.disposeBag)
             return  login
             
