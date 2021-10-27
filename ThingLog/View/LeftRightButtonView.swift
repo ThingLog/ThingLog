@@ -61,8 +61,8 @@ class LeftRightButtonView: UIView {
         addSubview(stackView)
         addSubview(topLineView)
         
-        let window = UIApplication.shared.windows.first
-        let bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
+        let window: UIWindow? = UIApplication.shared.windows.first
+        let bottomPadding: CGFloat = window?.safeAreaInsets.bottom ?? 0.0
         
         let topLineConstraint: NSLayoutConstraint = topLineView.heightAnchor.constraint(equalToConstant: 0.5)
         topLineConstraint.isActive = true

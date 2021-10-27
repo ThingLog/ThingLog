@@ -40,7 +40,9 @@ final class TrashViewController: UIViewController {
     }()
     
     private lazy var stackView: UIStackView = {
-        let stackView: UIStackView = UIStackView(arrangedSubviews: [collectionView, deleteButtonView])
+        let stackView: UIStackView = UIStackView(arrangedSubviews: [
+                                                    collectionView,
+                                                    deleteButtonView])
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -171,17 +173,18 @@ extension TrashViewController {
         editButton.rx.tap
             .bind { [weak self] in
                 self?.changeEditButton(isCurrentEditMode: self?.isEditMode ?? true)
-                if self?.isEditMode == true {
-                    self?.deleteStorage.removeAll()
-                }
+
                 // 하단에 삭제버튼의 높이를 애니메이션 준다.
                 UIView.animate(withDuration: 0.3) {
                     self?.deleteButtonHeightConstraint?.constant = (self?.isEditMode == true) ? 0.0 : (self?.deleteButtonViewHeight ?? 0.0)
                     self?.view.layoutIfNeeded()
+                } completion: { _ in
+                    if self?.isEditMode == true {
+                        self?.deleteStorage.removeAll()
+                    }
+                    self?.isEditMode.toggle()
+                    self?.collectionView.reloadData()
                 }
-                
-                self?.isEditMode.toggle()
-                self?.collectionView.reloadData()
             }
             .disposed(by: disposeBag)
     }
@@ -199,12 +202,13 @@ extension TrashViewController {
                 alert.titleLabel.text = text
                 alert.changeContentsText("정말 삭제 하시겠어요?\n이 동작은 취소할 수 없습니다")
                 
+                // 취소버튼
                 alert.leftButton.rx.tap.bind {
-                    self?.changeEditButton(isCurrentEditMode: false)
                     alert.dismiss(animated: false, completion: nil)
                 }
                 .disposed(by: alert.disposeBag)
                 
+                // 삭제버튼
                 alert.rightButton.rx.tap.bind { [weak self] in
                     // TODO: - ⚠️n개일 때 또는 전체일 때 삭제 로직 변경
                     self?.items.removeAll()
