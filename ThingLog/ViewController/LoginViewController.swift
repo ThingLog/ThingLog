@@ -192,7 +192,18 @@ extension LoginViewController: UICollectionViewDataSource {
             guard let login = collectionView.dequeueReusableSupplementaryView(ofKind: LoginTopHeaderView.reuseIdentifier, withReuseIdentifier: LoginTopHeaderView.reuseIdentifier, for: indexPath) as? LoginTopHeaderView else {
                 return UICollectionReusableView()
             }
+            // 다음에 하기 버튼 클릭시 바로 탭바 화면으로 넘어간다.
+            login.laterButton.rx.tap.bind { [weak self] in 
+                if let rootCordinator: RootCoordinator = self?.coordinator as? RootCoordinator {
+                    rootCordinator.showTabBarController()
+                
+                // 테스트를 위해서, 설정화면에서 호출한 경우,
+                } else if let rootCordinator: SettingCoordinator = self?.coordinator as? SettingCoordinator {
+                    rootCordinator.back()
+                }
+            }.disposed(by: login.disposeBag)
             return  login
+            
         case LeftLabelRightButtonHeaderView.reuseIdentifier:
             guard let recommend = collectionView.dequeueReusableSupplementaryView(ofKind: LeftLabelRightButtonHeaderView.reuseIdentifier, withReuseIdentifier: LeftLabelRightButtonHeaderView.reuseIdentifier, for: indexPath) as? LeftLabelRightButtonHeaderView else {
                 return UICollectionReusableView()

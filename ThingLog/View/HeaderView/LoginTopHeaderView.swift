@@ -4,7 +4,7 @@
 //
 //  Created by hyunsu on 2021/10/19.
 //
-
+import RxSwift
 import UIKit
 
 /// 로그인 화면에 상단에 나타나는 뷰다.  왼쪽에 2열로 보여주는 Label과 우측에 버튼이 있는 Collection HeaderView다.
@@ -51,10 +51,16 @@ final class LoginTopHeaderView: UICollectionReusableView {
     }()
     
     private let paddingConstraint: CGFloat = 20.0
+    var disposeBag: DisposeBag = DisposeBag()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
     
     required init?(coder: NSCoder) {
