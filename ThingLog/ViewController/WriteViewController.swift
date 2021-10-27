@@ -134,6 +134,8 @@ extension WriteViewController: UITableViewDataSource {
                 return UITableViewCell()
             }
 
+            cell.coordinator = coordinator
+
             return cell
         case .category:
             guard let cell: WriteCategoryTableCell = tableView.dequeueReusableCell(withIdentifier: WriteCategoryTableCell.reuseIdentifier, for: indexPath) as? WriteCategoryTableCell else {

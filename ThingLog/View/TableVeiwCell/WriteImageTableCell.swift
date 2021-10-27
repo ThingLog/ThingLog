@@ -26,6 +26,7 @@ final class WriteImageTableCell: UITableViewCell {
     private let paddingLeadingConstaint: CGFloat = 18.0
     private let paddingTopConstaint: CGFloat = 12.0
     private let paddingBottomConstaint: CGFloat = 20.0
+    var coordinator: WriteCoordinator?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -54,6 +55,7 @@ extension WriteImageTableCell {
         collectionView.register(CameraButtonCollectionCell.self, forCellWithReuseIdentifier: CameraButtonCollectionCell.reuseIdentifier)
         collectionView.register(ThumbnailCell.self, forCellWithReuseIdentifier: ThumbnailCell.reuseIdentifier)
         collectionView.dataSource = self
+        collectionView.delegate = self
     }
 
     private func createLayout() -> UICollectionViewCompositionalLayout {
@@ -100,6 +102,15 @@ extension WriteImageTableCell: UICollectionViewDataSource {
             }
 
             return cell
+        }
+    }
+}
+
+// MARK: - Delegate
+extension WriteImageTableCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            coordinator?.showPhotosViewController()
         }
     }
 }

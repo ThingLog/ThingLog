@@ -40,6 +40,13 @@ final class WriteCoordinator: Coordinator {
         navigationController.pushViewController(categoryViewController, animated: true)
     }
 
+    /// PhotosViewController로 이동한다.
+    func showPhotosViewController() {
+        let photosViewController: PhotosViewController = PhotosViewController()
+        photosViewController.coordinator = self
+        navigationController.pushViewController(photosViewController, animated: true)
+    }
+
     /// naviagtionController를 dismiss 한다.
     func dismissViewController() {
         navigationController.dismiss(animated: true) {
