@@ -182,7 +182,8 @@ extension ContentsCollectionViewCell {
         bottomLabel.isHidden = false
     }
     
-    /// 체크버튼을 숫자가 포함되도록 변경하거나 빈칸으로 변경하는 메서드다
+    // TODO: - ⚠️버튼 색이나 디자인 변경예정
+    /// 체크버튼을 강조하거나 강조하지 않도록 변경하는 메서드다
     func changeCheckButton(isSelected: Bool) {
         checkButton.layer.borderColor = isSelected ? SwiftGenColors.black.color.cgColor : SwiftGenColors.white.color.cgColor
         checkButton.backgroundColor = isSelected ? SwiftGenColors.black.color : .clear
