@@ -76,7 +76,9 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         button.layer.borderWidth = 1
         button.layer.borderColor = SwiftGenColors.white.color.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.Pretendard.overline
         button.isHidden = true
+        button.isUserInteractionEnabled = false
         return button
     }()
     
@@ -102,6 +104,10 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(checkButton)
         checkButton.layer.cornerRadius = checkButtonSize / 2
         
+        let imageViewHeight: NSLayoutConstraint = imageView.heightAnchor.constraint(equalToConstant: 124)
+        imageViewHeight.isActive = true
+        imageViewHeight.priority = .defaultHigh
+        
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -112,7 +118,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
             smallIconView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -7),
             smallIconView.widthAnchor.constraint(equalToConstant: 10),
             smallIconView.heightAnchor.constraint(equalToConstant: 10),
-            imageView.heightAnchor.constraint(equalToConstant: 124),
+            
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
             
             bottomGradientView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -174,5 +180,12 @@ extension ContentsCollectionViewCell {
         smallIconView.isHidden = true
         bottomGradientView.isHidden = false
         bottomLabel.isHidden = false
+    }
+    
+    // TODO: - ⚠️버튼 색이나 디자인 변경예정
+    /// 체크버튼을 강조하거나 강조하지 않도록 변경하는 메서드다
+    func changeCheckButton(isSelected: Bool) {
+        checkButton.layer.borderColor = isSelected ? SwiftGenColors.black.color.cgColor : SwiftGenColors.white.color.cgColor
+        checkButton.backgroundColor = isSelected ? SwiftGenColors.black.color : .clear
     }
 }
