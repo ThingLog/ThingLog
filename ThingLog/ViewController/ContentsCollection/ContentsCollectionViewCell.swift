@@ -201,4 +201,13 @@ extension ContentsCollectionViewCell {
         checkButton.layer.borderColor = isSelected ? SwiftGenColors.black.color.cgColor : SwiftGenColors.white.color.cgColor
         checkButton.backgroundColor = isSelected ? SwiftGenColors.black.color : .clear
     }
+
+    /// 체크 버튼의 `titleLabel`과 배경색을 변경한다.
+    /// - Parameters:
+    ///   - string: checkButton.titleLabel 에 지정할 문자열
+    ///   - backgroundColor: checkButton.backgroundColor 로 지정할 색상
+    func updateCheckButton(string: String?, backgroundColor: UIColor?) {
+        checkButton.setTitle(string, for: .normal)
+        checkButton.backgroundColor = backgroundColor
+    }
 }

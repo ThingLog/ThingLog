@@ -39,6 +39,7 @@ final class PhotosViewController: UIViewController {
         button.setTitle("확인", for: .normal)
         button.setTitleColor(SwiftGenColors.black.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.body1
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
     }()
 
@@ -54,10 +55,18 @@ final class PhotosViewController: UIViewController {
             collectionView.reloadData()
         }
     }
-    private var selectedIndexPath: [IndexPath] = []
+    private var selectedIndexPath: [IndexPath] = [] {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                self?.updateSelectedOrder()
+                self?.updateSuccessButton()
+            }
+        }
+    }
     private var thumbnailSize: CGSize = CGSize()
     private let imageManager: PHCachingImageManager = PHCachingImageManager()
     private let disposeBag: DisposeBag = DisposeBag()
+    private let selectedMaxCount: Int = 10
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,10 +139,10 @@ extension PhotosViewController {
         coordinator?.back()
     }
 
-    @objc
     /// 사용자의 앨범으로부터 이미지를 가져온다.
     /// - Parameter assetCollection: 특정 앨범을 가져오고 싶은 경우 사용한다.
     /// - Returns: 모든 이미지를 반환한다. (assetCollection이 있는 경우, 해당 앨범의 모든 이미지를 반환한다.)
+    @objc
     private func fetchAssets(assetCollection: PHAssetCollection?) -> PHFetchResult<PHAsset> {
         let allPhotosOptions: PHFetchOptions = PHFetchOptions()
         allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -145,10 +154,99 @@ extension PhotosViewController {
 
         return PHAsset.fetchAssets(in: assetCollection, options: nil)
     }
+
+    /// 네비게이션 우측 상단에 있는 확인 버튼에 선택한 개수를 변경한다. 선택한 항목이 없으면 "확인"으로 변경한다.
+    private func updateSuccessButton() {
+        guard !selectedIndexPath.isEmpty else {
+            successButton.setAttributedTitle(nil, for: .normal)
+            successButton.setTitle("확인", for: .normal)
+            return
+        }
+
+        let count: String = "\(selectedIndexPath.count)"
+        let nsStr: NSString = NSString(string: "\(count) 확인")
+        let range: NSRange = nsStr.range(of: "\(count)")
+        let newContents: String = nsStr.substring(from: range.location)
+
+        let attributedStr: NSMutableAttributedString = NSMutableAttributedString(string: newContents)
+        attributedStr.addAttribute(.font,
+                                   value: UIFont.Pretendard.title2,
+                                   range: (newContents as NSString).range(of: count))
+        attributedStr.addAttribute(.font,
+                                   value: UIFont.Pretendard.body1,
+                                   range: (newContents as NSString).range(of: "확인"))
+        successButton.setAttributedTitle(attributedStr, for: .normal)
+        successButton.sizeToFit()
+    }
+
+    /// selectedMaxCount < selectedIndexPath.count 인 경우 사용자에게 Alert을 띄운다.
+    private func showMaxSelectedAlert() {
+        let alert: AlertViewController = AlertViewController()
+        alert.modalPresentationStyle = .overFullScreen
+
+        alert.changeContentsText("이미지는 최대 10개까지 첨부할 수 있어요")
+        alert.leftButton.setTitle("확인", for: .normal)
+
+        alert.hideTitleLabel()
+        alert.hideRightButton()
+        alert.hideTextField()
+
+        alert.leftButton.rx.tap.bind {
+            alert.dismiss(animated: false, completion: nil)
+        }.disposed(by: disposeBag)
+
+        present(alert, animated: false, completion: nil)
+    }
 }
 
 // MARK: - UIColelctionView Delegate
 extension PhotosViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            // TODO: 카메라 기능 구현
+            return
+        }
+
+        guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: indexPath) as? ContentsCollectionViewCell else {
+            return
+        }
+
+        if let firstIndex: Int = selectedIndexPath.firstIndex(of: indexPath) {
+            selectedIndexPath.remove(at: firstIndex)
+            cell.updateCheckButton(string: "", backgroundColor: .clear)
+        } else {
+            if selectedIndexPath.count < selectedMaxCount {
+                selectedIndexPath.append(indexPath)
+            } else {
+                showMaxSelectedAlert()
+            }
+        }
+    }
+
+    /// `selectedIndexPath`을 초기화한다.
+    private func resetSelectedIndexPath() {
+        selectedIndexPath.forEach { indexPath in
+            guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: indexPath) as? ContentsCollectionViewCell else {
+                return
+            }
+
+            cell.updateCheckButton(string: "", backgroundColor: .clear)
+            cell.layoutIfNeeded()
+        }
+
+        selectedIndexPath = []
+    }
+
+    /// `selectedIndexPath`에 데이터가 변경될 때 기존에 있는 항목의 checkButton 문자열을 업데이트한다.
+    private func updateSelectedOrder() {
+        selectedIndexPath.enumerated().forEach { index, indexPath in
+            guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: indexPath) as? ContentsCollectionViewCell else {
+                return
+            }
+            cell.updateCheckButton(string: "\(index + 1)", backgroundColor: .black)
+            cell.layoutIfNeeded()
+        }
+    }
 }
 
 // MARK: - UICollectionView DataSource
@@ -180,6 +278,12 @@ extension PhotosViewController: UICollectionViewDataSource {
         }
 
         cell.setupImageViewWithCheckButton()
+
+        if selectedIndexPath.contains(indexPath) {
+            updateSelectedOrder()
+        } else {
+            cell.updateCheckButton(string: "", backgroundColor: .clear)
+        }
 
         return cell
     }
