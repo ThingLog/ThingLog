@@ -81,7 +81,8 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         button.isUserInteractionEnabled = false
         return button
     }()
-    
+
+    var representedAssetIdentifier: String = ""
     private let paddingCheckButton: CGFloat = 8
     private let checkButtonSize: CGFloat = 20
     
@@ -161,6 +162,10 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         imageView.image = UIImage(data: (postEntity.attachments?.allObjects as? [AttachmentEntity])![0].thumbnail!)
         testLabel.text = text
     }
+
+    func update(image: UIImage?) {
+        imageView.image = image
+    }
     
     /// 그라데이션 뷰의 크기를 결정하기 위해 구현한다.
     override func layoutSubviews() {
@@ -180,6 +185,14 @@ extension ContentsCollectionViewCell {
         smallIconView.isHidden = true
         bottomGradientView.isHidden = false
         bottomLabel.isHidden = false
+    }
+
+    /// 이미지와 체크 버튼만 표시하고 나머지 뷰들은 숨김처리한다.
+    func setupImageViewWithCheckButton() {
+        smallIconView.isHidden = true
+        bottomGradientView.isHidden = true
+        bottomLabel.isHidden = true
+        checkButton.isHidden = false
     }
     
     // TODO: - ⚠️버튼 색이나 디자인 변경예정

@@ -91,7 +91,7 @@ final class WriteViewController: UIViewController {
 
         alertController.rightButton.rx.tap.bind { [weak self] in
             alertController.dismiss(animated: false) {
-                self?.coordinator?.dismissViewController()
+                self?.coordinator?.dismissWriteViewController()
             }
         }.disposed(by: disposeBag)
 
