@@ -42,8 +42,9 @@ final class WriteViewController: UIViewController {
 
     // MARK: - Properties
     var coordinator: WriteCoordinator?
-    private var viewModel: WriteViewModel
     let disposeBag: DisposeBag = DisposeBag()
+    var selectedImages: [UIImage] = []
+    private var viewModel: WriteViewModel
 
     init(viewModel: WriteViewModel) {
         self.viewModel = viewModel
@@ -63,6 +64,7 @@ final class WriteViewController: UIViewController {
         setupView()
         bindKeyboardWillShow()
         bindKeyboardWillHide()
+        bindNotification()
     }
 
     override func viewDidLayoutSubviews() {

@@ -7,6 +7,9 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 extension WriteViewController {
     func setupNavigationBar() {
         setupBaseNavigationBar()
@@ -77,6 +80,18 @@ extension WriteViewController {
                 DispatchQueue.main.async {
                     self.setupTableViewBottomInset(0)
                 }
+            }.disposed(by: disposeBag)
+    }
+
+    /// PhotosViewController에서 전달받은 데이터 바인딩
+    func bindNotification() {
+        NotificationCenter.default.rx
+            .notification(.passSelectImages, object: nil)
+            .map { notification -> [UIImage] in
+                notification.userInfo?[Notification.Name.passSelectImages] as? [UIImage] ?? []
+            }
+            .bind { [weak self] images in
+                self?.selectedImages = images
             }.disposed(by: disposeBag)
     }
 

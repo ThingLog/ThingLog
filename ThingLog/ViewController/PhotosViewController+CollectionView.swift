@@ -41,7 +41,8 @@ extension PhotosViewController: UICollectionViewDataSource {
         }
 
         cell.didTappedCheckButtonCallback = { [weak self] in
-            self?.tappedCheckButton(cell, at: indexPath)
+            guard let self = self else { return }
+            self.tappedCheckButton(cell, at: indexPath)
         }
         cell.setupImageViewWithCheckButton()
         cell.updateCheckButton(string: "", backgroundColor: .clear)
@@ -57,6 +58,7 @@ extension PhotosViewController: UICollectionViewDataSource {
     private func tappedCheckButton(_ cell: ContentsCollectionViewCell, at indexPath: IndexPath) {
         if let firstIndex: Int = self.selectedIndexPath.firstIndex(of: indexPath) {
             selectedIndexPath.remove(at: firstIndex)
+            selectedImages.remove(at: firstIndex)
             DispatchQueue.main.async {
                 cell.updateCheckButton(string: "", backgroundColor: .clear)
                 cell.layoutIfNeeded()
@@ -64,6 +66,13 @@ extension PhotosViewController: UICollectionViewDataSource {
         } else {
             if selectedIndexPath.count < selectedMaxCount {
                 selectedIndexPath.append(indexPath)
+                let asset: PHAsset = assets.object(at: indexPath.item - 1)
+                let options: PHImageRequestOptions = PHImageRequestOptions()
+                options.isSynchronous = true
+                asset.toImage(targetSize: PHImageManagerMaximumSize, options: options) { [weak self] image in
+                    guard let self = self, let image = image else { return }
+                    self.selectedImages.append(image)
+                }
             } else {
                 showMaxSelectedAlert()
             }

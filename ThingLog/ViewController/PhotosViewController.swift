@@ -56,6 +56,7 @@ final class PhotosViewController: BaseViewController {
             }
         }
     }
+    var selectedImages: [UIImage] = []
 
     lazy var assets: PHFetchResult<PHAsset> = fetchAssets(assetCollection: nil) {
         didSet {
@@ -65,7 +66,6 @@ final class PhotosViewController: BaseViewController {
 
     private(set) var thumbnailSize: CGSize = CGSize()
     private(set) var albumsViewController: AlbumsViewController = AlbumsViewController()
-    private var selectedImage: [UIImage] = []
 
     private var isShowAlbumsViewController: Bool = false {
         didSet {
@@ -163,8 +163,11 @@ extension PhotosViewController {
     private func bindNavigationButton() {
         successButton.rx.tap
             .bind { [weak self] in
-                // TODO: 선택한 이미지 전달
-                self?.coordinator?.back()
+                guard let self = self else { return }
+                NotificationCenter.default.post(name: .passSelectImages,
+                                                object: nil,
+                                                userInfo: [Notification.Name.passSelectImages: self.selectedImages])
+                self.coordinator?.back()
             }.disposed(by: disposeBag)
 
         titleButton.rx.tap
