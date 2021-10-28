@@ -67,6 +67,7 @@ final class PhotosViewController: UIViewController {
     private let imageManager: PHCachingImageManager = PHCachingImageManager()
     private let disposeBag: DisposeBag = DisposeBag()
     private let selectedMaxCount: Int = 10
+    private var albumsViewController: AlbumsViewController = AlbumsViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +77,7 @@ final class PhotosViewController: UIViewController {
         isShowAlbumsViewController = false
         setupNavigationBar()
         setupView()
+        setupAlbumsViewController()
         bindNavigationButton()
         PHPhotoLibrary.shared().register(self)
     }
@@ -88,11 +90,20 @@ final class PhotosViewController: UIViewController {
         thumbnailSize = CGSize(width: cellSize.width * scale, height: cellSize.height * scale)
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        albumsViewController.willMove(toParent: nil)
+        albumsViewController.view.removeFromSuperview()
+        albumsViewController.removeFromParent()
+    }
+
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
 }
 
+// MARK: - Private
 extension PhotosViewController {
     private func setupNavigationBar() {
         setupBaseNavigationBar()
@@ -121,6 +132,21 @@ extension PhotosViewController {
         collectionView.delegate = self
     }
 
+    private func setupAlbumsViewController() {
+        addChild(albumsViewController)
+        view.addSubview(albumsViewController.view)
+
+        NSLayoutConstraint.activate([
+            albumsViewController.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            albumsViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            albumsViewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            albumsViewController.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+
+        albumsViewController.didMove(toParent: self)
+        albumsViewController.view.isHidden = true
+    }
+
     private func bindNavigationButton() {
         successButton.rx.tap
             .bind { [weak self] in
@@ -130,13 +156,41 @@ extension PhotosViewController {
 
         titleButton.rx.tap
             .bind { [weak self] in
-                self?.isShowAlbumsViewController.toggle()
+                guard let self = self else { return }
+                self.isShowAlbumsViewController ? self.dismissAlbumsViewController() : self.showAlbumsViewController()
+                self.isShowAlbumsViewController.toggle()
             }.disposed(by: disposeBag)
     }
 
     @objc
     private func didTapBackButton() {
         coordinator?.back()
+    }
+
+    private func showAlbumsViewController() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.type = .push
+            transition.subtype = .fromBottom
+            self.albumsViewController.view.layer.add(transition, forKey: "showAlbums")
+            self.albumsViewController.view.isHidden = false
+        } completion: { _ in
+            self.albumsViewController.view.layer.removeAnimation(forKey: "showAlbums")
+        }
+    }
+
+    private func dismissAlbumsViewController() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
+            let transition = CATransition()
+            transition.duration = 0.3
+            transition.type = .push
+            transition.subtype = .fromTop
+            self.albumsViewController.view.layer.add(transition, forKey: "dismissAlbums")
+            self.albumsViewController.view.isHidden = true
+        } completion: { _ in
+            self.albumsViewController.view.layer.removeAnimation(forKey: "dismissAlbums")
+        }
     }
 
     /// 사용자의 앨범으로부터 이미지를 가져온다.
