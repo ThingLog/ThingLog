@@ -65,6 +65,7 @@ final class PhotosViewController: BaseViewController {
 
     private(set) var thumbnailSize: CGSize = CGSize()
     private(set) var albumsViewController: AlbumsViewController = AlbumsViewController()
+    private var selectedImage: [UIImage] = []
 
     private var isShowAlbumsViewController: Bool = false {
         didSet {

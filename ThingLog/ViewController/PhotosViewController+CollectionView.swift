@@ -25,6 +25,12 @@ extension PhotosViewController: UICollectionViewDataSource {
             return cell
         }
 
+        setupContentsCell(cell: cell, at: indexPath)
+
+        return cell
+    }
+
+    private func setupContentsCell(cell: ContentsCollectionViewCell, at indexPath: IndexPath) {
         let asset: PHAsset = assets.object(at: indexPath.item - 1)
 
         cell.representedAssetIdentifier = asset.localIdentifier
@@ -33,14 +39,35 @@ extension PhotosViewController: UICollectionViewDataSource {
                 cell.update(image: image)
             }
         }
-        
+
+        cell.didTappedCheckButtonCallback = { [weak self] in
+            self?.tappedCheckButton(cell, at: indexPath)
+        }
         cell.setupImageViewWithCheckButton()
         cell.updateCheckButton(string: "", backgroundColor: .clear)
         DispatchQueue.main.async {
             self.updateSelectedOrder()
         }
+    }
 
-        return cell
+    /// 체크 버튼 선택 시 호출할 메서드, selectedIndexPath에 추가/삭제 기능을 수행한다.
+    /// - Parameters:
+    ///   - cell: 업데이트 하기 위한 셀
+    ///   - indexPath: 선택한 셀의 IndexPath
+    private func tappedCheckButton(_ cell: ContentsCollectionViewCell, at indexPath: IndexPath) {
+        if let firstIndex: Int = self.selectedIndexPath.firstIndex(of: indexPath) {
+            selectedIndexPath.remove(at: firstIndex)
+            DispatchQueue.main.async {
+                cell.updateCheckButton(string: "", backgroundColor: .clear)
+                cell.layoutIfNeeded()
+            }
+        } else {
+            if selectedIndexPath.count < selectedMaxCount {
+                selectedIndexPath.append(indexPath)
+            } else {
+                showMaxSelectedAlert()
+            }
+        }
     }
 }
 
@@ -50,21 +77,6 @@ extension PhotosViewController: UICollectionViewDelegate {
         if indexPath.item == 0 {
             // TODO: 카메라 기능 구현
             return
-        }
-
-        guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: indexPath) as? ContentsCollectionViewCell else {
-            return
-        }
-
-        if let firstIndex: Int = selectedIndexPath.firstIndex(of: indexPath) {
-            selectedIndexPath.remove(at: firstIndex)
-            cell.updateCheckButton(string: "", backgroundColor: .clear)
-        } else {
-            if selectedIndexPath.count < selectedMaxCount {
-                selectedIndexPath.append(indexPath)
-            } else {
-                showMaxSelectedAlert()
-            }
         }
     }
 }

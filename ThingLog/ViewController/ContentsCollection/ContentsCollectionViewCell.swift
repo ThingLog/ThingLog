@@ -7,6 +7,9 @@
 import CoreData
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 /// 기본적인 이미지만을 보여주기 위한 cell이다.
 ///
 /// 기본적인 구성으로는 imageView, smallIconView 로 구성된다. smallIconView는 이미지가 여러개인 경우에 표시한다.
@@ -83,12 +86,15 @@ class ContentsCollectionViewCell: UICollectionViewCell {
     }()
 
     var representedAssetIdentifier: String = ""
+    var disposeBag: DisposeBag = DisposeBag()
+    var didTappedCheckButtonCallback: (() -> Void)?
     private let paddingCheckButton: CGFloat = 8
     private let checkButtonSize: CGFloat = 20
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        bindCheckButton()
     }
     
     required init?(coder: NSCoder) {
@@ -177,6 +183,13 @@ class ContentsCollectionViewCell: UICollectionViewCell {
                                        startPoint: CGPoint(x: 0.0, y: 1.0),
                                        endPoint: CGPoint(x: 0.0, y: 0.0))
     }
+
+    private func bindCheckButton() {
+        checkButton.rx.tap
+            .bind { [weak self] in
+                self?.didTappedCheckButtonCallback?()
+            }.disposed(by: disposeBag)
+    }
 }
 
 extension ContentsCollectionViewCell {
@@ -193,6 +206,7 @@ extension ContentsCollectionViewCell {
         bottomGradientView.isHidden = true
         bottomLabel.isHidden = true
         checkButton.isHidden = false
+        checkButton.isUserInteractionEnabled = true
     }
     
     // TODO: - ⚠️버튼 색이나 디자인 변경예정
