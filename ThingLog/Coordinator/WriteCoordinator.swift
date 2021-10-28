@@ -46,4 +46,9 @@ final class WriteCoordinator: Coordinator {
             self.navigationController.viewControllers.removeAll()
         }
     }
+
+    /// 뒤로 이동한다.
+    func back() {
+        navigationController.popViewController(animated: true)
+    }
 }
