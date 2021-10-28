@@ -21,7 +21,7 @@ class LeftRightButtonView: UIView {
         let button: UIButton = UIButton()
         button.setTitle("모두 복구", for: .normal)
         button.setTitleColor(SwiftGenColors.black.color, for: .normal)
-        button.titleLabel?.font = UIFont.Pretendard.body2
+        button.titleLabel?.font = UIFont.Pretendard.body1
         return button
     }()
     
