@@ -62,6 +62,11 @@
 		87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188826FB5E9500C3FBCA /* PostRepository.swift */; };
 		87F2188E26FB8ACA00C3FBCA /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188D26FB8ACA00C3FBCA /* PostType.swift */; };
 		87F2189026FB8D6A00C3FBCA /* PostTypeEntity+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */; };
+		DB00D211272A8A79003FC9C3 /* SelectingDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D210272A8A79003FC9C3 /* SelectingDrawerViewController.swift */; };
+		DB00D216272A8D2F003FC9C3 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D215272A8D2F003FC9C3 /* DrawerViewController.swift */; };
+		DB00D218272A8DB0003FC9C3 /* DrawerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D217272A8DB0003FC9C3 /* DrawerCoordinator.swift */; };
+		DB00D21C272AD76E003FC9C3 /* ImageWithTwoLabellVerticalCetnerXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D21B272AD76E003FC9C3 /* ImageWithTwoLabellVerticalCetnerXView.swift */; };
+		DB00D21E272ADB68003FC9C3 /* DrawerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D21D272ADB68003FC9C3 /* DrawerCollectionCell.swift */; };
 		DB05B03C271853CE0067DB17 /* LeftRightButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */; };
 		DB05B03E27185B780067DB17 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03D27185B780067DB17 /* TrashViewController.swift */; };
 		DB05B04027185C500067DB17 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03F27185C500067DB17 /* UIViewController+.swift */; };
@@ -236,6 +241,11 @@
 		87F2188826FB5E9500C3FBCA /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		87F2188D26FB8ACA00C3FBCA /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
 		87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostTypeEntity+.swift"; sourceTree = "<group>"; };
+		DB00D210272A8A79003FC9C3 /* SelectingDrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingDrawerViewController.swift; sourceTree = "<group>"; };
+		DB00D215272A8D2F003FC9C3 /* DrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
+		DB00D217272A8DB0003FC9C3 /* DrawerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerCoordinator.swift; sourceTree = "<group>"; };
+		DB00D21B272AD76E003FC9C3 /* ImageWithTwoLabellVerticalCetnerXView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWithTwoLabellVerticalCetnerXView.swift; sourceTree = "<group>"; };
+		DB00D21D272ADB68003FC9C3 /* DrawerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerCollectionCell.swift; sourceTree = "<group>"; };
 		DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRightButtonView.swift; sourceTree = "<group>"; };
 		DB05B03D27185B780067DB17 /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
 		DB05B03F27185C500067DB17 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -482,10 +492,20 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		DB00D214272A8D1E003FC9C3 /* Drawer */ = {
+			isa = PBXGroup;
+			children = (
+				DB00D215272A8D2F003FC9C3 /* DrawerViewController.swift */,
+				DB00D210272A8A79003FC9C3 /* SelectingDrawerViewController.swift */,
+			);
+			path = Drawer;
+			sourceTree = "<group>";
+		};
 		DB7C04A426F5F26B009F5C0A /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
 				DB7C04A526F5F281009F5C0A /* Coordinator.swift */,
+				DB00D217272A8DB0003FC9C3 /* DrawerCoordinator.swift */,
 				DB7C04A926F5F308009F5C0A /* EasyLookCoordinator.swift */,
 				DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */,
 				DBD1054C2729560600632168 /* RootCoordinator.swift */,
@@ -511,6 +531,7 @@
 		DB7C04DF26FB18F4009F5C0A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DB00D214272A8D1E003FC9C3 /* Drawer */,
 				DB2B8AFC272151A800A02090 /* AlertViewController.swift */,
 				8738E1CA271705220069BB80 /* CategoryViewController.swift */,
 				DB7C04E026FB1900009F5C0A /* ContentsCollection */,
@@ -559,6 +580,7 @@
 				DBA0F823270B079B009553FC /* HeaderView */,
 				DBD545512703409300063C98 /* HorizontalCollectionView.swift */,
 				DB148C272704A1A500FDC48F /* IgnoreTouchView.swift */,
+				DB00D21B272AD76E003FC9C3 /* ImageWithTwoLabellVerticalCetnerXView.swift */,
 				DB148C212704623200FDC48F /* InsetButton.swift */,
 				DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */,
 				DB8BF6782705D25700FD5FDB /* LogoView.swift */,
@@ -584,6 +606,7 @@
 				87DAEB1A270BEAE50038C487 /* CameraButtonCollectionCell.swift */,
 				DB7C04E826FB19AE009F5C0A /* ContentsCollectionViewCell.swift */,
 				DBA0F821270AF656009553FC /* ContentsDetailCollectionViewCell.swift */,
+				DB00D21D272ADB68003FC9C3 /* DrawerCollectionCell.swift */,
 				87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */,
 				DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */,
 				87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */,
@@ -889,6 +912,7 @@
 				DB7C04CA26F9E69D009F5C0A /* UserDefaults+.swift in Sources */,
 				DB148C2C2705855A00FDC48F /* EasyLookTabTypeButton.swift in Sources */,
 				DB7C04E526FB1981009F5C0A /* BaseContentsCollectionViewController.swift in Sources */,
+				DB00D216272A8D2F003FC9C3 /* DrawerViewController.swift in Sources */,
 				DB8BF6812706D89E00FD5FDB /* ResultsWithDropBoxView.swift in Sources */,
 				DB148C222704623200FDC48F /* InsetButton.swift in Sources */,
 				DB05B054271FEABB0067DB17 /* LoginViewController+dequeueCell.swift in Sources */,
@@ -910,6 +934,7 @@
 				DB148C302705863100FDC48F /* EasyLookTabView.swift in Sources */,
 				DB3A5165270FFE0C003B529D /* String+.swift in Sources */,
 				DB7C04E926FB19AE009F5C0A /* ContentsCollectionViewCell.swift in Sources */,
+				DB00D218272A8DB0003FC9C3 /* DrawerCoordinator.swift in Sources */,
 				DB7C04BE26F9BE72009F5C0A /* ProfileView.swift in Sources */,
 				DB1745B927098E8A00EF083E /* RecentSearchDataViewModel.swift in Sources */,
 				DB7C04B626F8782B009F5C0A /* EasyLookViewController.swift in Sources */,
@@ -920,6 +945,7 @@
 				DB7C04B226F87548009F5C0A /* TabBarController.swift in Sources */,
 				DB7C04B926F87BE9009F5C0A /* ChoiceWritingView.swift in Sources */,
 				DB7C04AA26F5F308009F5C0A /* EasyLookCoordinator.swift in Sources */,
+				DB00D21E272ADB68003FC9C3 /* DrawerCollectionCell.swift in Sources */,
 				876C157927044BA0000C1C84 /* RepositoryError.swift in Sources */,
 				874D92F7271AD0A9005FF8F3 /* DisableSelectionTextField.swift in Sources */,
 				DB8BF6792705D25700FD5FDB /* LogoView.swift in Sources */,
@@ -951,7 +977,9 @@
 				874D92F9271AD672005FF8F3 /* DummyData.swift in Sources */,
 				8736B3EF26FDC1AD000433E1 /* Comment.swift in Sources */,
 				8736B3E326FCB9F3000433E1 /* Rating.swift in Sources */,
+				DB00D211272A8A79003FC9C3 /* SelectingDrawerViewController.swift in Sources */,
 				87BB17AB27098D760088B847 /* WriteViewModel.swift in Sources */,
+				DB00D21C272AD76E003FC9C3 /* ImageWithTwoLabellVerticalCetnerXView.swift in Sources */,
 				87ACB0B427229E2B00C78C86 /* WriteImageTableCell.swift in Sources */,
 				8736B3E926FCBE28000433E1 /* Category.swift in Sources */,
 				DB3A516927103B3E003B529D /* EmptyPostView.swift in Sources */,
@@ -1158,7 +1186,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = WVLV77R6X7;
 				INFOPLIST_FILE = ThingLog/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1179,7 +1207,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = WVLV77R6X7;
 				INFOPLIST_FILE = ThingLog/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

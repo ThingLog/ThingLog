@@ -34,6 +34,11 @@ final class HomeCoordinator: Coordinator {
         navigationController.pushViewController(loginViewController, animated: true)
     }
     
+    func showDrawerViewController() {
+        let drawerCoordinator: DrawerCoordinator = DrawerCoordinator(navigationController: navigationController)
+        drawerCoordinator.start()
+    }
+    
     func back() {
         navigationController.popViewController(animated: true)
     }
