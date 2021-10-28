@@ -43,7 +43,11 @@ final class WriteViewController: UIViewController {
     // MARK: - Properties
     var coordinator: WriteCoordinator?
     let disposeBag: DisposeBag = DisposeBag()
-    var selectedImages: [UIImage] = []
+    var selectedImages: [UIImage] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     private var viewModel: WriteViewModel
 
     init(viewModel: WriteViewModel) {
@@ -137,6 +141,7 @@ extension WriteViewController: UITableViewDataSource {
             }
 
             cell.coordinator = coordinator
+            cell.thumbnailImages = selectedImages
 
             return cell
         case .category:

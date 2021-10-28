@@ -28,6 +28,11 @@ final class WriteImageTableCell: UITableViewCell {
     private let paddingTopConstaint: CGFloat = 12.0
     private let paddingBottomConstaint: CGFloat = 20.0
     var coordinator: WriteCoordinator?
+    var thumbnailImages: [UIImage] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -139,7 +144,7 @@ extension WriteImageTableCell {
 extension WriteImageTableCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // TODO: 1(카메라 버튼 셀) + 추가된 이미지 개수를 반환한다.
-        11
+        1 + thumbnailImages.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -148,15 +153,19 @@ extension WriteImageTableCell: UICollectionViewDataSource {
                 return CameraButtonCollectionCell()
             }
 
+            cell.update(count: thumbnailImages.count)
+
             return cell
         } else {
             guard let cell: ThumbnailCell = collectionView.dequeueReusableCell(withReuseIdentifier: ThumbnailCell.reuseIdentifier, for: indexPath) as? ThumbnailCell else {
                 return ThumbnailCell()
             }
 
-            // TODO: 추가한 이미지 삭제 구현
-            cell.closeButtonDidTappedCallback = {
-                print("tapped \(indexPath.row)")
+            let image: UIImage = thumbnailImages[indexPath.row - 1]
+            cell.configure(image: image)
+
+            cell.closeButtonDidTappedCallback = { [weak self] in
+                self?.thumbnailImages.remove(at: indexPath.row - 1)
             }
 
             return cell

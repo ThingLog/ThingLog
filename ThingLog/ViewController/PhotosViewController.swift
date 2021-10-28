@@ -186,6 +186,7 @@ extension PhotosViewController {
             .bind { [weak self] assetCollection in
                 guard let self = self else { return }
                 self.resetSelectedIndexPath()
+                self.selectedImages = []
 
                 self.assets = self.fetchAssets(assetCollection: assetCollection)
                 self.titleButton.sendActions(for: .touchUpInside)
