@@ -45,6 +45,7 @@ extension WriteViewController {
 
         tableView.estimatedRowHeight = UITableView.automaticDimension
 
+        tableView.delegate = self
         tableView.dataSource = self
         tableView.register(WriteImageTableCell.self, forCellReuseIdentifier: WriteImageTableCell.reuseIdentifier)
         tableView.register(WriteCategoryTableCell.self, forCellReuseIdentifier: WriteCategoryTableCell.reuseIdentifier)

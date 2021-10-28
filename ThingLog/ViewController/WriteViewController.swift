@@ -139,13 +139,18 @@ extension WriteViewController: UITableViewDataSource {
             guard let cell: WriteCategoryTableCell = tableView.dequeueReusableCell(withIdentifier: WriteCategoryTableCell.reuseIdentifier, for: indexPath) as? WriteCategoryTableCell else {
                 return UITableViewCell()
             }
+
+            cell.indicatorButtonDidTappedCallback = { [weak self] in
+                self?.coordinator?.showCategoryViewController()
+            }
+
             return cell
         case .type:
             guard let cell: WriteTextFieldCell = tableView.dequeueReusableCell(withIdentifier: WriteTextFieldCell.reuseIdentifier, for: indexPath) as? WriteTextFieldCell else {
                 return WriteTextFieldCell()
             }
 
-            cell.keyboardType = viewModel.typeInfo[indexPath.row].keyboardType ?? .default
+            cell.keyboardType = viewModel.typeInfo[indexPath.row].keyboardType
             cell.placeholder = viewModel.typeInfo[indexPath.row].placeholder
 
             cell.isEditingSubject
@@ -178,6 +183,15 @@ extension WriteViewController: UITableViewDataSource {
             return cell
         default:
             return UITableViewCell()
+        }
+    }
+}
+
+// MARK: - TableView Delegate
+extension WriteViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == WriteViewModel.Section.category.rawValue {
+            coordinator?.showCategoryViewController()
         }
     }
 }
