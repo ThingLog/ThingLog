@@ -38,6 +38,7 @@ final class PhotosViewController: UIViewController {
         let button: UIButton = UIButton()
         button.setTitle("확인", for: .normal)
         button.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        button.setTitleColor(SwiftGenColors.gray4.color, for: .disabled)
         button.titleLabel?.font = UIFont.Pretendard.body1
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
@@ -73,6 +74,8 @@ final class PhotosViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = SwiftGenColors.white.color
+
+        selectedIndexPath = []
 
         isShowAlbumsViewController = false
         setupNavigationBar()
@@ -231,6 +234,7 @@ extension PhotosViewController {
         guard !selectedIndexPath.isEmpty else {
             successButton.setAttributedTitle(nil, for: .normal)
             successButton.setTitle("확인", for: .normal)
+            successButton.isEnabled = false
             return
         }
 
@@ -246,8 +250,15 @@ extension PhotosViewController {
         attributedStr.addAttribute(.font,
                                    value: UIFont.Pretendard.body1,
                                    range: (newContents as NSString).range(of: "확인"))
+        attributedStr.addAttribute(.foregroundColor,
+                                   value: SwiftGenColors.black.color,
+                                   range: (newContents as NSString).range(of: count))
+        attributedStr.addAttribute(.foregroundColor,
+                                   value: SwiftGenColors.black.color,
+                                   range: (newContents as NSString).range(of: "확인"))
         successButton.setAttributedTitle(attributedStr, for: .normal)
         successButton.sizeToFit()
+        successButton.isEnabled = true
     }
 
     /// selectedMaxCount < selectedIndexPath.count 인 경우 사용자에게 Alert을 띄운다.
