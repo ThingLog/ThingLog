@@ -93,6 +93,18 @@ extension AlbumsViewController {
 
 // MARK: - UITableView Delegate
 extension AlbumsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let sectionType = sections[indexPath.section]
+        switch sectionType {
+        case .all:
+            NotificationCenter.default.post(name: .selectAlbum, object: nil)
+        case .favorites:
+            NotificationCenter.default.post(name: .selectAlbum, object: nil, userInfo: [Notification.Name.selectAlbum: favorites[indexPath.item]])
+        case .userCollections:
+            NotificationCenter.default.post(name: .selectAlbum, object: nil,
+                                            userInfo: [Notification.Name.selectAlbum: userCollections[indexPath.item]])
+        }
+    }
 }
 
 // MARK: - UITableView DataSource

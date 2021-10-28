@@ -37,6 +37,7 @@
 		873ED123272AA0AA00C9F7F1 /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873ED122272AA0AA00C9F7F1 /* AlbumsViewController.swift */; };
 		873ED125272AA43B00C9F7F1 /* ImageWithVerticalTwoLabelTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873ED124272AA43B00C9F7F1 /* ImageWithVerticalTwoLabelTableCell.swift */; };
 		873ED127272AAFFD00C9F7F1 /* PHAsset+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873ED126272AAFFD00C9F7F1 /* PHAsset+.swift */; };
+		873ED129272AB77000C9F7F1 /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873ED128272AB77000C9F7F1 /* Notification.Name+.swift */; };
 		874D92F7271AD0A9005FF8F3 /* DisableSelectionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D92F6271AD0A9005FF8F3 /* DisableSelectionTextField.swift */; };
 		874D92F9271AD672005FF8F3 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D92F8271AD672005FF8F3 /* DummyData.swift */; };
 		875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */; };
@@ -213,6 +214,7 @@
 		873ED122272AA0AA00C9F7F1 /* AlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewController.swift; sourceTree = "<group>"; };
 		873ED124272AA43B00C9F7F1 /* ImageWithVerticalTwoLabelTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWithVerticalTwoLabelTableCell.swift; sourceTree = "<group>"; };
 		873ED126272AAFFD00C9F7F1 /* PHAsset+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+.swift"; sourceTree = "<group>"; };
+		873ED128272AB77000C9F7F1 /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
 		874D92F6271AD0A9005FF8F3 /* DisableSelectionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableSelectionTextField.swift; sourceTree = "<group>"; };
 		874D92F8271AD672005FF8F3 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -606,6 +608,7 @@
 				DB7C04C926F9E69D009F5C0A /* UserDefaults+.swift */,
 				DB05B03F27185C500067DB17 /* UIViewController+.swift */,
 				873ED126272AAFFD00C9F7F1 /* PHAsset+.swift */,
+				873ED128272AB77000C9F7F1 /* Notification.Name+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -893,6 +896,7 @@
 				DBD5455027033D9A00063C98 /* ButtonRoundCollectionCell.swift in Sources */,
 				DB7C04CA26F9E69D009F5C0A /* UserDefaults+.swift in Sources */,
 				DB148C2C2705855A00FDC48F /* EasyLookTabTypeButton.swift in Sources */,
+				873ED129272AB77000C9F7F1 /* Notification.Name+.swift in Sources */,
 				DB7C04E526FB1981009F5C0A /* BaseContentsCollectionViewController.swift in Sources */,
 				873ED127272AAFFD00C9F7F1 /* PHAsset+.swift in Sources */,
 				DB8BF6812706D89E00FD5FDB /* ResultsWithDropBoxView.swift in Sources */,

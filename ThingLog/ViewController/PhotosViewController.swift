@@ -79,6 +79,7 @@ final class PhotosViewController: UIViewController {
         setupView()
         setupAlbumsViewController()
         bindNavigationButton()
+        bindNotification()
         PHPhotoLibrary.shared().register(self)
     }
 
@@ -96,6 +97,8 @@ final class PhotosViewController: UIViewController {
         albumsViewController.willMove(toParent: nil)
         albumsViewController.view.removeFromSuperview()
         albumsViewController.removeFromParent()
+
+        NotificationCenter.default.removeObserver(self, name: .selectAlbum, object: nil)
     }
 
     deinit {
@@ -159,6 +162,20 @@ extension PhotosViewController {
                 guard let self = self else { return }
                 self.isShowAlbumsViewController ? self.dismissAlbumsViewController() : self.showAlbumsViewController()
                 self.isShowAlbumsViewController.toggle()
+            }.disposed(by: disposeBag)
+    }
+
+    private func bindNotification() {
+        NotificationCenter.default.rx.notification(.selectAlbum, object: nil)
+            .map { notification -> PHAssetCollection? in
+                notification.userInfo?[Notification.Name.selectAlbum] as? PHAssetCollection
+            }
+            .bind { [weak self] assetCollection in
+                guard let self = self else { return }
+                self.resetSelectedIndexPath()
+
+                self.assets = self.fetchAssets(assetCollection: assetCollection)
+                self.titleButton.sendActions(for: .touchUpInside)
             }.disposed(by: disposeBag)
     }
 
@@ -256,7 +273,7 @@ extension PhotosViewController {
 // MARK: - UIColelctionView Delegate
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        if indexPath.item == 0 {
             // TODO: 카메라 기능 구현
             return
         }
@@ -306,7 +323,7 @@ extension PhotosViewController: UICollectionViewDelegate {
 // MARK: - UICollectionView DataSource
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        assets.count
+        1 + assets.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -315,12 +332,12 @@ extension PhotosViewController: UICollectionViewDataSource {
         }
 
         // Camera Cell
-        if indexPath.row == 0 {
+        if indexPath.item == 0 {
             cell.update(image: SwiftGenAssets.camera.image)
             return cell
         }
 
-        let asset: PHAsset = assets.object(at: indexPath.item)
+        let asset: PHAsset = assets.object(at: indexPath.item - 1)
 
         let options: PHImageRequestOptions = PHImageRequestOptions()
         options.resizeMode = .exact
@@ -332,11 +349,9 @@ extension PhotosViewController: UICollectionViewDataSource {
         }
 
         cell.setupImageViewWithCheckButton()
-
-        if selectedIndexPath.contains(indexPath) {
-            updateSelectedOrder()
-        } else {
-            cell.updateCheckButton(string: "", backgroundColor: .clear)
+        cell.updateCheckButton(string: "", backgroundColor: .clear)
+        DispatchQueue.main.async {
+            self.updateSelectedOrder()
         }
 
         return cell
