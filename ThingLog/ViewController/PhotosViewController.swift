@@ -11,7 +11,8 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-final class PhotosViewController: UIViewController {
+/// 사진 목록을 보여주기 위한 뷰 컨트롤러
+final class PhotosViewController: BaseViewController {
     // MARK: - View Properties
     private let collectionView: UICollectionView = {
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -45,18 +46,9 @@ final class PhotosViewController: UIViewController {
     }()
 
     // MARK: - Properties
+    let selectedMaxCount: Int = 10
     var coordinator: WriteCoordinator?
-    private var isShowAlbumsViewController: Bool = false {
-        didSet {
-            isShowAlbumsViewController ? titleButton.setImage(SwiftGenAssets.arrowDropUp.image, for: .normal) : titleButton.setImage(SwiftGenAssets.arrowDropDown.image, for: .normal)
-        }
-    }
-    private lazy var assets: PHFetchResult<PHAsset> = fetchAssets(assetCollection: nil) {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
-    private var selectedIndexPath: [IndexPath] = [] {
+    var selectedIndexPath: [IndexPath] = [] {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.updateSelectedOrder()
@@ -64,25 +56,29 @@ final class PhotosViewController: UIViewController {
             }
         }
     }
-    private var thumbnailSize: CGSize = CGSize()
-    private let imageManager: PHCachingImageManager = PHCachingImageManager()
-    private let disposeBag: DisposeBag = DisposeBag()
-    private let selectedMaxCount: Int = 10
-    private var albumsViewController: AlbumsViewController = AlbumsViewController()
+
+    lazy var assets: PHFetchResult<PHAsset> = fetchAssets(assetCollection: nil) {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+
+    private(set) var thumbnailSize: CGSize = CGSize()
+    private(set) var albumsViewController: AlbumsViewController = AlbumsViewController()
+
+    private var isShowAlbumsViewController: Bool = false {
+        didSet {
+            isShowAlbumsViewController ? titleButton.setImage(SwiftGenAssets.arrowDropUp.image, for: .normal) : titleButton.setImage(SwiftGenAssets.arrowDropDown.image, for: .normal)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = SwiftGenColors.white.color
-
         selectedIndexPath = []
-
         isShowAlbumsViewController = false
-        setupNavigationBar()
-        setupView()
-        setupAlbumsViewController()
-        bindNavigationButton()
-        bindNotification()
+
         PHPhotoLibrary.shared().register(self)
     }
 
@@ -107,11 +103,8 @@ final class PhotosViewController: UIViewController {
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
-}
 
-// MARK: - Private
-extension PhotosViewController {
-    private func setupNavigationBar() {
+    override func setupNavigationBar() {
         setupBaseNavigationBar()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: SwiftGenAssets.closeBig.image.withRenderingMode(.alwaysOriginal),
@@ -123,7 +116,20 @@ extension PhotosViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: successButton)
     }
 
-    private func setupView() {
+    override func setupView() {
+        setupCollectionView()
+        setupAlbumsViewController()
+    }
+
+    override func setupBinding() {
+        bindNavigationButton()
+        bindNotification()
+    }
+}
+
+// MARK: - setup
+extension PhotosViewController {
+    private func setupCollectionView() {
         view.addSubview(collectionView)
 
         NSLayoutConstraint.activate([
@@ -186,37 +192,37 @@ extension PhotosViewController {
     private func didTapBackButton() {
         coordinator?.back()
     }
+}
 
-    private func showAlbumsViewController() {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.type = .push
-            transition.subtype = .fromBottom
-            self.albumsViewController.view.layer.add(transition, forKey: "showAlbums")
-            self.albumsViewController.view.isHidden = false
-        } completion: { _ in
-            self.albumsViewController.view.layer.removeAnimation(forKey: "showAlbums")
+extension PhotosViewController {
+    /// `selectedIndexPath`을 초기화한다.
+    func resetSelectedIndexPath() {
+        selectedIndexPath.forEach { indexPath in
+            guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: indexPath) as? ContentsCollectionViewCell else {
+                return
+            }
+
+            cell.updateCheckButton(string: "", backgroundColor: .clear)
+            cell.layoutIfNeeded()
         }
+
+        selectedIndexPath = []
     }
 
-    private func dismissAlbumsViewController() {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
-            let transition = CATransition()
-            transition.duration = 0.3
-            transition.type = .push
-            transition.subtype = .fromTop
-            self.albumsViewController.view.layer.add(transition, forKey: "dismissAlbums")
-            self.albumsViewController.view.isHidden = true
-        } completion: { _ in
-            self.albumsViewController.view.layer.removeAnimation(forKey: "dismissAlbums")
+    /// `selectedIndexPath`에 데이터가 변경될 때 기존에 있는 항목의 checkButton 문자열을 업데이트한다.
+    func updateSelectedOrder() {
+        selectedIndexPath.enumerated().forEach { index, indexPath in
+            guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: indexPath) as? ContentsCollectionViewCell else {
+                return
+            }
+            cell.updateCheckButton(string: "\(index + 1)", backgroundColor: .black)
+            cell.layoutIfNeeded()
         }
     }
 
     /// 사용자의 앨범으로부터 이미지를 가져온다.
     /// - Parameter assetCollection: 특정 앨범을 가져오고 싶은 경우 사용한다.
     /// - Returns: 모든 이미지를 반환한다. (assetCollection이 있는 경우, 해당 앨범의 모든 이미지를 반환한다.)
-    @objc
     private func fetchAssets(assetCollection: PHAssetCollection?) -> PHFetchResult<PHAsset> {
         let allPhotosOptions: PHFetchOptions = PHFetchOptions()
         allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -239,30 +245,30 @@ extension PhotosViewController {
         }
 
         let count: String = "\(selectedIndexPath.count)"
-        let nsStr: NSString = NSString(string: "\(count) 확인")
-        let range: NSRange = nsStr.range(of: "\(count)")
-        let newContents: String = nsStr.substring(from: range.location)
+        let nsString: NSString = NSString(string: "\(count) 확인")
+        let range: NSRange = nsString.range(of: "\(count)")
+        let newContents: String = nsString.substring(from: range.location)
 
-        let attributedStr: NSMutableAttributedString = NSMutableAttributedString(string: newContents)
-        attributedStr.addAttribute(.font,
+        let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: newContents)
+        attributedString.addAttribute(.font,
                                    value: UIFont.Pretendard.title2,
                                    range: (newContents as NSString).range(of: count))
-        attributedStr.addAttribute(.font,
+        attributedString.addAttribute(.font,
                                    value: UIFont.Pretendard.body1,
                                    range: (newContents as NSString).range(of: "확인"))
-        attributedStr.addAttribute(.foregroundColor,
+        attributedString.addAttribute(.foregroundColor,
                                    value: SwiftGenColors.black.color,
                                    range: (newContents as NSString).range(of: count))
-        attributedStr.addAttribute(.foregroundColor,
+        attributedString.addAttribute(.foregroundColor,
                                    value: SwiftGenColors.black.color,
                                    range: (newContents as NSString).range(of: "확인"))
-        successButton.setAttributedTitle(attributedStr, for: .normal)
+        successButton.setAttributedTitle(attributedString, for: .normal)
         successButton.sizeToFit()
         successButton.isEnabled = true
     }
 
     /// selectedMaxCount < selectedIndexPath.count 인 경우 사용자에게 Alert을 띄운다.
-    private func showMaxSelectedAlert() {
+    func showMaxSelectedAlert() {
         let alert: AlertViewController = AlertViewController()
         alert.modalPresentationStyle = .overFullScreen
 
@@ -278,94 +284,6 @@ extension PhotosViewController {
         }.disposed(by: disposeBag)
 
         present(alert, animated: false, completion: nil)
-    }
-}
-
-// MARK: - UIColelctionView Delegate
-extension PhotosViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.item == 0 {
-            // TODO: 카메라 기능 구현
-            return
-        }
-
-        guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: indexPath) as? ContentsCollectionViewCell else {
-            return
-        }
-
-        if let firstIndex: Int = selectedIndexPath.firstIndex(of: indexPath) {
-            selectedIndexPath.remove(at: firstIndex)
-            cell.updateCheckButton(string: "", backgroundColor: .clear)
-        } else {
-            if selectedIndexPath.count < selectedMaxCount {
-                selectedIndexPath.append(indexPath)
-            } else {
-                showMaxSelectedAlert()
-            }
-        }
-    }
-
-    /// `selectedIndexPath`을 초기화한다.
-    private func resetSelectedIndexPath() {
-        selectedIndexPath.forEach { indexPath in
-            guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: indexPath) as? ContentsCollectionViewCell else {
-                return
-            }
-
-            cell.updateCheckButton(string: "", backgroundColor: .clear)
-            cell.layoutIfNeeded()
-        }
-
-        selectedIndexPath = []
-    }
-
-    /// `selectedIndexPath`에 데이터가 변경될 때 기존에 있는 항목의 checkButton 문자열을 업데이트한다.
-    private func updateSelectedOrder() {
-        selectedIndexPath.enumerated().forEach { index, indexPath in
-            guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: indexPath) as? ContentsCollectionViewCell else {
-                return
-            }
-            cell.updateCheckButton(string: "\(index + 1)", backgroundColor: .black)
-            cell.layoutIfNeeded()
-        }
-    }
-}
-
-// MARK: - UICollectionView DataSource
-extension PhotosViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        1 + assets.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsCollectionViewCell else {
-            fatalError("Unable to dequeue PhotoCollectionViewCell")
-        }
-
-        // Camera Cell
-        if indexPath.item == 0 {
-            cell.update(image: SwiftGenAssets.camera.image)
-            return cell
-        }
-
-        let asset: PHAsset = assets.object(at: indexPath.item - 1)
-
-        let options: PHImageRequestOptions = PHImageRequestOptions()
-        options.resizeMode = .exact
-        cell.representedAssetIdentifier = asset.localIdentifier
-        imageManager.requestImage(for: asset, targetSize: thumbnailSize, contentMode: .aspectFill, options: options) { image, _ in
-            if cell.representedAssetIdentifier == asset.localIdentifier {
-                cell.update(image: image)
-            }
-        }
-
-        cell.setupImageViewWithCheckButton()
-        cell.updateCheckButton(string: "", backgroundColor: .clear)
-        DispatchQueue.main.async {
-            self.updateSelectedOrder()
-        }
-
-        return cell
     }
 }
 

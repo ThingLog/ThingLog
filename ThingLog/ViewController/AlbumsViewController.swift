@@ -30,7 +30,6 @@ final class AlbumsViewController: UIViewController {
     private var favorites: PHFetchResult<PHAssetCollection> = PHFetchResult<PHAssetCollection>()
     private var userCollections: PHFetchResult<PHAssetCollection> = PHFetchResult<PHAssetCollection>()
     private var thumbnailSize: CGSize = CGSize()
-    private let imageManager: PHCachingImageManager = PHCachingImageManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +72,7 @@ extension AlbumsViewController {
                            forCellReuseIdentifier: ImageWithVerticalTwoLabelTableCell.reuseIdentifier)
     }
 
-    ///
+    /// allPhotos, favorites, userCollections 데이터를 fetch 한다.
     private func fetchAssets() {
         let allPhotosOptions: PHFetchOptions = PHFetchOptions()
         allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -94,7 +93,7 @@ extension AlbumsViewController {
 // MARK: - UITableView Delegate
 extension AlbumsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sectionType = sections[indexPath.section]
+        let sectionType: AlbumSectionType = sections[indexPath.section]
         switch sectionType {
         case .all:
             NotificationCenter.default.post(name: .selectAlbum, object: nil)
@@ -134,8 +133,9 @@ extension AlbumsViewController: UITableViewDataSource {
         let sectionType: AlbumSectionType = sections[indexPath.section]
         switch sectionType {
         case .all:
-            let thumbnail: UIImage? = allPhotos.firstObject?.toImage(targetSize: thumbnailSize)
-            cell.configure(image: thumbnail, title: "최근 항목", description: "\(allPhotos.count)")
+            allPhotos.firstObject?.toImage(targetSize: thumbnailSize) { [weak self] image in
+                cell.configure(image: image, title: "최근 항목", description: "\(self?.allPhotos.count ?? 0)")
+            }
         case .favorites, .userCollections:
             let collection: PHAssetCollection = sectionType == .favorites ? favorites[indexPath.item] : userCollections[indexPath.item]
 
@@ -151,10 +151,7 @@ extension AlbumsViewController: UITableViewDataSource {
 
             let options: PHImageRequestOptions = PHImageRequestOptions()
             options.resizeMode = .exact
-            imageManager.requestImage(for: firstAsset,
-                                      targetSize: thumbnailSize,
-                                      contentMode: .aspectFill,
-                                      options: options) { image, _ in
+            firstAsset.toImage(targetSize: thumbnailSize, options: options) { image in
                 cell.configure(image: image,
                                title: collection.localizedTitle ?? "",
                                description: "\(fetchedAssets.count)")

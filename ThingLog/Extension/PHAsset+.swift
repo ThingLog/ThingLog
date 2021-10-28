@@ -9,14 +9,12 @@ import Photos
 import UIKit
 
 extension PHAsset {
-    func toImage(targetSize size: CGSize, contentMode: PHImageContentMode = .aspectFill, options: PHImageRequestOptions? = nil) -> UIImage? {
-        var fetchImage: UIImage?
+    func toImage(targetSize size: CGSize, contentMode: PHImageContentMode = .aspectFill, options: PHImageRequestOptions? = nil, completion: @escaping (UIImage?) -> Void) {
         PHImageManager.default().requestImage(for: self,
                                                  targetSize: size,
                                                  contentMode: contentMode,
-                                                 options: options) { image, info in
-            fetchImage = image
+                                                 options: options) { image, _ in
+            completion(image)
         }
-        return fetchImage
     }
 }

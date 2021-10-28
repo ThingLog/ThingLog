@@ -38,6 +38,9 @@
 		873ED125272AA43B00C9F7F1 /* ImageWithVerticalTwoLabelTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873ED124272AA43B00C9F7F1 /* ImageWithVerticalTwoLabelTableCell.swift */; };
 		873ED127272AAFFD00C9F7F1 /* PHAsset+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873ED126272AAFFD00C9F7F1 /* PHAsset+.swift */; };
 		873ED129272AB77000C9F7F1 /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873ED128272AB77000C9F7F1 /* Notification.Name+.swift */; };
+		873ED12B272AC8CB00C9F7F1 /* PhotosViewController+Albums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873ED12A272AC8CB00C9F7F1 /* PhotosViewController+Albums.swift */; };
+		873ED12D272AC96000C9F7F1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873ED12C272AC96000C9F7F1 /* BaseViewController.swift */; };
+		873ED12F272ACD3000C9F7F1 /* PhotosViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873ED12E272ACD3000C9F7F1 /* PhotosViewController+CollectionView.swift */; };
 		874D92F7271AD0A9005FF8F3 /* DisableSelectionTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D92F6271AD0A9005FF8F3 /* DisableSelectionTextField.swift */; };
 		874D92F9271AD672005FF8F3 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D92F8271AD672005FF8F3 /* DummyData.swift */; };
 		875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */; };
@@ -215,6 +218,9 @@
 		873ED124272AA43B00C9F7F1 /* ImageWithVerticalTwoLabelTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWithVerticalTwoLabelTableCell.swift; sourceTree = "<group>"; };
 		873ED126272AAFFD00C9F7F1 /* PHAsset+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+.swift"; sourceTree = "<group>"; };
 		873ED128272AB77000C9F7F1 /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
+		873ED12A272AC8CB00C9F7F1 /* PhotosViewController+Albums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosViewController+Albums.swift"; sourceTree = "<group>"; };
+		873ED12C272AC96000C9F7F1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		873ED12E272ACD3000C9F7F1 /* PhotosViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosViewController+CollectionView.swift"; sourceTree = "<group>"; };
 		874D92F6271AD0A9005FF8F3 /* DisableSelectionTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableSelectionTextField.swift; sourceTree = "<group>"; };
 		874D92F8271AD672005FF8F3 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -536,6 +542,9 @@
 				87BB17AC27098F480088B847 /* WriteViewController+setup.swift */,
 				8761A88327296C0700EA8683 /* PhotosViewController.swift */,
 				873ED122272AA0AA00C9F7F1 /* AlbumsViewController.swift */,
+				873ED12A272AC8CB00C9F7F1 /* PhotosViewController+Albums.swift */,
+				873ED12C272AC96000C9F7F1 /* BaseViewController.swift */,
+				873ED12E272ACD3000C9F7F1 /* PhotosViewController+CollectionView.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -919,10 +928,12 @@
 				DB7C04F226FB1F36009F5C0A /* ContentsPageViewController.swift in Sources */,
 				DB148C302705863100FDC48F /* EasyLookTabView.swift in Sources */,
 				DB3A5165270FFE0C003B529D /* String+.swift in Sources */,
+				873ED12F272ACD3000C9F7F1 /* PhotosViewController+CollectionView.swift in Sources */,
 				DB7C04E926FB19AE009F5C0A /* ContentsCollectionViewCell.swift in Sources */,
 				DB7C04BE26F9BE72009F5C0A /* ProfileView.swift in Sources */,
 				DB1745B927098E8A00EF083E /* RecentSearchDataViewModel.swift in Sources */,
 				DB7C04B626F8782B009F5C0A /* EasyLookViewController.swift in Sources */,
+				873ED12D272AC96000C9F7F1 /* BaseViewController.swift in Sources */,
 				DB148C282704A1A600FDC48F /* IgnoreTouchView.swift in Sources */,
 				DB69095F2712C55F00BB54E4 /* SearchResultsViewModel.swift in Sources */,
 				8761A88427296C0800EA8683 /* PhotosViewController.swift in Sources */,
@@ -941,6 +952,7 @@
 				87A86C8B2714139F008FB3F0 /* WriteTextFieldCell.swift in Sources */,
 				87DAEB1B270BEAE50038C487 /* CameraButtonCollectionCell.swift in Sources */,
 				DBD2244B27085DFB004C5184 /* SearchViewController.swift in Sources */,
+				873ED12B272AC8CB00C9F7F1 /* PhotosViewController+Albums.swift in Sources */,
 				DB7C04C726F9E693009F5C0A /* UserInformationViewModel.swift in Sources */,
 				DB8BF6832706DA7900FD5FDB /* EasyLookTopView.swift in Sources */,
 				DBA0F825270B07D8009553FC /* LeftLabelRightButtonHeaderView.swift in Sources */,
