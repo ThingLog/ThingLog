@@ -80,7 +80,6 @@ final class LoginViewController: UIViewController {
     }
     
     // MARK: - Setup
-    // TODO: ⚠️ 지원님이 글쓰기 화면에서 구현하실 하단의 검은색버튼 뷰를 재활용하여 추가할 예정이다.
     private func setupView() {
         view.addSubview(collectionView)
         view.addSubview(loginButton)
