@@ -13,3 +13,10 @@ protocol Coordinator {
     
     func start()
 }
+
+extension Coordinator {
+    /// 뒤로 이동한다.
+    func back() {
+        navigationController.popViewController(animated: true)
+    }
+}

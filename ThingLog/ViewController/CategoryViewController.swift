@@ -42,8 +42,11 @@ final class CategoryViewController: UIViewController {
     }()
 
     // MARK: - Properties
-    var coordinator: WriteCoordinator?
+    var coordinator: Coordinator?
     private let disposeBag: DisposeBag = DisposeBag()
+    private let leadingTrailingConstant: CGFloat = 18.0
+    private let topBottomConstant: CGFloat = 12.0
+    private var selectedCategories: Set<IndexPath> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,9 +122,9 @@ extension CategoryViewController {
         view.addSubview(textField)
 
         NSLayoutConstraint.activate([
-            textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 18),
-            textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
-            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18)
+            textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: leadingTrailingConstant),
+            textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topBottomConstant),
+            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -leadingTrailingConstant)
         ])
     }
 
@@ -130,7 +133,7 @@ extension CategoryViewController {
 
         NSLayoutConstraint.activate([
             bottomLineView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            bottomLineView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 12),
+            bottomLineView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: topBottomConstant),
             bottomLineView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             bottomLineView.heightAnchor.constraint(equalToConstant: 0.5)
         ])
@@ -141,7 +144,7 @@ extension CategoryViewController {
 
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.topAnchor.constraint(equalTo: bottomLineView.bottomAnchor, constant: 12),
+            tableView.topAnchor.constraint(equalTo: bottomLineView.bottomAnchor, constant: topBottomConstant),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
@@ -149,6 +152,7 @@ extension CategoryViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(RoundLabelWithButtonTableCell.self, forCellReuseIdentifier: RoundLabelWithButtonTableCell.reuseIdentifier)
+        tableView.allowsMultipleSelection = true
     }
 }
 
@@ -159,9 +163,8 @@ extension CategoryViewController: UITableViewDelegate {
             return
         }
 
+        selectedCategories.insert(indexPath)
         cell.isSelectedCategory.toggle()
-        // TODO: 선택한 순서로 업데이트
-        cell.configure(selectedOrder: 1)
     }
 
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -169,6 +172,7 @@ extension CategoryViewController: UITableViewDelegate {
             return
         }
 
+        selectedCategories.remove(indexPath)
         cell.isSelectedCategory.toggle()
     }
 }
@@ -176,7 +180,7 @@ extension CategoryViewController: UITableViewDelegate {
 // MARK: - TableView DataSource
 extension CategoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        50
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -185,6 +189,12 @@ extension CategoryViewController: UITableViewDataSource {
         }
 
         cell.configure(name: "테스트")
+
+        if selectedCategories.contains(indexPath) {
+            cell.isSelectedCategory = true
+        } else {
+            cell.isSelectedCategory = false
+        }
 
         return cell
     }
