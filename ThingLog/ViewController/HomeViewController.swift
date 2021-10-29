@@ -53,6 +53,7 @@ final class HomeViewController: UIViewController {
         subscribePageViewControllerScrollOffset()
         subscribeInformationViewModel()
         subscribeProfileEditButton()
+        subscribeDrawerImageView()
         
         fetchAllPost()
     }
@@ -207,6 +208,16 @@ extension HomeViewController {
             self?.coordinator?.showLoginViewController()
         }
         .disposed(by: disposeBag)
+    }
+    
+    /// 진열장 화면으로 이동하는 메서드다.
+    func subscribeDrawerImageView() {
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer()
+        profileView.userBadgeImageView.addGestureRecognizer(tapGesture)
+        profileView.userBadgeImageView.isUserInteractionEnabled = true 
+        tapGesture.rx.event.bind { [weak self] _ in
+            self?.coordinator?.showDrawerViewController()
+        }.disposed(by: disposeBag)
     }
     
     /// 콘텐츠 개수가 많은 상황에서 아래로 스크롤한 상태에서 콘텐츠 개수가 적은 페이지로 전환할 시 containerView의 높이를 줄여주는 메소드다.
