@@ -34,7 +34,7 @@ final class WriteViewModel {
     }
     // Section 마다 표시할 항목의 개수
     lazy var itemCount: [Int] = [1, 1, typeInfo.count, 1, 1]
-    private var passToSelectedCategoryIndexPaths: Set<IndexPath> = []
+    private var selectedCategoryIndexPaths: Set<IndexPath> = []
     private let disposeBag: DisposeBag = DisposeBag()
 
     init(writeType: WriteType) {
@@ -49,7 +49,7 @@ final class WriteViewModel {
                 notification.userInfo?[Notification.Name.passToSelectedCategoryIndexPaths] as? Set<IndexPath> ?? []
             }
             .bind { [weak self] indexPaths in
-                self?.passToSelectedCategoryIndexPaths = indexPaths
+                self?.selectedCategoryIndexPaths = indexPaths
             }.disposed(by: disposeBag)
     }
 }

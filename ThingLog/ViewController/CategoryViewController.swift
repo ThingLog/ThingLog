@@ -87,6 +87,9 @@ final class CategoryViewController: UIViewController {
                 NotificationCenter.default.post(name: .passToSelectedCategoryIndexPaths,
                                                 object: nil,
                                                 userInfo: [Notification.Name.passToSelectedCategoryIndexPaths: self.selectedCategoryIndexPaths])
+                NotificationCenter.default.post(name: .passToSelectedCategory,
+                                                object: nil,
+                                                userInfo: [Notification.Name.passToSelectedCategory: self.selectedCategory()])
                 self.coordinator?.back()
             }.disposed(by: disposeBag)
     }
@@ -118,6 +121,15 @@ final class CategoryViewController: UIViewController {
     @objc
     private func dismissKeyboard() {
         textField.resignFirstResponder()
+    }
+
+    private func selectedCategory() -> [Category] {
+        var categories: [Category] = []
+        selectedCategoryIndexPaths.forEach { indexPath in
+            let categoryEntity: CategoryEntity = repository.fetchedResultsController.object(at: indexPath)
+            categories.append(categoryEntity.toModel())
+        }
+        return categories
     }
 }
 
