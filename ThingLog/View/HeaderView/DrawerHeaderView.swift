@@ -10,8 +10,8 @@ import UIKit
 /// DrawerViewController에서 헤더뷰로 쓰일 대표진열장 HeaderView다.  [이미지](https://www.notion.so/DrawerHeaderView-19e668df2e994f008669223a67895571)
 class DrawerHeaderView: UICollectionReusableView {
     // MARK: - View
-    let drawerView: ImageWithTwoLabellVerticalCetnerXView = {
-        let drawerView: ImageWithTwoLabellVerticalCetnerXView = ImageWithTwoLabellVerticalCetnerXView(imageViewHeight: 100)
+    let drawerView: ImageWithTwoLabelVerticalCetnerXView = {
+        let drawerView: ImageWithTwoLabelVerticalCetnerXView = ImageWithTwoLabelVerticalCetnerXView(imageViewHeight: 100)
         drawerView.translatesAutoresizingMaskIntoConstraints = false
         return drawerView
     }()

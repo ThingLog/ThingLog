@@ -19,8 +19,8 @@ class SelectingDrawerViewController: UIViewController {
         return view
     }()
     
-    let drawerView: ImageWithTwoLabellVerticalCetnerXView = {
-        let drawerView: ImageWithTwoLabellVerticalCetnerXView = ImageWithTwoLabellVerticalCetnerXView(imageViewHeight: 100)
+    let drawerView: ImageWithTwoLabelVerticalCetnerXView = {
+        let drawerView: ImageWithTwoLabelVerticalCetnerXView = ImageWithTwoLabelVerticalCetnerXView(imageViewHeight: 100)
         drawerView.translatesAutoresizingMaskIntoConstraints = false
         return drawerView
     }()

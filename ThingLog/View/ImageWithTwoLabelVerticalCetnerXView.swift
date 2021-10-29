@@ -18,7 +18,7 @@ import UIKit
 /// `DrawerCell` 내부에서 사용,
 ///
 /// `SelectingDrawerViewController`에서 사용
-final class ImageWithTwoLabellVerticalCetnerXView: UIView {
+final class ImageWithTwoLabelVerticalCetnerXView: UIView {
     private let imageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.backgroundColor = SwiftGenColors.gray6.color
@@ -97,7 +97,7 @@ final class ImageWithTwoLabellVerticalCetnerXView: UIView {
 
 // MARK: - Custom Public Method 
 // 상황에 맞게 커스텀할 수 있도록 hide와 set메서드가 있다.
-extension ImageWithTwoLabellVerticalCetnerXView {
+extension ImageWithTwoLabelVerticalCetnerXView {
     func setTitleLabel(fontType: UIFont, color: UIColor, text: String?) {
         titleLabel.font = fontType
         titleLabel.textColor = color

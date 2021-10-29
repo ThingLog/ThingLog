@@ -65,7 +65,7 @@
 		DB00D211272A8A79003FC9C3 /* SelectingDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D210272A8A79003FC9C3 /* SelectingDrawerViewController.swift */; };
 		DB00D216272A8D2F003FC9C3 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D215272A8D2F003FC9C3 /* DrawerViewController.swift */; };
 		DB00D218272A8DB0003FC9C3 /* DrawerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D217272A8DB0003FC9C3 /* DrawerCoordinator.swift */; };
-		DB00D21C272AD76E003FC9C3 /* ImageWithTwoLabellVerticalCetnerXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D21B272AD76E003FC9C3 /* ImageWithTwoLabellVerticalCetnerXView.swift */; };
+		DB00D21C272AD76E003FC9C3 /* ImageWithTwoLabelVerticalCetnerXView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D21B272AD76E003FC9C3 /* ImageWithTwoLabelVerticalCetnerXView.swift */; };
 		DB00D21E272ADB68003FC9C3 /* DrawerCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D21D272ADB68003FC9C3 /* DrawerCollectionCell.swift */; };
 		DB05B03C271853CE0067DB17 /* LeftRightButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */; };
 		DB05B03E27185B780067DB17 /* TrashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB05B03D27185B780067DB17 /* TrashViewController.swift */; };
@@ -245,7 +245,7 @@
 		DB00D210272A8A79003FC9C3 /* SelectingDrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingDrawerViewController.swift; sourceTree = "<group>"; };
 		DB00D215272A8D2F003FC9C3 /* DrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
 		DB00D217272A8DB0003FC9C3 /* DrawerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerCoordinator.swift; sourceTree = "<group>"; };
-		DB00D21B272AD76E003FC9C3 /* ImageWithTwoLabellVerticalCetnerXView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWithTwoLabellVerticalCetnerXView.swift; sourceTree = "<group>"; };
+		DB00D21B272AD76E003FC9C3 /* ImageWithTwoLabelVerticalCetnerXView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageWithTwoLabelVerticalCetnerXView.swift; sourceTree = "<group>"; };
 		DB00D21D272ADB68003FC9C3 /* DrawerCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerCollectionCell.swift; sourceTree = "<group>"; };
 		DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftRightButtonView.swift; sourceTree = "<group>"; };
 		DB05B03D27185B780067DB17 /* TrashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashViewController.swift; sourceTree = "<group>"; };
@@ -582,7 +582,7 @@
 				DBA0F823270B079B009553FC /* HeaderView */,
 				DBD545512703409300063C98 /* HorizontalCollectionView.swift */,
 				DB148C272704A1A500FDC48F /* IgnoreTouchView.swift */,
-				DB00D21B272AD76E003FC9C3 /* ImageWithTwoLabellVerticalCetnerXView.swift */,
+				DB00D21B272AD76E003FC9C3 /* ImageWithTwoLabelVerticalCetnerXView.swift */,
 				DB148C212704623200FDC48F /* InsetButton.swift */,
 				DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */,
 				DB8BF6782705D25700FD5FDB /* LogoView.swift */,
@@ -983,7 +983,7 @@
 				8736B3E326FCB9F3000433E1 /* Rating.swift in Sources */,
 				DB00D211272A8A79003FC9C3 /* SelectingDrawerViewController.swift in Sources */,
 				87BB17AB27098D760088B847 /* WriteViewModel.swift in Sources */,
-				DB00D21C272AD76E003FC9C3 /* ImageWithTwoLabellVerticalCetnerXView.swift in Sources */,
+				DB00D21C272AD76E003FC9C3 /* ImageWithTwoLabelVerticalCetnerXView.swift in Sources */,
 				87ACB0B427229E2B00C78C86 /* WriteImageTableCell.swift in Sources */,
 				8736B3E926FCBE28000433E1 /* Category.swift in Sources */,
 				DB3A516927103B3E003B529D /* EmptyPostView.swift in Sources */,
