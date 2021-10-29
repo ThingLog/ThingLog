@@ -95,6 +95,7 @@
 		DB3A5165270FFE0C003B529D /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3A5164270FFE0C003B529D /* String+.swift */; };
 		DB3A516927103B3E003B529D /* EmptyPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3A516827103B3E003B529D /* EmptyPostView.swift */; };
 		DB3A516B27103DC4003B529D /* EmptyResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3A516A27103DC4003B529D /* EmptyResultsView.swift */; };
+		DB62C4BE272BD9E9000ED955 /* DrawerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB62C4BD272BD9E9000ED955 /* DrawerHeaderView.swift */; };
 		DB69095D2712B5EB00BB54E4 /* ThingLogPostTypeRequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69095C2712B5EB00BB54E4 /* ThingLogPostTypeRequestTest.swift */; };
 		DB69095F2712C55F00BB54E4 /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69095E2712C55F00BB54E4 /* SearchResultsViewModel.swift */; };
 		DB6909612712DA8100BB54E4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6909602712DA8100BB54E4 /* SettingViewController.swift */; };
@@ -274,6 +275,7 @@
 		DB3A5164270FFE0C003B529D /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		DB3A516827103B3E003B529D /* EmptyPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPostView.swift; sourceTree = "<group>"; };
 		DB3A516A27103DC4003B529D /* EmptyResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyResultsView.swift; sourceTree = "<group>"; };
+		DB62C4BD272BD9E9000ED955 /* DrawerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerHeaderView.swift; sourceTree = "<group>"; };
 		DB69095C2712B5EB00BB54E4 /* ThingLogPostTypeRequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogPostTypeRequestTest.swift; sourceTree = "<group>"; };
 		DB69095E2712C55F00BB54E4 /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
 		DB6909602712DA8100BB54E4 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -645,6 +647,7 @@
 		DBA0F823270B079B009553FC /* HeaderView */ = {
 			isa = PBXGroup;
 			children = (
+				DB62C4BD272BD9E9000ED955 /* DrawerHeaderView.swift */,
 				DBA0F824270B07D8009553FC /* LeftLabelRightButtonHeaderView.swift */,
 				DB05B04D271F09260067DB17 /* LoginTopHeaderView.swift */,
 				DB22327D27183378002ED30D /* TwoLabelVerticalHeaderView.swift */,
@@ -957,6 +960,7 @@
 				87DAEB1B270BEAE50038C487 /* CameraButtonCollectionCell.swift in Sources */,
 				DBD2244B27085DFB004C5184 /* SearchViewController.swift in Sources */,
 				DB7C04C726F9E693009F5C0A /* UserInformationViewModel.swift in Sources */,
+				DB62C4BE272BD9E9000ED955 /* DrawerHeaderView.swift in Sources */,
 				DB8BF6832706DA7900FD5FDB /* EasyLookTopView.swift in Sources */,
 				DBA0F825270B07D8009553FC /* LeftLabelRightButtonHeaderView.swift in Sources */,
 				873EC00B26D39055003C3525 /* SceneDelegate.swift in Sources */,

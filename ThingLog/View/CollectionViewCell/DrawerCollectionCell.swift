@@ -15,6 +15,7 @@ final class DrawerCollectionCell: UICollectionViewCell {
         return drawerView
     }()
     
+    private let drawerViewBottomPadding: CGFloat = 30
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -28,9 +29,9 @@ final class DrawerCollectionCell: UICollectionViewCell {
         contentView.addSubview(drawerView)
         
         NSLayoutConstraint.activate([
-            drawerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
+            drawerView.topAnchor.constraint(equalTo: contentView.topAnchor),
             drawerView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            drawerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            drawerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -drawerViewBottomPadding),
             drawerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
             drawerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0)
         ])

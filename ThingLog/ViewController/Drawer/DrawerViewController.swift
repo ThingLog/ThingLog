@@ -12,43 +12,27 @@ final class DrawerViewController: UIViewController {
     var coordinator: DrawerCoordinator?
     
     // MARK: - View
-    let drawerView: ImageWithTwoLabellVerticalCetnerXView = {
-        let drawerView: ImageWithTwoLabellVerticalCetnerXView = ImageWithTwoLabellVerticalCetnerXView(imageViewHeight: 100)
-        drawerView.translatesAutoresizingMaskIntoConstraints = false
-        drawerView.hideQuestionImageView(true)
-        drawerView.setSubLabel(fontType: UIFont.Pretendard.body2,
-                               color: SwiftGenColors.gray3.color,
-                               text: "아직 대표 물건이 없어용!")
-        return drawerView
-    }()
-    
-    private let borderView: UIView = {
-        let view: UIView = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = SwiftGenColors.gray4.color
-        return view
-    }()
-    
     private let collectionView: UICollectionView = {
+        let screenWidth: CGFloat = UIScreen.main.bounds.width
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: floor(UIScreen.main.bounds.width / 2) - 2, height: 150)
+        flowLayout.itemSize = CGSize(width: floor(screenWidth / 2) - 2, height: 150)
         flowLayout.minimumInteritemSpacing = 0
-        print(UIScreen.main.bounds.width, flowLayout.itemSize.width)
+        flowLayout.headerReferenceSize = CGSize(width: screenWidth, height: 270)
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.backgroundColor = SwiftGenColors.white.color
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(DrawerCollectionCell.self, forCellWithReuseIdentifier: DrawerCollectionCell.reuseIdentifier)
+        collectionView.register(DrawerHeaderView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: DrawerHeaderView.reuseIdentifier)
+        collectionView.alwaysBounceVertical = false
         return collectionView
     }()
     
     // MARK: - Properties
-    private let drawerViewTopPadding: CGFloat = 40
-    private let borderViewTopPadding: CGFloat = 36
-    private let padding: CGFloat = 20
-    
     // TODO: - ⚠️ 실제 데이터로 이용 예정
     var disposeBag: DisposeBag = DisposeBag()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = SwiftGenColors.white.color
@@ -59,21 +43,11 @@ final class DrawerViewController: UIViewController {
     
     // MARK: - Setup
     private func setupView() {
-        view.addSubview(drawerView)
-        view.addSubview(borderView)
         view.addSubview(collectionView)
         
         let safeLayout: UILayoutGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            drawerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            drawerView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: drawerViewTopPadding),
-            
-            borderView.topAnchor.constraint(equalTo: drawerView.bottomAnchor, constant: borderViewTopPadding),
-            borderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            borderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            borderView.heightAnchor.constraint(equalToConstant: 0.5),
-            
-            collectionView.topAnchor.constraint(equalTo: borderView.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: safeLayout.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -90,7 +64,7 @@ final class DrawerViewController: UIViewController {
         navigationItem.titleView = logoView
         
         let backButton: UIButton = UIButton()
-        backButton.setImage(SwiftGenAssets.paddingBack.image, for: .normal)
+        backButton.setImage(SwiftGenAssets.closeBig.image, for: .normal)
         backButton.tintColor = SwiftGenColors.black.color
         backButton.rx.tap
             .bind { [weak self] in
@@ -103,8 +77,8 @@ final class DrawerViewController: UIViewController {
     
     private func setupRightNavigationBarItem() {
         let editButton: UIButton = UIButton()
-        editButton.setTitle("확인", for: .normal)
-        editButton.titleLabel?.font = UIFont.Pretendard.body1
+        editButton.setTitle("완료", for: .normal)
+        editButton.titleLabel?.font = UIFont.Pretendard.title1
         editButton.setTitleColor(SwiftGenColors.black.color, for: .normal)
         editButton.rx.tap
             .bind { [weak self] in
@@ -143,5 +117,16 @@ extension DrawerViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // test
         coordinator?.showSelectingDrawerViewController()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DrawerHeaderView.reuseIdentifier, for: indexPath) as? DrawerHeaderView else {
+            return UICollectionReusableView()
+        }
+        headerView.drawerView.hideQuestionImageView(true)
+        headerView.drawerView.setSubLabel(fontType: UIFont.Pretendard.body2,
+                               color: SwiftGenColors.gray3.color,
+                               text: "아직 대표 물건이 없어용!")
+        return headerView
     }
 }

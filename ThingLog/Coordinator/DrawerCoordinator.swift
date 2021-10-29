@@ -18,6 +18,7 @@ final class DrawerCoordinator: Coordinator {
     func start() {
         let drawerViewController: DrawerViewController = DrawerViewController()
         drawerViewController.coordinator = self
+        drawerViewController.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(drawerViewController, animated: true)
     }
     
