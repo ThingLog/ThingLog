@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RxSwift
+
 final class WriteViewModel {
     enum Section: Int, CaseIterable {
         case image
@@ -32,8 +34,22 @@ final class WriteViewModel {
     }
     // Section 마다 표시할 항목의 개수
     lazy var itemCount: [Int] = [1, 1, typeInfo.count, 1, 1]
+    private var passToSelectedCategoryIndexPaths: Set<IndexPath> = []
+    private let disposeBag: DisposeBag = DisposeBag()
 
     init(writeType: WriteType) {
         self.writeType = writeType
+
+        bindPassToSelectedCategoryIndexPaths()
+    }
+
+    private func bindPassToSelectedCategoryIndexPaths() {
+        NotificationCenter.default.rx.notification(.passToSelectedCategoryIndexPaths, object: nil)
+            .map { notification -> Set<IndexPath> in
+                notification.userInfo?[Notification.Name.passToSelectedCategoryIndexPaths] as? Set<IndexPath> ?? []
+            }
+            .bind { [weak self] indexPaths in
+                self?.passToSelectedCategoryIndexPaths = indexPaths
+            }.disposed(by: disposeBag)
     }
 }

@@ -48,7 +48,7 @@ final class CategoryViewController: UIViewController {
     private let disposeBag: DisposeBag = DisposeBag()
     private let leadingTrailingConstant: CGFloat = 18.0
     private let topBottomConstant: CGFloat = 12.0
-    private var selectedCategories: Set<IndexPath> = []
+    private var selectedCategoryIndexPaths: Set<IndexPath> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,8 +83,11 @@ final class CategoryViewController: UIViewController {
     private func setupBinding() {
         successButton.rx.tap
             .bind { [weak self] in
-                // TODO: 카테고리 전달
-                self?.coordinator?.back()
+                guard let self = self else { return }
+                NotificationCenter.default.post(name: .passToSelectedCategoryIndexPaths,
+                                                object: nil,
+                                                userInfo: [Notification.Name.passToSelectedCategoryIndexPaths: self.selectedCategoryIndexPaths])
+                self.coordinator?.back()
             }.disposed(by: disposeBag)
     }
 
@@ -167,7 +170,7 @@ extension CategoryViewController: UITableViewDelegate {
             return
         }
 
-        selectedCategories.insert(indexPath)
+        selectedCategoryIndexPaths.insert(indexPath)
         cell.isSelectedCategory.toggle()
     }
 
@@ -176,7 +179,7 @@ extension CategoryViewController: UITableViewDelegate {
             return
         }
 
-        selectedCategories.remove(indexPath)
+        selectedCategoryIndexPaths.remove(indexPath)
         cell.isSelectedCategory.toggle()
     }
 }
@@ -202,7 +205,7 @@ extension CategoryViewController: UITableViewDataSource {
 
         cell.configure(name: category.title ?? "")
 
-        if selectedCategories.contains(indexPath) {
+        if selectedCategoryIndexPaths.contains(indexPath) {
             cell.isSelectedCategory = true
         } else {
             cell.isSelectedCategory = false
