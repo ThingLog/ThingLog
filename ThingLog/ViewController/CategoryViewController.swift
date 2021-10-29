@@ -5,6 +5,7 @@
 //  Created by 이지원 on 2021/10/13.
 //
 
+import CoreData
 import UIKit
 
 import RxCocoa
@@ -43,6 +44,7 @@ final class CategoryViewController: UIViewController {
 
     // MARK: - Properties
     var coordinator: Coordinator?
+    private lazy var repository: CategoryRepository = CategoryRepository(fetchedResultsControllerDelegate: self)
     private let disposeBag: DisposeBag = DisposeBag()
     private let leadingTrailingConstant: CGFloat = 18.0
     private let topBottomConstant: CGFloat = 12.0
@@ -180,7 +182,7 @@ extension CategoryViewController: UITableViewDelegate {
 // MARK: - TableView DataSource
 extension CategoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        50
+        repository.fetchedResultsController.fetchedObjects?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -188,14 +190,26 @@ extension CategoryViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.configure(name: "테스트")
+        configureCell(cell, at: indexPath)
+
+        return cell
+    }
+
+    private func configureCell(_ cell: RoundLabelWithButtonTableCell, at indexPath: IndexPath) {
+        let category: CategoryEntity = repository.fetchedResultsController.object(at: indexPath)
+
+        cell.configure(name: category.title ?? "")
 
         if selectedCategories.contains(indexPath) {
             cell.isSelectedCategory = true
         } else {
             cell.isSelectedCategory = false
         }
+    }
+}
 
-        return cell
+extension CategoryViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
     }
 }
