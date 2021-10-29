@@ -22,6 +22,7 @@ final class PhotosViewController: BaseViewController {
                                      height: (UIScreen.main.bounds.width - 2) / 3)
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
         return collectionView
     }()
 
@@ -35,13 +36,21 @@ final class PhotosViewController: BaseViewController {
         return button
     }()
 
+    private let selectedCountLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.font = UIFont.Pretendard.title2
+        label.textColor = SwiftGenColors.black.color
+        label.sizeToFit()
+        return label
+    }()
+
     private let successButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("확인", for: .normal)
         button.setTitleColor(SwiftGenColors.black.color, for: .normal)
         button.setTitleColor(SwiftGenColors.gray4.color, for: .disabled)
         button.titleLabel?.font = UIFont.Pretendard.body1
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.sizeToFit()
         return button
     }()
 
@@ -52,7 +61,7 @@ final class PhotosViewController: BaseViewController {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.updateSelectedOrder()
-                self?.updateSuccessButton()
+                self?.updateSelectedCountLabel()
             }
         }
     }
@@ -114,7 +123,14 @@ final class PhotosViewController: BaseViewController {
                                                            action: #selector(didTapBackButton))
 
         navigationItem.titleView = titleButton
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: successButton)
+
+        let rightButtonStackView: UIStackView = {
+            let stackView: UIStackView = UIStackView(arrangedSubviews: [selectedCountLabel, successButton])
+            stackView.distribution = .equalSpacing
+            stackView.spacing = 4
+            return stackView
+        }()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButtonStackView)
     }
 
     override func setupView() {
@@ -237,38 +253,19 @@ extension PhotosViewController {
             return PHAsset.fetchAssets(with: allPhotosOptions)
         }
 
-        return PHAsset.fetchAssets(in: assetCollection, options: nil)
+        return PHAsset.fetchAssets(in: assetCollection, options: allPhotosOptions)
     }
 
     /// 네비게이션 우측 상단에 있는 확인 버튼에 선택한 개수를 변경한다. 선택한 항목이 없으면 "확인"으로 변경한다.
-    private func updateSuccessButton() {
+    private func updateSelectedCountLabel() {
         guard !selectedIndexPath.isEmpty else {
-            successButton.setAttributedTitle(nil, for: .normal)
-            successButton.setTitle("확인", for: .normal)
+            selectedCountLabel.text = ""
             successButton.isEnabled = false
             return
         }
 
-        let count: String = "\(selectedIndexPath.count)"
-        let nsString: NSString = NSString(string: "\(count) 확인")
-        let range: NSRange = nsString.range(of: "\(count)")
-        let newContents: String = nsString.substring(from: range.location)
-
-        let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: newContents)
-        attributedString.addAttribute(.font,
-                                   value: UIFont.Pretendard.title2,
-                                   range: (newContents as NSString).range(of: count))
-        attributedString.addAttribute(.font,
-                                   value: UIFont.Pretendard.body1,
-                                   range: (newContents as NSString).range(of: "확인"))
-        attributedString.addAttribute(.foregroundColor,
-                                   value: SwiftGenColors.black.color,
-                                   range: (newContents as NSString).range(of: count))
-        attributedString.addAttribute(.foregroundColor,
-                                   value: SwiftGenColors.black.color,
-                                   range: (newContents as NSString).range(of: "확인"))
-        successButton.setAttributedTitle(attributedString, for: .normal)
-        successButton.sizeToFit()
+        selectedCountLabel.text = "\(selectedIndexPath.count)"
+        selectedCountLabel.sizeToFit()
         successButton.isEnabled = true
     }
 

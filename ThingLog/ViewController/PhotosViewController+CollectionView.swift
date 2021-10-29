@@ -5,8 +5,8 @@
 //  Created by 이지원 on 2021/10/28.
 //
 
-import UIKit
 import Photos
+import UIKit
 
 // MARK: - UICollectionView DataSource
 extension PhotosViewController: UICollectionViewDataSource {
@@ -22,6 +22,7 @@ extension PhotosViewController: UICollectionViewDataSource {
         // Camera Cell
         if indexPath.item == 0 {
             cell.update(image: SwiftGenAssets.camera.image)
+            cell.setupDisplayOnlyImageView()
             return cell
         }
 

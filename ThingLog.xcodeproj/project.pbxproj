@@ -522,7 +522,9 @@
 		DB7C04DF26FB18F4009F5C0A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				873ED122272AA0AA00C9F7F1 /* AlbumsViewController.swift */,
 				DB2B8AFC272151A800A02090 /* AlertViewController.swift */,
+				873ED12C272AC96000C9F7F1 /* BaseViewController.swift */,
 				8738E1CA271705220069BB80 /* CategoryViewController.swift */,
 				DB7C04E026FB1900009F5C0A /* ContentsCollection */,
 				DB7C04F126FB1F36009F5C0A /* ContentsPageViewController.swift */,
@@ -533,6 +535,9 @@
 				DB05B051271F0D4B0067DB17 /* LoginViewController.swift */,
 				DB05B053271FEABB0067DB17 /* LoginViewController+dequeueCell.swift */,
 				DB05B055271FEAFA0067DB17 /* LoginViewController+subscribe.swift */,
+				8761A88327296C0700EA8683 /* PhotosViewController.swift */,
+				873ED12A272AC8CB00C9F7F1 /* PhotosViewController+Albums.swift */,
+				873ED12E272ACD3000C9F7F1 /* PhotosViewController+CollectionView.swift */,
 				DBA0F828270B26A0009553FC /* SearchResultsViewController.swift */,
 				DBD2244A27085DFB004C5184 /* SearchViewController.swift */,
 				DB6909602712DA8100BB54E4 /* SettingViewController.swift */,
@@ -540,11 +545,6 @@
 				DB05B03D27185B780067DB17 /* TrashViewController.swift */,
 				87BB17A62709898F0088B847 /* WriteViewController.swift */,
 				87BB17AC27098F480088B847 /* WriteViewController+setup.swift */,
-				8761A88327296C0700EA8683 /* PhotosViewController.swift */,
-				873ED122272AA0AA00C9F7F1 /* AlbumsViewController.swift */,
-				873ED12A272AC8CB00C9F7F1 /* PhotosViewController+Albums.swift */,
-				873ED12C272AC96000C9F7F1 /* BaseViewController.swift */,
-				873ED12E272ACD3000C9F7F1 /* PhotosViewController+CollectionView.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -625,6 +625,7 @@
 		DBA0F81A2709B37C009553FC /* TableVeiwCell */ = {
 			isa = PBXGroup;
 			children = (
+				873ED124272AA43B00C9F7F1 /* ImageWithVerticalTwoLabelTableCell.swift */,
 				DBA0F81B2709B390009553FC /* LeftLabelRightButtonTableCell.swift */,
 				8738E1CE271709660069BB80 /* RoundLabelWithButtonTableCell.swift */,
 				87B1B6562715E2F0001EA889 /* WriteCategoryTableCell.swift */,
@@ -632,7 +633,6 @@
 				87A86C8C271414D2008FB3F0 /* WriteRatingCell.swift */,
 				87A86C8A2714139F008FB3F0 /* WriteTextFieldCell.swift */,
 				87A86C9027141576008FB3F0 /* WriteTextViewCell.swift */,
-				873ED124272AA43B00C9F7F1 /* ImageWithVerticalTwoLabelTableCell.swift */,
 			);
 			path = TableVeiwCell;
 			sourceTree = "<group>";

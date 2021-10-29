@@ -5,8 +5,8 @@
 //  Created by 이지원 on 2021/10/18.
 //
 
-import UIKit
 import Photos
+import UIKit
 
 /// 글쓰기 화면에서 이미지 등록 항목을 표시하기 위한 테이블뷰 셀, CollectionView를 가지고 있다.
 /// ![이미지](https://www.notion.so/WriteImageTableCell-78b4a7fe55564fa380c554d17bee49e0)

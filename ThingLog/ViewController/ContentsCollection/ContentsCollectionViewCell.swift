@@ -27,6 +27,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         let imageview: UIImageView = UIImageView()
         imageview.backgroundColor = .clear
         imageview.translatesAutoresizingMaskIntoConstraints = false
+        imageview.contentMode = .scaleAspectFill
         return imageview
     }()
     
@@ -207,6 +208,15 @@ extension ContentsCollectionViewCell {
         bottomLabel.isHidden = true
         checkButton.isHidden = false
         checkButton.isUserInteractionEnabled = true
+    }
+
+    /// 이미지만 표시하고 나머지 뷰들은 숨김처리한다.
+    func setupDisplayOnlyImageView() {
+        smallIconView.isHidden = true
+        bottomGradientView.isHidden = true
+        bottomLabel.isHidden = true
+        checkButton.isHidden = true
+        checkButton.isUserInteractionEnabled = false
     }
     
     // TODO: - ⚠️버튼 색이나 디자인 변경예정

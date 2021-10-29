@@ -5,16 +5,17 @@
 //  Created by 이지원 on 2021/10/28.
 //
 
-import UIKit
 import Photos
+import UIKit
 
 /// 사용자의 앨범 목록을 보여주기 위한 뷰 컨트롤러
-final class AlbumsViewController: UIViewController {
+final class AlbumsViewController: BaseViewController {
     // MARK: - View Properties
     private let tableView: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
         return tableView
     }()
 
@@ -35,7 +36,6 @@ final class AlbumsViewController: UIViewController {
         super.viewDidLoad()
 
         fetchAssets()
-        setupView()
         PHPhotoLibrary.shared().register(self)
     }
 
@@ -50,11 +50,15 @@ final class AlbumsViewController: UIViewController {
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
+
+    override func setupView() {
+        setupTableView()
+    }
 }
 
 // MARK: - Private
 extension AlbumsViewController {
-    private func setupView() {
+    private func setupTableView() {
         view.backgroundColor = .white
 
         view.addSubview(tableView)
@@ -130,10 +134,12 @@ extension AlbumsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
+        let options: PHImageRequestOptions = PHImageRequestOptions()
+        options.resizeMode = .exact
         let sectionType: AlbumSectionType = sections[indexPath.section]
         switch sectionType {
         case .all:
-            allPhotos.firstObject?.toImage(targetSize: thumbnailSize) { [weak self] image in
+            allPhotos.firstObject?.toImage(targetSize: thumbnailSize, options: options) { [weak self] image in
                 cell.configure(image: image, title: "최근 항목", description: "\(self?.allPhotos.count ?? 0)")
             }
         case .favorites, .userCollections:
@@ -145,12 +151,10 @@ extension AlbumsViewController: UITableViewDataSource {
             let fetchedAssets: PHFetchResult<PHAsset> = PHAsset.fetchAssets(in: collection, options: fetchAssetOptions)
 
             guard sectionType == .userCollections, let firstAsset = fetchedAssets.firstObject else {
-                cell.configure(image: nil, title: "즐겨찾는 항목", description: "0")
+                cell.configure(image: nil, title: collection.localizedTitle ?? "즐겨찾는 항목", description: "0")
                 return cell
             }
 
-            let options: PHImageRequestOptions = PHImageRequestOptions()
-            options.resizeMode = .exact
             firstAsset.toImage(targetSize: thumbnailSize, options: options) { image in
                 cell.configure(image: image,
                                title: collection.localizedTitle ?? "",

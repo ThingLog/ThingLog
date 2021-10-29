@@ -70,8 +70,8 @@ final class WriteCoordinator: Coordinator {
                                                         style: .cancel,
                                                         handler: nil)
         let settingAction: UIAlertAction = UIAlertAction(title: "설정",
-                                                      style: .default,
-                                                      handler: { [weak self] _ in
+                                                         style: .default,
+                                                         handler: { [weak self] _ in
             self?.moveAppSetting()
         })
 

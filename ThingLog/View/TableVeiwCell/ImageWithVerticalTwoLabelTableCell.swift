@@ -64,6 +64,7 @@ final class ImageWithVerticalTwoLabelTableCell: UITableViewCell {
 extension ImageWithVerticalTwoLabelTableCell {
     private func setupView() {
         selectionStyle = .none
+        backgroundColor = .clear
 
         let labelStackView: UIStackView = {
             let stackView: UIStackView = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel])

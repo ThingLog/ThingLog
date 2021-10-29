@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 /// 글쓰기 화면(샀다, 사고싶다, 선물받았다)를 담당하는 ViewController
-final class WriteViewController: UIViewController {
+final class WriteViewController: BaseViewController {
     // MARK: - View Properties
     let tableView: UITableView = {
         let tableView: UITableView = UITableView(frame: .zero, style: .plain)
@@ -42,7 +42,6 @@ final class WriteViewController: UIViewController {
 
     // MARK: - Properties
     var coordinator: WriteCoordinator?
-    let disposeBag: DisposeBag = DisposeBag()
     var selectedImages: [UIImage] = [] {
         didSet {
             tableView.reloadData()
@@ -62,13 +61,8 @@ final class WriteViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = SwiftGenColors.white.color
 
-        setupNavigationBar()
-        setupView()
-        bindKeyboardWillShow()
-        bindKeyboardWillHide()
-        bindNotification()
+        view.backgroundColor = SwiftGenColors.white.color
     }
 
     override func viewDidLayoutSubviews() {
@@ -78,6 +72,43 @@ final class WriteViewController: UIViewController {
         doneButton.titleEdgeInsets = UIEdgeInsets(top: -view.safeAreaInsets.bottom, left: 0, bottom: 0, right: 0)
     }
 
+    override func setupNavigationBar() {
+        setupBaseNavigationBar()
+
+        let logoView: LogoView = LogoView("글쓰기")
+        navigationItem.titleView = logoView
+
+        let closeButton: UIButton = {
+            let button: UIButton = UIButton()
+            button.setTitle("닫기", for: .normal)
+            button.setTitleColor(SwiftGenColors.black.color, for: .normal)
+            button.titleLabel?.font = UIFont.Pretendard.body1
+            return button
+        }()
+
+        closeButton.rx.tap.bind { [weak self] in
+            self?.close()
+        }.disposed(by: disposeBag)
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: closeButton)
+    }
+
+    override func setupView() {
+        view.addSubview(tableView)
+        view.addSubview(doneButton)
+
+        setupTableView()
+        setupDoneButton()
+    }
+
+    override func setupBinding() {
+        bindKeyboardWillShow()
+        bindKeyboardWillHide()
+        bindNotification()
+    }
+}
+
+extension WriteViewController {
     @objc
     /// 글쓰기 화면을 닫는다.
     /// 글쓰기 화면을 닫기 전에 alert 팝업을 띄워 다시 한 번 사용자에게 묻는다.
@@ -105,6 +136,8 @@ final class WriteViewController: UIViewController {
         present(alertController, animated: false, completion: nil)
     }
 
+    /// indexPath.row의 위치로 이동한다.
+    /// - Parameter indexPath: 이동하려는 셀의 IndexPath
     func scrollToCurrentRow(at indexPath: IndexPath) {
         if indexPath.section == WriteViewModel.Section.type.rawValue {
             let rowRect: CGRect = tableView.rectForRow(at: indexPath)
@@ -128,7 +161,7 @@ extension WriteViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.itemCount[section] ?? 0
+        viewModel.itemCount[section]
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -154,7 +187,7 @@ extension WriteViewController: UITableViewDataSource {
                 return WriteTextFieldCell()
             }
 
-            cell.keyboardType = viewModel.typeInfo[indexPath.row].keyboardType ?? .default
+            cell.keyboardType = viewModel.typeInfo[indexPath.row].keyboardType
             cell.placeholder = viewModel.typeInfo[indexPath.row].placeholder
 
             cell.isEditingSubject
