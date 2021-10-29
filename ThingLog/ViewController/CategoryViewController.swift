@@ -128,6 +128,8 @@ extension CategoryViewController {
             textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topBottomConstant),
             textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -leadingTrailingConstant)
         ])
+
+        textField.delegate = self
     }
 
     private func setupBottomLineView() {
@@ -205,6 +207,28 @@ extension CategoryViewController: UITableViewDataSource {
         } else {
             cell.isSelectedCategory = false
         }
+    }
+}
+
+extension CategoryViewController: UITextFieldDelegate {
+    /// 키보드에서 완료 버튼을 누르면 텍스트 필드에 입력한 내용을 Core Data Category에 저장한다.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let name: String = textField.text else {
+            return false
+        }
+
+        repository.create(Category(title: name)) { result in
+            switch result {
+            case .success:
+                textField.text = ""
+                textField.sendActions(for: .valueChanged)
+                textField.resignFirstResponder()
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            }
+        }
+
+        return true
     }
 }
 

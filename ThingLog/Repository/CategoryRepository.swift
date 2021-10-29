@@ -27,7 +27,7 @@ final class CategoryRepository: CategoryRepositoryProtocol {
 
     lazy var fetchedResultsController: NSFetchedResultsController<CategoryEntity> = {
         let fetchRequest: NSFetchRequest<CategoryEntity> = CategoryEntity.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: false)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
 
         let controller: NSFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                                                 managedObjectContext: coreDataStack.mainContext,
