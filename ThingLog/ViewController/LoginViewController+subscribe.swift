@@ -76,8 +76,11 @@ extension LoginViewController {
     }
     
     func moveTo(indexPath: IndexPath, collectionView: UICollectionView) {
+        if indexPath.section != LoginCollectionSection.userOneLine.section { return }
+        guard let userOnLineCell = collectionView.cellForItem(at: indexPath) as? TextFieldWithLabelWithButtonCollectionCell else { return }
+        let yPosition: CGFloat = userOnLineCell.frame.origin.y - 43.0
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .top)
+            self.collectionView.setContentOffset(CGPoint(x: 0, y: yPosition), animated: true)
         }
     }
 }

@@ -18,7 +18,7 @@ final class EmptyResultsView: UIView {
     
     let label: UILabel = {
         let label: UILabel = UILabel()
-        label.font = UIFont.Pretendard.body2
+        label.font = UIFont.Pretendard.body1
         label.textColor = SwiftGenColors.black.color
         label.text = "게시물 없음"
         label.textAlignment = .center
