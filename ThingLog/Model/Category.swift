@@ -8,7 +8,7 @@
 import CoreData
 import Foundation
 
-struct Category {
+struct Category: Equatable {
     let identifier: UUID
     let title: String
 
@@ -18,6 +18,10 @@ struct Category {
     init(title: String, identifier: UUID = UUID()) {
         self.identifier = identifier
         self.title = title
+    }
+
+    static func == (lhs: Category, rhs: Category) -> Bool {
+        lhs.title == rhs.title
     }
 }
 

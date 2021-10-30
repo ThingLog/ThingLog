@@ -34,7 +34,7 @@ final class WriteViewModel {
     }
     // Section 마다 표시할 항목의 개수
     lazy var itemCount: [Int] = [1, 1, typeInfo.count, 1, 1]
-    private var selectedCategoryIndexPaths: Set<IndexPath> = []
+    private var selectedCategories: [Category] = []
     private let disposeBag: DisposeBag = DisposeBag()
 
     init(writeType: WriteType) {
@@ -44,32 +44,33 @@ final class WriteViewModel {
     }
 
     private func setupBinding() {
-        bindPassToSelectedCategoryIndexPaths()
-        bindRemoveSelectedCategory()
+        bindNotificationPassToSelectedCategories()
+        bindNotificationRemoveSelectedCategory()
     }
 }
 
 extension WriteViewModel {
     /// `CategoryViewController`에서 전달받은 데이터를 `selectedCategoryIndexPaths`에 저장한다.
-    private func bindPassToSelectedCategoryIndexPaths() {
-        NotificationCenter.default.rx.notification(.passToSelectedCategoryIndexPaths, object: nil)
-            .map { notification -> Set<IndexPath> in
-                notification.userInfo?[Notification.Name.passToSelectedCategoryIndexPaths] as? Set<IndexPath> ?? []
+    private func bindNotificationPassToSelectedCategories() {
+        NotificationCenter.default.rx.notification(.passToSelectedCategories, object: nil)
+            .map { notification -> [Category] in
+                notification.userInfo?[Notification.Name.passToSelectedCategories] as? [Category] ?? []
             }
-            .bind { [weak self] indexPaths in
-                self?.selectedCategoryIndexPaths = indexPaths
+            .bind { [weak self] categories in
+                self?.selectedCategories = categories
             }.disposed(by: disposeBag)
     }
 
     /// `WriteCategoryTableCell` 에서 삭제한 카테고리를 `selectedCategoryIndexPaths`에서도 삭제한다.
-    private func bindRemoveSelectedCategory() {
+    private func bindNotificationRemoveSelectedCategory() {
         NotificationCenter.default.rx.notification(.removeSelectedCategory, object: nil)
-            .map { notification -> IndexPath in
-                notification.userInfo?[Notification.Name.removeSelectedCategory] as? IndexPath ?? IndexPath()
+            .map { notification -> Category? in
+                notification.userInfo?[Notification.Name.removeSelectedCategory] as? Category
             }
-            .bind { [weak self] indexPath in
-                if let firstIndex: Set<IndexPath>.Index = self?.selectedCategoryIndexPaths.firstIndex(of: indexPath) {
-                    self?.selectedCategoryIndexPaths.remove(at: firstIndex)
+            .bind { [weak self] category in
+                if let category: Category = category,
+                   let firstIndex: Int = self?.selectedCategories.firstIndex(of: category) {
+                    self?.selectedCategories.remove(at: firstIndex)
                 }
             }.disposed(by: disposeBag)
     }

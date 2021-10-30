@@ -40,7 +40,7 @@ final class WriteCategoryTableCell: UITableViewCell {
 
     // MARK: - Properties
     var indicatorButtonDidTappedCallback: (() -> Void)?
-    var categories: [(indexPath: IndexPath, category: Category)] = [] {
+    var categories: [Category] = [] {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.updateViewByCategories()
@@ -106,9 +106,9 @@ final class WriteCategoryTableCell: UITableViewCell {
 
     /// 카테고리 선택 화면에서 전달 받은 데이터를 저장한다.
     private func bindCategories() {
-        NotificationCenter.default.rx.notification(.passToSelectedIndexPathsWithCategory, object: nil)
-            .map { notification -> [(IndexPath, Category)] in
-                notification.userInfo?[Notification.Name.passToSelectedIndexPathsWithCategory] as? [(IndexPath, Category)] ?? []
+        NotificationCenter.default.rx.notification(.passToSelectedCategories, object: nil)
+            .map { notification -> [Category] in
+                notification.userInfo?[Notification.Name.passToSelectedCategories] as? [Category] ?? []
             }
             .bind { [weak self] categories in
                 self?.categories = categories
@@ -139,14 +139,9 @@ final class WriteCategoryTableCell: UITableViewCell {
     /// categories 값이 비어있는 경우 categoryLabel을 보여주고, collecionView를 숨긴다.
     /// categories 값이 있는 경우 categoryLabel을 숨기고 collectionView를 보여주고, collectionView.reloadData()를 호출한다.
     private func updateViewByCategories() {
-        if categories.isEmpty {
-            categoryLabel.isHidden = false
-            collectionView.isHidden = true
-        } else {
-            categoryLabel.isHidden = true
-            collectionView.isHidden = false
-            collectionView.reloadData()
-        }
+        categoryLabel.isHidden = !categories.isEmpty
+        collectionView.isHidden = categories.isEmpty
+        collectionView.reloadData()
     }
 }
 
@@ -160,13 +155,13 @@ extension WriteCategoryTableCell: UICollectionViewDataSource {
             return LabelWithButtonRoundCollectionCell()
         }
 
-        cell.configure(text: categories[indexPath.row].category.title)
+        cell.configure(text: categories[indexPath.row].title)
         // 선택한 카테고리를 삭제하려고 할 때 NotificationCenter를 통해 WriteViewModel에게 알린다.
         cell.removeButtonDidTappedCallback = { [weak self] in
             guard let self = self else { return }
             NotificationCenter.default.post(name: .removeSelectedCategory,
                                             object: nil,
-                                            userInfo: [Notification.Name.removeSelectedCategory: self.categories[indexPath.row].indexPath])
+                                            userInfo: [Notification.Name.removeSelectedCategory: self.categories[indexPath.row]])
             self.categories.remove(at: indexPath.row)
         }
 

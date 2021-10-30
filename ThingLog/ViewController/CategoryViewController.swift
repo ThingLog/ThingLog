@@ -24,7 +24,7 @@ final class CategoryViewController: UIViewController {
     private let textField: UITextField = {
         let textField: UITextField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "카테고리를 만들어보세요!"
+        textField.placeholder = "카테고리를 만들어보세요! (최대 20자)"
         textField.returnKeyType = .done
         return textField
     }()
@@ -49,6 +49,7 @@ final class CategoryViewController: UIViewController {
     private let leadingTrailingConstant: CGFloat = 18.0
     private let topBottomConstant: CGFloat = 12.0
     private var selectedCategoryIndexPaths: Set<IndexPath> = []
+    private let textFieldMaxLength: Int = 21
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,14 +85,10 @@ final class CategoryViewController: UIViewController {
         successButton.rx.tap
             .bind { [weak self] in
                 guard let self = self else { return }
-                // 선택한 카테고리 IndexPath를 WriteViewModel에게 전달한다.
-                NotificationCenter.default.post(name: .passToSelectedCategoryIndexPaths,
+                // 선택한 카테고리를 Category 객체로 변환하여 WriteViewModel, WriteCategoryTableCell에게 전달한다.
+                NotificationCenter.default.post(name: .passToSelectedCategories,
                                                 object: nil,
-                                                userInfo: [Notification.Name.passToSelectedCategoryIndexPaths: self.selectedCategoryIndexPaths])
-                // 선택한 카테고리 IndexPath와 Category를 WriteCategoryTableCell에게 전달한다.
-                NotificationCenter.default.post(name: .passToSelectedIndexPathsWithCategory,
-                                                object: nil,
-                                                userInfo: [Notification.Name.passToSelectedIndexPathsWithCategory: self.selectedIndexPathWithCategory()])
+                                                userInfo: [Notification.Name.passToSelectedCategories: self.selectedCategory()])
                 self.coordinator?.back()
             }.disposed(by: disposeBag)
     }
@@ -125,14 +122,14 @@ final class CategoryViewController: UIViewController {
         textField.resignFirstResponder()
     }
 
-    /// 선택한 카테고리를 IndexPath와 함께 Category 객체로 변환해서 반환한다.
-    private func selectedIndexPathWithCategory() -> [(IndexPath, Category)] {
-        var categories: [(IndexPath, Category)] = []
+    /// 선택한 카테고리를 Category 객체로 변환해서 오름차순으로 정렬 후 반환한다.
+    private func selectedCategory() -> [Category] {
+        var categories: [Category] = []
         selectedCategoryIndexPaths.forEach { indexPath in
             let categoryEntity: CategoryEntity = repository.fetchedResultsController.object(at: indexPath)
-            categories.append((indexPath, categoryEntity.toModel()))
+            categories.append(categoryEntity.toModel())
         }
-        return categories
+        return categories.sorted(by: { $0.title < $1.title })
     }
 }
 
@@ -229,9 +226,19 @@ extension CategoryViewController: UITableViewDataSource {
 }
 
 extension CategoryViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let newLength: Int = text.count + string.count - range.length
+        return newLength <= textFieldMaxLength
+    }
+
     /// 키보드에서 완료 버튼을 누르면 텍스트 필드에 입력한 내용을 Core Data Category에 저장한다.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let name: String = textField.text else {
+        guard let name: String = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
+            return false
+        }
+
+        guard !name.isEmpty else {
             return false
         }
 

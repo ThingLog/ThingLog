@@ -49,7 +49,7 @@ final class CategoryRepository: CategoryRepositoryProtocol {
     ///   - completion: 결과를 클로저 형태로 반환한다. 성공했을 경우 무조건 true를 반환하며, 실패했을 경우 PostRepositoryError 타입을 반환한다.
     func create(_ newCategory: Category, completion: @escaping(Result<Bool, RepositoryError>) -> Void) {
         let context: NSManagedObjectContext = coreDataStack.mainContext
-        context.perform {
+        context.performAndWait {
             do {
                 let category: CategoryEntity = newCategory.toEntity(in: context)
                 try context.save()
