@@ -18,6 +18,16 @@
           enumName: SwiftGenAssets # enum타입 명을 바꾼다.
           imageTypeName: ImageSwiftGen
         output: ThingLog/SwiftGen/ImageAssets.swift
+   - inputs:
+      - ThingLog/Resource/Drawers.xcassets
+     outputs:
+      - templateName: swift5
+        params:
+          forceProvidesNamespaces: true
+          enumName: SwiftGenDrawers # enum타입 명을 바꾼다.
+          imageTypeName: DrawerImageSwiftGen
+          imageAliasName: DrawerImageTypeAlias
+        output: ThingLog/SwiftGen/DrawersAssets.swift
 # xcassets
 # https://github.com/SwiftGen/SwiftGen/blob/stable/Documentation/templates/xcassets/swift5.md
 # xcassets:
