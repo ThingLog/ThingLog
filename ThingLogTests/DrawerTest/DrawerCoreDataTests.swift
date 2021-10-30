@@ -271,11 +271,10 @@ class DrawerCoreDataTests: XCTestCase {
                                                             defaultDrawers: mockDrawers)
         
         repo.fetchDrawers { drawers in
-            repo.updateDragonBall(rating: 1)
-            repo.updateDragonBall(rating: 2)
-            repo.updateDragonBall(rating: 3)
-            repo.updateDragonBall(rating: 4)
-            repo.updateDragonBall(rating: 5)
+            for score in 1...5 {
+                repo.updateDragonBall(rating: Int16(score))
+            }
+            
             repo.fetchDrawers{ drawers  in
                 if let drawers = drawers {
                     if let index = drawers.firstIndex(where: {$0.imageName == "dragonBall"}) {

@@ -66,19 +66,19 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
     
     func fetchRepresentative() -> Drawerable? {
         /// 대표 진열장을 선정한 경우 찾고, 없다면 nil을 반환합니다.
-        if let representative: String = NSUbiquitousKeyValueStore.default.string(forKey: KeyStoreName.representativeDrawer.name) {
-            let request: NSFetchRequest<DrawerEntity> = DrawerEntity.fetchRequest()
-            request.predicate = NSPredicate(format: "imageName == %@", representative)
-            do {
-                if let drawer: DrawerEntity = try coreDataStack.mainContext.fetch(request).first {
-                    return drawer
-                } else {
-                    return nil
-                }
-            } catch {
+        guard let representative: String = NSUbiquitousKeyValueStore.default.string(forKey: KeyStoreName.representativeDrawer.name) else {
+            return nil
+        }
+        
+        let request: NSFetchRequest<DrawerEntity> = DrawerEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "imageName == %@", representative)
+        do {
+            if let drawer: DrawerEntity = try coreDataStack.mainContext.fetch(request).first {
+                return drawer
+            } else {
                 return nil
             }
-        } else {
+        } catch {
             return nil
         }
     }

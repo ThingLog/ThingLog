@@ -39,7 +39,7 @@ struct Drawer: Drawerable {
 
 // TODO: - ⚠️ Drawer이미지 교체
 /// `CoreData`에 `Drawer`의 기본정보들을 저장하기 위한 객체입니다. 반드시 이미지 파일의 이름은 변경하지 않아야합니다.
-struct DefaultDrawerModle {
+struct DefaultDrawerModel {
     let drawers: [Drawerable] = [
         Drawer(title: "수학의 정석",
                subTitle: "방문 3회 달성",

@@ -24,7 +24,7 @@ enum KeyStoreName: String {
     /// 유저가 최대로 소비한 값
     case userMaxExpense
     
-    /// 대표 진열장
+    /// 진열장에서 대표 물건
     case representativeDrawer
     
     /// 다크모드
