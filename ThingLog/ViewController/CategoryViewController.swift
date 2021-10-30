@@ -84,12 +84,14 @@ final class CategoryViewController: UIViewController {
         successButton.rx.tap
             .bind { [weak self] in
                 guard let self = self else { return }
+                // 선택한 카테고리 IndexPath를 WriteViewModel에게 전달한다.
                 NotificationCenter.default.post(name: .passToSelectedCategoryIndexPaths,
                                                 object: nil,
                                                 userInfo: [Notification.Name.passToSelectedCategoryIndexPaths: self.selectedCategoryIndexPaths])
-                NotificationCenter.default.post(name: .passToSelectedCategory,
+                // 선택한 카테고리 IndexPath와 Category를 WriteCategoryTableCell에게 전달한다.
+                NotificationCenter.default.post(name: .passToSelectedIndexPathsWithCategory,
                                                 object: nil,
-                                                userInfo: [Notification.Name.passToSelectedCategory: self.selectedCategory()])
+                                                userInfo: [Notification.Name.passToSelectedIndexPathsWithCategory: self.selectedIndexPathWithCategory()])
                 self.coordinator?.back()
             }.disposed(by: disposeBag)
     }
@@ -123,11 +125,12 @@ final class CategoryViewController: UIViewController {
         textField.resignFirstResponder()
     }
 
-    private func selectedCategory() -> [Category] {
-        var categories: [Category] = []
+    /// 선택한 카테고리를 IndexPath와 함께 Category 객체로 변환해서 반환한다.
+    private func selectedIndexPathWithCategory() -> [(IndexPath, Category)] {
+        var categories: [(IndexPath, Category)] = []
         selectedCategoryIndexPaths.forEach { indexPath in
             let categoryEntity: CategoryEntity = repository.fetchedResultsController.object(at: indexPath)
-            categories.append(categoryEntity.toModel())
+            categories.append((indexPath, categoryEntity.toModel()))
         }
         return categories
     }

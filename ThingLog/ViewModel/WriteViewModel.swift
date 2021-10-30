@@ -40,9 +40,17 @@ final class WriteViewModel {
     init(writeType: WriteType) {
         self.writeType = writeType
 
-        bindPassToSelectedCategoryIndexPaths()
+        setupBinding()
     }
 
+    private func setupBinding() {
+        bindPassToSelectedCategoryIndexPaths()
+        bindRemoveSelectedCategory()
+    }
+}
+
+extension WriteViewModel {
+    /// `CategoryViewController`에서 전달받은 데이터를 `selectedCategoryIndexPaths`에 저장한다.
     private func bindPassToSelectedCategoryIndexPaths() {
         NotificationCenter.default.rx.notification(.passToSelectedCategoryIndexPaths, object: nil)
             .map { notification -> Set<IndexPath> in
@@ -50,6 +58,19 @@ final class WriteViewModel {
             }
             .bind { [weak self] indexPaths in
                 self?.selectedCategoryIndexPaths = indexPaths
+            }.disposed(by: disposeBag)
+    }
+
+    /// `WriteCategoryTableCell` 에서 삭제한 카테고리를 `selectedCategoryIndexPaths`에서도 삭제한다.
+    private func bindRemoveSelectedCategory() {
+        NotificationCenter.default.rx.notification(.removeSelectedCategory, object: nil)
+            .map { notification -> IndexPath in
+                notification.userInfo?[Notification.Name.removeSelectedCategory] as? IndexPath ?? IndexPath()
+            }
+            .bind { [weak self] indexPath in
+                if let firstIndex: Set<IndexPath>.Index = self?.selectedCategoryIndexPaths.firstIndex(of: indexPath) {
+                    self?.selectedCategoryIndexPaths.remove(at: firstIndex)
+                }
             }.disposed(by: disposeBag)
     }
 }
