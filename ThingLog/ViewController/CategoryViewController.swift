@@ -88,7 +88,7 @@ final class CategoryViewController: UIViewController {
                 // 선택한 카테고리를 Category 객체로 변환하여 WriteViewModel, WriteCategoryTableCell에게 전달한다.
                 NotificationCenter.default.post(name: .passToSelectedCategories,
                                                 object: nil,
-                                                userInfo: [Notification.Name.passToSelectedCategories: self.selectedCategory()])
+                                                userInfo: [Notification.Name.passToSelectedCategories: self.convertSelectedIndexPathToCategory()])
                 self.coordinator?.back()
             }.disposed(by: disposeBag)
     }
@@ -123,7 +123,7 @@ final class CategoryViewController: UIViewController {
     }
 
     /// 선택한 카테고리를 Category 객체로 변환해서 오름차순으로 정렬 후 반환한다.
-    private func selectedCategory() -> [Category] {
+    private func convertSelectedIndexPathToCategory() -> [Category] {
         var categories: [Category] = []
         selectedCategoryIndexPaths.forEach { indexPath in
             let categoryEntity: CategoryEntity = repository.fetchedResultsController.object(at: indexPath)
