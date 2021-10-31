@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RxSwift
+
 /// 글쓰기 화면에서 카테고리 항목을 나타내는 셀
 /// 카테고리가 선택되어 있다면 CollectionView를 통해 선택된 카테고리 항목을 보여주고, 선택되어 있지 않다면 Label을 보여준다.
 final class WriteCategoryTableCell: UITableViewCell {
@@ -38,25 +40,30 @@ final class WriteCategoryTableCell: UITableViewCell {
 
     // MARK: - Properties
     var indicatorButtonDidTappedCallback: (() -> Void)?
-    private(set) var isSelectedCategory: Bool = false {
+    var categories: [Category] = [] {
         didSet {
-            categoryLabel.isHidden.toggle()
-            collectionView.isHidden.toggle()
+            DispatchQueue.main.async { [weak self] in
+                self?.updateViewByCategories()
+            }
         }
     }
-    // TODO: 카테고리 화면에서 선택한 데이터로 대체
-    private let categories: [String] = ["사무용품", "가전제품", "문구", "화장품", "주방", "뭐 이런 게 다 있는 지 모르겠어요"]
-
     private let paddingLeading: CGFloat = 26.0
     private let paddingTrailing: CGFloat = 28.0
     private let paddingTopBottom: CGFloat = 20.0
     private let indicatorButtonSize: CGFloat = 40.0
     private let indicatorButtonTopBottom: CGFloat = 8.0
+    private var disposeBag: DisposeBag = DisposeBag()
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
         setupCollectionView()
+        bindCategories()
     }
 
     required init?(coder: NSCoder) {
@@ -97,6 +104,17 @@ final class WriteCategoryTableCell: UITableViewCell {
         collectionView.dataSource = self
     }
 
+    /// 카테고리 선택 화면에서 전달 받은 데이터를 저장한다.
+    private func bindCategories() {
+        NotificationCenter.default.rx.notification(.passToSelectedCategories, object: nil)
+            .map { notification -> [Category] in
+                notification.userInfo?[Notification.Name.passToSelectedCategories] as? [Category] ?? []
+            }
+            .bind { [weak self] categories in
+                self?.categories = categories
+            }.disposed(by: disposeBag)
+    }
+
     private func createLayout() -> UICollectionViewCompositionalLayout {
         let itemSize: NSCollectionLayoutSize = .init(widthDimension: .estimated(44), heightDimension: .estimated(26))
         let item: NSCollectionLayoutItem = .init(layoutSize: itemSize)
@@ -114,7 +132,16 @@ final class WriteCategoryTableCell: UITableViewCell {
     @objc
     private func tappedIndicatorButton() {
         indicatorButtonDidTappedCallback?()
-        isSelectedCategory.toggle()
+    }
+
+    /// categories 의 값에 따라 뷰를 업데이트한다.
+    ///
+    /// categories 값이 비어있는 경우 categoryLabel을 보여주고, collecionView를 숨긴다.
+    /// categories 값이 있는 경우 categoryLabel을 숨기고 collectionView를 보여주고, collectionView.reloadData()를 호출한다.
+    private func updateViewByCategories() {
+        categoryLabel.isHidden = !categories.isEmpty
+        collectionView.isHidden = categories.isEmpty
+        collectionView.reloadData()
     }
 }
 
@@ -128,9 +155,14 @@ extension WriteCategoryTableCell: UICollectionViewDataSource {
             return LabelWithButtonRoundCollectionCell()
         }
 
-        cell.configure(text: categories[indexPath.row])
-        cell.removeButtonDidTappedCallback = {
-            print("touch up \(indexPath.row)")
+        cell.configure(text: categories[indexPath.row].title)
+        // 선택한 카테고리를 삭제하려고 할 때 NotificationCenter를 통해 WriteViewModel에게 알린다.
+        cell.removeButtonDidTappedCallback = { [weak self] in
+            guard let self = self else { return }
+            NotificationCenter.default.post(name: .removeSelectedCategory,
+                                            object: nil,
+                                            userInfo: [Notification.Name.removeSelectedCategory: self.categories[indexPath.row]])
+            self.categories.remove(at: indexPath.row)
         }
 
         return cell

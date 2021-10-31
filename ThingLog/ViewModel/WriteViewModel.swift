@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RxSwift
+
 final class WriteViewModel {
     enum Section: Int, CaseIterable {
         case image
@@ -32,8 +34,44 @@ final class WriteViewModel {
     }
     // Section 마다 표시할 항목의 개수
     lazy var itemCount: [Int] = [1, 1, typeInfo.count, 1, 1]
+    private var selectedCategories: [Category] = []
+    private let disposeBag: DisposeBag = DisposeBag()
 
     init(writeType: WriteType) {
         self.writeType = writeType
+
+        setupBinding()
+    }
+
+    private func setupBinding() {
+        bindNotificationPassToSelectedCategories()
+        bindNotificationRemoveSelectedCategory()
+    }
+}
+
+extension WriteViewModel {
+    /// `CategoryViewController`에서 전달받은 데이터를 `selectedCategoryIndexPaths`에 저장한다.
+    private func bindNotificationPassToSelectedCategories() {
+        NotificationCenter.default.rx.notification(.passToSelectedCategories, object: nil)
+            .map { notification -> [Category] in
+                notification.userInfo?[Notification.Name.passToSelectedCategories] as? [Category] ?? []
+            }
+            .bind { [weak self] categories in
+                self?.selectedCategories = categories
+            }.disposed(by: disposeBag)
+    }
+
+    /// `WriteCategoryTableCell` 에서 삭제한 카테고리를 `selectedCategoryIndexPaths`에서도 삭제한다.
+    private func bindNotificationRemoveSelectedCategory() {
+        NotificationCenter.default.rx.notification(.removeSelectedCategory, object: nil)
+            .map { notification -> Category? in
+                notification.userInfo?[Notification.Name.removeSelectedCategory] as? Category
+            }
+            .bind { [weak self] category in
+                if let category: Category = category,
+                   let firstIndex: Int = self?.selectedCategories.firstIndex(of: category) {
+                    self?.selectedCategories.remove(at: firstIndex)
+                }
+            }.disposed(by: disposeBag)
     }
 }

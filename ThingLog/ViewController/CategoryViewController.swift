@@ -5,6 +5,7 @@
 //  Created by 이지원 on 2021/10/13.
 //
 
+import CoreData
 import UIKit
 
 import RxCocoa
@@ -23,7 +24,7 @@ final class CategoryViewController: UIViewController {
     private let textField: UITextField = {
         let textField: UITextField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "카테고리를 만들어보세요!"
+        textField.placeholder = "카테고리를 만들어보세요! (최대 20자)"
         textField.returnKeyType = .done
         return textField
     }()
@@ -43,10 +44,12 @@ final class CategoryViewController: UIViewController {
 
     // MARK: - Properties
     var coordinator: Coordinator?
+    private lazy var repository: CategoryRepository = CategoryRepository(fetchedResultsControllerDelegate: self)
     private let disposeBag: DisposeBag = DisposeBag()
     private let leadingTrailingConstant: CGFloat = 18.0
     private let topBottomConstant: CGFloat = 12.0
-    private var selectedCategories: Set<IndexPath> = []
+    private var selectedCategoryIndexPaths: Set<IndexPath> = []
+    private let textFieldMaxLength: Int = 21
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,8 +84,12 @@ final class CategoryViewController: UIViewController {
     private func setupBinding() {
         successButton.rx.tap
             .bind { [weak self] in
-                // TODO: 카테고리 전달
-                self?.coordinator?.back()
+                guard let self = self else { return }
+                // 선택한 카테고리를 Category 객체로 변환하여 WriteViewModel, WriteCategoryTableCell에게 전달한다.
+                NotificationCenter.default.post(name: .passToSelectedCategories,
+                                                object: nil,
+                                                userInfo: [Notification.Name.passToSelectedCategories: self.convertSelectedIndexPathToCategory()])
+                self.coordinator?.back()
             }.disposed(by: disposeBag)
     }
 
@@ -114,6 +121,16 @@ final class CategoryViewController: UIViewController {
     private func dismissKeyboard() {
         textField.resignFirstResponder()
     }
+
+    /// 선택한 카테고리를 Category 객체로 변환해서 오름차순으로 정렬 후 반환한다.
+    private func convertSelectedIndexPathToCategory() -> [Category] {
+        var categories: [Category] = []
+        selectedCategoryIndexPaths.forEach { indexPath in
+            let categoryEntity: CategoryEntity = repository.fetchedResultsController.object(at: indexPath)
+            categories.append(categoryEntity.toModel())
+        }
+        return categories.sorted(by: { $0.title < $1.title })
+    }
 }
 
 // MARK: - Setup
@@ -126,6 +143,8 @@ extension CategoryViewController {
             textField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topBottomConstant),
             textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -leadingTrailingConstant)
         ])
+
+        textField.delegate = self
     }
 
     private func setupBottomLineView() {
@@ -163,7 +182,7 @@ extension CategoryViewController: UITableViewDelegate {
             return
         }
 
-        selectedCategories.insert(indexPath)
+        selectedCategoryIndexPaths.insert(indexPath)
         cell.isSelectedCategory.toggle()
     }
 
@@ -172,7 +191,7 @@ extension CategoryViewController: UITableViewDelegate {
             return
         }
 
-        selectedCategories.remove(indexPath)
+        selectedCategoryIndexPaths.remove(indexPath)
         cell.isSelectedCategory.toggle()
     }
 }
@@ -180,7 +199,7 @@ extension CategoryViewController: UITableViewDelegate {
 // MARK: - TableView DataSource
 extension CategoryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        50
+        repository.fetchedResultsController.fetchedObjects?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -188,14 +207,58 @@ extension CategoryViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.configure(name: "테스트")
+        configureCell(cell, at: indexPath)
 
-        if selectedCategories.contains(indexPath) {
+        return cell
+    }
+
+    private func configureCell(_ cell: RoundLabelWithButtonTableCell, at indexPath: IndexPath) {
+        let category: CategoryEntity = repository.fetchedResultsController.object(at: indexPath)
+
+        cell.configure(name: category.title ?? "")
+
+        if selectedCategoryIndexPaths.contains(indexPath) {
             cell.isSelectedCategory = true
         } else {
             cell.isSelectedCategory = false
         }
+    }
+}
 
-        return cell
+extension CategoryViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        let newLength: Int = text.count + string.count - range.length
+        return newLength <= textFieldMaxLength
+    }
+
+    /// 키보드에서 완료 버튼을 누르면 텍스트 필드에 입력한 내용을 Core Data Category에 저장한다.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let name: String = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
+            return false
+        }
+
+        guard !name.isEmpty else {
+            return false
+        }
+
+        repository.create(Category(title: name)) { result in
+            switch result {
+            case .success:
+                textField.text = ""
+                textField.sendActions(for: .valueChanged)
+                textField.resignFirstResponder()
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            }
+        }
+
+        return true
+    }
+}
+
+extension CategoryViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
     }
 }
