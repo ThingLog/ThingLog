@@ -21,14 +21,16 @@ final class RootCoordinator: Coordinator {
         window?.makeKeyAndVisible()
     }
     
-    // 가장 처음에 시작하는 화면을 결정하는 메소드다.
+    // 가장 처음에 시작하는 화면을 결정하는 메소드다. 유저정보가 있다면 바로 탭바화면을 보여준다.
     func start() {
-        if UserInformationViewModel.shared.userAliasName == nil {
-            let loginViewController: LoginViewController = LoginViewController(isLogin: true)
-            loginViewController.coordinator = self
-            navigationController.pushViewController(loginViewController, animated: true)
-        } else {
-            showTabBarController()
+        UserInformationiCloudViewModel().fetchUserInformation { userInformation in
+            if let _ = userInformation {
+                self.showTabBarController()
+            } else {
+                let loginViewController: LoginViewController = LoginViewController(isLogin: true)
+                loginViewController.coordinator = self
+                self.navigationController.pushViewController(loginViewController, animated: true)
+            }
         }
     }
     
