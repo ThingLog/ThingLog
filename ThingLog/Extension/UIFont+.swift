@@ -27,6 +27,7 @@ extension UIFont {
     enum Pretendard: FontTextStyle {
         static var headline1: UIFont { SwiftGenFonts.Pretendard.bold.font(size: 34.0) }
         static var headline2: UIFont { SwiftGenFonts.Pretendard.bold.font(size: 24.0) }
+        static var headline2n2: UIFont { SwiftGenFonts.Pretendard.regular.font(size: 24.0) }
         static var headline3: UIFont { SwiftGenFonts.Pretendard.bold.font(size: 20.0) }
         static var headline4: UIFont { SwiftGenFonts.Pretendard.bold.font(size: 18.0) }
         static var title1: UIFont { SwiftGenFonts.Pretendard.bold.font(size: 16.0) }
@@ -35,8 +36,10 @@ extension UIFont {
         static var body1: UIFont { SwiftGenFonts.Pretendard.regular.font(size: 16.0) }
         static var body2: UIFont { SwiftGenFonts.Pretendard.regular.font(size: 14.0) }
         static var body3: UIFont { SwiftGenFonts.Pretendard.regular.font(size: 12.0) }
+        static var alert: UIFont { SwiftGenFonts.Pretendard.regular.font(size: 16.0) }
         static var button: UIFont { SwiftGenFonts.Pretendard.bold.font(size: 16.0) }
         static var caption: UIFont { SwiftGenFonts.Pretendard.regular.font(size: 12.0) }
         static var overline: UIFont { SwiftGenFonts.Pretendard.regular.font(size: 11.0) }
+        
     }
 }
