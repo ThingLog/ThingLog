@@ -85,7 +85,6 @@ final class TextFieldWithLabelWithButtonCollectionCell: UICollectionViewCell {
     
     var bottomBorderLineView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.gray3.color
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setContentHuggingPriority(.required, for: .vertical)
         return view
@@ -110,6 +109,7 @@ final class TextFieldWithLabelWithButtonCollectionCell: UICollectionViewCell {
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupBackgroundColor()
         setupView()
     }
     
@@ -117,8 +117,12 @@ final class TextFieldWithLabelWithButtonCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not beem implemented")
     }
 
+    func setupBackgroundColor() {
+        backgroundColor = SwiftGenColors.primaryBackground.color
+        bottomBorderLineView.backgroundColor = SwiftGenColors.gray2.color
+    }
+    
     private func setupView() {
-        backgroundColor = SwiftGenColors.white.color
         contentView.addSubview(stackView)
         contentView.addSubview(bottomBorderLineView)
         NSLayoutConstraint.activate([

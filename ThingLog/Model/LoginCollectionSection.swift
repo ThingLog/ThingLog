@@ -70,7 +70,7 @@ extension LoginCollectionSection {
     }
     
     private static func section(sectionIndex: Int, group: NSCollectionLayoutGroup, isLogin: Bool) -> NSCollectionLayoutSection {
-        let loginHeader: NSCollectionLayoutBoundarySupplementaryItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(92)), elementKind: LoginTopHeaderView.reuseIdentifier, alignment: .top)
+        let loginHeader: NSCollectionLayoutBoundarySupplementaryItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(60 + 120)), elementKind: LoginTopHeaderView.reuseIdentifier, alignment: .top)
         
         let emptyFooter: NSCollectionLayoutBoundarySupplementaryItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: sectionIndex == LoginCollectionSection.bottomPadding.section ? .absolute(500) : .absolute(44)), elementKind: UICollectionReusableView.reuseIdentifier, alignment: .bottom)
         

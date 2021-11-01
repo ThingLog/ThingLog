@@ -84,6 +84,7 @@ class LeftLabelRightButtonHeaderView: UICollectionReusableView {
     }
     
     private func setupView() {
+        setupBackgroundColor()
         addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: paddingLeadingTrailingConstraint),
@@ -96,5 +97,9 @@ class LeftLabelRightButtonHeaderView: UICollectionReusableView {
     func updateTitle(title: String?, subTitle: String? = nil) {
         titleLabel.text = title
         subTitleLabel.text = subTitle
+    }
+    
+    func setupBackgroundColor() {
+        backgroundColor = SwiftGenColors.primaryBackground.color
     }
 }
