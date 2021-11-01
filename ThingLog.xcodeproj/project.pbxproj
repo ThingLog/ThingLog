@@ -159,6 +159,8 @@
 		DBD5455027033D9A00063C98 /* ButtonRoundCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454F27033D9A00063C98 /* ButtonRoundCollectionCell.swift */; };
 		DBD545522703409300063C98 /* HorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD545512703409300063C98 /* HorizontalCollectionView.swift */; };
 		DBE3E9C3272FD6B300B3EB69 /* UserInformationViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE3E9C2272FD6B300B3EB69 /* UserInformationViewModelable.swift */; };
+		DBE3E9C6272FF25A00B3EB69 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBE3E9C5272FF25A00B3EB69 /* Icons.xcassets */; };
+		DBE3E9C8272FF32D00B3EB69 /* IconsAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE3E9C7272FF32D00B3EB69 /* IconsAssets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -354,6 +356,8 @@
 		DBD5454F27033D9A00063C98 /* ButtonRoundCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonRoundCollectionCell.swift; sourceTree = "<group>"; };
 		DBD545512703409300063C98 /* HorizontalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionView.swift; sourceTree = "<group>"; };
 		DBE3E9C2272FD6B300B3EB69 /* UserInformationViewModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationViewModelable.swift; sourceTree = "<group>"; };
+		DBE3E9C5272FF25A00B3EB69 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
+		DBE3E9C7272FF32D00B3EB69 /* IconsAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconsAssets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -726,6 +730,7 @@
 		DBAE8E9126FDAE7500F536AD /* SwiftGen */ = {
 			isa = PBXGroup;
 			children = (
+				DBE3E9C7272FF32D00B3EB69 /* IconsAssets.swift */,
 				DB331DA626FDD00A00A629F5 /* ColorsAsset.swift */,
 				DB32B286272C033F009074AF /* DrawersAssets.swift */,
 				DB331DA826FDD00A00A629F5 /* Fonts.swift */,
@@ -741,6 +746,7 @@
 				DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */,
 				DB32B280272C01E1009074AF /* Drawers.xcassets */,
 				DBAE8E9926FDB52E00F536AD /* Font */,
+				DBE3E9C5272FF25A00B3EB69 /* Icons.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -873,6 +879,7 @@
 				DBAE8E9626FDB3EE00F536AD /* Pretendard-Bold.otf in Resources */,
 				DBA1FD4526FB701C00F50DE5 /* InfoPlist.strings in Resources */,
 				873EC01826D39057003C3525 /* LaunchScreen.storyboard in Resources */,
+				DBE3E9C6272FF25A00B3EB69 /* Icons.xcassets in Resources */,
 				873EC01526D39057003C3525 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1046,6 +1053,7 @@
 				DB05B03E27185B780067DB17 /* TrashViewController.swift in Sources */,
 				8736B3F426FDD55E000433E1 /* UIFont+.swift in Sources */,
 				DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */,
+				DBE3E9C8272FF32D00B3EB69 /* IconsAssets.swift in Sources */,
 				DB9FBDB7272E9A11005E64AF /* UserInformation.swift in Sources */,
 				87A86C8F27141507008FB3F0 /* RatingView.swift in Sources */,
 				DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */,
