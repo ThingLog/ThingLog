@@ -55,7 +55,6 @@ final class AlertViewController: UIViewController {
         label.numberOfLines = 0
         label.text = "카테고리 항목"
         label.font = UIFont.Pretendard.title2
-        label.textColor = SwiftGenColors.black.color
         label.textAlignment = .center
         return label
     }()
@@ -66,7 +65,6 @@ final class AlertViewController: UIViewController {
         label.numberOfLines = 0
         label.text = "정말 삭제하시겠어요? \n이 동작은 취소할 수 없습니다"
         label.font = UIFont.Pretendard.body1
-        label.textColor = SwiftGenColors.black.color
         label.textAlignment = .center
         return label
     }()
@@ -76,7 +74,6 @@ final class AlertViewController: UIViewController {
         let button: UIButton = UIButton()
         button.titleLabel?.font = UIFont.Pretendard.title1
         button.setTitle("취소", for: .normal)
-        button.setTitleColor(SwiftGenColors.black.color, for: .normal)
         return button
     }()
     /// 우측에 강조되어 있지 않은 button이다.
@@ -84,7 +81,6 @@ final class AlertViewController: UIViewController {
         let button: UIButton = UIButton()
         button.titleLabel?.font = UIFont.Pretendard.body1
         button.setTitle("삭제", for: .normal)
-        button.setTitleColor(SwiftGenColors.black.color, for: .normal)
         return button
     }()
     
@@ -92,7 +88,6 @@ final class AlertViewController: UIViewController {
     let textField: UITextField = {
         let textField: UITextField = UITextField()
         textField.layer.borderWidth = 0.5
-        textField.layer.borderColor = SwiftGenColors.gray4.color.cgColor
         textField.font = UIFont.Pretendard.body1
         textField.translatesAutoresizingMaskIntoConstraints = false
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 5))
@@ -104,14 +99,12 @@ final class AlertViewController: UIViewController {
     // MARK: - Private View
     private let borderLineBetweenButton: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.gray4.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let borderLineOnButton: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.gray4.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -217,48 +210,42 @@ final class AlertViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         subscribeTextFieldReturnKey()
+        setupAlertView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // 나타날 때 애니메이션을 추가한다.
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
-            self.view.backgroundColor = .black.withAlphaComponent(0.6)
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3) {
+            self.view.backgroundColor = .black.withAlphaComponent(0.5)
+        }
+        
+        UIView.animate(withDuration: 0.05, delay: 0) {
+            self.alertView.transform = CGAffineTransform(scaleX: 1.07, y: 1.07)
         } completion: { _  in
-            self.setupAlertView()
-            UIView.animate(withDuration: 0.2) {
-                self.alertView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            } completion: { _ in
-                UIView.animate(withDuration: 0.2) {
-                    self.alertView.transform = .identity
-                }
+            UIView.animate(withDuration: 0.15) {
+                self.setBackgroundColorTint()
+                self.alertView.transform = .identity
             }
         }
     }
     
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         // 사라질 때 애니메이션을 추가한다.
-        UIView.animate(withDuration: 0.2) {
-            self.alertView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseInOut) {
+            self.setBackgroundColorClear()
+            self.view.backgroundColor = .clear
+            self.view.layoutIfNeeded()
         } completion: { _ in
-            UIView.animate(withDuration: 0.2) {
-                self.alertView.transform = .identity
-            } completion: { _ in
-                self.alertView.isHidden = true
-                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseInOut) {
-                    self.view.backgroundColor = .clear
-                    self.view.layoutIfNeeded()
-                } completion: { _ in
-                    super.dismiss(animated: flag, completion: completion)
-                }
-            }
+            super.dismiss(animated: flag, completion: completion)
         }
     }
     
     private func setupAlertView() {
         view.addSubview(alertView)
+        setBackgroundColorClear()
         alertView.addSubview(stackView)
+        textField.layer.cornerRadius = textFieldHeight / 2
         NSLayoutConstraint.activate([
             alertView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             alertView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -334,7 +321,7 @@ extension AlertViewController {
             }
             .disposed(by: disposeBag)
     }
-
+    
     @objc
     private func keyboardWillAppear(_ notification: NSNotification) {
         if let keyboardSize: CGRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -347,5 +334,35 @@ extension AlertViewController {
     @objc
     private func keyboardWillHide(_ notification: NSNotification) {
         alertView.transform = .identity
+    }
+    
+    private func setBackgroundColorClear() {
+        alertView.backgroundColor = SwiftGenColors.white.color.withAlphaComponent(0)
+        titleLabel.textColor = SwiftGenColors.black.color.withAlphaComponent(0)
+        contentsLabel.textColor = SwiftGenColors.black.color.withAlphaComponent(0)
+        
+        textField.layer.borderColor = SwiftGenColors.gray4.color.withAlphaComponent(0).cgColor
+        textField.textColor = SwiftGenColors.black.color.withAlphaComponent(0)
+        
+        leftButton.setTitleColor(SwiftGenColors.black.color.withAlphaComponent(0), for: .normal)
+        rightButton.setTitleColor(SwiftGenColors.black.color.withAlphaComponent(0), for: .normal)
+        
+        borderLineBetweenButton.backgroundColor = SwiftGenColors.gray4.color.withAlphaComponent(0)
+        borderLineOnButton.backgroundColor = SwiftGenColors.gray4.color.withAlphaComponent(0)
+    }
+    
+    private func setBackgroundColorTint() {
+        alertView.backgroundColor = SwiftGenColors.white.color
+        titleLabel.textColor = SwiftGenColors.black.color
+        contentsLabel.textColor = SwiftGenColors.black.color
+        
+        textField.layer.borderColor = SwiftGenColors.black.color.cgColor
+        textField.textColor = SwiftGenColors.black.color
+        
+        leftButton.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        rightButton.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        
+        borderLineBetweenButton.backgroundColor = SwiftGenColors.gray4.color
+        borderLineOnButton.backgroundColor = SwiftGenColors.gray4.color
     }
 }
