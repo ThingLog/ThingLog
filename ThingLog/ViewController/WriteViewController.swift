@@ -47,7 +47,7 @@ final class WriteViewController: BaseViewController {
             tableView.reloadData()
         }
     }
-    private var viewModel: WriteViewModel
+    private(set) var viewModel: WriteViewModel
 
     init(viewModel: WriteViewModel) {
         self.viewModel = viewModel
@@ -104,7 +104,7 @@ final class WriteViewController: BaseViewController {
     override func setupBinding() {
         bindKeyboardWillShow()
         bindKeyboardWillHide()
-        bindNotification()
+        bindNotificationPassSelectPHAssets()
     }
 }
 

@@ -11,15 +11,20 @@ import UIKit
 /// 사용자의 앨범 목록을 보여주기 위한 뷰 컨트롤러
 final class AlbumsViewController: BaseViewController {
     // MARK: - View Properties
-    private let tableView: UITableView = {
-        let tableView: UITableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .clear
-        return tableView
+    private let collectionView: UICollectionView = {
+        let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width - 32, height: 80)
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        flowLayout.minimumLineSpacing = 20
+        let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .clear
+        return collectionView
     }()
 
     // MARK: - Properties
+    /// 최근 항목, 즐겨찾는 항목, 사용자 앨범이 각기 다른 타입의 데이터를 보여줘야 하기 때문에 섹션을 이용해 구분한다.
     enum AlbumSectionType: Int {
         case all
         case favorites
@@ -30,6 +35,17 @@ final class AlbumsViewController: BaseViewController {
     private var allPhotos: PHFetchResult<PHAsset> = PHFetchResult<PHAsset>()
     private var favorites: PHFetchResult<PHAssetCollection> = PHFetchResult<PHAssetCollection>()
     private var userCollections: PHFetchResult<PHAssetCollection> = PHFetchResult<PHAssetCollection>()
+    private let defaultFetchOptions: PHFetchOptions = {
+        let options: PHFetchOptions = PHFetchOptions()
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        options.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
+        return options
+    }()
+    private let defaultImageRequestOptions: PHImageRequestOptions = {
+        let options: PHImageRequestOptions = PHImageRequestOptions()
+        options.resizeMode = .exact
+        return options
+    }()
     private var thumbnailSize: CGSize = CGSize()
 
     override func viewDidLoad() {
@@ -52,37 +68,34 @@ final class AlbumsViewController: BaseViewController {
     }
 
     override func setupView() {
-        setupTableView()
+        setupCollectionView()
     }
 }
 
 // MARK: - Private
 extension AlbumsViewController {
-    private func setupTableView() {
+    private func setupCollectionView() {
         view.backgroundColor = .white
 
-        view.addSubview(tableView)
+        view.addSubview(collectionView)
 
+        let leadingTrailingSpacing: CGFloat = 16.0
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: leadingTrailingSpacing),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -leadingTrailingSpacing),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
 
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(ImageWithVerticalTwoLabelTableCell.self,
-                           forCellReuseIdentifier: ImageWithVerticalTwoLabelTableCell.reuseIdentifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(ImageWithVerticalTwoLabelCollectionCell.self,
+                                forCellWithReuseIdentifier: ImageWithVerticalTwoLabelCollectionCell.reuseIdentifier)
     }
 
     /// allPhotos, favorites, userCollections 데이터를 fetch 한다.
     private func fetchAssets() {
-        let allPhotosOptions: PHFetchOptions = PHFetchOptions()
-        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        allPhotosOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
-
-        allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
+        allPhotos = PHAsset.fetchAssets(with: defaultFetchOptions)
         favorites = PHAssetCollection.fetchAssetCollections(
             with: .smartAlbum,
             subtype: .smartAlbumFavorites,
@@ -95,8 +108,8 @@ extension AlbumsViewController {
 }
 
 // MARK: - UITableView Delegate
-extension AlbumsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension AlbumsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let sectionType: AlbumSectionType = sections[indexPath.section]
         switch sectionType {
         case .all:
@@ -111,12 +124,12 @@ extension AlbumsViewController: UITableViewDelegate {
 }
 
 // MARK: - UITableView DataSource
-extension AlbumsViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+extension AlbumsViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         sections.count
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch AlbumSectionType.init(rawValue: section) {
         case .all:
             return 1
@@ -129,33 +142,33 @@ extension AlbumsViewController: UITableViewDataSource {
         }
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell: ImageWithVerticalTwoLabelTableCell = tableView.dequeueReusableCell(withIdentifier: ImageWithVerticalTwoLabelTableCell.reuseIdentifier, for: indexPath) as? ImageWithVerticalTwoLabelTableCell else {
-            return UITableViewCell()
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell: ImageWithVerticalTwoLabelCollectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageWithVerticalTwoLabelCollectionCell.reuseIdentifier, for: indexPath) as? ImageWithVerticalTwoLabelCollectionCell else {
+            return UICollectionViewCell()
         }
 
-        let options: PHImageRequestOptions = PHImageRequestOptions()
-        options.resizeMode = .exact
         let sectionType: AlbumSectionType = sections[indexPath.section]
         switch sectionType {
         case .all:
-            allPhotos.firstObject?.toImage(targetSize: thumbnailSize, options: options) { [weak self] image in
-                cell.configure(image: image, title: "최근 항목", description: "\(self?.allPhotos.count ?? 0)")
+            allPhotos.firstObject?.toImage(targetSize: thumbnailSize, options: defaultImageRequestOptions) { [weak self] image in
+                cell.configure(image: image,
+                               title: "최근 항목",
+                               description: "\(self?.allPhotos.count ?? 0)")
             }
         case .favorites, .userCollections:
             let collection: PHAssetCollection = sectionType == .favorites ? favorites[indexPath.item] : userCollections[indexPath.item]
 
-            let fetchAssetOptions: PHFetchOptions = PHFetchOptions()
-            fetchAssetOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-            fetchAssetOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
-            let fetchedAssets: PHFetchResult<PHAsset> = PHAsset.fetchAssets(in: collection, options: fetchAssetOptions)
+            let fetchedAssets: PHFetchResult<PHAsset> = PHAsset.fetchAssets(in: collection, options: defaultFetchOptions)
 
-            guard sectionType == .userCollections, let firstAsset = fetchedAssets.firstObject else {
-                cell.configure(image: nil, title: collection.localizedTitle ?? "즐겨찾는 항목", description: "0")
+            guard let firstAsset: PHAsset = fetchedAssets.firstObject else {
+                if sectionType == .favorites {
+                    cell.configure(image: nil, title: collection.localizedTitle ?? "즐겨찾는 항목", description: "0")
+                    return cell
+                }
                 return cell
             }
 
-            firstAsset.toImage(targetSize: thumbnailSize, options: options) { image in
+            firstAsset.toImage(targetSize: thumbnailSize, options: defaultImageRequestOptions) { image in
                 cell.configure(image: image,
                                title: collection.localizedTitle ?? "",
                                description: "\(fetchedAssets.count)")
@@ -182,7 +195,7 @@ extension AlbumsViewController: PHPhotoLibraryChangeObserver {
                 userCollections = changeDetails.fetchResultAfterChanges
             }
 
-            tableView.reloadData()
+            collectionView.reloadData()
         }
     }
 }

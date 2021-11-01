@@ -5,6 +5,7 @@
 //  Created by 이지원 on 2021/10/03.
 //
 
+import Photos
 import UIKit
 
 import RxCocoa
@@ -33,7 +34,7 @@ extension WriteViewController {
         NSLayoutConstraint.activate([
             doneButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             doneButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            doneButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            doneButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 
@@ -80,14 +81,17 @@ extension WriteViewController {
     }
 
     /// PhotosViewController에서 전달받은 데이터 바인딩
-    func bindNotification() {
+    func bindNotificationPassSelectPHAssets() {
         NotificationCenter.default.rx
-            .notification(.passSelectImages, object: nil)
-            .map { notification -> [UIImage] in
-                notification.userInfo?[Notification.Name.passSelectImages] as? [UIImage] ?? []
+            .notification(.passSelectAssets, object: nil)
+            .map { notification -> [PHAsset] in
+                notification.userInfo?[Notification.Name.passSelectAssets] as? [PHAsset] ?? []
             }
-            .bind { [weak self] images in
-                self?.selectedImages = images
+            .bind { assets in
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.selectedImages = self.viewModel.requestThumbnailImages(with: assets)
+                }
             }.disposed(by: disposeBag)
     }
 }

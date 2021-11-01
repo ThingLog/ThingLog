@@ -86,16 +86,20 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         return button
     }()
 
+    /// 셀이 동일한 에셋을 표시하는 경우에만 썸네일 이미지를 설정하기 위한 프로퍼티
     var representedAssetIdentifier: String = ""
     var disposeBag: DisposeBag = DisposeBag()
-    var didTappedCheckButtonCallback: (() -> Void)?
     private let paddingCheckButton: CGFloat = 8
     private let checkButtonSize: CGFloat = 20
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        bindCheckButton()
     }
     
     required init?(coder: NSCoder) {
@@ -183,13 +187,6 @@ class ContentsCollectionViewCell: UICollectionViewCell {
                                        endColor: .clear,
                                        startPoint: CGPoint(x: 0.0, y: 1.0),
                                        endPoint: CGPoint(x: 0.0, y: 0.0))
-    }
-
-    private func bindCheckButton() {
-        checkButton.rx.tap
-            .bind { [weak self] in
-                self?.didTappedCheckButtonCallback?()
-            }.disposed(by: disposeBag)
     }
 }
 

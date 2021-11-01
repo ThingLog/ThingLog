@@ -35,20 +35,21 @@ extension PhotosViewController: UICollectionViewDataSource {
         let asset: PHAsset = assets.object(at: indexPath.item - 1)
 
         cell.representedAssetIdentifier = asset.localIdentifier
-        asset.toImage(targetSize: thumbnailSize) { image in
+        asset.toThumbnailImage(targetSize: thumbnailSize) { image in
             if cell.representedAssetIdentifier == asset.localIdentifier {
                 cell.update(image: image)
             }
         }
 
-        cell.didTappedCheckButtonCallback = { [weak self] in
-            guard let self = self else { return }
-            self.tappedCheckButton(cell, at: indexPath)
-        }
+        cell.checkButton.rx.tap
+            .bind { [weak self] in
+                guard let self = self else { return }
+                self.tappedCheckButton(cell, at: indexPath)
+            }.disposed(by: cell.disposeBag)
         cell.setupImageViewWithCheckButton()
         cell.updateCheckButton(string: "", backgroundColor: .clear)
-        DispatchQueue.main.async {
-            self.updateSelectedOrder()
+        if let firstIndex: Int = selectedIndexPath.firstIndex(of: indexPath) {
+            cell.updateCheckButton(string: "\(firstIndex + 1)", backgroundColor: .black)
         }
     }
 
@@ -59,7 +60,6 @@ extension PhotosViewController: UICollectionViewDataSource {
     private func tappedCheckButton(_ cell: ContentsCollectionViewCell, at indexPath: IndexPath) {
         if let firstIndex: Int = self.selectedIndexPath.firstIndex(of: indexPath) {
             selectedIndexPath.remove(at: firstIndex)
-            selectedImages.remove(at: firstIndex)
             DispatchQueue.main.async {
                 cell.updateCheckButton(string: "", backgroundColor: .clear)
                 cell.layoutIfNeeded()
@@ -67,13 +67,6 @@ extension PhotosViewController: UICollectionViewDataSource {
         } else {
             if selectedIndexPath.count < selectedMaxCount {
                 selectedIndexPath.append(indexPath)
-                let asset: PHAsset = assets.object(at: indexPath.item - 1)
-                let options: PHImageRequestOptions = PHImageRequestOptions()
-                options.isSynchronous = true
-                asset.toImage(targetSize: PHImageManagerMaximumSize, options: options) { [weak self] image in
-                    guard let self = self, let image = image else { return }
-                    self.selectedImages.append(image)
-                }
             } else {
                 showMaxSelectedAlert()
             }

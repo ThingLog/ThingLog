@@ -55,6 +55,7 @@ final class PhotosViewController: BaseViewController {
     }()
 
     // MARK: - Properties
+    let imageMagnager: PHCachingImageManager = PHCachingImageManager()
     let selectedMaxCount: Int = 10
     var coordinator: WriteCoordinator?
     var selectedIndexPath: [IndexPath] = [] {
@@ -65,8 +66,6 @@ final class PhotosViewController: BaseViewController {
             }
         }
     }
-    var selectedImages: [UIImage] = []
-
     lazy var assets: PHFetchResult<PHAsset> = fetchAssets(assetCollection: nil) {
         didSet {
             collectionView.reloadData()
@@ -140,7 +139,7 @@ final class PhotosViewController: BaseViewController {
 
     override func setupBinding() {
         bindNavigationButton()
-        bindNotification()
+        bindNotificationSelectAlbum()
     }
 }
 
@@ -180,9 +179,9 @@ extension PhotosViewController {
         successButton.rx.tap
             .bind { [weak self] in
                 guard let self = self else { return }
-                NotificationCenter.default.post(name: .passSelectImages,
+                NotificationCenter.default.post(name: .passSelectAssets,
                                                 object: nil,
-                                                userInfo: [Notification.Name.passSelectImages: self.selectedImages])
+                                                userInfo: [Notification.Name.passSelectAssets: self.convertIndexPathToAsset()])
                 self.coordinator?.back()
             }.disposed(by: disposeBag)
 
@@ -194,7 +193,8 @@ extension PhotosViewController {
             }.disposed(by: disposeBag)
     }
 
-    private func bindNotification() {
+    /// AlbumViewController에서 선택한 앨범을 가져온다. 기존에 선택한 항목들을 초기화하고, AlbumViewController를 숨긴다.
+    private func bindNotificationSelectAlbum() {
         NotificationCenter.default.rx.notification(.selectAlbum, object: nil)
             .map { notification -> PHAssetCollection? in
                 notification.userInfo?[Notification.Name.selectAlbum] as? PHAssetCollection
@@ -202,8 +202,6 @@ extension PhotosViewController {
             .bind { [weak self] assetCollection in
                 guard let self = self else { return }
                 self.resetSelectedIndexPath()
-                self.selectedImages = []
-
                 self.assets = self.fetchAssets(assetCollection: assetCollection)
                 self.titleButton.sendActions(for: .touchUpInside)
             }.disposed(by: disposeBag)
@@ -218,16 +216,8 @@ extension PhotosViewController {
 extension PhotosViewController {
     /// `selectedIndexPath`을 초기화한다.
     func resetSelectedIndexPath() {
-        selectedIndexPath.forEach { indexPath in
-            guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: indexPath) as? ContentsCollectionViewCell else {
-                return
-            }
-
-            cell.updateCheckButton(string: "", backgroundColor: .clear)
-            cell.layoutIfNeeded()
-        }
-
         selectedIndexPath = []
+        collectionView.reloadData()
     }
 
     /// `selectedIndexPath`에 데이터가 변경될 때 기존에 있는 항목의 checkButton 문자열을 업데이트한다.
@@ -258,15 +248,14 @@ extension PhotosViewController {
 
     /// 네비게이션 우측 상단에 있는 확인 버튼에 선택한 개수를 변경한다. 선택한 항목이 없으면 "확인"으로 변경한다.
     private func updateSelectedCountLabel() {
-        guard !selectedIndexPath.isEmpty else {
+        if selectedIndexPath.isEmpty {
             selectedCountLabel.text = ""
             successButton.isEnabled = false
-            return
+        } else {
+            selectedCountLabel.text = "\(selectedIndexPath.count)"
+            selectedCountLabel.sizeToFit()
+            successButton.isEnabled = true
         }
-
-        selectedCountLabel.text = "\(selectedIndexPath.count)"
-        selectedCountLabel.sizeToFit()
-        successButton.isEnabled = true
     }
 
     /// selectedMaxCount < selectedIndexPath.count 인 경우 사용자에게 Alert을 띄운다.
@@ -286,6 +275,16 @@ extension PhotosViewController {
         }.disposed(by: disposeBag)
 
         present(alert, animated: false, completion: nil)
+    }
+
+    /// `selectedIndexPath`를 `PHAsset`으로 변환하여 반환한다.
+    private func convertIndexPathToAsset() -> [PHAsset] {
+        var selectedAssets: [PHAsset] = []
+        for indexPath in selectedIndexPath {
+            let asset: PHAsset = assets.object(at: indexPath.item - 1)
+            selectedAssets.append(asset)
+        }
+        return selectedAssets
     }
 }
 

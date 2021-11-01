@@ -9,13 +9,14 @@ import UIKit
 
 /// 글쓰기>사진첩 선택 화면에서 앨범 목록을 보여주기 위한 TableCell
 /// ![이미지](https://www.notion.so/ImageWithVerticalTwoLabelTableCell-d2892451212148fab7e175666054cd2f)
-final class ImageWithVerticalTwoLabelTableCell: UITableViewCell {
+final class ImageWithVerticalTwoLabelCollectionCell: UICollectionViewCell {
     private let roundImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10
         imageView.backgroundColor = SwiftGenColors.gray6.color
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
 
@@ -36,22 +37,14 @@ final class ImageWithVerticalTwoLabelTableCell: UITableViewCell {
     }()
 
     private let imageWidth: CGFloat = 80.0
-    private let imageHeight: CGFloat = 100.0
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupView()
     }
 
-    required init?(coder: NSCoder) {
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0.0, left: 16.0, bottom: 20.0, right: 16.0))
     }
 
     func configure(image: UIImage?, title: String, description: String) {
@@ -61,9 +54,8 @@ final class ImageWithVerticalTwoLabelTableCell: UITableViewCell {
     }
 }
 
-extension ImageWithVerticalTwoLabelTableCell {
+extension ImageWithVerticalTwoLabelCollectionCell {
     private func setupView() {
-        selectionStyle = .none
         backgroundColor = .clear
 
         let labelStackView: UIStackView = {
@@ -91,7 +83,7 @@ extension ImageWithVerticalTwoLabelTableCell {
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             roundImageView.widthAnchor.constraint(equalToConstant: imageWidth),
-            roundImageView.heightAnchor.constraint(equalToConstant: imageHeight)
+            roundImageView.heightAnchor.constraint(equalTo: roundImageView.widthAnchor)
         ])
     }
 }
