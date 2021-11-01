@@ -157,6 +157,7 @@
 		DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454B27032C6600063C98 /* EasyLookViewModel.swift */; };
 		DBD5455027033D9A00063C98 /* ButtonRoundCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454F27033D9A00063C98 /* ButtonRoundCollectionCell.swift */; };
 		DBD545522703409300063C98 /* HorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD545512703409300063C98 /* HorizontalCollectionView.swift */; };
+		DBE3E9C3272FD6B300B3EB69 /* UserInformationViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE3E9C2272FD6B300B3EB69 /* UserInformationViewModelable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -350,6 +351,7 @@
 		DBD5454B27032C6600063C98 /* EasyLookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookViewModel.swift; sourceTree = "<group>"; };
 		DBD5454F27033D9A00063C98 /* ButtonRoundCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonRoundCollectionCell.swift; sourceTree = "<group>"; };
 		DBD545512703409300063C98 /* HorizontalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionView.swift; sourceTree = "<group>"; };
+		DBE3E9C2272FD6B300B3EB69 /* UserInformationViewModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationViewModelable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -680,6 +682,7 @@
 			children = (
 				DB9FBDB8272E9A33005E64AF /* UserInformationiCloudViewModel.swift */,
 				DB7C04C626F9E693009F5C0A /* UserInformationUserDefaultsViewModel.swift */,
+				DBE3E9C2272FD6B300B3EB69 /* UserInformationViewModelable.swift */,
 			);
 			path = UserInformationViewModel;
 			sourceTree = "<group>";
@@ -999,6 +1002,7 @@
 				876C157D27047B19000C1C84 /* CategoryRepository.swift in Sources */,
 				DBD5454927032BAA00063C98 /* EasyLookTabType.swift in Sources */,
 				DB331DA926FDD00A00A629F5 /* ColorsAsset.swift in Sources */,
+				DBE3E9C3272FD6B300B3EB69 /* UserInformationViewModelable.swift in Sources */,
 				DBD2244527085651004C5184 /* EasyLookViewController+setup.swift in Sources */,
 				87BB17A72709898F0088B847 /* WriteViewController.swift in Sources */,
 				87A86C9127141576008FB3F0 /* WriteTextViewCell.swift in Sources */,
