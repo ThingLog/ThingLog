@@ -25,28 +25,24 @@ final class EasyLookTopView: UIView {
             borderLineTrailingView
         ])
         stackView.axis = .horizontal
-        stackView.backgroundColor = SwiftGenColors.white.color
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
     private var borderLineView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.gray5.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private var borderLineLeadingView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private var borderLineTrailingView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -68,7 +64,6 @@ final class EasyLookTopView: UIView {
             resultsWithDropBoxView
         ])
         stackView.axis = .vertical
-        stackView.backgroundColor = SwiftGenColors.white.color
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -105,6 +100,7 @@ final class EasyLookTopView: UIView {
         
         super.init(frame: .zero)
         setupView()
+        setupBackgroundColor()
     }
     
     required init?(coder: NSCoder) {
@@ -112,6 +108,10 @@ final class EasyLookTopView: UIView {
         
         self.superView = UIView()
         super.init(coder: coder)
+    }
+    
+    private func setupBackgroundColor() {
+        borderLineView.backgroundColor = SwiftGenColors.gray4.color
     }
     
     private func setupView() {

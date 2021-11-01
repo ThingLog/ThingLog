@@ -570,14 +570,12 @@
 		DB7C04DF26FB18F4009F5C0A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DBE3E9C92730137200B3EB69 /* EasyLook */,
 				DB2B8AFC272151A800A02090 /* AlertViewController.swift */,
 				8738E1CA271705220069BB80 /* CategoryViewController.swift */,
 				DB7C04E026FB1900009F5C0A /* ContentsCollection */,
 				DB7C04F126FB1F36009F5C0A /* ContentsPageViewController.swift */,
 				DB00D214272A8D1E003FC9C3 /* Drawer */,
-				DB7C04B526F8782B009F5C0A /* EasyLookViewController.swift */,
-				DBD2244427085651004C5184 /* EasyLookViewController+setup.swift */,
-				DBD2244627085671004C5184 /* EasyLookViewController+subscribe.swift */,
 				DB7C04EF26FB1EFF009F5C0A /* HomeViewController.swift */,
 				DB9FBDB3272E82A9005E64AF /* Login */,
 				DBA0F828270B26A0009553FC /* SearchResultsViewController.swift */,
@@ -759,6 +757,16 @@
 				DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		DBE3E9C92730137200B3EB69 /* EasyLook */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04B526F8782B009F5C0A /* EasyLookViewController.swift */,
+				DBD2244427085651004C5184 /* EasyLookViewController+setup.swift */,
+				DBD2244627085671004C5184 /* EasyLookViewController+subscribe.swift */,
+			);
+			path = EasyLook;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

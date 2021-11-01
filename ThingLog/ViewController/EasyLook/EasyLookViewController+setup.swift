@@ -9,6 +9,11 @@ import UIKit
 
 extension EasyLookViewController {
     // MARK: - Setup
+    
+    func setupBackgroundColor() {
+        view.backgroundColor = SwiftGenColors.primaryBackground.color
+        topButton.backgroundColor = SwiftGenColors.primaryBackground.color
+    }
     func setupEasyLookTopView() {
         view.addSubview(easyLookTopView)
         let safeLayoutGuide: UILayoutGuide = view.safeAreaLayoutGuide
@@ -70,16 +75,16 @@ extension EasyLookViewController {
         navigationItem.leftBarButtonItem = logoBarButtonItem
         
         let searchButton: UIButton = UIButton()
-        searchButton.setImage(SwiftGenAssets.search.image, for: .normal)
-        searchButton.tintColor = SwiftGenColors.black.color
+        searchButton.setImage(SwiftGenIcons.search.image, for: .normal)
+        searchButton.tintColor = SwiftGenColors.primaryBlack.color
         searchButton.rx.tap.bind { [weak self] in
             self?.coordinator?.showSearchViewController()
         }
         .disposed(by: disposeBag)
         
         let settingButton: UIButton = UIButton()
-        settingButton.setImage(SwiftGenAssets.setting.image, for: .normal)
-        settingButton.tintColor = SwiftGenColors.black.color
+        settingButton.setImage(SwiftGenIcons.system.image, for: .normal)
+        settingButton.tintColor = SwiftGenColors.primaryBlack.color
         settingButton.rx.tap
             .bind { [weak self] in
                 self?.coordinator?.showSettingViewController()

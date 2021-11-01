@@ -55,7 +55,7 @@ internal enum SwiftGenIcons {
   internal static let shortArrowRM = IconImageSwiftGen(name: "short arrow_r(m)")
   internal static let shortArrowRS = IconImageSwiftGen(name: "short arrow_r(s)")
   internal static let system = IconImageSwiftGen(name: "system")
-  internal static let topButton = IconImageSwiftGen(name: "top button")
+  internal static let topButton = IconImageSwiftGen(name: "top Button")
   internal static let wishVer1 = IconImageSwiftGen(name: "wish.ver1")
   internal static let writing = IconImageSwiftGen(name: "writing")
 }

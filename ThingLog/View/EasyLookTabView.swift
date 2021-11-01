@@ -12,14 +12,12 @@ final class EasyLookTabView: UIView {
     // MARK: - View
     private var emptyLeadingView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private var emptyTrailingView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -43,14 +41,18 @@ final class EasyLookTabView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setupBackgroundColor()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
+    private func setupBackgroundColor() {
+        backgroundColor = SwiftGenColors.primaryBackground.color
+    }
+    
     private func setupView() {
-        backgroundColor = SwiftGenColors.white.color
         addView()
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
