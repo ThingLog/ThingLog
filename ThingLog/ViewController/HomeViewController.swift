@@ -254,15 +254,15 @@ extension HomeViewController {
             let postRepo: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
             guard let pageType = PageType(rawValue: Int16(idx)) else { return }
             postRepo.pageType = pageType
-            baseController.fetchResultController = postRepo.fetchedResultsController
+            baseController.fetchResultController = postRepo.fetchResultsController(by: .fromHome)
             baseController.collectionView.reloadData()
             
             // PageType으로 특정 탭 버튼을 찾아 업데이트한다.
             let pageTypeButton: UIButton = contentsTabView.pageTypeButton(by: pageType)
-            let count: Int = postRepo.fetchedResultsController.fetchedObjects?.count ?? 0
+            let count: Int = baseController.fetchResultController?.fetchedObjects?.count ?? 0
             pageTypeButton.setTitle(String(count), for: .normal)
             
-            baseController.completionBlock = { [weak self] updatedFetchedCount in
+            baseController.completionBlock = { updatedFetchedCount in
                 pageTypeButton.setTitle(String(updatedFetchedCount), for: .normal)
             }
         }

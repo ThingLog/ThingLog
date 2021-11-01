@@ -84,17 +84,20 @@ class ThingLogPostCategoryRequestTests: XCTestCase, DummyProtocol {
     }
     
     func test_특정_카테고리로_post들을_최신순으로_가져올_수_있다() throws {
-        let posts = dummyPost(10)
+        let posts = dummyPost(20)
         
         posts.forEach {
             create($0)
         }
         // 제일 높은
         let targetCategoryTitle: String = "가전"
-        let targetCount: Int = posts.filter { $0.categories.contains(where: {$0.title == targetCategoryTitle})}.count
+        let targetCount: Int = posts.filter { $0.categories.contains(where: {$0.title == targetCategoryTitle})}.filter { $0.postType.isDelete == false }.count
         
         let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "ANY categories.title == %@", targetCategoryTitle)
+        var predicates: [NSPredicate] = []
+        predicates.append(NSPredicate(format: "ANY categories.title CONTAINS %@", targetCategoryTitle))
+        predicates.append(NSPredicate(format: "postType.isDelete == false"))
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         request.sortDescriptors = [NSSortDescriptor(key: "createDate", ascending: false)]
         
         timeout(0.3) { exp in
@@ -109,17 +112,20 @@ class ThingLogPostCategoryRequestTests: XCTestCase, DummyProtocol {
     }
     
     func test_특정_문자열이_포함된_카테고리의_Post들을_최신순으로_가져올_수_있다() throws {
-        let posts = dummyPost(10)
+        let posts = dummyPost(20)
         
         posts.forEach {
             create($0)
         }
         // 제일 높은
         let targetCategoryTitle: String = "가"
-        let targetCount: Int = posts.filter { $0.categories.contains(where: {$0.title.contains( targetCategoryTitle)})}.count
+        let targetCount: Int = posts.filter { $0.categories.contains(where: {$0.title.contains( targetCategoryTitle)})}.filter { $0.postType.isDelete == false }.count
         
         let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "ANY categories.title CONTAINS %@", targetCategoryTitle)
+        var predicates: [NSPredicate] = []
+        predicates.append(NSPredicate(format: "ANY categories.title CONTAINS %@", targetCategoryTitle))
+        predicates.append(NSPredicate(format: "postType.isDelete == false"))
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         request.sortDescriptors = [NSSortDescriptor(key: "createDate", ascending: false)]
         
         timeout(0.3) { exp in

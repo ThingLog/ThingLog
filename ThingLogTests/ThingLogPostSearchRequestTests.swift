@@ -58,10 +58,13 @@ class ThingLogPostSearchTests: XCTestCase, DummyProtocol {
         }
         
         let targetTitle: String = "아이패드"
-        let targetCount: Int = posts.filter { $0.title.contains(targetTitle)}.count
+        let targetCount: Int = posts.filter { $0.title.contains(targetTitle)}.filter { $0.postType.isDelete == false}.count
         
         let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "title CONTAINS %@", targetTitle)
+        var predicates: [NSPredicate] = [ ]
+        predicates.append(NSPredicate(format: "title CONTAINS %@", targetTitle))
+        predicates.append(NSPredicate(format: "postType.isDelete == false"))
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         request.sortDescriptors = [NSSortDescriptor(key: "createDate", ascending: false)]
         
         timeout(0.3) { exp in
@@ -82,10 +85,13 @@ class ThingLogPostSearchTests: XCTestCase, DummyProtocol {
         }
         
         let targetTitle: String = "아이패드"
-        let targetCount: Int = posts.filter { $0.contents!.contains(targetTitle)}.count
+        let targetCount: Int = posts.filter { $0.contents!.contains(targetTitle)}.filter { $0.postType.isDelete == false}.count
         
         let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "contents CONTAINS %@", targetTitle)
+        var predicates: [NSPredicate] = [ ]
+        predicates.append(NSPredicate(format: "contents CONTAINS %@", targetTitle))
+        predicates.append(NSPredicate(format: "postType.isDelete == false"))
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         request.sortDescriptors = [NSSortDescriptor(key: "createDate", ascending: false)]
         
         timeout(0.3) { exp in
