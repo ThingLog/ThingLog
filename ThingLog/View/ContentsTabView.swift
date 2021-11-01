@@ -11,34 +11,32 @@ import UIKit
 /// 홈화면 ContentsCollectionView들이 보이는 상단의 탭을 나타내는 뷰다.
 final class ContentsTabView: UIView {
     var boughtButton: TemplateImageButton = {
-        let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenAssets.bought.image)
+        let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenIcons.buyVer1.image)
         button.updateColor(SwiftGenColors.black.color)
-        button.titleLabel?.font = UIFont.Pretendard.body2
+        button.titleLabel?.font = UIFont.Pretendard.title2
         return button
     }()
     var wishButton: TemplateImageButton = {
-        let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenAssets.wish.image)
-        button.updateColor(SwiftGenColors.gray4.color)
+        let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenIcons.wishVer1.image)
+        button.updateColor(SwiftGenColors.gray2.color)
         button.titleLabel?.font = UIFont.Pretendard.body2
         return button
     }()
     var giftButton: TemplateImageButton = {
-        let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenAssets.gift.image)
-        button.updateColor(SwiftGenColors.gray4.color)
+        let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenIcons.giftVer1.image)
+        button.updateColor(SwiftGenColors.gray2.color)
         button.titleLabel?.font = UIFont.Pretendard.body2
         return button
     }()
     
     private var indicatorBar: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.black.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private var topBorderLine: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.gray6.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -57,14 +55,21 @@ final class ContentsTabView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setupBackgroundColor()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
+    func setupBackgroundColor() {
+        indicatorBar.backgroundColor = SwiftGenColors.black.color
+        topBorderLine.backgroundColor = SwiftGenColors.gray4.color
+        backgroundColor = SwiftGenColors.primaryBackground.color
+    }
+    
     func setupView() {
-        backgroundColor = SwiftGenColors.white.color
+        
         addSubview(topBorderLine)
         addSubview(indicatorBar)
         addSubview(buttonStackView)
@@ -75,9 +80,9 @@ final class ContentsTabView: UIView {
             topBorderLine.leadingAnchor.constraint(equalTo: leadingAnchor),
             topBorderLine.trailingAnchor.constraint(equalTo: trailingAnchor),
             topBorderLine.topAnchor.constraint(equalTo: topAnchor),
-            topBorderLine.heightAnchor.constraint(equalToConstant: 1),
+            topBorderLine.heightAnchor.constraint(equalToConstant: 0.5),
             
-            indicatorBar.heightAnchor.constraint(equalToConstant: 1),
+            indicatorBar.heightAnchor.constraint(equalToConstant: 2),
             indicatorBar.bottomAnchor.constraint(equalTo: bottomAnchor),
             indicatorBar.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1 / 3),
             
@@ -99,15 +104,19 @@ extension ContentsTabView {
             if let button: TemplateImageButton = $0 as? TemplateImageButton {
                 button.setTitleColor(SwiftGenColors.gray4.color, for: .normal)
                 button.tintColor = SwiftGenColors.gray4.color
+                button.titleLabel?.font = UIFont.Pretendard.body2
             }
         }
         switch index {
         case 0:
             boughtButton.updateColor(SwiftGenColors.black.color)
+            boughtButton.titleLabel?.font = UIFont.Pretendard.title2
         case 1:
             wishButton.updateColor(SwiftGenColors.black.color)
+            wishButton.titleLabel?.font = UIFont.Pretendard.title2
         default:
             giftButton.updateColor(SwiftGenColors.black.color)
+            giftButton.titleLabel?.font = UIFont.Pretendard.title2
         }
     }
     

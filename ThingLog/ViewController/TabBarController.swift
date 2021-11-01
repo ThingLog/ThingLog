@@ -47,7 +47,7 @@ final class TabBarController: UITabBarController {
         tabBar.tintColor = SwiftGenColors.black.color // tabbar button 틴트 컬러
         
         let appearance: UITabBarAppearance = UITabBarAppearance()
-        appearance.backgroundColor = SwiftGenColors.white.color
+        appearance.backgroundColor = SwiftGenColors.primaryBackground.color
         appearance.shadowColor = SwiftGenColors.gray4.color
         appearance.shadowImage = UIImage.colorForNavBar(color: SwiftGenColors.gray4.color)
         tabBar.standardAppearance = appearance
@@ -55,13 +55,15 @@ final class TabBarController: UITabBarController {
         homeCoordinator.start()
         easyLookCoordinator.start()
 
-        let homeTabImage: UIImage = SwiftGenAssets.homeTab.image
-        let easyLookTabImage: UIImage = SwiftGenAssets.easyLookTab.image
-        let plusTabImage: UIImage = SwiftGenAssets.plusTab.image.withRenderingMode(.alwaysOriginal)
-        
-        let homeTabBar: UITabBarItem = UITabBarItem(title: nil, image: homeTabImage, selectedImage: nil)
-        let easyLookTabBar: UITabBarItem = UITabBarItem(title: nil, image: easyLookTabImage, selectedImage: nil)
-        let plusTabBar: UITabBarItem = UITabBarItem(title: nil, image: plusTabImage, selectedImage: nil)
+        let homeTabBar: UITabBarItem = UITabBarItem(title: nil,
+                                                    image: SwiftGenIcons.homeStroke.image,
+                                                    selectedImage: SwiftGenIcons.homeFill.image)
+        let easyLookTabBar: UITabBarItem = UITabBarItem(title: nil,
+                                                        image: SwiftGenIcons.gatherStroke.image,
+                                                        selectedImage: SwiftGenIcons.gatherFill.image)
+        let plusTabBar: UITabBarItem = UITabBarItem(title: nil,
+                                                    image: SwiftGenIcons.writing.image.withRenderingMode(.alwaysOriginal),
+                                                    selectedImage: nil)
         
         homeTabBar.imageInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -5, right: 0)
         plusTabBar.imageInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -5, right: 0)
