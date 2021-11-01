@@ -206,7 +206,7 @@ extension DropBoxView: UITableViewDelegate {
         // 기존에 선택된 cell의 강조를 풀어준다.
         if let cell: UITableViewCell = tableView.cellForRow(at: selectedIndexPath) {
             cell.textLabel?.font = UIFont.Pretendard.body3
-            cell.textLabel?.textColor = SwiftGenColors.gray4.color
+            cell.textLabel?.textColor = SwiftGenColors.gray2.color
         }
         selectedIndexPath = indexPath
         

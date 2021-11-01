@@ -53,8 +53,7 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
     var leftLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.body2
-        label.textColor = SwiftGenColors.black.color
-        label.backgroundColor = .clear
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -89,14 +88,12 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
     
     private let emptyView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let emptyView2: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -153,14 +150,18 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
+        setupBackgroundColor()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupBackgroundColor() {
+        contentView.backgroundColor = SwiftGenColors.primaryBackground.color
+    }
     private func setupView() {
-        contentView.backgroundColor = SwiftGenColors.white.color
+        
         contentView.addSubview(stackView)
         selectionStyle = .none
         borderLineHeightConstraint = borderLineView.heightAnchor.constraint(equalToConstant: 0.5)
@@ -215,7 +216,7 @@ extension LeftLabelRightButtonTableCell {
         case .withClearButton:
             let image: UIImage? = SwiftGenAssets.clear.image.withRenderingMode(.alwaysTemplate)
             rightButton.setImage(image, for: .normal)
-            rightButton.tintColor = SwiftGenColors.black.color
+            rightButton.tintColor = SwiftGenColors.primaryBlack.color
         case .withToggleButton:
             rightButton.isHidden = true
             rightToggleButton.isHidden = false

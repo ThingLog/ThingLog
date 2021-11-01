@@ -44,7 +44,7 @@ final class TabBarController: UITabBarController {
     // MARK: - Setup
     private func setupView() {
         delegate = self
-        tabBar.tintColor = SwiftGenColors.black.color // tabbar button 틴트 컬러
+        tabBar.tintColor = SwiftGenColors.primaryBlack.color // tabbar button 틴트 컬러
         
         let appearance: UITabBarAppearance = UITabBarAppearance()
         appearance.backgroundColor = SwiftGenColors.primaryBackground.color
@@ -56,10 +56,10 @@ final class TabBarController: UITabBarController {
         easyLookCoordinator.start()
 
         let homeTabBar: UITabBarItem = UITabBarItem(title: nil,
-                                                    image: SwiftGenIcons.homeStroke.image,
+                                                    image: SwiftGenIcons.homeStroke.image.withRenderingMode(.alwaysOriginal),
                                                     selectedImage: SwiftGenIcons.homeFill.image)
         let easyLookTabBar: UITabBarItem = UITabBarItem(title: nil,
-                                                        image: SwiftGenIcons.gatherStroke.image,
+                                                        image: SwiftGenIcons.gatherStroke.image.withRenderingMode(.alwaysOriginal),
                                                         selectedImage: SwiftGenIcons.gatherFill.image)
         let plusTabBar: UITabBarItem = UITabBarItem(title: nil,
                                                     image: SwiftGenIcons.writing.image.withRenderingMode(.alwaysOriginal),

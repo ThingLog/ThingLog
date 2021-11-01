@@ -72,7 +72,7 @@ final class EasyLookTopView: UIView {
     private var superView: UIView
     
     private let categoryContentsConstraint: CGFloat = 44
-    private let borderLineHeightConstraint: CGFloat = 1
+    private let borderLineHeightConstraint: CGFloat = 0.5
     
     // 외부에서 참조하기 위한 뷰 사이즈다. 카테고리를 클릭했을 때 최대 높이를 반환한다.
     var maxHeight: CGFloat {
@@ -130,8 +130,8 @@ final class EasyLookTopView: UIView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            borderLineLeadingView.widthAnchor.constraint(equalToConstant: 10),
-            borderLineTrailingView.widthAnchor.constraint(equalToConstant: 10),
+            borderLineLeadingView.widthAnchor.constraint(equalToConstant: 20),
+            borderLineTrailingView.widthAnchor.constraint(equalToConstant: 20),
             const1,
             const3,
             const2

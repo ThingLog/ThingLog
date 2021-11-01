@@ -15,7 +15,6 @@ class SearchResultsViewController: UIViewController {
         collectionView.register(ContentsDetailCollectionViewCell.self, forCellWithReuseIdentifier: ContentsDetailCollectionViewCell.reuseIdentifier)
         collectionView.register(LeftLabelRightButtonHeaderView.self, forSupplementaryViewOfKind: "header", withReuseIdentifier: LeftLabelRightButtonHeaderView.reuseIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .white
         return collectionView
     }()
     
@@ -52,9 +51,15 @@ class SearchResultsViewController: UIViewController {
         super.viewDidLoad()
         setupTotalFilterView()
         setupCollectionView()
+        setupBackgroundColor()
     }
     
     // MARK: - Setup
+    
+    private func setupBackgroundColor() {
+        collectionView.backgroundColor = SwiftGenColors.primaryBackground.color
+    }
+    
     private func setupTotalFilterView() {
         view.addSubview(totalFilterView)
         NSLayoutConstraint.activate([
