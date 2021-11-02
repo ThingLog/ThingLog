@@ -45,4 +45,8 @@ extension UIView {
         gradient.name = "customGradient"
         layer.addSublayer(gradient)
     }
+
+    func addSubviews(_ subviews: UIView...) {
+        subviews.forEach(addSubview)
+    }
 }
