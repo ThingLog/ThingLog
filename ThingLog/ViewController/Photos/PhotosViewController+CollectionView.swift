@@ -35,7 +35,11 @@ extension PhotosViewController: UICollectionViewDataSource {
         let asset: PHAsset = assets.object(at: indexPath.item - 1)
 
         cell.representedAssetIdentifier = asset.localIdentifier
-        asset.toThumbnailImage(targetSize: thumbnailSize) { image in
+
+        imageManager.requestImage(for: asset,
+                                  targetSize: thumbnailSize,
+                                  contentMode: .aspectFill,
+                                  options: nil) { image, _ in
             if cell.representedAssetIdentifier == asset.localIdentifier {
                 cell.update(image: image)
             }
@@ -81,5 +85,20 @@ extension PhotosViewController: UICollectionViewDelegate {
             // TODO: 카메라 기능 구현
             return
         }
+    }
+}
+
+extension UICollectionView {
+    func indexPathsForElements(in rect: CGRect) -> [IndexPath] {
+        guard let allLayoutAttributes: [UICollectionViewLayoutAttributes] = collectionViewLayout.layoutAttributesForElements(in: rect) else {
+            return []
+        }
+        return allLayoutAttributes.map { $0.indexPath }
+    }
+}
+
+extension PhotosViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        updateCachedAssets()
     }
 }

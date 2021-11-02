@@ -66,6 +66,7 @@
 		87BEF07B2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF07A2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift */; };
 		87DAEB1B270BEAE50038C487 /* CameraButtonCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DAEB1A270BEAE50038C487 /* CameraButtonCollectionCell.swift */; };
 		87DAEB1D270BEC170038C487 /* ThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */; };
+		87EDCFCE2731166D002C98BE /* PhotosViewController+Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EDCFCD2731166D002C98BE /* PhotosViewController+Caching.swift */; };
 		87F2188326FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188226FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift */; };
 		87F2188626FB5DFB00C3FBCA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188526FB5DFB00C3FBCA /* Post.swift */; };
 		87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188826FB5E9500C3FBCA /* PostRepository.swift */; };
@@ -247,6 +248,7 @@
 		87BEF07A2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogCategoryRepositoryTests.swift; sourceTree = "<group>"; };
 		87DAEB1A270BEAE50038C487 /* CameraButtonCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButtonCollectionCell.swift; sourceTree = "<group>"; };
 		87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCell.swift; sourceTree = "<group>"; };
+		87EDCFCD2731166D002C98BE /* PhotosViewController+Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosViewController+Caching.swift"; sourceTree = "<group>"; };
 		87F2188226FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogPostRepositoryTests.swift; sourceTree = "<group>"; };
 		87F2188526FB5DFB00C3FBCA /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		87F2188826FB5E9500C3FBCA /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 				8761A88327296C0700EA8683 /* PhotosViewController.swift */,
 				873ED12A272AC8CB00C9F7F1 /* PhotosViewController+Albums.swift */,
 				873ED12E272ACD3000C9F7F1 /* PhotosViewController+CollectionView.swift */,
+				87EDCFCD2731166D002C98BE /* PhotosViewController+Caching.swift */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -622,14 +625,14 @@
 			isa = PBXGroup;
 			children = (
 				DB148C25270469B300FDC48F /* Date+.swift */,
+				873ED128272AB77000C9F7F1 /* Notification.Name+.swift */,
+				873ED126272AAFFD00C9F7F1 /* PHAsset+.swift */,
 				DB3A5164270FFE0C003B529D /* String+.swift */,
 				8736B3F326FDD55E000433E1 /* UIFont+.swift */,
 				DBAB64A626FE2AFF006D95ED /* UIImage+.swift */,
 				DB7C04EB26FB1A04009F5C0A /* UIView+.swift */,
-				DB7C04C926F9E69D009F5C0A /* UserDefaults+.swift */,
 				DB05B03F27185C500067DB17 /* UIViewController+.swift */,
-				873ED126272AAFFD00C9F7F1 /* PHAsset+.swift */,
-				873ED128272AB77000C9F7F1 /* Notification.Name+.swift */,
+				DB7C04C926F9E69D009F5C0A /* UserDefaults+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -671,9 +674,9 @@
 		DBAE8E9226FDB39C00F536AD /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				DBAE8E9926FDB52E00F536AD /* Font */,
 				873EC01426D39057003C3525 /* Assets.xcassets */,
 				DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */,
+				DBAE8E9926FDB52E00F536AD /* Font */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -960,6 +963,7 @@
 				DB8BF6792705D25700FD5FDB /* LogoView.swift in Sources */,
 				DBA0F829270B26A0009553FC /* SearchResultsViewController.swift in Sources */,
 				87078B5B26EA44B5007AE242 /* ThingLog.xcdatamodeld in Sources */,
+				87EDCFCE2731166D002C98BE /* PhotosViewController+Caching.swift in Sources */,
 				873EC00926D39055003C3525 /* AppDelegate.swift in Sources */,
 				87A86C8B2714139F008FB3F0 /* WriteTextFieldCell.swift in Sources */,
 				87DAEB1B270BEAE50038C487 /* CameraButtonCollectionCell.swift in Sources */,

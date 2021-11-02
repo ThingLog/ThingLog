@@ -17,16 +17,4 @@ extension PHAsset {
             completion(image)
         }
     }
-
-    func toThumbnailImage(targetSize size: CGSize,
-                          contentMode: PHImageContentMode = .aspectFill,
-                          options: PHImageRequestOptions? = nil,
-                          completion: @escaping (UIImage?) -> Void) {
-        PHCachingImageManager.default().requestImage(for: self,
-                                                     targetSize: size,
-                                                     contentMode: contentMode,
-                                                     options: options) { image, _ in
-            completion(image)
-        }
-    }
 }

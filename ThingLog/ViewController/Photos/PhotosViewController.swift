@@ -14,7 +14,7 @@ import RxSwift
 /// 사진 목록을 보여주기 위한 뷰 컨트롤러
 final class PhotosViewController: BaseViewController {
     // MARK: - View Properties
-    private let collectionView: UICollectionView = {
+    let collectionView: UICollectionView = {
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumInteritemSpacing = 1
         flowLayout.minimumLineSpacing = 1
@@ -55,7 +55,8 @@ final class PhotosViewController: BaseViewController {
     }()
 
     // MARK: - Properties
-    let imageMagnager: PHCachingImageManager = PHCachingImageManager()
+    let imageManager: PHCachingImageManager = PHCachingImageManager()
+    var previousPreheatRect: CGRect = .zero
     let selectedMaxCount: Int = 10
     var coordinator: WriteCoordinator?
     var selectedIndexPath: [IndexPath] = [] {
@@ -69,12 +70,11 @@ final class PhotosViewController: BaseViewController {
     lazy var assets: PHFetchResult<PHAsset> = fetchAssets(assetCollection: nil) {
         didSet {
             collectionView.reloadData()
+            collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
-
     private(set) var thumbnailSize: CGSize = CGSize()
     private(set) var albumsViewController: AlbumsViewController = AlbumsViewController()
-
     private var isShowAlbumsViewController: Bool = false {
         didSet {
             isShowAlbumsViewController ? titleButton.setImage(SwiftGenAssets.arrowDropUp.image, for: .normal) : titleButton.setImage(SwiftGenAssets.arrowDropDown.image, for: .normal)
@@ -87,6 +87,7 @@ final class PhotosViewController: BaseViewController {
         view.backgroundColor = SwiftGenColors.white.color
         selectedIndexPath = []
         isShowAlbumsViewController = false
+        resetCachedAssets()
 
         PHPhotoLibrary.shared().register(self)
     }
@@ -97,6 +98,11 @@ final class PhotosViewController: BaseViewController {
         let scale: CGFloat = UIScreen.main.scale
         let cellSize: CGSize = CGSize(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)
         thumbnailSize = CGSize(width: cellSize.width * scale, height: cellSize.height * scale)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateCachedAssets()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -250,12 +256,10 @@ extension PhotosViewController {
     private func updateSelectedCountLabel() {
         if selectedIndexPath.isEmpty {
             selectedCountLabel.text = ""
-            successButton.isEnabled = false
         } else {
             selectedCountLabel.text = "\(selectedIndexPath.count)"
-            selectedCountLabel.sizeToFit()
-            successButton.isEnabled = true
         }
+        successButton.isEnabled = !selectedIndexPath.isEmpty
     }
 
     /// selectedMaxCount < selectedIndexPath.count 인 경우 사용자에게 Alert을 띄운다.
