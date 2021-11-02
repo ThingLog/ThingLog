@@ -5,18 +5,21 @@
 //  Created by 이지원 on 2021/11/02.
 //
 
+import CoreData
 import Foundation
 
 protocol PostViewModelProtocol: AnyObject {
     associatedtype Screen
 
-    var posts: [Post] { get set }
+    var fetchedResultsController: NSFetchedResultsController<PostEntity> { get set }
     /// 데이터 표시 시작 지점을 위한 프로퍼티
     var startIndexPath: IndexPath { get set }
     /// 어느 화면에서 표시하는 지 알기 위한 프로퍼티
     var screen: Screen { get set }
 
-    init(posts: [Post], startIndexPath: IndexPath, from screen: Screen)
+    init(fetchedResultsController: NSFetchedResultsController<PostEntity>,
+         startIndexPath: IndexPath,
+         from screen: Screen)
 }
 
 final class PostViewModel: PostViewModelProtocol {
@@ -28,12 +31,14 @@ final class PostViewModel: PostViewModelProtocol {
         case trash
     }
 
-    var posts: [Post]
+    var fetchedResultsController: NSFetchedResultsController<PostEntity>
     var startIndexPath: IndexPath
     var screen: Screen
 
-    init(posts: [Post], startIndexPath: IndexPath, from screen: Screen) {
-        self.posts = posts
+    init(fetchedResultsController: NSFetchedResultsController<PostEntity>,
+         startIndexPath: IndexPath,
+         from screen: Screen) {
+        self.fetchedResultsController = fetchedResultsController
         self.startIndexPath = startIndexPath
         self.screen = screen
     }
