@@ -29,8 +29,7 @@ final class LabelWithButtonRoundCollectionCell: UICollectionViewCell {
     }()
 
     var removeButtonDidTappedCallback: (() -> Void)?
-    private let paddingLeading: CGFloat = 12.0
-    private let paddingTrailing: CGFloat = 6.0
+    private let leadingTrailingSpacing: CGFloat = 8.0
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,8 +41,9 @@ final class LabelWithButtonRoundCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not beem implemented")
     }
 
-    func configure(text: String) {
+    func configure(text: String, buttonIsHidden: Bool = false) {
         label.text = text
+        removeButton.isHidden = buttonIsHidden
     }
 }
 
@@ -62,9 +62,9 @@ extension LabelWithButtonRoundCollectionCell {
         contentView.addSubview(stackView)
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: paddingLeading),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: leadingTrailingSpacing),
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -paddingTrailing),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -leadingTrailingSpacing),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
 

@@ -47,6 +47,13 @@ class LeftRightButtonView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+
+    private let bottomLineView: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = SwiftGenColors.gray4.color
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,8 +65,7 @@ class LeftRightButtonView: UIView {
     }
     
     func setupView() {
-        addSubview(stackView)
-        addSubview(topLineView)
+        addSubviews(stackView, topLineView, bottomLineView)
         
         let window: UIWindow? = UIApplication.shared.windows.first
         let bottomPadding: CGFloat = window?.safeAreaInsets.bottom ?? 0.0
@@ -71,6 +77,10 @@ class LeftRightButtonView: UIView {
         let borderLineConstraint: NSLayoutConstraint = borderLine.widthAnchor.constraint(equalToConstant: 0.5)
         borderLineConstraint.isActive = true
         borderLineConstraint.priority = .defaultHigh
+
+        let bottomLineConstraint: NSLayoutConstraint = bottomLineView.heightAnchor.constraint(equalToConstant: 0.5)
+        bottomLineConstraint.isActive = true
+        bottomLineConstraint.priority = .defaultHigh
                     
         NSLayoutConstraint.activate([
             topLineView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -83,7 +93,11 @@ class LeftRightButtonView: UIView {
             stackView.topAnchor.constraint(equalTo: topLineView.bottomAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -bottomPadding),
  
-            leftButton.widthAnchor.constraint(equalTo: rightButton.widthAnchor)
+            leftButton.widthAnchor.constraint(equalTo: rightButton.widthAnchor),
+
+            bottomLineView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            bottomLineView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            bottomLineView.topAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }
