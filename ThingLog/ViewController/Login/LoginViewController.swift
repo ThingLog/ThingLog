@@ -57,6 +57,9 @@ final class LoginViewController: UIViewController {
     let recommendList: [String] = ["나를 찾는 여정", "미니멀리즘", "건강한 소비 습관", "취향모음", "물건의 역사", "물건을 통해 나를 본다"]
     var disposeBag: DisposeBag = DisposeBag()
     
+    var userInformation: UserInformationable = UserInformation(userAliasName: "", userOneLineIntroduction: "", isAumatedDarkMode: true)
+    private let userInformationViewModel: UserInformationViewModelable = UserInformationiCloudViewModel()
+    
     // MARK: - Init
     /// 로그인이 포함된 화면인지 아닌지를 주입하는 이니셜라이저다.
     init(isLogin: Bool) {
@@ -75,6 +78,7 @@ final class LoginViewController: UIViewController {
         view.backgroundColor = SwiftGenColors.white.color
         setupView()
         setupNavigationBar()
+        setupUserInformation()
         
         subscribeLoginButton()
     }
@@ -148,6 +152,7 @@ final class LoginViewController: UIViewController {
         editButton.rx.tap
             .bind { [weak self] in
                 guard let coordinator = self?.coordinator as? HomeCoordinator else { return }
+                self?.updateUserInformation()
                 coordinator.back()
             }
             .disposed(by: disposeBag)
@@ -156,11 +161,21 @@ final class LoginViewController: UIViewController {
         fixedSpace.width = 24
         navigationItem.rightBarButtonItems = [fixedSpace, editBarButton]
     }
+    
+    func setupUserInformation() {
+        userInformationViewModel.fetchUserInformation { userInformation in
+            if let userInformation = userInformation {
+                self.userInformation = userInformation
+                self.collectionView.reloadData()
+            }
+        }
+    }
 }
 
 extension LoginViewController {
     func subscribeLoginButton() {
         loginButton.rx.tap.bind { [weak self] in
+            self?.updateUserInformation()
             self?.enterTabBarViewController()
         }.disposed(by: disposeBag)
     }
@@ -174,6 +189,14 @@ extension LoginViewController {
         } else if let rootCordinator: SettingCoordinator = coordinator as? SettingCoordinator {
             rootCordinator.back()
         }
+    }
+    
+    /// 로그인정보 저장하기
+    func updateUserInformation() {
+        let newUserInformation: UserInformationable = UserInformation(userAliasName: userInformation.userAliasName.isEmpty ? "닉네임" : userInformation.userAliasName,
+                                                                      userOneLineIntroduction: userInformation.userOneLineIntroduction,
+                                                                      isAumatedDarkMode: userInformation.isAumatedDarkMode)
+        userInformationViewModel.updateUserInformation(newUserInformation)
     }
 }
 
@@ -203,6 +226,7 @@ extension LoginViewController: UICollectionViewDataSource {
                                                   placeHolder: "닉네임을 입력하세요") as? TextFieldWithLabelWithButtonCollectionCell else {
                 return UICollectionViewCell()
             }
+            cell.textField.text = userInformation.userAliasName
             subscribeTextFieldCell(cell, collectionView, cellForItemAt: indexPath)
             subscribeEnterKeyOfUserNameTextField(cell, collectionView, cellForItemAt: indexPath)
             return cell
@@ -213,6 +237,7 @@ extension LoginViewController: UICollectionViewDataSource {
                                                   placeHolder: "한 줄 소개") as? TextFieldWithLabelWithButtonCollectionCell else {
                 return UICollectionViewCell()
             }
+            cell.textField.text = userInformation.userOneLineIntroduction
             subscribeTextFieldCell(cell, collectionView, cellForItemAt: indexPath)
             subscribeEnterKeyOfUserOneLineTextField(cell, collectionView, cellForItemAt: indexPath)
             return cell
@@ -228,7 +253,8 @@ extension LoginViewController: UICollectionViewDataSource {
                 return UICollectionReusableView()
             }
             // 다음에 하기 버튼 클릭시 바로 탭바 화면으로 넘어간다.
-            login.laterButton.rx.tap.bind { [weak self] in 
+            login.laterButton.rx.tap.bind { [weak self] in
+                self?.updateUserInformation()
                 self?.enterTabBarViewController()
             }.disposed(by: login.disposeBag)
             return  login
@@ -259,6 +285,7 @@ extension LoginViewController: UICollectionViewDelegate {
             guard let textFieldCell = collectionView.cellForItem(at: IndexPath(item: 0, section: LoginCollectionSection.userOneLine.section)) as? TextFieldWithLabelWithButtonCollectionCell else { return
             }
             textFieldCell.textField.text = recommendList[indexPath.item]
+            userInformation.userOneLineIntroduction = recommendList[indexPath.item]
         }
     }
 }

@@ -34,6 +34,7 @@ final class HomeViewController: UIViewController {
     }()
     
     var coordinator: HomeCoordinator?
+    private let userInformationViewModel: UserInformationViewModelable = UserInformationiCloudViewModel()
     var heightAnchorProfileView: NSLayoutConstraint?
     let profileViewHeight: CGFloat = 44 + 24 + 16
     
@@ -51,11 +52,12 @@ final class HomeViewController: UIViewController {
         subscribePageVeiwControllerTransition()
         subscribeContentsTabButton()
         subscribePageViewControllerScrollOffset()
-        subscribeInformationViewModel()
         subscribeProfileEditButton()
         subscribeDrawerImageView()
+        subscribeUserInformationChange()
         
         fetchAllPost()
+        fetchUserInformation()
     }
     
     // MARK: - Setup
@@ -187,20 +189,12 @@ extension HomeViewController {
             })
             .disposed(by: pageViewController.disposeBag)
     }
-    
-    /// 사용자의 정보 ( 이름, 한줄 소개 ) 를 subscribe한다.
-    func subscribeInformationViewModel() {
-        UserInformationViewModel.shared.userAliasNameSubject
-            .bind { [weak self] name in
-                self?.profileView.userAliasNameButton.setTitle(name ?? "분더카머", for: .normal)
-            }
-            .disposed(by: disposeBag)
-        
-        UserInformationViewModel.shared.userOneLineIntroductionSubject
-            .bind { [weak self] introduction in
-                self?.profileView.userOneLineIntroductionLabel.text = introduction ?? "나를 찾는 여정 나를 찾는 여정"
-            }
-            .disposed(by: disposeBag)
+  
+    /// 유저정보가 변경되는 경우의 notificaiton을 subscribe하여 유저정보를 변경하도록 한다.
+    func subscribeUserInformationChange() {
+        userInformationViewModel.subscribeUserInformationChange { [weak self] userInformation in
+            self?.updateProfileView(by: userInformation)
+        }
     }
     
     func subscribeProfileEditButton() {
@@ -214,7 +208,7 @@ extension HomeViewController {
     func subscribeDrawerImageView() {
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer()
         profileView.userBadgeImageView.addGestureRecognizer(tapGesture)
-        profileView.userBadgeImageView.isUserInteractionEnabled = true 
+        profileView.userBadgeImageView.isUserInteractionEnabled = true
         tapGesture.rx.event.bind { [weak self] _ in
             self?.coordinator?.showDrawerViewController()
         }.disposed(by: disposeBag)
@@ -266,6 +260,18 @@ extension HomeViewController {
                 pageTypeButton.setTitle(String(updatedFetchedCount), for: .normal)
             }
         }
+    }
+    
+    func fetchUserInformation() {
+        userInformationViewModel.fetchUserInformation { [weak self] userInformation in
+            self?.updateProfileView(by: userInformation)
+        }
+    }
+    
+    private func updateProfileView(by userInformation: UserInformationable?) {
+        profileView.userAliasNameButton.setTitle(userInformation?.userAliasName, for: .normal)
+        profileView.userOneLineIntroductionLabel.text = userInformation?.userOneLineIntroduction
+        profileView.userOneLineIntroductionLabel.isHidden = userInformation?.userOneLineIntroduction == nil
     }
 }
 

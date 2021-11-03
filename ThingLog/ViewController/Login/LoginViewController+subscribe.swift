@@ -34,12 +34,32 @@ extension LoginViewController {
             }.disposed(by: cell.disposeBag)
     }
     
-    /// 공통적인 부분으로, 편집을 시작할 때,
+    /// 공통적인 부분으로,
+    /// 텍스트를 입력하는 중일 때,
+    /// 편집을 시작할 때,
     /// clear버튼 누를 때,
     /// toolBar버튼 누를 때를 subscribe한다.
     func subscribeTextFieldCell(_ cell: TextFieldWithLabelWithButtonCollectionCell,
                                 _ collectionView: UICollectionView,
                                 cellForItemAt indexPath: IndexPath) {
+        cell.textField.rx.text
+            .bind { [weak self] textFieldText in
+                // 공백만 이루어진건 아닌지 판별하여 저장한다. 
+                var text: String = ""
+                if let textFieldText: String = textFieldText {
+                    if textFieldText.filter({ $0 == " " }).count == textFieldText.count {
+                        cell.textField.text = ""
+                    } else {
+                        text = textFieldText
+                    }
+                }
+                if indexPath.section == LoginCollectionSection.userName.section {
+                    self?.userInformation.userAliasName = text
+                } else if indexPath.section == LoginCollectionSection.userOneLine.section {
+                    self?.userInformation.userOneLineIntroduction = text
+                }
+            }.disposed(by: cell.disposeBag)
+        
         cell.textField.rx.controlEvent(.editingDidBegin)
             .asObservable()
             .bind { [weak self] in
@@ -57,8 +77,13 @@ extension LoginViewController {
                 self?.moveTo(indexPath: indexPath, collectionView: collectionView)
             }.disposed(by: cell.disposeBag)
         
-        cell.clearButton.rx.tap.bind { 
+        cell.clearButton.rx.tap.bind {  [weak self] in
             cell.textField.text = nil
+            if indexPath.section == LoginCollectionSection.userName.section {
+                self?.userInformation.userAliasName = ""
+            } else if indexPath.section == LoginCollectionSection.userOneLine.section {
+                self?.userInformation.userOneLineIntroduction = ""
+            }
             cell.hideCountingLabelAndClearButton(true)
         }
         .disposed(by: cell.disposeBag)

@@ -46,6 +46,7 @@ final class ProfileView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.setContentHuggingPriority(.required, for: .horizontal)
         imageView.setContentHuggingPriority(.required, for: .vertical)
+        imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
         imageView.backgroundColor = SwiftGenColors.gray6.color
         return imageView
     }()
@@ -121,15 +122,16 @@ final class ProfileView: UIView {
         
         userBadgeImageView.layer.cornerRadius = imageHeight / 2
         let emptyVerticalConstraint: NSLayoutConstraint = emptyVerticalView.heightAnchor.constraint(equalToConstant: emptyHeight)
-        emptyVerticalConstraint.isActive =  true
+        emptyVerticalConstraint.isActive = true
         emptyVerticalConstraint.priority = .defaultHigh
         
         let paddingViewConstraint: NSLayoutConstraint = paddingViewBetweenLabel.heightAnchor.constraint(equalToConstant: paddingViewHeight)
         paddingViewConstraint.isActive = true
         paddingViewConstraint.priority = .defaultHigh
-        
+        let userBadgeImageViewHeightConstraint: NSLayoutConstraint = userBadgeImageView.heightAnchor.constraint(equalToConstant: imageHeight)
+        userBadgeImageViewHeightConstraint.isActive = true
+        userBadgeImageViewHeightConstraint.priority = .defaultHigh
         NSLayoutConstraint.activate([
-            userBadgeImageView.heightAnchor.constraint(lessThanOrEqualToConstant: imageHeight),
             userBadgeImageView.widthAnchor.constraint(equalTo: userBadgeImageView.heightAnchor),
             
             emptyLeadingView.widthAnchor.constraint(equalToConstant: emptyWidth),
