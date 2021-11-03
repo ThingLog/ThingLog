@@ -29,9 +29,9 @@ extension Date {
     }
     
     /// self 날짜를 파라미터의 날짜값의 날짜차이를 구한다.
-    /// - Parameter fivotDate: 날짜차이를 원하는 날짜를 주입한다.
+    /// - Parameter pivotDate: 날짜차이를 원하는 날짜를 주입한다.
     /// - Returns: self날짜보다 주입한 날짜가 큰 경우 양수값으로 나온다.
-    func distanceFrom(_ fivotDate: Date) -> Int {
-        Calendar.current.dateComponents([.day], from: self, to: fivotDate).day ?? 0
+    func distanceFrom(_ pivotDate: Date) -> Int {
+        Calendar.current.dateComponents([.day], from: self, to: pivotDate).day ?? 0
     }
 }
