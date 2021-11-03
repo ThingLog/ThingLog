@@ -16,8 +16,9 @@ final class CoreDataStack {
     lazy var persistentContainer: NSPersistentContainer = {
         let container: NSPersistentContainer = NSPersistentContainer(name: "ThingLog")
 
-        container.loadPersistentStores { _, error in
+        container.loadPersistentStores { description, error in
             if let error: NSError = error as NSError? {
+                print(description.url)
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         }

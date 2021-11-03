@@ -182,12 +182,17 @@ extension SearchTextField {
             return button
         }()
         let cancleBarButton: UIBarButtonItem = UIBarButtonItem(customView: correctButton)
-        cancleBarButton.tintColor = SwiftGenColors.primaryBlack.color
-        keyboardToolBar.barTintColor = SwiftGenColors.gray6.color
+        keyboardToolBar.barTintColor = UIColor(red: 249, green: 249, blue: 249, alpha: 0)
         keyboardToolBar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
                                  cancleBarButton]
         keyboardToolBar.sizeToFit()
         textField.inputAccessoryView = keyboardToolBar
+        
+        // add top BorderLine
+        let topBorder: CALayer = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0.5)
+        topBorder.backgroundColor = SwiftGenColors.gray3.color.cgColor
+        keyboardToolBar.layer.addSublayer(topBorder)
     }
     
     @objc

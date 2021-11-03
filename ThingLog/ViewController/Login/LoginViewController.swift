@@ -128,8 +128,8 @@ final class LoginViewController: UIViewController {
         navigationItem.titleView = titleView
         
         let clearButton: UIButton = UIButton()
-        clearButton.setImage(SwiftGenAssets.closeBig.image, for: .normal)
-        clearButton.tintColor = SwiftGenColors.black.color
+        clearButton.setImage(SwiftGenIcons.close.image, for: .normal)
+        clearButton.tintColor = SwiftGenColors.primaryBlack.color
         clearButton.rx.tap
             .bind { [weak self] in
                 guard let coordinator = self?.coordinator as? HomeCoordinator else { return }
@@ -142,7 +142,7 @@ final class LoginViewController: UIViewController {
         let editButton: UIButton = UIButton()
         editButton.setTitle("확인", for: .normal)
         editButton.titleLabel?.font = UIFont.Pretendard.body1
-        editButton.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        editButton.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         editButton.rx.tap
             .bind { [weak self] in
                 guard let coordinator = self?.coordinator as? HomeCoordinator else { return }

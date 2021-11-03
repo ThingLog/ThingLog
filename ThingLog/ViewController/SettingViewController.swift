@@ -63,7 +63,6 @@ final class SettingViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
         tableView.alwaysBounceVertical = false
-        tableView.backgroundColor = SwiftGenColors.white.color
         return tableView
     }()
     
@@ -76,14 +75,20 @@ final class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = SwiftGenColors.white.color
         setupTableView()
         setupNavigationBar()
+        setupBackgroundColor()
         
         fetchUserInformation()
     }
     
     // MARK: - Setup
+    
+    func setupBackgroundColor() {
+        tableView.backgroundColor = SwiftGenColors.primaryBackground.color
+        view.backgroundColor = SwiftGenColors.primaryBackground.color
+    }
+
     func setupTableView() {
         view.addSubview(tableView)
         view.addSubview(topBorderLineView)
@@ -110,8 +115,8 @@ final class SettingViewController: UIViewController {
         navigationItem.titleView = logoView
         
         let backButton: UIButton = UIButton()
-        backButton.setImage(SwiftGenAssets.paddingBack.image, for: .normal)
-        backButton.tintColor = SwiftGenColors.black.color
+        backButton.setImage(SwiftGenIcons.longArrowR.image, for: .normal)
+        backButton.tintColor = SwiftGenColors.primaryBlack.color
         backButton.rx.tap
             .bind { [weak self] in
                 self?.coordinator?.back()
@@ -150,8 +155,8 @@ extension SettingViewController: UITableViewDataSource {
             case .darkMode:
                 cell.changeViewType(labelType: .withBody1,
                                     buttonType: .withToggleButton,
-                                    borderLineHeight: .with1Height,
-                                    borderLineColor: .withGray5)
+                                    borderLineHeight: .with05Height,
+                                    borderLineColor: .withGray4)
                 cell.rightToggleButton.setOn(userInformation?.isAumatedDarkMode ?? true, animated: false)
                 cell.rightToggleButton.rx.isOn
                     .bind { [weak self] bool in
@@ -166,8 +171,8 @@ extension SettingViewController: UITableViewDataSource {
             case .editCategory, .trash, .login, .addDummyData, .deleteDummyData, .alert1, .alert2, .alert3, .resetUserInfor:
                 cell.changeViewType(labelType: .withBody1,
                                     buttonType: .withChevronRight,
-                                    borderLineHeight: .with1Height,
-                                    borderLineColor: .withGray5)
+                                    borderLineHeight: .with05Height,
+                                    borderLineColor: .withGray4)
             }
         }
         return cell

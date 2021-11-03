@@ -21,7 +21,7 @@ import UIKit
 final class ImageWithTwoLabelVerticalCetnerXView: UIView {
     private let imageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.backgroundColor = SwiftGenColors.gray6.color
+        imageView.backgroundColor = SwiftGenColors.gray4.color
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -31,14 +31,14 @@ final class ImageWithTwoLabelVerticalCetnerXView: UIView {
         label.text = "문구세트"
         label.textAlignment = .center
         label.font = UIFont.Pretendard.title1
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let questionImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.image = SwiftGenAssets.question.image
+        imageView.image = SwiftGenIcons.displayCaseNoneM.image
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -49,7 +49,7 @@ final class ImageWithTwoLabelVerticalCetnerXView: UIView {
         label.text = "방문 30회 달성"
         label.textAlignment = .center
         label.font = UIFont.Pretendard.body1
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

@@ -12,7 +12,7 @@ import UIKit
 final class ContentsTabView: UIView {
     var boughtButton: TemplateImageButton = {
         let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenIcons.buyVer1.image)
-        button.updateColor(SwiftGenColors.black.color)
+        button.updateColor(SwiftGenColors.primaryBlack.color)
         button.titleLabel?.font = UIFont.Pretendard.title2
         return button
     }()
@@ -63,7 +63,7 @@ final class ContentsTabView: UIView {
     }
     
     func setupBackgroundColor() {
-        indicatorBar.backgroundColor = SwiftGenColors.black.color
+        indicatorBar.backgroundColor = SwiftGenColors.primaryBlack.color
         topBorderLine.backgroundColor = SwiftGenColors.gray4.color
         backgroundColor = SwiftGenColors.primaryBackground.color
     }
@@ -102,20 +102,20 @@ extension ContentsTabView {
     func updateButtonTintColor(by index: Int) {
         buttonStackView.arrangedSubviews.forEach {
             if let button: TemplateImageButton = $0 as? TemplateImageButton {
-                button.setTitleColor(SwiftGenColors.gray4.color, for: .normal)
-                button.tintColor = SwiftGenColors.gray4.color
+                button.setTitleColor(SwiftGenColors.gray2.color, for: .normal)
+                button.tintColor = SwiftGenColors.gray2.color
                 button.titleLabel?.font = UIFont.Pretendard.body2
             }
         }
         switch index {
         case 0:
-            boughtButton.updateColor(SwiftGenColors.black.color)
+            boughtButton.updateColor(SwiftGenColors.primaryBlack.color)
             boughtButton.titleLabel?.font = UIFont.Pretendard.title2
         case 1:
-            wishButton.updateColor(SwiftGenColors.black.color)
+            wishButton.updateColor(SwiftGenColors.primaryBlack.color)
             wishButton.titleLabel?.font = UIFont.Pretendard.title2
         default:
-            giftButton.updateColor(SwiftGenColors.black.color)
+            giftButton.updateColor(SwiftGenColors.primaryBlack.color)
             giftButton.titleLabel?.font = UIFont.Pretendard.title2
         }
     }
