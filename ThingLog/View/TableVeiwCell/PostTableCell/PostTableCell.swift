@@ -229,7 +229,7 @@ final class PostTableCell: UITableViewCell {
     }()
 
     let categoryViewDataSource: PostCategoryViewDataSouce = PostCategoryViewDataSouce()
-    let slideImageViewDataSource: SlideImageViewDataSource = SlideImageViewDataSource()
+    let slideImageViewDataSource: PostSlideImageViewDataSource = PostSlideImageViewDataSource()
     var disposeBag: DisposeBag = DisposeBag()
     /// TODO: 이후 뷰모델을 통해 어떤 화면인지 받을 예정, 테스트를 위한 프로퍼티
     var isTrash: Bool = true {

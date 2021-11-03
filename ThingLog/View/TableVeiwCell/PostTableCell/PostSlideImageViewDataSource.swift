@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class SlideImageViewDataSource: NSObject {
+final class PostSlideImageViewDataSource: NSObject {
 }
 
-extension SlideImageViewDataSource: UICollectionViewDataSource {
+extension PostSlideImageViewDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         10
     }

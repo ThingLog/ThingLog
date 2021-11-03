@@ -35,6 +35,7 @@ extension PostTableCell {
     }
 
     func setupSlideImageCollectionView() {
+        slideImageCollectionView.delegate = self
         slideImageCollectionView.dataSource = slideImageViewDataSource
         slideImageCollectionView.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier)
 
@@ -176,5 +177,13 @@ extension PostTableCell {
             contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+    }
+}
+
+extension PostTableCell: UICollectionViewDelegate, UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageWidth: CGFloat = scrollView.frame.size.width
+        let page: Int = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1) + 1
+        imageCountLabel.text = "\(page)/10"
     }
 }
