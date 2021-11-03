@@ -28,10 +28,10 @@ class ThingLogPostTypeRequestTest: XCTestCase, DummyProtocol {
         }
         // 제일 높은
         let targetPageType: Int16 = PageType.gift.rawValue
-        let targetCount: Int = posts.filter { $0.postType.type == PageType.gift}.count
+        let targetCount: Int = posts.filter { $0.postType.type == PageType.gift && $0.postType.isDelete == false }.count
         
         let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "postType.type == %d", targetPageType)
+        request.predicate = NSPredicate(format: "postType.isDelete == false AND postType.type == %d", targetPageType)
         request.sortDescriptors = [NSSortDescriptor(key: "createDate", ascending: false)]
         
         timeout(0.3) { exp in

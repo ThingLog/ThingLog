@@ -16,6 +16,7 @@ func makeDummy() {
     let titleNameList: [String] = ["아이폰", "맥북", "아이폰11", "아이패드프로", "애플워치"]
     let purchasePlaceList: [String] = ["강남", "서울", "경기", "제주"]
     let postType: [PageType] = [.bought, .gift, .wish]
+    let startDate: Date = Date().offset(-2, byAdding: .month)!
 
     let newPosts: [Post] = (1...400).map { idx in
         var categories: [Category] = [Category.init(title: "")]
@@ -26,14 +27,15 @@ func makeDummy() {
                                  purchasePlace: purchasePlaceList.randomElement()!,
                                  contents: "Test Contents \(titleNameList.randomElement()!)...",
                                  giftGiver: "현수",
-                                 postType: .init(isDelete: false, type: postType.randomElement()!),
+                                 postType: .init(isDelete: [true, false].randomElement()!, type: postType.randomElement()!),
                                  rating: Rating(score: ScoreType(rawValue: Int16.random(in: 0..<5))!),
                                  categories: categories,
                                  attachments: [Attachment(thumbnail: originalImage,
                                                           imageData: .init(originalImage: originalImage))],
                                  comments: nil,
+                                 deleteDate: startDate.offset(idx, byAdding: .day)!,
                                  isLike: [true, false].randomElement()!,
-                                 createDate: Date().offset(idx, byAdding: .day)!)
+                                 createDate: startDate.offset(idx, byAdding: .day)!)
         return newPost
     }.shuffled()
 

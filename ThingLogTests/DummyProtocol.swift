@@ -29,6 +29,7 @@ extension DummyProtocol {
         let titleNameList: [String] = ["아이폰","맥북","아이폰11","아이패드프로","애플워치"]
         let purchasePlaceList: [String] = ["강남","서울","경기","제주"]
         let pageTypeList: [PageType] = [.bought, .gift, .wish]
+        let startDate: Date = Date().offset(-2, byAdding: .month)!
         
         let newPosts: [Post] = (1...count).map { i in
             var categories = [Category.init(title: "")]
@@ -41,14 +42,15 @@ extension DummyProtocol {
                                      purchasePlace: purchasePlaceList.randomElement()!,
                                      contents: "Test Contents \(titleNameList.randomElement()!)...",
                                      giftGiver: "현수",
-                                     postType: .init(isDelete: false, type: pageTypeList.randomElement()!),
+                                     postType: .init(isDelete: [true, false].randomElement()!, type: pageTypeList.randomElement()!),
                                      rating: Rating(score: ScoreType(rawValue: Int16.random(in: 0..<5))!),
                                      categories: categories,
                                      attachments: [Attachment(thumbnail: originalImage,
                                                               imageData: .init(originalImage: originalImage))],
                                      comments: nil,
+                                     deleteDate: startDate.offset(i, byAdding: .day)!,
                                      isLike: [true,false].randomElement()!,
-                                     createDate: Date().offset(i, byAdding: .day)!)
+                                     createDate: startDate.offset(i, byAdding: .day)!)
             return newPost
         }.shuffled()
         return newPosts
@@ -56,6 +58,7 @@ extension DummyProtocol {
     
     func deleteAllEntity() {
         timeout(10) { exp in
+            print("TEAR DOWN Start")
             postRepository.deleteAll { result in
                 switch result {
                 case .success(_):
