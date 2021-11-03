@@ -79,11 +79,14 @@ extension PostTableCell {
 
         NSLayoutConstraint.activate([
             firstInfoContainerView.heightAnchor.constraint(equalToConstant: firstInfoViewHeight),
-            nameLabel.leadingAnchor.constraint(equalTo: firstInfoContainerView.leadingAnchor, constant: leadingTrailingSpacing),
-            nameLabel.topAnchor.constraint(equalTo: firstInfoContainerView.topAnchor),
-            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: ratingView.leadingAnchor),
-            nameLabel.bottomAnchor.constraint(equalTo: firstInfoContainerView.bottomAnchor),
-            ratingView.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor),
+            nameScrollView.leadingAnchor.constraint(equalTo: firstInfoContainerView.leadingAnchor, constant: leadingTrailingSpacing),
+            nameScrollView.topAnchor.constraint(equalTo: firstInfoContainerView.topAnchor),
+            nameScrollView.trailingAnchor.constraint(equalTo: ratingView.leadingAnchor, constant: -leadingTrailingSpacing),
+            nameScrollView.bottomAnchor.constraint(equalTo: firstInfoContainerView.bottomAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: nameScrollView.leadingAnchor),
+            nameLabel.trailingAnchor.constraint(equalTo: nameScrollView.trailingAnchor),
+            nameLabel.centerYAnchor.constraint(equalTo: nameScrollView.centerYAnchor),
+            ratingView.centerYAnchor.constraint(equalTo: nameScrollView.centerYAnchor),
             ratingView.trailingAnchor.constraint(equalTo: firstInfoContainerView.trailingAnchor, constant: -leadingTrailingSpacing)
         ])
     }
@@ -94,11 +97,14 @@ extension PostTableCell {
 
         NSLayoutConstraint.activate([
             secondInfoContainerView.heightAnchor.constraint(equalToConstant: secondInfoViewHeight),
-            placeLabel.leadingAnchor.constraint(equalTo: secondInfoContainerView.leadingAnchor, constant: leadingTrailingSpacing),
-            placeLabel.topAnchor.constraint(equalTo: secondInfoContainerView.topAnchor),
-            placeLabel.trailingAnchor.constraint(lessThanOrEqualTo: priceLabel.leadingAnchor),
-            placeLabel.bottomAnchor.constraint(equalTo: secondInfoContainerView.bottomAnchor),
-            priceLabel.centerYAnchor.constraint(equalTo: placeLabel.centerYAnchor),
+            placeScrollView.leadingAnchor.constraint(equalTo: secondInfoContainerView.leadingAnchor, constant: leadingTrailingSpacing),
+            placeScrollView.topAnchor.constraint(equalTo: secondInfoContainerView.topAnchor),
+            placeScrollView.trailingAnchor.constraint(equalTo: priceLabel.leadingAnchor, constant: -leadingTrailingSpacing),
+            placeScrollView.bottomAnchor.constraint(equalTo: secondInfoContainerView.bottomAnchor),
+            placeLabel.leadingAnchor.constraint(equalTo: placeScrollView.leadingAnchor),
+            placeLabel.trailingAnchor.constraint(equalTo: placeScrollView.trailingAnchor),
+            placeLabel.centerYAnchor.constraint(equalTo: placeScrollView.centerYAnchor),
+            priceLabel.centerYAnchor.constraint(equalTo: placeScrollView.centerYAnchor),
             priceLabel.trailingAnchor.constraint(equalTo: secondInfoContainerView.trailingAnchor, constant: -leadingTrailingSpacing)
         ])
     }

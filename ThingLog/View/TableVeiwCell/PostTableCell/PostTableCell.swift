@@ -109,8 +109,17 @@ final class PostTableCell: UITableViewCell {
     lazy var firstInfoContainerView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .clear
-        view.addSubviews(nameLabel, ratingView)
+        view.addSubviews(nameScrollView, ratingView)
         return view
+    }()
+
+    /// 물건 이름이 길어지는 경우를 위한 스크롤 뷰
+    lazy var nameScrollView: UIScrollView = {
+        let scrollView: UIScrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.addSubview(nameLabel)
+        return scrollView
     }()
 
     let nameLabel: UILabel = {
@@ -118,7 +127,7 @@ final class PostTableCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.Pretendard.title1
         label.textColor = SwiftGenColors.black.color
-        label.text = "화분"
+        label.text = "화분화분화분화분화분화분화분화"
         return label
     }()
 
@@ -134,8 +143,17 @@ final class PostTableCell: UITableViewCell {
     lazy var secondInfoContainerView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .clear
-        view.addSubviews(placeLabel, priceLabel)
+        view.addSubviews(placeScrollView, priceLabel)
         return view
+    }()
+
+    /// 판매처/구매처가 길어지는 경우를 위한 스크롤 뷰
+    lazy var placeScrollView: UIScrollView = {
+        let scrollView: UIScrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.addSubview(placeLabel)
+        return scrollView
     }()
 
     let placeLabel: UILabel = {
@@ -143,7 +161,7 @@ final class PostTableCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.Pretendard.title1
         label.textColor = SwiftGenColors.black.color
-        label.text = "아날로그 키퍼"
+        label.text = "제품 구매한 곳이 열 다섯 글자 이상이라면 이렇게 슬라이드 ㄱㄴ"
         return label
     }()
 
@@ -152,7 +170,7 @@ final class PostTableCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.Pretendard.title1
         label.textColor = SwiftGenColors.black.color
-        label.text = "18,000 원"
+        label.text = "999,999,999 원"
         return label
     }()
 
