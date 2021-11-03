@@ -66,29 +66,11 @@ extension PostTableCell {
     }
 
     func setupCategoryCollectionView() {
-        categoryCollectionView.collectionViewLayout = createLayout()
+        categoryCollectionView.collectionViewLayout = createCategoryCollectionViewLayout()
         categoryCollectionView.dataSource = categoryViewDataSource
         categoryCollectionView.register(LabelWithButtonRoundCollectionCell.self, forCellWithReuseIdentifier: LabelWithButtonRoundCollectionCell.reuseIdentifier)
 
         categoryCollectionView.heightAnchor.constraint(equalToConstant: 38.0).isActive = true
-    }
-
-    private func createLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize: NSCollectionLayoutSize = .init(widthDimension: .estimated(1), heightDimension: .estimated(1))
-        let item: NSCollectionLayoutItem = .init(layoutSize: itemSize)
-
-        let groupSize: NSCollectionLayoutSize = .init(widthDimension: .estimated(1),
-                                                      heightDimension: .fractionalHeight(1))
-        let group: NSCollectionLayoutGroup = .horizontal(layoutSize: groupSize, subitems: [item])
-
-        let section: NSCollectionLayoutSection = .init(group: group)
-        section.orthogonalScrollingBehavior = .continuous
-        section.interGroupSpacing = 10
-        section.contentInsets = .init(top: 8, leading: 10, bottom: 0, trailing: 10)
-
-        let layout: UICollectionViewCompositionalLayout = .init(section: section)
-
-        return layout
     }
 
     func setupFirstInfoView() {
@@ -170,14 +152,33 @@ extension PostTableCell {
         ])
     }
 
-    func setupContentStackView() {
+    func setupStackView() {
         NSLayoutConstraint.activate([
-            contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            contentStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            contentStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            contentStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
+
+    private func createCategoryCollectionViewLayout() -> UICollectionViewCompositionalLayout {
+        let itemSize: NSCollectionLayoutSize = .init(widthDimension: .estimated(1), heightDimension: .estimated(1))
+        let item: NSCollectionLayoutItem = .init(layoutSize: itemSize)
+
+        let groupSize: NSCollectionLayoutSize = .init(widthDimension: .estimated(1),
+                                                      heightDimension: .fractionalHeight(1))
+        let group: NSCollectionLayoutGroup = .horizontal(layoutSize: groupSize, subitems: [item])
+
+        let section: NSCollectionLayoutSection = .init(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        section.interGroupSpacing = 10
+        section.contentInsets = .init(top: 8, leading: 10, bottom: 0, trailing: 10)
+
+        let layout: UICollectionViewCompositionalLayout = .init(section: section)
+
+        return layout
+    }
+
 }
 
 extension PostTableCell: UICollectionViewDelegate, UIScrollViewDelegate {

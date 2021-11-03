@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 
 final class PostTableCell: UITableViewCell {
+    /// 날짜, 기타 메뉴(수정, 삭제)를 포함한 뷰
     let headerContainerView: UIView = {
         let view: UIView = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -36,6 +37,7 @@ final class PostTableCell: UITableViewCell {
         return button
     }()
 
+    /// 게시물의 이미지를 보여주는 컬렉션 뷰
     let slideImageCollectionView: UICollectionView = {
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
@@ -50,6 +52,7 @@ final class PostTableCell: UITableViewCell {
         return collectionView
     }()
 
+    /// 좋아요, 댓글, 이미지 위치, 포토카드를 포함한 뷰
     lazy var interactionContainerView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .clear
@@ -94,6 +97,7 @@ final class PostTableCell: UITableViewCell {
         return button
     }()
 
+    /// 게시물의 카테고리를 표시하는 컬렉션 뷰
     let categoryCollectionView: UICollectionView = {
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -101,6 +105,7 @@ final class PostTableCell: UITableViewCell {
         return collectionView
     }()
 
+    /// 물건 이름, 별점을 포함한 뷰
     lazy var firstInfoContainerView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .clear
@@ -125,6 +130,7 @@ final class PostTableCell: UITableViewCell {
         return ratingView
     }()
 
+    /// 장소, 가격을 포함한 뷰
     lazy var secondInfoContainerView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .clear
@@ -150,6 +156,7 @@ final class PostTableCell: UITableViewCell {
         return label
     }()
 
+    /// 본문, 댓글 n개 모두 보기를 포함한 뷰
     lazy var contentsContainerView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .clear
@@ -189,6 +196,7 @@ final class PostTableCell: UITableViewCell {
         return button
     }()
 
+    /// 특별한 상황(사고싶다, 휴지통)에서 쓰이는 샀어요 버튼, 삭제/복구 버튼을 포함한 뷰
     lazy var specificActionContainerView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .clear
@@ -218,7 +226,8 @@ final class PostTableCell: UITableViewCell {
         return view
     }()
 
-    lazy var contentStackView: UIStackView = {
+    /// 게시물을 표시하기 위한 모든 뷰를 포함한 스택 뷰
+    lazy var stackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [headerContainerView, slideImageCollectionView, interactionContainerView, categoryCollectionView, firstInfoContainerView, secondInfoContainerView, contentsContainerView, specificActionContainerView, emptyView])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -257,7 +266,7 @@ final class PostTableCell: UITableViewCell {
     }
 
     func setupView() {
-        contentView.addSubview(contentStackView)
+        contentView.addSubview(stackView)
         setupHeaderView()
         setupSlideImageCollectionView()
         setupInteractionView()
@@ -268,17 +277,10 @@ final class PostTableCell: UITableViewCell {
         setupSpecificActionContainerView()
         setupOtherView()
 
-        setupContentStackView()
+        setupStackView()
     }
 
     func setupBinding() {
-        // TODO: for test
-    }
-
-    func horizontalFlexibleView() -> UIView {
-        let view: UIView = UIView()
-        view.setContentCompressionResistancePriority(.required, for: .horizontal)
-        return view
     }
 
     /// 특별한 상황에서 쓰이는 버튼(사고싶다, 휴지통 게시물인 경우)을 숨김/표시 처리한다.
