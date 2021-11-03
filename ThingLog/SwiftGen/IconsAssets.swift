@@ -23,6 +23,7 @@ internal enum SwiftGenIcons {
   internal static let comments = IconImageSwiftGen(name: "Comments")
   internal static let displayCaseNoneM = IconImageSwiftGen(name: "Display case_none(m)")
   internal static let displayCaseNoneS = IconImageSwiftGen(name: "Display case_none(s)")
+  internal static let group = IconImageSwiftGen(name: "Group")
   internal static let satisfactionFill = IconImageSwiftGen(name: "Satisfaction_fill")
   internal static let satisfactionStroke = IconImageSwiftGen(name: "Satisfaction_stroke")
   internal static let arrowDropDown = IconImageSwiftGen(name: "arrow_drop_down")
@@ -54,7 +55,7 @@ internal enum SwiftGenIcons {
   internal static let shortArrowRM = IconImageSwiftGen(name: "short arrow_r(m)")
   internal static let shortArrowRS = IconImageSwiftGen(name: "short arrow_r(s)")
   internal static let system = IconImageSwiftGen(name: "system")
-  internal static let topButton = IconImageSwiftGen(name: "top button")
+  internal static let topButton = IconImageSwiftGen(name: "top Button")
   internal static let wishVer1 = IconImageSwiftGen(name: "wish.ver1")
   internal static let writing = IconImageSwiftGen(name: "writing")
 }

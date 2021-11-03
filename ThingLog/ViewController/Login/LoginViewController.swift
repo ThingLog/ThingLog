@@ -33,7 +33,6 @@ final class LoginViewController: UIViewController {
         collection.register(LeftLabelRightButtonHeaderView.self,
                             forSupplementaryViewOfKind: LeftLabelRightButtonHeaderView.reuseIdentifier,
                             withReuseIdentifier: LeftLabelRightButtonHeaderView.reuseIdentifier)
-        collection.backgroundColor = SwiftGenColors.white.color
         collection.alwaysBounceVertical = false
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
@@ -75,12 +74,17 @@ final class LoginViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = SwiftGenColors.white.color
+        setupBackgroundColor()
         setupView()
         setupNavigationBar()
         setupUserInformation()
         
         subscribeLoginButton()
+    }
+    
+    func setupBackgroundColor() {
+        view.backgroundColor = SwiftGenColors.primaryBackground.color
+        collectionView.backgroundColor = SwiftGenColors.primaryBackground.color
     }
     
     // MARK: - Setup
@@ -114,28 +118,18 @@ final class LoginViewController: UIViewController {
     
     /// 로그인 화면인 경우에 나타날 Navigationbar를 세팅한다.
     private func setupNavigationBarWithLogin() {
-        let logoView: UIButton = UIButton()
-        logoView.setTitle("Logo", for: .normal)
-        logoView.titleLabel?.font = UIFont.Pretendard.headline3
-        logoView.setTitleColor(SwiftGenColors.black.color, for: .normal)
-        logoView.rx.tap
-            .bind { [weak self] in
-                guard let coordinator = self?.coordinator as? SettingCoordinator else { return }
-                coordinator.back()
-            }
-            .disposed(by: disposeBag)
-        let logoBarButton: UIBarButtonItem = UIBarButtonItem(customView: logoView)
-        navigationItem.leftBarButtonItem = logoBarButton
+        navigationController?.isNavigationBarHidden = true
     }
     
     /// 프로필 편집 화면인 경우에 나타날 Navigationbar를 세팅한다.
     private func setupNavigationBarWithEditMode() {
+        navigationController?.isNavigationBarHidden = false
         let titleView: UIView = LogoView("프로필 편집", font: UIFont.Pretendard.headline4)
         navigationItem.titleView = titleView
         
         let clearButton: UIButton = UIButton()
-        clearButton.setImage(SwiftGenAssets.closeBig.image, for: .normal)
-        clearButton.tintColor = SwiftGenColors.black.color
+        clearButton.setImage(SwiftGenIcons.close.image, for: .normal)
+        clearButton.tintColor = SwiftGenColors.primaryBlack.color
         clearButton.rx.tap
             .bind { [weak self] in
                 guard let coordinator = self?.coordinator as? HomeCoordinator else { return }
@@ -148,7 +142,7 @@ final class LoginViewController: UIViewController {
         let editButton: UIButton = UIButton()
         editButton.setTitle("확인", for: .normal)
         editButton.titleLabel?.font = UIFont.Pretendard.body1
-        editButton.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        editButton.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         editButton.rx.tap
             .bind { [weak self] in
                 guard let coordinator = self?.coordinator as? HomeCoordinator else { return }
@@ -293,15 +287,15 @@ extension LoginViewController: UICollectionViewDelegate {
 extension LoginViewController {
     /// 셀의 버튼의 섹을 잠시 강조하는 메서드다
     private func tint(_ cell: ButtonRoundCollectionCell, _ bool: Bool) {
-        UIView.animate(withDuration: 0.2) {
-            cell.changeColor(borderColor: SwiftGenColors.gray3.color,
-                             backgroundColor: bool ? SwiftGenColors.gray5.color : SwiftGenColors.white.color ,
-                             textColor: SwiftGenColors.black.color )
+        UIView.animate(withDuration: 0.3) {
+            cell.changeColor(borderColor: SwiftGenColors.primaryBlack.color,
+                             backgroundColor: bool ? SwiftGenColors.primaryBlack.color : SwiftGenColors.primaryBackground.color ,
+                             textColor: bool ? SwiftGenColors.white.color : SwiftGenColors.primaryBlack.color )
         } completion: { _  in
-            UIView.animate(withDuration: 0.2) {
-                cell.changeColor(borderColor: SwiftGenColors.gray3.color,
-                                 backgroundColor: !bool ? SwiftGenColors.gray5.color : SwiftGenColors.white.color ,
-                                 textColor: SwiftGenColors.black.color )
+            UIView.animate(withDuration: 0.3) {
+                cell.changeColor(borderColor: SwiftGenColors.primaryBlack.color,
+                                 backgroundColor: !bool ? SwiftGenColors.primaryBlack.color : SwiftGenColors.primaryBackground.color ,
+                                 textColor: !bool ? SwiftGenColors.white.color : SwiftGenColors.primaryBlack.color )
             }
         }
     }

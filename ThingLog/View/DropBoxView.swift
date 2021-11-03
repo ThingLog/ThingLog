@@ -14,9 +14,9 @@ final class DropBoxView: UIView {
     // MARK: - View
     var titleButton: InsetButton = {
         let button: InsetButton = InsetButton()
-        button.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.body3
-        button.setImage(SwiftGenAssets.chevronDown.image, for: .normal)
+        button.setImage(SwiftGenIcons.dropBoxArrow1.image, for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
@@ -28,7 +28,6 @@ final class DropBoxView: UIView {
     
     private var tableView: UITableView = {
         let tableView: UITableView = UITableView()
-        tableView.backgroundColor = SwiftGenColors.white.color
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = true
@@ -42,7 +41,6 @@ final class DropBoxView: UIView {
     private let outsideTouchDetectView: IgnoreTouchView = {
         let touchDetectView: IgnoreTouchView = IgnoreTouchView(frame: UIScreen.main.bounds)
         touchDetectView.isUserInteractionEnabled = true
-        touchDetectView.backgroundColor = .clear
         return touchDetectView
     }()
     
@@ -53,7 +51,7 @@ final class DropBoxView: UIView {
     private var isShowingDropBox: Bool = false
     // 최초로 버튼을 클릭했는지 여부를 확인하기 위한 프로퍼티이다.
     private var isFirstClickButton: Bool = true
-    private let tableViewCellHeight: CGFloat = 28
+    private let tableViewCellHeight: CGFloat = 44
     private var maxTableViewHeight: CGFloat {
         if filterType.list.count >= 4 {
             return tableViewCellHeight * 4
@@ -78,6 +76,7 @@ final class DropBoxView: UIView {
         super.init(frame: .zero)
         updateView(title: type.defaultValue)
         setupView()
+        setupBackgroundColor()
     }
     
     required init?(coder: NSCoder) {
@@ -86,10 +85,15 @@ final class DropBoxView: UIView {
     }
     
     // MARK: - Setup
+    
+    private func setupBackgroundColor() {
+        backgroundColor = SwiftGenColors.primaryBackground.color
+        tableView.backgroundColor = SwiftGenColors.primaryBackground.color
+        outsideTouchDetectView.backgroundColor = .clear
+    }
+    
     private func setupView() {
-        backgroundColor = SwiftGenColors.white.color
         clipsToBounds = true
-        
         addSubview(titleButton)
         superView?.addSubview(tableView)
         bringSubviewToFront(tableView)
@@ -185,11 +189,10 @@ extension DropBoxView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
         cell.selectionStyle = .none
-        cell.backgroundColor = SwiftGenColors.white.color
-        cell.contentView.backgroundColor = SwiftGenColors.white.color
+        cell.backgroundColor = SwiftGenColors.primaryBackground.color
         cell.textLabel?.text = filterType.list[indexPath.row]
         cell.textLabel?.font = selectedIndexPath == indexPath ? UIFont.Pretendard.title3 : UIFont.Pretendard.body3
-        cell.textLabel?.textColor = selectedIndexPath == indexPath ? SwiftGenColors.black.color : SwiftGenColors.gray4.color
+        cell.textLabel?.textColor = selectedIndexPath == indexPath ? SwiftGenColors.primaryBlack.color : SwiftGenColors.gray2.color
         return cell
     }
 }
@@ -203,14 +206,14 @@ extension DropBoxView: UITableViewDelegate {
         // 기존에 선택된 cell의 강조를 풀어준다.
         if let cell: UITableViewCell = tableView.cellForRow(at: selectedIndexPath) {
             cell.textLabel?.font = UIFont.Pretendard.body3
-            cell.textLabel?.textColor = SwiftGenColors.gray4.color
+            cell.textLabel?.textColor = SwiftGenColors.gray2.color
         }
         selectedIndexPath = indexPath
         
         // 현재 선택된 cell을 강조한다.
         if let cell: UITableViewCell = tableView.cellForRow(at: selectedIndexPath) {
             cell.textLabel?.font = UIFont.Pretendard.title3
-            cell.textLabel?.textColor = SwiftGenColors.black.color
+            cell.textLabel?.textColor = SwiftGenColors.primaryBlack.color
         }
         let title: String = filterType.list[indexPath.row]
         updateView(title: title)

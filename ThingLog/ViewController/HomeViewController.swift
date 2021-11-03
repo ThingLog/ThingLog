@@ -9,9 +9,9 @@ import RxSwift
 import UIKit
 
 final class HomeViewController: UIViewController {
+    // MARK: - View
     let profileView: ProfileView = {
         let profileView: ProfileView = ProfileView()
-        profileView.backgroundColor = SwiftGenColors.white.color
         profileView.translatesAutoresizingMaskIntoConstraints = false
         return profileView
     }()
@@ -32,6 +32,8 @@ final class HomeViewController: UIViewController {
         let controller: ContentsPageViewController = ContentsPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         return controller
     }()
+    
+    // MARK: - Properties
     
     var coordinator: HomeCoordinator?
     private let userInformationViewModel: UserInformationViewModelable = UserInformationiCloudViewModel()
@@ -89,7 +91,7 @@ final class HomeViewController: UIViewController {
             contentsTabView.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor),
             contentsTabView.trailingAnchor.constraint(equalTo: contentsContainerView.trailingAnchor),
             contentsTabView.topAnchor.constraint(equalTo: contentsContainerView.safeAreaLayoutGuide.topAnchor),
-            contentsTabView.heightAnchor.constraint(equalToConstant: 36)
+            contentsTabView.heightAnchor.constraint(equalToConstant: 37)
         ])
     }
     
@@ -114,7 +116,7 @@ final class HomeViewController: UIViewController {
         navigationItem.leftBarButtonItem = logoBarButtonItem
         
         let settingButton: UIButton = UIButton()
-        settingButton.setImage(SwiftGenAssets.setting.image, for: .normal)
+        settingButton.setImage(SwiftGenIcons.system.image, for: .normal)
         settingButton.tintColor = SwiftGenColors.black.color
         settingButton.rx.tap
             .bind { [weak self] in

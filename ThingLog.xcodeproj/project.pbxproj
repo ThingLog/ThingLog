@@ -586,13 +586,10 @@
 				DB7C04E026FB1900009F5C0A /* ContentsCollection */,
 				DB7C04F126FB1F36009F5C0A /* ContentsPageViewController.swift */,
 				DB00D214272A8D1E003FC9C3 /* Drawer */,
-				DB7C04B526F8782B009F5C0A /* EasyLookViewController.swift */,
-				DBD2244427085651004C5184 /* EasyLookViewController+setup.swift */,
-				DBD2244627085671004C5184 /* EasyLookViewController+subscribe.swift */,
+				DBE3E9C92730137200B3EB69 /* EasyLook */,
 				DB7C04EF26FB1EFF009F5C0A /* HomeViewController.swift */,
 				DB9FBDB3272E82A9005E64AF /* Login */,
-				DBA0F828270B26A0009553FC /* SearchResultsViewController.swift */,
-				DBD2244A27085DFB004C5184 /* SearchViewController.swift */,
+				DBE3E9CA2730196D00B3EB69 /* Search */,
 				DB6909602712DA8100BB54E4 /* SettingViewController.swift */,
 				DB7C04B126F87548009F5C0A /* TabBarController.swift */,
 				DBE3E9BF272FB9AB00B3EB69 /* Trash */,
@@ -780,6 +777,25 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		DBE3E9C92730137200B3EB69 /* EasyLook */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04B526F8782B009F5C0A /* EasyLookViewController.swift */,
+				DBD2244427085651004C5184 /* EasyLookViewController+setup.swift */,
+				DBD2244627085671004C5184 /* EasyLookViewController+subscribe.swift */,
+			);
+			path = EasyLook;
+			sourceTree = "<group>";
+		};
+		DBE3E9CA2730196D00B3EB69 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				DBA0F828270B26A0009553FC /* SearchResultsViewController.swift */,
+				DBD2244A27085DFB004C5184 /* SearchViewController.swift */,
+			);
+			path = Search;
+            sourceTree = "<group>";
+        };
 		DBE3E9BF272FB9AB00B3EB69 /* Trash */ = {
 			isa = PBXGroup;
 			children = (

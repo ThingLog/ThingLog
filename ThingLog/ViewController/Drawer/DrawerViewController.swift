@@ -19,7 +19,6 @@ final class DrawerViewController: UIViewController {
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.headerReferenceSize = CGSize(width: screenWidth, height: 270)
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.backgroundColor = SwiftGenColors.white.color
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(DrawerCollectionCell.self, forCellWithReuseIdentifier: DrawerCollectionCell.reuseIdentifier)
         collectionView.register(DrawerHeaderView.self,
@@ -35,13 +34,19 @@ final class DrawerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = SwiftGenColors.white.color
+        setupBackgroundColor()
         setupNavigationBar()
         setupRightNavigationBarItem()
         setupView()
     }
     
     // MARK: - Setup
+    
+    private func setupBackgroundColor() {
+        collectionView.backgroundColor = SwiftGenColors.primaryBackground.color
+        view.backgroundColor = SwiftGenColors.primaryBackground.color
+    }
+    
     private func setupView() {
         view.addSubview(collectionView)
         
@@ -64,8 +69,8 @@ final class DrawerViewController: UIViewController {
         navigationItem.titleView = logoView
         
         let backButton: UIButton = UIButton()
-        backButton.setImage(SwiftGenAssets.closeBig.image, for: .normal)
-        backButton.tintColor = SwiftGenColors.black.color
+        backButton.setImage(SwiftGenIcons.close.image, for: .normal)
+        backButton.tintColor = SwiftGenColors.primaryBlack.color
         backButton.rx.tap
             .bind { [weak self] in
                 self?.coordinator?.back()
@@ -78,8 +83,8 @@ final class DrawerViewController: UIViewController {
     private func setupRightNavigationBarItem() {
         let editButton: UIButton = UIButton()
         editButton.setTitle("완료", for: .normal)
-        editButton.titleLabel?.font = UIFont.Pretendard.title1
-        editButton.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        editButton.titleLabel?.font = UIFont.Pretendard.body1
+        editButton.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         editButton.rx.tap
             .bind { [weak self] in
                 self?.coordinator?.back()
@@ -109,7 +114,7 @@ extension DrawerViewController: UICollectionViewDataSource, UICollectionViewDele
         cell.drawerView.hideTitleLabel(!bool)
         cell.drawerView.hideSubLabel(true)
         cell.drawerView.setTitleLabel(fontType: UIFont.Pretendard.title2,
-                                      color: SwiftGenColors.black.color,
+                                      color: SwiftGenColors.primaryBlack.color,
                                       text: "문구세트")
         return cell
     }
@@ -125,8 +130,8 @@ extension DrawerViewController: UICollectionViewDataSource, UICollectionViewDele
         }
         headerView.drawerView.hideQuestionImageView(true)
         headerView.drawerView.setSubLabel(fontType: UIFont.Pretendard.body2,
-                               color: SwiftGenColors.gray3.color,
-                               text: "아직 대표 물건이 없어용!")
+                                          color: SwiftGenColors.gray2.color,
+                                          text: "아직 대표 물건이 없어용!")
         return headerView
     }
 }

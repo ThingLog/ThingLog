@@ -352,15 +352,15 @@ extension AlertViewController {
     }
     
     private func setBackgroundColorTint() {
-        alertView.backgroundColor = SwiftGenColors.white.color
-        titleLabel.textColor = SwiftGenColors.black.color
-        contentsLabel.textColor = SwiftGenColors.black.color
+        alertView.backgroundColor = SwiftGenColors.primaryBackground.color
+        titleLabel.textColor = SwiftGenColors.primaryBlack.color
+        contentsLabel.textColor = SwiftGenColors.primaryBlack.color
         
-        textField.layer.borderColor = SwiftGenColors.black.color.cgColor
-        textField.textColor = SwiftGenColors.black.color
+        textField.layer.borderColor = SwiftGenColors.primaryBlack.color.cgColor
+        textField.textColor = SwiftGenColors.primaryBlack.color
         
-        leftButton.setTitleColor(SwiftGenColors.black.color, for: .normal)
-        rightButton.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        leftButton.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
+        rightButton.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         
         borderLineBetweenButton.backgroundColor = SwiftGenColors.gray4.color
         borderLineOnButton.backgroundColor = SwiftGenColors.gray4.color

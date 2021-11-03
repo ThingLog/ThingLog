@@ -34,7 +34,6 @@ final class SearchViewController: UIViewController {
     private let emptyView: EmptyResultsView = {
         let view: EmptyResultsView = EmptyResultsView()
         view.isHidden = true
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -48,7 +47,7 @@ final class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = SwiftGenColors.white.color
+        setupBackgroundColor()
         setupNavigationBar()
         setupContainerView()
         setupRecentSearchView()
@@ -70,6 +69,12 @@ final class SearchViewController: UIViewController {
     }
     
     // MARK: - Setup
+    
+    private func setupBackgroundColor() {
+        view.backgroundColor = SwiftGenColors.primaryBackground.color
+        emptyView.backgroundColor = SwiftGenColors.primaryBackground.color
+    }
+    
     private func setupContainerView() {
         let safeLayout: UILayoutGuide = view.safeAreaLayoutGuide
         view.addSubview(containerView)
@@ -110,18 +115,7 @@ final class SearchViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        if #available(iOS 15, *) {
-            let appearance: UINavigationBarAppearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = SwiftGenColors.white.color
-            appearance.shadowColor = .clear
-            navigationController?.navigationBar.standardAppearance = appearance
-            navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-        } else {
-            navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.barTintColor = SwiftGenColors.white.color
-            navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
-        }
+        setupBaseNavigationBar()
         navigationItem.setHidesBackButton(true, animated: false)
         navigationItem.titleView = searchTextField
         searchTextField.delegate = self
