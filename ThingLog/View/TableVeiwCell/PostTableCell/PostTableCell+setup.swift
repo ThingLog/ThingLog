@@ -149,10 +149,11 @@ extension PostTableCell {
             boughtButton.leadingAnchor.constraint(equalTo: specificActionContainerView.leadingAnchor, constant: boughtButtonLeadingTrailingSpacing),
             boughtButton.topAnchor.constraint(equalTo: specificActionContainerView.topAnchor),
             boughtButton.trailingAnchor.constraint(equalTo: specificActionContainerView.trailingAnchor, constant: -boughtButtonLeadingTrailingSpacing),
+            boughtButton.bottomAnchor.constraint(equalTo: specificActionContainerView.bottomAnchor),
             boughtButton.heightAnchor.constraint(equalToConstant: boughtButtonHeight),
 
             trashActionButton.leadingAnchor.constraint(equalTo: specificActionContainerView.leadingAnchor),
-            trashActionButton.topAnchor.constraint(equalTo: boughtButton.bottomAnchor),
+            trashActionButton.topAnchor.constraint(equalTo: specificActionContainerView.topAnchor),
             trashActionButton.trailingAnchor.constraint(equalTo: specificActionContainerView.trailingAnchor),
             trashActionButton.bottomAnchor.constraint(equalTo: specificActionContainerView.bottomAnchor),
             trashActionButton.heightAnchor.constraint(equalToConstant: trashButtonHeight)

@@ -231,6 +231,14 @@ final class PostTableCell: UITableViewCell {
     let categoryViewDataSource: PostCategoryViewDataSouce = PostCategoryViewDataSouce()
     let slideImageViewDataSource: SlideImageViewDataSource = SlideImageViewDataSource()
     var disposeBag: DisposeBag = DisposeBag()
+    /// TODO: 이후 뷰모델을 통해 어떤 화면인지 받을 예정, 테스트를 위한 프로퍼티
+    var isTrash: Bool = true {
+        didSet { updateSpecificActionView() }
+    }
+    /// TODO: 이후 뷰모델을 통해 어떤 화면인지 받을 예정, 테스트를 위한 프로퍼티
+    var isBought: Bool = true {
+        didSet { updateSpecificActionView() }
+    }
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -264,11 +272,25 @@ final class PostTableCell: UITableViewCell {
     }
 
     func setupBinding() {
+        // TODO: for test
     }
 
     func horizontalFlexibleView() -> UIView {
         let view: UIView = UIView()
         view.setContentCompressionResistancePriority(.required, for: .horizontal)
         return view
+    }
+
+    /// 특별한 상황에서 쓰이는 버튼(사고싶다, 휴지통 게시물인 경우)을 숨김/표시 처리한다.
+    /// 이후 뷰모델에서 어떤 화면인지 넘겨받으면 리팩토링할 예정
+    func updateSpecificActionView() {
+        if isBought && isTrash {
+            specificActionContainerView.isHidden = true
+            return
+        }
+        
+        specificActionContainerView.isHidden = false
+        boughtButton.isHidden = !isBought
+        trashActionButton.isHidden = !isTrash
     }
 }
