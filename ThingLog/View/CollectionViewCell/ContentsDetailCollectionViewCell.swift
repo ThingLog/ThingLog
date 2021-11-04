@@ -222,6 +222,9 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
     private func setupView() {
         contentView.addSubview(stackView)
         NSLayoutConstraint.activate([
+            topBorderLineView.heightAnchor.constraint(equalToConstant: 0.3),
+            bottomBorderLineView.heightAnchor.constraint(equalToConstant: 0.5),
+            
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -229,10 +232,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
             
             imageView.heightAnchor.constraint(equalTo: imageWithRightStackView.heightAnchor),
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
-            
-            bottomBorderLineView.heightAnchor.constraint(equalToConstant: 0.5),
-            topBorderLineView.heightAnchor.constraint(equalToConstant: 0.5),
-            
+                        
             dateTopEmptyView.heightAnchor.constraint(equalToConstant: 4)
         ])
     }

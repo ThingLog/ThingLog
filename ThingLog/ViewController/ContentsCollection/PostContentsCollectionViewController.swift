@@ -31,11 +31,10 @@ class PostContentsCollectionViewController: BaseContentsCollectionViewController
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewCompositionalLayout(section: section))
         collectionView.register(ContentsDetailCollectionViewCell.self, forCellWithReuseIdentifier: ContentsDetailCollectionViewCell.reuseIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .white
         self.collectionView = collectionView
         
         view.addSubview(collectionView)
-        collectionView.backgroundColor = SwiftGenColors.white.color
+        collectionView.backgroundColor = SwiftGenColors.primaryBackground.color
         collectionView.dataSource = self
         collectionView.delegate = self
         NSLayoutConstraint.activate([

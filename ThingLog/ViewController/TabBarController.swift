@@ -152,6 +152,7 @@ extension TabBarController {
                 self.choiceView.hide(false)
                 self.dimmedView.backgroundColor = .black.withAlphaComponent(0.6)
                 self.rotatePlusButton(isRecovery: false)
+                UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
                 self.view.layoutIfNeeded()
             }
         }

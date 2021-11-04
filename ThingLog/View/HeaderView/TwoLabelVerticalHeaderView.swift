@@ -15,7 +15,7 @@ class TwoLabelVerticalHeaderView: UICollectionReusableView {
     private let titleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.title2
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.required, for: .vertical)
@@ -26,12 +26,12 @@ class TwoLabelVerticalHeaderView: UICollectionReusableView {
     private let subTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.body3
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.setContentHuggingPriority(.required, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.text = "게시물이 삭제되기까지 남은 날짜를 보여줍니다. 해당 기간이 지나면 항목이 영구적으로 삭제됩니다. 최대 30일이 소요될 수 있습니다"
+        label.text = "게시물이 삭제되기까지 남은 날짜를 보여줍니다. 해당 기간이 지나면 항목이 영구적으로 삭제됩니다. 최대 30일이 소요될 수 있습니다."
         return label
     }()
     

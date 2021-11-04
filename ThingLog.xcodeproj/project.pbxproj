@@ -108,6 +108,7 @@
 		DB69095F2712C55F00BB54E4 /* SearchResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69095E2712C55F00BB54E4 /* SearchResultsViewModel.swift */; };
 		DB6909612712DA8100BB54E4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6909602712DA8100BB54E4 /* SettingViewController.swift */; };
 		DB6909632712DB0800BB54E4 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6909622712DB0800BB54E4 /* SettingCoordinator.swift */; };
+		DB6D05AD2733D47E003002A3 /* CheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D05AC2733D47E003002A3 /* CheckView.swift */; };
 		DB7C04AA26F5F308009F5C0A /* EasyLookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A926F5F308009F5C0A /* EasyLookCoordinator.swift */; };
 		DB7C04B226F87548009F5C0A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04B126F87548009F5C0A /* TabBarController.swift */; };
 		DB7C04B626F8782B009F5C0A /* EasyLookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04B526F8782B009F5C0A /* EasyLookViewController.swift */; };
@@ -126,10 +127,10 @@
 		DB8BF6792705D25700FD5FDB /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6782705D25700FD5FDB /* LogoView.swift */; };
 		DB8BF6812706D89E00FD5FDB /* ResultsWithDropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6802706D89E00FD5FDB /* ResultsWithDropBoxView.swift */; };
 		DB8BF6832706DA7900FD5FDB /* EasyLookTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6822706DA7900FD5FDB /* EasyLookTopView.swift */; };
-		DB9FBDBB272EAB62005E64AF /* TrashCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FBDBA272EAB62005E64AF /* TrashCoreDataTests.swift */; };
 		DB9FBDB2272E8144005E64AF /* UserInformationiCloudTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FBDB1272E8144005E64AF /* UserInformationiCloudTests.swift */; };
 		DB9FBDB7272E9A11005E64AF /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FBDB6272E9A11005E64AF /* UserInformation.swift */; };
 		DB9FBDB9272E9A33005E64AF /* UserInformationiCloudViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FBDB8272E9A33005E64AF /* UserInformationiCloudViewModel.swift */; };
+		DB9FBDBB272EAB62005E64AF /* TrashCoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FBDBA272EAB62005E64AF /* TrashCoreDataTests.swift */; };
 		DBA0F8192709A79A009553FC /* ThingLogRecentSearchDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0F8182709A79A009553FC /* ThingLogRecentSearchDataTests.swift */; };
 		DBA0F81C2709B390009553FC /* LeftLabelRightButtonTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0F81B2709B390009553FC /* LeftLabelRightButtonTableCell.swift */; };
 		DBA0F81E2709BD41009553FC /* RecentSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0F81D2709BD41009553FC /* RecentSearchView.swift */; };
@@ -306,6 +307,7 @@
 		DB69095E2712C55F00BB54E4 /* SearchResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewModel.swift; sourceTree = "<group>"; };
 		DB6909602712DA8100BB54E4 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		DB6909622712DB0800BB54E4 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
+		DB6D05AC2733D47E003002A3 /* CheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckView.swift; sourceTree = "<group>"; };
 		DB7C04A526F5F281009F5C0A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		DB7C04A926F5F308009F5C0A /* EasyLookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookCoordinator.swift; sourceTree = "<group>"; };
@@ -326,10 +328,10 @@
 		DB8BF6782705D25700FD5FDB /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		DB8BF6802706D89E00FD5FDB /* ResultsWithDropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsWithDropBoxView.swift; sourceTree = "<group>"; };
 		DB8BF6822706DA7900FD5FDB /* EasyLookTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookTopView.swift; sourceTree = "<group>"; };
-		DB9FBDBA272EAB62005E64AF /* TrashCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashCoreDataTests.swift; sourceTree = "<group>"; };
 		DB9FBDB1272E8144005E64AF /* UserInformationiCloudTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationiCloudTests.swift; sourceTree = "<group>"; };
 		DB9FBDB6272E9A11005E64AF /* UserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformation.swift; sourceTree = "<group>"; };
 		DB9FBDB8272E9A33005E64AF /* UserInformationiCloudViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationiCloudViewModel.swift; sourceTree = "<group>"; };
+		DB9FBDBA272EAB62005E64AF /* TrashCoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashCoreDataTests.swift; sourceTree = "<group>"; };
 		DBA0F8182709A79A009553FC /* ThingLogRecentSearchDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogRecentSearchDataTests.swift; sourceTree = "<group>"; };
 		DBA0F81B2709B390009553FC /* LeftLabelRightButtonTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftLabelRightButtonTableCell.swift; sourceTree = "<group>"; };
 		DBA0F81D2709BD41009553FC /* RecentSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchView.swift; sourceTree = "<group>"; };
@@ -612,6 +614,7 @@
 			isa = PBXGroup;
 			children = (
 				87ACB0B127229A3000C78C86 /* CenterTextButton.swift */,
+				DB6D05AC2733D47E003002A3 /* CheckView.swift */,
 				DB7C04B826F87BE9009F5C0A /* ChoiceWritingView.swift */,
 				DB7C04E726FB199A009F5C0A /* CollectionViewCell */,
 				DB7C04ED26FB1ACE009F5C0A /* ContentsTabView.swift */,
@@ -674,14 +677,6 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		DB9FBDBC272ECCC7005E64AF /* Trash */ = {
-			isa = PBXGroup;
-			children = (
-				DB9FBDBA272EAB62005E64AF /* TrashCoreDataTests.swift */,
-			);
-			path = Trash;
-            sourceTree = "<group>";
-        };
 		DB9FBDAE272E8120005E64AF /* UserInformationTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -708,6 +703,14 @@
 				DBE3E9C2272FD6B300B3EB69 /* UserInformationViewModelable.swift */,
 			);
 			path = UserInformationViewModel;
+			sourceTree = "<group>";
+		};
+		DB9FBDBC272ECCC7005E64AF /* Trash */ = {
+			isa = PBXGroup;
+			children = (
+				DB9FBDBA272EAB62005E64AF /* TrashCoreDataTests.swift */,
+			);
+			path = Trash;
 			sourceTree = "<group>";
 		};
 		DBA0F81A2709B37C009553FC /* TableVeiwCell */ = {
@@ -777,6 +780,15 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		DBE3E9BF272FB9AB00B3EB69 /* Trash */ = {
+			isa = PBXGroup;
+			children = (
+				DB05B03D27185B780067DB17 /* TrashViewController.swift */,
+				DBE3E9C0272FB9BB00B3EB69 /* TrashViewController+Collection.swift */,
+			);
+			path = Trash;
+			sourceTree = "<group>";
+		};
 		DBE3E9C92730137200B3EB69 /* EasyLook */ = {
 			isa = PBXGroup;
 			children = (
@@ -794,15 +806,6 @@
 				DBD2244A27085DFB004C5184 /* SearchViewController.swift */,
 			);
 			path = Search;
-            sourceTree = "<group>";
-        };
-		DBE3E9BF272FB9AB00B3EB69 /* Trash */ = {
-			isa = PBXGroup;
-			children = (
-				DB05B03D27185B780067DB17 /* TrashViewController.swift */,
-				DBE3E9C0272FB9BB00B3EB69 /* TrashViewController+Collection.swift */,
-			);
-			path = Trash;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1109,6 +1112,7 @@
 				DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */,
 				DB331DAB26FDD00A00A629F5 /* Fonts.swift in Sources */,
 				8789A19E272C5DCC00CFB16C /* Notification.Name+.swift in Sources */,
+				DB6D05AD2733D47E003002A3 /* CheckView.swift in Sources */,
 				8736B3E526FCBA77000433E1 /* RatingEntity+.swift in Sources */,
 				87F2188626FB5DFB00C3FBCA /* Post.swift in Sources */,
 				DBA0F822270AF656009553FC /* ContentsDetailCollectionViewCell.swift in Sources */,

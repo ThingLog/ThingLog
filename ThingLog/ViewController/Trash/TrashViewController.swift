@@ -15,6 +15,12 @@ final class TrashViewController: UIViewController {
     /// 네비게이션바 우측에 있는 선택or취소 버튼이다
     let editButton: UIButton = UIButton()
     
+    let topBorderLineView: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let collectionView: UICollectionView = {
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumInteritemSpacing = 1
@@ -34,7 +40,6 @@ final class TrashViewController: UIViewController {
     private let deleteButtonView: LeftRightButtonView = {
         let deleteView: LeftRightButtonView = LeftRightButtonView()
         deleteView.clipsToBounds = true
-        deleteView.backgroundColor = SwiftGenColors.white.color
         deleteView.translatesAutoresizingMaskIntoConstraints = false
         return deleteView
     }()
@@ -53,7 +58,6 @@ final class TrashViewController: UIViewController {
         let view: EmptyResultsView = EmptyResultsView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true
-        view.backgroundColor = SwiftGenColors.white.color
         view.label.text = "휴지통이 비었습니다"
         return view
     }()
@@ -98,6 +102,7 @@ final class TrashViewController: UIViewController {
         setupEmptyView()
         setupNavigationBar()
         setupRightNavigationBarItem()
+        setupBackgroundColor()
         
         subscribeEditButton()
         subscribeDeleteButton()
@@ -107,20 +112,33 @@ final class TrashViewController: UIViewController {
     }
     
     // MARK: - Setup
+    private func setupBackgroundColor() {
+        collectionView.backgroundColor = SwiftGenColors.primaryBackground.color
+        emptyView.backgroundColor = SwiftGenColors.primaryBackground.color
+        deleteButtonView.backgroundColor = SwiftGenColors.primaryBackground.color
+        topBorderLineView.backgroundColor = SwiftGenColors.gray4.color
+    }
+    
     private func setupStackView() {
         view.addSubview(stackView)
+        view.addSubview(topBorderLineView)
+        
         deleteButtonHeightConstraint = deleteButtonView.heightAnchor.constraint(equalToConstant: 0)
         deleteButtonHeightConstraint?.isActive = true
         NSLayoutConstraint.activate([
+            topBorderLineView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topBorderLineView.heightAnchor.constraint(equalToConstant: 0.5),
+            topBorderLineView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topBorderLineView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.topAnchor.constraint(equalTo: topBorderLineView.bottomAnchor),
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
     private func setupBaseCollectionView() {
-        collectionView.backgroundColor = SwiftGenColors.white.color
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -142,8 +160,8 @@ final class TrashViewController: UIViewController {
         navigationItem.titleView = logoView
         
         let backButton: UIButton = UIButton()
-        backButton.setImage(SwiftGenAssets.paddingBack.image, for: .normal)
-        backButton.tintColor = SwiftGenColors.black.color
+        backButton.setImage(SwiftGenIcons.longArrowR.image, for: .normal)
+        backButton.tintColor = SwiftGenColors.primaryBlack.color
         backButton.rx.tap
             .bind { [weak self] in
                 self?.coordinator?.back()
@@ -156,7 +174,7 @@ final class TrashViewController: UIViewController {
     private func setupRightNavigationBarItem() {
         editButton.setTitle("선택", for: .normal)
         editButton.titleLabel?.font = UIFont.Pretendard.body1
-        editButton.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        editButton.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         let editBarButton: UIBarButtonItem = UIBarButtonItem(customView: editButton)
         let fixedSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         fixedSpace.width = 17

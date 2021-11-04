@@ -226,6 +226,7 @@ final class AlertViewController: UIViewController {
             UIView.animate(withDuration: 0.15) {
                 self.setBackgroundColorTint()
                 self.alertView.transform = .identity
+                UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
             }
         }
     }
