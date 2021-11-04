@@ -12,7 +12,7 @@ class LeftRightButtonView: UIView {
     let leftButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("모두 삭제", for: .normal)
-        button.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        button.setTitleColor(SwiftGenColors.systemRed.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.title1
         return button
     }()
@@ -20,14 +20,14 @@ class LeftRightButtonView: UIView {
     let rightButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("모두 복구", for: .normal)
-        button.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.body1
         return button
     }()
     
     private let borderLine: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.gray4.color
+        view.backgroundColor = SwiftGenColors.gray2.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -43,7 +43,7 @@ class LeftRightButtonView: UIView {
     
     private let topLineView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.gray4.color
+        view.backgroundColor = SwiftGenColors.gray2.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
