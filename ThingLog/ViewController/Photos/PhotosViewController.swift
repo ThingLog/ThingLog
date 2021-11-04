@@ -55,7 +55,7 @@ final class PhotosViewController: BaseViewController {
     }()
 
     // MARK: - Properties
-    let imageManager: PHCachingImageManager = PHCachingImageManager()
+    let imageManager: PHCachingImageManager = PHCachingImageManager.default() as! PHCachingImageManager
     var previousPreheatRect: CGRect = .zero
     let selectedMaxCount: Int = 10
     var coordinator: WriteCoordinator?

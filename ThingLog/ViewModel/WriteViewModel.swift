@@ -49,7 +49,7 @@ final class WriteViewModel {
         bindNotificationPassSelectPHAssets()
     }
 
-    /// 
+    /// PhotosViewController 에서 전달받은 데이터를 바인딩한다.
     func bindNotificationPassSelectPHAssets() {
         NotificationCenter.default.rx
             .notification(.passSelectAssets, object: nil)

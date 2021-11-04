@@ -9,6 +9,7 @@ import UIKit
 
 import RxCocoa
 import RxSwift
+import Photos
 
 /// 기본적인 이미지만을 보여주기 위한 cell이다.
 ///
@@ -88,6 +89,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
 
     /// 셀이 동일한 에셋을 표시하는 경우에만 썸네일 이미지를 설정하기 위한 프로퍼티
     var representedAssetIdentifier: String = ""
+    var imageRequestID: PHImageRequestID?
     var disposeBag: DisposeBag = DisposeBag()
     private let paddingCheckButton: CGFloat = 8
     private let checkButtonSize: CGFloat = 20
@@ -95,6 +97,10 @@ class ContentsCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+
+        guard let imageRequestID = imageRequestID else { return }
+        PHCachingImageManager.default().cancelImageRequest(imageRequestID)
+        self.imageRequestID = nil
     }
     
     override init(frame: CGRect) {
