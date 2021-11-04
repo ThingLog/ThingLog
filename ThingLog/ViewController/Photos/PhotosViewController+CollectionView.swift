@@ -40,6 +40,7 @@ extension PhotosViewController: UICollectionViewDataSource {
                                                         targetSize: thumbnailSize,
                                                         contentMode: .aspectFill,
                                                         options: nil) { image, _ in
+            if indexPath.item == 0 { return }
             if cell.representedAssetIdentifier == asset.localIdentifier {
                 cell.update(image: image)
             }
