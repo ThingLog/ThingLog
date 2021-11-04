@@ -25,7 +25,9 @@ final class RatingView: UIView {
     var maxCount: Int = 5 {
         didSet { setupRatingButton() }
     }
-    var currentRating: Int = 0
+    var currentRating: Int = 0 {
+        didSet { updateCurrentRating() }
+    }
     /// 버튼을 선택했을 때 호출할 클로저
     var didTapButtonBlock: (() -> Void)?
 
@@ -81,5 +83,11 @@ extension RatingView {
         (end + 1..<maxCount).forEach { buttons[$0].setImage(emptyImage, for: .normal) }
 
         currentRating = end + 1
+    }
+
+    /// currentRating 값 만큼 button의 색상을 채운다.
+    private func updateCurrentRating() {
+        (0...currentRating).forEach { buttons[$0].setImage(fillImage, for: .normal) }
+        (currentRating..<maxCount).forEach { buttons[$0].setImage(emptyImage, for: .normal) }
     }
 }

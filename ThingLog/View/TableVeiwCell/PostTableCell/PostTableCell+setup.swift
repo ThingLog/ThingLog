@@ -168,7 +168,8 @@ extension PostTableCell {
     }
 
     private func createCategoryCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize: NSCollectionLayoutSize = .init(widthDimension: .estimated(1), heightDimension: .estimated(1))
+        let itemSize: NSCollectionLayoutSize = .init(widthDimension: .estimated(16),
+                                                     heightDimension: .fractionalHeight(1))
         let item: NSCollectionLayoutItem = .init(layoutSize: itemSize)
 
         let groupSize: NSCollectionLayoutSize = .init(widthDimension: .estimated(1),
@@ -178,13 +179,12 @@ extension PostTableCell {
         let section: NSCollectionLayoutSection = .init(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.interGroupSpacing = 10
-        section.contentInsets = .init(top: 8, leading: 10, bottom: 0, trailing: 10)
+        section.contentInsets = .init(top: 8, leading: 10, bottom: 8, trailing: 10)
 
         let layout: UICollectionViewCompositionalLayout = .init(section: section)
 
         return layout
     }
-
 }
 
 extension PostTableCell: UICollectionViewDelegate, UIScrollViewDelegate {

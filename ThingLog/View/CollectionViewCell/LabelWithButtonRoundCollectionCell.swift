@@ -16,7 +16,6 @@ final class LabelWithButtonRoundCollectionCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.Pretendard.body1
         label.textColor = SwiftGenColors.black.color
-        label.text = "전자제품"
         return label
     }()
 
@@ -50,7 +49,9 @@ final class LabelWithButtonRoundCollectionCell: UICollectionViewCell {
 extension LabelWithButtonRoundCollectionCell {
     private func setupView() {
         contentView.layer.cornerRadius = 10
-        contentView.backgroundColor = SwiftGenColors.gray6.color
+        contentView.backgroundColor = .clear
+        contentView.layer.borderColor = SwiftGenColors.primaryBlack.color.cgColor
+        contentView.layer.borderWidth = 1.0
 
         let stackView: UIStackView = {
             let stackView: UIStackView = UIStackView(arrangedSubviews: [label, removeButton])

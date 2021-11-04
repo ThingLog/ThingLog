@@ -10,7 +10,10 @@ import UIKit
 import RxCocoa
 import RxSwift
 
+/// 게시물을 표시하는데 사용하는 뷰
+/// ![이미지](https://www.notion.so/PostTableCell-667e8e6eb38c4dd4b6bdf45ac6b4614d)
 final class PostTableCell: UITableViewCell {
+    // MARK: - View Properties
     /// 날짜, 기타 메뉴(수정, 삭제)를 포함한 뷰
     let headerContainerView: UIView = {
         let view: UIView = UIView()
@@ -255,6 +258,7 @@ final class PostTableCell: UITableViewCell {
         return stackView
     }()
 
+    // MARK: - Properties
     let categoryViewDataSource: PostCategoryViewDataSouce = PostCategoryViewDataSouce()
     let slideImageViewDataSource: PostSlideImageViewDataSource = PostSlideImageViewDataSource()
     var disposeBag: DisposeBag = DisposeBag()
