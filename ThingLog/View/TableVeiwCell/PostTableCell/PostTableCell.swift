@@ -213,7 +213,7 @@ final class PostTableCell: UITableViewCell {
     }()
 
     let trashActionButton: LeftRightButtonView = {
-        let button: LeftRightButtonView = LeftRightButtonView()
+        let button: LeftRightButtonView = LeftRightButtonView(bottomLineIsHidden: false)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.leftButton.setTitle("삭제", for: .normal)
         button.rightButton.setTitle("복구", for: .normal)

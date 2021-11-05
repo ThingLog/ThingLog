@@ -54,16 +54,19 @@ class LeftRightButtonView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+
+    private var bottomLineIsHidden: Bool
+
+    init(bottomLineIsHidden: Bool = true) {
+        self.bottomLineIsHidden = bottomLineIsHidden
+        super.init(frame: .zero)
         setupView()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
-    
+
     func setupView() {
         addSubviews(stackView, topLineView, bottomLineView)
         
@@ -72,7 +75,7 @@ class LeftRightButtonView: UIView {
         
         let topLineConstraint: NSLayoutConstraint = topLineView.heightAnchor.constraint(equalToConstant: 0.5)
         topLineConstraint.isActive = true
-        topLineConstraint.priority = .defaultHigh
+        topLineConstraint.priority = .required
         
         let borderLineConstraint: NSLayoutConstraint = borderLine.widthAnchor.constraint(equalToConstant: 0.5)
         borderLineConstraint.isActive = true
@@ -80,8 +83,8 @@ class LeftRightButtonView: UIView {
 
         let bottomLineConstraint: NSLayoutConstraint = bottomLineView.heightAnchor.constraint(equalToConstant: 0.5)
         bottomLineConstraint.isActive = true
-        bottomLineConstraint.priority = .defaultHigh
-                    
+        bottomLineConstraint.priority = .required
+
         NSLayoutConstraint.activate([
             topLineView.leadingAnchor.constraint(equalTo: leadingAnchor),
             topLineView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -91,13 +94,20 @@ class LeftRightButtonView: UIView {
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.topAnchor.constraint(equalTo: topLineView.bottomAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -bottomPadding),
  
-            leftButton.widthAnchor.constraint(equalTo: rightButton.widthAnchor),
-
-            bottomLineView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            bottomLineView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            bottomLineView.topAnchor.constraint(equalTo: bottomAnchor)
+            leftButton.widthAnchor.constraint(equalTo: rightButton.widthAnchor)
         ])
+
+        // bottomLine이 필요한 경우(게시물), 필요하지 않는 경우(휴지통)에 따라 오토레이아웃을 설정한다.
+        if bottomLineIsHidden {
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -bottomPadding).isActive = true
+        } else {
+            NSLayoutConstraint.activate([
+                stackView.bottomAnchor.constraint(equalTo: bottomLineView.topAnchor),
+                bottomLineView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                bottomLineView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                bottomLineView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            ])
+        }
     }
 }
