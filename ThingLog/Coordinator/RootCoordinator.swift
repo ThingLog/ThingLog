@@ -41,5 +41,6 @@ final class RootCoordinator: Coordinator {
             login.coordinator = nil
         }
         self.window?.rootViewController = TabBarController()
+//        self.window?.makeKeyAndVisible()
     }
 }
