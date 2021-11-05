@@ -19,6 +19,8 @@ internal typealias AssetImageTypeAlias = ImageSwiftGen.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum SwiftGenAssets {
+  internal static let arrowDropDown = ImageSwiftGen(name: "arrowDropDown")
+  internal static let arrowDropUp = ImageSwiftGen(name: "arrowDropUp")
   internal static let back = ImageSwiftGen(name: "back")
   internal static let bought = ImageSwiftGen(name: "bought")
   internal static let camera = ImageSwiftGen(name: "camera")
@@ -54,6 +56,7 @@ internal struct ImageSwiftGen {
   internal typealias Image = UIImage
   #endif
 
+  @available(iOS 8.0, tvOS 9.0, watchOS 2.0, macOS 10.7, *)
   internal var image: Image {
     let bundle = BundleToken.bundle
     #if os(iOS) || os(tvOS)
@@ -69,9 +72,21 @@ internal struct ImageSwiftGen {
     }
     return result
   }
+
+  #if os(iOS) || os(tvOS)
+  @available(iOS 8.0, tvOS 9.0, *)
+  internal func image(compatibleWith traitCollection: UITraitCollection) -> Image {
+    let bundle = BundleToken.bundle
+    guard let result = Image(named: name, in: bundle, compatibleWith: traitCollection) else {
+      fatalError("Unable to load image asset named \(name).")
+    }
+    return result
+  }
+  #endif
 }
 
 internal extension ImageSwiftGen.Image {
+  @available(iOS 8.0, tvOS 9.0, watchOS 2.0, *)
   @available(macOS, deprecated,
     message: "This initializer is unsafe on macOS, please use the ImageSwiftGen.image property")
   convenience init?(asset: ImageSwiftGen) {

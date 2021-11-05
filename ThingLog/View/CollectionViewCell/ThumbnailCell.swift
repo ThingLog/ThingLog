@@ -16,6 +16,7 @@ final class ThumbnailCell: UICollectionViewCell {
         imageView.layer.borderWidth = 1
         imageView.layer.cornerRadius = 4
         imageView.layer.borderColor = SwiftGenColors.gray5.color.cgColor
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
 

@@ -15,6 +15,14 @@ final class CheckView: UIControl {
         imageView.isHidden = true
         return imageView
     }()
+
+    let label: UILabel = {
+        let label: UILabel = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.Pretendard.overline
+        label.textColor = SwiftGenColors.white.color
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,11 +34,15 @@ final class CheckView: UIControl {
     
     func setupView() {
         addSubview(imageView)
+        addSubview(label)
+
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -2),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 2),
             imageView.topAnchor.constraint(equalTo: topAnchor, constant: -2),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 2)
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 2),
+            label.centerXAnchor.constraint(equalTo: centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }

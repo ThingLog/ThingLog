@@ -7,6 +7,10 @@
 import CoreData
 import UIKit
 
+import RxCocoa
+import RxSwift
+import Photos
+
 /// 기본적인 이미지만을 보여주기 위한 cell이다.
 ///
 /// 기본적인 구성으로는 imageView, smallIconView 로 구성된다. smallIconView는 이미지가 여러개인 경우에 표시한다.
@@ -24,6 +28,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         let imageview: UIImageView = UIImageView()
         imageview.backgroundColor = .clear
         imageview.translatesAutoresizingMaskIntoConstraints = false
+        imageview.contentMode = .scaleAspectFill
         return imageview
     }()
     
@@ -81,9 +86,22 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         button.isUserInteractionEnabled = false
         return button
     }()
-    
+
+    /// 셀이 동일한 에셋을 표시하는 경우에만 썸네일 이미지를 설정하기 위한 프로퍼티
+    var representedAssetIdentifier: String = ""
+    var imageRequestID: PHImageRequestID?
+    var disposeBag: DisposeBag = DisposeBag()
     private let paddingCheckButton: CGFloat = 8
     private let checkButtonSize: CGFloat = 20
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+
+        guard let imageRequestID = imageRequestID else { return }
+        PHCachingImageManager.default().cancelImageRequest(imageRequestID)
+        self.imageRequestID = nil
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -161,6 +179,10 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         imageView.image = UIImage(data: (postEntity.attachments?.allObjects as? [AttachmentEntity])![0].thumbnail!)
         testLabel.text = text
     }
+
+    func update(image: UIImage?) {
+        imageView.image = image
+    }
     
     /// 그라데이션 뷰의 크기를 결정하기 위해 구현한다.
     override func layoutSubviews() {
@@ -181,11 +203,38 @@ extension ContentsCollectionViewCell {
         bottomGradientView.isHidden = false
         bottomLabel.isHidden = false
     }
+
+    /// 이미지와 체크 버튼만 표시하고 나머지 뷰들은 숨김처리한다.
+    func setupImageViewWithCheckButton() {
+        smallIconView.isHidden = true
+        bottomGradientView.isHidden = true
+        bottomLabel.isHidden = true
+        checkButton.isHidden = false
+        checkButton.isUserInteractionEnabled = true
+    }
+
+    /// 이미지만 표시하고 나머지 뷰들은 숨김처리한다.
+    func setupDisplayOnlyImageView() {
+        smallIconView.isHidden = true
+        bottomGradientView.isHidden = true
+        bottomLabel.isHidden = true
+        checkButton.isHidden = true
+        checkButton.isUserInteractionEnabled = false
+    }
     
     /// 체크버튼을 강조하거나 강조하지 않도록 변경하는 메서드다
     func changeCheckButton(isSelected: Bool) {
         checkButton.imageView.isHidden = !isSelected
         checkButton.backgroundColor = isSelected ? SwiftGenColors.systemGreen.color : .clear
         checkButton.layer.borderColor = isSelected ? UIColor.clear.cgColor : SwiftGenColors.white.color.cgColor
+    }
+
+    /// 체크 버튼의 `titleLabel`과 배경색을 변경한다.
+    /// - Parameters:
+    ///   - string: checkButton.titleLabel 에 지정할 문자열
+    ///   - backgroundColor: checkButton.backgroundColor 로 지정할 색상
+    func updateCheckButton(string: String?, backgroundColor: UIColor?) {
+        checkButton.label.text = string
+        checkButton.backgroundColor = backgroundColor
     }
 }
