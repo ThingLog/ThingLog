@@ -112,25 +112,15 @@ final class PostTableCell: UITableViewCell {
     lazy var firstInfoContainerView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .clear
-        view.addSubviews(nameScrollView, ratingView)
+        view.addSubviews(nameLabel, ratingView)
         return view
     }()
 
-    /// 물건 이름이 길어지는 경우를 위한 스크롤 뷰
-    lazy var nameScrollView: UIScrollView = {
-        let scrollView: UIScrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.addSubview(nameLabel)
-        return scrollView
-    }()
-
-    let nameLabel: UILabel = {
-        let label: UILabel = UILabel()
+    /// 물건 이름, 가로로 스크롤할 수 있다.
+    let nameLabel: HorizontalScrollLabel = {
+        let label: HorizontalScrollLabel = HorizontalScrollLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.Pretendard.title1
-        label.textColor = SwiftGenColors.black.color
-        label.text = "화분화분화분화분화분화분화분화"
+        label.text = "화분"
         return label
     }()
 
@@ -146,24 +136,14 @@ final class PostTableCell: UITableViewCell {
     lazy var secondInfoContainerView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .clear
-        view.addSubviews(placeScrollView, priceLabel)
+        view.addSubviews(placeLabel, priceLabel)
         return view
     }()
 
-    /// 판매처/구매처가 길어지는 경우를 위한 스크롤 뷰
-    lazy var placeScrollView: UIScrollView = {
-        let scrollView: UIScrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.addSubview(placeLabel)
-        return scrollView
-    }()
-
-    let placeLabel: UILabel = {
-        let label: UILabel = UILabel()
+    /// 판매처/구매처, 가로로 스크롤할 수 있다.
+    let placeLabel: HorizontalScrollLabel = {
+        let label: HorizontalScrollLabel = HorizontalScrollLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.Pretendard.title1
-        label.textColor = SwiftGenColors.black.color
         label.text = "제품 구매한 곳이 열 다섯 글자 이상이라면 이렇게 슬라이드 ㄱㄴ"
         return label
     }()
