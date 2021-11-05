@@ -227,15 +227,6 @@ extension WriteViewController: UITableViewDelegate {
     }
 }
 
-// MARK: - TableView Delegate
-extension WriteViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == WriteViewModel.Section.category.rawValue {
-            coordinator?.showCategoryViewController()
-        }
-    }
-}
-
 // MARK: - Delegate
 extension WriteViewController: WriteTextViewCellDelegate {
     func updateTextViewHeight() {

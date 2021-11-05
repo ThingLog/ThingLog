@@ -43,7 +43,6 @@ final class CheckView: UIControl {
             imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 2),
             label.centerXAnchor.constraint(equalTo: centerXAnchor),
             label.centerYAnchor.constraint(equalTo: centerYAnchor)
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 2)
         ])
     }
 }
