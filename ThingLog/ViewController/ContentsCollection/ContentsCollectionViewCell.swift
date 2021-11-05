@@ -76,12 +76,12 @@ class ContentsCollectionViewCell: UICollectionViewCell {
     }()
     
     /// 우측 상단에 체크하기 위한 버튼이다. ( 주로 휴지통 화면에서 삭제 또는 복구하기 위해 사용되는 버튼이다. )
-    let checkButton: UIButton = {
-        let button: UIButton = UIButton()
+    let checkButton: CheckView = {
+        let button: CheckView = CheckView()
         button.layer.borderWidth = 1
+        button.imageView.tintColor = SwiftGenColors.white.color
         button.layer.borderColor = SwiftGenColors.white.color.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.titleLabel?.font = UIFont.Pretendard.overline
         button.isHidden = true
         button.isUserInteractionEnabled = false
         return button
@@ -189,7 +189,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         bottomGradientView.frame = contentView.bounds
         bottomGradientView.frame.size.height = contentView.bounds.height / 4
-        bottomGradientView.setGradient(startColor: SwiftGenColors.black.color,
+        bottomGradientView.setGradient(startColor: SwiftGenColors.primaryBlack.color,
                                        endColor: .clear,
                                        startPoint: CGPoint(x: 0.0, y: 1.0),
                                        endPoint: CGPoint(x: 0.0, y: 0.0))
@@ -222,11 +222,11 @@ extension ContentsCollectionViewCell {
         checkButton.isUserInteractionEnabled = false
     }
     
-    // TODO: - ⚠️버튼 색이나 디자인 변경예정
     /// 체크버튼을 강조하거나 강조하지 않도록 변경하는 메서드다
     func changeCheckButton(isSelected: Bool) {
-        checkButton.layer.borderColor = isSelected ? SwiftGenColors.black.color.cgColor : SwiftGenColors.white.color.cgColor
-        checkButton.backgroundColor = isSelected ? SwiftGenColors.black.color : .clear
+        checkButton.imageView.isHidden = !isSelected
+        checkButton.backgroundColor = isSelected ? SwiftGenColors.systemGreen.color : .clear
+        checkButton.layer.borderColor = isSelected ? UIColor.clear.cgColor : SwiftGenColors.white.color.cgColor
     }
 
     /// 체크 버튼의 `titleLabel`과 배경색을 변경한다.
@@ -234,7 +234,7 @@ extension ContentsCollectionViewCell {
     ///   - string: checkButton.titleLabel 에 지정할 문자열
     ///   - backgroundColor: checkButton.backgroundColor 로 지정할 색상
     func updateCheckButton(string: String?, backgroundColor: UIColor?) {
-        checkButton.setTitle(string, for: .normal)
+        checkButton.label.text = string
         checkButton.backgroundColor = backgroundColor
     }
 }

@@ -60,6 +60,10 @@ final class RoundLabelWithButtonTableCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func configure(name: String) {
+        nameLabel.text = name
+    }
+
     func configure(selectedOrder: Int) {
         selectedButton.setTitle("\(selectedOrder)", for: .normal)
     }

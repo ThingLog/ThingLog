@@ -4,12 +4,19 @@
 //
 //  Created by hyunsu on 2021/10/19.
 //
-
+import RxSwift
 import UIKit
 
 /// 로그인 화면에 상단에 나타나는 뷰다.  왼쪽에 2열로 보여주는 Label과 우측에 버튼이 있는 Collection HeaderView다.
 /// [이미지](https://www.notion.so/LoginTopHeaderView-bb63faf9cb56461b9a06dd4bc345e584)
 final class LoginTopHeaderView: UICollectionReusableView {
+    let logoView: UIImageView = {
+        let imageView: UIImageView = UIImageView(image: SwiftGenIcons.group.image)
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     let titleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = SwiftGenFonts.Pretendard.regular.font(size: 24)
@@ -51,10 +58,17 @@ final class LoginTopHeaderView: UICollectionReusableView {
     }()
     
     private let paddingConstraint: CGFloat = 20.0
+    private let logoViewHeight: CGFloat = 80
+    var disposeBag: DisposeBag = DisposeBag()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
     
     required init?(coder: NSCoder) {
@@ -62,13 +76,22 @@ final class LoginTopHeaderView: UICollectionReusableView {
     }
     
     private func setupView() {
-        backgroundColor = SwiftGenColors.white.color
+        setupBackgroundColor()
+        addSubview(logoView)
         addSubview(stackView)
         NSLayoutConstraint.activate([
+            logoView.topAnchor.constraint(equalTo: topAnchor, constant: paddingConstraint),
+            logoView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: paddingConstraint),
+            logoView.heightAnchor.constraint(equalToConstant: logoViewHeight),
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: logoView.bottomAnchor, constant: -paddingConstraint),
             stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: paddingConstraint),
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -paddingConstraint),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            stackView.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 0)
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor) 
         ])
+    }
+    
+    private func setupBackgroundColor() {
+        logoView.backgroundColor = SwiftGenColors.primaryBackground.color
+        backgroundColor = SwiftGenColors.primaryBackground.color
     }
 }

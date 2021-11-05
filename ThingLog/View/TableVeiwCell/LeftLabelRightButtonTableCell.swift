@@ -53,8 +53,7 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
     var leftLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.body2
-        label.textColor = SwiftGenColors.black.color
-        label.backgroundColor = .clear
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -64,7 +63,7 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
     
     var rightButton: UIButton = {
         let button: UIButton = UIButton()
-        button.setImage(SwiftGenAssets.clear.image, for: .normal)
+        button.setImage(SwiftGenIcons.close.image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setContentCompressionResistancePriority(.required, for: .horizontal)
         button.setContentHuggingPriority(.required, for: .horizontal)
@@ -73,6 +72,11 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
     
     var rightToggleButton: UISwitch = {
         let button: UISwitch = UISwitch()
+        button.tintColor = SwiftGenColors.gray3.color
+        button.layer.cornerRadius = button.frame.height / 2.0
+        button.backgroundColor = SwiftGenColors.gray3.color
+        button.clipsToBounds = true
+        button.onTintColor = SwiftGenColors.systemGreen.color
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setContentCompressionResistancePriority(.required, for: .horizontal)
         button.setContentHuggingPriority(.required, for: .horizontal)
@@ -82,21 +86,18 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
     
     private var borderLineView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.gray4.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let emptyView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private let emptyView2: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -153,14 +154,19 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
+        setupBackgroundColor()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupBackgroundColor() {
+        contentView.backgroundColor = SwiftGenColors.primaryBackground.color
+        borderLineView.backgroundColor = SwiftGenColors.gray4.color
+    }
     private func setupView() {
-        contentView.backgroundColor = SwiftGenColors.white.color
+        
         contentView.addSubview(stackView)
         selectionStyle = .none
         borderLineHeightConstraint = borderLineView.heightAnchor.constraint(equalToConstant: 0.5)
@@ -209,13 +215,15 @@ extension LeftLabelRightButtonTableCell {
     private func changeButtonType(buttonType: ButtonType) {
         switch buttonType {
         case .withChevronRight:
-            let image: UIImage? = SwiftGenAssets.chevronRight.image.withRenderingMode(.alwaysTemplate)
+            let image: UIImage? = SwiftGenIcons.shortArrowRM.image.withRenderingMode(.alwaysTemplate)
             rightButton.setImage(image, for: .normal)
-            rightButton.tintColor = SwiftGenColors.gray5.color
+            rightButton.tintColor = SwiftGenColors.primaryBlack.color
+            rightButton.isUserInteractionEnabled = false
         case .withClearButton:
-            let image: UIImage? = SwiftGenAssets.clear.image.withRenderingMode(.alwaysTemplate)
+            let image: UIImage? = SwiftGenIcons.close.image.withRenderingMode(.alwaysTemplate)
             rightButton.setImage(image, for: .normal)
-            rightButton.tintColor = SwiftGenColors.black.color
+            rightButton.tintColor = SwiftGenColors.primaryBlack.color
+            rightButton.isUserInteractionEnabled = true
         case .withToggleButton:
             rightButton.isHidden = true
             rightToggleButton.isHidden = false

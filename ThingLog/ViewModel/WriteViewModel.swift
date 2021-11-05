@@ -41,24 +41,19 @@ final class WriteViewModel {
         }
     }
     private let thumbnailSize: CGSize = CGSize(width: 80, height: 80)
+    private var selectedCategories: [Category] = []
     private let disposeBag: DisposeBag = DisposeBag()
 
     init(writeType: WriteType) {
         self.writeType = writeType
 
-        bindNotificationPassSelectPHAssets()
+        setupBinding()
     }
 
-    /// PhotosViewController 에서 전달받은 데이터를 바인딩한다.
-    func bindNotificationPassSelectPHAssets() {
-        NotificationCenter.default.rx
-            .notification(.passSelectAssets, object: nil)
-            .map { notification -> [PHAsset] in
-                notification.userInfo?[Notification.Name.passSelectAssets] as? [PHAsset] ?? []
-            }
-            .bind { [weak self] assets in
-                self?.executeOriginalImages(with: assets)
-            }.disposed(by: disposeBag)
+    private func setupBinding() {
+        bindNotificationPassToSelectedCategories()
+        bindNotificationRemoveSelectedCategory()
+        bindNotificationPassSelectPHAssets()
     }
 
     /// 파라미터로 전달받은 PHAsset을 UIImage로 변환하여 반환한다.
@@ -78,10 +73,49 @@ final class WriteViewModel {
 
         return images
     }
+}
+
+extension WriteViewModel {
+    /// `CategoryViewController`에서 전달받은 데이터를 `selectedCategoryIndexPaths`에 저장한다.
+    private func bindNotificationPassToSelectedCategories() {
+        NotificationCenter.default.rx.notification(.passToSelectedCategories, object: nil)
+            .map { notification -> [Category] in
+                notification.userInfo?[Notification.Name.passToSelectedCategories] as? [Category] ?? []
+            }
+            .bind { [weak self] categories in
+                self?.selectedCategories = categories
+            }.disposed(by: disposeBag)
+    }
+
+    /// `WriteCategoryTableCell` 에서 삭제한 카테고리를 `selectedCategoryIndexPaths`에서도 삭제한다.
+    private func bindNotificationRemoveSelectedCategory() {
+        NotificationCenter.default.rx.notification(.removeSelectedCategory, object: nil)
+            .map { notification -> Category? in
+                notification.userInfo?[Notification.Name.removeSelectedCategory] as? Category
+            }
+            .bind { [weak self] category in
+                if let category: Category = category,
+                   let firstIndex: Int = self?.selectedCategories.firstIndex(of: category) {
+                    self?.selectedCategories.remove(at: firstIndex)
+                }
+            }.disposed(by: disposeBag)
+    }
+
+    /// PhotosViewController 에서 전달받은 데이터를 바인딩한다.
+    private func bindNotificationPassSelectPHAssets() {
+        NotificationCenter.default.rx
+            .notification(.passSelectAssets, object: nil)
+            .map { notification -> [PHAsset] in
+                notification.userInfo?[Notification.Name.passSelectAssets] as? [PHAsset] ?? []
+            }
+            .bind { [weak self] assets in
+                self?.executeOriginalImages(with: assets)
+            }.disposed(by: disposeBag)
+    }
 
     /// 파라미터로 받은 `PHAsset`을 `UIImage`로 변환하여 originalImages에 저장한다. 비동기로 동작한다.
     /// - Parameter assets: UIImage로 변환할 [PHAsset]
-    func executeOriginalImages(with assets: [PHAsset]) {
+    private func executeOriginalImages(with assets: [PHAsset]) {
         let options: PHImageRequestOptions = PHImageRequestOptions()
         options.isSynchronous = true
 

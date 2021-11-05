@@ -46,7 +46,7 @@ extension PhotosViewController: UICollectionViewDataSource {
             }
         }
 
-        cell.checkButton.rx.tap
+        cell.checkButton.rx.controlEvent(.touchUpInside)
             .bind { [weak self] in
                 guard let self = self else { return }
                 self.tappedCheckButton(cell, at: indexPath)
@@ -54,7 +54,7 @@ extension PhotosViewController: UICollectionViewDataSource {
         cell.setupImageViewWithCheckButton()
         cell.updateCheckButton(string: "", backgroundColor: .clear)
         if let firstIndex: Int = selectedIndexPath.firstIndex(of: indexPath) {
-            cell.updateCheckButton(string: "\(firstIndex + 1)", backgroundColor: .black)
+            cell.updateCheckButton(string: "\(firstIndex + 1)", backgroundColor: SwiftGenColors.systemGreen.color)
         }
     }
 

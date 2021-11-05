@@ -20,7 +20,6 @@ final class ButtonRoundCollectionCell: UICollectionViewCell {
         button.titleLabel?.font = UIFont.Pretendard.body2
         button.clipsToBounds = true
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        button.backgroundColor = SwiftGenColors.white.color
         button.setTitleColor(SwiftGenColors.gray5.color, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isUserInteractionEnabled = false
@@ -37,14 +36,19 @@ final class ButtonRoundCollectionCell: UICollectionViewCell {
     }
     
     private func setupView() {
+        setupBackgroundColor()
         contentView.addSubview(button)
-        contentView.backgroundColor = SwiftGenColors.white.color
         NSLayoutConstraint.activate([
             button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             button.topAnchor.constraint(equalTo: contentView.topAnchor)
         ])
+    }
+    
+    func setupBackgroundColor() {
+        contentView.backgroundColor = SwiftGenColors.primaryBackground.color
+        button.backgroundColor = SwiftGenColors.primaryBackground.color
     }
 }
 

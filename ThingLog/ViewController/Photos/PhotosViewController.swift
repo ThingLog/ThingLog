@@ -232,7 +232,7 @@ extension PhotosViewController {
             guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: indexPath) as? ContentsCollectionViewCell else {
                 return
             }
-            cell.updateCheckButton(string: "\(index + 1)", backgroundColor: .black)
+            cell.updateCheckButton(string: "\(index + 1)", backgroundColor: SwiftGenColors.systemGreen.color)
             cell.layoutIfNeeded()
         }
     }

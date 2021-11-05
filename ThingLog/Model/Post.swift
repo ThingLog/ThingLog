@@ -52,6 +52,7 @@ extension Post {
         entity.title = title
         entity.price = Int64(price)
         entity.createDate = createDate
+        entity.deleteDate = deleteDate
         entity.purchasePlace = purchasePlace
         entity.contents = contents
         entity.giftGiver = giftGiver

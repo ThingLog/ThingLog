@@ -23,6 +23,6 @@ final class EasyLookTabTypeButton: UIButton {
     
     func updateColor(isTint: Bool) {
         titleLabel?.font = isTint ? UIFont.Pretendard.title2 : UIFont.Pretendard.body2
-        setTitleColor(isTint ? SwiftGenColors.black.color : SwiftGenColors.gray4.color, for: .normal)
+        setTitleColor(isTint ? SwiftGenColors.primaryBlack.color : SwiftGenColors.gray2.color, for: .normal)
     }
 }

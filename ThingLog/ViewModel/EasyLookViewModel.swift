@@ -50,6 +50,7 @@ final class EasyLookViewModel {
     private func currentNSFetchRequest() -> NSFetchRequest<PostEntity> {
         let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
         var predicates: [NSPredicate] = [NSPredicate]()
+        predicates.append(NSPredicate(format: "postType.isDelete == false"))
         if let subType: String = currentSubCategoryType {
             predicates.append(NSPredicate(format: "ANY categories.title == %@", subType))
         }

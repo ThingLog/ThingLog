@@ -18,10 +18,11 @@ final class EmptyResultsView: UIView {
     
     let label: UILabel = {
         let label: UILabel = UILabel()
-        label.font = UIFont.Pretendard.body2
-        label.textColor = SwiftGenColors.black.color
+        label.font = UIFont.Pretendard.body1
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.text = "게시물 없음"
         label.textAlignment = .center
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.setContentHuggingPriority(.defaultLow, for: .vertical)

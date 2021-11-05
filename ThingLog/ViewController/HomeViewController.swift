@@ -9,9 +9,9 @@ import RxSwift
 import UIKit
 
 final class HomeViewController: UIViewController {
+    // MARK: - View
     let profileView: ProfileView = {
         let profileView: ProfileView = ProfileView()
-        profileView.backgroundColor = SwiftGenColors.white.color
         profileView.translatesAutoresizingMaskIntoConstraints = false
         return profileView
     }()
@@ -33,7 +33,10 @@ final class HomeViewController: UIViewController {
         return controller
     }()
     
+    // MARK: - Properties
+    
     var coordinator: HomeCoordinator?
+    private let userInformationViewModel: UserInformationViewModelable = UserInformationiCloudViewModel()
     var heightAnchorProfileView: NSLayoutConstraint?
     let profileViewHeight: CGFloat = 44 + 24 + 16
     
@@ -51,10 +54,12 @@ final class HomeViewController: UIViewController {
         subscribePageVeiwControllerTransition()
         subscribeContentsTabButton()
         subscribePageViewControllerScrollOffset()
-        subscribeInformationViewModel()
         subscribeProfileEditButton()
+        subscribeDrawerImageView()
+        subscribeUserInformationChange()
         
         fetchAllPost()
+        fetchUserInformation()
     }
     
     // MARK: - Setup
@@ -86,7 +91,7 @@ final class HomeViewController: UIViewController {
             contentsTabView.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor),
             contentsTabView.trailingAnchor.constraint(equalTo: contentsContainerView.trailingAnchor),
             contentsTabView.topAnchor.constraint(equalTo: contentsContainerView.safeAreaLayoutGuide.topAnchor),
-            contentsTabView.heightAnchor.constraint(equalToConstant: 36)
+            contentsTabView.heightAnchor.constraint(equalToConstant: 37)
         ])
     }
     
@@ -111,7 +116,7 @@ final class HomeViewController: UIViewController {
         navigationItem.leftBarButtonItem = logoBarButtonItem
         
         let settingButton: UIButton = UIButton()
-        settingButton.setImage(SwiftGenAssets.setting.image, for: .normal)
+        settingButton.setImage(SwiftGenIcons.system.image, for: .normal)
         settingButton.tintColor = SwiftGenColors.black.color
         settingButton.rx.tap
             .bind { [weak self] in
@@ -186,20 +191,12 @@ extension HomeViewController {
             })
             .disposed(by: pageViewController.disposeBag)
     }
-    
-    /// 사용자의 정보 ( 이름, 한줄 소개 ) 를 subscribe한다.
-    func subscribeInformationViewModel() {
-        UserInformationViewModel.shared.userAliasNameSubject
-            .bind { [weak self] name in
-                self?.profileView.userAliasNameButton.setTitle(name ?? "분더카머", for: .normal)
-            }
-            .disposed(by: disposeBag)
-        
-        UserInformationViewModel.shared.userOneLineIntroductionSubject
-            .bind { [weak self] introduction in
-                self?.profileView.userOneLineIntroductionLabel.text = introduction ?? "나를 찾는 여정 나를 찾는 여정"
-            }
-            .disposed(by: disposeBag)
+  
+    /// 유저정보가 변경되는 경우의 notificaiton을 subscribe하여 유저정보를 변경하도록 한다.
+    func subscribeUserInformationChange() {
+        userInformationViewModel.subscribeUserInformationChange { [weak self] userInformation in
+            self?.updateProfileView(by: userInformation)
+        }
     }
     
     func subscribeProfileEditButton() {
@@ -207,6 +204,16 @@ extension HomeViewController {
             self?.coordinator?.showLoginViewController()
         }
         .disposed(by: disposeBag)
+    }
+    
+    /// 진열장 화면으로 이동하는 메서드다.
+    func subscribeDrawerImageView() {
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer()
+        profileView.userBadgeImageView.addGestureRecognizer(tapGesture)
+        profileView.userBadgeImageView.isUserInteractionEnabled = true
+        tapGesture.rx.event.bind { [weak self] _ in
+            self?.coordinator?.showDrawerViewController()
+        }.disposed(by: disposeBag)
     }
     
     /// 콘텐츠 개수가 많은 상황에서 아래로 스크롤한 상태에서 콘텐츠 개수가 적은 페이지로 전환할 시 containerView의 높이를 줄여주는 메소드다.
@@ -243,18 +250,30 @@ extension HomeViewController {
             let postRepo: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
             guard let pageType = PageType(rawValue: Int16(idx)) else { return }
             postRepo.pageType = pageType
-            baseController.fetchResultController = postRepo.fetchedResultsController
+            baseController.fetchResultController = postRepo.fetchResultsController(by: .fromHome)
             baseController.collectionView.reloadData()
             
             // PageType으로 특정 탭 버튼을 찾아 업데이트한다.
             let pageTypeButton: UIButton = contentsTabView.pageTypeButton(by: pageType)
-            let count: Int = postRepo.fetchedResultsController.fetchedObjects?.count ?? 0
+            let count: Int = baseController.fetchResultController?.fetchedObjects?.count ?? 0
             pageTypeButton.setTitle(String(count), for: .normal)
             
-            baseController.completionBlock = { [weak self] updatedFetchedCount in
+            baseController.completionBlock = { updatedFetchedCount in
                 pageTypeButton.setTitle(String(updatedFetchedCount), for: .normal)
             }
         }
+    }
+    
+    func fetchUserInformation() {
+        userInformationViewModel.fetchUserInformation { [weak self] userInformation in
+            self?.updateProfileView(by: userInformation)
+        }
+    }
+    
+    private func updateProfileView(by userInformation: UserInformationable?) {
+        profileView.userAliasNameButton.setTitle(userInformation?.userAliasName, for: .normal)
+        profileView.userOneLineIntroductionLabel.text = userInformation?.userOneLineIntroduction
+        profileView.userOneLineIntroductionLabel.isHidden = userInformation?.userOneLineIntroduction == nil
     }
 }
 

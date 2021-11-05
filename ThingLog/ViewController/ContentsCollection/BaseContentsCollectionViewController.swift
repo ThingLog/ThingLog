@@ -67,7 +67,7 @@ class BaseContentsCollectionViewController: UIViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = SwiftGenColors.white.color
+        view.backgroundColor = SwiftGenColors.primaryBackground.color
         setupResultFilterView()
         setupBaseCollectionView()
         setupEmptyView()
@@ -96,7 +96,7 @@ class BaseContentsCollectionViewController: UIViewController {
     
     func setupBaseCollectionView() {
         view.addSubview(collectionView)
-        collectionView.backgroundColor = SwiftGenColors.white.color
+        collectionView.backgroundColor = SwiftGenColors.primaryBackground.color
         collectionView.dataSource = self
         collectionView.delegate = self
         NSLayoutConstraint.activate([
@@ -163,7 +163,7 @@ extension BaseContentsCollectionViewController: UICollectionViewDataSource {
             cell.updateView(item)
         }
         
-        cell.backgroundColor = SwiftGenColors.gray6.color
+        cell.backgroundColor = .clear
         return cell
     }
 }

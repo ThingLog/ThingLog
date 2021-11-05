@@ -11,7 +11,6 @@ import UIKit
 final class EmptyPostView: UIView {
     private let topBorderLine: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.gray5.color
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setContentHuggingPriority(.required, for: .vertical)
         return view
@@ -41,10 +40,16 @@ final class EmptyPostView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setupBackgroundColor()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    private func setupBackgroundColor() {
+        topBorderLine.backgroundColor = SwiftGenColors.gray4.color
+        backgroundColor = SwiftGenColors.primaryBackground.color
     }
     
     private func setupView() {
