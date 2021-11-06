@@ -52,6 +52,7 @@ final class WriteTextFieldCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        setupBind()
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

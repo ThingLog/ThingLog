@@ -57,13 +57,14 @@ final class WriteCategoryTableCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        bindNotificationCategories()
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
         setupCollectionView()
-        bindCategories()
+        bindNotificationCategories()
     }
 
     required init?(coder: NSCoder) {
@@ -105,8 +106,8 @@ final class WriteCategoryTableCell: UITableViewCell {
     }
 
     /// 카테고리 선택 화면에서 전달 받은 데이터를 저장한다.
-    private func bindCategories() {
-        NotificationCenter.default.rx.notification(.passToSelectedCategories, object: nil)
+    private func bindNotificationCategories() {
+        NotificationCenter.default.rx.notification(.passToSelectedCategories)
             .map { notification -> [Category] in
                 notification.userInfo?[Notification.Name.passToSelectedCategories] as? [Category] ?? []
             }

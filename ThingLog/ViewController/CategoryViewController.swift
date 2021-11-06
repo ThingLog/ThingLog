@@ -86,9 +86,10 @@ final class CategoryViewController: UIViewController {
             .bind { [weak self] in
                 guard let self = self else { return }
                 // 선택한 카테고리를 Category 객체로 변환하여 WriteViewModel, WriteCategoryTableCell에게 전달한다.
+                let category: [Category] = self.convertSelectedIndexPathToCategory()
                 NotificationCenter.default.post(name: .passToSelectedCategories,
                                                 object: nil,
-                                                userInfo: [Notification.Name.passToSelectedCategories: self.convertSelectedIndexPathToCategory()])
+                                                userInfo: [Notification.Name.passToSelectedCategories: category])
                 self.coordinator?.back()
             }.disposed(by: disposeBag)
     }

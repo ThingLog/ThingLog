@@ -35,13 +35,9 @@ final class WriteViewModel {
     }
     // Section 마다 표시할 항목의 개수
     lazy var itemCount: [Int] = [1, 1, typeInfo.count, 1, 1]
-    private(set) var originalImages: [UIImage] = [] {
-        didSet {
-            print("⚡️ 호출..", originalImages)
-        }
-    }
-    private let thumbnailSize: CGSize = CGSize(width: 80, height: 80)
+    private(set) var originalImages: [UIImage] = []
     private var selectedCategories: [Category] = []
+    private let thumbnailSize: CGSize = CGSize(width: 80, height: 80)
     private let disposeBag: DisposeBag = DisposeBag()
 
     init(writeType: WriteType) {
