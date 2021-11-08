@@ -104,6 +104,7 @@ final class WriteViewController: BaseViewController {
         bindKeyboardWillShow()
         bindKeyboardWillHide()
         bindNotificationPassSelectPHAssets()
+        bindDoneButton()
     }
 }
 

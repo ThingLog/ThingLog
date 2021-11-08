@@ -95,4 +95,22 @@ extension WriteViewController {
                 }
             }.disposed(by: disposeBag)
     }
+
+    /// 작성 완료 버튼을 눌렀을 때 데이터를 저장한다.
+    func bindDoneButton() {
+        doneButton.rx.tap
+            .bind { [weak self] in
+                self?.getCurrentValue()
+            }.disposed(by: disposeBag)
+    }
+
+    func getCurrentValue() {
+        let section = WriteViewModel.Section.type.rawValue
+        for index in 0..<viewModel.itemCount[section] {
+            let indexPath: IndexPath = IndexPath(row: index, section: section)
+            if let cell = tableView.cellForRow(at: indexPath) as? WriteTextFieldCell {
+                print("⚡️", cell.text)
+            }
+        }
+    }
 }

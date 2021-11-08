@@ -51,7 +51,6 @@
 		876C157927044BA0000C1C84 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157827044BA0000C1C84 /* RepositoryError.swift */; };
 		876C157B27044DFF000C1C84 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157A27044DFF000C1C84 /* CategoryEntity.swift */; };
 		876C157D27047B19000C1C84 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157C27047B19000C1C84 /* CategoryRepository.swift */; };
-		8789A19E272C5DCC00CFB16C /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8789A19D272C5DCC00CFB16C /* Notification.Name+.swift */; };
 		87A86C8B2714139F008FB3F0 /* WriteTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8A2714139F008FB3F0 /* WriteTextFieldCell.swift */; };
 		87A86C8D271414D2008FB3F0 /* WriteRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8C271414D2008FB3F0 /* WriteRatingCell.swift */; };
 		87A86C8F27141507008FB3F0 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8E27141507008FB3F0 /* RatingView.swift */; };
@@ -551,6 +550,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		877B659E273692DC00561DDF /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				87BB17A62709898F0088B847 /* WriteViewController.swift */,
+				87BB17AC27098F480088B847 /* WriteViewController+setup.swift */,
+			);
+			path = Write;
+			sourceTree = "<group>";
+		};
 		87F2188726FB5E6000C3FBCA /* Repository */ = {
 			isa = PBXGroup;
 			children = (
@@ -624,14 +632,13 @@
 				DB00D214272A8D1E003FC9C3 /* Drawer */,
 				DBE3E9C92730137200B3EB69 /* EasyLook */,
 				DB7C04EF26FB1EFF009F5C0A /* HomeViewController.swift */,
-				87336FDB272EE76800E1C4CA /* Photos */,
 				DB9FBDB3272E82A9005E64AF /* Login */,
+				87336FDB272EE76800E1C4CA /* Photos */,
 				DBE3E9CA2730196D00B3EB69 /* Search */,
 				DB6909602712DA8100BB54E4 /* SettingViewController.swift */,
 				DB7C04B126F87548009F5C0A /* TabBarController.swift */,
 				DBE3E9BF272FB9AB00B3EB69 /* Trash */,
-				87BB17A62709898F0088B847 /* WriteViewController.swift */,
-				87BB17AC27098F480088B847 /* WriteViewController+setup.swift */,
+				877B659E273692DC00561DDF /* Write */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -913,7 +920,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					873EC00426D39055003C3525 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -1153,12 +1160,10 @@
 				DBE3E9C8272FF32D00B3EB69 /* IconsAssets.swift in Sources */,
 				DB9FBDB7272E9A11005E64AF /* UserInformation.swift in Sources */,
 				87A86C8F27141507008FB3F0 /* RatingView.swift in Sources */,
-				DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */,
 				DB05B04E271F09260067DB17 /* LoginTopHeaderView.swift in Sources */,
 				DB7C04F026FB1EFF009F5C0A /* HomeViewController.swift in Sources */,
 				DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */,
 				DB331DAB26FDD00A00A629F5 /* Fonts.swift in Sources */,
-				8789A19E272C5DCC00CFB16C /* Notification.Name+.swift in Sources */,
 				DB6D05AD2733D47E003002A3 /* CheckView.swift in Sources */,
 				8736B3E526FCBA77000433E1 /* RatingEntity+.swift in Sources */,
 				87F2188626FB5DFB00C3FBCA /* Post.swift in Sources */,
