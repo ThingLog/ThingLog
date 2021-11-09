@@ -8,8 +8,9 @@
 import UIKit
 
 /// 댓글 화면에서 댓글을 표시할 때 사용하는 컬렉션뷰 셀
-/// ![이미지](https://www.notion.so/CommentTableCell-79a4165aa5804c5e86875368b8d53705)
+/// [이미지](https://www.notion.so/CommentTableCell-79a4165aa5804c5e86875368b8d53705)
 final class CommentTableCell: UITableViewCell {
+    // MARK: - View Properties
     private let topLineView: UIView = {
         let view: UIView = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +75,7 @@ final class CommentTableCell: UITableViewCell {
         return textView
     }()
 
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
@@ -84,6 +86,7 @@ final class CommentTableCell: UITableViewCell {
         setupView()
     }
 
+    // MARK: - Setup
     private func setupView() {
         let leadingTrailingSpacing: CGFloat = 20.0
         let topBottomSpacing: CGFloat = 14.0
