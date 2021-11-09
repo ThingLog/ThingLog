@@ -47,6 +47,7 @@ final class WriteViewController: BaseViewController {
         }
     }
     private(set) var viewModel: WriteViewModel
+
     init(viewModel: WriteViewModel) {
         self.viewModel = viewModel
         
@@ -156,80 +157,6 @@ extension WriteViewController {
                 self.tableView.setContentOffset(bottomOffset, animated: false)
             }
         }
-    }
-}
-
-// MARK: - DataSource
-extension WriteViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        WriteViewModel.Section.allCases.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.itemCount[section]
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let section: WriteViewModel.Section? = .init(rawValue: indexPath.section)
-        switch section {
-        case .image:
-            if let cell: WriteImageTableCell = tableView.dequeueReusableCell(withIdentifier: WriteImageTableCell.reuseIdentifier, for: indexPath) as? WriteImageTableCell {
-                cell.coordinator = coordinator
-                cell.thumbnailImages = selectedImages
-                
-                return cell
-            }
-        case .category:
-            if let cell: WriteCategoryTableCell = tableView.dequeueReusableCell(withIdentifier: WriteCategoryTableCell.reuseIdentifier, for: indexPath) as? WriteCategoryTableCell {
-                cell.indicatorButtonDidTappedCallback = { [weak self] in
-                    self?.coordinator?.showCategoryViewController()
-                }
-                
-                return cell
-            }
-        case .type:
-            if let cell: WriteTextFieldCell = tableView.dequeueReusableCell(withIdentifier: WriteTextFieldCell.reuseIdentifier, for: indexPath) as? WriteTextFieldCell {
-                cell.keyboardType = viewModel.typeInfo[indexPath.row].keyboardType
-                cell.placeholder = viewModel.typeInfo[indexPath.row].placeholder
-                
-                cell.isEditingSubject
-                    .bind { [weak self] _ in
-                        self?.scrollToCurrentRow(at: indexPath)
-                    }.disposed(by: cell.disposeBag)
-                cell.textValueSubject
-                    .bind { [weak self] text in
-                        self?.viewModel.typeValues[indexPath.row] = text
-                    }.disposed(by: cell.disposeBag)
-                
-                return cell
-            }
-        case .rating:
-            if let cell: WriteRatingCell = tableView.dequeueReusableCell(withIdentifier: WriteRatingCell.reuseIdentifier, for: indexPath) as? WriteRatingCell {
-                cell.selectRatingBlock = { [weak self] in
-                    self?.viewModel.rating = cell.currentRating
-                    self?.view.endEditing(true)
-                }
-                
-                return cell
-            }
-        case .contents:
-            if let cell: WriteTextViewCell = tableView.dequeueReusableCell(withIdentifier: WriteTextViewCell.reuseIdentifier, for: indexPath) as? WriteTextViewCell {
-                cell.delegate = self
-                cell.textView.rx.didBeginEditing
-                    .bind { [weak self] in
-                        self?.scrollToCurrentRow(at: indexPath)
-                    }.disposed(by: cell.disposeBag)
-
-                cell.textView.rx.text.orEmpty
-                    .subscribe(onNext: { [weak self] text in
-                        self?.viewModel.contents = text
-                    }).disposed(by: cell.disposeBag)
-                return cell
-            }
-        case .none:
-            return UITableViewCell()
-        }
-        return UITableViewCell()
     }
 }
 

@@ -63,6 +63,7 @@
 		87BB17AB27098D760088B847 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB17AA27098D760088B847 /* WriteViewModel.swift */; };
 		87BB17AD27098F480088B847 /* WriteViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB17AC27098F480088B847 /* WriteViewController+setup.swift */; };
 		87BEF07B2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF07A2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift */; };
+		87CFA333273A5A1600D08824 /* WriteViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CFA332273A5A1600D08824 /* WriteViewController+DataSource.swift */; };
 		87DAEB1B270BEAE50038C487 /* CameraButtonCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DAEB1A270BEAE50038C487 /* CameraButtonCollectionCell.swift */; };
 		87DAEB1D270BEC170038C487 /* ThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */; };
 		87EDCFCE2731166D002C98BE /* PhotosViewController+Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EDCFCD2731166D002C98BE /* PhotosViewController+Caching.swift */; };
@@ -271,6 +272,7 @@
 		87BB17AA27098D760088B847 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
 		87BB17AC27098F480088B847 /* WriteViewController+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteViewController+setup.swift"; sourceTree = "<group>"; };
 		87BEF07A2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogCategoryRepositoryTests.swift; sourceTree = "<group>"; };
+		87CFA332273A5A1600D08824 /* WriteViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteViewController+DataSource.swift"; sourceTree = "<group>"; };
 		87DAEB1A270BEAE50038C487 /* CameraButtonCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButtonCollectionCell.swift; sourceTree = "<group>"; };
 		87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCell.swift; sourceTree = "<group>"; };
 		87EDCFCD2731166D002C98BE /* PhotosViewController+Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosViewController+Caching.swift"; sourceTree = "<group>"; };
@@ -551,6 +553,7 @@
 			isa = PBXGroup;
 			children = (
 				87BB17A62709898F0088B847 /* WriteViewController.swift */,
+				87CFA332273A5A1600D08824 /* WriteViewController+DataSource.swift */,
 				87BB17AC27098F480088B847 /* WriteViewController+setup.swift */,
 			);
 			path = Write;
@@ -1097,6 +1100,7 @@
 				87ACB0B227229A3000C78C86 /* CenterTextButton.swift in Sources */,
 				876243E22708704800BDA1DC /* WriteTypeButton.swift in Sources */,
 				8738E1CF271709660069BB80 /* RoundLabelWithButtonTableCell.swift in Sources */,
+				87CFA333273A5A1600D08824 /* WriteViewController+DataSource.swift in Sources */,
 				DBA883B6272BEF9B0089643B /* DrawerCoreDataRepository.swift in Sources */,
 				DB37EC77270C307C00030D9A /* RecentSearchView+update.swift in Sources */,
 				87B1B6552715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift in Sources */,

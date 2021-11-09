@@ -18,6 +18,21 @@ final class WriteViewModel {
         case type
         case rating
         case contents
+
+        func cellIdentifier() -> String {
+            switch self {
+            case .image:
+                return WriteImageTableCell.reuseIdentifier
+            case .category:
+                return WriteCategoryTableCell.reuseIdentifier
+            case .type:
+                return WriteTextFieldCell.reuseIdentifier
+            case .rating:
+                return WriteRatingCell.reuseIdentifier
+            case .contents:
+                return WriteTextViewCell.reuseIdentifier
+            }
+        }
     }
 
     // MARK: - Properties
