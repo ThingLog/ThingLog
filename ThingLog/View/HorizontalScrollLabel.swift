@@ -8,7 +8,7 @@
 import UIKit
 
 /// 스크롤 뷰로 감싼 Label이다. 수평으로 스크롤 할 수 있다. 게시물 화면에서 물건 이름, 장소 이름을 표시할 때 사용한다.
-/// ![이미지](https://www.notion.so/HorizontalScrollLabel-8e858ea324db46a0a18c4bea93b8e368)
+/// [이미지](https://www.notion.so/HorizontalScrollLabel-8e858ea324db46a0a18c4bea93b8e368)
 final class HorizontalScrollLabel: UIView {
     private let scrollView: UIScrollView = {
         let scrollView: UIScrollView = UIScrollView()

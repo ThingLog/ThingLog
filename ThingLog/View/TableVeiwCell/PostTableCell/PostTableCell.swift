@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 /// 게시물을 표시하는데 사용하는 뷰
-/// ![이미지](https://www.notion.so/PostTableCell-667e8e6eb38c4dd4b6bdf45ac6b4614d)
+/// [이미지](https://www.notion.so/PostTableCell-667e8e6eb38c4dd4b6bdf45ac6b4614d)
 final class PostTableCell: UITableViewCell {
     // MARK: - View Properties
     /// 날짜, 기타 메뉴(수정, 삭제)를 포함한 뷰
@@ -260,7 +260,6 @@ final class PostTableCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         setupView()
-        setupBinding()
     }
 
     required init?(coder: NSCoder) {
@@ -280,9 +279,6 @@ final class PostTableCell: UITableViewCell {
         setupOtherView()
 
         setupStackView()
-    }
-
-    func setupBinding() {
     }
 
     /// 특별한 상황에서 쓰이는 버튼(사고싶다, 휴지통 게시물인 경우)을 숨김/표시 처리한다.

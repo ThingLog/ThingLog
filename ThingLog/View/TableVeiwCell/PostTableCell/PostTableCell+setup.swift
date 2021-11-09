@@ -127,8 +127,7 @@ extension PostTableCell {
     }
 
     func setupSpecificActionContainerView() {
-        let trashButtonHeight: CGFloat = 54.0
-        let boughtButtonHeight: CGFloat = 52.0
+        let buttonHeight: CGFloat = 52.0
         let boughtButtonLeadingTrailingSpacing: CGFloat = 20.0
 
         NSLayoutConstraint.activate([
@@ -136,15 +135,15 @@ extension PostTableCell {
             boughtButton.topAnchor.constraint(equalTo: specificActionContainerView.topAnchor),
             boughtButton.trailingAnchor.constraint(equalTo: specificActionContainerView.trailingAnchor, constant: -boughtButtonLeadingTrailingSpacing),
             boughtButton.bottomAnchor.constraint(equalTo: specificActionContainerView.bottomAnchor),
-            boughtButton.heightAnchor.constraint(equalToConstant: boughtButtonHeight),
+            boughtButton.heightAnchor.constraint(equalToConstant: buttonHeight),
 
             trashActionButton.leadingAnchor.constraint(equalTo: specificActionContainerView.leadingAnchor),
             trashActionButton.topAnchor.constraint(equalTo: specificActionContainerView.topAnchor),
             trashActionButton.trailingAnchor.constraint(equalTo: specificActionContainerView.trailingAnchor),
             trashActionButton.bottomAnchor.constraint(equalTo: specificActionContainerView.bottomAnchor),
-            trashActionButton.heightAnchor.constraint(equalToConstant: trashButtonHeight)
+            trashActionButton.heightAnchor.constraint(equalToConstant: buttonHeight)
         ])
-        boughtButton.layer.cornerRadius = boughtButtonHeight / 2
+        boughtButton.layer.cornerRadius = buttonHeight / 2
     }
 
     func setupOtherView() {
