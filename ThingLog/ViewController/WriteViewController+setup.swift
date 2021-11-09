@@ -5,42 +5,19 @@
 //  Created by 이지원 on 2021/10/03.
 //
 
+import Photos
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 extension WriteViewController {
-    func setupNavigationBar() {
-        setupBaseNavigationBar()
-        
-        let logoView: LogoView = LogoView("글쓰기")
-        navigationItem.titleView = logoView
-
-        let closeButton: UIButton = {
-            let button: UIButton = UIButton()
-            button.setTitle("닫기", for: .normal)
-            button.setTitleColor(SwiftGenColors.black.color, for: .normal)
-            button.titleLabel?.font = UIFont.Pretendard.body1
-            return button
-        }()
-
-        closeButton.rx.tap.bind { [weak self] in
-            self?.close()
-        }.disposed(by: disposeBag)
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: closeButton)
-    }
-
-    func setupView() {
-        view.addSubview(tableView)
-        view.addSubview(doneButton)
-
+    func setupTableView() {
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: doneButton.topAnchor),
-            doneButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            doneButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            doneButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: doneButton.topAnchor)
         ])
 
         tableView.estimatedRowHeight = UITableView.automaticDimension
@@ -52,6 +29,29 @@ extension WriteViewController {
         tableView.register(WriteTextFieldCell.self, forCellReuseIdentifier: WriteTextFieldCell.reuseIdentifier)
         tableView.register(WriteRatingCell.self, forCellReuseIdentifier: WriteRatingCell.reuseIdentifier)
         tableView.register(WriteTextViewCell.self, forCellReuseIdentifier: WriteTextViewCell.reuseIdentifier)
+    }
+
+    func setupDoneButton() {
+        NSLayoutConstraint.activate([
+            doneButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            doneButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            doneButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+
+    /// TableView 하단에 여백을 지정한다.
+    /// - Parameter height: 테이블 뷰 하단에 들어갈 높이
+    private func setupTableViewBottomInset(_ height: CGFloat) {
+        var inset: UIEdgeInsets = self.tableView.contentInset
+        inset.bottom = height
+        UIView.animate(withDuration: 0.3) {
+            self.tableView.contentInset = inset
+        }
+        inset = tableView.verticalScrollIndicatorInsets
+        inset.bottom = height
+        UIView.animate(withDuration: 0.3) {
+            self.tableView.scrollIndicatorInsets = inset
+        }
     }
 
     /// 키보드가 올라왔을 때 키보드 높이만큼 하단 여백 추가
@@ -81,18 +81,18 @@ extension WriteViewController {
             }.disposed(by: disposeBag)
     }
 
-    /// TableView 하단에 여백을 지정한다.
-    /// - Parameter height: 테이블 뷰 하단에 들어갈 높이
-    private func setupTableViewBottomInset(_ height: CGFloat) {
-        var inset: UIEdgeInsets = self.tableView.contentInset
-        inset.bottom = height
-        UIView.animate(withDuration: 0.3) {
-            self.tableView.contentInset = inset
-        }
-        inset = tableView.verticalScrollIndicatorInsets
-        inset.bottom = height
-        UIView.animate(withDuration: 0.3) {
-            self.tableView.scrollIndicatorInsets = inset
-        }
+    /// PhotosViewController에서 전달받은 데이터 바인딩
+    func bindNotificationPassSelectPHAssets() {
+        NotificationCenter.default.rx
+            .notification(.passSelectAssets, object: nil)
+            .map { notification -> [PHAsset] in
+                notification.userInfo?[Notification.Name.passSelectAssets] as? [PHAsset] ?? []
+            }
+            .bind { assets in
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.selectedImages = self.viewModel.requestThumbnailImages(with: assets)
+                }
+            }.disposed(by: disposeBag)
     }
 }

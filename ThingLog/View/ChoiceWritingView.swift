@@ -34,6 +34,7 @@ final class ChoiceWritingView: UIView {
         super.init(frame: frame)
         setupView()
         setChoiceViewTapGesture()
+        setupBackgroundColor()
     }
 
     required init?(coder: NSCoder) {
@@ -42,6 +43,11 @@ final class ChoiceWritingView: UIView {
     }
 
     // MARK: - Setup
+    
+    private func setupBackgroundColor() {
+        backgroundColor = SwiftGenColors.primaryBackground.color
+    }
+    
     private func setupView() {
         addSubview(choiceView)
         translatesAutoresizingMaskIntoConstraints = false
@@ -54,7 +60,7 @@ final class ChoiceWritingView: UIView {
         ])
         heightConstraint?.isActive = true
 
-        backgroundColor = SwiftGenColors.white.color
+        
         clipsToBounds = true
         layer.cornerRadius = 17.0
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]

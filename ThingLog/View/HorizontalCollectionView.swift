@@ -18,7 +18,6 @@ final class HorizontalCollectionView: UIView {
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(ButtonRoundCollectionCell.self, forCellWithReuseIdentifier: ButtonRoundCollectionCell.reuseIdentifier)
-        collectionView.backgroundColor = SwiftGenColors.white.color
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
@@ -54,14 +53,20 @@ final class HorizontalCollectionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setupBackgroundColor()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
+    private func setupBackgroundColor() {
+        collectionView.backgroundColor = SwiftGenColors.primaryBackground.color
+        backgroundColor = SwiftGenColors.primaryBackground.color
+    }
+    
     private func setupView() {
-        backgroundColor = SwiftGenColors.white.color
+        
         addSubview(collectionView)
         
         collectionView.delegate = self
@@ -110,9 +115,9 @@ extension HorizontalCollectionView: UICollectionViewDataSource {
     
     /// ButtonRoundCollectionCell의 색을 강조하거나 강조하지 않는다.
     private func changeButtonColor(isSelected: Bool, cell: ButtonRoundCollectionCell) {
-        cell.changeColor(borderColor: SwiftGenColors.gray5.color,
-                         backgroundColor: isSelected ? SwiftGenColors.gray5.color : SwiftGenColors.white.color,
-                         textColor: isSelected ? SwiftGenColors.white.color : SwiftGenColors.gray5.color)
+        cell.changeColor(borderColor: SwiftGenColors.primaryBlack.color,
+                         backgroundColor: isSelected ? SwiftGenColors.primaryBlack.color : SwiftGenColors.primaryBackground.color,
+                         textColor: isSelected ? SwiftGenColors.white.color : SwiftGenColors.primaryBlack.color)
     }
 }
 

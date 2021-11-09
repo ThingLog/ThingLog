@@ -53,7 +53,7 @@ final class RecentSearchView: UIView {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.title2
         label.text = "최근 검색"
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -63,7 +63,6 @@ final class RecentSearchView: UIView {
         let button: UIButton = UIButton()
         button.setTitle("전체 삭제", for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.body2
-        button.setTitleColor(SwiftGenColors.gray3.color, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return button
@@ -80,7 +79,7 @@ final class RecentSearchView: UIView {
         let label: UILabel = UILabel()
         label.text = "최근 검색어 내역이 없습니다"
         label.font = UIFont.Pretendard.body1
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -88,7 +87,6 @@ final class RecentSearchView: UIView {
     
     private let informationBorderLineView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.gray4.color
         view.setContentCompressionResistancePriority(.required, for: .vertical)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -98,7 +96,6 @@ final class RecentSearchView: UIView {
         let button: UIButton = UIButton()
         button.setTitle("자동저장 끄기", for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.title3
-        button.setTitleColor(SwiftGenColors.gray3.color, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -158,8 +155,7 @@ final class RecentSearchView: UIView {
         let tableView: UITableView = UITableView()
         tableView.separatorStyle = .none
         tableView.showsHorizontalScrollIndicator = false
-        tableView.showsVerticalScrollIndicator = false 
-        tableView.backgroundColor = SwiftGenColors.white.color
+        tableView.showsVerticalScrollIndicator = false
         tableView.register(LeftLabelRightButtonTableCell.self, forCellReuseIdentifier: LeftLabelRightButtonTableCell.reuseIdentifier)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.setContentHuggingPriority(.required, for: .vertical)
@@ -218,6 +214,7 @@ final class RecentSearchView: UIView {
     init(recentSearchDataViewModel: RecentSearchDataViewModelProtocol) {
         self.recentSearchDataViewModel = recentSearchDataViewModel
         super.init(frame: .zero)
+        setupBackgroundColor()
         setupView()
         setupTableView()
         
@@ -238,10 +235,16 @@ final class RecentSearchView: UIView {
         tableView.isScrollEnabled = floor(tableView.bounds.height) < floor(tableView.contentSize.height)
     }
     
+    private func setupBackgroundColor() {
+        backgroundColor = SwiftGenColors.primaryBackground.color
+        informationBorderLineView.backgroundColor = SwiftGenColors.gray4.color
+        tableView.backgroundColor = SwiftGenColors.primaryBackground.color
+        clearTotalButton.setTitleColor(SwiftGenColors.gray2.color, for: .normal)
+        autoSaveButton.setTitleColor(SwiftGenColors.gray2.color, for: .normal)
+    }
+    
     private func setupView() {
         addSubview(stackView)
-        backgroundColor = SwiftGenColors.white.color
-        
         tableViewHeightConstraint = tableView.heightAnchor.constraint(lessThanOrEqualToConstant: 0)
         tableViewHeightConstraint?.isActive = true
         tableViewHeightConstraint?.priority = .defaultLow

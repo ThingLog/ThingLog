@@ -28,8 +28,7 @@ final class EasyLookViewController: UIViewController {
     // 아래로 스크롤 할 시 나타나는 버튼으로, 누르면 최상단으로 스크롤해주는 기능을 가지는 Button이다.
     var topButton: UIButton = {
         let button: UIButton = UIButton()
-        button.setImage(SwiftGenAssets.chevronUp.image, for: .normal)
-        button.backgroundColor = SwiftGenColors.white.color
+        button.setImage(SwiftGenIcons.topButton.image, for: .normal)
         button.alpha = 0
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +48,7 @@ final class EasyLookViewController: UIViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = SwiftGenColors.white.color
+        setupBackgroundColor()
         setupNavigationBar()
         setupEasyLookTopView()
         setupContainerView()

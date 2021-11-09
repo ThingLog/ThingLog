@@ -48,7 +48,6 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
     // MARK: - Views
     private let imageView: UIImageView = {
         let imageview: UIImageView = UIImageView()
-        imageview.backgroundColor = SwiftGenColors.gray5.color
         imageview.translatesAutoresizingMaskIntoConstraints = false
         return imageview
     }()
@@ -62,7 +61,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
     private let dateLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.body3
-        label.textColor = SwiftGenColors.gray3.color
+        label.textColor = SwiftGenColors.gray2.color
         label.setContentHuggingPriority(.required, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -71,7 +70,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
     private let categoryLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.body3
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.required, for: .horizontal)
         return label
@@ -81,7 +80,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.title3
         label.text = "카테고리"
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.setContentHuggingPriority(.required, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -101,7 +100,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
     private let postTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.body3
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -111,7 +110,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.title3
         label.text = "물건이름"
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.setContentHuggingPriority(.required, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -142,7 +141,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
     private let contentsLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.body3
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.numberOfLines = 3
         label.setContentHuggingPriority(.defaultLow, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -180,23 +179,21 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    private let topBortderLineView: UIView = {
+    private let topBorderLineView: UIView = {
         let view: UIView = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = SwiftGenColors.gray5.color
         return view
     }()
     
     private let bottomBorderLineView: UIView = {
         let view: UIView = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = SwiftGenColors.gray5.color
         return view
     }()
     
     private lazy var stackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [
-                                                    topBortderLineView,
+                                                    topBorderLineView,
                                                     imageWithRightStackView,
                                                     bottomBorderLineView])
         stackView.axis = .vertical
@@ -208,15 +205,26 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        setBackgroundColor()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
+    // MARK: - Setup
+    private func setBackgroundColor() {
+        topBorderLineView.backgroundColor = SwiftGenColors.gray4.color
+        bottomBorderLineView.backgroundColor = SwiftGenColors.gray4.color
+        contentView.backgroundColor = SwiftGenColors.primaryBackground.color
+    }
+    
     private func setupView() {
         contentView.addSubview(stackView)
         NSLayoutConstraint.activate([
+            topBorderLineView.heightAnchor.constraint(equalToConstant: 0.3),
+            bottomBorderLineView.heightAnchor.constraint(equalToConstant: 0.5),
+            
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -224,10 +232,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
             
             imageView.heightAnchor.constraint(equalTo: imageWithRightStackView.heightAnchor),
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
-            
-            bottomBorderLineView.heightAnchor.constraint(equalToConstant: 0.5),
-            topBortderLineView.heightAnchor.constraint(equalToConstant: 0.5),
-            
+                        
             dateTopEmptyView.heightAnchor.constraint(equalToConstant: 4)
         ])
     }

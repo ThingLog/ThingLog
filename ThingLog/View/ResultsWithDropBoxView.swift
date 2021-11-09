@@ -40,7 +40,7 @@ final class ResultsWithDropBoxView: UIView {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.title2
         label.text = "카테고리"
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -49,7 +49,6 @@ final class ResultsWithDropBoxView: UIView {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [
                                                     titleLabel,
                                                     emptyTitleLabelTrailingView])
-        stackView.backgroundColor = SwiftGenColors.white.color
         stackView.isHidden = true
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -58,9 +57,8 @@ final class ResultsWithDropBoxView: UIView {
     private let resultTotalLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.body2
-        label.textColor = SwiftGenColors.gray3.color
+        label.textColor = SwiftGenColors.gray2.color
         label.text = "총 0건"
-        label.backgroundColor = SwiftGenColors.white.color
         return label
     }()
     
@@ -80,7 +78,6 @@ final class ResultsWithDropBoxView: UIView {
     
     lazy var stackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
-        stackView.backgroundColor = SwiftGenColors.white.color
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -99,6 +96,7 @@ final class ResultsWithDropBoxView: UIView {
         self.superView = superView
         super.init(frame: .zero)
         setupView()
+        setupBackgroundColor()
     }
     
     required init?(coder: NSCoder) {
@@ -106,8 +104,12 @@ final class ResultsWithDropBoxView: UIView {
         super.init(coder: coder)
     }
     
+    private func setupBackgroundColor() {
+        backgroundColor = SwiftGenColors.primaryBackground.color
+    }
+    
     private func setupView() {
-        backgroundColor = SwiftGenColors.white.color
+        
         addSubview(stackView)
         
         NSLayoutConstraint.activate([

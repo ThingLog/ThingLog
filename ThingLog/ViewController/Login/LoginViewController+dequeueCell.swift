@@ -24,7 +24,7 @@ extension LoginViewController {
         let item: String = recommendList[indexPath.item]
         cell.changeButtonLayerBorderWidth(0.5)
         cell.changeColor(borderColor: SwiftGenColors.gray3.color,
-                         backgroundColor: SwiftGenColors.white.color,
+                         backgroundColor: SwiftGenColors.primaryBackground.color,
                          textColor: SwiftGenColors.black.color)
         cell.updateView(title: item, cornerRadius: 30 / 2)
         return cell

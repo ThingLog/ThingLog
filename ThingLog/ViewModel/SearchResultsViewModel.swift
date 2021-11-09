@@ -34,18 +34,23 @@ final class SearchResultsViewModel {
                                      type: ResultCollectionSection) -> NSFetchRequest<PostEntity> {
         let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "createDate", ascending: false)]
+        
+        var predicates: [NSPredicate] = [NSPredicate]()
+        predicates.append(NSPredicate(format: "postType.isDelete == false"))
+        
         switch type {
         case .category:
-            request.predicate = NSPredicate(format: "ANY categories.title == %@", keyWord)
+            predicates.append(NSPredicate(format: "ANY categories.title == %@", keyWord))
         case .postTitle:
-            request.predicate = NSPredicate(format: "title CONTAINS %@", keyWord)
+            predicates.append(NSPredicate(format: "title CONTAINS %@", keyWord))
         case .postContents:
-            request.predicate = NSPredicate(format: "contents CONTAINS %@", keyWord)
+            predicates.append(NSPredicate(format: "contents CONTAINS %@", keyWord))
         case .gift:
-            request.predicate = NSPredicate(format: "giftGiver CONTAINS %@", keyWord)
+            predicates.append(NSPredicate(format: "giftGiver CONTAINS %@", keyWord))
         case .place:
-            request.predicate = NSPredicate(format: "purchasePlace CONTAINS %@", keyWord)
+            predicates.append(NSPredicate(format: "purchasePlace CONTAINS %@", keyWord))
         }
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         return request
     }
     

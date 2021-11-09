@@ -4,20 +4,20 @@
 //
 //  Created by hyunsu on 2021/10/02.
 //
-
+import RxSwift
 import UIKit
 
 /* 구조
  textFieldView: UIView  {
-    iconTextFiedStackView: UIStackView  {
-        [ searchIcon, textField ]
-    }
+ iconTextFiedStackView: UIStackView  {
+ [ searchIcon, textField ]
+ }
  }
  
  CustomTextField: UIView  {
-    stackView: UIStackView  {
-        [ backButton, textFieldView ]
-    }
+ stackView: UIStackView  {
+ [ backButton, textFieldView ]
+ }
  }
  
  */
@@ -32,8 +32,8 @@ protocol SearchTextFieldDelegate: AnyObject {
 final class SearchTextField: UIView {
     // MARK: - View
     var backButton: TemplateImageButton = {
-        let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenAssets.back.image)
-        button.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenIcons.longArrowR.image)
+        button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.body1
         button.setTitle(nil, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -44,17 +44,18 @@ final class SearchTextField: UIView {
     
     private var textFieldView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.gray6.color
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderWidth = 1
+        view.layer.borderColor = SwiftGenColors.primaryBlack.color.cgColor
         view.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return view
     }()
     
     private let searchIcon: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        let image: UIImage? = SwiftGenAssets.search.image.withRenderingMode(.alwaysTemplate)
+        let image: UIImage? = SwiftGenIcons.search.image.withRenderingMode(.alwaysTemplate)
         imageView.image = image
-        imageView.tintColor = SwiftGenColors.gray3.color
+        imageView.tintColor = SwiftGenColors.primaryBlack.color
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.setContentHuggingPriority(.required, for: .horizontal)
         return imageView
@@ -64,14 +65,14 @@ final class SearchTextField: UIView {
         let textField: UITextField = UITextField()
         textField.backgroundColor = .clear
         textField.font = UIFont.Pretendard.body2
-        textField.attributedPlaceholder = NSAttributedString(string: "검색어를 입력하세요", attributes: [NSAttributedString.Key.foregroundColor: SwiftGenColors.gray3.color])
-        textField.textColor = SwiftGenColors.gray3.color
-        textField.clearButtonMode = .whileEditing
-        if let button: UIButton = textField.value(forKey: "clearButton") as? UIButton {
-            let templateImage: UIImage? = button.imageView?.image?.withRenderingMode(.alwaysTemplate)
-            button.setImage(templateImage, for: .normal)
-            button.tintColor = SwiftGenColors.gray3.color
-        }
+        textField.attributedPlaceholder = NSAttributedString(string: "검색어를 입력하세요", attributes: [NSAttributedString.Key.foregroundColor: SwiftGenColors.gray2.color])
+        textField.textColor = SwiftGenColors.primaryBlack.color
+        
+        let clearButton: UIButton = UIButton(type: .custom)
+        clearButton.setImage(SwiftGenIcons.close.image, for: .normal)
+        clearButton.contentMode = .scaleAspectFit
+        textField.rightView = clearButton
+        textField.rightViewMode = .never
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -93,7 +94,6 @@ final class SearchTextField: UIView {
     }()
     
     // MARK: - Properties
-    private let backImage: UIImage? = SwiftGenAssets.back.image.withRenderingMode(.alwaysTemplate)
     private let iconHeight: CGFloat = 20
     private let textFieldViewLeading: CGFloat = 10
     private let textFieldViewTrialing: CGFloat = -19
@@ -104,6 +104,8 @@ final class SearchTextField: UIView {
     
     weak var delegate: SearchTextFieldDelegate?
     
+    var disposeBag: DisposeBag = DisposeBag()
+    
     // MARK: - Init
     /// 해당 뷰를 초기화하는 메서드다.
     /// - Parameter isOnNavigationbar: 만약 해당 뷰가 네비게이션바에 속한다면 true를, 그렇지 않다면 false를 주입한다.
@@ -111,6 +113,7 @@ final class SearchTextField: UIView {
         self.isOnNavigationbar = isOnNavigationbar
         super.init(frame: .zero)
         setupView()
+        setupTextFieldCloseButton()
     }
     
     required init?(coder: NSCoder) {
@@ -170,28 +173,57 @@ extension SearchTextField {
         ])
     }
     
+    private func setupTextFieldCloseButton() {
+        (textField.rightView as? UIButton)?.rx.tap
+            .bind { [weak self] _ in
+                self?.textField.text = nil
+                self?.textField.rightViewMode = .never
+            }.disposed(by: disposeBag)
+    
+        textField.rx.controlEvent(.editingDidEnd)
+            .bind { [weak self] _ in
+                self?.textField.rightViewMode = .never
+            }.disposed(by: disposeBag)
+
+        textField.rx.controlEvent([.editingChanged, .editingDidBegin])
+            .withLatestFrom(textField.rx.text.orEmpty)
+            .map { $0.isEmpty }
+            .bind { [weak self] isEmpty in
+                self?.textField.rightViewMode = isEmpty ? .never : .always
+            }
+            .disposed(by: disposeBag)
+    }
+    
     func setupToolBar() {
         let keyboardToolBar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         keyboardToolBar.barStyle = .default
-        let cancleButton: UIButton = {
+        let correctButton: UIButton = {
             let button: UIButton = UIButton()
             button.titleLabel?.font = UIFont.Pretendard.title2
-            button.setTitle("취소", for: .normal)
+            button.setTitle("확인", for: .normal)
             button.setTitleColor(SwiftGenColors.systemBlue.color, for: .normal)
-            button.addTarget(self, action: #selector(cancleKeyboard), for: .touchUpInside)
+            button.addTarget(self, action: #selector(correctKeyboard), for: .touchUpInside)
             return button
         }()
-        let cancleBarButton: UIBarButtonItem = UIBarButtonItem(customView: cancleButton)
-        cancleBarButton.tintColor = SwiftGenColors.black.color
-        keyboardToolBar.barTintColor = SwiftGenColors.gray6.color
-        keyboardToolBar.items = [cancleBarButton, UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
+        let cancleBarButton: UIBarButtonItem = UIBarButtonItem(customView: correctButton)
+        keyboardToolBar.barTintColor = UIColor(red: 249, green: 249, blue: 249, alpha: 0)
+        keyboardToolBar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+                                 cancleBarButton]
         keyboardToolBar.sizeToFit()
         textField.inputAccessoryView = keyboardToolBar
+        
+        // add top BorderLine
+        let topBorder: CALayer = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0.5)
+        topBorder.backgroundColor = SwiftGenColors.gray3.color.cgColor
+        keyboardToolBar.layer.addSublayer(topBorder)
     }
     
     @objc
-    private func cancleKeyboard() {
-        textField.endEditing(true)
+    private func correctKeyboard() {
+        // return키를 호출하기 위해, SearchTextFieldShouldReturn Delegate를 호출한다.
+        delegate?.searchTextFieldShouldReturn(textField)
+        textField.resignFirstResponder()
     }
     
     private func setupTextField() {

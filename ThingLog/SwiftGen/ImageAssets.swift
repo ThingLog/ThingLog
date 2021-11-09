@@ -19,6 +19,8 @@ internal typealias AssetImageTypeAlias = ImageSwiftGen.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum SwiftGenAssets {
+  internal static let arrowDropDown = ImageSwiftGen(name: "arrowDropDown")
+  internal static let arrowDropUp = ImageSwiftGen(name: "arrowDropUp")
   internal static let back = ImageSwiftGen(name: "back")
   internal static let bought = ImageSwiftGen(name: "bought")
   internal static let camera = ImageSwiftGen(name: "camera")

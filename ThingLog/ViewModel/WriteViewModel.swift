@@ -5,6 +5,7 @@
 //  Created by 이지원 on 2021/10/03.
 //
 
+import Photos
 import UIKit
 
 import RxSwift
@@ -34,6 +35,12 @@ final class WriteViewModel {
     }
     // Section 마다 표시할 항목의 개수
     lazy var itemCount: [Int] = [1, 1, typeInfo.count, 1, 1]
+    private(set) var originalImages: [UIImage] = [] {
+        didSet {
+            print("⚡️ 호출..", originalImages)
+        }
+    }
+    private let thumbnailSize: CGSize = CGSize(width: 80, height: 80)
     private var selectedCategories: [Category] = []
     private let disposeBag: DisposeBag = DisposeBag()
 
@@ -46,6 +53,25 @@ final class WriteViewModel {
     private func setupBinding() {
         bindNotificationPassToSelectedCategories()
         bindNotificationRemoveSelectedCategory()
+        bindNotificationPassSelectPHAssets()
+    }
+
+    /// 파라미터로 전달받은 PHAsset을 UIImage로 변환하여 반환한다.
+    /// - Parameter assets: 가져올 데이터
+    /// - Returns: thumbnailSize의 [UIImage]
+    func requestThumbnailImages(with assets: [PHAsset]) -> [UIImage] {
+        var images: [UIImage] = []
+        let options: PHImageRequestOptions = PHImageRequestOptions()
+        options.isSynchronous = true
+
+        assets.forEach { asset in
+            asset.toImage(targetSize: thumbnailSize, options: options) { image in
+                guard let image = image else { return }
+                images.append(image)
+            }
+        }
+
+        return images
     }
 }
 
@@ -73,5 +99,33 @@ extension WriteViewModel {
                     self?.selectedCategories.remove(at: firstIndex)
                 }
             }.disposed(by: disposeBag)
+    }
+
+    /// PhotosViewController 에서 전달받은 데이터를 바인딩한다.
+    private func bindNotificationPassSelectPHAssets() {
+        NotificationCenter.default.rx
+            .notification(.passSelectAssets, object: nil)
+            .map { notification -> [PHAsset] in
+                notification.userInfo?[Notification.Name.passSelectAssets] as? [PHAsset] ?? []
+            }
+            .bind { [weak self] assets in
+                self?.executeOriginalImages(with: assets)
+            }.disposed(by: disposeBag)
+    }
+
+    /// 파라미터로 받은 `PHAsset`을 `UIImage`로 변환하여 originalImages에 저장한다. 비동기로 동작한다.
+    /// - Parameter assets: UIImage로 변환할 [PHAsset]
+    private func executeOriginalImages(with assets: [PHAsset]) {
+        let options: PHImageRequestOptions = PHImageRequestOptions()
+        options.isSynchronous = true
+
+        DispatchQueue.global().async { [weak self] in
+            assets.forEach { asset in
+                asset.toImage(targetSize: PHImageManagerMaximumSize, options: options) { image in
+                    guard let image = image else { return }
+                    self?.originalImages.append(image)
+                }
+            }
+        }
     }
 }

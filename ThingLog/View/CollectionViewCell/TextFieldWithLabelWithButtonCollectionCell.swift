@@ -15,7 +15,7 @@ final class TextFieldWithLabelWithButtonCollectionCell: UICollectionViewCell {
         let textField: DisableSelectionTextField = DisableSelectionTextField()
         textField.font = UIFont.Pretendard.body1
         textField.rightView = nil
-        textField.textColor = SwiftGenColors.black.color
+        textField.textColor = SwiftGenColors.primaryBlack.color
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return textField
@@ -24,15 +24,16 @@ final class TextFieldWithLabelWithButtonCollectionCell: UICollectionViewCell {
     let countingLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.body2
-        label.textColor = SwiftGenColors.gray3.color
+        label.textColor = SwiftGenColors.gray2.color
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
     
-    let clearButton: UIButton = {
-        let button: UIButton = UIButton()
-        button.setImage(SwiftGenAssets.textdelete.image, for: .normal)
+    let clearButton: TemplateImageButton = {
+        let button: TemplateImageButton = TemplateImageButton(swiftGenImage: SwiftGenIcons.close.image)
+        button.setTitle("", for: .normal)
+        button.tintColor = SwiftGenColors.gray2.color
         button.setContentHuggingPriority(.required, for: .vertical)
         button.setContentCompressionResistancePriority(.required, for: .vertical)
         return button
@@ -85,7 +86,6 @@ final class TextFieldWithLabelWithButtonCollectionCell: UICollectionViewCell {
     
     var bottomBorderLineView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.gray3.color
         view.translatesAutoresizingMaskIntoConstraints = false
         view.setContentHuggingPriority(.required, for: .vertical)
         return view
@@ -110,6 +110,7 @@ final class TextFieldWithLabelWithButtonCollectionCell: UICollectionViewCell {
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupBackgroundColor()
         setupView()
     }
     
@@ -117,8 +118,13 @@ final class TextFieldWithLabelWithButtonCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not beem implemented")
     }
 
+    // MARK: - Setup
+    func setupBackgroundColor() {
+        backgroundColor = SwiftGenColors.primaryBackground.color
+        bottomBorderLineView.backgroundColor = SwiftGenColors.gray2.color
+    }
+    
     private func setupView() {
-        backgroundColor = SwiftGenColors.white.color
         contentView.addSubview(stackView)
         contentView.addSubview(bottomBorderLineView)
         NSLayoutConstraint.activate([
@@ -150,11 +156,16 @@ final class TextFieldWithLabelWithButtonCollectionCell: UICollectionViewCell {
         keyboardToolBar.barStyle = .default
         toolBarCheckButton.addTarget(self, action: #selector(cancleKeyboard), for: .touchUpInside)
         let cancleBarButton: UIBarButtonItem = UIBarButtonItem(customView: toolBarCheckButton)
-        cancleBarButton.tintColor = SwiftGenColors.black.color
-        keyboardToolBar.barTintColor = SwiftGenColors.gray6.color
         keyboardToolBar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), cancleBarButton]
+        keyboardToolBar.barTintColor = UIColor(red: 249, green: 249, blue: 249, alpha: 0)
         keyboardToolBar.sizeToFit()
         textField.inputAccessoryView = keyboardToolBar
+        
+        // add top BorderLine
+        let topBorder: CALayer = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 0.5)
+        topBorder.backgroundColor = SwiftGenColors.gray3.color.cgColor
+        keyboardToolBar.layer.addSublayer(topBorder)
     }
     
     /// 키보드에 반응이 있거나 없을 때 필요한 로직을 추가한다.
@@ -178,7 +189,7 @@ extension TextFieldWithLabelWithButtonCollectionCell {
     /// placeholder를 설정하는 메서드다
     /// - Parameter text: placeholder에 들어갈 문구를 지정한다.
     func setupPlaceholder(text: String) {
-        textField.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSAttributedString.Key.foregroundColor: SwiftGenColors.gray4.color])
+        textField.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSAttributedString.Key.foregroundColor: SwiftGenColors.gray2.color])
     }
     
     /// 최대 textField 맥시멈을 설정한다.

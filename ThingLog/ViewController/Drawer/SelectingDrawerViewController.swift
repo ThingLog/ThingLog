@@ -14,7 +14,6 @@ class SelectingDrawerViewController: UIViewController {
     // MARK: - View
     var popupView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.white.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -40,7 +39,6 @@ class SelectingDrawerViewController: UIViewController {
     let button: UIButton = {
         let button: UIButton = UIButton()
         button.clipsToBounds = true
-        button.backgroundColor = SwiftGenColors.black.color
         button.setTitleColor(SwiftGenColors.white.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.title1
         button.setTitle("대표 물건 지정", for: .normal)
@@ -74,10 +72,10 @@ class SelectingDrawerViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .clear
         addSubView()
         setupDimmedView()
         setupPopupView()
+        setupBackgroundColor()
         
         subscribeDimmedView()
         
@@ -89,6 +87,7 @@ class SelectingDrawerViewController: UIViewController {
         UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut) {
             self.dimmedView.backgroundColor = .black.withAlphaComponent(0.6)
             self.popupViewBottomAnchor?.constant = 0
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
             self.view.layoutIfNeeded()
         }
     }
@@ -114,6 +113,13 @@ class SelectingDrawerViewController: UIViewController {
         popupView.addSubview(information)
         popupView.addSubview(button)
     }
+    
+    private func setupBackgroundColor() {
+        popupView.backgroundColor = SwiftGenColors.primaryBackground.color
+        button.backgroundColor = SwiftGenColors.primaryBlack.color
+        view.backgroundColor = .clear
+    }
+    
     
     func setupDimmedView() {
         NSLayoutConstraint.activate([

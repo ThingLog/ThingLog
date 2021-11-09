@@ -5,6 +5,7 @@
 //  Created by 이지원 on 2021/10/18.
 //
 
+import Photos
 import UIKit
 
 /// 글쓰기 화면에서 이미지 등록 항목을 표시하기 위한 테이블뷰 셀, CollectionView를 가지고 있다.
@@ -21,11 +22,18 @@ final class WriteImageTableCell: UITableViewCell {
         return collectionView
     }()
 
+    private let userPermissions: UserPermissionsViewModel = UserPermissionsViewModel()
     private let thumbnailCellSize: CGFloat = 62.0
     private let collectionViewHeight: CGFloat = 64.0
     private let paddingLeadingConstaint: CGFloat = 18.0
     private let paddingTopConstaint: CGFloat = 12.0
     private let paddingBottomConstaint: CGFloat = 20.0
+    var coordinator: WriteCoordinator?
+    var thumbnailImages: [UIImage] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -54,6 +62,7 @@ extension WriteImageTableCell {
         collectionView.register(CameraButtonCollectionCell.self, forCellWithReuseIdentifier: CameraButtonCollectionCell.reuseIdentifier)
         collectionView.register(ThumbnailCell.self, forCellWithReuseIdentifier: ThumbnailCell.reuseIdentifier)
         collectionView.dataSource = self
+        collectionView.delegate = self
     }
 
     private func createLayout() -> UICollectionViewCompositionalLayout {
@@ -73,13 +82,30 @@ extension WriteImageTableCell {
         let layout: UICollectionViewCompositionalLayout = .init(section: section)
         return layout
     }
+
+    /// 사용자에게 앨범 사용 접근 권한을 요청한다. 요청을 승인한 경우 PhotosViewController로 이동하고 요청을 거부한 경우 설정으로 이동을 안내하는 Alert을 띄운다.
+    private func tappedCameraButton() {
+        if #available(iOS 14, *) {
+            userPermissions.requestPhotoLibraryAccessWithAccessLevel { isGranted in
+                DispatchQueue.main.async { [weak self] in
+                    isGranted ? self?.coordinator?.showPhotosViewController() : self?.coordinator?.showMoveSettingAlert()
+                }
+            }
+        } else {
+            userPermissions.requestPhotoLibraryAccess { isGranted in
+                DispatchQueue.main.async { [weak self] in
+                    isGranted ? self?.coordinator?.showPhotosViewController() : self?.coordinator?.showMoveSettingAlert()
+                }
+            }
+        }
+    }
 }
 
 // MARK: - DataSource
 extension WriteImageTableCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // TODO: 1(카메라 버튼 셀) + 추가된 이미지 개수를 반환한다.
-        11
+        1 + thumbnailImages.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -88,18 +114,35 @@ extension WriteImageTableCell: UICollectionViewDataSource {
                 return CameraButtonCollectionCell()
             }
 
+            cell.update(count: thumbnailImages.count)
+
             return cell
         } else {
             guard let cell: ThumbnailCell = collectionView.dequeueReusableCell(withReuseIdentifier: ThumbnailCell.reuseIdentifier, for: indexPath) as? ThumbnailCell else {
                 return ThumbnailCell()
             }
 
-            // TODO: 추가한 이미지 삭제 구현
-            cell.closeButtonDidTappedCallback = {
-                print("tapped \(indexPath.row)")
+            let image: UIImage = thumbnailImages[indexPath.row - 1]
+            cell.configure(image: image)
+
+            cell.closeButtonDidTappedCallback = { [weak self] in
+                collectionView.deleteItems(at: [indexPath])
+                self?.thumbnailImages.remove(at: indexPath.row - 1)
+                UIView.performWithoutAnimation {
+                    collectionView.reloadSections(IndexSet(integer: indexPath.section))
+                }
             }
 
             return cell
+        }
+    }
+}
+
+// MARK: - Delegate
+extension WriteImageTableCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            tappedCameraButton()
         }
     }
 }

@@ -14,9 +14,9 @@ final class ProfileView: UIView {
     var userAliasNameButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("분더카머", for: .normal)
-        button.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.headline3
-        button.setImage(SwiftGenAssets.modifyText.image, for: .normal)
+        button.setImage(SwiftGenIcons.edit.image, for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
@@ -28,7 +28,7 @@ final class ProfileView: UIView {
         let label: UILabel = UILabel()
         label.text = "나를 찾는 여정 나를 찾는 여정"
         label.font = UIFont.Pretendard.body2
-        label.textColor = SwiftGenColors.gray4.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return label
@@ -108,6 +108,7 @@ final class ProfileView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupBackgroundColor()
         setupView()
     }
     
@@ -116,8 +117,12 @@ final class ProfileView: UIView {
         setupView()
     }
     
+    func setupBackgroundColor() {
+        backgroundColor = SwiftGenColors.primaryBackground.color
+    }
+    
     private func setupView() {
-        backgroundColor = SwiftGenColors.white.color
+        
         addSubview(totalView)
         
         userBadgeImageView.layer.cornerRadius = imageHeight / 2
