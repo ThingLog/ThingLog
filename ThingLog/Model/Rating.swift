@@ -9,6 +9,7 @@ import CoreData
 import Foundation
 
 enum ScoreType: Int16 {
+    case unrated = 0
     case veryPoor = 1
     case poor = 2
     case good = 3

@@ -132,7 +132,7 @@ final class WriteViewModel {
                     contents: contents,
                     giftGiver: giftGiver,
                     postType: PostType(isDelete: false, type: pageType),
-                    rating: Rating(score: ScoreType(rawValue: Int16(rating)) ?? ScoreType.poor),
+                    rating: Rating(score: ScoreType(rawValue: Int16(rating)) ?? ScoreType.unrated),
                     categories: selectedCategories,
                     attachments: attachments)
     }
