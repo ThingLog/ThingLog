@@ -40,4 +40,11 @@ final class SettingCoordinator: Coordinator {
         loginViewController.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(loginViewController, animated: true)
     }
+
+    func showPostViewController() {
+        let postViewController: PostViewController = PostViewController()
+        postViewController.coordinator = self
+        postViewController.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(postViewController, animated: true)
+    }
 }
