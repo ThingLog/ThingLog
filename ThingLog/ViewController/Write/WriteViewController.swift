@@ -86,7 +86,7 @@ final class WriteViewController: BaseViewController {
         }()
         
         closeButton.rx.tap.bind { [weak self] in
-            self?.close()
+            self?.closeWithAlert()
         }.disposed(by: disposeBag)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: closeButton)
@@ -113,7 +113,7 @@ extension WriteViewController {
     /// 글쓰기 화면을 닫는다.
     /// 글쓰기 화면을 닫기 전에 alert 팝업을 띄워 다시 한 번 사용자에게 묻는다.
     /// 글쓰기 화면을 닫으면서 navigationController.viewControllers를 초기화한다.
-    func close() {
+    func closeWithAlert() {
         let alertController: AlertViewController = AlertViewController()
         
         alertController.hideTitleLabel()
@@ -135,6 +135,11 @@ extension WriteViewController {
         alertController.modalPresentationStyle = .overFullScreen
         present(alertController, animated: false, completion: nil)
     }
+
+    /// 글 작성을 완료하고 이전 화면으로 돌아간다.
+    func close() {
+        coordinator?.dismissWriteViewController()
+    }
     
     /// indexPath.row의 위치로 이동한다.
     /// - Parameter indexPath: 이동하려는 셀의 IndexPath
@@ -151,39 +156,6 @@ extension WriteViewController {
                 self.tableView.setContentOffset(bottomOffset, animated: false)
             }
         }
-    }
-
-    /// Section.type의 셀들의 값을 반환한다.
-    private func getTypeSectionValue() -> [String?] {
-        var result: [String?] = []
-        let section: Int = WriteViewModel.Section.type.rawValue
-        for index in 0..<viewModel.itemCount[section] {
-            let indexPath: IndexPath = IndexPath(row: index, section: section)
-            if let cell: WriteTextFieldCell = tableView.cellForRow(at: indexPath) as? WriteTextFieldCell {
-                result.append(cell.text)
-            }
-        }
-        return result
-    }
-
-    /// Section.rating.currentRating 값을 반환한다.
-    private func getRating() -> Int {
-        let section: Int = WriteViewModel.Section.rating.rawValue
-        let indexPath: IndexPath = IndexPath(row: 0, section: section)
-        if let cell: WriteRatingCell = tableView.cellForRow(at: indexPath) as? WriteRatingCell {
-            return cell.currentRating
-        }
-        return 0
-    }
-
-    /// Section.contents.text 값을 반환한다.
-    private func getContents() -> String {
-        let section: Int = WriteViewModel.Section.contents.rawValue
-        let indexPath: IndexPath = IndexPath(row: 0, section: section)
-        if let cell: WriteTextViewCell = tableView.cellForRow(at: indexPath) as? WriteTextViewCell {
-            return cell.textView.text
-        }
-        return ""
     }
 }
 
@@ -224,12 +196,17 @@ extension WriteViewController: UITableViewDataSource {
                     .bind { [weak self] _ in
                         self?.scrollToCurrentRow(at: indexPath)
                     }.disposed(by: cell.disposeBag)
+                cell.textValueSubject
+                    .bind { [weak self] text in
+                        self?.viewModel.typeValues[indexPath.row] = text
+                    }.disposed(by: cell.disposeBag)
                 
                 return cell
             }
         case .rating:
             if let cell: WriteRatingCell = tableView.dequeueReusableCell(withIdentifier: WriteRatingCell.reuseIdentifier, for: indexPath) as? WriteRatingCell {
                 cell.selectRatingBlock = { [weak self] in
+                    self?.viewModel.rating = cell.currentRating
                     self?.view.endEditing(true)
                 }
                 
@@ -242,7 +219,11 @@ extension WriteViewController: UITableViewDataSource {
                     .bind { [weak self] in
                         self?.scrollToCurrentRow(at: indexPath)
                     }.disposed(by: cell.disposeBag)
-                
+
+                cell.textView.rx.text.orEmpty
+                    .subscribe(onNext: { [weak self] text in
+                        self?.viewModel.contents = text
+                    }).disposed(by: cell.disposeBag)
                 return cell
             }
         case .none:

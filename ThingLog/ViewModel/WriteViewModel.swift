@@ -35,10 +35,17 @@ final class WriteViewModel {
     }
     // Section 마다 표시할 항목의 개수
     lazy var itemCount: [Int] = [1, 1, typeInfo.count, 1, 1]
-    private(set) var originalImages: [UIImage] = []
-    private var selectedCategories: [Category] = []
     private let thumbnailSize: CGSize = CGSize(width: 80, height: 80)
     private let disposeBag: DisposeBag = DisposeBag()
+    private let repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
+
+    // MARK: - Properties for save Post
+    var price: Int = 0
+    var rating: Int = 0
+    var contents: String = ""
+    lazy var typeValues: [String?] = Array(repeating: "", count: typeInfo.count)
+    private(set) var originalImages: [UIImage] = []
+    private var selectedCategories: [Category] = []
 
     init(writeType: PageType) {
         self.pageType = writeType
@@ -68,6 +75,65 @@ final class WriteViewModel {
         }
 
         return images
+    }
+
+    /// Core Data에 게시물을 저장한다.
+    /// - Parameter completion: 성공 여부를 반환한다.
+    func save(completion: @escaping (Bool) -> Void) {
+        let newPost: Post = createNewPost()
+
+        repository.create(newPost) { result in
+            switch result {
+            case .success:
+                completion(true)
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
+
+    /// 사용자에게 입력받은 데이터를 토대로 Post 객체를 생성한다.
+    private func createNewPost() -> Post {
+        let title: String = typeValues[0] ?? ""
+        var purchasePlace: String = ""
+        var giftGiver: String = ""
+
+        switch pageType {
+        case .bought:
+            price = Int(typeValues[1]?.filter("0123456789".contains) ?? "") ?? 0
+            purchasePlace = typeValues[2] ?? ""
+        case .wish:
+            price = Int(typeValues[1]?.filter("0123456789".contains) ?? "") ?? 0
+            purchasePlace = typeValues[2] ?? ""
+        case .gift:
+            giftGiver = typeValues[1] ?? ""
+        }
+
+        let attachments: [Attachment] = createAttachment()
+
+        return Post(title: title,
+                    price: price,
+                    purchasePlace: purchasePlace,
+                    contents: contents,
+                    giftGiver: giftGiver,
+                    postType: PostType(isDelete: false, type: pageType),
+                    rating: Rating(score: ScoreType(rawValue: Int16(rating)) ?? ScoreType.poor),
+                    categories: selectedCategories,
+                    attachments: attachments)
+    }
+
+    /// originalImages로 [Attachment] 를 생성한다.
+    private func createAttachment() -> [Attachment] {
+        let thumbnailSize: CGSize = CGSize(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)
+        var attachments: [Attachment] = []
+        for index in 0..<originalImages.count {
+            if let thumbnail: UIImage = originalImages[index].resizedImage(Size: thumbnailSize) {
+                let attachment: Attachment = Attachment(thumbnail: thumbnail,
+                                                        imageData: .init(originalImage: originalImages[index]))
+                attachments.append(attachment)
+            }
+        }
+        return attachments
     }
 }
 

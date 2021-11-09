@@ -42,8 +42,8 @@ final class WriteTextFieldCell: UITableViewCell {
         }
     }
 
-    var text: String? { textField.text }
     var isEditingSubject: PublishSubject<Bool> = PublishSubject<Bool>()
+    var textValueSubject: PublishSubject<String?> = PublishSubject<String?>()
 
     private(set) var disposeBag: DisposeBag = DisposeBag()
     private let paddingLeadingTrailing: CGFloat = 26.0
@@ -130,13 +130,14 @@ extension WriteTextFieldCell {
             .map { $0.isEmpty }
             .bind { [weak self] isEmpty in
                 self?.textField.rightViewMode = isEmpty ? .never : .always
+                self?.textValueSubject.onNext(self?.textField.text)
             }
             .disposed(by: disposeBag)
     }
 
     @objc
     private func dismissKeyboard() {
-        textField.resignFirstResponder()
+        _ = textField.resignFirstResponder()
     }
 
     @objc

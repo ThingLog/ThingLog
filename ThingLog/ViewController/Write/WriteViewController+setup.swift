@@ -100,7 +100,12 @@ extension WriteViewController {
     func bindDoneButton() {
         doneButton.rx.tap
             .bind { [weak self] in
-                // TODO: Save
+                guard let self = self else { return }
+                self.viewModel.save { isSave in
+                    if isSave {
+                        self.close()
+                    }
+                }
             }.disposed(by: disposeBag)
     }
 }
