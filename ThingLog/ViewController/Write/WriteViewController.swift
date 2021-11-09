@@ -137,6 +137,23 @@ extension WriteViewController {
         present(alertController, animated: false, completion: nil)
     }
 
+    /// 필수 항목(사진 선택)이 누락되었을 때 사용자에게 안내 알럿을 띄운다.
+    func showRequiredAlert() {
+        let alertController: AlertViewController = AlertViewController()
+
+        alertController.hideTitleLabel()
+        alertController.changeContentsText("사진은 필수 입력 항목이에요")
+        alertController.hideTextField()
+        alertController.hideRightButton()
+        alertController.leftButton.setTitle("확인", for: .normal)
+
+        alertController.leftButton.rx.tap.bind {
+            alertController.dismiss(animated: false, completion: nil)
+        }.disposed(by: disposeBag)
+        alertController.modalPresentationStyle = .overFullScreen
+        present(alertController, animated: false, completion: nil)
+    }
+
     /// 글 작성을 완료하고 이전 화면으로 돌아간다.
     func close() {
         coordinator?.dismissWriteViewController()

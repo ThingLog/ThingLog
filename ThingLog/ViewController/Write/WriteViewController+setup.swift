@@ -101,6 +101,10 @@ extension WriteViewController {
         doneButton.rx.tap
             .bind { [weak self] in
                 guard let self = self else { return }
+                guard self.selectedImages.isNotEmpty else {
+                    self.showRequiredAlert()
+                    return
+                }
                 self.viewModel.save { isSave in
                     if isSave {
                         self.close()
