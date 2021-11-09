@@ -100,17 +100,7 @@ extension WriteViewController {
     func bindDoneButton() {
         doneButton.rx.tap
             .bind { [weak self] in
-                self?.getCurrentValue()
+                // TODO: Save
             }.disposed(by: disposeBag)
-    }
-
-    func getCurrentValue() {
-        let section = WriteViewModel.Section.type.rawValue
-        for index in 0..<viewModel.itemCount[section] {
-            let indexPath: IndexPath = IndexPath(row: index, section: section)
-            if let cell = tableView.cellForRow(at: indexPath) as? WriteTextFieldCell {
-                print("⚡️", cell.text)
-            }
-        }
     }
 }

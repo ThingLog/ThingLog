@@ -21,10 +21,10 @@ final class WriteViewModel {
     }
 
     // MARK: - Properties
-    var writeType: WriteType
+    var pageType: PageType
     /// WriteTextFieldCell을 표시할 때 필요한 keyboardType, placeholder 구성. writeType에 따라 개수가 다르다.
     var typeInfo: [(keyboardType: UIKeyboardType, placeholder: String)] {
-        switch writeType {
+        switch pageType {
         case .bought:
             return [(.default, "물건 이름"), (.numberPad, "가격"), (.default, "구매처")]
         case .wish:
@@ -40,8 +40,8 @@ final class WriteViewModel {
     private let thumbnailSize: CGSize = CGSize(width: 80, height: 80)
     private let disposeBag: DisposeBag = DisposeBag()
 
-    init(writeType: WriteType) {
-        self.writeType = writeType
+    init(writeType: PageType) {
+        self.pageType = writeType
 
         setupBinding()
     }
