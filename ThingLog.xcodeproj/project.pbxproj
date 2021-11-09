@@ -117,6 +117,7 @@
 		DB6909612712DA8100BB54E4 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6909602712DA8100BB54E4 /* SettingViewController.swift */; };
 		DB6909632712DB0800BB54E4 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6909622712DB0800BB54E4 /* SettingCoordinator.swift */; };
 		DB6D05AD2733D47E003002A3 /* CheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D05AC2733D47E003002A3 /* CheckView.swift */; };
+		DB73BB07273A61CE00719DF6 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB73BB06273A61CE00719DF6 /* SplashCoordinator.swift */; };
 		DB7C04AA26F5F308009F5C0A /* EasyLookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A926F5F308009F5C0A /* EasyLookCoordinator.swift */; };
 		DB7C04B226F87548009F5C0A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04B126F87548009F5C0A /* TabBarController.swift */; };
 		DB7C04B626F8782B009F5C0A /* EasyLookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04B526F8782B009F5C0A /* EasyLookViewController.swift */; };
@@ -323,6 +324,7 @@
 		DB6909602712DA8100BB54E4 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		DB6909622712DB0800BB54E4 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		DB6D05AC2733D47E003002A3 /* CheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckView.swift; sourceTree = "<group>"; };
+		DB73BB06273A61CE00719DF6 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
 		DB7C04A526F5F281009F5C0A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		DB7C04A926F5F308009F5C0A /* EasyLookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookCoordinator.swift; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 				DBD1054C2729560600632168 /* RootCoordinator.swift */,
 				DB6909622712DB0800BB54E4 /* SettingCoordinator.swift */,
 				87BB17A827098A720088B847 /* WriteCoordinator.swift */,
+				DB73BB06273A61CE00719DF6 /* SplashCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1125,6 +1128,7 @@
 				87A86C8B2714139F008FB3F0 /* WriteTextFieldCell.swift in Sources */,
 				87EDCFD027311E9F002C98BE /* PostViewModel.swift in Sources */,
 				87DAEB1B270BEAE50038C487 /* CameraButtonCollectionCell.swift in Sources */,
+				DB73BB07273A61CE00719DF6 /* SplashCoordinator.swift in Sources */,
 				DBD2244B27085DFB004C5184 /* SearchViewController.swift in Sources */,
 				DB7C04C726F9E693009F5C0A /* UserInformationUserDefaultsViewModel.swift in Sources */,
 				DB62C4BE272BD9E9000ED955 /* DrawerHeaderView.swift in Sources */,

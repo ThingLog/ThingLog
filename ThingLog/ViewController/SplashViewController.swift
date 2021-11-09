@@ -9,28 +9,17 @@ import UIKit
 
 /// 가장 처음에 앱이 시작될 때 보여지는 화면이다.
 class SplashViewController: UIViewController {
+    var coordinator: SplashCoordinator?
+    
     let starAnimationView: AnimationView = {
         let view: AnimationView = AnimationView(name: "splash")
         view.animationSpeed = 1.1
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    /// 애니메이션이 끝난 후 호출 되는 클로저다.
-    var lottieCompletion: (() -> Void)?
-    
-    /// 초기화를 담당하고, 애니메이션이 끝난 후 동작되기를 원하는 로직이 담긴 클로저를 주입한다.
-    /// - Parameter lottieCompletion: 애니메이션이 끝난 후 동작되기를 원하는 로직.
-    init(lottieCompletion: @escaping () -> Void) {
-        self.lottieCompletion = lottieCompletion
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
+
     override func viewDidLoad() {
+        super.viewDidLoad()
         setupView()
     }
     
@@ -45,9 +34,10 @@ class SplashViewController: UIViewController {
             starAnimationView.heightAnchor.constraint(equalTo: starAnimationView.widthAnchor)
         ])
         
-        starAnimationView.play { (finished) in
+        // 애니메이션 동작후, 뷰컨트롤러 전환.
+        starAnimationView.play { finished in
             if finished {
-                self.lottieCompletion?()
+                self.coordinator?.next()
             }
         }
     }
