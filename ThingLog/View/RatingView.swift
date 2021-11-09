@@ -18,16 +18,25 @@ final class RatingView: UIView {
         return stackView
     }()
 
-    private let fillImage: UIImage = SwiftGenAssets.rating.image.withTintColor(SwiftGenColors.black.color)
-    private let emptyImage: UIImage = SwiftGenAssets.rating.image
+    private let fillImage: UIImage = SwiftGenIcons.satisfactionFill.image
+    private let emptyImage: UIImage = SwiftGenIcons.satisfactionStroke.image
 
     // MARK: - Properties
     var maxCount: Int = 5 {
         didSet { setupRatingButton() }
     }
-    var currentRating: Int = 0
+    var currentRating: Int = 0 {
+        didSet { updateCurrentRating() }
+    }
     /// 버튼을 선택했을 때 호출할 클로저
     var didTapButtonBlock: (() -> Void)?
+
+    init(buttonSpacing: CGFloat = 14.0) {
+        super.init(frame: .zero)
+        stackView.spacing = buttonSpacing
+        setupRatingButton()
+        setupView()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -74,5 +83,11 @@ extension RatingView {
         (end + 1..<maxCount).forEach { buttons[$0].setImage(emptyImage, for: .normal) }
 
         currentRating = end + 1
+    }
+
+    /// currentRating 값 만큼 button의 색상을 채운다.
+    private func updateCurrentRating() {
+        (0...currentRating).forEach { buttons[$0].setImage(fillImage, for: .normal) }
+        (currentRating..<maxCount).forEach { buttons[$0].setImage(emptyImage, for: .normal) }
     }
 }

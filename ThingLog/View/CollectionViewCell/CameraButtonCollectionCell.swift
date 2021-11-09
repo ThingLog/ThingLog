@@ -8,7 +8,7 @@
 import UIKit
 
 /// 글쓰기 화면에 들어가는 사진 등록 버튼
-/// ![이미지](https://www.notion.so/CameraButtonCollectionCell-72aa2d9a582c4bea9d60f66d4eb8dc34)
+/// [이미지](https://www.notion.so/CameraButtonCollectionCell-72aa2d9a582c4bea9d60f66d4eb8dc34)
 final class CameraButtonCollectionCell: UICollectionViewCell {
     private let iconImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()

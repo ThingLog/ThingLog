@@ -16,7 +16,6 @@ final class LabelWithButtonRoundCollectionCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.Pretendard.body1
         label.textColor = SwiftGenColors.black.color
-        label.text = "전자제품"
         return label
     }()
 
@@ -29,8 +28,7 @@ final class LabelWithButtonRoundCollectionCell: UICollectionViewCell {
     }()
 
     var removeButtonDidTappedCallback: (() -> Void)?
-    private let paddingLeading: CGFloat = 12.0
-    private let paddingTrailing: CGFloat = 6.0
+    private let leadingTrailingSpacing: CGFloat = 8.0
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,15 +40,18 @@ final class LabelWithButtonRoundCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not beem implemented")
     }
 
-    func configure(text: String) {
+    func configure(text: String, buttonIsHidden: Bool = false) {
         label.text = text
+        removeButton.isHidden = buttonIsHidden
     }
 }
 
 extension LabelWithButtonRoundCollectionCell {
     private func setupView() {
         contentView.layer.cornerRadius = 10
-        contentView.backgroundColor = SwiftGenColors.gray6.color
+        contentView.backgroundColor = .clear
+        contentView.layer.borderColor = SwiftGenColors.primaryBlack.color.cgColor
+        contentView.layer.borderWidth = 1.0
 
         let stackView: UIStackView = {
             let stackView: UIStackView = UIStackView(arrangedSubviews: [label, removeButton])
@@ -62,9 +63,9 @@ extension LabelWithButtonRoundCollectionCell {
         contentView.addSubview(stackView)
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: paddingLeading),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: leadingTrailingSpacing),
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -paddingTrailing),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -leadingTrailingSpacing),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
 
