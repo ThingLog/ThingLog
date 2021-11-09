@@ -152,6 +152,39 @@ extension WriteViewController {
             }
         }
     }
+
+    /// Section.type의 셀들의 값을 반환한다.
+    private func getTypeSectionValue() -> [String?] {
+        var result: [String?] = []
+        let section: Int = WriteViewModel.Section.type.rawValue
+        for index in 0..<viewModel.itemCount[section] {
+            let indexPath: IndexPath = IndexPath(row: index, section: section)
+            if let cell: WriteTextFieldCell = tableView.cellForRow(at: indexPath) as? WriteTextFieldCell {
+                result.append(cell.text)
+            }
+        }
+        return result
+    }
+
+    /// Section.rating.currentRating 값을 반환한다.
+    private func getRating() -> Int {
+        let section: Int = WriteViewModel.Section.rating.rawValue
+        let indexPath: IndexPath = IndexPath(row: 0, section: section)
+        if let cell: WriteRatingCell = tableView.cellForRow(at: indexPath) as? WriteRatingCell {
+            return cell.currentRating
+        }
+        return 0
+    }
+
+    /// Section.contents.text 값을 반환한다.
+    private func getContents() -> String {
+        let section: Int = WriteViewModel.Section.contents.rawValue
+        let indexPath: IndexPath = IndexPath(row: 0, section: section)
+        if let cell: WriteTextViewCell = tableView.cellForRow(at: indexPath) as? WriteTextViewCell {
+            return cell.textView.text
+        }
+        return ""
+    }
 }
 
 // MARK: - DataSource
