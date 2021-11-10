@@ -192,7 +192,7 @@ final class PostTableCell: UITableViewCell {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("댓글 n개 모두 보기", for: .normal)
-        button.setTitleColor(SwiftGenColors.gray4.color, for: .normal)
+        button.setTitleColor(SwiftGenColors.gray2.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.title2
         return button
     }()
@@ -267,6 +267,7 @@ final class PostTableCell: UITableViewCell {
     }
 
     func setupView() {
+        backgroundColor = .clear
         contentView.addSubview(stackView)
         setupHeaderView()
         setupSlideImageCollectionView()
