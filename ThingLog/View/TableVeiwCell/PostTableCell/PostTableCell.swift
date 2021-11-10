@@ -32,11 +32,9 @@ final class PostTableCell: UITableViewCell {
         return label
     }()
 
-    let moreMenuButton: UIButton = {
-        let button: UIButton = UIButton()
+    let moreMenuButton: DropDownView = {
+        let button: DropDownView = DropDownView()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(SwiftGenIcons.moreButton.image, for: .normal)
-        button.sizeToFit()
         return button
     }()
 
