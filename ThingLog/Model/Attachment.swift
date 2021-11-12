@@ -25,7 +25,7 @@ extension Attachment {
     func toEntity(in context: NSManagedObjectContext) -> AttachmentEntity {
         let entity: AttachmentEntity = AttachmentEntity(context: context)
         entity.identifier = identifier
-        entity.thumbnail = thumbnail.pngData()
+        entity.thumbnail = thumbnail.jpegData(compressionQuality: 0.8)
         entity.imageData = imageData.toEntity(in: context)
         return entity
     }
@@ -34,7 +34,7 @@ extension Attachment {
 extension Attachment.ImageData {
     func toEntity(in context: NSManagedObjectContext) -> ImageDataEntity {
         let entity: ImageDataEntity = ImageDataEntity(context: context)
-        entity.originalImage = originalImage.pngData()
+        entity.originalImage = originalImage.jpegData(compressionQuality: 0.8)
         return entity
     }
 }

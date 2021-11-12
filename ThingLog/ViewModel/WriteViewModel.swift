@@ -50,7 +50,7 @@ final class WriteViewModel {
     }
     // Section 마다 표시할 항목의 개수
     lazy var itemCount: [Int] = [1, 1, typeInfo.count, 1, 1]
-    private let thumbnailSize: CGSize = CGSize(width: 80, height: 80)
+    private let thumbnailSize: CGSize = CGSize(width: 100, height: 100)
     private let disposeBag: DisposeBag = DisposeBag()
     private let repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
 
@@ -61,9 +61,11 @@ final class WriteViewModel {
     lazy var typeValues: [String?] = Array(repeating: "", count: typeInfo.count)
     private(set) var originalImages: [UIImage] = []
     private var selectedCategories: [Category] = []
+    /// 이미지가 저장될 크기
+    private let imageSize: CGSize = CGSize(width: 588, height: 588)
 
-    init(writeType: PageType) {
-        self.pageType = writeType
+    init(pageType: PageType) {
+        self.pageType = pageType
 
         setupBinding()
     }
@@ -139,7 +141,6 @@ final class WriteViewModel {
 
     /// originalImages로 [Attachment] 를 생성한다.
     private func createAttachment() -> [Attachment] {
-        let thumbnailSize: CGSize = CGSize(width: UIScreen.main.bounds.width / 3, height: UIScreen.main.bounds.width / 3)
         var attachments: [Attachment] = []
         for index in 0..<originalImages.count {
             if let thumbnail: UIImage = originalImages[index].resizedImage(Size: thumbnailSize) {
@@ -197,10 +198,11 @@ extension WriteViewModel {
         options.isSynchronous = true
 
         DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
             assets.forEach { asset in
-                asset.toImage(targetSize: PHImageManagerMaximumSize, options: options) { image in
+                asset.toImage(targetSize: self.imageSize, options: options) { image in
                     guard let image = image else { return }
-                    self?.originalImages.append(image)
+                    self.originalImages.append(image)
                 }
             }
         }

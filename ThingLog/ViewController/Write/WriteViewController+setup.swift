@@ -88,8 +88,8 @@ extension WriteViewController {
             .map { notification -> [PHAsset] in
                 notification.userInfo?[Notification.Name.passSelectAssets] as? [PHAsset] ?? []
             }
-            .bind { assets in
-                DispatchQueue.main.async { [weak self] in
+            .bind { [weak self] assets in
+                DispatchQueue.main.async {
                     guard let self = self else { return }
                     self.selectedImages = self.viewModel.requestThumbnailImages(with: assets)
                 }
