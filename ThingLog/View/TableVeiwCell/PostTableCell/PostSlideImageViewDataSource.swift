@@ -21,6 +21,7 @@ extension PostSlideImageViewDataSource: UICollectionViewDataSource {
         }
 
         cell.imageView.image = UIImage(systemName: "square.and.arrow.up")
+        cell.setupDisplayOnlyImageView()
 
         return cell
     }

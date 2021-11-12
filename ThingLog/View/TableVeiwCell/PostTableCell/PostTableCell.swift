@@ -32,8 +32,8 @@ final class PostTableCell: UITableViewCell {
         return label
     }()
 
-    let moreMenuButton: DropDownView = {
-        let button: DropDownView = DropDownView()
+    lazy var moreMenuButton: DropDownView = {
+        let button: DropDownView = DropDownView(superView: contentView)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
