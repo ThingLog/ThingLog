@@ -51,6 +51,10 @@ final class HorizontalScrollLabel: UIView {
         scrollView.addSubview(contentView)
         contentView.addSubview(label)
 
+        let centerXConstraint: NSLayoutConstraint = contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
+        centerXConstraint.priority = .defaultLow
+        centerXConstraint.isActive = true
+
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.topAnchor.constraint(equalTo: topAnchor),
@@ -61,6 +65,7 @@ final class HorizontalScrollLabel: UIView {
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
 
             label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             label.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
