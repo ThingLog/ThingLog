@@ -113,7 +113,7 @@ final class TextViewWithSideButtonsView: UIView {
     private func bindLeftButton() {
         leftButton.rx.tap
             .bind { [weak self] in
-                self?.textView.text = nil
+                self?.setupPlaceholder()
                 self?.textView.resignFirstResponder()
             }.disposed(by: disposeBag)
     }
@@ -126,6 +126,12 @@ final class TextViewWithSideButtonsView: UIView {
                 guard let self = self else { return }
                 self.rightButton.isEnabled = isPlaceholder && !self.textView.text.isEmpty
             }.disposed(by: disposeBag)
+    }
+
+    /// 텍스트 뷰의 placholder를 세팅한다.
+    private func setupPlaceholder() {
+        textView.text = placeholder
+        textView.textColor = SwiftGenColors.gray2.color
     }
 }
 
@@ -141,8 +147,7 @@ extension TextViewWithSideButtonsView: UITextViewDelegate {
 
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = placeholder
-            textView.textColor = SwiftGenColors.gray2.color
+            setupPlaceholder()
         }
     }
 }
