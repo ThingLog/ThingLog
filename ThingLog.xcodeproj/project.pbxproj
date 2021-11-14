@@ -54,6 +54,7 @@
 		87A86C9127141576008FB3F0 /* WriteTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C9027141576008FB3F0 /* WriteTextViewCell.swift */; };
 		87ACB0B227229A3000C78C86 /* CenterTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACB0B127229A3000C78C86 /* CenterTextButton.swift */; };
 		87ACB0B427229E2B00C78C86 /* WriteImageTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACB0B327229E2B00C78C86 /* WriteImageTableCell.swift */; };
+		87AD860B2740066E0056C690 /* TextViewWithSideButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD860A2740066E0056C690 /* TextViewWithSideButtonsView.swift */; };
 		87B1B6552715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */; };
 		87B1B6572715E2F0001EA889 /* WriteCategoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1B6562715E2F0001EA889 /* WriteCategoryTableCell.swift */; };
 		87B9EEE8273BDE3B001F3FB4 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B9EEE7273BDE3B001F3FB4 /* DropDownView.swift */; };
@@ -316,6 +317,7 @@
 		87A86C9027141576008FB3F0 /* WriteTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTextViewCell.swift; sourceTree = "<group>"; };
 		87ACB0B127229A3000C78C86 /* CenterTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterTextButton.swift; sourceTree = "<group>"; };
 		87ACB0B327229E2B00C78C86 /* WriteImageTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteImageTableCell.swift; sourceTree = "<group>"; };
+		87AD860A2740066E0056C690 /* TextViewWithSideButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewWithSideButtonsView.swift; sourceTree = "<group>"; };
 		87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithButtonRoundCollectionCell.swift; sourceTree = "<group>"; };
 		87B1B6562715E2F0001EA889 /* WriteCategoryTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCategoryTableCell.swift; sourceTree = "<group>"; };
 		87B9EEE7273BDE3B001F3FB4 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
@@ -870,6 +872,7 @@
 				DBA0F81A2709B37C009553FC /* TableVeiwCell */,
 				DB7C04FB26FB27A6009F5C0A /* TemplateImageButton.swift */,
 				876243E12708704800BDA1DC /* WriteTypeButton.swift */,
+				87AD860A2740066E0056C690 /* TextViewWithSideButtonsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1369,6 +1372,7 @@
 				DB8BF6792705D25700FD5FDB /* LogoView.swift in Sources */,
 				DBA0F829270B26A0009553FC /* SearchResultsViewController.swift in Sources */,
 				87078B5B26EA44B5007AE242 /* ThingLog.xcdatamodeld in Sources */,
+				87AD860B2740066E0056C690 /* TextViewWithSideButtonsView.swift in Sources */,
 				87EDCFCE2731166D002C98BE /* PhotosViewController+Caching.swift in Sources */,
 				877B659D273677EF00561DDF /* CommentTableCell.swift in Sources */,
 				DBD1054D2729560600632168 /* LoginCoordinator.swift in Sources */,
