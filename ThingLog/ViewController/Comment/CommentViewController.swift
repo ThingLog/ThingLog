@@ -30,9 +30,28 @@ final class CommentViewController: BaseViewController {
 
     // MARK: - Properties
     var commentInputViewBottomConstraint: NSLayoutConstraint?
+    var coordinator: Coordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+
+        let logoView: LogoView = LogoView("게시물", font: UIFont.Pretendard.headline4)
+        navigationItem.titleView = logoView
+
+        let backButton: UIButton = UIButton()
+        backButton.setImage(SwiftGenIcons.longArrowR.image, for: .normal)
+        backButton.tintColor = SwiftGenColors.primaryBlack.color
+        backButton.rx.tap
+            .bind { [weak self] in
+                self?.coordinator?.back()
+            }
+            .disposed(by: disposeBag)
+        let backBarButton: UIBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.leftBarButtonItem = backBarButton
     }
 
     override func setupView() {
