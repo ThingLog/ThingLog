@@ -101,7 +101,7 @@ final class OnboardingStartViewController: UIViewController {
     
     func subscribeStartButton() {
         startButton.rx.tap.bind { [weak self] in
-            self?.coordinator?.showOnboardlingList()
+            self?.coordinator?.showOnboardingList()
         }.disposed(by: disposeBag)
     }
 }

@@ -44,7 +44,6 @@
 		876C157B27044DFF000C1C84 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157A27044DFF000C1C84 /* CategoryEntity.swift */; };
 		876C157D27047B19000C1C84 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157C27047B19000C1C84 /* CategoryRepository.swift */; };
 		877B659D273677EF00561DDF /* CommentTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877B659C273677EF00561DDF /* CommentTableCell.swift */; };
-		8789A19E272C5DCC00CFB16C /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8789A19D272C5DCC00CFB16C /* Notification.Name+.swift */; };
 		87A86C8B2714139F008FB3F0 /* WriteTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8A2714139F008FB3F0 /* WriteTextFieldCell.swift */; };
 		87A86C8D271414D2008FB3F0 /* WriteRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8C271414D2008FB3F0 /* WriteRatingCell.swift */; };
 		87A86C8F27141507008FB3F0 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8E27141507008FB3F0 /* RatingView.swift */; };
@@ -668,6 +667,15 @@
 			path = List;
 			sourceTree = "<group>";
 		};
+		DB7B470C274137F600426EF1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				DB7C04F126FB1F36009F5C0A /* ContentsPageViewController.swift */,
+				DB7C04EF26FB1EFF009F5C0A /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		DB7C04A426F5F26B009F5C0A /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -707,10 +715,9 @@
 				873ED12C272AC96000C9F7F1 /* BaseViewController.swift */,
 				8738E1CA271705220069BB80 /* CategoryViewController.swift */,
 				DB7C04E026FB1900009F5C0A /* ContentsCollection */,
-				DB7C04F126FB1F36009F5C0A /* ContentsPageViewController.swift */,
 				DB00D214272A8D1E003FC9C3 /* Drawer */,
 				DBE3E9C92730137200B3EB69 /* EasyLook */,
-				DB7C04EF26FB1EFF009F5C0A /* HomeViewController.swift */,
+				DB7B470C274137F600426EF1 /* Home */,
 				DB9FBDB3272E82A9005E64AF /* Login */,
 				DB7B46FE2740FE6F00426EF1 /* Onboarding */,
 				87336FDB272EE76800E1C4CA /* Photos */,
@@ -1262,7 +1269,6 @@
 				DB7C04F026FB1EFF009F5C0A /* HomeViewController.swift in Sources */,
 				DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */,
 				DB331DAB26FDD00A00A629F5 /* Fonts.swift in Sources */,
-				8789A19E272C5DCC00CFB16C /* Notification.Name+.swift in Sources */,
 				DB6D05AD2733D47E003002A3 /* CheckView.swift in Sources */,
 				8736B3E526FCBA77000433E1 /* RatingEntity+.swift in Sources */,
 				87F2188626FB5DFB00C3FBCA /* Post.swift in Sources */,

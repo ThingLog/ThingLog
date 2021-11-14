@@ -34,7 +34,7 @@ class OnboardingCoordinator: Coordinator {
         window?.makeKeyAndVisible()
     }
     
-    func showOnboardlingList() {
+    func showOnboardingList() {
         let onboardingList: OnboardingListViewController = OnboardingListViewController()
         onboardingList.coordinator = self
         // 메모리 해제

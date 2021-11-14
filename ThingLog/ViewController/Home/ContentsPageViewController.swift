@@ -8,6 +8,7 @@
 import RxSwift
 import UIKit
 
+/// 홈화면에서 3개의 탭안에 보여지기 위한 PageViewController다.
 class ContentsPageViewController: UIPageViewController {
     let controllers: [UIViewController] = [BaseContentsCollectionViewController(willHideFilterView: true),
                                            BaseContentsCollectionViewController(willHideFilterView: true),
