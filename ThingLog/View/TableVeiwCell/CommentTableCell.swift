@@ -71,6 +71,7 @@ final class CommentTableCell: UITableViewCell {
         """
         textView.textContainer.lineFragmentPadding = .zero
         textView.textContainerInset = .zero
+        textView.backgroundColor = .clear
         textView.sizeToFit()
         return textView
     }()
@@ -88,6 +89,7 @@ final class CommentTableCell: UITableViewCell {
 
     // MARK: - Setup
     private func setupView() {
+        backgroundColor = .clear
         let leadingTrailingSpacing: CGFloat = 20.0
         let topBottomSpacing: CGFloat = 14.0
 
@@ -97,9 +99,7 @@ final class CommentTableCell: UITableViewCell {
             return stackView
         }()
 
-        contentView.addSubview(topLineView)
-        contentView.addSubview(headerStackView)
-        contentView.addSubview(textView)
+        contentView.addSubviews(topLineView, headerStackView, textView)
 
         NSLayoutConstraint.activate([
             topLineView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

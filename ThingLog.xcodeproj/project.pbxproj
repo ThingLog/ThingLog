@@ -48,6 +48,10 @@
 		876C157B27044DFF000C1C84 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157A27044DFF000C1C84 /* CategoryEntity.swift */; };
 		876C157D27047B19000C1C84 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157C27047B19000C1C84 /* CategoryRepository.swift */; };
 		877B659D273677EF00561DDF /* CommentTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877B659C273677EF00561DDF /* CommentTableCell.swift */; };
+		8789A19E272C5DCC00CFB16C /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8789A19D272C5DCC00CFB16C /* Notification.Name+.swift */; };
+		87A863C82740DCBE0023FBE7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A863C72740DCBE0023FBE7 /* CommentViewController.swift */; };
+		87A863CA2740DD4B0023FBE7 /* CommentViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A863C92740DD4B0023FBE7 /* CommentViewController+setup.swift */; };
+		87A863CC2740DDAD0023FBE7 /* CommentViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A863CB2740DDAD0023FBE7 /* CommentViewController+DataSource.swift */; };
 		87A86C8B2714139F008FB3F0 /* WriteTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8A2714139F008FB3F0 /* WriteTextFieldCell.swift */; };
 		87A86C8D271414D2008FB3F0 /* WriteRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8C271414D2008FB3F0 /* WriteRatingCell.swift */; };
 		87A86C8F27141507008FB3F0 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8E27141507008FB3F0 /* RatingView.swift */; };
@@ -311,6 +315,9 @@
 		876C157C27047B19000C1C84 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
 		877B659C273677EF00561DDF /* CommentTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableCell.swift; sourceTree = "<group>"; };
 		8789A19D272C5DCC00CFB16C /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
+		87A863C72740DCBE0023FBE7 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		87A863C92740DD4B0023FBE7 /* CommentViewController+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommentViewController+setup.swift"; sourceTree = "<group>"; };
+		87A863CB2740DDAD0023FBE7 /* CommentViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommentViewController+DataSource.swift"; sourceTree = "<group>"; };
 		87A86C8A2714139F008FB3F0 /* WriteTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTextFieldCell.swift; sourceTree = "<group>"; };
 		87A86C8C271414D2008FB3F0 /* WriteRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRatingCell.swift; sourceTree = "<group>"; };
 		87A86C8E27141507008FB3F0 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
@@ -679,6 +686,16 @@
 			path = DropDownView;
 			sourceTree = "<group>";
 		};
+		87A863C62740DCB10023FBE7 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				87A863C72740DCBE0023FBE7 /* CommentViewController.swift */,
+				87A863C92740DD4B0023FBE7 /* CommentViewController+setup.swift */,
+				87A863CB2740DDAD0023FBE7 /* CommentViewController+DataSource.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
 		87EDCFD527316E55002C98BE /* PostTableCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -808,6 +825,7 @@
 				DB2B8AFC272151A800A02090 /* AlertViewController.swift */,
 				873ED12C272AC96000C9F7F1 /* BaseViewController.swift */,
 				8738E1CA271705220069BB80 /* CategoryViewController.swift */,
+				87A863C62740DCB10023FBE7 /* Comment */,
 				DB7C04E026FB1900009F5C0A /* ContentsCollection */,
 				DB00D214272A8D1E003FC9C3 /* Drawer */,
 				DBE3E9C92730137200B3EB69 /* EasyLook */,
@@ -871,8 +889,8 @@
 				DB1745B62708700200EF083E /* SearchTextField.swift */,
 				DBA0F81A2709B37C009553FC /* TableVeiwCell */,
 				DB7C04FB26FB27A6009F5C0A /* TemplateImageButton.swift */,
-				876243E12708704800BDA1DC /* WriteTypeButton.swift */,
 				87AD860A2740066E0056C690 /* TextViewWithSideButtonsView.swift */,
+				876243E12708704800BDA1DC /* WriteTypeButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1281,6 +1299,7 @@
 				DBAB64A526FCC2F8006D95ED /* HomeCoordinator.swift in Sources */,
 				DBD545522703409300063C98 /* HorizontalCollectionView.swift in Sources */,
 				DBAB64A426FCC2C5006D95ED /* Coordinator.swift in Sources */,
+				87A863CA2740DD4B0023FBE7 /* CommentViewController+setup.swift in Sources */,
 				DBA0F81E2709BD41009553FC /* RecentSearchView.swift in Sources */,
 				DBD2244727085671004C5184 /* EasyLookViewController+subscribe.swift in Sources */,
 				8738E1CB271705220069BB80 /* CategoryViewController.swift in Sources */,
@@ -1295,6 +1314,7 @@
 				87B9EEE8273BDE3B001F3FB4 /* DropDownView.swift in Sources */,
 				DBD5454727032B1C00063C98 /* FilterType.swift in Sources */,
 				DB1111EE27352D2D00D02F99 /* SplashViewController.swift in Sources */,
+				87A863CC2740DDAD0023FBE7 /* CommentViewController+DataSource.swift in Sources */,
 				DBAB64A726FE2AFF006D95ED /* UIImage+.swift in Sources */,
 				DB3A516B27103DC4003B529D /* EmptyResultsView.swift in Sources */,
 				DB148C26270469B300FDC48F /* Date+.swift in Sources */,
@@ -1413,6 +1433,7 @@
 				87EDCFDB273171BC002C98BE /* PostCategoryViewDataSouce.swift in Sources */,
 				874D92F9271AD672005FF8F3 /* DummyData.swift in Sources */,
 				8715B3AF273ABFB3007A3A88 /* PostViewController+setup.swift in Sources */,
+				87A863C82740DCBE0023FBE7 /* CommentViewController.swift in Sources */,
 				8736B3EF26FDC1AD000433E1 /* Comment.swift in Sources */,
 				8736B3E326FCB9F3000433E1 /* Rating.swift in Sources */,
 				DB00D211272A8A79003FC9C3 /* SelectingDrawerViewController.swift in Sources */,

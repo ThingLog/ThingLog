@@ -14,6 +14,13 @@ import RxSwift
 /// [이미지](https://www.notion.so/TextFieldWithSideButtonsView-b49640be11914396970a35f1f3561d68)
 final class TextViewWithSideButtonsView: UIView {
     // MARK: View Properties
+    private let topLineView: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = SwiftGenColors.gray4.color
+        return view
+    }()
+
     private let leftButton: UIButton = {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -31,6 +38,8 @@ final class TextViewWithSideButtonsView: UIView {
         textView.font = UIFont.Pretendard.body1
         textView.textColor = SwiftGenColors.gray2.color
         textView.text = "댓글로 경험을 추가하세요!"
+        textView.textContainer.lineFragmentPadding = .zero
+        textView.textContainerInset = .zero
         textView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         textView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         return textView
@@ -50,6 +59,8 @@ final class TextViewWithSideButtonsView: UIView {
 
     // MARK: - Properties
     private let placeholder: String = "댓글로 경험을 추가하세요!"
+    private let leadingTrailingSpacing: CGFloat = 20.0
+    private let topBottomSpacing: CGFloat = 12.0
     private let disposeBag: DisposeBag = DisposeBag()
 
     override init(frame: CGRect) {
@@ -67,6 +78,7 @@ final class TextViewWithSideButtonsView: UIView {
     }
 
     private func setupView() {
+        backgroundColor = SwiftGenColors.white.color
         let stackView: UIStackView = {
             let stackView: UIStackView = UIStackView(arrangedSubviews: [leftButton, textView, rightButton])
             stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -75,13 +87,18 @@ final class TextViewWithSideButtonsView: UIView {
             return stackView
         }()
 
-        addSubview(stackView)
+        addSubviews(topLineView, stackView)
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            topLineView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            topLineView.topAnchor.constraint(equalTo: topAnchor),
+            topLineView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            topLineView.heightAnchor.constraint(equalToConstant: 0.5),
+
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadingTrailingSpacing),
+            stackView.topAnchor.constraint(equalTo: topLineView.bottomAnchor, constant: topBottomSpacing),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -leadingTrailingSpacing),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -topBottomSpacing)
         ])
 
         textView.delegate = self
