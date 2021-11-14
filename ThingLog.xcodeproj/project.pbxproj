@@ -136,6 +136,10 @@
 		DB73BB07273A61CE00719DF6 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB73BB06273A61CE00719DF6 /* SplashCoordinator.swift */; };
 		DB7B47002740FE7800426EF1 /* OnboardingStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B46FF2740FE7800426EF1 /* OnboardingStartViewController.swift */; };
 		DB7B4702274102B300426EF1 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4701274102B300426EF1 /* OnboardingCoordinator.swift */; };
+		DB7B4704274104C800426EF1 /* OnboardingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4703274104C800426EF1 /* OnboardingListViewController.swift */; };
+		DB7B470727410ADE00426EF1 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B470627410ADE00426EF1 /* OnboardingPageViewController.swift */; };
+		DB7B470927410CC800426EF1 /* OnboardingPage1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B470827410CC800426EF1 /* OnboardingPage1ViewController.swift */; };
+		DB7B470B27410CD700426EF1 /* OnboardingPage2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B470A27410CD700426EF1 /* OnboardingPage2ViewController.swift */; };
 		DB7C04AA26F5F308009F5C0A /* EasyLookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A926F5F308009F5C0A /* EasyLookCoordinator.swift */; };
 		DB7C04B226F87548009F5C0A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04B126F87548009F5C0A /* TabBarController.swift */; };
 		DB7C04B626F8782B009F5C0A /* EasyLookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04B526F8782B009F5C0A /* EasyLookViewController.swift */; };
@@ -361,6 +365,10 @@
 		DB73BB06273A61CE00719DF6 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
 		DB7B46FF2740FE7800426EF1 /* OnboardingStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStartViewController.swift; sourceTree = "<group>"; };
 		DB7B4701274102B300426EF1 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		DB7B4703274104C800426EF1 /* OnboardingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingListViewController.swift; sourceTree = "<group>"; };
+		DB7B470627410ADE00426EF1 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		DB7B470827410CC800426EF1 /* OnboardingPage1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage1ViewController.swift; sourceTree = "<group>"; };
+		DB7B470A27410CD700426EF1 /* OnboardingPage2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage2ViewController.swift; sourceTree = "<group>"; };
 		DB7C04A526F5F281009F5C0A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		DB7C04A926F5F308009F5C0A /* EasyLookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookCoordinator.swift; sourceTree = "<group>"; };
@@ -643,9 +651,21 @@
 		DB7B46FE2740FE6F00426EF1 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				DB7B4705274104DE00426EF1 /* List */,
+				DB7B4703274104C800426EF1 /* OnboardingListViewController.swift */,
 				DB7B46FF2740FE7800426EF1 /* OnboardingStartViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		DB7B4705274104DE00426EF1 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				DB7B470827410CC800426EF1 /* OnboardingPage1ViewController.swift */,
+				DB7B470A27410CD700426EF1 /* OnboardingPage2ViewController.swift */,
+				DB7B470627410ADE00426EF1 /* OnboardingPageViewController.swift */,
+			);
+			path = List;
 			sourceTree = "<group>";
 		};
 		DB7C04A426F5F26B009F5C0A /* Coordinator */ = {
@@ -683,7 +703,6 @@
 		DB7C04DF26FB18F4009F5C0A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				DB7B46FE2740FE6F00426EF1 /* Onboarding */,
 				DB2B8AFC272151A800A02090 /* AlertViewController.swift */,
 				873ED12C272AC96000C9F7F1 /* BaseViewController.swift */,
 				8738E1CA271705220069BB80 /* CategoryViewController.swift */,
@@ -692,8 +711,9 @@
 				DB00D214272A8D1E003FC9C3 /* Drawer */,
 				DBE3E9C92730137200B3EB69 /* EasyLook */,
 				DB7C04EF26FB1EFF009F5C0A /* HomeViewController.swift */,
-				87336FDB272EE76800E1C4CA /* Photos */,
 				DB9FBDB3272E82A9005E64AF /* Login */,
+				DB7B46FE2740FE6F00426EF1 /* Onboarding */,
+				87336FDB272EE76800E1C4CA /* Photos */,
 				DBE3E9CA2730196D00B3EB69 /* Search */,
 				DB6909602712DA8100BB54E4 /* SettingViewController.swift */,
 				DB1111ED27352D2D00D02F99 /* SplashViewController.swift */,
@@ -1152,6 +1172,7 @@
 				DB148C26270469B300FDC48F /* Date+.swift in Sources */,
 				DB22327E27183378002ED30D /* TwoLabelVerticalHeaderView.swift in Sources */,
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
+				DB7B470B27410CD700426EF1 /* OnboardingPage2ViewController.swift in Sources */,
 				DB32B28B272D0532009074AF /* DrawerEntity+.swift in Sources */,
 				DB6909632712DB0800BB54E4 /* SettingCoordinator.swift in Sources */,
 				DBD5455027033D9A00063C98 /* ButtonRoundCollectionCell.swift in Sources */,
@@ -1170,6 +1191,7 @@
 				DB7C04FC26FB27A6009F5C0A /* TemplateImageButton.swift in Sources */,
 				DB05B050271F0AB00067DB17 /* LoginCollectionSection.swift in Sources */,
 				87ACB0B227229A3000C78C86 /* CenterTextButton.swift in Sources */,
+				DB7B4704274104C800426EF1 /* OnboardingListViewController.swift in Sources */,
 				876243E22708704800BDA1DC /* WriteTypeButton.swift in Sources */,
 				8738E1CF271709660069BB80 /* RoundLabelWithButtonTableCell.swift in Sources */,
 				87EDCFD927316F8A002C98BE /* PostTableCell+setup.swift in Sources */,
@@ -1222,6 +1244,7 @@
 				DBD2244B27085DFB004C5184 /* SearchViewController.swift in Sources */,
 				873ED12B272AC8CB00C9F7F1 /* PhotosViewController+Albums.swift in Sources */,
 				DB7C04C726F9E693009F5C0A /* UserInformationUserDefaultsViewModel.swift in Sources */,
+				DB7B470727410ADE00426EF1 /* OnboardingPageViewController.swift in Sources */,
 				DB62C4BE272BD9E9000ED955 /* DrawerHeaderView.swift in Sources */,
 				87EDCFD427312517002C98BE /* PostCoordinator.swift in Sources */,
 				DB8BF6832706DA7900FD5FDB /* EasyLookTopView.swift in Sources */,
@@ -1261,6 +1284,7 @@
 				87EDCFDD273174E1002C98BE /* PostSlideImageViewDataSource.swift in Sources */,
 				8738E1CD271708F80069BB80 /* PaddingLabel.swift in Sources */,
 				DB7B47002740FE7800426EF1 /* OnboardingStartViewController.swift in Sources */,
+				DB7B470927410CC800426EF1 /* OnboardingPage1ViewController.swift in Sources */,
 				876C157B27044DFF000C1C84 /* CategoryEntity.swift in Sources */,
 				87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */,
 				8736B3F626FE245A000433E1 /* PostEntity+.swift in Sources */,

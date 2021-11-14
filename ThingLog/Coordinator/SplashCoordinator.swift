@@ -26,7 +26,6 @@ final class SplashCoordinator: Coordinator {
     }
     
     func next() {
-        // TODO: Onboarding으로 교체될 예정.
         OnboardingCoordinator(window).start()
     }
 }

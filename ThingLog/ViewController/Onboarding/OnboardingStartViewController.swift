@@ -4,11 +4,14 @@
 //
 //  Created by hyunsu on 2021/11/14.
 //
-
+import RxSwift
 import UIKit
 
 /// 온보딩 시작하는 첫 화면
-class OnboardingStartViewController: UIViewController {
+final class OnboardingStartViewController: UIViewController {
+    deinit {
+        print("OnboardingStartViewController dead ✅")
+    }
     var coordinator: OnboardingCoordinator?
     
     // MARK: - View
@@ -49,12 +52,6 @@ class OnboardingStartViewController: UIViewController {
         return imageView
     }()
     
-    let emptyView: UIView = {
-        let view: UIView = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private lazy var startButton: RoundCenterTextButton = {
         let button: RoundCenterTextButton = RoundCenterTextButton(cornerRadius: startButtonHeight / 2)
         button.setTitle("시작하기", for: .normal)
@@ -65,10 +62,11 @@ class OnboardingStartViewController: UIViewController {
     // MARK: - Properties
     private let topPaddingForTitle: CGFloat = 10
     private let topPaddingForSlogan: CGFloat = 36
-    private let topPaddingForLogo: CGFloat = 40
     private let logoHeight: CGFloat = 120
     private let startButtonHeight: CGFloat = 52
     private let leadingPadding: CGFloat = 20
+    private let startButtonPadding: CGFloat = 20
+    private let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -76,13 +74,14 @@ class OnboardingStartViewController: UIViewController {
         view.backgroundColor = SwiftGenColors.primaryBackground.color
         setupView()
         setupBaseNavigationBar()
+        
+        subscribeStartButton()
     }
     
     func setupView() {
         view.addSubview(titleView)
         view.addSubview(slogan)
         view.addSubview(logoView)
-        view.addSubview(emptyView)
         view.addSubview(startButton)
         
         NSLayoutConstraint.activate([
@@ -90,19 +89,22 @@ class OnboardingStartViewController: UIViewController {
             titleView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingPadding),
             slogan.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: topPaddingForSlogan),
             slogan.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leadingPadding),
-            logoView.topAnchor.constraint(equalTo: slogan.bottomAnchor, constant: topPaddingForLogo),
+            
             logoView.heightAnchor.constraint(equalToConstant: logoHeight),
             logoView.widthAnchor.constraint(equalToConstant: logoHeight),
             logoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            emptyView.topAnchor.constraint(equalTo: logoView.bottomAnchor),
-            emptyView.bottomAnchor.constraint(equalTo: startButton.topAnchor),
-            emptyView.heightAnchor.constraint(greaterThanOrEqualToConstant: 0),
-            
-            startButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            startButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            logoView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+
+            startButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: startButtonPadding),
+            startButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -startButtonPadding),
+            startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -startButtonPadding),
             startButton.heightAnchor.constraint(equalToConstant: startButtonHeight)
         ])
+    }
+    
+    func subscribeStartButton() {
+        startButton.rx.tap.bind { [weak self] in
+            self?.coordinator?.showOnboardlingList()
+        }.disposed(by: disposeBag)
     }
 }
