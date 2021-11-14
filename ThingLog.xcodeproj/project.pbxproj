@@ -61,13 +61,13 @@
 		87DAEB1B270BEAE50038C487 /* CameraButtonCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DAEB1A270BEAE50038C487 /* CameraButtonCollectionCell.swift */; };
 		87DAEB1D270BEC170038C487 /* ThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */; };
 		87E8E81927355EEB0042AA7E /* HorizontalScrollLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8E81827355EEB0042AA7E /* HorizontalScrollLabel.swift */; };
+		87EDCFCE2731166D002C98BE /* PhotosViewController+Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EDCFCD2731166D002C98BE /* PhotosViewController+Caching.swift */; };
+		87EDCFD027311E9F002C98BE /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EDCFCF27311E9F002C98BE /* PostViewModel.swift */; };
+		87EDCFD427312517002C98BE /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EDCFD327312517002C98BE /* PostCoordinator.swift */; };
 		87EDCFD727316E69002C98BE /* PostTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EDCFD627316E69002C98BE /* PostTableCell.swift */; };
 		87EDCFD927316F8A002C98BE /* PostTableCell+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EDCFD827316F8A002C98BE /* PostTableCell+setup.swift */; };
 		87EDCFDB273171BC002C98BE /* PostCategoryViewDataSouce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EDCFDA273171BC002C98BE /* PostCategoryViewDataSouce.swift */; };
 		87EDCFDD273174E1002C98BE /* PostSlideImageViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EDCFDC273174E1002C98BE /* PostSlideImageViewDataSource.swift */; };
-		87EDCFCE2731166D002C98BE /* PhotosViewController+Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EDCFCD2731166D002C98BE /* PhotosViewController+Caching.swift */; };
-		87EDCFD027311E9F002C98BE /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EDCFCF27311E9F002C98BE /* PostViewModel.swift */; };
-		87EDCFD427312517002C98BE /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EDCFD327312517002C98BE /* PostCoordinator.swift */; };
 		87F2188326FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188226FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift */; };
 		87F2188626FB5DFB00C3FBCA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188526FB5DFB00C3FBCA /* Post.swift */; };
 		87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188826FB5E9500C3FBCA /* PostRepository.swift */; };
@@ -134,6 +134,8 @@
 		DB6909632712DB0800BB54E4 /* SettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6909622712DB0800BB54E4 /* SettingCoordinator.swift */; };
 		DB6D05AD2733D47E003002A3 /* CheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6D05AC2733D47E003002A3 /* CheckView.swift */; };
 		DB73BB07273A61CE00719DF6 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB73BB06273A61CE00719DF6 /* SplashCoordinator.swift */; };
+		DB7B47002740FE7800426EF1 /* OnboardingStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B46FF2740FE7800426EF1 /* OnboardingStartViewController.swift */; };
+		DB7B4702274102B300426EF1 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7B4701274102B300426EF1 /* OnboardingCoordinator.swift */; };
 		DB7C04AA26F5F308009F5C0A /* EasyLookCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04A926F5F308009F5C0A /* EasyLookCoordinator.swift */; };
 		DB7C04B226F87548009F5C0A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04B126F87548009F5C0A /* TabBarController.swift */; };
 		DB7C04B626F8782B009F5C0A /* EasyLookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04B526F8782B009F5C0A /* EasyLookViewController.swift */; };
@@ -290,13 +292,13 @@
 		87DAEB1A270BEAE50038C487 /* CameraButtonCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButtonCollectionCell.swift; sourceTree = "<group>"; };
 		87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCell.swift; sourceTree = "<group>"; };
 		87E8E81827355EEB0042AA7E /* HorizontalScrollLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollLabel.swift; sourceTree = "<group>"; };
+		87EDCFCD2731166D002C98BE /* PhotosViewController+Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosViewController+Caching.swift"; sourceTree = "<group>"; };
+		87EDCFCF27311E9F002C98BE /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		87EDCFD327312517002C98BE /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
 		87EDCFD627316E69002C98BE /* PostTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableCell.swift; sourceTree = "<group>"; };
 		87EDCFD827316F8A002C98BE /* PostTableCell+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostTableCell+setup.swift"; sourceTree = "<group>"; };
 		87EDCFDA273171BC002C98BE /* PostCategoryViewDataSouce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategoryViewDataSouce.swift; sourceTree = "<group>"; };
 		87EDCFDC273174E1002C98BE /* PostSlideImageViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSlideImageViewDataSource.swift; sourceTree = "<group>"; };
-		87EDCFCD2731166D002C98BE /* PhotosViewController+Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosViewController+Caching.swift"; sourceTree = "<group>"; };
-		87EDCFCF27311E9F002C98BE /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
-		87EDCFD327312517002C98BE /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
 		87F2188226FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogPostRepositoryTests.swift; sourceTree = "<group>"; };
 		87F2188526FB5DFB00C3FBCA /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		87F2188826FB5E9500C3FBCA /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
@@ -357,6 +359,8 @@
 		DB6909622712DB0800BB54E4 /* SettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinator.swift; sourceTree = "<group>"; };
 		DB6D05AC2733D47E003002A3 /* CheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckView.swift; sourceTree = "<group>"; };
 		DB73BB06273A61CE00719DF6 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
+		DB7B46FF2740FE7800426EF1 /* OnboardingStartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStartViewController.swift; sourceTree = "<group>"; };
+		DB7B4701274102B300426EF1 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		DB7C04A526F5F281009F5C0A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		DB7C04A926F5F308009F5C0A /* EasyLookCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookCoordinator.swift; sourceTree = "<group>"; };
@@ -636,6 +640,14 @@
 			path = Lottie;
 			sourceTree = "<group>";
 		};
+		DB7B46FE2740FE6F00426EF1 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				DB7B46FF2740FE7800426EF1 /* OnboardingStartViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		DB7C04A426F5F26B009F5C0A /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -643,11 +655,12 @@
 				DB00D217272A8DB0003FC9C3 /* DrawerCoordinator.swift */,
 				DB7C04A926F5F308009F5C0A /* EasyLookCoordinator.swift */,
 				DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */,
+				DB7B4701274102B300426EF1 /* OnboardingCoordinator.swift */,
 				87EDCFD327312517002C98BE /* PostCoordinator.swift */,
 				DBD1054C2729560600632168 /* RootCoordinator.swift */,
 				DB6909622712DB0800BB54E4 /* SettingCoordinator.swift */,
-				87BB17A827098A720088B847 /* WriteCoordinator.swift */,
 				DB73BB06273A61CE00719DF6 /* SplashCoordinator.swift */,
+				87BB17A827098A720088B847 /* WriteCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -670,6 +683,7 @@
 		DB7C04DF26FB18F4009F5C0A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DB7B46FE2740FE6F00426EF1 /* Onboarding */,
 				DB2B8AFC272151A800A02090 /* AlertViewController.swift */,
 				873ED12C272AC96000C9F7F1 /* BaseViewController.swift */,
 				8738E1CA271705220069BB80 /* CategoryViewController.swift */,
@@ -1123,6 +1137,7 @@
 				DBD2244727085671004C5184 /* EasyLookViewController+subscribe.swift in Sources */,
 				8738E1CB271705220069BB80 /* CategoryViewController.swift in Sources */,
 				DB7C04EE26FB1ACE009F5C0A /* ContentsTabView.swift in Sources */,
+				DB7B4702274102B300426EF1 /* OnboardingCoordinator.swift in Sources */,
 				DB05B04C271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift in Sources */,
 				DB32B289272C2028009074AF /* KeyStoreName.swift in Sources */,
 				DBA0F820270AF0A4009553FC /* ResultCollectionSection.swift in Sources */,
@@ -1245,6 +1260,7 @@
 				87DAEB1D270BEC170038C487 /* ThumbnailCell.swift in Sources */,
 				87EDCFDD273174E1002C98BE /* PostSlideImageViewDataSource.swift in Sources */,
 				8738E1CD271708F80069BB80 /* PaddingLabel.swift in Sources */,
+				DB7B47002740FE7800426EF1 /* OnboardingStartViewController.swift in Sources */,
 				876C157B27044DFF000C1C84 /* CategoryEntity.swift in Sources */,
 				87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */,
 				8736B3F626FE245A000433E1 /* PostEntity+.swift in Sources */,
