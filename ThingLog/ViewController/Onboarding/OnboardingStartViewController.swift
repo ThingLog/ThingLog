@@ -9,9 +9,6 @@ import UIKit
 
 /// 온보딩 시작하는 첫 화면
 final class OnboardingStartViewController: UIViewController {
-    deinit {
-        print("OnboardingStartViewController dead ✅")
-    }
     var coordinator: OnboardingCoordinator?
     
     // MARK: - View

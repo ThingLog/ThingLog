@@ -176,7 +176,7 @@ extension LoginViewController {
     
     /// 탭바 화면으로 넘어가는 메소드다
     private func enterTabBarViewController() {
-        if let rootCordinator: RootCoordinator = coordinator as? RootCoordinator {
+        if let rootCordinator: LoginCoordinator = coordinator as? LoginCoordinator {
             rootCordinator.showTabBarController()
             
             // 테스트를 위해서, 설정화면에서 호출한 경우,

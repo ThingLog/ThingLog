@@ -183,7 +183,7 @@
 		DBC45A9C270F24B800AB9499 /* DummyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC45A9B270F24B800AB9499 /* DummyProtocol.swift */; };
 		DBC45A9E270F25E400AB9499 /* ThingLogPostCategoryRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC45A9D270F25E400AB9499 /* ThingLogPostCategoryRequestTests.swift */; };
 		DBC45AA0270F266800AB9499 /* ThingLogPostSearchRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC45A9F270F266800AB9499 /* ThingLogPostSearchRequestTests.swift */; };
-		DBD1054D2729560600632168 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1054C2729560600632168 /* RootCoordinator.swift */; };
+		DBD1054D2729560600632168 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD1054C2729560600632168 /* LoginCoordinator.swift */; };
 		DBD105512729726400632168 /* RoundCenterTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD105502729726400632168 /* RoundCenterTextButton.swift */; };
 		DBD2244527085651004C5184 /* EasyLookViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2244427085651004C5184 /* EasyLookViewController+setup.swift */; };
 		DBD2244727085671004C5184 /* EasyLookViewController+subscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2244627085671004C5184 /* EasyLookViewController+subscribe.swift */; };
@@ -415,7 +415,7 @@
 		DBC45A9B270F24B800AB9499 /* DummyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyProtocol.swift; sourceTree = "<group>"; };
 		DBC45A9D270F25E400AB9499 /* ThingLogPostCategoryRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogPostCategoryRequestTests.swift; sourceTree = "<group>"; };
 		DBC45A9F270F266800AB9499 /* ThingLogPostSearchRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogPostSearchRequestTests.swift; sourceTree = "<group>"; };
-		DBD1054C2729560600632168 /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
+		DBD1054C2729560600632168 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		DBD105502729726400632168 /* RoundCenterTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundCenterTextButton.swift; sourceTree = "<group>"; };
 		DBD2244427085651004C5184 /* EasyLookViewController+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EasyLookViewController+setup.swift"; sourceTree = "<group>"; };
 		DBD2244627085671004C5184 /* EasyLookViewController+subscribe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EasyLookViewController+subscribe.swift"; sourceTree = "<group>"; };
@@ -675,9 +675,9 @@
 				DB00D217272A8DB0003FC9C3 /* DrawerCoordinator.swift */,
 				DB7C04A926F5F308009F5C0A /* EasyLookCoordinator.swift */,
 				DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */,
+				DBD1054C2729560600632168 /* LoginCoordinator.swift */,
 				DB7B4701274102B300426EF1 /* OnboardingCoordinator.swift */,
 				87EDCFD327312517002C98BE /* PostCoordinator.swift */,
-				DBD1054C2729560600632168 /* RootCoordinator.swift */,
 				DB6909622712DB0800BB54E4 /* SettingCoordinator.swift */,
 				DB73BB06273A61CE00719DF6 /* SplashCoordinator.swift */,
 				87BB17A827098A720088B847 /* WriteCoordinator.swift */,
@@ -1235,7 +1235,7 @@
 				87078B5B26EA44B5007AE242 /* ThingLog.xcdatamodeld in Sources */,
 				87EDCFCE2731166D002C98BE /* PhotosViewController+Caching.swift in Sources */,
 				877B659D273677EF00561DDF /* CommentTableCell.swift in Sources */,
-				DBD1054D2729560600632168 /* RootCoordinator.swift in Sources */,
+				DBD1054D2729560600632168 /* LoginCoordinator.swift in Sources */,
 				873EC00926D39055003C3525 /* AppDelegate.swift in Sources */,
 				87A86C8B2714139F008FB3F0 /* WriteTextFieldCell.swift in Sources */,
 				87EDCFD027311E9F002C98BE /* PostViewModel.swift in Sources */,

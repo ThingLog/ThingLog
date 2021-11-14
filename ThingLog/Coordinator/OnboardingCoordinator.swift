@@ -7,7 +7,7 @@
 
 import UIKit
 
-/// 온보딩 화면을 돕는 Coordinator
+/// 온보딩 화면을 돕는 Coordinator이고, 유저정보가 있다면 온보딩을 스킵하고, TabBar를 보여준다.
 class OnboardingCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     
@@ -37,15 +37,18 @@ class OnboardingCoordinator: Coordinator {
     func showOnboardlingList() {
         let onboardingList: OnboardingListViewController = OnboardingListViewController()
         onboardingList.coordinator = self
+        // 메모리 해제
+        if let startViewController: OnboardingStartViewController = navigationController.topViewController as? OnboardingStartViewController {
+            startViewController.coordinator = nil
+        }
         navigationController.pushViewController(onboardingList, animated: true)
     }
     
     func showLoginViewController() {
-        // TODO: - ⚠️ memory leak 문제 해결
-        RootCoordinator(window: window, navigationController: UINavigationController()).start()
-    }
-    
-    deinit {
-        print("onboarding coordinator dead ✅")
+        // 메모리 해제
+        if let onboardingList: OnboardingListViewController = navigationController.topViewController as? OnboardingListViewController {
+            onboardingList.coordinator = nil
+        }
+        LoginCoordinator(window: window, navigationController: UINavigationController()).start()
     }
 }
