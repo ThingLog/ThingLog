@@ -10,6 +10,18 @@ import UIKit
 /// 좌측에 titleLabel과 subTitleLabel을, 우측에 button을 가지는 Collection HeaderView다.
 class LeftLabelRightButtonHeaderView: UICollectionReusableView {
     // MARK: - View
+    // 로그인화면에서 사용하기 위해 있는 이미지뷰이고, 기본적으로 hide되어있다. 
+    let leftIconView: UIImageView = {
+        let imageView: UIImageView = UIImageView(image: SwiftGenIcons.loginStar.image.withRenderingMode(.alwaysTemplate))
+        imageView.tintColor = SwiftGenColors.primaryBlack.color
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.setContentHuggingPriority(.required, for: .horizontal)
+        imageView.setContentHuggingPriority(.required, for: .vertical)
+        imageView.isHidden = true
+        return imageView
+    }()
+    
     private let titleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.title2
@@ -33,8 +45,9 @@ class LeftLabelRightButtonHeaderView: UICollectionReusableView {
     
     private lazy var labelStackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [
-        titleLabel,
-        subTitleLabel])
+                                                    leftIconView,
+                                                    titleLabel,
+                                                    subTitleLabel])
         stackView.axis = .horizontal
         stackView.spacing = 6
         stackView.setContentHuggingPriority(.defaultLow, for: .horizontal)

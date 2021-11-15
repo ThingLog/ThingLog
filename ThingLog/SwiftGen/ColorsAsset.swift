@@ -21,6 +21,7 @@ internal typealias AssetColorTypeAlias = ColorSwiftGen.Color
 internal enum SwiftGenColors {
   internal static let black = ColorSwiftGen(name: "black")
   internal static let blue = ColorSwiftGen(name: "blue")
+  internal static let dimmedColor = ColorSwiftGen(name: "dimmedColor")
   internal static let gray1 = ColorSwiftGen(name: "gray1")
   internal static let gray2 = ColorSwiftGen(name: "gray2")
   internal static let gray3 = ColorSwiftGen(name: "gray3")
@@ -57,17 +58,6 @@ internal final class ColorSwiftGen {
     }
     return color
   }()
-
-  #if os(iOS) || os(tvOS)
-  @available(iOS 11.0, tvOS 11.0, *)
-  internal func color(compatibleWith traitCollection: UITraitCollection) -> Color {
-    let bundle = BundleToken.bundle
-    guard let color = Color(named: name, in: bundle, compatibleWith: traitCollection) else {
-      fatalError("Unable to load color asset named \(name).")
-    }
-    return color
-  }
-  #endif
 
   fileprivate init(name: String) {
     self.name = name

@@ -116,8 +116,8 @@ final class HomeViewController: UIViewController {
         navigationItem.leftBarButtonItem = logoBarButtonItem
         
         let settingButton: UIButton = UIButton()
-        settingButton.setImage(SwiftGenIcons.system.image, for: .normal)
-        settingButton.tintColor = SwiftGenColors.black.color
+        settingButton.setImage(SwiftGenIcons.system.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        settingButton.tintColor = SwiftGenColors.primaryBlack.color
         settingButton.rx.tap
             .bind { [weak self] in
                 self?.coordinator?.showSettingViewController()

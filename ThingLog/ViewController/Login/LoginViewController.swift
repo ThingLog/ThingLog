@@ -257,6 +257,7 @@ extension LoginViewController: UICollectionViewDataSource {
             guard let recommend = collectionView.dequeueReusableSupplementaryView(ofKind: LeftLabelRightButtonHeaderView.reuseIdentifier, withReuseIdentifier: LeftLabelRightButtonHeaderView.reuseIdentifier, for: indexPath) as? LeftLabelRightButtonHeaderView else {
                 return UICollectionReusableView()
             }
+            recommend.leftIconView.isHidden = false 
             recommend.rightButton.isHidden = true
             recommend.updateTitle(title: "추천 소개 글", subTitle: nil)
             return recommend
@@ -293,7 +294,7 @@ extension LoginViewController {
                              textColor: bool ? SwiftGenColors.white.color : SwiftGenColors.primaryBlack.color )
         } completion: { _  in
             UIView.animate(withDuration: 0.3) {
-                cell.changeColor(borderColor: SwiftGenColors.primaryBlack.color,
+                cell.changeColor(borderColor: SwiftGenColors.gray3.color,
                                  backgroundColor: !bool ? SwiftGenColors.primaryBlack.color : SwiftGenColors.primaryBackground.color ,
                                  textColor: !bool ? SwiftGenColors.white.color : SwiftGenColors.primaryBlack.color )
             }
