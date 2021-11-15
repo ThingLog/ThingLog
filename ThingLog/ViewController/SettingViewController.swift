@@ -21,6 +21,7 @@ final class SettingViewController: UIViewController {
         case alert2 = 7
         case alert3 = 8
         case resetUserInfor = 9
+        case post = 10
         
         var title: String {
             switch self {
@@ -44,6 +45,8 @@ final class SettingViewController: UIViewController {
                 return "제목과 텍스트필드, 두개의 버튼 있는 Alert"
             case .resetUserInfor:
                 return "유저정보 초기화 ( 앱 종료됩니다 )"
+            case .post:
+                return "게시물 화면"
             }
         }
     }
@@ -168,7 +171,7 @@ extension SettingViewController: UITableViewDataSource {
                     }
                     .disposed(by: cell.disposeBag)
                 
-            case .editCategory, .trash, .login, .addDummyData, .deleteDummyData, .alert1, .alert2, .alert3, .resetUserInfor:
+            case .editCategory, .trash, .login, .addDummyData, .deleteDummyData, .alert1, .alert2, .alert3, .resetUserInfor, .post:
                 cell.changeViewType(labelType: .withBody1,
                                     buttonType: .withChevronRight,
                                     borderLineHeight: .with05Height,
@@ -204,8 +207,9 @@ extension SettingViewController: UITableViewDelegate {
             case .resetUserInfor:
                 UserInformationiCloudViewModel().resetUserInformation()
                 exit(1)
+            case .post:
+                coordinator?.showPostViewController()
             }
-            
         }
     }
     func showAlert1() {

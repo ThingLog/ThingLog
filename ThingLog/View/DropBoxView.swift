@@ -97,7 +97,7 @@ final class DropBoxView: UIView {
         clipsToBounds = true
         addSubview(titleButton)
         superView?.addSubview(tableView)
-        bringSubviewToFront(tableView)
+
         tableViewHeightConstant = tableView.heightAnchor.constraint(equalToConstant: 0)
         tableViewHeightConstant?.isActive = true
         NSLayoutConstraint.activate([

@@ -81,11 +81,8 @@ extension PostTableCell {
             firstInfoContainerView.heightAnchor.constraint(equalToConstant: firstInfoViewHeight),
             nameLabel.leadingAnchor.constraint(equalTo: firstInfoContainerView.leadingAnchor, constant: leadingTrailingSpacing),
             nameLabel.topAnchor.constraint(equalTo: firstInfoContainerView.topAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: ratingView.leadingAnchor, constant: -leadingTrailingSpacing),
+            nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: ratingView.leadingAnchor, constant: -leadingTrailingSpacing),
             nameLabel.bottomAnchor.constraint(equalTo: firstInfoContainerView.bottomAnchor),
-//            nameLabel.leadingAnchor.constraint(equalTo: firstInfoContainerView.leadingAnchor),
-//            nameLabel.trailingAnchor.constraint(equalTo: firstInfoContainerView.trailingAnchor),
-//            nameLabel.centerYAnchor.constraint(equalTo: firstInfoContainerView.centerYAnchor),
             ratingView.centerYAnchor.constraint(equalTo: firstInfoContainerView.centerYAnchor),
             ratingView.trailingAnchor.constraint(equalTo: firstInfoContainerView.trailingAnchor, constant: -leadingTrailingSpacing)
         ])
@@ -99,7 +96,7 @@ extension PostTableCell {
             secondInfoContainerView.heightAnchor.constraint(equalToConstant: secondInfoViewHeight),
             placeLabel.leadingAnchor.constraint(equalTo: secondInfoContainerView.leadingAnchor, constant: leadingTrailingSpacing),
             placeLabel.topAnchor.constraint(equalTo: secondInfoContainerView.topAnchor),
-            placeLabel.trailingAnchor.constraint(equalTo: priceLabel.leadingAnchor, constant: -leadingTrailingSpacing),
+            placeLabel.trailingAnchor.constraint(lessThanOrEqualTo: priceLabel.leadingAnchor, constant: -leadingTrailingSpacing),
             placeLabel.bottomAnchor.constraint(equalTo: secondInfoContainerView.bottomAnchor),
             priceLabel.centerYAnchor.constraint(equalTo: placeLabel.centerYAnchor),
             priceLabel.trailingAnchor.constraint(equalTo: secondInfoContainerView.trailingAnchor, constant: -leadingTrailingSpacing)
@@ -119,6 +116,8 @@ extension PostTableCell {
             contentTextView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: topSpacing),
             contentTextView.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor, constant: leadingTrailingSpacing),
             contentTextView.trailingAnchor.constraint(equalTo: contentsContainerView.trailingAnchor, constant: -leadingTrailingSpacing),
+            contentTextView.centerXAnchor.constraint(equalTo: contentsContainerView.centerXAnchor),
+            contentTextView.centerYAnchor.constraint(equalTo: contentsContainerView.centerYAnchor),
             commentMoreButton.topAnchor.constraint(equalTo: contentTextView.bottomAnchor),
             commentMoreButton.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor, constant: leadingTrailingSpacing),
             commentMoreButton.trailingAnchor.constraint(lessThanOrEqualTo: contentsContainerView.trailingAnchor, constant: -leadingTrailingSpacing),
