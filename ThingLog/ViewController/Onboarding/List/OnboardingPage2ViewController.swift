@@ -9,9 +9,16 @@ import UIKit
 
 /// 두번째 온보딩 화면을 보여주는 ViewController다.
 final class OnboardingPage2ViewController: UIViewController {
-    let startAnimationView: AnimationView = {
-        let view: AnimationView = AnimationView(name: "onboarding2")
-        view.animationSpeed = 1.1
+    // 상단 유동적인 높이를 지정하기 위한 빈 뷰
+    let topEmptyView: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var startAnimationView: AnimationView = {
+        let view: AnimationView = self.traitCollection.userInterfaceStyle == .dark ? AnimationView(name: "onboarding2Dark") : AnimationView(name: "onboarding2")
+        view.animationSpeed = 1.0
         view.loopMode = .loop
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -67,7 +74,7 @@ final class OnboardingPage2ViewController: UIViewController {
     let contentsLael: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.body1
-        label.text = "나의 모든 기록을 모아보기에서 한눈에 확인하고,\n나에 대해 알아가 보세요!"
+        label.text = "기록을 통해 나의 가치를 발견할 수 있습니다.\n나에 대해 알아가 보세요!"
         label.numberOfLines = 2
         label.textAlignment = .center
         label.textColor = SwiftGenColors.gray2.color
@@ -85,9 +92,7 @@ final class OnboardingPage2ViewController: UIViewController {
     }()
     
     // MARK: - Properties
-    private let bottomPaddingForAnimation: CGFloat = 63
-    private let bottomPaddingForUnderlineView: CGFloat = 110
-    private let bottomPaddingForTextStackView: CGFloat = 80
+    private let topPaddingForTextStackView: CGFloat = 120
     
     // MARK: - Life Cycle 
     override func viewDidLoad() {
@@ -101,9 +106,24 @@ final class OnboardingPage2ViewController: UIViewController {
             self.startAnimationView.play()
         }
     }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         startAnimationView.stop()
+    }
+    
+    // 다크모드 감지
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        guard UIApplication.shared.applicationState == .inactive else {
+            return
+        }
+        
+        startAnimationView.animation = Animation.named(self.traitCollection.userInterfaceStyle == .dark ? "onboarding2Dark" : "onboarding2")
+        DispatchQueue.main.async {
+            self.startAnimationView.play()
+        }
     }
     
     func setupView() {
@@ -115,13 +135,25 @@ final class OnboardingPage2ViewController: UIViewController {
         view.addSubview(textStackView)
         view.addSubview(leadingEmptyView)
         view.addSubview(trailingEmptyView)
+        view.addSubview(topEmptyView)
         
         NSLayoutConstraint.activate([
+            topEmptyView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topEmptyView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.17),
+            topEmptyView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            topEmptyView.widthAnchor.constraint(equalToConstant: 1),
+            
+            startAnimationView.topAnchor.constraint(equalTo: topEmptyView.bottomAnchor),
             startAnimationView.widthAnchor.constraint(equalTo: underlineView.widthAnchor, multiplier: 0.75),
-            startAnimationView.heightAnchor.constraint(equalTo: startAnimationView.widthAnchor),
-            startAnimationView.bottomAnchor.constraint(equalTo: underlineView.topAnchor,
-                                                       constant: 0),
+            startAnimationView.heightAnchor.constraint(equalTo: startAnimationView.widthAnchor, multiplier: 0.83),
             startAnimationView.centerXAnchor.constraint(equalTo: underlineView.centerXAnchor),
+            
+            underlineView.leadingAnchor.constraint(equalTo: leftLabel.trailingAnchor,
+                                                   constant: 2),
+            underlineView.trailingAnchor.constraint(equalTo: rightLabel.leadingAnchor,
+                                                    constant: -2),
+            underlineView.heightAnchor.constraint(equalToConstant: 4),
+            underlineView.topAnchor.constraint(equalTo: startAnimationView.bottomAnchor),
             
             leadingEmptyView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             trailingEmptyView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -133,16 +165,7 @@ final class OnboardingPage2ViewController: UIViewController {
                                               constant: -4),
             rightLabel.bottomAnchor.constraint(equalTo: leftLabel.bottomAnchor),
             
-            underlineView.leadingAnchor.constraint(equalTo: leftLabel.trailingAnchor,
-                                                   constant: 2),
-            underlineView.trailingAnchor.constraint(equalTo: rightLabel.leadingAnchor,
-                                                    constant: -2),
-            underlineView.heightAnchor.constraint(equalToConstant: 4),
-            underlineView.bottomAnchor.constraint(equalTo: textStackView.topAnchor,
-                                                  constant: -bottomPaddingForUnderlineView),
-            
-            textStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor,
-                                                  constant: -bottomPaddingForTextStackView),
+            textStackView.topAnchor.constraint(equalTo: underlineView.bottomAnchor, constant: topPaddingForTextStackView),
             textStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }

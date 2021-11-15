@@ -26,6 +26,7 @@ internal enum SwiftGenIcons {
   internal static let group = IconImageSwiftGen(name: "Group")
   internal static let satisfactionFill = IconImageSwiftGen(name: "Satisfaction_fill")
   internal static let satisfactionStroke = IconImageSwiftGen(name: "Satisfaction_stroke")
+  internal static let thingLog = IconImageSwiftGen(name: "ThingLog")
   internal static let arrowDropDown = IconImageSwiftGen(name: "arrow_drop_down")
   internal static let buyVer1 = IconImageSwiftGen(name: "buy.ver1")
   internal static let camera = IconImageSwiftGen(name: "camera")
