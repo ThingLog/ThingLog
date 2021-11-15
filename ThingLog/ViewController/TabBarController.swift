@@ -24,11 +24,11 @@ final class TabBarController: UITabBarController {
     let choiceView: ChoiceWritingView = ChoiceWritingView()
     let dimmedView: UIView = {
         let dimmed: UIView = UIView()
-        dimmed.backgroundColor = .black.withAlphaComponent(0.0)
+        dimmed.backgroundColor = SwiftGenColors.dimmedColor.color.withAlphaComponent(0.0)
         dimmed.isUserInteractionEnabled = true
         return dimmed
     }()
-
+    
     // MARK: - Properties
     private let disposeBag: DisposeBag = DisposeBag()
     
@@ -45,8 +45,9 @@ final class TabBarController: UITabBarController {
     private func setupView() {
         delegate = self
         tabBar.tintColor = SwiftGenColors.primaryBlack.color // tabbar button 틴트 컬러
-        
+        tabBar.unselectedItemTintColor = SwiftGenColors.systemRed.color // 이건 적용안됌 ( 아래로 해결 )
         let appearance: UITabBarAppearance = UITabBarAppearance()
+        appearance.stackedLayoutAppearance.normal.iconColor = SwiftGenColors.primaryBlack.color // 이걸로 적용해야함.
         appearance.backgroundColor = SwiftGenColors.primaryBackground.color
         appearance.shadowColor = SwiftGenColors.gray4.color
         appearance.shadowImage = UIImage.colorForNavBar(color: SwiftGenColors.gray4.color)
@@ -54,15 +55,15 @@ final class TabBarController: UITabBarController {
         
         homeCoordinator.start()
         easyLookCoordinator.start()
-
+        
         let homeTabBar: UITabBarItem = UITabBarItem(title: nil,
-                                                    image: SwiftGenIcons.homeStroke.image.withRenderingMode(.alwaysOriginal),
-                                                    selectedImage: SwiftGenIcons.homeFill.image)
+                                                    image: SwiftGenIcons.homeStroke.image.withRenderingMode(.alwaysTemplate),
+                                                    selectedImage: SwiftGenIcons.homeFill.image.withRenderingMode(.alwaysTemplate))
         let easyLookTabBar: UITabBarItem = UITabBarItem(title: nil,
-                                                        image: SwiftGenIcons.gatherStroke.image.withRenderingMode(.alwaysOriginal),
-                                                        selectedImage: SwiftGenIcons.gatherFill.image)
+                                                        image: SwiftGenIcons.gatherStroke.image.withRenderingMode(.alwaysTemplate),
+                                                        selectedImage: SwiftGenIcons.gatherFill.image.withRenderingMode(.alwaysTemplate))
         let plusTabBar: UITabBarItem = UITabBarItem(title: nil,
-                                                    image: SwiftGenIcons.writing.image.withRenderingMode(.alwaysOriginal),
+                                                    image: SwiftGenIcons.writingHole.image.withRenderingMode(.alwaysTemplate),
                                                     selectedImage: nil)
         
         homeTabBar.imageInsets = UIEdgeInsets.init(top: 5, left: 0, bottom: -5, right: 0)
@@ -100,7 +101,7 @@ final class TabBarController: UITabBarController {
             dimmedView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-
+    
     private func bindWriteType() {
         choiceView.selectedWriteTypeSubject
             .bind { [weak self] type in
@@ -108,11 +109,11 @@ final class TabBarController: UITabBarController {
                 self.touchDimmedView()
                 
                 // Test Code
-//                if type == .bought {
-//                    makeDummy()
-//                } else {
-//                    deleteAllEntity()
-//                }
+                //                if type == .bought {
+                //                    makeDummy()
+                //                } else {
+                //                    deleteAllEntity()
+                //                }
                 self.writeCoordinator.showWriteViewController(with: type)
             }
             .disposed(by: disposeBag)
@@ -150,7 +151,7 @@ extension TabBarController {
             
             UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .curveEaseInOut) {
                 self.choiceView.hide(false)
-                self.dimmedView.backgroundColor = .black.withAlphaComponent(0.6)
+                self.dimmedView.backgroundColor = SwiftGenColors.dimmedColor.color.withAlphaComponent(0.6)
                 self.rotatePlusButton(isRecovery: false)
                 UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
                 self.view.layoutIfNeeded()

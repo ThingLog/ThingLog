@@ -118,7 +118,7 @@ final class SettingViewController: UIViewController {
         navigationItem.titleView = logoView
         
         let backButton: UIButton = UIButton()
-        backButton.setImage(SwiftGenIcons.longArrowR.image, for: .normal)
+        backButton.setImage(SwiftGenIcons.longArrowR.image.withRenderingMode(.alwaysTemplate), for: .normal)
         backButton.tintColor = SwiftGenColors.primaryBlack.color
         backButton.rx.tap
             .bind { [weak self] in

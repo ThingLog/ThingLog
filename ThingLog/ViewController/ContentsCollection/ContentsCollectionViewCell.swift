@@ -32,6 +32,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         return imageview
     }()
     
+    // TODO: - ⚠️ 삭제할 에정인 lable
     var testLabel: UILabel = {
         let label: UILabel = UILabel()
         label.textColor = SwiftGenColors.systemBlue.color
@@ -47,7 +48,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         let image: UIImage? = UIImage(systemName: "square.on.square.fill")
         let imageView: UIImageView = UIImageView(image: image)
         imageView.transform = CGAffineTransform(rotationAngle: .pi)
-        imageView.tintColor = SwiftGenColors.white.color
+        imageView.tintColor = .white
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -64,7 +65,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
     // 하단에 정보를 표시하기 위한 Label이다. ( 주로 휴지통 화면에서 몇일 남았는지를 알려주기 위해 사용된다. )
     let bottomLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.textColor = SwiftGenColors.white.color
+        label.textColor = .white
         label.font = UIFont.Pretendard.body3
         label.backgroundColor = .clear
         label.numberOfLines = 0
@@ -189,7 +190,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         bottomGradientView.frame = contentView.bounds
         bottomGradientView.frame.size.height = contentView.bounds.height / 4
-        bottomGradientView.setGradient(startColor: SwiftGenColors.primaryBlack.color,
+        bottomGradientView.setGradient(startColor: .black,
                                        endColor: .clear,
                                        startPoint: CGPoint(x: 0.0, y: 1.0),
                                        endPoint: CGPoint(x: 0.0, y: 0.0))
@@ -225,7 +226,7 @@ extension ContentsCollectionViewCell {
     /// 체크버튼을 강조하거나 강조하지 않도록 변경하는 메서드다
     func changeCheckButton(isSelected: Bool) {
         checkButton.imageView.isHidden = !isSelected
-        checkButton.backgroundColor = isSelected ? SwiftGenColors.systemGreen.color : .clear
+        checkButton.backgroundColor = isSelected ? .white : .clear
         checkButton.layer.borderColor = isSelected ? UIColor.clear.cgColor : SwiftGenColors.white.color.cgColor
     }
 

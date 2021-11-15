@@ -18,11 +18,11 @@ extension WriteType {
     var image: UIImage? {
         switch self {
         case .bought:
-            return SwiftGenIcons.buyVer1.image.withTintColor(SwiftGenColors.black.color)
+            return SwiftGenIcons.buyVer1.image.withTintColor(SwiftGenColors.primaryBlack.color)
         case .gift:
-            return SwiftGenIcons.giftVer1.image.withTintColor(SwiftGenColors.black.color)
+            return SwiftGenIcons.giftVer1.image.withTintColor(SwiftGenColors.primaryBlack.color)
         case .wish:
-            return SwiftGenIcons.wishVer1.image.withTintColor(SwiftGenColors.black.color)
+            return SwiftGenIcons.wishVer1.image.withTintColor(SwiftGenColors.primaryBlack.color)
         }
     }
 }

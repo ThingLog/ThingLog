@@ -12,7 +12,7 @@ final class LogoView: UILabel {
     init(_ title: String, font: UIFont = UIFont.Pretendard.headline3) {
         super.init(frame: .zero)
         text = title
-        textColor = SwiftGenColors.black.color
+        textColor = SwiftGenColors.primaryBlack.color
         self.font = font
     }
     required init?(coder: NSCoder) {

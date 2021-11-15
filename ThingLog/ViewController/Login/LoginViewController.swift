@@ -128,7 +128,7 @@ final class LoginViewController: UIViewController {
         navigationItem.titleView = titleView
         
         let clearButton: UIButton = UIButton()
-        clearButton.setImage(SwiftGenIcons.close.image, for: .normal)
+        clearButton.setImage(SwiftGenIcons.close.image.withRenderingMode(.alwaysTemplate), for: .normal)
         clearButton.tintColor = SwiftGenColors.primaryBlack.color
         clearButton.rx.tap
             .bind { [weak self] in
@@ -176,7 +176,7 @@ extension LoginViewController {
     
     /// 탭바 화면으로 넘어가는 메소드다
     private func enterTabBarViewController() {
-        if let rootCordinator: RootCoordinator = coordinator as? RootCoordinator {
+        if let rootCordinator: LoginCoordinator = coordinator as? LoginCoordinator {
             rootCordinator.showTabBarController()
             
             // 테스트를 위해서, 설정화면에서 호출한 경우,
@@ -257,6 +257,7 @@ extension LoginViewController: UICollectionViewDataSource {
             guard let recommend = collectionView.dequeueReusableSupplementaryView(ofKind: LeftLabelRightButtonHeaderView.reuseIdentifier, withReuseIdentifier: LeftLabelRightButtonHeaderView.reuseIdentifier, for: indexPath) as? LeftLabelRightButtonHeaderView else {
                 return UICollectionReusableView()
             }
+            recommend.leftIconView.isHidden = false 
             recommend.rightButton.isHidden = true
             recommend.updateTitle(title: "추천 소개 글", subTitle: nil)
             return recommend
@@ -293,7 +294,7 @@ extension LoginViewController {
                              textColor: bool ? SwiftGenColors.white.color : SwiftGenColors.primaryBlack.color )
         } completion: { _  in
             UIView.animate(withDuration: 0.3) {
-                cell.changeColor(borderColor: SwiftGenColors.primaryBlack.color,
+                cell.changeColor(borderColor: SwiftGenColors.gray3.color,
                                  backgroundColor: !bool ? SwiftGenColors.primaryBlack.color : SwiftGenColors.primaryBackground.color ,
                                  textColor: !bool ? SwiftGenColors.white.color : SwiftGenColors.primaryBlack.color )
             }

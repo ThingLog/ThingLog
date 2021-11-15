@@ -16,7 +16,8 @@ final class DropBoxView: UIView {
         let button: InsetButton = InsetButton()
         button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.body3
-        button.setImage(SwiftGenIcons.dropBoxArrow1.image, for: .normal)
+        button.setImage(SwiftGenIcons.dropBoxArrow1.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = SwiftGenColors.primaryBlack.color
         button.semanticContentAttribute = .forceRightToLeft
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(clickButton), for: .touchUpInside)

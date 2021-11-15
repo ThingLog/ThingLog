@@ -38,7 +38,8 @@ final class ImageWithTwoLabelVerticalCetnerXView: UIView {
     
     private let questionImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.image = SwiftGenIcons.displayCaseNoneM.image
+        imageView.image = SwiftGenIcons.displayCaseNoneM.image.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = SwiftGenColors.primaryBlack.color
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
