@@ -50,7 +50,7 @@ class LeftRightButtonView: UIView {
 
     private let bottomLineView: UIView = {
         let view: UIView = UIView()
-        view.backgroundColor = SwiftGenColors.gray4.color
+        view.backgroundColor = SwiftGenColors.gray2.color
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

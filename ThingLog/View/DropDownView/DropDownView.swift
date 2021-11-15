@@ -26,6 +26,7 @@ final class DropDownView: UIView {
         let tableView: UITableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
+        tableView.backgroundColor = SwiftGenColors.primaryBackground.color
         return tableView
     }()
 
@@ -76,7 +77,6 @@ final class DropDownView: UIView {
     private func setupView() {
         addSubviews(button)
         superView?.addSubview(tableView)
-        bringSubviewToFront(tableView)
 
         setupButton()
     }
