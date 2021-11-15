@@ -63,7 +63,8 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
     
     var rightButton: UIButton = {
         let button: UIButton = UIButton()
-        button.setImage(SwiftGenIcons.close.image, for: .normal)
+        button.setImage(SwiftGenIcons.close.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = SwiftGenColors.primaryBlack.color
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setContentCompressionResistancePriority(.required, for: .horizontal)
         button.setContentHuggingPriority(.required, for: .horizontal)
