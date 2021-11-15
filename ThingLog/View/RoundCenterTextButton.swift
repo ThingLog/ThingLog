@@ -13,7 +13,7 @@ class RoundCenterTextButton: UIButton {
         super.init(frame: .zero)
         layer.cornerRadius = cornerRadius
         clipsToBounds = true
-        backgroundColor = SwiftGenColors.black.color
+        backgroundColor = SwiftGenColors.primaryBlack.color
         setTitleColor(SwiftGenColors.white.color, for: .normal)
         titleLabel?.font = UIFont.Pretendard.title1
     }
