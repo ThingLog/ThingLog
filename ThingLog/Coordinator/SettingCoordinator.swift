@@ -41,3 +41,10 @@ final class SettingCoordinator: Coordinator {
         navigationController.pushViewController(loginViewController, animated: true)
     }
 }
+
+extension SettingCoordinator: PostCoordinatorProtocol {
+    func showPostViewController(with viewModel: PostViewModel) {
+        // TODO: - ⚠️ PostViewController로 대체할 예정
+        navigationController.pushViewController(TestPostViewController(postViewModel: viewModel), animated: true)
+    }
+}

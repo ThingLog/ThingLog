@@ -64,12 +64,7 @@ final class TrashViewController: UIViewController {
     
     // MARK: - Properties
     var fetchResultController: NSFetchedResultsController<PostEntity>?
-    //    {
-    //        didSet {
-    //            fetchResultController?.delegate = self
-    //        }
-    //    }
-    
+
     // CoreData가 외부에서 변경될 때 호출하는 클로저다.
     var completionBlock: ((Int) -> Void)?
     

@@ -43,3 +43,10 @@ final class HomeCoordinator: Coordinator {
         navigationController.popViewController(animated: true)
     }
 }
+
+extension HomeCoordinator: PostCoordinatorProtocol {
+    func showPostViewController(with viewModel: PostViewModel) {
+        // TODO: - ⚠️ PostViewController로 대체할 예정
+        navigationController.pushViewController(TestPostViewController(postViewModel: viewModel), animated: true)
+    }
+}
