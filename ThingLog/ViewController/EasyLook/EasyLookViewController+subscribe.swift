@@ -139,6 +139,6 @@ extension EasyLookViewController {
     /// CategoryView의 하단에 fetch된 Post개시물의 개수를 업데이트하는 메서드다
     /// - Parameter fetchedCount: fetch된 Post개시물의 개수를 주입한다.
     private func updateResultsCountView(fetchedCount: Int?) {
-        self.easyLookTopView.resultsWithDropBoxView.updateResultTotalLabel(by: "총" + String(fetchedCount ?? 0) + "건")
+        self.easyLookTopView.resultsWithDropBoxView.updateResultTotalLabel(by: "총 " + String(fetchedCount ?? 0) + "건")
     }
 }

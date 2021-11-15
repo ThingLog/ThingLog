@@ -16,7 +16,8 @@ final class ProfileView: UIView {
         button.setTitle("분더카머", for: .normal)
         button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.headline3
-        button.setImage(SwiftGenIcons.edit.image, for: .normal)
+        button.setImage(SwiftGenIcons.edit.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = SwiftGenColors.primaryBlack.color
         button.semanticContentAttribute = .forceRightToLeft
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)

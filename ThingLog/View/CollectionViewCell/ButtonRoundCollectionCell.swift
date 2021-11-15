@@ -16,11 +16,11 @@ final class ButtonRoundCollectionCell: UICollectionViewCell {
     var button: InsetButton = {
         let button: InsetButton = InsetButton()
         button.layer.borderWidth = 1.0
-        button.layer.borderColor = SwiftGenColors.gray5.color.cgColor
+        button.layer.borderColor = SwiftGenColors.gray3.color.cgColor
         button.titleLabel?.font = UIFont.Pretendard.body2
         button.clipsToBounds = true
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        button.setTitleColor(SwiftGenColors.gray5.color, for: .normal)
+        button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isUserInteractionEnabled = false
         return button

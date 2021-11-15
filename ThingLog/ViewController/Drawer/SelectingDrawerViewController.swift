@@ -85,7 +85,7 @@ class SelectingDrawerViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut) {
-            self.dimmedView.backgroundColor = .black.withAlphaComponent(0.6)
+            self.dimmedView.backgroundColor = SwiftGenColors.dimmedColor.color.withAlphaComponent(0.6)
             self.popupViewBottomAnchor?.constant = 0
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
             self.view.layoutIfNeeded()

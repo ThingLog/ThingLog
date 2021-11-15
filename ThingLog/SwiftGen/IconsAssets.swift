@@ -59,6 +59,7 @@ internal enum SwiftGenIcons {
   internal static let topButton = IconImageSwiftGen(name: "top Button")
   internal static let wishVer1 = IconImageSwiftGen(name: "wish.ver1")
   internal static let writing = IconImageSwiftGen(name: "writing")
+  internal static let writingHole = IconImageSwiftGen(name: "writing_ hole")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

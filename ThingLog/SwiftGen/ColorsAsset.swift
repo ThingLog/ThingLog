@@ -21,6 +21,7 @@ internal typealias AssetColorTypeAlias = ColorSwiftGen.Color
 internal enum SwiftGenColors {
   internal static let black = ColorSwiftGen(name: "black")
   internal static let blue = ColorSwiftGen(name: "blue")
+  internal static let dimmedColor = ColorSwiftGen(name: "dimmedColor")
   internal static let gray1 = ColorSwiftGen(name: "gray1")
   internal static let gray2 = ColorSwiftGen(name: "gray2")
   internal static let gray3 = ColorSwiftGen(name: "gray3")
