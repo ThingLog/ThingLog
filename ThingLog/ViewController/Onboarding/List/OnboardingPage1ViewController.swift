@@ -88,10 +88,9 @@ final class OnboardingPage1ViewController: UIViewController {
     
     func setupView() {
         view.backgroundColor = SwiftGenColors.primaryBackground.color
-        view.addSubview(topEmptyView)
-        view.addSubview(startAnimationView)
-        view.addSubview(textStackView)
-        
+        view.addSubviews(topEmptyView,
+                         startAnimationView,
+                         textStackView)
         NSLayoutConstraint.activate([
             topEmptyView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             topEmptyView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.17),

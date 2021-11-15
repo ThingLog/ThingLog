@@ -71,11 +71,10 @@ final class OnboardingStartViewController: UIViewController {
     }
     
     func setupView() {
-        view.addSubview(topEmptyView)
-        view.addSubview(titleView)
-        
-        view.addSubview(logoView)
-        view.addSubview(startButton)
+        view.addSubviews(topEmptyView,
+                         titleView,
+                         logoView,
+                         startButton)
         
         NSLayoutConstraint.activate([
             topEmptyView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

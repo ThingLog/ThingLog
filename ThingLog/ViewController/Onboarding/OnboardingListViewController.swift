@@ -60,9 +60,9 @@ final class OnboardingListViewController: UIViewController {
     }
     
     func setupView() {
-        view.addSubview(contentsContainerView)
-        view.addSubview(pageControl)
-        view.addSubview(doneButton)
+        view.addSubviews(contentsContainerView,
+                         pageControl,
+                         doneButton)
         
         NSLayoutConstraint.activate([
             contentsContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

@@ -128,14 +128,14 @@ final class OnboardingPage2ViewController: UIViewController {
     
     func setupView() {
         view.backgroundColor = SwiftGenColors.primaryBackground.color
-        view.addSubview(startAnimationView)
-        view.addSubview(leftLabel)
-        view.addSubview(rightLabel)
-        view.addSubview(underlineView)
-        view.addSubview(textStackView)
-        view.addSubview(leadingEmptyView)
-        view.addSubview(trailingEmptyView)
-        view.addSubview(topEmptyView)
+        view.addSubviews(startAnimationView,
+                         leftLabel,
+                         rightLabel,
+                         underlineView,
+                         textStackView,
+                         leadingEmptyView,
+                         trailingEmptyView,
+                         topEmptyView)
         
         NSLayoutConstraint.activate([
             topEmptyView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

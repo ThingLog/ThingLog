@@ -21,7 +21,7 @@ final class LoginCoordinator: Coordinator {
         window?.makeKeyAndVisible()
     }
     
-    // 가장 처음에 시작하는 화면을 결정하는 메소드다. 유저정보가 있다면 바로 탭바화면을 보여준다.
+    // 로그인화면을 보여주도록한다. 
     func start() {
         let loginViewController: LoginViewController = LoginViewController(isLogin: true)
         loginViewController.coordinator = self
