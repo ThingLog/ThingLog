@@ -75,9 +75,3 @@ extension TrashViewController: UICollectionViewDelegate {
         }
     }
 }
-
-//extension TrashViewController: NSFetchedResultsControllerDelegate {
-//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        //        completionBlock?(controller.fetchedObjects?.count ?? 0)
-//    }
-//}

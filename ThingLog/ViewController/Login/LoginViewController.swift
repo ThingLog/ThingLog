@@ -128,7 +128,7 @@ final class LoginViewController: UIViewController {
         navigationItem.titleView = titleView
         
         let clearButton: UIButton = UIButton()
-        clearButton.setImage(SwiftGenIcons.close.image, for: .normal)
+        clearButton.setImage(SwiftGenIcons.close.image.withRenderingMode(.alwaysTemplate), for: .normal)
         clearButton.tintColor = SwiftGenColors.primaryBlack.color
         clearButton.rx.tap
             .bind { [weak self] in
