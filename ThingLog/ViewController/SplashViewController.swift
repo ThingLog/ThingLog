@@ -13,7 +13,7 @@ class SplashViewController: UIViewController {
     
     let starAnimationView: AnimationView = {
         let view: AnimationView = AnimationView(name: "splash")
-        view.animationSpeed = 1.1
+        view.animationSpeed = 1.0
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
