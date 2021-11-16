@@ -24,6 +24,7 @@ internal enum SwiftGenIcons {
   internal static let displayCaseNoneM = IconImageSwiftGen(name: "Display case_none(m)")
   internal static let displayCaseNoneS = IconImageSwiftGen(name: "Display case_none(s)")
   internal static let group = IconImageSwiftGen(name: "Group")
+  internal static let new = IconImageSwiftGen(name: "NEW")
   internal static let satisfactionFill = IconImageSwiftGen(name: "Satisfaction_fill")
   internal static let satisfactionStroke = IconImageSwiftGen(name: "Satisfaction_stroke")
   internal static let thingLog = IconImageSwiftGen(name: "ThingLog")

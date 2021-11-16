@@ -33,6 +33,9 @@ enum KeyStoreName: String {
     /// 드래곤볼을 판단하기 위한 배열이름
     case dragonBallArray
     
+    /// 새로운 진열장 아이템 획득 이벤트 여부
+    case isNewEvent
+    
     var name: String {
         self.rawValue
     }

@@ -22,6 +22,7 @@
         <attribute name="imageName" optional="YES" attributeType="String"/>
         <attribute name="information" optional="YES" attributeType="String"/>
         <attribute name="isAcquired" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isNewDrawer" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="subTitle" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
@@ -59,9 +60,9 @@
     </entity>
     <elements>
         <element name="Attachment" positionX="-7253.027587890626" positionY="-4690.344833374023" width="128" height="103"/>
-        <element name="Drawer" positionX="-6919.932647705078" positionY="-4487.72053527832" width="128" height="119"/>
         <element name="Category" positionX="-7669.173278808594" positionY="-4417.294006347656" width="128" height="74"/>
         <element name="Comment" positionX="-6921.718536376953" positionY="-4342.518676757812" width="128" height="103"/>
+        <element name="Drawer" positionX="-6919.932647705078" positionY="-4487.72053527832" width="128" height="134"/>
         <element name="ImageData" positionX="-7058.579223632812" positionY="-4674.90251159668" width="128" height="73"/>
         <element name="Post" positionX="-7234.070434570312" positionY="-4447.350189208984" width="128" height="268"/>
         <element name="PostType" positionX="-7670.684143066406" positionY="-4199.678771972656" width="128" height="103"/>

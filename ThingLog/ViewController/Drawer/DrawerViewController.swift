@@ -12,7 +12,7 @@ final class DrawerViewController: UIViewController {
     var coordinator: DrawerCoordinator?
     
     // MARK: - View
-    private let collectionView: UICollectionView = {
+    let collectionView: UICollectionView = {
         let screenWidth: CGFloat = UIScreen.main.bounds.width
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: floor(screenWidth / 2) - 2, height: 150)
@@ -29,7 +29,11 @@ final class DrawerViewController: UIViewController {
     }()
     
     // MARK: - Properties
-    // TODO: - ⚠️ 실제 데이터로 이용 예정
+    var drawersData: [Drawerable] = []
+    var drawerRespository: DrawerRepositoryable = DrawerCoreDataRepository(coreDataStack: CoreDataStack.shared,
+                                                                           defaultDrawers: DefaultDrawerModel().drawers)
+    /// 네비 X 버튼 누를 경우 다시 되돌리기 위한 대표 진열장 아이템이다.
+    var representativeDrawer: Drawerable?
     var disposeBag: DisposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -38,6 +42,13 @@ final class DrawerViewController: UIViewController {
         setupNavigationBar()
         setupRightNavigationBarItem()
         setupView()
+        
+        fetchDrawers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        drawerRespository.completeNewEvent()
     }
     
     // MARK: - Setup
@@ -73,6 +84,8 @@ final class DrawerViewController: UIViewController {
         backButton.tintColor = SwiftGenColors.primaryBlack.color
         backButton.rx.tap
             .bind { [weak self] in
+                // 대표진열장이 변경됐어도 다시 되돌린다.
+                self?.drawerRespository.updateRepresentative(drawer: self?.representativeDrawer)
                 self?.coordinator?.back()
             }
             .disposed(by: disposeBag)
@@ -95,12 +108,20 @@ final class DrawerViewController: UIViewController {
         fixedSpace.width = 17
         navigationItem.rightBarButtonItems = [fixedSpace, editBarButton]
     }
+    
+    func fetchDrawers() {
+        drawerRespository.fetchDrawers { drawerList in
+            guard let drawerList: [Drawerable] = drawerList else { return }
+            self.drawersData = drawerList
+            self.collectionView.reloadData()
+        }
+        representativeDrawer = drawerRespository.fetchRepresentative()
+    }
 }
 
 extension DrawerViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // test data
-        return 6
+        drawersData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -108,20 +129,25 @@ extension DrawerViewController: UICollectionViewDataSource, UICollectionViewDele
             return UICollectionViewCell()
         }
         
-        // test data 
-        let bool: Bool = [true, false].randomElement()!
-        cell.drawerView.hideQuestionImageView(bool)
-        cell.drawerView.hideTitleLabel(!bool)
+        let drawer: Drawerable = drawersData[indexPath.item]
+        
+        cell.drawerView.hideQuestionImageView(drawer.isAcquired)
+        cell.drawerView.hideTitleLabel(!drawer.isAcquired)
         cell.drawerView.hideSubLabel(true)
+        cell.drawerView.hideNewBadge(!drawer.isNewDrawer)
         cell.drawerView.setTitleLabel(fontType: UIFont.Pretendard.title2,
                                       color: SwiftGenColors.primaryBlack.color,
-                                      text: "문구세트")
+                                      text: drawer.title)
+        
+        guard let imageData: Data = drawer.imageData,
+              var drawerImage: UIImage = UIImage(data: imageData) else {
+            return UICollectionViewCell()
+        }
+        if drawer.isAcquired == false {
+            drawerImage = drawerImage.withRenderingMode(.alwaysTemplate)
+        }
+        cell.drawerView.setImage(drawerImage)
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // test
-        coordinator?.showSelectingDrawerViewController()
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -129,9 +155,26 @@ extension DrawerViewController: UICollectionViewDataSource, UICollectionViewDele
             return UICollectionReusableView()
         }
         headerView.drawerView.hideQuestionImageView(true)
-        headerView.drawerView.setSubLabel(fontType: UIFont.Pretendard.body2,
-                                          color: SwiftGenColors.gray2.color,
-                                          text: "아직 대표 물건이 없어용!")
+        
+        if let representative: Drawerable = drawerRespository.fetchRepresentative(),
+           let imageData: Data = representative.imageData,
+           let drawerImage: UIImage = UIImage(data: imageData) {
+            headerView.drawerView.setImage(drawerImage)
+            headerView.drawerView.setSubLabel(fontType: UIFont.Pretendard.body2,
+                                              color: SwiftGenColors.gray2.color,
+                                              text: representative.title)
+        } else {
+            headerView.drawerView.setImage(SwiftGenDrawerList.emptyRepresentative.image.withRenderingMode(.alwaysTemplate))
+            headerView.drawerView.setSubLabel(fontType: UIFont.Pretendard.body2,
+                                              color: SwiftGenColors.gray2.color,
+                                              text: "아직 대표 물건이 없어요!")
+        }
+        
         return headerView
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let drawer: Drawerable = drawersData[indexPath.item]
+        coordinator?.showSelectingDrawerViewController(drawer: drawer)
     }
 }
