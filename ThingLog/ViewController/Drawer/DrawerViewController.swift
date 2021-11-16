@@ -32,6 +32,8 @@ final class DrawerViewController: UIViewController {
     var drawersData: [Drawerable] = []
     var drawerRespository: DrawerRepositoryable = DrawerCoreDataRepository(coreDataStack: CoreDataStack.shared,
                                                                            defaultDrawers: DefaultDrawerModel().drawers)
+    /// 네비 X 버튼 누를 경우 다시 되돌리기 위한 대표 진열장 아이템이다.
+    var representativeDrawer: Drawerable?
     var disposeBag: DisposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -82,6 +84,8 @@ final class DrawerViewController: UIViewController {
         backButton.tintColor = SwiftGenColors.primaryBlack.color
         backButton.rx.tap
             .bind { [weak self] in
+                // 대표진열장이 변경됐어도 다시 되돌린다.
+                self?.drawerRespository.updateRepresentative(drawer: self?.representativeDrawer)
                 self?.coordinator?.back()
             }
             .disposed(by: disposeBag)
@@ -111,6 +115,7 @@ final class DrawerViewController: UIViewController {
             self.drawersData = drawerList
             self.collectionView.reloadData()
         }
+        representativeDrawer = drawerRespository.fetchRepresentative()
     }
 }
 

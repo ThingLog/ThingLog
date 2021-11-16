@@ -222,8 +222,7 @@ extension SelectingDrawerViewController {
     /// 대표물건으로 설정하여 뒤로 돌아간다.
     func subscribeSelectButton() {
         selectButton.rx.tap.bind { [weak self] in
-            guard let drawer: Drawerable = self?.drawer else { return }
-            self?.drawerRepository.updateRepresentative(drawer: drawer)
+            self?.drawerRepository.updateRepresentative(drawer: self?.drawer)
             self?.coordinator?.detachSelectingDrawerViewController()
         }.disposed(by: disposeBag)
     }

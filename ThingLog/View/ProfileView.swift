@@ -65,8 +65,7 @@ final class ProfileView: UIView {
     
     lazy var badgeView: UIView = {
         let view: UIView = UIView()
-        view.addSubviews(userBadgeImageView)
-        view.addSubviews(newBadgeAnimationView)
+        view.addSubviews(userBadgeImageView, newBadgeAnimationView)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

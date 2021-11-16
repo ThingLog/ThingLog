@@ -35,7 +35,7 @@ protocol DrawerRepositoryable {
     func updateVIP(by money: Int)
     
     /// 대표 진열장 물건을 업데이트 합니다. `SelectingDrawerViewController`의 `대표설정`버튼 들어가는 로직에 추가한다.
-    func updateRepresentative(drawer: Drawerable)
+    func updateRepresentative(drawer: Drawerable?)
     
     /// 진열장 아이템을 새로 획득한 경우에 이벤트를 가져옵니다.
     func isNewEvent(_ completion: @escaping ((Bool) -> Void))
@@ -117,8 +117,13 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
         }
     }
     
-    func updateRepresentative(drawer: Drawerable) {
-        NSUbiquitousKeyValueStore.default.set(drawer.imageName, forKey: KeyStoreName.representativeDrawer.name)
+    func updateRepresentative(drawer: Drawerable?) {
+        if let drawer: Drawerable = drawer {
+            NSUbiquitousKeyValueStore.default.set(drawer.imageName, forKey: KeyStoreName.representativeDrawer.name)
+        } else {
+            NSUbiquitousKeyValueStore.default.removeObject(forKey: KeyStoreName.representativeDrawer.name)
+        }
+        
         NSUbiquitousKeyValueStore.default.synchronize()
     }
     
