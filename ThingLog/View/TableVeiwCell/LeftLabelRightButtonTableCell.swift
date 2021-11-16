@@ -220,11 +220,15 @@ extension LeftLabelRightButtonTableCell {
             rightButton.setImage(image, for: .normal)
             rightButton.tintColor = SwiftGenColors.primaryBlack.color
             rightButton.isUserInteractionEnabled = false
+            rightButton.isHidden = false
+            rightToggleButton.isHidden = true
         case .withClearButton:
             let image: UIImage? = SwiftGenIcons.close.image.withRenderingMode(.alwaysTemplate)
             rightButton.setImage(image, for: .normal)
             rightButton.tintColor = SwiftGenColors.primaryBlack.color
             rightButton.isUserInteractionEnabled = true
+            rightButton.isHidden = false
+            rightToggleButton.isHidden = true
         case .withToggleButton:
             rightButton.isHidden = true
             rightToggleButton.isHidden = false

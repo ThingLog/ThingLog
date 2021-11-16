@@ -49,6 +49,9 @@ final class WriteCoordinator: Coordinator {
 
     /// naviagtionController를 dismiss 한다.
     func dismissWriteViewController() {
+        if let home = navigationController.parent as? HomeViewController {
+            
+        }
         navigationController.dismiss(animated: true) {
             self.navigationController.viewControllers.removeAll()
         }

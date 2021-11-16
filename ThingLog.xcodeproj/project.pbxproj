@@ -63,12 +63,6 @@
 		87BB17AB27098D760088B847 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB17AA27098D760088B847 /* WriteViewModel.swift */; };
 		87BB17AD27098F480088B847 /* WriteViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB17AC27098F480088B847 /* WriteViewController+setup.swift */; };
 		87BEF07B2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF07A2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift */; };
-		87D7C9A6273EA98E00ACAB0A /* RxBlocking.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC03F26D504BA003C3525 /* RxBlocking.xcframework */; };
-		87D7C9A7273EA98E00ACAB0A /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC04026D504BA003C3525 /* RxCocoa.xcframework */; };
-		87D7C9A8273EA98E00ACAB0A /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC03C26D504BA003C3525 /* RxRelay.xcframework */; };
-		87D7C9A9273EA98E00ACAB0A /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873EC03E26D504BA003C3525 /* RxSwift.xcframework */; };
-		87D7C9AB273EA98E00ACAB0A /* RxCocoaRuntime.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87D7C9AA273EA98E00ACAB0A /* RxCocoaRuntime.xcframework */; };
-		87D7C9AC273EA98E00ACAB0A /* RxCocoaRuntime.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 87D7C9AA273EA98E00ACAB0A /* RxCocoaRuntime.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		87DAEB1B270BEAE50038C487 /* CameraButtonCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DAEB1A270BEAE50038C487 /* CameraButtonCollectionCell.swift */; };
 		87DAEB1D270BEC170038C487 /* ThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */; };
 		87E8E81927355EEB0042AA7E /* HorizontalScrollLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8E81827355EEB0042AA7E /* HorizontalScrollLabel.swift */; };
@@ -201,6 +195,9 @@
 		DBD37BD6274253D1000FDDBC /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = DBD37BD5274253D1000FDDBC /* splash.json */; };
 		DBD37BD9274255F2000FDDBC /* onboarding1Dark.json in Resources */ = {isa = PBXBuildFile; fileRef = DBD37BD7274255F2000FDDBC /* onboarding1Dark.json */; };
 		DBD37BDA274255F2000FDDBC /* onboarding2Dark.json in Resources */ = {isa = PBXBuildFile; fileRef = DBD37BD8274255F2000FDDBC /* onboarding2Dark.json */; };
+		DBD3A21A27438C8E0001F9BF /* drawerNew.json in Resources */ = {isa = PBXBuildFile; fileRef = DBD3A21827438C8E0001F9BF /* drawerNew.json */; };
+		DBD3A21B27438C8E0001F9BF /* drawerNewDark.json in Resources */ = {isa = PBXBuildFile; fileRef = DBD3A21927438C8E0001F9BF /* drawerNewDark.json */; };
+		DBD3A21D2743AEF50001F9BF /* HomeViewController+subscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD3A21C2743AEF50001F9BF /* HomeViewController+subscribe.swift */; };
 		DBD5454727032B1C00063C98 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454627032B1C00063C98 /* FilterType.swift */; };
 		DBD5454927032BAA00063C98 /* EasyLookTabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454827032BAA00063C98 /* EasyLookTabType.swift */; };
 		DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454B27032C6600063C98 /* EasyLookViewModel.swift */; };
@@ -312,7 +309,6 @@
 		87BB17AA27098D760088B847 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
 		87BB17AC27098F480088B847 /* WriteViewController+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteViewController+setup.swift"; sourceTree = "<group>"; };
 		87BEF07A2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogCategoryRepositoryTests.swift; sourceTree = "<group>"; };
-		87D7C9AA273EA98E00ACAB0A /* RxCocoaRuntime.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoaRuntime.xcframework; path = Carthage/Build/RxCocoaRuntime.xcframework; sourceTree = "<group>"; };
 		87DAEB1A270BEAE50038C487 /* CameraButtonCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButtonCollectionCell.swift; sourceTree = "<group>"; };
 		87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCell.swift; sourceTree = "<group>"; };
 		87E8E81827355EEB0042AA7E /* HorizontalScrollLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollLabel.swift; sourceTree = "<group>"; };
@@ -442,6 +438,9 @@
 		DBD37BD5274253D1000FDDBC /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		DBD37BD7274255F2000FDDBC /* onboarding1Dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding1Dark.json; sourceTree = "<group>"; };
 		DBD37BD8274255F2000FDDBC /* onboarding2Dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding2Dark.json; sourceTree = "<group>"; };
+		DBD3A21827438C8E0001F9BF /* drawerNew.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = drawerNew.json; sourceTree = "<group>"; };
+		DBD3A21927438C8E0001F9BF /* drawerNewDark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = drawerNewDark.json; sourceTree = "<group>"; };
+		DBD3A21C2743AEF50001F9BF /* HomeViewController+subscribe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+subscribe.swift"; sourceTree = "<group>"; };
 		DBD5454627032B1C00063C98 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
 		DBD5454827032BAA00063C98 /* EasyLookTabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookTabType.swift; sourceTree = "<group>"; };
 		DBD5454B27032C6600063C98 /* EasyLookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookViewModel.swift; sourceTree = "<group>"; };
@@ -683,6 +682,8 @@
 		DB1111E627352CCA00D02F99 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				DBD3A21827438C8E0001F9BF /* drawerNew.json */,
+				DBD3A21927438C8E0001F9BF /* drawerNewDark.json */,
 				DB1111EF27352EE800D02F99 /* onboarding1.json */,
 				DBD37BD7274255F2000FDDBC /* onboarding1Dark.json */,
 				DB1111F127352EE800D02F99 /* onboarding2.json */,
@@ -717,6 +718,7 @@
 			children = (
 				DB7C04F126FB1F36009F5C0A /* ContentsPageViewController.swift */,
 				DB7C04EF26FB1EFF009F5C0A /* HomeViewController.swift */,
+				DBD3A21C2743AEF50001F9BF /* HomeViewController+subscribe.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1108,12 +1110,14 @@
 				DBAE8E9726FDB3EE00F536AD /* Pretendard-Regular.otf in Resources */,
 				DB32B281272C01E1009074AF /* Drawers.xcassets in Resources */,
 				DBAE8E9826FDB3EE00F536AD /* Pretendard-SemiBold.otf in Resources */,
+				DBD3A21A27438C8E0001F9BF /* drawerNew.json in Resources */,
 				DB1111F427352EE800D02F99 /* onboarding2.json in Resources */,
 				DBAE8EB126FDBEAE00F536AD /* swiftgen.yml in Resources */,
 				DBAE8E9626FDB3EE00F536AD /* Pretendard-Bold.otf in Resources */,
 				DBA1FD4526FB701C00F50DE5 /* InfoPlist.strings in Resources */,
 				873EC01826D39057003C3525 /* LaunchScreen.storyboard in Resources */,
 				DBD37BDA274255F2000FDDBC /* onboarding2Dark.json in Resources */,
+				DBD3A21B27438C8E0001F9BF /* drawerNewDark.json in Resources */,
 				DBE3E9C6272FF25A00B3EB69 /* Icons.xcassets in Resources */,
 				DBD37BD9274255F2000FDDBC /* onboarding1Dark.json in Resources */,
 				DBD37BD6274253D1000FDDBC /* splash.json in Resources */,
@@ -1353,6 +1357,7 @@
 				DB87730C270B430C00401961 /* RecentSearchDataViewModelProtocol.swift in Sources */,
 				87F2189026FB8D6A00C3FBCA /* PostTypeEntity+.swift in Sources */,
 				DBA0F81C2709B390009553FC /* LeftLabelRightButtonTableCell.swift in Sources */,
+				DBD3A21D2743AEF50001F9BF /* HomeViewController+subscribe.swift in Sources */,
 				875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */,
 				DB6909612712DA8100BB54E4 /* SettingViewController.swift in Sources */,
 				87B1B6572715E2F0001EA889 /* WriteCategoryTableCell.swift in Sources */,

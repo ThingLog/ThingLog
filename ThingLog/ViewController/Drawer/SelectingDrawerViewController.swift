@@ -36,7 +36,7 @@ class SelectingDrawerViewController: UIViewController {
         return label
     }()
     
-    let button: UIButton = {
+    let selectButton: UIButton = {
         let button: UIButton = UIButton()
         button.clipsToBounds = true
         button.setTitleColor(SwiftGenColors.white.color, for: .normal)
@@ -67,7 +67,18 @@ class SelectingDrawerViewController: UIViewController {
         return 20 + bottomPadding
     }
     
+    var drawer: Drawerable
+    var drawerRepository: DrawerRepositoryable = DrawerCoreDataRepository(coreDataStack: CoreDataStack.shared)
     var disposeBag: DisposeBag = DisposeBag()
+    
+    init(drawer: Drawerable) {
+        self.drawer = drawer
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -78,8 +89,9 @@ class SelectingDrawerViewController: UIViewController {
         setupBackgroundColor()
         
         subscribeDimmedView()
+        subscribeSelectButton()
         
-        testSetDrawerView()
+        setupDrawerView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -104,22 +116,20 @@ class SelectingDrawerViewController: UIViewController {
     
     // MARK: - Setup
     func addSubView() {
-        view.addSubview(dimmedView)
-        view.addSubview(popupView)
+        view.addSubviews(dimmedView, popupView)
         
         popupView.layer.cornerRadius = 17.0
         popupView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         popupView.addSubview(drawerView)
         popupView.addSubview(information)
-        popupView.addSubview(button)
+        popupView.addSubview(selectButton)
     }
     
     private func setupBackgroundColor() {
         popupView.backgroundColor = SwiftGenColors.primaryBackground.color
-        button.backgroundColor = SwiftGenColors.primaryBlack.color
+        selectButton.backgroundColor = SwiftGenColors.primaryBlack.color
         view.backgroundColor = .clear
     }
-    
     
     func setupDimmedView() {
         NSLayoutConstraint.activate([
@@ -134,7 +144,7 @@ class SelectingDrawerViewController: UIViewController {
         popupViewBottomAnchor = popupView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: popupViewHeight)
         popupViewBottomAnchor?.isActive = true
         
-        button.layer.cornerRadius = buttonHeight / 2
+        selectButton.layer.cornerRadius = buttonHeight / 2
         
         // 화면이 작은 경우에도 보여지기 위해 두 개의 Constraint를 준비
         let drawerTopAnchorMax: NSLayoutConstraint = drawerView.topAnchor.constraint(equalTo: popupView.topAnchor, constant: drawerTopPadding)
@@ -145,11 +155,11 @@ class SelectingDrawerViewController: UIViewController {
         imageViewTopAnchorMin.isActive = true
         imageViewTopAnchorMin.priority = .init(rawValue: 100)
         
-        let buttonBottomAnchorMax: NSLayoutConstraint = button.bottomAnchor.constraint(equalTo: popupView.bottomAnchor, constant: -buttonBottomPadding)
+        let buttonBottomAnchorMax: NSLayoutConstraint = selectButton.bottomAnchor.constraint(equalTo: popupView.bottomAnchor, constant: -buttonBottomPadding)
         buttonBottomAnchorMax.isActive = true
         buttonBottomAnchorMax.priority = .init(rawValue: 150)
         
-        let buttonBottomAnchorMin: NSLayoutConstraint = button.bottomAnchor.constraint(equalTo: popupView.bottomAnchor, constant: -5)
+        let buttonBottomAnchorMin: NSLayoutConstraint = selectButton.bottomAnchor.constraint(equalTo: popupView.bottomAnchor, constant: -5)
         buttonBottomAnchorMin.isActive = true
         buttonBottomAnchorMin.priority = .init(rawValue: 100)
         
@@ -160,12 +170,12 @@ class SelectingDrawerViewController: UIViewController {
             information.topAnchor.constraint(equalTo: drawerView.bottomAnchor, constant: informaitonTopPadding),
             information.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: padding),
             information.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -padding),
-            information.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -informaitonBottomPadding),
+            information.bottomAnchor.constraint(equalTo: selectButton.topAnchor, constant: -informaitonBottomPadding),
             
-            button.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: padding),
-            button.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -padding),
-            button.centerXAnchor.constraint(equalTo: popupView.centerXAnchor),
-            button.heightAnchor.constraint(equalToConstant: buttonHeight),
+            selectButton.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: padding),
+            selectButton.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -padding),
+            selectButton.centerXAnchor.constraint(equalTo: popupView.centerXAnchor),
+            selectButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             
             popupView.heightAnchor.constraint(equalToConstant: popupViewHeight),
             popupView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -173,7 +183,33 @@ class SelectingDrawerViewController: UIViewController {
         ])
     }
     
-    // View를 Subscribe하여 터치할 시 사라지도록 한다.
+    func setupDrawerView() {
+        selectButton.isHidden = !drawer.isAcquired
+        drawerView.hideQuestionImageView(drawer.isAcquired)
+        drawerView.hideTitleLabel(!drawer.isAcquired)
+        information.isHidden = !drawer.isAcquired
+        
+        drawerView.setTitleLabel(fontType: UIFont.Pretendard.title1,
+                                 color: SwiftGenColors.primaryBlack.color,
+                                 text: drawer.title)
+        drawerView.setSubLabel(fontType: UIFont.Pretendard.body1,
+                               color: SwiftGenColors.primaryBlack.color,
+                               text: drawer.subTitle)
+        information.text = drawer.information
+        
+        guard let imageData: Data = drawer.imageData,
+              var drawerImage: UIImage = UIImage(data: imageData) else {
+            return
+        }
+        if drawer.isAcquired == false {
+            drawerImage = drawerImage.withRenderingMode(.alwaysTemplate)
+        }
+        drawerView.setImage(drawerImage)
+    }
+}
+
+extension SelectingDrawerViewController {
+    /// View를 Subscribe하여 터치할 시 사라지도록 한다.
     func subscribeDimmedView() {
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer()
         dimmedView.addGestureRecognizer(tapGesture)
@@ -183,11 +219,12 @@ class SelectingDrawerViewController: UIViewController {
         }.disposed(by: disposeBag)
     }
     
-    // test data
-    func testSetDrawerView() {
-        let bool: Bool = [true, false].randomElement()!
-        drawerView.hideQuestionImageView(bool)
-        drawerView.hideTitleLabel(!bool)
-        information.isHidden = !bool
+    /// 대표물건으로 설정하여 뒤로 돌아간다.
+    func subscribeSelectButton() {
+        selectButton.rx.tap.bind { [weak self] in
+            guard let drawer: Drawerable = self?.drawer else { return }
+            self?.drawerRepository.updateRepresentative(drawer: drawer)
+            self?.coordinator?.detachSelectingDrawerViewController()
+        }.disposed(by: disposeBag)
     }
 }

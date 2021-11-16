@@ -40,7 +40,6 @@ class BaseContentsCollectionViewController: UIViewController {
     // MARK: - Properties
     var fetchResultController: NSFetchedResultsController<PostEntity>? {
         didSet {
-            disposeBag = DisposeBag()
             fetchResultController?.delegate = self
         }
     }

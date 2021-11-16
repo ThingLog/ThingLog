@@ -152,7 +152,7 @@ final class LoginViewController: UIViewController {
             .disposed(by: disposeBag)
         let editBarButton: UIBarButtonItem = UIBarButtonItem(customView: editButton)
         let fixedSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        fixedSpace.width = 24
+        fixedSpace.width = 17
         navigationItem.rightBarButtonItems = [fixedSpace, editBarButton]
     }
     

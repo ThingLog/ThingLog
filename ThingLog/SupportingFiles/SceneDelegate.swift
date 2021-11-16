@@ -37,11 +37,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
+        // 휴지통 초과 데이터 삭제 
         PostRepository(fetchedResultsControllerDelegate: nil, coreDataStack: CoreDataStack.shared)
             .checkTrashData()
+        
+        // 접속 날짜 카운팅
+        let drawerRepo: DrawerRepositoryable = DrawerCoreDataRepository(coreDataStack: CoreDataStack.shared, defaultDrawers: DefaultDrawerModel().drawers)
+        drawerRepo.updateMath()
+        drawerRepo.updateStationery()
     }
+    
     
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.

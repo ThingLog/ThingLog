@@ -21,7 +21,7 @@ import UIKit
 final class ImageWithTwoLabelVerticalCetnerXView: UIView {
     private let imageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.backgroundColor = SwiftGenColors.gray4.color
+        imageView.tintColor = SwiftGenColors.primaryBlack.color
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -41,6 +41,15 @@ final class ImageWithTwoLabelVerticalCetnerXView: UIView {
         imageView.image = SwiftGenIcons.displayCaseNoneM.image.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = SwiftGenColors.primaryBlack.color
         imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let newBadge: UIImageView = {
+        let imageView: UIImageView = UIImageView()
+        imageView.image = SwiftGenIcons.new.image
+        imageView.contentMode = .scaleAspectFit
+        imageView.isHidden = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -80,8 +89,9 @@ final class ImageWithTwoLabelVerticalCetnerXView: UIView {
     }
     
     private func setupView() {
-        addSubview(imageView)
-        addSubview(informationStackView)
+        addSubviews(imageView,
+                    informationStackView,
+                    newBadge)
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: topAnchor),
@@ -91,7 +101,10 @@ final class ImageWithTwoLabelVerticalCetnerXView: UIView {
             
             informationStackView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
             informationStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            informationStackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            informationStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            newBadge.topAnchor.constraint(equalTo: imageView.topAnchor, constant: -10),
+            newBadge.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -10)
         ])
     }
 }
@@ -125,5 +138,9 @@ extension ImageWithTwoLabelVerticalCetnerXView {
     
     func hideTitleLabel(_ bool: Bool) {
         titleLabel.isHidden = bool
+    }
+    
+    func hideNewBadge(_ bool: Bool) {
+        newBadge.isHidden = bool
     }
 }

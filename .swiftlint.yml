@@ -573,3 +573,4 @@ excluded:
     - ThingLogTests
     - ThingLogUITests
     - ThingLog/SwiftGen/*
+    - ThingLog/ViewController/SettingViewController.swift

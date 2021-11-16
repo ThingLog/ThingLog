@@ -54,11 +54,14 @@ final class OnboardingPage1ViewController: UIViewController {
     
     // MARK: - Properties
     private let topPaddingForTextStackView: CGFloat = 63
+    var willEnterForegroundObserver: NSObjectProtocol?
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        
+        subscribeWillEnterForegroundNotification()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,6 +73,7 @@ final class OnboardingPage1ViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(willEnterForegroundObserver)
         startAnimationView.stop()
     }
     
@@ -106,6 +110,18 @@ final class OnboardingPage1ViewController: UIViewController {
                                                constant: topPaddingForTextStackView),
             textStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+    }
+    
+    func subscribeWillEnterForegroundNotification() {
+        willEnterForegroundObserver =
+            NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification,
+                                                   object: nil,
+                                                   queue: .main) {
+                [weak self] notification in
+                DispatchQueue.main.async {
+                    self?.startAnimationView.play()
+                }
+            }
     }
 }
 
