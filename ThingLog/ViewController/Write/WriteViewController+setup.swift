@@ -81,35 +81,34 @@ extension WriteViewController {
             }.disposed(by: disposeBag)
     }
 
-    /// PhotosViewController에서 전달받은 데이터 바인딩
-    func bindNotificationPassSelectPHAssets() {
-        NotificationCenter.default.rx
-            .notification(.passSelectAssets, object: nil)
-            .map { notification -> [PHAsset] in
-                notification.userInfo?[Notification.Name.passSelectAssets] as? [PHAsset] ?? []
-            }
-            .bind { [weak self] assets in
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    self.selectedImages = self.viewModel.requestThumbnailImages(with: assets)
-                }
-            }.disposed(by: disposeBag)
-    }
-
     /// 작성 완료 버튼을 눌렀을 때 데이터를 저장한다.
     func bindDoneButton() {
         doneButton.rx.tap
             .bind { [weak self] in
                 guard let self = self else { return }
-                guard self.selectedImages.isNotEmpty else {
-                    self.showRequiredAlert()
-                    return
-                }
                 self.viewModel.save { isSave in
                     if isSave {
                         self.close()
+                    } else {
+                        self.showRequiredAlert()
                     }
                 }
             }.disposed(by: disposeBag)
+    }
+
+    /// WriteViewModel.thumbnailImageSubject가 업데이트 될 때 tableView 를 갱신한다.
+    func bindThumbnailSubjectUpdate() {
+        viewModel.thumbnailImagesSubject
+            .subscribe(onNext: { [weak self] _ in
+                self?.tableView.reloadData()
+            }).disposed(by: disposeBag)
+    }
+
+    /// WriteViewModel.categorySubject가 업데이트 될 때 tableView를 갱신한다.
+    func bindCategorySubject() {
+        viewModel.categorySubject
+            .subscribe(onNext: { [weak self] _ in
+                self?.tableView.reloadData()
+            }).disposed(by: disposeBag)
     }
 }

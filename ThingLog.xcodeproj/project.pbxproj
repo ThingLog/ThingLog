@@ -617,8 +617,8 @@
 				DB87730B270B430C00401961 /* RecentSearchDataViewModelProtocol.swift */,
 				DB69095E2712C55F00BB54E4 /* SearchResultsViewModel.swift */,
 				DB9FBDB5272E99ED005E64AF /* UserInformationViewModel */,
-				87BB17AA27098D760088B847 /* WriteViewModel.swift */,
 				87336FDC272EE85E00E1C4CA /* UserPermissionsViewModel.swift */,
+				87BB17AA27098D760088B847 /* WriteViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -710,6 +710,7 @@
 		DB7C04EA26FB19FE009F5C0A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				875B8FFC273AAE850059DF2A /* Collection+.swift */,
 				DB148C25270469B300FDC48F /* Date+.swift */,
 				873ED128272AB77000C9F7F1 /* Notification.Name+.swift */,
 				873ED126272AAFFD00C9F7F1 /* PHAsset+.swift */,
@@ -720,7 +721,6 @@
 				DB05B03F27185C500067DB17 /* UIViewController+.swift */,
 				DB7C04C926F9E69D009F5C0A /* UserDefaults+.swift */,
 				8789A19D272C5DCC00CFB16C /* Notification.Name+.swift */,
-				875B8FFC273AAE850059DF2A /* Collection+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";

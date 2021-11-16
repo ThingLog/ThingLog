@@ -116,6 +116,7 @@ final class PhotosViewController: BaseViewController {
     }
 
     deinit {
+        imageManager.stopCachingImagesForAllAssets()
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
     }
 

@@ -8,8 +8,10 @@
 import Photos
 import UIKit
 
+import RxSwift
+
 /// 글쓰기 화면에서 이미지 등록 항목을 표시하기 위한 테이블뷰 셀, CollectionView를 가지고 있다.
-/// ![이미지](https://www.notion.so/WriteImageTableCell-78b4a7fe55564fa380c554d17bee49e0)
+/// [이미지](https://www.notion.so/WriteImageTableCell-78b4a7fe55564fa380c554d17bee49e0)
 final class WriteImageTableCell: UITableViewCell {
     private lazy var collectionView: UICollectionView = {
         let collectionView: UICollectionView = .init(frame: .zero,
@@ -22,22 +24,30 @@ final class WriteImageTableCell: UITableViewCell {
         return collectionView
     }()
 
+    // MARK: - Properties
     private let userPermissions: UserPermissionsViewModel = UserPermissionsViewModel()
     private let thumbnailCellSize: CGFloat = 62.0
     private let collectionViewHeight: CGFloat = 64.0
     private let paddingLeadingConstaint: CGFloat = 18.0
     private let paddingTopConstaint: CGFloat = 12.0
     private let paddingBottomConstaint: CGFloat = 20.0
+    private var thumbnailCount: Int = 0
     var coordinator: WriteCoordinator?
-    var thumbnailImages: [UIImage] = [] {
-        didSet {
-            collectionView.reloadData()
-        }
+
+    // MARK: - Rx
+    var thumbnailSubject: BehaviorSubject<[UIImage]> = BehaviorSubject<[UIImage]>(value: [])
+    var disposeBag: DisposeBag = DisposeBag()
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+        setupBinding()
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
+        setupBinding()
     }
 
     required init?(coder: NSCoder) {
@@ -63,6 +73,14 @@ extension WriteImageTableCell {
         collectionView.register(ThumbnailCell.self, forCellWithReuseIdentifier: ThumbnailCell.reuseIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
+    }
+
+    private func setupBinding() {
+        thumbnailSubject
+            .bind { [weak self] images in
+                self?.thumbnailCount = images.count
+                self?.collectionView.reloadData()
+            }.disposed(by: disposeBag)
     }
 
     private func createLayout() -> UICollectionViewCompositionalLayout {
@@ -105,7 +123,7 @@ extension WriteImageTableCell {
 extension WriteImageTableCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // TODO: 1(카메라 버튼 셀) + 추가된 이미지 개수를 반환한다.
-        1 + thumbnailImages.count
+        1 + thumbnailCount
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -114,7 +132,7 @@ extension WriteImageTableCell: UICollectionViewDataSource {
                 return CameraButtonCollectionCell()
             }
 
-            cell.update(count: thumbnailImages.count)
+            cell.update(count: thumbnailCount)
 
             return cell
         } else {
@@ -122,12 +140,19 @@ extension WriteImageTableCell: UICollectionViewDataSource {
                 return ThumbnailCell()
             }
 
-            let image: UIImage = thumbnailImages[indexPath.row - 1]
+            let image: UIImage? = try? thumbnailSubject.value()[indexPath.item - 1]
             cell.configure(image: image)
 
             cell.closeButtonDidTappedCallback = { [weak self] in
+                guard var updateValue: [UIImage] = try? self?.thumbnailSubject.value() else {
+                    return
+                }
                 collectionView.deleteItems(at: [indexPath])
-                self?.thumbnailImages.remove(at: indexPath.row - 1)
+                updateValue.remove(at: indexPath.item - 1)
+                self?.thumbnailSubject.onNext(updateValue)
+                NotificationCenter.default.post(name: .removeSelectedThumbnail,
+                                                object: nil,
+                                                userInfo: [Notification.Name.removeSelectedThumbnail: indexPath])
                 UIView.performWithoutAnimation {
                     collectionView.reloadSections(IndexSet(integer: indexPath.section))
                 }

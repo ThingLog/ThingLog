@@ -18,56 +18,59 @@ extension WriteViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        dequeueAndConfigureCell(for: indexPath, from: tableView)
+        dequeueAndConfigureCell(for: indexPath)
     }
 }
 
 extension WriteViewController {
-    private func dequeueAndConfigureCell(for indexPath: IndexPath, from tableView: UITableView) -> UITableViewCell {
+    private func dequeueAndConfigureCell(for indexPath: IndexPath) -> UITableViewCell {
         guard let section: WriteViewModel.Section = .init(rawValue: indexPath.section) else {
             fatalError("Section index out of range")
         }
-        let identifier: String = section.cellIdentifier()
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
 
         switch section {
         case .image:
-            if let imageCell: WriteImageTableCell = cell as? WriteImageTableCell {
-                configureImageTableCell(imageCell)
-            }
+            return configureImageTableCell(with: indexPath)
         case .category:
-            if let categoryCell: WriteCategoryTableCell = cell as? WriteCategoryTableCell {
-                configureCategoryTableCell(categoryCell)
-            }
+            return configureCategoryTableCell(with: indexPath)
         case .type:
-            if let typeCell: WriteTextFieldCell = cell as? WriteTextFieldCell {
-                configureTextFieldTableCell(typeCell, with: indexPath)
-            }
+            return configureTextFieldTableCell(with: indexPath)
         case .rating:
-            if let ratingCell: WriteRatingCell = cell as? WriteRatingCell {
-                configureRatingTableCell(ratingCell)
-            }
+            return configureRatingTableCell(with: indexPath)
         case .contents:
-            if let contentCell: WriteTextViewCell = cell as? WriteTextViewCell {
-                configureTextViewTableCell(contentCell, with: indexPath)
-            }
+            return configureTextViewTableCell(with: indexPath)
+        }
+    }
+
+    private func configureImageTableCell(with indexPath: IndexPath) -> UITableViewCell {
+        guard let cell: WriteImageTableCell = tableView.dequeueReusableCell(withIdentifier: WriteImageTableCell.reuseIdentifier, for: indexPath) as? WriteImageTableCell else {
+            fatalError("Unable to downcast the cell in dequeueReusableCell to WriteImageTableCell")
+        }
+
+        cell.coordinator = coordinator
+        cell.thumbnailSubject = viewModel.thumbnailImagesSubject
+
+        return cell
+    }
+
+    private func configureCategoryTableCell(with indexPath: IndexPath) -> UITableViewCell {
+        guard let cell: WriteCategoryTableCell = tableView.dequeueReusableCell(withIdentifier: WriteCategoryTableCell.reuseIdentifier, for: indexPath) as? WriteCategoryTableCell else {
+            fatalError("Unable to downcast the cell in dequeueReusableCell to WriteCategoryTableCell")
+        }
+
+        cell.categorySubject = viewModel.categorySubject
+        cell.indicatorButtonDidTappedCallback = { [weak self] in
+            self?.coordinator?.showCategoryViewController()
         }
 
         return cell
     }
 
-    private func configureImageTableCell(_ cell: WriteImageTableCell) {
-        cell.coordinator = coordinator
-        cell.thumbnailImages = selectedImages
-    }
-
-    private func configureCategoryTableCell(_ cell: WriteCategoryTableCell) {
-        cell.indicatorButtonDidTappedCallback = { [weak self] in
-            self?.coordinator?.showCategoryViewController()
+    private func configureTextFieldTableCell(with indexPath: IndexPath) -> UITableViewCell {
+        guard let cell: WriteTextFieldCell = tableView.dequeueReusableCell(withIdentifier: WriteTextFieldCell.reuseIdentifier, for: indexPath) as? WriteTextFieldCell else {
+            fatalError("Unable to downcast the cell in dequeueReusableCell to WriteTextFieldCell")
         }
-    }
 
-    private func configureTextFieldTableCell(_ cell: WriteTextFieldCell, with indexPath: IndexPath) {
         cell.configure(keyboardType: viewModel.typeInfo[indexPath.row].keyboardType,
                        placeholder: viewModel.typeInfo[indexPath.row].placeholder)
         cell.isEditingSubject
@@ -78,16 +81,28 @@ extension WriteViewController {
             .bind { [weak self] text in
                 self?.viewModel.typeValues[indexPath.row] = text
             }.disposed(by: cell.disposeBag)
+
+        return cell
     }
 
-    private func configureRatingTableCell(_ cell: WriteRatingCell) {
+    private func configureRatingTableCell(with indexPath: IndexPath) -> UITableViewCell {
+        guard let cell: WriteRatingCell = tableView.dequeueReusableCell(withIdentifier: WriteRatingCell.reuseIdentifier, for: indexPath) as? WriteRatingCell else {
+            fatalError("Unable to downcast the cell in dequeueReusableCell to WriteRatingCell")
+        }
+
         cell.selectRatingBlock = { [weak self] in
             self?.viewModel.rating = cell.currentRating
             self?.view.endEditing(true)
         }
+
+        return cell
     }
 
-    private func configureTextViewTableCell(_ cell: WriteTextViewCell, with indexPath: IndexPath) {
+    private func configureTextViewTableCell(with indexPath: IndexPath) -> UITableViewCell {
+        guard let cell: WriteTextViewCell = tableView.dequeueReusableCell(withIdentifier: WriteTextViewCell.reuseIdentifier, for: indexPath) as? WriteTextViewCell else {
+            fatalError("Unable to downcast the cell in dequeueReusableCell to WriteTextViewCell")
+        }
+
         cell.delegate = self
         cell.textView.rx.didBeginEditing
             .bind { [weak self] in
@@ -97,5 +112,7 @@ extension WriteViewController {
             .subscribe(onNext: { [weak self] text in
                 self?.viewModel.contents = text
             }).disposed(by: cell.disposeBag)
+
+        return cell
     }
 }

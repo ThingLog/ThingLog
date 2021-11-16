@@ -41,11 +41,6 @@ final class WriteViewController: BaseViewController {
     
     // MARK: - Properties
     var coordinator: WriteCoordinator?
-    var selectedImages: [UIImage] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
     private(set) var viewModel: WriteViewModel
 
     init(viewModel: WriteViewModel) {
@@ -60,8 +55,6 @@ final class WriteViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = SwiftGenColors.white.color
-        
         view.backgroundColor = SwiftGenColors.white.color
     }
     
@@ -104,8 +97,9 @@ final class WriteViewController: BaseViewController {
     override func setupBinding() {
         bindKeyboardWillShow()
         bindKeyboardWillHide()
-        bindNotificationPassSelectPHAssets()
         bindDoneButton()
+        bindThumbnailSubjectUpdate()
+        bindCategorySubject()
     }
 }
 
