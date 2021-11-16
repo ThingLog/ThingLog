@@ -68,7 +68,7 @@ final class PostRepository: PostRepositoryProtocol {
     /// - Returns: 데이터를 가져온 ResultsController를 반환한다.
     func fetchResultsController(by requestType: RequestType) -> NSFetchedResultsController<PostEntity> {
         let fetchRequest: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
-        let minDate: Date = Date().offset(-30, byAdding: .day) ?? Date()
+        let minDate: Date = Date().offset(-29, byAdding: .day) ?? Date()
         switch requestType {
         case .fromHome:
             fetchRequest.predicate = NSPredicate(format: "postType.isDelete == false AND postType.type == %d", pageType?.rawValue ?? 0)
@@ -242,7 +242,7 @@ final class PostRepository: PostRepositoryProtocol {
         let context: NSManagedObjectContext = coreDataStack.mainContext
         context.perform {
             do {
-                let minDate: Date = Date().offset(-30, byAdding: .day) ?? Date()
+                let minDate: Date = Date().offset(-29, byAdding: .day) ?? Date()
                 let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
                 request.predicate = NSPredicate(format: "postType.isDelete == true AND deleteDate <= %@", minDate as NSDate )
                 request.sortDescriptors = [NSSortDescriptor(key: "deleteDate", ascending: true)]

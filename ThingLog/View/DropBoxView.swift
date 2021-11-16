@@ -117,8 +117,13 @@ final class DropBoxView: UIView {
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.topAnchor.constraint(equalTo: bottomAnchor, constant: 1)
         ])
+        tableView.layer.cornerRadius = 5
+        tableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        tableView.clipsToBounds = true
+        
         superView?.layoutIfNeeded()
         tableView.selectRow(at: selectedIndexPath, animated: false, scrollPosition: .top)
+        
     }
 }
 

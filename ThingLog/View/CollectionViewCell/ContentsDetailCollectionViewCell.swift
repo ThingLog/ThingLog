@@ -48,6 +48,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
     // MARK: - Views
     private let imageView: UIImageView = {
         let imageview: UIImageView = UIImageView()
+        imageview.contentMode = .scaleAspectFill
         imageview.translatesAutoresizingMaskIntoConstraints = false
         return imageview
     }()
@@ -216,7 +217,6 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
     private func setBackgroundColor() {
         topBorderLineView.backgroundColor = SwiftGenColors.gray4.color
         bottomBorderLineView.backgroundColor = SwiftGenColors.gray4.color
-        contentView.backgroundColor = SwiftGenColors.primaryBackground.color
     }
     
     private func setupView() {
@@ -244,6 +244,11 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
             if let createDate: Date = post.createDate {
                 dateLabel.text = createDate.toString(.year) + "." + createDate.toString(.month) + "." + createDate.toString(.day)
             }
+            
+            if let imageData: Data = (post.attachments?.allObjects as? [AttachmentEntity])?[0].thumbnail {
+                imageView.image = UIImage(data: imageData)
+            }
+            
             categoryLabel.text = (post.categories?.allObjects as? [CategoryEntity])?.first?.title
             postTitleLabel.text = post.title
             contentsLabel.text = post.contents
