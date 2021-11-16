@@ -42,10 +42,10 @@ enum ResultCollectionSection: Int, CaseIterable {
         let layout: UICollectionViewCompositionalLayout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _ : NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection in
             let isPostContentsSection: Bool = sectionIndex == ResultCollectionSection.postContents.section
             
-            let groupHeight: NSCollectionLayoutDimension = isPostContentsSection ? .estimated(1) :  .estimated(1)
+            let groupHeight: NSCollectionLayoutDimension = .estimated(1)
             let groupWidth: NSCollectionLayoutDimension = isPostContentsSection ? .fractionalWidth(1.0) : .absolute(124)
 
-            let itemWidth: NSCollectionLayoutDimension = isPostContentsSection ? .fractionalWidth(1.0) : .estimated(1.0)
+            let itemWidth: NSCollectionLayoutDimension = .fractionalWidth(1.0)
             let itemHeight: NSCollectionLayoutDimension = isPostContentsSection ? .absolute(110) : .estimated(1.0)
             
             let itemSize: NSCollectionLayoutSize = NSCollectionLayoutSize(widthDimension: itemWidth, heightDimension: itemHeight)

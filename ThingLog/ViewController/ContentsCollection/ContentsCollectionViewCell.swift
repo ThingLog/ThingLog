@@ -26,7 +26,6 @@ import Photos
 class ContentsCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageview: UIImageView = UIImageView()
-        imageview.backgroundColor = .clear
         imageview.translatesAutoresizingMaskIntoConstraints = false
         imageview.contentMode = .scaleAspectFill
         return imageview
@@ -49,6 +48,10 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         let imageView: UIImageView = UIImageView(image: image)
         imageView.transform = CGAffineTransform(rotationAngle: .pi)
         imageView.tintColor = .white
+        imageView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        imageView.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -115,12 +118,11 @@ class ContentsCollectionViewCell: UICollectionViewCell {
     
     private func setupView() {
         clipsToBounds = true
-        
-        contentView.addSubview(imageView)
-        contentView.addSubview(smallIconView)
-        contentView.addSubview(bottomGradientView)
-        contentView.addSubview(bottomLabel)
-        contentView.addSubview(checkButton)
+        contentView.addSubviews(imageView,
+                                smallIconView,
+                                bottomGradientView,
+                                bottomLabel,
+                                checkButton)
         checkButton.layer.cornerRadius = checkButtonSize / 2
         
         let imageViewHeight: NSLayoutConstraint = imageView.heightAnchor.constraint(equalToConstant: 124)
@@ -177,8 +179,11 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         text += "\n" + (postEntity.isLike ? "좋아요" : "싫어요")
         text += "\n날짜: " + (postEntity.createDate!.toString(.year)) + "." + (postEntity.createDate!.toString(.month)) + "." + (postEntity.createDate!.toString(.day))
         text += "\n만족도: " + String(postEntity.rating!.score)
-        imageView.image = UIImage(data: (postEntity.attachments?.allObjects as? [AttachmentEntity])![0].thumbnail!)
+        if let imageData: Data = (postEntity.attachments?.allObjects as? [AttachmentEntity])?[0].thumbnail {
+            imageView.image = UIImage(data: imageData)
+        }
         testLabel.text = text
+        smallIconView.isHidden = postEntity.attachments?.allObjects.count == 1
     }
 
     func update(image: UIImage?) {

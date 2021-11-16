@@ -140,7 +140,9 @@ extension SearchResultsViewController: UICollectionViewDataSource, UICollectionV
             // 그외 ( 카테고리, 물건이름, 선물받은, 거래처/판매처 )
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsCollectionViewCell else { return UICollectionViewCell() }
-            cell.backgroundColor = SwiftGenColors.gray5.color
+            if let post: PostEntity = viewModel.fetchedResultsControllers[indexPath.section].fetchedObjects?[indexPath.item] {
+                cell.updateView(post)
+            }
             return cell
         }
     }
