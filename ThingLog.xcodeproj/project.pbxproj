@@ -198,7 +198,6 @@
 		DBD2244527085651004C5184 /* EasyLookViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2244427085651004C5184 /* EasyLookViewController+setup.swift */; };
 		DBD2244727085671004C5184 /* EasyLookViewController+subscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2244627085671004C5184 /* EasyLookViewController+subscribe.swift */; };
 		DBD2244B27085DFB004C5184 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD2244A27085DFB004C5184 /* SearchViewController.swift */; };
-		DBD37BD427424740000FDDBC /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBD37BD327424740000FDDBC /* Storyboard.storyboard */; };
 		DBD37BD6274253D1000FDDBC /* splash.json in Resources */ = {isa = PBXBuildFile; fileRef = DBD37BD5274253D1000FDDBC /* splash.json */; };
 		DBD37BD9274255F2000FDDBC /* onboarding1Dark.json in Resources */ = {isa = PBXBuildFile; fileRef = DBD37BD7274255F2000FDDBC /* onboarding1Dark.json */; };
 		DBD37BDA274255F2000FDDBC /* onboarding2Dark.json in Resources */ = {isa = PBXBuildFile; fileRef = DBD37BD8274255F2000FDDBC /* onboarding2Dark.json */; };
@@ -440,7 +439,6 @@
 		DBD2244427085651004C5184 /* EasyLookViewController+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EasyLookViewController+setup.swift"; sourceTree = "<group>"; };
 		DBD2244627085671004C5184 /* EasyLookViewController+subscribe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EasyLookViewController+subscribe.swift"; sourceTree = "<group>"; };
 		DBD2244A27085DFB004C5184 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		DBD37BD327424740000FDDBC /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		DBD37BD5274253D1000FDDBC /* splash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splash.json; sourceTree = "<group>"; };
 		DBD37BD7274255F2000FDDBC /* onboarding1Dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding1Dark.json; sourceTree = "<group>"; };
 		DBD37BD8274255F2000FDDBC /* onboarding2Dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = onboarding2Dark.json; sourceTree = "<group>"; };
@@ -710,7 +708,6 @@
 				DB7B470827410CC800426EF1 /* OnboardingPage1ViewController.swift */,
 				DB7B470A27410CD700426EF1 /* OnboardingPage2ViewController.swift */,
 				DB7B470627410ADE00426EF1 /* OnboardingPageViewController.swift */,
-				DBD37BD327424740000FDDBC /* Storyboard.storyboard */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -1108,7 +1105,6 @@
 				DB1111F227352EE800D02F99 /* onboarding1.json in Resources */,
 				873EC04E26D5068F003C3525 /* .swiftlint.yml in Resources */,
 				DB05B058271FFEF80067DB17 /* Settings.bundle in Resources */,
-				DBD37BD427424740000FDDBC /* Storyboard.storyboard in Resources */,
 				DBAE8E9726FDB3EE00F536AD /* Pretendard-Regular.otf in Resources */,
 				DB32B281272C01E1009074AF /* Drawers.xcassets in Resources */,
 				DBAE8E9826FDB3EE00F536AD /* Pretendard-SemiBold.otf in Resources */,

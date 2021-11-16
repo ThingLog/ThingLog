@@ -64,7 +64,7 @@ final class HomeViewController: UIViewController {
     
     // MARK: - Setup
     func setupView() {
-        view.backgroundColor = SwiftGenColors.white.color
+        view.backgroundColor = SwiftGenColors.primaryBackground.color
         view.addSubview(profileView)
         heightAnchorProfileView = profileView.heightAnchor.constraint(equalToConstant: profileViewHeight)
         heightAnchorProfileView?.isActive = true
@@ -261,6 +261,11 @@ extension HomeViewController {
             baseController.completionBlock = { updatedFetchedCount in
                 pageTypeButton.setTitle(String(updatedFetchedCount), for: .normal)
             }
+            
+            // 추가적으로, 셀을 선택했을 때 이벤트를 옵저빙하여, PostViewController로 전환하도록 한다.
+            baseController.didSelectPostViewModelSubject.bind { [weak self] postViewModel in
+                self?.coordinator?.showPostViewController(with: postViewModel)
+            }.disposed(by: baseController.disposeBag)
         }
     }
     

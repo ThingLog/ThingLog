@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class EasyLookCoordinator: Coordinator {
+final class EasyLookCoordinator: PostCoordinatorProtocol {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     

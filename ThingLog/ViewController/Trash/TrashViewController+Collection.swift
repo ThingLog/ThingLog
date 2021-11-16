@@ -72,6 +72,12 @@ extension TrashViewController: UICollectionViewDelegate {
             }
             editButton.setTitle(deleteStorageCount + " 취소", for: .normal)
             editButton.sizeToFit()
+        } else {
+            // 에딧 모드가 아닌 경우에만 PostViewController로 전환한다.
+            guard let controller: NSFetchedResultsController = fetchResultController else { return }
+            let postViewModel: PostViewModel = PostViewModel(fetchedResultsController: controller,
+                                                             startIndexPath: indexPath)
+            coordinator?.showPostViewController(with: postViewModel)
         }
     }
 }

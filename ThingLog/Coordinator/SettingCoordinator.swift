@@ -8,7 +8,7 @@
 import UIKit
 
 /// 설정화면에서 뷰전환을 돕는 Coordinator이다.
-final class SettingCoordinator: Coordinator {
+final class SettingCoordinator: PostCoordinatorProtocol {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     
