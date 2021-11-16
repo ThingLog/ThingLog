@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class EasyLookCoordinator: Coordinator {
+final class EasyLookCoordinator: PostCoordinatorProtocol {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     
@@ -37,12 +37,5 @@ final class EasyLookCoordinator: Coordinator {
     func showSettingViewController() {
         let settingCoordinator: SettingCoordinator = SettingCoordinator(navigationController: navigationController)
         settingCoordinator.start()
-    }
-}
-
-extension EasyLookCoordinator: PostCoordinatorProtocol {
-    func showPostViewController(with viewModel: PostViewModel) {
-        // TODO: - ⚠️ PostViewController로 대체할 예정
-        navigationController.pushViewController(TestPostViewController(postViewModel: viewModel), animated: true)
     }
 }

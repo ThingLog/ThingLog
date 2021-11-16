@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class HomeCoordinator: Coordinator {
+final class HomeCoordinator: PostCoordinatorProtocol {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     
@@ -41,12 +41,5 @@ final class HomeCoordinator: Coordinator {
     
     func back() {
         navigationController.popViewController(animated: true)
-    }
-}
-
-extension HomeCoordinator: PostCoordinatorProtocol {
-    func showPostViewController(with viewModel: PostViewModel) {
-        // TODO: - ⚠️ PostViewController로 대체할 예정
-        navigationController.pushViewController(TestPostViewController(postViewModel: viewModel), animated: true)
     }
 }

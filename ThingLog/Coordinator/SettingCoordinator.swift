@@ -8,7 +8,7 @@
 import UIKit
 
 /// 설정화면에서 뷰전환을 돕는 Coordinator이다.
-final class SettingCoordinator: Coordinator {
+final class SettingCoordinator: PostCoordinatorProtocol {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     
@@ -39,12 +39,5 @@ final class SettingCoordinator: Coordinator {
         loginViewController.coordinator = self
         loginViewController.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(loginViewController, animated: true)
-    }
-}
-
-extension SettingCoordinator: PostCoordinatorProtocol {
-    func showPostViewController(with viewModel: PostViewModel) {
-        // TODO: - ⚠️ PostViewController로 대체할 예정
-        navigationController.pushViewController(TestPostViewController(postViewModel: viewModel), animated: true)
     }
 }
