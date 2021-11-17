@@ -207,6 +207,7 @@
 		DBE3E9C3272FD6B300B3EB69 /* UserInformationViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE3E9C2272FD6B300B3EB69 /* UserInformationViewModelable.swift */; };
 		DBE3E9C6272FF25A00B3EB69 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBE3E9C5272FF25A00B3EB69 /* Icons.xcassets */; };
 		DBE3E9C8272FF32D00B3EB69 /* IconsAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE3E9C7272FF32D00B3EB69 /* IconsAssets.swift */; };
+		DBFF2C602744C5F400A2CEE9 /* PhotoCardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFF2C5F2744C5F400A2CEE9 /* PhotoCardCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -450,6 +451,7 @@
 		DBE3E9C2272FD6B300B3EB69 /* UserInformationViewModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationViewModelable.swift; sourceTree = "<group>"; };
 		DBE3E9C5272FF25A00B3EB69 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		DBE3E9C7272FF32D00B3EB69 /* IconsAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconsAssets.swift; sourceTree = "<group>"; };
+		DBFF2C5F2744C5F400A2CEE9 /* PhotoCardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCardCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -732,6 +734,7 @@
 				DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */,
 				DBD1054C2729560600632168 /* LoginCoordinator.swift */,
 				DB7B4701274102B300426EF1 /* OnboardingCoordinator.swift */,
+				DBFF2C5F2744C5F400A2CEE9 /* PhotoCardCoordinator.swift */,
 				87EDCFD327312517002C98BE /* PostCoordinator.swift */,
 				DB6909622712DB0800BB54E4 /* SettingCoordinator.swift */,
 				DB73BB06273A61CE00719DF6 /* SplashCoordinator.swift */,
@@ -1324,6 +1327,7 @@
 				87A86C8F27141507008FB3F0 /* RatingView.swift in Sources */,
 				DB05B04E271F09260067DB17 /* LoginTopHeaderView.swift in Sources */,
 				DB7C04F026FB1EFF009F5C0A /* HomeViewController.swift in Sources */,
+				DBFF2C602744C5F400A2CEE9 /* PhotoCardCoordinator.swift in Sources */,
 				DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */,
 				DB331DAB26FDD00A00A629F5 /* Fonts.swift in Sources */,
 				DB6D05AD2733D47E003002A3 /* CheckView.swift in Sources */,
