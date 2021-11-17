@@ -734,11 +734,11 @@
 				DB7C04A726F5F2BB009F5C0A /* HomeCoordinator.swift */,
 				DBD1054C2729560600632168 /* LoginCoordinator.swift */,
 				DB7B4701274102B300426EF1 /* OnboardingCoordinator.swift */,
+				DBFF2C5F2744C5F400A2CEE9 /* PhotoCardCoordinator.swift */,
 				87EDCFD327312517002C98BE /* PostCoordinator.swift */,
 				DB6909622712DB0800BB54E4 /* SettingCoordinator.swift */,
 				DB73BB06273A61CE00719DF6 /* SplashCoordinator.swift */,
 				87BB17A827098A720088B847 /* WriteCoordinator.swift */,
-				DBFF2C5F2744C5F400A2CEE9 /* PhotoCardCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
