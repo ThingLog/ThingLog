@@ -55,7 +55,7 @@ final class ProfileView: UIView {
     }()
     
     lazy var newBadgeAnimationView: AnimationView = {
-        let view: AnimationView = self.traitCollection.userInterfaceStyle == .dark ? AnimationView(name: "drawerNewDark") : AnimationView(name: "drawerNew")
+        let view: AnimationView = self.traitCollection.userInterfaceStyle == .dark ? AnimationView(name: AnimationJson.drawerNewDark.name) : AnimationView(name: AnimationJson.drawerNew.name)
         view.animationSpeed = 1.0
         view.loopMode = .loop
         view.isHidden = true
@@ -202,12 +202,12 @@ final class ProfileView: UIView {
             if let userInfor: UserInformationable = userInfor {
                 let darkMode: Bool = userInfor.isAumatedDarkMode
                 if darkMode {
-                    self.newBadgeAnimationView.animation = Animation.named("drawerNewDark")
+                    self.newBadgeAnimationView.animation = Animation.named(AnimationJson.drawerNewDark.name)
                 } else {
-                    self.newBadgeAnimationView.animation = Animation.named("drawerNew")
+                    self.newBadgeAnimationView.animation = Animation.named(AnimationJson.drawerNew.name)
                 }
             } else {
-                self.newBadgeAnimationView.animation = Animation.named(self.traitCollection.userInterfaceStyle == .dark ? "drawerNewDark" : "drawerNew")
+                self.newBadgeAnimationView.animation = Animation.named(self.traitCollection.userInterfaceStyle == .dark ? AnimationJson.drawerNewDark.name : AnimationJson.drawerNew.name)
             }
             if self.newBadgeAnimationView.isHidden { return }
             DispatchQueue.main.async {

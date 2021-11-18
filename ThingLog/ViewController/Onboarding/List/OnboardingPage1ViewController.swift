@@ -17,7 +17,7 @@ final class OnboardingPage1ViewController: UIViewController {
     }()
     
     lazy var startAnimationView: AnimationView = {
-        let view: AnimationView = self.traitCollection.userInterfaceStyle == .dark ? AnimationView(name: "onboarding1Dark") : AnimationView(name: "onboarding1")
+        let view: AnimationView = self.traitCollection.userInterfaceStyle == .dark ? AnimationView(name: AnimationJson.onboarding1Dark.name) : AnimationView(name: AnimationJson.onboarding1.name)
         view.animationSpeed = 1.0
         view.loopMode = .loop
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +84,7 @@ final class OnboardingPage1ViewController: UIViewController {
         guard UIApplication.shared.applicationState == .inactive else {
             return
         }
-        startAnimationView.animation = Animation.named(self.traitCollection.userInterfaceStyle == .dark ? "onboarding1Dark" : "onboarding1")
+        startAnimationView.animation = Animation.named(self.traitCollection.userInterfaceStyle == .dark ? AnimationJson.onboarding1Dark.name : AnimationJson.onboarding1.name)
         DispatchQueue.main.async {
             self.startAnimationView.play()
         }

@@ -12,7 +12,7 @@ class SplashViewController: UIViewController {
     var coordinator: SplashCoordinator?
     
     let starAnimationView: AnimationView = {
-        let view: AnimationView = AnimationView(name: "splash")
+        let view: AnimationView = AnimationView(name: AnimationJson.splash.name)
         view.animationSpeed = 1.0
         view.translatesAutoresizingMaskIntoConstraints = false
         return view

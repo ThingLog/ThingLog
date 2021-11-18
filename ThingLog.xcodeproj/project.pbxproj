@@ -162,6 +162,7 @@
 		DB8BF6792705D25700FD5FDB /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6782705D25700FD5FDB /* LogoView.swift */; };
 		DB8BF6812706D89E00FD5FDB /* ResultsWithDropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6802706D89E00FD5FDB /* ResultsWithDropBoxView.swift */; };
 		DB8BF6832706DA7900FD5FDB /* EasyLookTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6822706DA7900FD5FDB /* EasyLookTopView.swift */; };
+		DB8F078027462ADF00F708E2 /* AnimationJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8F077F27462ADF00F708E2 /* AnimationJson.swift */; };
 		DB98FBC32744E596002409BF /* PhotoCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBC22744E596002409BF /* PhotoCardViewController.swift */; };
 		DB98FBC62744E5BC002409BF /* LabelWithUnderLineVerticalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBC52744E5BC002409BF /* LabelWithUnderLineVerticalView.swift */; };
 		DB98FBC82744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBC72744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift */; };
@@ -416,6 +417,7 @@
 		DB8BF6782705D25700FD5FDB /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		DB8BF6802706D89E00FD5FDB /* ResultsWithDropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsWithDropBoxView.swift; sourceTree = "<group>"; };
 		DB8BF6822706DA7900FD5FDB /* EasyLookTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookTopView.swift; sourceTree = "<group>"; };
+		DB8F077F27462ADF00F708E2 /* AnimationJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationJson.swift; sourceTree = "<group>"; };
 		DB98FBC22744E596002409BF /* PhotoCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCardViewController.swift; sourceTree = "<group>"; };
 		DB98FBC52744E5BC002409BF /* LabelWithUnderLineVerticalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithUnderLineVerticalView.swift; sourceTree = "<group>"; };
 		DB98FBC72744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewWithSelectViewCollectionCell.swift; sourceTree = "<group>"; };
@@ -713,6 +715,7 @@
 				DB1111F127352EE800D02F99 /* onboarding2.json */,
 				DBD37BD8274255F2000FDDBC /* onboarding2Dark.json */,
 				DBD37BD5274253D1000FDDBC /* splash.json */,
+				DB8F077F27462ADF00F708E2 /* AnimationJson.swift */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -1413,6 +1416,7 @@
 				DB98FBDA2745ADA9002409BF /* PhotoCardInset.swift in Sources */,
 				DBA0F81C2709B390009553FC /* LeftLabelRightButtonTableCell.swift in Sources */,
 				DBD3A21D2743AEF50001F9BF /* HomeViewController+subscribe.swift in Sources */,
+				DB8F078027462ADF00F708E2 /* AnimationJson.swift in Sources */,
 				875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */,
 				DB6909612712DA8100BB54E4 /* SettingViewController.swift in Sources */,
 				87B1B6572715E2F0001EA889 /* WriteCategoryTableCell.swift in Sources */,
