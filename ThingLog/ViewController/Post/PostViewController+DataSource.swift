@@ -9,7 +9,7 @@ import UIKit
 
 extension PostViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        viewModel.fetchedResultsController.fetchedObjects?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -17,42 +17,8 @@ extension PostViewController: UITableViewDataSource {
             return PostTableCell()
         }
 
-        // 초기 설정
-        cell.isTrash = true
-        cell.isBought = true
-
-        // 휴지통
-        cell.likeButton.rx.tap
-            .bind { [weak self] in
-                UIView.performWithoutAnimation {
-                    self?.tableView.beginUpdates()
-                    cell.isTrash = true
-                    cell.isBought = false
-                    self?.tableView.endUpdates()
-                }
-            }.disposed(by: cell.disposeBag)
-
-        // 사고싶다
-        cell.commentButton.rx.tap
-            .bind { [weak self] in
-                UIView.performWithoutAnimation {
-                    self?.tableView.beginUpdates()
-                    cell.isBought = true
-                    cell.isTrash = false
-                    self?.tableView.endUpdates()
-                }
-            }.disposed(by: cell.disposeBag)
-
-        // 그 외 default
-        cell.photocardButton.rx.tap
-            .bind { [weak self] in
-                UIView.performWithoutAnimation {
-                    self?.tableView.beginUpdates()
-                    cell.isTrash = true
-                    cell.isBought = true
-                    self?.tableView.endUpdates()
-                }
-            }.disposed(by: cell.disposeBag)
+        let item: PostEntity = viewModel.fetchedResultsController.object(at: indexPath)
+        cell.configure(with: item)
         
         return cell
     }

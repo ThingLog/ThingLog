@@ -8,11 +8,12 @@
 import UIKit
 
 final class PostSlideImageViewDataSource: NSObject {
+    var images: [UIImage] = []
 }
 
 extension PostSlideImageViewDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        images.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -20,7 +21,7 @@ extension PostSlideImageViewDataSource: UICollectionViewDataSource {
             return ContentsCollectionViewCell()
         }
 
-        cell.imageView.image = UIImage(systemName: "square.and.arrow.up")
+        cell.imageView.image = images[indexPath.item]
         cell.setupDisplayOnlyImageView()
 
         return cell

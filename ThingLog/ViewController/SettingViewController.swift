@@ -23,7 +23,6 @@ final class SettingViewController: UIViewController {
         case alert2
         case alert3
         case resetUserInfor
-        case post
         case clearDrawer
         case blackCard
         case dragonball
@@ -52,8 +51,6 @@ final class SettingViewController: UIViewController {
                 return "제목과 텍스트필드, 두개의 버튼 있는 Alert"
             case .resetUserInfor:
                 return "유저정보 초기화 ( 앱 종료됩니다 )"
-            case .post:
-                return "게시물 화면"
             case .clearDrawer:
                 return "진열장 아이템 초기화"
             case .blackCard:
@@ -187,7 +184,7 @@ extension SettingViewController: UITableViewDataSource {
                     }
                     .disposed(by: cell.disposeBag)
                 
-            case .editCategory, .trash, .login, .addDummyData, .deleteDummyData, .alert1, .alert2, .alert3, .resetUserInfor, .post, .clearDrawer, .blackCard, .basket, .rightAward, .dragonball:
+            case .editCategory, .trash, .login, .addDummyData, .deleteDummyData, .alert1, .alert2, .alert3, .resetUserInfor, .clearDrawer, .blackCard, .basket, .rightAward, .dragonball:
                 cell.changeViewType(labelType: .withBody1,
                                     buttonType: .withChevronRight,
                                     borderLineHeight: .with05Height,
@@ -226,8 +223,6 @@ extension SettingViewController: UITableViewDelegate {
             case .resetUserInfor:
                 UserInformationiCloudViewModel().resetUserInformation()
                 exit(1)
-            case .post:
-                coordinator?.showPostViewController()
             case .clearDrawer:
                 drawerRepo.deleteAllDrawers()
                 coordinator?.navigationController.viewControllers.forEach {

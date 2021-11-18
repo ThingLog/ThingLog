@@ -8,12 +8,13 @@
 import UIKit
 
 final class PostCategoryViewDataSouce: NSObject {
+    var items: [String] = []
+    var isEmpty: Bool = false
 }
 
 extension PostCategoryViewDataSouce: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // TODO: remove test data
-        10
+        items.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -21,7 +22,8 @@ extension PostCategoryViewDataSouce: UICollectionViewDataSource {
             return LabelWithButtonRoundCollectionCell()
         }
 
-        cell.configure(text: "전자제품", buttonIsHidden: true)
+        cell.configure(text: items[indexPath.item], buttonIsHidden: true)
+        isEmpty ? cell.configureColor(SwiftGenColors.gray2.color) : cell.configureColor(SwiftGenColors.primaryBlack.color)
 
         return cell
     }
