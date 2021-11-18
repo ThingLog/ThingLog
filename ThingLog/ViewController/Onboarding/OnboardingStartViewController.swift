@@ -54,7 +54,6 @@ final class OnboardingStartViewController: UIViewController {
     
     // MARK: - Properties
     private let topPaddingForLogo: CGFloat = 33
-    private let logoHeight: CGFloat = 120
     private let startButtonHeight: CGFloat = 52
     private let leadingPadding: CGFloat = 20
     private let startButtonPadding: CGFloat = 20
@@ -86,8 +85,8 @@ final class OnboardingStartViewController: UIViewController {
             titleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             logoView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: topPaddingForLogo),
-            logoView.heightAnchor.constraint(equalToConstant: logoHeight),
-            logoView.widthAnchor.constraint(equalToConstant: logoHeight),
+            logoView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.26),
+            logoView.heightAnchor.constraint(equalTo: logoView.widthAnchor),
             logoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
             startButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: startButtonPadding),

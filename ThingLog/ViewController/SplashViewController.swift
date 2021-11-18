@@ -30,8 +30,8 @@ class SplashViewController: UIViewController {
         NSLayoutConstraint.activate([
             starAnimationView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             starAnimationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            starAnimationView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.65),
-            starAnimationView.heightAnchor.constraint(equalTo: starAnimationView.widthAnchor)
+            starAnimationView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.26),
+            starAnimationView.heightAnchor.constraint(equalTo: starAnimationView.widthAnchor, multiplier: 2)
         ])
         
         // 애니메이션 동작후, 뷰컨트롤러 전환.
