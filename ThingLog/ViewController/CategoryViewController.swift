@@ -48,8 +48,7 @@ final class CategoryViewController: UIViewController {
     private let disposeBag: DisposeBag = DisposeBag()
     private let leadingTrailingConstant: CGFloat = 18.0
     private let topBottomConstant: CGFloat = 12.0
-    private var selectedCategoryIndexPaths: Set<IndexPath> = []
-    private var selectedCategory: Set<UUID?> = []
+    private var selectedCategory: [CategoryEntity] = []
     private let textFieldMaxLength: Int = 21
 
     // MARK: - Life Cycle
@@ -88,7 +87,7 @@ final class CategoryViewController: UIViewController {
         successButton.rx.tap
             .bind { [weak self] in
                 guard let self = self else { return }
-                // 선택한 카테고리를 Category 객체로 변환하여 WriteViewModel, WriteCategoryTableCell에게 전달한다.
+                // 선택한 카테고리를 Category 객체로 변환하여 WriteViewModel에 전달한다.
                 let category: [Category] = self.convertSelectedIndexPathToCategory()
                 NotificationCenter.default.post(name: .passToSelectedCategories,
                                                 object: nil,
@@ -129,9 +128,8 @@ final class CategoryViewController: UIViewController {
     /// 선택한 카테고리를 Category 객체로 변환해서 오름차순으로 정렬 후 반환한다.
     private func convertSelectedIndexPathToCategory() -> [Category] {
         var categories: [Category] = []
-        selectedCategoryIndexPaths.forEach { indexPath in
-            let categoryEntity: CategoryEntity = repository.fetchedResultsController.object(at: indexPath)
-            categories.append(categoryEntity.toModel())
+        selectedCategory.forEach {
+            categories.append($0.toModel())
         }
         return categories.sorted(by: { $0.title < $1.title })
     }
@@ -182,25 +180,13 @@ extension CategoryViewController {
 // MARK: - TableView Delegate
 extension CategoryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? RoundLabelWithButtonTableCell else {
-            return
+        let category: CategoryEntity = repository.fetchedResultsController.object(at: indexPath)
+        if let index: Int = selectedCategory.firstIndex(of: category) {
+            selectedCategory.remove(at: index)
+        } else {
+            selectedCategory.append(category)
         }
-
-        selectedCategory.insert(cell.identifier)
-        selectedCategoryIndexPaths.insert(indexPath)
-        cell.isSelectedCategory.toggle()
-    }
-
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? RoundLabelWithButtonTableCell else {
-            return
-        }
-
-        selectedCategory.remove(cell.identifier)
-        if let firstIndex: Set<IndexPath>.Index = selectedCategoryIndexPaths.firstIndex(of: indexPath) {
-            selectedCategoryIndexPaths.remove(at: firstIndex)
-        }
-        cell.isSelectedCategory.toggle()
+        tableView.reloadData()
     }
 }
 
@@ -223,17 +209,12 @@ extension CategoryViewController: UITableViewDataSource {
     private func configureCell(_ cell: RoundLabelWithButtonTableCell, at indexPath: IndexPath) {
         let category: CategoryEntity = repository.fetchedResultsController.object(at: indexPath)
 
-        cell.identifier = category.identifier
         cell.configure(name: category.title ?? "")
 
-        if selectedCategory.contains(category.identifier) {
+        if selectedCategory.contains(category) {
             cell.isSelectedCategory = true
-            selectedCategoryIndexPaths.insert(indexPath)
         } else {
             cell.isSelectedCategory = false
-            if let firstIndex: Set<IndexPath>.Index = selectedCategoryIndexPaths.firstIndex(of: indexPath) {
-                selectedCategoryIndexPaths.remove(at: firstIndex)
-            }
         }
     }
 }

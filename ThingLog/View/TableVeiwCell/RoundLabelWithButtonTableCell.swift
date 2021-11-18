@@ -44,8 +44,6 @@ final class RoundLabelWithButtonTableCell: UITableViewCell {
     }()
 
     // MARK: - Properties
-    /// 카테고리를 구분하기 위한 값
-    var identifier: UUID?
     var isSelectedCategory: Bool = false {
         didSet {
             selectedButton.backgroundColor = isSelectedCategory ? SwiftGenColors.black.color : SwiftGenColors.white.color
