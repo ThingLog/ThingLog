@@ -75,7 +75,7 @@ final class AlbumsViewController: BaseViewController {
 // MARK: - Private
 extension AlbumsViewController {
     private func setupCollectionView() {
-        view.backgroundColor = .white
+        view.backgroundColor = SwiftGenColors.primaryBackground.color
 
         view.addSubview(collectionView)
 
