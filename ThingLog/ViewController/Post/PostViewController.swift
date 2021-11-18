@@ -39,7 +39,8 @@ final class PostViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.scrollToRow(at: viewModel.startIndexPath, at: .top, animated: false)
+        let startIndexPath: IndexPath = IndexPath(row: viewModel.startIndexPath.row, section: 0)
+        tableView.scrollToRow(at: startIndexPath, at: .top, animated: false)
     }
 
     // MARK: - Setup
