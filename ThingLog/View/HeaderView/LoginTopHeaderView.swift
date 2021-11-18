@@ -22,7 +22,7 @@ final class LoginTopHeaderView: UICollectionReusableView {
         label.font = SwiftGenFonts.Pretendard.regular.font(size: 24)
         label.text = "안녕하세요\n띵로그입니다."
         label.numberOfLines = 2
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
         return label
@@ -34,7 +34,7 @@ final class LoginTopHeaderView: UICollectionReusableView {
         button.titleEdgeInsets = UIEdgeInsets(top: .leastNormalMagnitude, left: .leastNormalMagnitude, bottom: .leastNormalMagnitude, right: .leastNormalMagnitude)
         button.contentEdgeInsets = UIEdgeInsets(top: .leastNormalMagnitude, left: .leastNormalMagnitude, bottom: .leastNormalMagnitude, right: .leastNormalMagnitude)
         button.titleLabel?.font = UIFont.Pretendard.body1
-        button.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         button.setTitle("나중에", for: .normal)
         return button
     }()

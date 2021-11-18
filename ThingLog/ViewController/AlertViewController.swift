@@ -203,6 +203,7 @@ final class AlertViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDarkMode()
         view.backgroundColor = .clear
         view.layoutIfNeeded()
         
@@ -217,7 +218,7 @@ final class AlertViewController: UIViewController {
         super.viewDidAppear(animated)
         // 나타날 때 애니메이션을 추가한다.
         UIView.animate(withDuration: 0.3) {
-            self.view.backgroundColor = .black.withAlphaComponent(0.5)
+            self.view.backgroundColor = SwiftGenColors.dimmedColor.color.withAlphaComponent(0.5)
         }
         
         UIView.animate(withDuration: 0.05, delay: 0) {
@@ -339,14 +340,14 @@ extension AlertViewController {
     
     private func setBackgroundColorClear() {
         alertView.backgroundColor = SwiftGenColors.white.color.withAlphaComponent(0)
-        titleLabel.textColor = SwiftGenColors.black.color.withAlphaComponent(0)
-        contentsLabel.textColor = SwiftGenColors.black.color.withAlphaComponent(0)
+        titleLabel.textColor = SwiftGenColors.primaryBlack.color.withAlphaComponent(0)
+        contentsLabel.textColor = SwiftGenColors.primaryBlack.color.withAlphaComponent(0)
         
         textField.layer.borderColor = SwiftGenColors.gray4.color.withAlphaComponent(0).cgColor
-        textField.textColor = SwiftGenColors.black.color.withAlphaComponent(0)
+        textField.textColor = SwiftGenColors.primaryBlack.color.withAlphaComponent(0)
         
-        leftButton.setTitleColor(SwiftGenColors.black.color.withAlphaComponent(0), for: .normal)
-        rightButton.setTitleColor(SwiftGenColors.black.color.withAlphaComponent(0), for: .normal)
+        leftButton.setTitleColor(SwiftGenColors.primaryBlack.color.withAlphaComponent(0), for: .normal)
+        rightButton.setTitleColor(SwiftGenColors.primaryBlack.color.withAlphaComponent(0), for: .normal)
         
         borderLineBetweenButton.backgroundColor = SwiftGenColors.gray4.color.withAlphaComponent(0)
         borderLineOnButton.backgroundColor = SwiftGenColors.gray4.color.withAlphaComponent(0)

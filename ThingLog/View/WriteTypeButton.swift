@@ -15,14 +15,14 @@ final class WriteTypeButton: UIView {
         let imageView: UIImageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
-        imageView.tintColor = SwiftGenColors.black.color
+        imageView.tintColor = SwiftGenColors.primaryBlack.color
         return imageView
     }()
     private let textLabel: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.Pretendard.body3
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         return label
     }()
 

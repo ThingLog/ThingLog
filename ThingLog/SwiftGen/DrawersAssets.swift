@@ -19,7 +19,15 @@ internal typealias DrawerImageTypeAlias = DrawerImageSwiftGen.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum SwiftGenDrawers {
+  internal static let basket = DrawerImageSwiftGen(name: "basket")
+  internal static let blackCard = DrawerImageSwiftGen(name: "blackCard")
+  internal static let dragonball = DrawerImageSwiftGen(name: "dragonball")
+  internal static let math = DrawerImageSwiftGen(name: "math")
+  internal static let mathEmpty = DrawerImageSwiftGen(name: "mathEmpty")
+  internal static let representativeEmpty = DrawerImageSwiftGen(name: "representativeEmpty")
+  internal static let rightAward = DrawerImageSwiftGen(name: "rightAward")
   internal static let sampleDrawer = DrawerImageSwiftGen(name: "sampleDrawer")
+  internal static let stationery = DrawerImageSwiftGen(name: "stationery")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

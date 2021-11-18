@@ -9,18 +9,27 @@ import UIKit
 
 /// 설정화면을 보여주는 ViewController다.
 final class SettingViewController: UIViewController {
+    var coordinator: SettingCoordinator?
+    
     /// 설정화면의 tableView cell에 들어가는 값을 추상화한 enum 타입이다.
     private enum TableViewCellType: Int, CaseIterable {
-        case darkMode = 0
-        case editCategory = 1
-        case trash = 2
-        case login = 3
-        case addDummyData = 4
-        case deleteDummyData = 5
-        case alert1 = 6
-        case alert2 = 7
-        case alert3 = 8
-        case resetUserInfor = 9
+        case darkMode
+        case editCategory
+        case trash
+        case card
+        case login
+        case addDummyData
+        case deleteDummyData
+        case alert1
+        case alert2
+        case alert3
+        case resetUserInfor
+        case post
+        case clearDrawer
+        case blackCard
+        case dragonball
+        case basket
+        case rightAward
         
         var title: String {
             switch self {
@@ -28,6 +37,8 @@ final class SettingViewController: UIViewController {
                 return "다크모드"
             case .editCategory:
                 return "카테고리 수정"
+            case .card:
+                return "포토카드"
             case .trash:
                 return "휴지통"
             case .login:
@@ -44,10 +55,21 @@ final class SettingViewController: UIViewController {
                 return "제목과 텍스트필드, 두개의 버튼 있는 Alert"
             case .resetUserInfor:
                 return "유저정보 초기화 ( 앱 종료됩니다 )"
+            case .post:
+                return "게시물 화면"
+            case .clearDrawer:
+                return "진열장 아이템 초기화"
+            case .blackCard:
+                return "진열장 - 블랙카드 획득"
+            case .dragonball:
+                return "진열장 - 드래곤볼 획득"
+            case .basket:
+                return "진열장 - 장바구니 획득"
+            case .rightAward:
+                return "진열장 - 인의예지상 획득"
             }
         }
     }
-    var coordinator: SettingCoordinator?
     
     private let topBorderLineView: UIView = {
         let view: UIView = UIView()
@@ -75,6 +97,7 @@ final class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDarkMode()
         setupTableView()
         setupNavigationBar()
         setupBackgroundColor()
@@ -115,7 +138,7 @@ final class SettingViewController: UIViewController {
         navigationItem.titleView = logoView
         
         let backButton: UIButton = UIButton()
-        backButton.setImage(SwiftGenIcons.longArrowR.image, for: .normal)
+        backButton.setImage(SwiftGenIcons.longArrowR.image.withRenderingMode(.alwaysTemplate), for: .normal)
         backButton.tintColor = SwiftGenColors.primaryBlack.color
         backButton.rx.tap
             .bind { [weak self] in
@@ -165,10 +188,11 @@ extension SettingViewController: UITableViewDataSource {
                             return
                         }
                         self?.userInformationViewModel.updateUserInformation(userInformation)
+                        self?.setDarkMode()
                     }
                     .disposed(by: cell.disposeBag)
                 
-            case .editCategory, .trash, .login, .addDummyData, .deleteDummyData, .alert1, .alert2, .alert3, .resetUserInfor:
+            case .editCategory, .trash, .card, .login, .addDummyData, .deleteDummyData, .alert1, .alert2, .alert3, .resetUserInfor, .post, .clearDrawer, .blackCard, .basket, .rightAward, .dragonball:
                 cell.changeViewType(labelType: .withBody1,
                                     buttonType: .withChevronRight,
                                     borderLineHeight: .with05Height,
@@ -182,6 +206,9 @@ extension SettingViewController: UITableViewDataSource {
 extension SettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cellType: TableViewCellType = TableViewCellType(rawValue: indexPath.row) {
+            let drawerRepo = DrawerCoreDataRepository(coreDataStack: CoreDataStack.shared,
+                                                      defaultDrawers: DefaultDrawerModel().drawers)
+            
             switch cellType {
             case .darkMode:
                 return
@@ -189,6 +216,11 @@ extension SettingViewController: UITableViewDelegate {
                 return
             case .trash:
                 coordinator?.showTrashViewController()
+            case .card:
+                let card = PhotoCardViewController(postEntity: PostEntity(),
+                                                   selectImage: SwiftGenIcons.group.image)
+                card.coordinator = coordinator
+                navigationController?.pushViewController(card, animated: true)
             case .login:
                 coordinator?.showLoginViewController()
             case .addDummyData:
@@ -204,8 +236,28 @@ extension SettingViewController: UITableViewDelegate {
             case .resetUserInfor:
                 UserInformationiCloudViewModel().resetUserInformation()
                 exit(1)
+            case .post:
+                coordinator?.showPostViewController()
+            case .clearDrawer:
+                drawerRepo.deleteAllDrawers()
+                coordinator?.navigationController.viewControllers.forEach {
+                    guard let homeViewController = $0 as? HomeViewController else { return }
+                    homeViewController.fetchRepresentativeDrawer()
+                    
+                }
+            case .blackCard:
+                drawerRepo.updateVIP(by: 1_000_000)
+            case .dragonball:
+                drawerRepo.updateDragonBall(rating: 1)
+                drawerRepo.updateDragonBall(rating: 2)
+                drawerRepo.updateDragonBall(rating: 3)
+                drawerRepo.updateDragonBall(rating: 4)
+                drawerRepo.updateDragonBall(rating: 5)
+            case .basket:
+                drawerRepo.updateBasket()
+            case .rightAward:
+                drawerRepo.updateRightAward()
             }
-            
         }
     }
     func showAlert1() {

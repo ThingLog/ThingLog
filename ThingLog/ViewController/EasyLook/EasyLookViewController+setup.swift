@@ -75,7 +75,7 @@ extension EasyLookViewController {
         navigationItem.leftBarButtonItem = logoBarButtonItem
         
         let searchButton: UIButton = UIButton()
-        searchButton.setImage(SwiftGenIcons.search.image, for: .normal)
+        searchButton.setImage(SwiftGenIcons.search.image.withRenderingMode(.alwaysTemplate), for: .normal)
         searchButton.tintColor = SwiftGenColors.primaryBlack.color
         searchButton.rx.tap.bind { [weak self] in
             self?.coordinator?.showSearchViewController()
@@ -83,7 +83,7 @@ extension EasyLookViewController {
         .disposed(by: disposeBag)
         
         let settingButton: UIButton = UIButton()
-        settingButton.setImage(SwiftGenIcons.system.image, for: .normal)
+        settingButton.setImage(SwiftGenIcons.system.image.withRenderingMode(.alwaysTemplate), for: .normal)
         settingButton.tintColor = SwiftGenColors.primaryBlack.color
         settingButton.rx.tap
             .bind { [weak self] in

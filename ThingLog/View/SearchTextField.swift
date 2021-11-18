@@ -69,7 +69,8 @@ final class SearchTextField: UIView {
         textField.textColor = SwiftGenColors.primaryBlack.color
         
         let clearButton: UIButton = UIButton(type: .custom)
-        clearButton.setImage(SwiftGenIcons.close.image, for: .normal)
+        clearButton.setImage(SwiftGenIcons.close.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        clearButton.tintColor = SwiftGenColors.primaryBlack.color
         clearButton.contentMode = .scaleAspectFit
         textField.rightView = clearButton
         textField.rightViewMode = .never

@@ -35,7 +35,13 @@ protocol DrawerRepositoryable {
     func updateVIP(by money: Int)
     
     /// 대표 진열장 물건을 업데이트 합니다. `SelectingDrawerViewController`의 `대표설정`버튼 들어가는 로직에 추가한다.
-    func updateRepresentative(drawer: Drawerable)
+    func updateRepresentative(drawer: Drawerable?)
+    
+    /// 진열장 아이템을 새로 획득한 경우에 이벤트를 가져옵니다.
+    func isNewEvent(_ completion: @escaping ((Bool) -> Void))
+    
+    /// 새로 획득한 진열장 아이템의 이벤트를 확인처리합니다.
+    func completeNewEvent()
 }
 
 /// `CoreData`를 이용하여 `Drawer`를 가져오고 업데이트 하는 객체다.
@@ -86,8 +92,7 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
     // MARK: - Update
     func updateRightAward() {
         // 포토카드로 선물 인사 보낸경우
-        // TODO: - ⚠️ 이름 변경 ex) SwiftGenDrawers.dragonBall.name
-        acquireDrawer(by: "rightAward")
+        acquireDrawer(by: SwiftGenDrawerList.rightAward.imageName)
     }
     
     func updateMath() {
@@ -97,8 +102,7 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
         let loginCount: Int64 = NSUbiquitousKeyValueStore.default.longLong(forKey: KeyStoreName.userLoginCount.name)
         
         if loginCount >= 3 {
-            // TODO: - ⚠️ 이름 변경 ex) SwiftGenDrawers.dragonBall.name
-            acquireDrawer(by: "math")
+            acquireDrawer(by: SwiftGenDrawerList.math.imageName)
         }
     }
     
@@ -109,21 +113,30 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
         let loginCount: Int64 = NSUbiquitousKeyValueStore.default.longLong(forKey: KeyStoreName.userLoginCount.name)
         
         if loginCount >= 30 {
-            // TODO: - ⚠️ 이름 변경 ex) SwiftGenDrawers.dragonBall.name
-            acquireDrawer(by: "stationery")
+            acquireDrawer(by: SwiftGenDrawerList.stationery.imageName)
         }
     }
     
-    func updateRepresentative(drawer: Drawerable) {
-        NSUbiquitousKeyValueStore.default.set(drawer.imageName, forKey: KeyStoreName.representativeDrawer.name)
+    func updateRepresentative(drawer: Drawerable?) {
+        if let drawer: Drawerable = drawer {
+            NSUbiquitousKeyValueStore.default.set(drawer.imageName, forKey: KeyStoreName.representativeDrawer.name)
+        } else {
+            NSUbiquitousKeyValueStore.default.removeObject(forKey: KeyStoreName.representativeDrawer.name)
+        }
+        
+        NSUbiquitousKeyValueStore.default.synchronize()
     }
     
     func updateBasket() {
-        // TODO: - ⚠️ 이름 변경 ex) SwiftGenDrawers.dragonBall.name
-        acquireDrawer(by: "basket")
+        acquireDrawer(by: SwiftGenDrawerList.basket.imageName)
     }
     
     func updateDragonBall(rating: Int16) {
+        // 만족도 0은 만족도 미선택이므로, return 한다.
+        if rating == 0 {
+            return
+        }
+        
         // 만족도 1-5개 기록 모으기
         // 배열을 이용하여 중복값이 없는 경우에만 추가하여, 판별한다.
         var dragonBallArray: [Int16] = NSUbiquitousKeyValueStore.default.array(forKey: KeyStoreName.dragonBallArray.name) as? [Int16] ?? []
@@ -134,15 +147,46 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
         NSUbiquitousKeyValueStore.default.synchronize()
         
         if dragonBallArray.count == 5 {
-            // TODO: - ⚠️ 이름 변경 ex) SwiftGenDrawers.dragonBall.name
-            acquireDrawer(by: "dragonBall")
+            acquireDrawer(by: SwiftGenDrawerList.dragonball.imageName)
         }
     }
     
     func updateVIP(by money: Int) {
         if money >= 1_000_000 {
-            // TODO: - ⚠️ 이름 변경 ex) SwiftGenDrawers.dragonBall.name
-            acquireDrawer(by: "vip")
+            acquireDrawer(by: SwiftGenDrawerList.blackCard.imageName)
+        }
+    }
+    
+    func isNewEvent(_ completion: @escaping ((Bool) -> Void)) {
+        let isNewEvent: Bool = NSUbiquitousKeyValueStore.default.bool(forKey: KeyStoreName.isNewEvent.name)
+        completion(isNewEvent)
+    }
+    
+    func completeNewEvent() {
+        // 획득이벤트를 확인처리하고,
+        NSUbiquitousKeyValueStore.default.set(false, forKey: KeyStoreName.isNewEvent.name)
+        NSUbiquitousKeyValueStore.default.synchronize()
+
+        // 진열장아이템들을 모두 확인처리한다.
+        fetchDrawers { drawers in
+            guard let drawers = drawers else { return }
+            drawers.forEach {
+                let request: NSFetchRequest<DrawerEntity> = DrawerEntity.fetchRequest()
+                request.predicate = NSPredicate(format: "imageName == %@", $0.imageName ?? "")
+                do {
+                    if let drawer: DrawerEntity = try self.coreDataStack.mainContext.fetch(request).first {
+                        drawer.isNewDrawer = false
+                        // 새로운 진열장 아이템을 획득 했다 이벤트 발생.
+                        NSUbiquitousKeyValueStore.default.set(false, forKey: KeyStoreName.isNewEvent.name)
+                        NSUbiquitousKeyValueStore.default.synchronize()
+                        try self.coreDataStack.mainContext.save()
+                    } else {
+                        return
+                    }
+                } catch {
+                    return
+                }
+            }
         }
     }
 }
@@ -156,11 +200,14 @@ extension DrawerCoreDataRepository {
             do {
                 let drawers: [DrawerEntity] = try coreDataStack.mainContext.fetch(request)
                 var drawerEntity: DrawerEntity
+                
                 if let drawer: DrawerEntity = drawers.first {
                     drawerEntity = drawer
                 } else {
+                    // 새로 만드는 경우에 초기화해야하는 부분.
                     drawerEntity = DrawerEntity(context: coreDataStack.mainContext)
                     drawerEntity.isAcquired = $0.isAcquired
+                    drawerEntity.isNewDrawer = $0.isNewDrawer
                 }
                 
                 drawerEntity.identifier = UUID()
@@ -168,6 +215,7 @@ extension DrawerCoreDataRepository {
                 drawerEntity.title = $0.title
                 drawerEntity.subTitle = $0.subTitle
                 drawerEntity.information = $0.information
+                
                 try coreDataStack.mainContext.save()
             } catch {
                 return
@@ -181,7 +229,12 @@ extension DrawerCoreDataRepository {
         request.predicate = NSPredicate(format: "imageName == %@", imageName)
         do {
             if let drawer: DrawerEntity = try coreDataStack.mainContext.fetch(request).first {
+                if drawer.isAcquired { return }
                 drawer.isAcquired = true
+                drawer.isNewDrawer = true
+                // 새로운 진열장 아이템을 획득 했다 이벤트 발생.
+                NSUbiquitousKeyValueStore.default.set(true, forKey: KeyStoreName.isNewEvent.name)
+                NSUbiquitousKeyValueStore.default.synchronize()
                 try coreDataStack.mainContext.save()
             } else {
                 return
@@ -212,11 +265,17 @@ extension DrawerCoreDataRepository {
     }
     
     func deleteAllDrawers() {
+        NSUbiquitousKeyValueStore.default.removeObject(forKey: KeyStoreName.representativeDrawer.name)
+        NSUbiquitousKeyValueStore.default.removeObject(forKey: KeyStoreName.dragonBallArray.name)
+        NSUbiquitousKeyValueStore.default.set(false, forKey: KeyStoreName.isNewEvent.name)
+        NSUbiquitousKeyValueStore.default.synchronize()
+        
         let request: NSFetchRequest<DrawerEntity> = DrawerEntity.fetchRequest()
         do {
             let drawer: [DrawerEntity] = try coreDataStack.mainContext.fetch(request)
             drawer.forEach {
                 coreDataStack.mainContext.delete($0)
+                self.setupDrawers()
             }
             try coreDataStack.mainContext.save()
         } catch {

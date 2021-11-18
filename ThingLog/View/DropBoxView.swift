@@ -16,7 +16,8 @@ final class DropBoxView: UIView {
         let button: InsetButton = InsetButton()
         button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.body3
-        button.setImage(SwiftGenIcons.dropBoxArrow1.image, for: .normal)
+        button.setImage(SwiftGenIcons.dropBoxArrow1.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = SwiftGenColors.primaryBlack.color
         button.semanticContentAttribute = .forceRightToLeft
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(clickButton), for: .touchUpInside)
@@ -96,7 +97,7 @@ final class DropBoxView: UIView {
         clipsToBounds = true
         addSubview(titleButton)
         superView?.addSubview(tableView)
-        bringSubviewToFront(tableView)
+
         tableViewHeightConstant = tableView.heightAnchor.constraint(equalToConstant: 0)
         tableViewHeightConstant?.isActive = true
         NSLayoutConstraint.activate([
@@ -116,8 +117,13 @@ final class DropBoxView: UIView {
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.topAnchor.constraint(equalTo: bottomAnchor, constant: 1)
         ])
+        tableView.layer.cornerRadius = 5
+        tableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        tableView.clipsToBounds = true
+        
         superView?.layoutIfNeeded()
         tableView.selectRow(at: selectedIndexPath, animated: false, scrollPosition: .top)
+        
     }
 }
 

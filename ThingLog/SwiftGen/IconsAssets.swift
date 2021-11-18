@@ -24,11 +24,14 @@ internal enum SwiftGenIcons {
   internal static let displayCaseNoneM = IconImageSwiftGen(name: "Display case_none(m)")
   internal static let displayCaseNoneS = IconImageSwiftGen(name: "Display case_none(s)")
   internal static let group = IconImageSwiftGen(name: "Group")
+  internal static let new = IconImageSwiftGen(name: "NEW")
   internal static let satisfactionFill = IconImageSwiftGen(name: "Satisfaction_fill")
   internal static let satisfactionStroke = IconImageSwiftGen(name: "Satisfaction_stroke")
+  internal static let thingLog = IconImageSwiftGen(name: "ThingLog")
   internal static let arrowDropDown = IconImageSwiftGen(name: "arrow_drop_down")
   internal static let buyVer1 = IconImageSwiftGen(name: "buy.ver1")
   internal static let camera = IconImageSwiftGen(name: "camera")
+  internal static let cardLogo = IconImageSwiftGen(name: "cardLogo")
   internal static let checkBoxM = IconImageSwiftGen(name: "check box(m)")
   internal static let checkBoxS = IconImageSwiftGen(name: "check box(s)")
   internal static let check = IconImageSwiftGen(name: "check")
@@ -58,6 +61,7 @@ internal enum SwiftGenIcons {
   internal static let topButton = IconImageSwiftGen(name: "top Button")
   internal static let wishVer1 = IconImageSwiftGen(name: "wish.ver1")
   internal static let writing = IconImageSwiftGen(name: "writing")
+  internal static let writingHole = IconImageSwiftGen(name: "writing_ hole")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

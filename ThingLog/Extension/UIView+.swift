@@ -45,4 +45,18 @@ extension UIView {
         gradient.name = "customGradient"
         layer.addSublayer(gradient)
     }
+
+    func addSubviews(_ subviews: UIView...) {
+        subviews.forEach(addSubview)
+    }
+    
+    /// top, bottom, leading, trailing을 그대로 view와 일치시키도록 constraint를 지정한다.
+    func setAllConstraintTo(_ view: UIView) {
+        NSLayoutConstraint.activate([
+            self.topAnchor.constraint(equalTo: view.topAnchor),
+            self.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            self.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            self.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
 }

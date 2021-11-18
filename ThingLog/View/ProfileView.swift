@@ -4,7 +4,7 @@
 //
 //  Created by hyunsu on 2021/09/21.
 //
-
+import Lottie
 import UIKit
 
 /// 홈화면 상단에 유저 `닉네임`, 유저 `한 줄 소개` 및 `벳지` 이미지를 보여주는 뷰다. [이미지](https://www.notion.so/ProfileView-2ec81d3153944a198ed01320a070cf63)
@@ -16,7 +16,8 @@ final class ProfileView: UIView {
         button.setTitle("분더카머", for: .normal)
         button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.headline3
-        button.setImage(SwiftGenIcons.edit.image, for: .normal)
+        button.setImage(SwiftGenIcons.edit.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = SwiftGenColors.primaryBlack.color
         button.semanticContentAttribute = .forceRightToLeft
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)
@@ -46,9 +47,27 @@ final class ProfileView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.setContentHuggingPriority(.required, for: .horizontal)
         imageView.setContentHuggingPriority(.required, for: .vertical)
-        imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
-        imageView.backgroundColor = SwiftGenColors.gray6.color
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        imageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = SwiftGenColors.primaryBlack.color
         return imageView
+    }()
+    
+    lazy var newBadgeAnimationView: AnimationView = {
+        let view: AnimationView = self.traitCollection.userInterfaceStyle == .dark ? AnimationView(name: AnimationJson.drawerNewDark.name) : AnimationView(name: AnimationJson.drawerNew.name)
+        view.animationSpeed = 1.0
+        view.loopMode = .loop
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var badgeView: UIView = {
+        let view: UIView = UIView()
+        view.addSubviews(userBadgeImageView, newBadgeAnimationView)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let emptyLeadingView: UIView = {
@@ -82,7 +101,7 @@ final class ProfileView: UIView {
     private lazy var horizontalStackView: UIStackView = {
         let stackView: UIStackView = UIStackView(arrangedSubviews: [ emptyLeadingView,
                                                                      verticalStackView,
-                                                                     userBadgeImageView,
+                                                                     badgeView,
                                                                      emptyTrailingView ])
         stackView.axis = .horizontal
         stackView.alignment = .center
@@ -91,16 +110,18 @@ final class ProfileView: UIView {
     }()
     
     private lazy var totalView: UIStackView = {
-        let stackView: UIStackView = UIStackView(arrangedSubviews: [horizontalStackView, emptyVerticalView])
+        let stackView: UIStackView = UIStackView(arrangedSubviews: [horizontalStackView,
+                                                                    emptyVerticalView])
         stackView.axis = .vertical
         stackView.spacing = 0
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
-    private let imageHeight: CGFloat = 44
-    private let emptyWidth: CGFloat = 44
-    private let emptyHeight: CGFloat = 16
+    private let imageHeight: CGFloat = 50
+    private let badgeViewHeight: CGFloat = 80
+    private let emptyLeadingWidth: CGFloat = 20
+    private let emptyHeight: CGFloat = 11
     private let paddingViewHeight: CGFloat = 4
     
     // 배지이미지를 저장하기 위한 프로퍼티
@@ -110,6 +131,8 @@ final class ProfileView: UIView {
         super.init(frame: frame)
         setupBackgroundColor()
         setupView()
+        setupBadgeView()
+        setupDarkModeForAnimation()
     }
     
     required init?(coder: NSCoder) {
@@ -117,15 +140,14 @@ final class ProfileView: UIView {
         setupView()
     }
     
+    // MARK: - SetUp
     func setupBackgroundColor() {
         backgroundColor = SwiftGenColors.primaryBackground.color
     }
     
     private func setupView() {
-        
         addSubview(totalView)
-        
-        userBadgeImageView.layer.cornerRadius = imageHeight / 2
+    
         let emptyVerticalConstraint: NSLayoutConstraint = emptyVerticalView.heightAnchor.constraint(equalToConstant: emptyHeight)
         emptyVerticalConstraint.isActive = true
         emptyVerticalConstraint.priority = .defaultHigh
@@ -136,17 +158,62 @@ final class ProfileView: UIView {
         let userBadgeImageViewHeightConstraint: NSLayoutConstraint = userBadgeImageView.heightAnchor.constraint(equalToConstant: imageHeight)
         userBadgeImageViewHeightConstraint.isActive = true
         userBadgeImageViewHeightConstraint.priority = .defaultHigh
+        
         NSLayoutConstraint.activate([
             userBadgeImageView.widthAnchor.constraint(equalTo: userBadgeImageView.heightAnchor),
             
-            emptyLeadingView.widthAnchor.constraint(equalToConstant: emptyWidth),
-            emptyTrailingView.widthAnchor.constraint(equalToConstant: emptyWidth),
+            emptyLeadingView.widthAnchor.constraint(equalToConstant: emptyLeadingWidth),
+            emptyTrailingView.widthAnchor.constraint(equalToConstant: 5),
             
             totalView.leadingAnchor.constraint(equalTo: leadingAnchor),
             totalView.trailingAnchor.constraint(equalTo: trailingAnchor),
             totalView.topAnchor.constraint(equalTo: topAnchor),
             totalView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+    
+    func setupBadgeView() {
+        let newBadgeAnimationViewHeightConstraint: NSLayoutConstraint = newBadgeAnimationView.heightAnchor.constraint(equalToConstant: badgeViewHeight)
+        newBadgeAnimationViewHeightConstraint.isActive = true
+        newBadgeAnimationViewHeightConstraint.priority = .defaultHigh
+        
+        let badgeViewHeightConstraint: NSLayoutConstraint = badgeView.heightAnchor.constraint(equalToConstant: badgeViewHeight)
+        badgeViewHeightConstraint.isActive = true
+        badgeViewHeightConstraint.priority = .defaultHigh
+        
+        NSLayoutConstraint.activate([
+            userBadgeImageView.centerXAnchor.constraint(equalTo: badgeView.centerXAnchor),
+            userBadgeImageView.centerYAnchor.constraint(equalTo: badgeView.centerYAnchor),
+            
+            newBadgeAnimationView.centerXAnchor.constraint(equalTo: badgeView.centerXAnchor),
+            newBadgeAnimationView.centerYAnchor.constraint(equalTo: badgeView.centerYAnchor),
+            
+            newBadgeAnimationView.heightAnchor.constraint(equalToConstant: badgeViewHeight),
+            newBadgeAnimationView.widthAnchor.constraint(equalTo: newBadgeAnimationView.widthAnchor),
+            
+            badgeView.widthAnchor.constraint(equalTo: newBadgeAnimationView.heightAnchor)
+        ])
+    }
+    
+    /// 다크모드 설정 여부에 따라 애니메이션 뷰의 색을 변경해준다. AnimationView는 다른 아이콘과 다르게 다크모드 라이트모드에 대응하는 쌍이 없기 때문에, 따로 로직을 추가했다. 
+    func setupDarkModeForAnimation() {
+        let userInformationViewModel: UserInformationViewModelable = UserInformationiCloudViewModel()
+        userInformationViewModel.fetchUserInformation { userInfor in
+            if let userInfor: UserInformationable = userInfor {
+                let darkMode: Bool = userInfor.isAumatedDarkMode
+                if darkMode {
+                    self.newBadgeAnimationView.animation = Animation.named(AnimationJson.drawerNewDark.name)
+                } else {
+                    self.newBadgeAnimationView.animation = Animation.named(AnimationJson.drawerNew.name)
+                }
+            } else {
+                self.newBadgeAnimationView.animation = Animation.named(self.traitCollection.userInterfaceStyle == .dark ? AnimationJson.drawerNewDark.name : AnimationJson.drawerNew.name)
+            }
+            if self.newBadgeAnimationView.isHidden { return }
+            DispatchQueue.main.async {
+                self.newBadgeAnimationView.play()
+            }
+        }
     }
 }
 
@@ -161,7 +228,6 @@ extension ProfileView {
     /// 배지 이미지 뷰를 숨기거나 나타내기 위한 메소드다.
     /// - Parameter bool: 숨기고자 하는 경우는 true, 그렇지 않다면 false를 넣는다.
     func hideBadgeView(_ bool: Bool) {
-        userBadgeImageView.backgroundColor = bool ? .clear : SwiftGenColors.gray6.color
         userBadgeImageView.image = bool ? nil : badgeImage
     }
 }

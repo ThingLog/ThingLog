@@ -5,10 +5,19 @@
 //  Created by hyunsu on 2021/10/04.
 //
 import CoreData
+import RxSwift
 import UIKit
+
+/// SearchResultsViewController에서 발생하는 이벤트를 듣도록 정의한 Protocol이다. ( 일반적인 Delegate 패턴 )
+protocol SearchResultsViewControllerListener: AnyObject {
+    func searchResultsDidSelectCell(viewModel: PostViewModel)
+}
 
 /// 검색홈에서 검색결과에 CollectionView형태로 보여주는 Controller다.
 class SearchResultsViewController: UIViewController {
+    weak var listener: SearchResultsViewControllerListener?
+    
+    // MARK: - View
     let collectionView: UICollectionView = {
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: ResultCollectionSection.resultsCollectionViewLayout())
         collectionView.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier)
@@ -79,6 +88,7 @@ class SearchResultsViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     /// 모두보기 버튼 탭시 나타날 여부를 결정한다.
@@ -130,7 +140,9 @@ extension SearchResultsViewController: UICollectionViewDataSource, UICollectionV
             // 그외 ( 카테고리, 물건이름, 선물받은, 거래처/판매처 )
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsCollectionViewCell else { return UICollectionViewCell() }
-            cell.backgroundColor = SwiftGenColors.gray5.color
+            if let post: PostEntity = viewModel.fetchedResultsControllers[indexPath.section].fetchedObjects?[indexPath.item] {
+                cell.updateView(post)
+            }
             return cell
         }
     }
@@ -176,11 +188,22 @@ extension SearchResultsViewController: UICollectionViewDataSource, UICollectionV
                     // 해당 controller의 filterView를 업데이트 한다.
                     self?.selectedCollectionViewController?.resultsFilterView.updateTitleLabel(by: headerTitle)
                     self?.selectedCollectionViewController?.resultsFilterView.updateResultTotalLabel(by: "\(postCount)건")
+                    
+                    // 추가적으로, 셀을 선택했을 때 이벤트를 옵저빙하여, PostViewController로 전환하도록 한다.
+                    self?.selectedCollectionViewController?.didSelectPostViewModelSubject.bind { [weak self] postViewModel in
+                        self?.listener?.searchResultsDidSelectCell(viewModel: postViewModel)
+                    }.disposed(by: self?.selectedCollectionViewController?.disposeBag ?? DisposeBag())
                 }
                 .disposed(by: headerView.disposeBag)
             return headerView
         } else {
             return UICollectionReusableView()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let postViewModel: PostViewModel = PostViewModel(fetchedResultsController: viewModel.fetchedResultsControllers[indexPath.section],
+                                                         startIndexPath: indexPath)
+        listener?.searchResultsDidSelectCell(viewModel: postViewModel)
     }
 }

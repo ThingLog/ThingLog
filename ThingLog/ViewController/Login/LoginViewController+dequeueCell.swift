@@ -25,7 +25,7 @@ extension LoginViewController {
         cell.changeButtonLayerBorderWidth(0.5)
         cell.changeColor(borderColor: SwiftGenColors.gray3.color,
                          backgroundColor: SwiftGenColors.primaryBackground.color,
-                         textColor: SwiftGenColors.black.color)
+                         textColor: SwiftGenColors.primaryBlack.color)
         cell.updateView(title: item, cornerRadius: 30 / 2)
         return cell
     }

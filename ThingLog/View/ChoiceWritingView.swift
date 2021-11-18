@@ -85,7 +85,7 @@ extension ChoiceWritingView {
         choiceView.arrangedSubviews.forEach {
             if let button: WriteTypeButton = $0 as? WriteTypeButton {
                 button.setIcon(dimmed ? true : false)
-                button.setColor(dimmed ? SwiftGenColors.white.color : SwiftGenColors.black.color)
+                button.setColor(dimmed ? SwiftGenColors.white.color : SwiftGenColors.primaryBlack.color)
             }
         }
     }

@@ -63,7 +63,8 @@ final class LeftLabelRightButtonTableCell: UITableViewCell {
     
     var rightButton: UIButton = {
         let button: UIButton = UIButton()
-        button.setImage(SwiftGenIcons.close.image, for: .normal)
+        button.setImage(SwiftGenIcons.close.image.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = SwiftGenColors.primaryBlack.color
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setContentCompressionResistancePriority(.required, for: .horizontal)
         button.setContentHuggingPriority(.required, for: .horizontal)
@@ -219,11 +220,15 @@ extension LeftLabelRightButtonTableCell {
             rightButton.setImage(image, for: .normal)
             rightButton.tintColor = SwiftGenColors.primaryBlack.color
             rightButton.isUserInteractionEnabled = false
+            rightButton.isHidden = false
+            rightToggleButton.isHidden = true
         case .withClearButton:
             let image: UIImage? = SwiftGenIcons.close.image.withRenderingMode(.alwaysTemplate)
             rightButton.setImage(image, for: .normal)
             rightButton.tintColor = SwiftGenColors.primaryBlack.color
             rightButton.isUserInteractionEnabled = true
+            rightButton.isHidden = false
+            rightToggleButton.isHidden = true
         case .withToggleButton:
             rightButton.isHidden = true
             rightToggleButton.isHidden = false

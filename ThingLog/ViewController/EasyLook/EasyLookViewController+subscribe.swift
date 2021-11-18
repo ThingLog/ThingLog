@@ -21,6 +21,11 @@ extension EasyLookViewController {
                 let fetchedCount: Int? = self.viewModel.fetchResultController?.fetchedObjects?.count
                 self.updateResultsCountView(fetchedCount: fetchedCount)
                 self.contentsViewController.collectionView.reloadData()
+                
+                // 추가적으로, 셀을 선택했을 때 이벤트를 옵저빙하여, PostViewController로 전환하도록 한다.
+                self.contentsViewController.didSelectPostViewModelSubject.bind { [weak self] postViewModel in
+                    self?.coordinator?.showPostViewController(with: postViewModel)
+                }.disposed(by: self.contentsViewController.disposeBag)
             case .failure(_):
                 return
             }
@@ -107,7 +112,9 @@ extension EasyLookViewController {
             })
             .disposed(by: disposeBag)
     }
-    
+}
+
+extension EasyLookViewController {
     /// 카테고리의 서브카테고리 뷰의 높이를 변경하는 메서드다
     private func hideHorizontalCollectionView(_ bool: Bool) {
         let subCategoryCount: Int = categoryRepo.fetchedResultsController.fetchedObjects?.count ?? 0
@@ -139,6 +146,6 @@ extension EasyLookViewController {
     /// CategoryView의 하단에 fetch된 Post개시물의 개수를 업데이트하는 메서드다
     /// - Parameter fetchedCount: fetch된 Post개시물의 개수를 주입한다.
     private func updateResultsCountView(fetchedCount: Int?) {
-        self.easyLookTopView.resultsWithDropBoxView.updateResultTotalLabel(by: "총" + String(fetchedCount ?? 0) + "건")
+        self.easyLookTopView.resultsWithDropBoxView.updateResultTotalLabel(by: "총 " + String(fetchedCount ?? 0) + "건")
     }
 }

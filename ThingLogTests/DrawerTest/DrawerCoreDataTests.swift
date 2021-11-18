@@ -236,7 +236,7 @@ class DrawerCoreDataTests: XCTestCase {
             repo.updateVIP(by: 1_000_000)
             repo.fetchDrawers{ drawers  in
                 if let drawers = drawers {
-                    if let index = drawers.firstIndex(where: {$0.imageName == "vip"}) {
+                    if let index = drawers.firstIndex(where: {$0.imageName == "blackCard"}) {
                         XCTAssert(drawers[index].isAcquired == true)
                     } else {
                         XCTFail()
@@ -255,7 +255,7 @@ class DrawerCoreDataTests: XCTestCase {
             repo.updateDragonBall(rating: 1)
             repo.fetchDrawers{ drawers  in
                 if let drawers = drawers {
-                    if let index = drawers.firstIndex(where: {$0.imageName == "dragonBall"}) {
+                    if let index = drawers.firstIndex(where: {$0.imageName == "dragonball"}) {
                         XCTAssert(drawers[index].isAcquired == false)
                     } else {
                         XCTFail()
@@ -277,7 +277,7 @@ class DrawerCoreDataTests: XCTestCase {
             
             repo.fetchDrawers{ drawers  in
                 if let drawers = drawers {
-                    if let index = drawers.firstIndex(where: {$0.imageName == "dragonBall"}) {
+                    if let index = drawers.firstIndex(where: {$0.imageName == "dragonball"}) {
                         XCTAssert(drawers[index].isAcquired == true)
                     } else {
                         XCTFail()
@@ -320,37 +320,43 @@ extension DrawerCoreDataTests {
                        information: "집합 부분만 너덜거리는 수학의 정석. 작심 3일 하지 말고 끝까지 기록해 보자는 응원의 선물!",
                        imageData: nil,
                        imageName: "math",
-                       isAcquired: false),
+                       isAcquired: false,
+                       isNewDrawer: false),
             MockDrawer(title: "인의예지상",
                        subTitle: "방문 3회 달성",
                        information: "집합 부분만 너덜거리는 수학의 정석. 작심 3일 하지 말고 끝까지 기록해 보자는 응원의 선물!",
                        imageData: nil,
                        imageName: "rightAward",
-                       isAcquired: false),
+                       isAcquired: false,
+                       isNewDrawer: false),
             MockDrawer(title: "문구세트",
                        subTitle: "방문 3회 달성",
                        information: "집합 부분만 너덜거리는 수학의 정석. 작심 3일 하지 말고 끝까지 기록해 보자는 응원의 선물!",
                        imageData: nil,
                        imageName: "stationery",
-                       isAcquired: false),
+                       isAcquired: false,
+                       isNewDrawer: false),
             MockDrawer(title: "장바구니",
                        subTitle: "방문 3회 달성",
                        information: "집합 부분만 너덜거리는 수학의 정석. 작심 3일 하지 말고 끝까지 기록해 보자는 응원의 선물!",
                        imageData: nil,
                        imageName: "basket",
-                       isAcquired: false),
+                       isAcquired: false,
+                       isNewDrawer: false),
             MockDrawer(title: "VIP",
                        subTitle: "방문 3회 달성",
                        information: "집합 부분만 너덜거리는 수학의 정석. 작심 3일 하지 말고 끝까지 기록해 보자는 응원의 선물!",
                        imageData: nil,
-                       imageName: "vip",
-                       isAcquired: false),
+                       imageName: "blackCard",
+                       isAcquired: false,
+                       isNewDrawer: false),
             MockDrawer(title: "드래곤볼",
                        subTitle: "방문 3회 달성",
                        information: "집합 부분만 너덜거리는 수학의 정석. 작심 3일 하지 말고 끝까지 기록해 보자는 응원의 선물!",
                        imageData: nil,
-                       imageName: "dragonBall",
-                       isAcquired: false)
+                       imageName: "dragonball",
+                       isAcquired: false,
+                       isNewDrawer: false)
         ]
     }
     
@@ -364,4 +370,5 @@ struct MockDrawer: Drawerable {
     var imageData: Data?
     var imageName: String?
     var isAcquired: Bool
+    var isNewDrawer: Bool
 }

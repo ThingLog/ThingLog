@@ -8,38 +8,23 @@
 import CoreData
 import Foundation
 
+/// 게시물리스트를 보여주기 위한 뷰모델을 정의한 Protocol이다
 protocol PostViewModelProtocol: AnyObject {
-    associatedtype Screen
-
     var fetchedResultsController: NSFetchedResultsController<PostEntity> { get set }
     /// 데이터 표시 시작 지점을 위한 프로퍼티
     var startIndexPath: IndexPath { get set }
-    /// 어느 화면에서 표시하는 지 알기 위한 프로퍼티
-    var screen: Screen { get set }
-
+    
     init(fetchedResultsController: NSFetchedResultsController<PostEntity>,
-         startIndexPath: IndexPath,
-         from screen: Screen)
+         startIndexPath: IndexPath)
 }
 
 final class PostViewModel: PostViewModelProtocol {
-    enum Screen {
-        case buy
-        case bought
-        case gift
-        case search
-        case trash
-    }
-
     var fetchedResultsController: NSFetchedResultsController<PostEntity>
     var startIndexPath: IndexPath
-    var screen: Screen
 
     init(fetchedResultsController: NSFetchedResultsController<PostEntity>,
-         startIndexPath: IndexPath,
-         from screen: Screen) {
+         startIndexPath: IndexPath) {
         self.fetchedResultsController = fetchedResultsController
         self.startIndexPath = startIndexPath
-        self.screen = screen
     }
 }

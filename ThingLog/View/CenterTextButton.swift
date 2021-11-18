@@ -8,7 +8,7 @@
 import UIKit
 
 /// 로그인, 글쓰기, 게시물>사고싶다 화면 하단에 들어가는 버튼
-/// ![이미지](https://www.notion.so/CenterTextButton-6be63ac5586348669a2559f0774eb4fb)
+/// [이미지](https://www.notion.so/CenterTextButton-6be63ac5586348669a2559f0774eb4fb)
 final class CenterTextButton: UIButton {
     private var buttonHeight: CGFloat
 

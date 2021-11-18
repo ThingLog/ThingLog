@@ -45,9 +45,12 @@ class BaseContentsCollectionViewController: UIViewController {
     }
     // CoreData가 외부에서 변경될 때 호출하는 클로저다
     var completionBlock: ((Int) -> Void)?
-    
+    /// 현재 스크롤하는 Y의 위치를 갖는 Subject다.
     var scrollOffsetYSubject: PublishSubject = PublishSubject<CGFloat>()
+    /// 셀을 터치하는 경우에 발생되는 `PostViewModel`을 갖는 Subject다.
+    var didSelectPostViewModelSubject: PublishSubject = PublishSubject<PostViewModel>()
     var disposeBag: DisposeBag = DisposeBag()
+    
     var recentScrollOffsetY: CGFloat = 0
     var originScrollContentsHeight: CGFloat = 0
     private var reusltFilterViewHeight: CGFloat = 44.0
@@ -194,5 +197,13 @@ extension BaseContentsCollectionViewController: UIScrollViewDelegate, UICollecti
             scrollOffsetYSubject.onNext(nextOffset)
         }
         recentScrollOffsetY = scrollView.contentOffset.y
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let controller: NSFetchedResultsController = fetchResultController else {
+            return
+        }
+        didSelectPostViewModelSubject.onNext(PostViewModel(fetchedResultsController: controller,
+                                                           startIndexPath: indexPath))
     }
 }

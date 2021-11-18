@@ -64,12 +64,7 @@ final class TrashViewController: UIViewController {
     
     // MARK: - Properties
     var fetchResultController: NSFetchedResultsController<PostEntity>?
-    //    {
-    //        didSet {
-    //            fetchResultController?.delegate = self
-    //        }
-    //    }
-    
+
     // CoreData가 외부에서 변경될 때 호출하는 클로저다.
     var completionBlock: ((Int) -> Void)?
     
@@ -160,7 +155,7 @@ final class TrashViewController: UIViewController {
         navigationItem.titleView = logoView
         
         let backButton: UIButton = UIButton()
-        backButton.setImage(SwiftGenIcons.longArrowR.image, for: .normal)
+        backButton.setImage(SwiftGenIcons.longArrowR.image.withRenderingMode(.alwaysTemplate), for: .normal)
         backButton.tintColor = SwiftGenColors.primaryBlack.color
         backButton.rx.tap
             .bind { [weak self] in

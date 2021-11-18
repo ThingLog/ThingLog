@@ -28,6 +28,7 @@ protocol PostRepositoryProtocol {
 final class PostRepository: PostRepositoryProtocol {
     private let coreDataStack: CoreDataStack
     private weak var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate?
+    private lazy var drawerRepository: DrawerRepositoryable = DrawerCoreDataRepository(coreDataStack: coreDataStack)
     
     /// 휴지통에서나, 홈화면 등에서 fetchResultsController를 사용하고자 할 때, 타입을 지정하여 간단하게 가져오기 위한 타입이다.
     enum RequestType {
@@ -68,7 +69,7 @@ final class PostRepository: PostRepositoryProtocol {
     /// - Returns: 데이터를 가져온 ResultsController를 반환한다.
     func fetchResultsController(by requestType: RequestType) -> NSFetchedResultsController<PostEntity> {
         let fetchRequest: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
-        let minDate: Date = Date().offset(-30, byAdding: .day) ?? Date()
+        let minDate: Date = Date().offset(-29, byAdding: .day) ?? Date()
         switch requestType {
         case .fromHome:
             fetchRequest.predicate = NSPredicate(format: "postType.isDelete == false AND postType.type == %d", pageType?.rawValue ?? 0)
@@ -103,6 +104,13 @@ final class PostRepository: PostRepositoryProtocol {
             do {
                 let post: PostEntity = newPost.toEntity(in: context)
                 try context.save()
+                
+                // 진열장 아이템 조건 ( VIP, 드래곤볼 )
+                if newPost.postType.type == .bought {
+                    self.drawerRepository.updateVIP(by: newPost.price)
+                }
+                self.drawerRepository.updateDragonBall(rating: newPost.rating.score.rawValue)
+                
                 completion(.success(true))
             } catch {
                 completion(.failure(.failedCreate))
@@ -122,6 +130,9 @@ final class PostRepository: PostRepositoryProtocol {
                 context.perform {
                     do {
                         postEntity.update(with: updatePost, in: context)
+                        
+                        // 진열장 아이템 조건 ( 드래곤볼 )
+                        self.drawerRepository.updateDragonBall(rating: updatePost.rating.score.rawValue)
                         try context.save()
                         completion(.success(true))
                     } catch {
@@ -242,7 +253,7 @@ final class PostRepository: PostRepositoryProtocol {
         let context: NSManagedObjectContext = coreDataStack.mainContext
         context.perform {
             do {
-                let minDate: Date = Date().offset(-30, byAdding: .day) ?? Date()
+                let minDate: Date = Date().offset(-29, byAdding: .day) ?? Date()
                 let request: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
                 request.predicate = NSPredicate(format: "postType.isDelete == true AND deleteDate <= %@", minDate as NSDate )
                 request.sortDescriptors = [NSSortDescriptor(key: "deleteDate", ascending: true)]

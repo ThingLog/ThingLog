@@ -15,8 +15,8 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = SwiftGenColors.white.color
+        setDarkMode()
+        view.backgroundColor = SwiftGenColors.primaryBackground.color
 
         setupNavigationBar()
         setupView()

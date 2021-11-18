@@ -99,7 +99,9 @@ final class SearchViewController: UIViewController {
     }
     
     private func setupSearchResultsViewContorller() {
+        searchResultsViewController.listener = self
         addChild(searchResultsViewController)
+        
         let searchResultsView: UIView = searchResultsViewController.view
         searchResultsView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -241,5 +243,11 @@ extension SearchViewController: SearchTextFieldDelegate {
 extension SearchViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         showSearchResultsViewController(false)
+    }
+}
+
+extension SearchViewController: SearchResultsViewControllerListener {
+    func searchResultsDidSelectCell(viewModel: PostViewModel) {
+        coordinator?.showPostViewController(with: viewModel)
     }
 }
