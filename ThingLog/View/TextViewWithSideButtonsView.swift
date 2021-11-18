@@ -59,9 +59,11 @@ final class TextViewWithSideButtonsView: UIView {
 
     // MARK: - Properties
     private let placeholder: String = "댓글로 경험을 추가하세요!"
+    private let textViewMaximumNumberOfLines: Int = 3
     private let leadingTrailingSpacing: CGFloat = 20.0
     private let topBottomSpacing: CGFloat = 12.0
     private let disposeBag: DisposeBag = DisposeBag()
+    private var textViewHeightConstraint: NSLayoutConstraint?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -89,6 +91,9 @@ final class TextViewWithSideButtonsView: UIView {
 
         addSubviews(topLineView, stackView)
 
+        textViewHeightConstraint = textView.heightAnchor.constraint(equalToConstant: UIFont.Pretendard.body1.lineHeight)
+        textViewHeightConstraint?.isActive = true
+
         NSLayoutConstraint.activate([
             topLineView.leadingAnchor.constraint(equalTo: leadingAnchor),
             topLineView.topAnchor.constraint(equalTo: topAnchor),
@@ -113,6 +118,7 @@ final class TextViewWithSideButtonsView: UIView {
     private func bindLeftButton() {
         leftButton.rx.tap
             .bind { [weak self] in
+                self?.textViewHeightConstraint?.constant = UIFont.Pretendard.body1.lineHeight
                 self?.setupPlaceholder()
                 self?.textView.resignFirstResponder()
             }.disposed(by: disposeBag)
@@ -149,5 +155,20 @@ extension TextViewWithSideButtonsView: UITextViewDelegate {
         if textView.text.isEmpty {
             setupPlaceholder()
         }
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        let lineHeight: CGFloat = textView.font?.lineHeight ?? 1
+        let linesCount: Int = Int(textView.contentSize.height / lineHeight)
+        let size: CGSize = CGSize(width: textView.frame.size.width, height: .infinity)
+        let estimatedSize: CGSize = textView.sizeThatFits(size)
+
+        guard linesCount < textViewMaximumNumberOfLines else {
+            textView.isScrollEnabled = true
+            return
+        }
+
+        textView.isScrollEnabled = false
+        textViewHeightConstraint?.constant = estimatedSize.height
     }
 }
