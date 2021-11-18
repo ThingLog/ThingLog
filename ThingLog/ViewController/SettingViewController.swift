@@ -16,6 +16,7 @@ final class SettingViewController: UIViewController {
         case darkMode
         case editCategory
         case trash
+        case card
         case login
         case addDummyData
         case deleteDummyData
@@ -36,6 +37,8 @@ final class SettingViewController: UIViewController {
                 return "다크모드"
             case .editCategory:
                 return "카테고리 수정"
+            case .card:
+                return "포토카드"
             case .trash:
                 return "휴지통"
             case .login:
@@ -187,7 +190,7 @@ extension SettingViewController: UITableViewDataSource {
                     }
                     .disposed(by: cell.disposeBag)
                 
-            case .editCategory, .trash, .login, .addDummyData, .deleteDummyData, .alert1, .alert2, .alert3, .resetUserInfor, .post, .clearDrawer, .blackCard, .basket, .rightAward, .dragonball:
+            case .editCategory, .trash, .card, .login, .addDummyData, .deleteDummyData, .alert1, .alert2, .alert3, .resetUserInfor, .post, .clearDrawer, .blackCard, .basket, .rightAward, .dragonball:
                 cell.changeViewType(labelType: .withBody1,
                                     buttonType: .withChevronRight,
                                     borderLineHeight: .with05Height,
@@ -211,6 +214,11 @@ extension SettingViewController: UITableViewDelegate {
                 return
             case .trash:
                 coordinator?.showTrashViewController()
+            case .card:
+                let card = PhotoCardViewController(postEntity: PostEntity(),
+                                                   selectImage: SwiftGenIcons.group.image)
+                card.coordinator = coordinator
+                navigationController?.pushViewController(card, animated: true)
             case .login:
                 coordinator?.showLoginViewController()
             case .addDummyData:

@@ -31,6 +31,7 @@ internal enum SwiftGenIcons {
   internal static let arrowDropDown = IconImageSwiftGen(name: "arrow_drop_down")
   internal static let buyVer1 = IconImageSwiftGen(name: "buy.ver1")
   internal static let camera = IconImageSwiftGen(name: "camera")
+  internal static let cardLogo = IconImageSwiftGen(name: "cardLogo")
   internal static let checkBoxM = IconImageSwiftGen(name: "check box(m)")
   internal static let checkBoxS = IconImageSwiftGen(name: "check box(s)")
   internal static let check = IconImageSwiftGen(name: "check")

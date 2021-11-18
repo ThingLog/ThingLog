@@ -162,6 +162,18 @@
 		DB8BF6792705D25700FD5FDB /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6782705D25700FD5FDB /* LogoView.swift */; };
 		DB8BF6812706D89E00FD5FDB /* ResultsWithDropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6802706D89E00FD5FDB /* ResultsWithDropBoxView.swift */; };
 		DB8BF6832706DA7900FD5FDB /* EasyLookTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6822706DA7900FD5FDB /* EasyLookTopView.swift */; };
+		DB98FBC32744E596002409BF /* PhotoCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBC22744E596002409BF /* PhotoCardViewController.swift */; };
+		DB98FBC62744E5BC002409BF /* LabelWithUnderLineVerticalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBC52744E5BC002409BF /* LabelWithUnderLineVerticalView.swift */; };
+		DB98FBC82744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBC72744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift */; };
+		DB98FBCA2744E63A002409BF /* PhotoCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBC92744E63A002409BF /* PhotoCardViewModel.swift */; };
+		DB98FBCC2744E685002409BF /* PhotoCardViewController+collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBCB2744E685002409BF /* PhotoCardViewController+collection.swift */; };
+		DB98FBCE2744E6BA002409BF /* PhotoCardViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBCD2744E6BA002409BF /* PhotoCardViewController+setup.swift */; };
+		DB98FBD02744F0D5002409BF /* GestureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBCF2744F0D5002409BF /* GestureModel.swift */; };
+		DB98FBD22744F939002409BF /* PhotoCardViewController+subscribe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBD12744F939002409BF /* PhotoCardViewController+subscribe.swift */; };
+		DB98FBD42744FE16002409BF /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBD32744FE16002409BF /* ImageSaver.swift */; };
+		DB98FBD627450706002409BF /* Frame.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB98FBD527450706002409BF /* Frame.xcassets */; };
+		DB98FBD8274507E2002409BF /* FrameAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBD7274507E2002409BF /* FrameAssets.swift */; };
+		DB98FBDA2745ADA9002409BF /* PhotoCardInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBD92745ADA9002409BF /* PhotoCardInset.swift */; };
 		DB9FBDB2272E8144005E64AF /* UserInformationiCloudTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FBDB1272E8144005E64AF /* UserInformationiCloudTests.swift */; };
 		DB9FBDB7272E9A11005E64AF /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FBDB6272E9A11005E64AF /* UserInformation.swift */; };
 		DB9FBDB9272E9A33005E64AF /* UserInformationiCloudViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9FBDB8272E9A33005E64AF /* UserInformationiCloudViewModel.swift */; };
@@ -405,6 +417,18 @@
 		DB8BF6782705D25700FD5FDB /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		DB8BF6802706D89E00FD5FDB /* ResultsWithDropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsWithDropBoxView.swift; sourceTree = "<group>"; };
 		DB8BF6822706DA7900FD5FDB /* EasyLookTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookTopView.swift; sourceTree = "<group>"; };
+		DB98FBC22744E596002409BF /* PhotoCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCardViewController.swift; sourceTree = "<group>"; };
+		DB98FBC52744E5BC002409BF /* LabelWithUnderLineVerticalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithUnderLineVerticalView.swift; sourceTree = "<group>"; };
+		DB98FBC72744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewWithSelectViewCollectionCell.swift; sourceTree = "<group>"; };
+		DB98FBC92744E63A002409BF /* PhotoCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCardViewModel.swift; sourceTree = "<group>"; };
+		DB98FBCB2744E685002409BF /* PhotoCardViewController+collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoCardViewController+collection.swift"; sourceTree = "<group>"; };
+		DB98FBCD2744E6BA002409BF /* PhotoCardViewController+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoCardViewController+setup.swift"; sourceTree = "<group>"; };
+		DB98FBCF2744F0D5002409BF /* GestureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureModel.swift; sourceTree = "<group>"; };
+		DB98FBD12744F939002409BF /* PhotoCardViewController+subscribe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoCardViewController+subscribe.swift"; sourceTree = "<group>"; };
+		DB98FBD32744FE16002409BF /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
+		DB98FBD527450706002409BF /* Frame.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Frame.xcassets; sourceTree = "<group>"; };
+		DB98FBD7274507E2002409BF /* FrameAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameAssets.swift; sourceTree = "<group>"; };
+		DB98FBD92745ADA9002409BF /* PhotoCardInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCardInset.swift; sourceTree = "<group>"; };
 		DB9FBDB1272E8144005E64AF /* UserInformationiCloudTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationiCloudTests.swift; sourceTree = "<group>"; };
 		DB9FBDB6272E9A11005E64AF /* UserInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformation.swift; sourceTree = "<group>"; };
 		DB9FBDB8272E9A33005E64AF /* UserInformationiCloudViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationiCloudViewModel.swift; sourceTree = "<group>"; };
@@ -747,13 +771,14 @@
 			isa = PBXGroup;
 			children = (
 				DBD5454B27032C6600063C98 /* EasyLookViewModel.swift */,
+				DB98FBC92744E63A002409BF /* PhotoCardViewModel.swift */,
 				87EDCFCF27311E9F002C98BE /* PostViewModel.swift */,
 				DB1745B827098E8A00EF083E /* RecentSearchDataViewModel.swift */,
 				DB87730B270B430C00401961 /* RecentSearchDataViewModelProtocol.swift */,
 				DB69095E2712C55F00BB54E4 /* SearchResultsViewModel.swift */,
 				DB9FBDB5272E99ED005E64AF /* UserInformationViewModel */,
-				87BB17AA27098D760088B847 /* WriteViewModel.swift */,
 				87336FDC272EE85E00E1C4CA /* UserPermissionsViewModel.swift */,
+				87BB17AA27098D760088B847 /* WriteViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -767,11 +792,12 @@
 				DB7C04E026FB1900009F5C0A /* ContentsCollection */,
 				DB00D214272A8D1E003FC9C3 /* Drawer */,
 				DBE3E9C92730137200B3EB69 /* EasyLook */,
-				8715B3AD273ABECB007A3A88 /* Post */,
 				DB7B470C274137F600426EF1 /* Home */,
 				DB9FBDB3272E82A9005E64AF /* Login */,
 				DB7B46FE2740FE6F00426EF1 /* Onboarding */,
+				DB98FBC42744E5A6002409BF /* PhotoCard */,
 				87336FDB272EE76800E1C4CA /* Photos */,
+				8715B3AD273ABECB007A3A88 /* Post */,
 				DBE3E9CA2730196D00B3EB69 /* Search */,
 				DB6909602712DA8100BB54E4 /* SettingViewController.swift */,
 				DB1111ED27352D2D00D02F99 /* SplashViewController.swift */,
@@ -814,6 +840,7 @@
 				DB148C272704A1A500FDC48F /* IgnoreTouchView.swift */,
 				DB00D21B272AD76E003FC9C3 /* ImageWithTwoLabelVerticalCetnerXView.swift */,
 				DB148C212704623200FDC48F /* InsetButton.swift */,
+				DB98FBC52744E5BC002409BF /* LabelWithUnderLineVerticalView.swift */,
 				DB05B03B271853CE0067DB17 /* LeftRightButtonView.swift */,
 				DB8BF6782705D25700FD5FDB /* LogoView.swift */,
 				8738E1CC271708F80069BB80 /* PaddingLabel.swift */,
@@ -838,8 +865,9 @@
 				87DAEB1A270BEAE50038C487 /* CameraButtonCollectionCell.swift */,
 				DB7C04E826FB19AE009F5C0A /* ContentsCollectionViewCell.swift */,
 				DBA0F821270AF656009553FC /* ContentsDetailCollectionViewCell.swift */,
-				873ED124272AA43B00C9F7F1 /* ImageWithVerticalTwoLabelCollectionCell.swift */,
 				DB00D21D272ADB68003FC9C3 /* DrawerCollectionCell.swift */,
+				DB98FBC72744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift */,
+				873ED124272AA43B00C9F7F1 /* ImageWithVerticalTwoLabelCollectionCell.swift */,
 				87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */,
 				DB05B04B271F04E50067DB17 /* TextFieldWithLabelWithButtonCollectionCell.swift */,
 				87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */,
@@ -862,6 +890,20 @@
 				8789A19D272C5DCC00CFB16C /* Notification.Name+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		DB98FBC42744E5A6002409BF /* PhotoCard */ = {
+			isa = PBXGroup;
+			children = (
+				DB98FBCF2744F0D5002409BF /* GestureModel.swift */,
+				DB98FBD32744FE16002409BF /* ImageSaver.swift */,
+				DB98FBD92745ADA9002409BF /* PhotoCardInset.swift */,
+				DB98FBC22744E596002409BF /* PhotoCardViewController.swift */,
+				DB98FBCB2744E685002409BF /* PhotoCardViewController+collection.swift */,
+				DB98FBCD2744E6BA002409BF /* PhotoCardViewController+setup.swift */,
+				DB98FBD12744F939002409BF /* PhotoCardViewController+subscribe.swift */,
+			);
+			path = PhotoCard;
 			sourceTree = "<group>";
 		};
 		DB9FBDAE272E8120005E64AF /* UserInformationTest */ = {
@@ -938,6 +980,7 @@
 		DBAE8E9126FDAE7500F536AD /* SwiftGen */ = {
 			isa = PBXGroup;
 			children = (
+				DB98FBD7274507E2002409BF /* FrameAssets.swift */,
 				DBE3E9C7272FF32D00B3EB69 /* IconsAssets.swift */,
 				DB331DA626FDD00A00A629F5 /* ColorsAsset.swift */,
 				DB32B286272C033F009074AF /* DrawersAssets.swift */,
@@ -956,6 +999,7 @@
 				DBAE8E9926FDB52E00F536AD /* Font */,
 				DB32B280272C01E1009074AF /* Drawers.xcassets */,
 				DBE3E9C5272FF25A00B3EB69 /* Icons.xcassets */,
+				DB98FBD527450706002409BF /* Frame.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -1119,6 +1163,7 @@
 				DBAE8E9626FDB3EE00F536AD /* Pretendard-Bold.otf in Resources */,
 				DBA1FD4526FB701C00F50DE5 /* InfoPlist.strings in Resources */,
 				873EC01826D39057003C3525 /* LaunchScreen.storyboard in Resources */,
+				DB98FBD627450706002409BF /* Frame.xcassets in Resources */,
 				DBD37BDA274255F2000FDDBC /* onboarding2Dark.json in Resources */,
 				DBD3A21B27438C8E0001F9BF /* drawerNewDark.json in Resources */,
 				DBE3E9C6272FF25A00B3EB69 /* Icons.xcassets in Resources */,
@@ -1255,19 +1300,23 @@
 				DB7C04EC26FB1A04009F5C0A /* UIView+.swift in Sources */,
 				DB7C04FC26FB27A6009F5C0A /* TemplateImageButton.swift in Sources */,
 				DB05B050271F0AB00067DB17 /* LoginCollectionSection.swift in Sources */,
+				DB98FBD02744F0D5002409BF /* GestureModel.swift in Sources */,
 				87ACB0B227229A3000C78C86 /* CenterTextButton.swift in Sources */,
 				DB7B4704274104C800426EF1 /* OnboardingListViewController.swift in Sources */,
 				876243E22708704800BDA1DC /* WriteTypeButton.swift in Sources */,
 				8738E1CF271709660069BB80 /* RoundLabelWithButtonTableCell.swift in Sources */,
 				87EDCFD927316F8A002C98BE /* PostTableCell+setup.swift in Sources */,
 				DBA883B6272BEF9B0089643B /* DrawerCoreDataRepository.swift in Sources */,
+				DB98FBC82744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift in Sources */,
 				DB37EC77270C307C00030D9A /* RecentSearchView+update.swift in Sources */,
 				87B1B6552715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift in Sources */,
 				876C157D27047B19000C1C84 /* CategoryRepository.swift in Sources */,
 				DBD5454927032BAA00063C98 /* EasyLookTabType.swift in Sources */,
 				DB331DA926FDD00A00A629F5 /* ColorsAsset.swift in Sources */,
+				DB98FBD8274507E2002409BF /* FrameAssets.swift in Sources */,
 				DBE3E9C3272FD6B300B3EB69 /* UserInformationViewModelable.swift in Sources */,
 				DBD2244527085651004C5184 /* EasyLookViewController+setup.swift in Sources */,
+				DB98FBCC2744E685002409BF /* PhotoCardViewController+collection.swift in Sources */,
 				87BB17A72709898F0088B847 /* WriteViewController.swift in Sources */,
 				87A86C9127141576008FB3F0 /* WriteTextViewCell.swift in Sources */,
 				DB7C04F226FB1F36009F5C0A /* ContentsPageViewController.swift in Sources */,
@@ -1291,6 +1340,7 @@
 				DB05B052271F0D4B0067DB17 /* LoginViewController.swift in Sources */,
 				8715B3AC273ABEC5007A3A88 /* PostViewController.swift in Sources */,
 				DB7C04B226F87548009F5C0A /* TabBarController.swift in Sources */,
+				DB98FBD22744F939002409BF /* PhotoCardViewController+subscribe.swift in Sources */,
 				87E8E81927355EEB0042AA7E /* HorizontalScrollLabel.swift in Sources */,
 				DB7C04B926F87BE9009F5C0A /* ChoiceWritingView.swift in Sources */,
 				DB7C04AA26F5F308009F5C0A /* EasyLookCoordinator.swift in Sources */,
@@ -1319,6 +1369,8 @@
 				873EC00B26D39055003C3525 /* SceneDelegate.swift in Sources */,
 				87BB17AD27098F480088B847 /* WriteViewController+setup.swift in Sources */,
 				DB05B04027185C500067DB17 /* UIViewController+.swift in Sources */,
+				DB98FBC62744E5BC002409BF /* LabelWithUnderLineVerticalView.swift in Sources */,
+				DB98FBCE2744E6BA002409BF /* PhotoCardViewController+setup.swift in Sources */,
 				DB05B03E27185B780067DB17 /* TrashViewController.swift in Sources */,
 				8736B3F426FDD55E000433E1 /* UIFont+.swift in Sources */,
 				DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */,
@@ -1333,6 +1385,7 @@
 				DB6D05AD2733D47E003002A3 /* CheckView.swift in Sources */,
 				8736B3E526FCBA77000433E1 /* RatingEntity+.swift in Sources */,
 				87F2188626FB5DFB00C3FBCA /* Post.swift in Sources */,
+				DB98FBCA2744E63A002409BF /* PhotoCardViewModel.swift in Sources */,
 				DBA0F822270AF656009553FC /* ContentsDetailCollectionViewCell.swift in Sources */,
 				87EDCFDB273171BC002C98BE /* PostCategoryViewDataSouce.swift in Sources */,
 				874D92F9271AD672005FF8F3 /* DummyData.swift in Sources */,
@@ -1341,6 +1394,7 @@
 				8736B3E326FCB9F3000433E1 /* Rating.swift in Sources */,
 				DB00D211272A8A79003FC9C3 /* SelectingDrawerViewController.swift in Sources */,
 				87BB17AB27098D760088B847 /* WriteViewModel.swift in Sources */,
+				DB98FBD42744FE16002409BF /* ImageSaver.swift in Sources */,
 				DB00D21C272AD76E003FC9C3 /* ImageWithTwoLabelVerticalCetnerXView.swift in Sources */,
 				87EDCFD727316E69002C98BE /* PostTableCell.swift in Sources */,
 				87ACB0B427229E2B00C78C86 /* WriteImageTableCell.swift in Sources */,
@@ -1360,6 +1414,7 @@
 				DB1745B72708700200EF083E /* SearchTextField.swift in Sources */,
 				DB87730C270B430C00401961 /* RecentSearchDataViewModelProtocol.swift in Sources */,
 				87F2189026FB8D6A00C3FBCA /* PostTypeEntity+.swift in Sources */,
+				DB98FBDA2745ADA9002409BF /* PhotoCardInset.swift in Sources */,
 				DBA0F81C2709B390009553FC /* LeftLabelRightButtonTableCell.swift in Sources */,
 				DBD3A21D2743AEF50001F9BF /* HomeViewController+subscribe.swift in Sources */,
 				875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */,
@@ -1368,6 +1423,7 @@
 				DB22B6BE270ECA20005F9971 /* PostContentsCollectionViewController.swift in Sources */,
 				8736B3F226FDC281000433E1 /* Attachment.swift in Sources */,
 				DB32B28D272D0589009074AF /* Drawer.swift in Sources */,
+				DB98FBC32744E596002409BF /* PhotoCardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
