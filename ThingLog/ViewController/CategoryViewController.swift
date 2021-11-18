@@ -49,8 +49,10 @@ final class CategoryViewController: UIViewController {
     private let leadingTrailingConstant: CGFloat = 18.0
     private let topBottomConstant: CGFloat = 12.0
     private var selectedCategoryIndexPaths: Set<IndexPath> = []
+    private var selectedCategory: Set<UUID?> = []
     private let textFieldMaxLength: Int = 21
-    
+
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -61,6 +63,7 @@ final class CategoryViewController: UIViewController {
         setupToolbar()
     }
 
+    // MARK: - setup
     private func setupNavigationBar() {
         setupBaseNavigationBar()
 
@@ -183,6 +186,7 @@ extension CategoryViewController: UITableViewDelegate {
             return
         }
 
+        selectedCategory.insert(cell.identifier)
         selectedCategoryIndexPaths.insert(indexPath)
         cell.isSelectedCategory.toggle()
     }
@@ -192,7 +196,10 @@ extension CategoryViewController: UITableViewDelegate {
             return
         }
 
-        selectedCategoryIndexPaths.remove(indexPath)
+        selectedCategory.remove(cell.identifier)
+        if let firstIndex: Set<IndexPath>.Index = selectedCategoryIndexPaths.firstIndex(of: indexPath) {
+            selectedCategoryIndexPaths.remove(at: firstIndex)
+        }
         cell.isSelectedCategory.toggle()
     }
 }
@@ -216,12 +223,17 @@ extension CategoryViewController: UITableViewDataSource {
     private func configureCell(_ cell: RoundLabelWithButtonTableCell, at indexPath: IndexPath) {
         let category: CategoryEntity = repository.fetchedResultsController.object(at: indexPath)
 
+        cell.identifier = category.identifier
         cell.configure(name: category.title ?? "")
 
-        if selectedCategoryIndexPaths.contains(indexPath) {
+        if selectedCategory.contains(category.identifier) {
             cell.isSelectedCategory = true
+            selectedCategoryIndexPaths.insert(indexPath)
         } else {
             cell.isSelectedCategory = false
+            if let firstIndex: Set<IndexPath>.Index = selectedCategoryIndexPaths.firstIndex(of: indexPath) {
+                selectedCategoryIndexPaths.remove(at: firstIndex)
+            }
         }
     }
 }

@@ -38,7 +38,7 @@ final class WriteViewModel {
     /// 썸네일 크기
     private let thumbnailSize: CGSize = CGSize(width: 100, height: 100)
     /// 이미지가 저장될 크기
-    private let imageSize: CGSize = CGSize(width: 588, height: 588)
+    private let imageSize: CGSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
     private let repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
     private var isSelectImages: Bool = false
 
@@ -55,16 +55,18 @@ final class WriteViewModel {
     private(set) var categorySubject: BehaviorSubject<[Category]> = BehaviorSubject<[Category]>(value: [])
     private let disposeBag: DisposeBag = DisposeBag()
 
+    // MARK: - Init
     init(pageType: PageType) {
         self.pageType = pageType
 
         setupBinding()
     }
 
+    // MARK: - setup
     private func setupBinding() {
         bindNotificationPassToSelectedCategories()
         bindNotificationPassSelectPHAssets()
-        bindIsImageSelected()
+        bindThumbnailImagesSubject()
         bindNotificationRemoveSelectedThumbnail()
         bindCategorySubject()
     }
@@ -159,7 +161,7 @@ extension WriteViewModel {
     }
 
     /// 이미지가 선택되어 있는 지 여부를 `isSelectImages` 에 갱신한다.
-    private func bindIsImageSelected() {
+    private func bindThumbnailImagesSubject() {
         thumbnailImagesSubject
             .map { $0.isNotEmpty }
             .bind { [weak self] isNotEmpty in
@@ -198,15 +200,17 @@ extension WriteViewModel {
             asset.toImage(targetSize: self.thumbnailSize, options: options) { image in
                 guard let image = image else { return }
                 images.append(image)
+                if images.count == assets.count {
+                    self.thumbnailImagesSubject.onNext(images)
+                }
             }
         }
-
-        thumbnailImagesSubject.onNext(images)
     }
 
     /// 파라미터로 받은 `PHAsset`을 `UIImage`로 변환하여 originalImages에 저장한다. 비동기로 동작한다.
     /// - Parameter assets: UIImage로 변환할 [PHAsset]
     private func requestOriginalImages(with assets: [PHAsset]) {
+        var images: [UIImage] = []
         let options: PHImageRequestOptions = PHImageRequestOptions()
         options.isSynchronous = true
 
@@ -215,7 +219,10 @@ extension WriteViewModel {
             assets.forEach { asset in
                 asset.toImage(targetSize: self.imageSize, options: options) { image in
                     guard let image = image else { return }
-                    self.originalImages.append(image)
+                    images.append(image)
+                    if images.count == assets.count {
+                        self.originalImages = images
+                    }
                 }
             }
         }
