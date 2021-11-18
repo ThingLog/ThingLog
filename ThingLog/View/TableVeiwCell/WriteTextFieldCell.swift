@@ -25,25 +25,8 @@ final class WriteTextFieldCell: UITableViewCell {
         return textField
     }()
 
-    var placeholder: String? {
-        didSet {
-            textField.attributedPlaceholder = NSAttributedString(string: placeholder ?? "",
-                                                                 attributes: [
-                                                                    NSAttributedString.Key.foregroundColor: SwiftGenColors.gray3.color,
-                                                                    NSAttributedString.Key.font: UIFont.Pretendard.body1
-                                                                 ])
-        }
-    }
-
-    var keyboardType: UIKeyboardType = .default {
-        didSet {
-            textField.keyboardType = keyboardType
-            textField.isSelection = keyboardType == .numberPad ? false : true
-        }
-    }
-
-    var text: String? { textField.text }
     var isEditingSubject: PublishSubject<Bool> = PublishSubject<Bool>()
+    var textValueSubject: PublishSubject<String?> = PublishSubject<String?>()
 
     private(set) var disposeBag: DisposeBag = DisposeBag()
     private let paddingLeadingTrailing: CGFloat = 26.0
@@ -52,6 +35,7 @@ final class WriteTextFieldCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        setupBind()
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -64,6 +48,17 @@ final class WriteTextFieldCell: UITableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    /// 텍스트 필드의 키보드 타입과 플레이스 홀더를 구성한다.
+    func configure(keyboardType: UIKeyboardType, placeholder: String) {
+        textField.keyboardType = keyboardType
+        textField.isSelection = keyboardType == .numberPad ? false : true
+        textField.attributedPlaceholder = NSAttributedString(string: placeholder ?? "",
+                                                             attributes: [
+                                                                NSAttributedString.Key.foregroundColor: SwiftGenColors.gray3.color,
+                                                                NSAttributedString.Key.font: UIFont.Pretendard.body1
+                                                             ])
     }
 }
 
@@ -129,13 +124,14 @@ extension WriteTextFieldCell {
             .map { $0.isEmpty }
             .bind { [weak self] isEmpty in
                 self?.textField.rightViewMode = isEmpty ? .never : .always
+                self?.textValueSubject.onNext(self?.textField.text)
             }
             .disposed(by: disposeBag)
     }
 
     @objc
     private func dismissKeyboard() {
-        textField.resignFirstResponder()
+        _ = textField.resignFirstResponder()
     }
 
     @objc

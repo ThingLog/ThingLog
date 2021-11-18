@@ -40,30 +40,34 @@ final class WriteCategoryTableCell: UITableViewCell {
 
     // MARK: - Properties
     var indicatorButtonDidTappedCallback: (() -> Void)?
-    var categories: [Category] = [] {
+    private let paddingLeading: CGFloat = 26.0
+    private let paddingTrailing: CGFloat = 28.0
+    private let paddingTopBottom: CGFloat = 20.0
+    private let indicatorButtonSize: CGFloat = 40.0
+    private let indicatorButtonTopBottom: CGFloat = 8.0
+    private var categories: [Category] = [] {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.updateViewByCategories()
             }
         }
     }
-    private let paddingLeading: CGFloat = 26.0
-    private let paddingTrailing: CGFloat = 28.0
-    private let paddingTopBottom: CGFloat = 20.0
-    private let indicatorButtonSize: CGFloat = 40.0
-    private let indicatorButtonTopBottom: CGFloat = 8.0
+
+    // MARK: - Rx
+    var categorySubject: BehaviorSubject<[Category]> = BehaviorSubject<[Category]>(value: [])
     private var disposeBag: DisposeBag = DisposeBag()
 
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        bindCategorySubject()
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
         setupCollectionView()
-        bindCategories()
+        bindCategorySubject()
     }
 
     required init?(coder: NSCoder) {
@@ -105,13 +109,11 @@ final class WriteCategoryTableCell: UITableViewCell {
     }
 
     /// 카테고리 선택 화면에서 전달 받은 데이터를 저장한다.
-    private func bindCategories() {
-        NotificationCenter.default.rx.notification(.passToSelectedCategories, object: nil)
-            .map { notification -> [Category] in
-                notification.userInfo?[Notification.Name.passToSelectedCategories] as? [Category] ?? []
-            }
+    private func bindCategorySubject() {
+        categorySubject
             .bind { [weak self] categories in
                 self?.categories = categories
+                self?.collectionView.reloadData()
             }.disposed(by: disposeBag)
     }
 
@@ -158,11 +160,13 @@ extension WriteCategoryTableCell: UICollectionViewDataSource {
         cell.configure(text: categories[indexPath.row].title)
         // 선택한 카테고리를 삭제하려고 할 때 NotificationCenter를 통해 WriteViewModel에게 알린다.
         cell.removeButtonDidTappedCallback = { [weak self] in
-            guard let self = self else { return }
-            NotificationCenter.default.post(name: .removeSelectedCategory,
-                                            object: nil,
-                                            userInfo: [Notification.Name.removeSelectedCategory: self.categories[indexPath.row]])
-            self.categories.remove(at: indexPath.row)
+            guard var updateValue: [Category] = try? self?.categorySubject.value() else {
+                return
+            }
+
+            collectionView.deleteItems(at: [indexPath])
+            updateValue.remove(at: indexPath.item)
+            self?.categorySubject.onNext(updateValue)
         }
 
         return cell

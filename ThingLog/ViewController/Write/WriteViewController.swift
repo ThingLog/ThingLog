@@ -41,12 +41,8 @@ final class WriteViewController: BaseViewController {
     
     // MARK: - Properties
     var coordinator: WriteCoordinator?
-    var selectedImages: [UIImage] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
     private(set) var viewModel: WriteViewModel
+
     init(viewModel: WriteViewModel) {
         self.viewModel = viewModel
         
@@ -59,8 +55,6 @@ final class WriteViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = SwiftGenColors.white.color
-        
         view.backgroundColor = SwiftGenColors.white.color
     }
     
@@ -86,7 +80,7 @@ final class WriteViewController: BaseViewController {
         }()
         
         closeButton.rx.tap.bind { [weak self] in
-            self?.close()
+            self?.closeWithAlert()
         }.disposed(by: disposeBag)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: closeButton)
@@ -103,7 +97,9 @@ final class WriteViewController: BaseViewController {
     override func setupBinding() {
         bindKeyboardWillShow()
         bindKeyboardWillHide()
-        bindNotificationPassSelectPHAssets()
+        bindDoneButton()
+        bindThumbnailSubjectUpdate()
+        bindCategorySubject()
     }
 }
 
@@ -112,7 +108,7 @@ extension WriteViewController {
     /// 글쓰기 화면을 닫는다.
     /// 글쓰기 화면을 닫기 전에 alert 팝업을 띄워 다시 한 번 사용자에게 묻는다.
     /// 글쓰기 화면을 닫으면서 navigationController.viewControllers를 초기화한다.
-    func close() {
+    func closeWithAlert() {
         let alertController: AlertViewController = AlertViewController()
         
         alertController.hideTitleLabel()
@@ -134,6 +130,28 @@ extension WriteViewController {
         alertController.modalPresentationStyle = .overFullScreen
         present(alertController, animated: false, completion: nil)
     }
+
+    /// 필수 항목(사진 선택)이 누락되었을 때 사용자에게 안내 알럿을 띄운다.
+    func showRequiredAlert() {
+        let alertController: AlertViewController = AlertViewController()
+
+        alertController.hideTitleLabel()
+        alertController.changeContentsText("사진은 필수 입력 항목이에요")
+        alertController.hideTextField()
+        alertController.hideRightButton()
+        alertController.leftButton.setTitle("확인", for: .normal)
+
+        alertController.leftButton.rx.tap.bind {
+            alertController.dismiss(animated: false, completion: nil)
+        }.disposed(by: disposeBag)
+        alertController.modalPresentationStyle = .overFullScreen
+        present(alertController, animated: false, completion: nil)
+    }
+
+    /// 글 작성을 완료하고 이전 화면으로 돌아간다.
+    func close() {
+        coordinator?.dismissWriteViewController()
+    }
     
     /// indexPath.row의 위치로 이동한다.
     /// - Parameter indexPath: 이동하려는 셀의 IndexPath
@@ -150,71 +168,6 @@ extension WriteViewController {
                 self.tableView.setContentOffset(bottomOffset, animated: false)
             }
         }
-    }
-}
-
-// MARK: - DataSource
-extension WriteViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        WriteViewModel.Section.allCases.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.itemCount[section]
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let section: WriteViewModel.Section? = .init(rawValue: indexPath.section)
-        switch section {
-        case .image:
-            if let cell: WriteImageTableCell = tableView.dequeueReusableCell(withIdentifier: WriteImageTableCell.reuseIdentifier, for: indexPath) as? WriteImageTableCell {
-                cell.coordinator = coordinator
-                cell.thumbnailImages = selectedImages
-                
-                return cell
-            }
-        case .category:
-            if let cell: WriteCategoryTableCell = tableView.dequeueReusableCell(withIdentifier: WriteCategoryTableCell.reuseIdentifier, for: indexPath) as? WriteCategoryTableCell {
-                cell.indicatorButtonDidTappedCallback = { [weak self] in
-                    self?.coordinator?.showCategoryViewController()
-                }
-                
-                return cell
-            }
-        case .type:
-            if let cell: WriteTextFieldCell = tableView.dequeueReusableCell(withIdentifier: WriteTextFieldCell.reuseIdentifier, for: indexPath) as? WriteTextFieldCell {
-                cell.keyboardType = viewModel.typeInfo[indexPath.row].keyboardType
-                cell.placeholder = viewModel.typeInfo[indexPath.row].placeholder
-                
-                cell.isEditingSubject
-                    .bind { [weak self] _ in
-                        self?.scrollToCurrentRow(at: indexPath)
-                    }.disposed(by: cell.disposeBag)
-                
-                return cell
-            }
-        case .rating:
-            if let cell: WriteRatingCell = tableView.dequeueReusableCell(withIdentifier: WriteRatingCell.reuseIdentifier, for: indexPath) as? WriteRatingCell {
-                cell.selectRatingBlock = { [weak self] in
-                    self?.view.endEditing(true)
-                }
-                
-                return cell
-            }
-        case .contents:
-            if let cell: WriteTextViewCell = tableView.dequeueReusableCell(withIdentifier: WriteTextViewCell.reuseIdentifier, for: indexPath) as? WriteTextViewCell {
-                cell.delegate = self
-                cell.textView.rx.didBeginEditing
-                    .bind { [weak self] in
-                        self?.scrollToCurrentRow(at: indexPath)
-                    }.disposed(by: cell.disposeBag)
-                
-                return cell
-            }
-        case .none:
-            return UITableViewCell()
-        }
-        return UITableViewCell()
     }
 }
 

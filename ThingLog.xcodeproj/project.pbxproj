@@ -41,8 +41,8 @@
 		874D92F9271AD672005FF8F3 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874D92F8271AD672005FF8F3 /* DummyData.swift */; };
 		874F52C9273E868200F79921 /* DropDownView+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874F52C8273E868200F79921 /* DropDownView+Delegate.swift */; };
 		875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */; };
+		875B8FFD273AAE850059DF2A /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B8FFC273AAE850059DF2A /* Collection+.swift */; };
 		8761A88427296C0800EA8683 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761A88327296C0700EA8683 /* PhotosViewController.swift */; };
-		876243E02708701B00BDA1DC /* WriteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876243DF2708701B00BDA1DC /* WriteType.swift */; };
 		876243E22708704800BDA1DC /* WriteTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876243E12708704800BDA1DC /* WriteTypeButton.swift */; };
 		876C157927044BA0000C1C84 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157827044BA0000C1C84 /* RepositoryError.swift */; };
 		876C157B27044DFF000C1C84 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157A27044DFF000C1C84 /* CategoryEntity.swift */; };
@@ -63,6 +63,7 @@
 		87BB17AB27098D760088B847 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB17AA27098D760088B847 /* WriteViewModel.swift */; };
 		87BB17AD27098F480088B847 /* WriteViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB17AC27098F480088B847 /* WriteViewController+setup.swift */; };
 		87BEF07B2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BEF07A2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift */; };
+		87CFA333273A5A1600D08824 /* WriteViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CFA332273A5A1600D08824 /* WriteViewController+DataSource.swift */; };
 		87DAEB1B270BEAE50038C487 /* CameraButtonCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DAEB1A270BEAE50038C487 /* CameraButtonCollectionCell.swift */; };
 		87DAEB1D270BEC170038C487 /* ThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */; };
 		87E8E81927355EEB0042AA7E /* HorizontalScrollLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8E81827355EEB0042AA7E /* HorizontalScrollLabel.swift */; };
@@ -300,8 +301,8 @@
 		874D92F8271AD672005FF8F3 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 		874F52C8273E868200F79921 /* DropDownView+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DropDownView+Delegate.swift"; sourceTree = "<group>"; };
 		875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		875B8FFC273AAE850059DF2A /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		8761A88327296C0700EA8683 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
-		876243DF2708701B00BDA1DC /* WriteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteType.swift; sourceTree = "<group>"; };
 		876243E12708704800BDA1DC /* WriteTypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTypeButton.swift; sourceTree = "<group>"; };
 		876C157827044BA0000C1C84 /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
 		876C157A27044DFF000C1C84 /* CategoryEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntity.swift; sourceTree = "<group>"; };
@@ -323,6 +324,7 @@
 		87BB17AA27098D760088B847 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
 		87BB17AC27098F480088B847 /* WriteViewController+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteViewController+setup.swift"; sourceTree = "<group>"; };
 		87BEF07A2705C80D00797ECD /* ThingLogCategoryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogCategoryRepositoryTests.swift; sourceTree = "<group>"; };
+		87CFA332273A5A1600D08824 /* WriteViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteViewController+DataSource.swift"; sourceTree = "<group>"; };
 		87DAEB1A270BEAE50038C487 /* CameraButtonCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButtonCollectionCell.swift; sourceTree = "<group>"; };
 		87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCell.swift; sourceTree = "<group>"; };
 		87E8E81827355EEB0042AA7E /* HorizontalScrollLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollLabel.swift; sourceTree = "<group>"; };
@@ -649,9 +651,18 @@
 				8736B3E226FCB9F3000433E1 /* Rating.swift */,
 				DBA0F81F270AF0A4009553FC /* ResultCollectionSection.swift */,
 				DB9FBDB6272E9A11005E64AF /* UserInformation.swift */,
-				876243DF2708701B00BDA1DC /* WriteType.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		877B659E273692DC00561DDF /* Write */ = {
+			isa = PBXGroup;
+			children = (
+				87BB17A62709898F0088B847 /* WriteViewController.swift */,
+				87CFA332273A5A1600D08824 /* WriteViewController+DataSource.swift */,
+				87BB17AC27098F480088B847 /* WriteViewController+setup.swift */,
+			);
+			path = Write;
 			sourceTree = "<group>";
 		};
 		87B9EEE6273BDE22001F3FB4 /* DropDownView */ = {
@@ -806,8 +817,7 @@
 				DB1111ED27352D2D00D02F99 /* SplashViewController.swift */,
 				DB7C04B126F87548009F5C0A /* TabBarController.swift */,
 				DBE3E9BF272FB9AB00B3EB69 /* Trash */,
-				87BB17A62709898F0088B847 /* WriteViewController.swift */,
-				87BB17AC27098F480088B847 /* WriteViewController+setup.swift */,
+				877B659E273692DC00561DDF /* Write */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -881,6 +891,7 @@
 		DB7C04EA26FB19FE009F5C0A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				875B8FFC273AAE850059DF2A /* Collection+.swift */,
 				DB148C25270469B300FDC48F /* Date+.swift */,
 				873ED128272AB77000C9F7F1 /* Notification.Name+.swift */,
 				873ED126272AAFFD00C9F7F1 /* PHAsset+.swift */,
@@ -1275,7 +1286,6 @@
 				DBD105512729726400632168 /* RoundCenterTextButton.swift in Sources */,
 				DB05B056271FEAFA0067DB17 /* LoginViewController+subscribe.swift in Sources */,
 				DB331DAA26FDD00A00A629F5 /* ImageAssets.swift in Sources */,
-				876243E02708701B00BDA1DC /* WriteType.swift in Sources */,
 				87B9EEE8273BDE3B001F3FB4 /* DropDownView.swift in Sources */,
 				DBD5454727032B1C00063C98 /* FilterType.swift in Sources */,
 				DB1111EE27352D2D00D02F99 /* SplashViewController.swift in Sources */,
@@ -1302,12 +1312,14 @@
 				DB05B054271FEABB0067DB17 /* LoginViewController+dequeueCell.swift in Sources */,
 				DB7C04EC26FB1A04009F5C0A /* UIView+.swift in Sources */,
 				DB7C04FC26FB27A6009F5C0A /* TemplateImageButton.swift in Sources */,
+				875B8FFD273AAE850059DF2A /* Collection+.swift in Sources */,
 				DB05B050271F0AB00067DB17 /* LoginCollectionSection.swift in Sources */,
 				DB98FBD02744F0D5002409BF /* GestureModel.swift in Sources */,
 				87ACB0B227229A3000C78C86 /* CenterTextButton.swift in Sources */,
 				DB7B4704274104C800426EF1 /* OnboardingListViewController.swift in Sources */,
 				876243E22708704800BDA1DC /* WriteTypeButton.swift in Sources */,
 				8738E1CF271709660069BB80 /* RoundLabelWithButtonTableCell.swift in Sources */,
+				87CFA333273A5A1600D08824 /* WriteViewController+DataSource.swift in Sources */,
 				87EDCFD927316F8A002C98BE /* PostTableCell+setup.swift in Sources */,
 				DBA883B6272BEF9B0089643B /* DrawerCoreDataRepository.swift in Sources */,
 				DB98FBC82744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift in Sources */,

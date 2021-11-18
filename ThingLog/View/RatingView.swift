@@ -76,13 +76,12 @@ extension RatingView {
 
     @objc
     private func didTapButton(_ sender: UIButton) {
-        didTapButtonBlock?()
-
         let end: Int = sender.tag
 
         (0...end).forEach { buttons[$0].setImage(fillImage, for: .normal) }
         (end + 1..<maxCount).forEach { buttons[$0].setImage(emptyImage, for: .normal) }
         currentRating = end + 1
+        didTapButtonBlock?()
     }
 
     /// currentRating 값 만큼 button의 색상을 채운다.

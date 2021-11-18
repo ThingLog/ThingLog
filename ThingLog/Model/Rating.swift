@@ -9,11 +9,12 @@ import CoreData
 import Foundation
 
 enum ScoreType: Int16 {
-    case veryPoor = 0
-    case poor = 1
-    case good = 2
-    case veryGood = 3
-    case excellent = 4
+    case unrated = 0
+    case veryPoor = 1
+    case poor = 2
+    case good = 3
+    case veryGood = 4
+    case excellent = 5
 }
 
 struct Rating {

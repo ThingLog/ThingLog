@@ -23,9 +23,9 @@ final class WriteCoordinator: Coordinator {
     }
 
     /// WriteViewController로 이동한다.
-    /// - Parameter type: WriteType에 따라 ViewModel을 생성하기 위해 필요하다.
-    func showWriteViewController(with type: WriteType) {
-        let viewModel: WriteViewModel = WriteViewModel(writeType: type)
+    /// - Parameter type: PageType에 따라 ViewModel을 생성하기 위해 필요하다.
+    func showWriteViewController(with type: PageType) {
+        let viewModel: WriteViewModel = WriteViewModel(pageType: type)
         let writeViewController: WriteViewController = WriteViewController(viewModel: viewModel)
         writeViewController.coordinator = self
         navigationController.modalPresentationStyle = .fullScreen
