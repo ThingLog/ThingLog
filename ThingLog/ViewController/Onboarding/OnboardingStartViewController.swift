@@ -62,6 +62,7 @@ final class OnboardingStartViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDarkMode()
         view.backgroundColor = SwiftGenColors.primaryBackground.color
         setupView()
         setupBaseNavigationBar()

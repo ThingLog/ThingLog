@@ -83,6 +83,7 @@ class SelectingDrawerViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDarkMode()
         addSubView()
         setupDimmedView()
         setupPopupView()

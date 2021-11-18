@@ -132,25 +132,12 @@ final class ProfileView: UIView {
         setupBackgroundColor()
         setupView()
         setupBadgeView()
+        setupDarkModeForAnimation()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
-    }
-    
-    // 다크모드 감지
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        guard UIApplication.shared.applicationState == .inactive else {
-            return
-        }
-        newBadgeAnimationView.animation = Animation.named(self.traitCollection.userInterfaceStyle == .dark ? "drawerNewDark" : "drawerNew")
-        if newBadgeAnimationView.isHidden { return }
-        DispatchQueue.main.async {
-            self.newBadgeAnimationView.play()
-        }
     }
     
     // MARK: - SetUp
@@ -206,6 +193,27 @@ final class ProfileView: UIView {
             
             badgeView.widthAnchor.constraint(equalTo: newBadgeAnimationView.heightAnchor)
         ])
+    }
+    
+    /// 다크모드 설정 여부에 따라 애니메이션 뷰의 색을 변경해준다. AnimationView는 다른 아이콘과 다르게 다크모드 라이트모드에 대응하는 쌍이 없기 때문에, 따로 로직을 추가했다. 
+    func setupDarkModeForAnimation() {
+        let userInformationViewModel: UserInformationViewModelable = UserInformationiCloudViewModel()
+        userInformationViewModel.fetchUserInformation { userInfor in
+            if let userInfor: UserInformationable = userInfor {
+                let darkMode: Bool = userInfor.isAumatedDarkMode
+                if darkMode {
+                    self.newBadgeAnimationView.animation = Animation.named("drawerNewDark")
+                } else {
+                    self.newBadgeAnimationView.animation = Animation.named("drawerNew")
+                }
+            } else {
+                self.newBadgeAnimationView.animation = Animation.named(self.traitCollection.userInterfaceStyle == .dark ? "drawerNewDark" : "drawerNew")
+            }
+            if self.newBadgeAnimationView.isHidden { return }
+            DispatchQueue.main.async {
+                self.newBadgeAnimationView.play()
+            }
+        }
     }
 }
 

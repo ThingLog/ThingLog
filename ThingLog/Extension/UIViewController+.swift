@@ -24,5 +24,24 @@ extension UIViewController {
             navigationController?.navigationBar.setValue(true, forKey: "hidesShadow")
         }
     }
+    
+    func setDarkMode() {
+        let userInformationViewModel: UserInformationViewModelable = UserInformationiCloudViewModel()
+        userInformationViewModel.fetchUserInformation { userInfor in
+            guard let userInfor = userInfor else {
+                return
+            }
+            let darkMode: Bool = userInfor.isAumatedDarkMode
+            if darkMode {
+                self.overrideUserInterfaceStyle = .dark
+                self.navigationController?.overrideUserInterfaceStyle = .dark
+                self.tabBarController?.overrideUserInterfaceStyle = .dark
+            } else {
+                self.overrideUserInterfaceStyle = .light
+                self.navigationController?.overrideUserInterfaceStyle = .light
+                self.tabBarController?.overrideUserInterfaceStyle = .light
+            }
+        }
+    }
 }
  
