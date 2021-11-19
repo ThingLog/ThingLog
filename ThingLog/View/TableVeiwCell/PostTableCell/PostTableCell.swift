@@ -199,6 +199,7 @@ final class PostTableCell: UITableViewCell {
     /// 특별한 상황(사고싶다, 휴지통)에서 쓰이는 샀어요 버튼, 삭제/복구 버튼을 포함한 뷰
     lazy var specificActionContainerView: UIView = {
         let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
         view.addSubviews(boughtButton, trashActionButton)
         view.isHidden = true
