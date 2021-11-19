@@ -108,12 +108,18 @@ extension PostTableCell {
         let bottomSpacing: CGFloat = 16.0
         let leadingTrailingSpacing: CGFloat = 20.0
 
+        let lineViewHeightConstraint: NSLayoutConstraint = lineView.heightAnchor.constraint(equalToConstant: 0.5)
+        lineViewHeightConstraint.priority = .defaultHigh
+        lineViewHeightConstraint.isActive = true
+
+        let contentTextViewTopConstraint: NSLayoutConstraint = contentTextView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: topSpacing)
+        contentTextViewTopConstraint.priority = .defaultHigh
+        contentTextViewTopConstraint.isActive = true
+
         NSLayoutConstraint.activate([
-            lineView.heightAnchor.constraint(equalToConstant: 0.5),
             lineView.topAnchor.constraint(equalTo: contentsContainerView.topAnchor, constant: topSpacing),
             lineView.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor),
             lineView.trailingAnchor.constraint(equalTo: contentsContainerView.trailingAnchor),
-            contentTextView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: topSpacing),
             contentTextView.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor, constant: leadingTrailingSpacing),
             contentTextView.trailingAnchor.constraint(equalTo: contentsContainerView.trailingAnchor, constant: -leadingTrailingSpacing),
             contentTextView.centerXAnchor.constraint(equalTo: contentsContainerView.centerXAnchor),
@@ -130,17 +136,16 @@ extension PostTableCell {
         let boughtButtonLeadingTrailingSpacing: CGFloat = 20.0
 
         NSLayoutConstraint.activate([
+            specificActionContainerView.heightAnchor.constraint(equalToConstant: buttonHeight),
             boughtButton.leadingAnchor.constraint(equalTo: specificActionContainerView.leadingAnchor, constant: boughtButtonLeadingTrailingSpacing),
             boughtButton.topAnchor.constraint(equalTo: specificActionContainerView.topAnchor),
             boughtButton.trailingAnchor.constraint(equalTo: specificActionContainerView.trailingAnchor, constant: -boughtButtonLeadingTrailingSpacing),
             boughtButton.bottomAnchor.constraint(equalTo: specificActionContainerView.bottomAnchor),
-            boughtButton.heightAnchor.constraint(equalToConstant: buttonHeight),
 
             trashActionButton.leadingAnchor.constraint(equalTo: specificActionContainerView.leadingAnchor),
             trashActionButton.topAnchor.constraint(equalTo: specificActionContainerView.topAnchor),
             trashActionButton.trailingAnchor.constraint(equalTo: specificActionContainerView.trailingAnchor),
-            trashActionButton.bottomAnchor.constraint(equalTo: specificActionContainerView.bottomAnchor),
-            trashActionButton.heightAnchor.constraint(equalToConstant: buttonHeight)
+            trashActionButton.bottomAnchor.constraint(equalTo: specificActionContainerView.bottomAnchor)
         ])
         boughtButton.layer.cornerRadius = buttonHeight / 2
     }
@@ -186,6 +191,6 @@ extension PostTableCell: UICollectionViewDelegate, UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageWidth: CGFloat = scrollView.frame.size.width
         let page: Int = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1) + 1
-        imageCountLabel.text = "\(page)/10"
+        imageCountLabel.text = "\(page)/\(imageCount)"
     }
 }

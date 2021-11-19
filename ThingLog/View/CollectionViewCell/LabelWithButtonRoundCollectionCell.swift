@@ -44,6 +44,11 @@ final class LabelWithButtonRoundCollectionCell: UICollectionViewCell {
         label.text = text
         removeButton.isHidden = buttonIsHidden
     }
+
+    func configureColor(_ color: UIColor) {
+        contentView.layer.borderColor = color.cgColor
+        label.textColor = color
+    }
 }
 
 extension LabelWithButtonRoundCollectionCell {

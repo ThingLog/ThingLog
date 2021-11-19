@@ -14,7 +14,8 @@ protocol PostCoordinatorProtocol: Coordinator {
 
 extension PostCoordinatorProtocol {
     func showPostViewController(with viewModel: PostViewModel) {
-        // TODO: - ⚠️ PostViewController로 대체할 예정
-        navigationController.pushViewController(TestPostViewController(postViewModel: viewModel), animated: true)
+        let postViewController: PostViewController = PostViewController(viewModel: viewModel)
+        postViewController.coordinator = self
+        navigationController.pushViewController(postViewController, animated: true)
     }
 }

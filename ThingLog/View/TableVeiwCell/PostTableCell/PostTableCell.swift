@@ -5,6 +5,7 @@
 //  Created by 이지원 on 2021/11/02.
 //
 
+import CoreData
 import UIKit
 
 import RxCocoa
@@ -198,8 +199,10 @@ final class PostTableCell: UITableViewCell {
     /// 특별한 상황(사고싶다, 휴지통)에서 쓰이는 샀어요 버튼, 삭제/복구 버튼을 포함한 뷰
     lazy var specificActionContainerView: UIView = {
         let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
         view.addSubviews(boughtButton, trashActionButton)
+        view.isHidden = true
         return view
     }()
 
@@ -207,6 +210,7 @@ final class PostTableCell: UITableViewCell {
         let button: RoundCenterTextButton = RoundCenterTextButton(cornerRadius: 0.0)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("샀어요 !", for: .normal)
+        button.isHidden = true
         return button
     }()
 
@@ -215,6 +219,7 @@ final class PostTableCell: UITableViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.leftButton.setTitle("삭제", for: .normal)
         button.rightButton.setTitle("복구", for: .normal)
+        button.isHidden = true
         return button
     }()
 
@@ -240,14 +245,7 @@ final class PostTableCell: UITableViewCell {
     let categoryViewDataSource: PostCategoryViewDataSouce = PostCategoryViewDataSouce()
     let slideImageViewDataSource: PostSlideImageViewDataSource = PostSlideImageViewDataSource()
     var disposeBag: DisposeBag = DisposeBag()
-    /// TODO: 이후 뷰모델을 통해 어떤 화면인지 받을 예정, 테스트를 위한 프로퍼티
-    var isTrash: Bool = true {
-        didSet { updateSpecificActionView() }
-    }
-    /// TODO: 이후 뷰모델을 통해 어떤 화면인지 받을 예정, 테스트를 위한 프로퍼티
-    var isBought: Bool = true {
-        didSet { updateSpecificActionView() }
-    }
+    private(set) var imageCount: Int = 0
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -280,16 +278,135 @@ final class PostTableCell: UITableViewCell {
         setupStackView()
     }
 
-    /// 특별한 상황에서 쓰이는 버튼(사고싶다, 휴지통 게시물인 경우)을 숨김/표시 처리한다.
-    /// 이후 뷰모델에서 어떤 화면인지 넘겨받으면 리팩토링할 예정
-    func updateSpecificActionView() {
-        if isBought && isTrash {
-            specificActionContainerView.isHidden = true
+    func configure(with post: PostEntity) {
+        guard let type: PageType = post.postType?.pageType else {
+            fatalError("\(#function): Not Found PageType")
+        }
+
+        // 날짜
+        if let createDate: Date = post.createDate {
+            dateLabel.text = "\(createDate.toString(.year))년 \(createDate.toString(.month))월 \(createDate.toString(.day))일"
+        }
+
+        // 이미지
+        configureSlideImageView(with: post.attachments)
+
+        // 좋아요 여부
+        likeButton.isSelected = post.isLike
+
+        // 카테고리
+        configureCategory(with: post.categories)
+
+        // 제목
+        nameLabel.text = (post.title ?? "").isEmpty ? "물건 이름" : post.title
+        nameLabel.configureLabel(isEmpty: (post.title ?? "").isEmpty)
+
+        // 별점
+        ratingView.currentRating = Int(post.rating?.score ?? 0)
+
+        // 판매처/구매처
+        configurePurchasePlaceLabel(type: type, place: post.purchasePlace, giver: post.giftGiver)
+
+        // 가격
+        configurePriceLabel(type: type, price: post.price)
+
+        // 본문
+        configureContents(text: post.contents)
+
+        // 댓글 n개 모두 보기
+        configureCommentMoreButton(with: post.comments?.allObjects.count)
+        // SpecificAction (휴지통, 사고싶다)
+        configureSpecificAction(type: type, isDelete: post.postType?.isDelete)
+    }
+}
+
+// MARK: Configure Method
+extension PostTableCell {
+    /// SlideImageView의 데이터를 구성한다.
+    private func configureSlideImageView(with attachments: NSSet?) {
+        if let attachments: [AttachmentEntity] = attachments?.allObjects as? [AttachmentEntity] {
+            let imageDatas: [Data] = attachments.compactMap { $0.imageData?.originalImage }
+            slideImageViewDataSource.images = imageDatas.compactMap { UIImage(data: $0) }
+            imageCount = imageDatas.count
+            imageCountLabel.text = "1/\(imageCount)"
+        }
+    }
+
+    /// CategoryViewDataSource의 데이터를 구성한다. 카테고리가 선택되어있지 않는 경우, 기본값을 넣는다.
+    private func configureCategory(with categories: NSSet?) {
+        if let categories: [CategoryEntity] = categories?.allObjects as? [CategoryEntity] {
+            categoryViewDataSource.items = categories.isEmpty ? ["카테고리"] : categories.compactMap { $0.title }
+            categoryViewDataSource.isEmpty = categories.isEmpty
+        }
+    }
+
+    /// PurchasePlace을 구성한다. `선물받았다` 게시물인 경우에 placeLabel에 선물 준 사람을 넣는다.
+    /// - Parameters:
+    ///   - type: 데이터가 없는 경우에 기본 값을 표시하기 위해서 필요하다.
+    private func configurePurchasePlaceLabel(type: PageType, place: String?, giver: String?) {
+        switch type {
+        case .bought, .wish:
+            if (place ?? "").isEmpty {
+                placeLabel.text = type == .bought ? "구매처" : "판매처"
+            } else {
+                placeLabel.text = place
+            }
+            placeLabel.configureLabel(isEmpty: (place ?? "").isEmpty)
+        case .gift:
+            placeLabel.text = (giver ?? "").isEmpty ? "선물 준 사람" : giver
+            placeLabel.configureLabel(isEmpty: (giver ?? "").isEmpty)
+        }
+    }
+
+    /// PriceLabel 을 구성한다. PageType == .gift 인 경우 priceLabel. text = "" 로 설정한다.
+    /// price 가 0인 경우 데이터가 없을 때로 가정하여 표시한다.
+    private func configurePriceLabel(type: PageType, price: Int64) {
+        if type == .gift {
+            priceLabel.text = ""
             return
         }
-        
-        specificActionContainerView.isHidden = false
-        boughtButton.isHidden = !isBought
-        trashActionButton.isHidden = !isTrash
+
+        priceLabel.text = price == 0 ? "가격" : "\(price)원"
+        priceLabel.font = price == 0 ? UIFont.Pretendard.body1 : UIFont.Pretendard.title1
+        priceLabel.textColor = price == 0 ? SwiftGenColors.gray2.color : SwiftGenColors.black.color
+    }
+
+    /// contentTextView를 구성한다. 텍스트가 없는 경우 기본 값과 함께 색상을 변경한다.
+    private func configureContents(text: String?) {
+        let isEmpty: Bool = text?.isEmpty ?? true
+
+        contentTextView.text = isEmpty ? "물건에 대한 생각이나 감정을 자유롭게 기록해보세요." : text
+        contentTextView.textColor = isEmpty ? SwiftGenColors.gray2.color : SwiftGenColors.primaryBlack.color
+    }
+
+    /// CommentMoreButton을 구성한다.
+    /// count 가 0이거나 nil인 경우 commentMoreButton을 숨김 처리한다. 그렇지 않다면 "댓글 \(number)개 모두 보기"로 타이틀을 구성하고 표시한다.
+    private func configureCommentMoreButton(with number: Int?) {
+        if let number: Int = number, number != 0 {
+            commentMoreButton.isHidden = false
+            commentMoreButton.setTitle("댓글 \(number)개 모두 보기", for: .normal)
+        } else {
+            commentMoreButton.isHidden = true
+        }
+    }
+
+    /// 휴지통이거나, 사고싶다 인 경우 버튼을 숨김/표시 처리한다.
+    private func configureSpecificAction(type: PageType, isDelete: Bool?) {
+        // 휴지통이면 삭제/복구 버튼 표시
+        if let isDelete: Bool = isDelete, isDelete == true {
+            specificActionContainerView.isHidden = false
+            trashActionButton.isHidden = false
+            boughtButton.isHidden = true
+            return
+        }
+
+        // 사고싶다면 샀어요 버튼 표시, 아니라면 specificActionContainerView 숨김 처리
+        if type == .wish {
+            specificActionContainerView.isHidden = false
+            trashActionButton.isHidden = true
+            boughtButton.isHidden = false
+        } else {
+            specificActionContainerView.isHidden = true
+        }
     }
 }

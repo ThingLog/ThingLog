@@ -72,4 +72,11 @@ final class HorizontalScrollLabel: UIView {
             label.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
         ])
     }
+
+    /// Label 색상, 폰트를 변경한다.
+    /// - Parameter isEmpty: isEmpty 값에 따라 색상, 폰트를 변경한다.
+    func configureLabel(isEmpty: Bool = false) {
+        label.font = isEmpty ? UIFont.Pretendard.body1 : UIFont.Pretendard.title1
+        label.textColor = isEmpty ? SwiftGenColors.gray2.color : SwiftGenColors.black.color
+    }
 }
