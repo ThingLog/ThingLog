@@ -23,6 +23,6 @@ struct PhotoCardInset {
     let bottomPaddingForOptionView: CGFloat = 22
     let bottomPaddingForColorCollectionView: CGFloat = 30
     let bottomPaddingForFrameCollectionView: CGFloat = 15
-    let bottomPaddingForLogoView: CGFloat = 11
-    let bottomPaddingForRatingView: CGFloat = 14
+    let bottomPaddingForLogoView: CGFloat = 15
+    let bottomPaddingForRatingView: CGFloat = 18
 }

@@ -76,13 +76,12 @@ extension RatingView {
 
     @objc
     private func didTapButton(_ sender: UIButton) {
-        didTapButtonBlock?()
-
         let end: Int = sender.tag
 
         (0...end).forEach { buttons[$0].setImage(fillImage, for: .normal) }
         (end + 1..<maxCount).forEach { buttons[$0].setImage(emptyImage, for: .normal) }
         currentRating = end + 1
+        didTapButtonBlock?()
     }
 
     /// currentRating 값 만큼 button의 색상을 채운다.
@@ -96,5 +95,10 @@ extension RatingView {
         buttons.forEach {
             $0.tintColor = color
         }
+    }
+    
+    /// StackView안의 spacing을 조절한다. 포토카드에서 기존에 구현된 것 보다 더 좁게 사용하기 위함.
+    func changeSpacingInStackView(_ spacing: CGFloat) {
+        self.stackView.spacing = spacing
     }
 }

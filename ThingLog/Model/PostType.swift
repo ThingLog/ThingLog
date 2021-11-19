@@ -7,11 +7,27 @@
 
 import CoreData
 import Foundation
+import UIKit.UIImage
 
+/// PostType을 저장할 때, 열거형으로 저장함으로써 가독성과 상수에 대한 안정성이 보장된다.
 enum PageType: Int16 {
     case bought = 0
     case wish = 1
     case gift = 2
+}
+
+extension PageType {
+    /// PageType에 따라 이미지를 반환한다.
+    var image: UIImage? {
+        switch self {
+        case .bought:
+            return SwiftGenIcons.buyVer1.image.withTintColor(SwiftGenColors.black.color)
+        case .gift:
+            return SwiftGenIcons.giftVer1.image.withTintColor(SwiftGenColors.black.color)
+        case .wish:
+            return SwiftGenIcons.wishVer1.image.withTintColor(SwiftGenColors.black.color)
+        }
+    }
 }
 
 struct PostType {
