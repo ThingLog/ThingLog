@@ -159,6 +159,7 @@
 		DB7C04F226FB1F36009F5C0A /* ContentsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04F126FB1F36009F5C0A /* ContentsPageViewController.swift */; };
 		DB7C04FC26FB27A6009F5C0A /* TemplateImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7C04FB26FB27A6009F5C0A /* TemplateImageButton.swift */; };
 		DB87730C270B430C00401961 /* RecentSearchDataViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87730B270B430C00401961 /* RecentSearchDataViewModelProtocol.swift */; };
+		DB8AB8432746364B0064A6A4 /* SystemSettingCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8AB8422746364B0064A6A4 /* SystemSettingCoordinatorProtocol.swift */; };
 		DB8BF6792705D25700FD5FDB /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6782705D25700FD5FDB /* LogoView.swift */; };
 		DB8BF6812706D89E00FD5FDB /* ResultsWithDropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6802706D89E00FD5FDB /* ResultsWithDropBoxView.swift */; };
 		DB8BF6832706DA7900FD5FDB /* EasyLookTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6822706DA7900FD5FDB /* EasyLookTopView.swift */; };
@@ -415,6 +416,7 @@
 		DB7C04F126FB1F36009F5C0A /* ContentsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsPageViewController.swift; sourceTree = "<group>"; };
 		DB7C04FB26FB27A6009F5C0A /* TemplateImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateImageButton.swift; sourceTree = "<group>"; };
 		DB87730B270B430C00401961 /* RecentSearchDataViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchDataViewModelProtocol.swift; sourceTree = "<group>"; };
+		DB8AB8422746364B0064A6A4 /* SystemSettingCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSettingCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		DB8BF6782705D25700FD5FDB /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		DB8BF6802706D89E00FD5FDB /* ResultsWithDropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsWithDropBoxView.swift; sourceTree = "<group>"; };
 		DB8BF6822706DA7900FD5FDB /* EasyLookTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookTopView.swift; sourceTree = "<group>"; };
@@ -765,6 +767,7 @@
 				87EDCFD327312517002C98BE /* PostCoordinator.swift */,
 				DB6909622712DB0800BB54E4 /* SettingCoordinator.swift */,
 				DB73BB06273A61CE00719DF6 /* SplashCoordinator.swift */,
+				DB8AB8422746364B0064A6A4 /* SystemSettingCoordinatorProtocol.swift */,
 				87BB17A827098A720088B847 /* WriteCoordinator.swift */,
 			);
 			path = Coordinator;
@@ -1286,6 +1289,7 @@
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
 				DB7B470B27410CD700426EF1 /* OnboardingPage2ViewController.swift in Sources */,
 				DB32B28B272D0532009074AF /* DrawerEntity+.swift in Sources */,
+				DB8AB8432746364B0064A6A4 /* SystemSettingCoordinatorProtocol.swift in Sources */,
 				DB6909632712DB0800BB54E4 /* SettingCoordinator.swift in Sources */,
 				DBD5455027033D9A00063C98 /* ButtonRoundCollectionCell.swift in Sources */,
 				87336FDD272EE85E00E1C4CA /* UserPermissionsViewModel.swift in Sources */,
