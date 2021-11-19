@@ -203,6 +203,7 @@ final class AlertViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDarkMode()
         view.backgroundColor = .clear
         view.layoutIfNeeded()
         

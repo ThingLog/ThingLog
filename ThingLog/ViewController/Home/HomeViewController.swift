@@ -67,6 +67,7 @@ final class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setDarkMode()
         fetchRepresentativeDrawer()
     }
     
@@ -195,6 +196,7 @@ extension HomeViewController {
                 self.profileView.newBadgeAnimationView.isHidden = true
                 return
             }
+            self.profileView.setupDarkModeForAnimation()
             DispatchQueue.main.async {
                 self.profileView.newBadgeAnimationView.isHidden = false
                 self.profileView.newBadgeAnimationView.play()

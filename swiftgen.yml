@@ -38,6 +38,16 @@
           imageTypeName: IconImageSwiftGen
           imageAliasName: IconImageTypeAlias
         output: ThingLog/SwiftGen/IconsAssets.swift
+   - inputs:
+      - ThingLog/Resource/Frame.xcassets
+     outputs:
+      - templateName: swift5
+        params:
+          forceProvidesNamespaces: true
+          enumName: SwiftGenFrame # enum타입 명을 바꾼다.
+          imageTypeName: FrameImageSwiftGen
+          imageAliasName: FrameImageTypeAlias
+        output: ThingLog/SwiftGen/FrameAssets.swift
 # xcassets
 # https://github.com/SwiftGen/SwiftGen/blob/stable/Documentation/templates/xcassets/swift5.md
 # xcassets:

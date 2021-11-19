@@ -30,7 +30,7 @@ class SelectingDrawerViewController: UIViewController {
         label.textAlignment = .center
         label.numberOfLines = 0
         label.font = UIFont.Pretendard.body2
-        label.textColor = SwiftGenColors.systemBlue.color
+        label.textColor = SwiftGenColors.systemGreen.color
         label.translatesAutoresizingMaskIntoConstraints = false
         label.setContentHuggingPriority(.init(rawValue: 50), for: .vertical)
         return label
@@ -83,6 +83,7 @@ class SelectingDrawerViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDarkMode()
         addSubView()
         setupDimmedView()
         setupPopupView()

@@ -12,7 +12,7 @@ class SplashViewController: UIViewController {
     var coordinator: SplashCoordinator?
     
     let starAnimationView: AnimationView = {
-        let view: AnimationView = AnimationView(name: "splash")
+        let view: AnimationView = AnimationView(name: AnimationJson.splash.name)
         view.animationSpeed = 1.0
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -20,6 +20,7 @@ class SplashViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDarkMode()
         setupView()
     }
     
@@ -30,8 +31,8 @@ class SplashViewController: UIViewController {
         NSLayoutConstraint.activate([
             starAnimationView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             starAnimationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            starAnimationView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.65),
-            starAnimationView.heightAnchor.constraint(equalTo: starAnimationView.widthAnchor)
+            starAnimationView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.26),
+            starAnimationView.heightAnchor.constraint(equalTo: starAnimationView.widthAnchor, multiplier: 2)
         ])
         
         // 애니메이션 동작후, 뷰컨트롤러 전환.

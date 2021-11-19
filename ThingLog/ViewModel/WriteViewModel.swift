@@ -21,10 +21,10 @@ final class WriteViewModel {
     }
 
     // MARK: - Properties
-    var writeType: WriteType
+    var pageType: PageType
     /// WriteTextFieldCell을 표시할 때 필요한 keyboardType, placeholder 구성. writeType에 따라 개수가 다르다.
     var typeInfo: [(keyboardType: UIKeyboardType, placeholder: String)] {
-        switch writeType {
+        switch pageType {
         case .bought:
             return [(.default, "물건 이름"), (.numberPad, "가격"), (.default, "구매처")]
         case .wish:
@@ -33,45 +33,105 @@ final class WriteViewModel {
             return [(.default, "물건 이름"), (.default, "선물 준 사람")]
         }
     }
-    // Section 마다 표시할 항목의 개수
+    /// Section 마다 표시할 항목의 개수
     lazy var itemCount: [Int] = [1, 1, typeInfo.count, 1, 1]
-    private(set) var originalImages: [UIImage] = [] {
-        didSet {
-            print("⚡️ 호출..", originalImages)
-        }
-    }
-    private let thumbnailSize: CGSize = CGSize(width: 80, height: 80)
-    private var selectedCategories: [Category] = []
+    /// 썸네일 크기
+    private let thumbnailSize: CGSize = CGSize(width: 100, height: 100)
+    /// 이미지가 저장될 크기
+    private let imageSize: CGSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+    private let repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
+    private var isSelectImages: Bool = false
+
+    // MARK: - Properties for save Post
+    var price: Int = 0
+    var rating: Int = 0
+    var contents: String = ""
+    lazy var typeValues: [String?] = Array(repeating: "", count: typeInfo.count)
+    private(set) var originalImages: [UIImage] = []
+    private var categories: [Category] = []
+
+    // MARK: - Rx
+    private(set) var thumbnailImagesSubject: BehaviorSubject<[UIImage]> = BehaviorSubject<[UIImage]>(value: [])
+    private(set) var categorySubject: BehaviorSubject<[Category]> = BehaviorSubject<[Category]>(value: [])
     private let disposeBag: DisposeBag = DisposeBag()
 
-    init(writeType: WriteType) {
-        self.writeType = writeType
+    // MARK: - Init
+    init(pageType: PageType) {
+        self.pageType = pageType
 
         setupBinding()
     }
 
+    // MARK: - setup
     private func setupBinding() {
         bindNotificationPassToSelectedCategories()
-        bindNotificationRemoveSelectedCategory()
         bindNotificationPassSelectPHAssets()
+        bindThumbnailImagesSubject()
+        bindNotificationRemoveSelectedThumbnail()
+        bindCategorySubject()
     }
 
-    /// 파라미터로 전달받은 PHAsset을 UIImage로 변환하여 반환한다.
-    /// - Parameter assets: 가져올 데이터
-    /// - Returns: thumbnailSize의 [UIImage]
-    func requestThumbnailImages(with assets: [PHAsset]) -> [UIImage] {
-        var images: [UIImage] = []
-        let options: PHImageRequestOptions = PHImageRequestOptions()
-        options.isSynchronous = true
-
-        assets.forEach { asset in
-            asset.toImage(targetSize: thumbnailSize, options: options) { image in
-                guard let image = image else { return }
-                images.append(image)
-            }
+    /// Core Data에 게시물을 저장한다.
+    /// - Parameter completion: 성공 여부를 반환한다.
+    func save(completion: @escaping (Bool) -> Void) {
+        guard isSelectImages else {
+            completion(false)
+            return
         }
 
-        return images
+        let newPost: Post = createNewPost()
+
+        repository.create(newPost) { result in
+            switch result {
+            case .success:
+                completion(true)
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
+
+    /// 사용자에게 입력받은 데이터를 토대로 Post 객체를 생성한다.
+    private func createNewPost() -> Post {
+        let title: String = typeValues[0] ?? ""
+        var purchasePlace: String = ""
+        var giftGiver: String = ""
+
+        switch pageType {
+        case .bought:
+            price = Int(typeValues[1]?.filter("0123456789".contains) ?? "") ?? 0
+            purchasePlace = typeValues[2] ?? ""
+        case .wish:
+            price = Int(typeValues[1]?.filter("0123456789".contains) ?? "") ?? 0
+            purchasePlace = typeValues[2] ?? ""
+        case .gift:
+            giftGiver = typeValues[1] ?? ""
+        }
+
+        let attachments: [Attachment] = createAttachment()
+
+        return Post(title: title,
+                    price: price,
+                    purchasePlace: purchasePlace,
+                    contents: contents,
+                    giftGiver: giftGiver,
+                    postType: PostType(isDelete: false, type: pageType),
+                    rating: Rating(score: ScoreType(rawValue: Int16(rating)) ?? ScoreType.unrated),
+                    categories: categories,
+                    attachments: attachments)
+    }
+
+    /// originalImages로 [Attachment] 를 생성한다.
+    private func createAttachment() -> [Attachment] {
+        var attachments: [Attachment] = []
+        for index in 0..<originalImages.count {
+            if let thumbnail: UIImage = try? thumbnailImagesSubject.value()[index] {
+                let attachment: Attachment = Attachment(thumbnail: thumbnail,
+                                                        imageData: .init(originalImage: originalImages[index]))
+                attachments.append(attachment)
+            }
+        }
+        return attachments
     }
 }
 
@@ -83,21 +143,7 @@ extension WriteViewModel {
                 notification.userInfo?[Notification.Name.passToSelectedCategories] as? [Category] ?? []
             }
             .bind { [weak self] categories in
-                self?.selectedCategories = categories
-            }.disposed(by: disposeBag)
-    }
-
-    /// `WriteCategoryTableCell` 에서 삭제한 카테고리를 `selectedCategoryIndexPaths`에서도 삭제한다.
-    private func bindNotificationRemoveSelectedCategory() {
-        NotificationCenter.default.rx.notification(.removeSelectedCategory, object: nil)
-            .map { notification -> Category? in
-                notification.userInfo?[Notification.Name.removeSelectedCategory] as? Category
-            }
-            .bind { [weak self] category in
-                if let category: Category = category,
-                   let firstIndex: Int = self?.selectedCategories.firstIndex(of: category) {
-                    self?.selectedCategories.remove(at: firstIndex)
-                }
+                self?.categorySubject.onNext(categories)
             }.disposed(by: disposeBag)
     }
 
@@ -109,21 +155,74 @@ extension WriteViewModel {
                 notification.userInfo?[Notification.Name.passSelectAssets] as? [PHAsset] ?? []
             }
             .bind { [weak self] assets in
-                self?.executeOriginalImages(with: assets)
+                self?.requestThumbnailImages(with: assets)
+                self?.requestOriginalImages(with: assets)
             }.disposed(by: disposeBag)
+    }
+
+    /// 이미지가 선택되어 있는 지 여부를 `isSelectImages` 에 갱신한다.
+    private func bindThumbnailImagesSubject() {
+        thumbnailImagesSubject
+            .map { $0.isNotEmpty }
+            .bind { [weak self] isNotEmpty in
+                self?.isSelectImages = isNotEmpty
+            }.disposed(by: disposeBag)
+    }
+
+    /// WriteImageTableCell 에서 삭제한 썸네일을 originalImages에서도 삭제한다.
+    private func bindNotificationRemoveSelectedThumbnail() {
+        NotificationCenter.default.rx
+            .notification(.removeSelectedThumbnail)
+            .map { notification -> IndexPath in
+                notification.userInfo?[Notification.Name.removeSelectedThumbnail] as? IndexPath ?? IndexPath()
+            }
+            .bind { [weak self] indexPath in
+                self?.originalImages.remove(at: indexPath.row - 1)
+            }.disposed(by: disposeBag)
+    }
+
+    /// CategorySubject가 갱신될 때마다 categories에 저장한다.
+    private func bindCategorySubject() {
+        categorySubject
+            .bind { [weak self] categories in
+                self?.categories = categories
+            }.disposed(by: disposeBag)
+    }
+
+    /// 파라미터로 전달받은 `PHAsset`을 `UIImage`로 변환하여 `thumbnailImagesSubject`에 저장한다.
+    /// - Parameter assets: 가져올 데이터
+    private func requestThumbnailImages(with assets: [PHAsset]) {
+        var images: [UIImage] = []
+        let options: PHImageRequestOptions = PHImageRequestOptions()
+        options.isSynchronous = true
+
+        assets.forEach { asset in
+            asset.toImage(targetSize: self.thumbnailSize, options: options) { image in
+                guard let image = image else { return }
+                images.append(image)
+                if images.count == assets.count {
+                    self.thumbnailImagesSubject.onNext(images)
+                }
+            }
+        }
     }
 
     /// 파라미터로 받은 `PHAsset`을 `UIImage`로 변환하여 originalImages에 저장한다. 비동기로 동작한다.
     /// - Parameter assets: UIImage로 변환할 [PHAsset]
-    private func executeOriginalImages(with assets: [PHAsset]) {
+    private func requestOriginalImages(with assets: [PHAsset]) {
+        var images: [UIImage] = []
         let options: PHImageRequestOptions = PHImageRequestOptions()
         options.isSynchronous = true
 
         DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
             assets.forEach { asset in
-                asset.toImage(targetSize: PHImageManagerMaximumSize, options: options) { image in
+                asset.toImage(targetSize: self.imageSize, options: options) { image in
                     guard let image = image else { return }
-                    self?.originalImages.append(image)
+                    images.append(image)
+                    if images.count == assets.count {
+                        self.originalImages = images
+                    }
                 }
             }
         }

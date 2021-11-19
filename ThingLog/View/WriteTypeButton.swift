@@ -27,7 +27,7 @@ final class WriteTypeButton: UIView {
     }()
 
     // MARK: Properties
-    var type: WriteType?
+    var type: PageType?
     private let iconWidth: CGFloat = 24.0
 
     override init(frame: CGRect) {
@@ -40,7 +40,7 @@ final class WriteTypeButton: UIView {
         setupView()
     }
 
-    init(type: WriteType) {
+    init(type: PageType) {
         super.init(frame: .zero)
         self.type = type
         setupView()

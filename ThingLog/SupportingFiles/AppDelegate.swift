@@ -11,7 +11,9 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        DrawerCoreDataRepository(coreDataStack: CoreDataStack.shared,
+                                 defaultDrawers: DefaultDrawerModel().drawers).fetchDrawers(nil)
         return true
     }
 

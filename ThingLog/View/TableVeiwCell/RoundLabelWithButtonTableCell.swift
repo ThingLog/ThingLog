@@ -11,6 +11,7 @@ import UIKit
 ///
 /// [이미지](https://www.notion.so/RoundLabelWithButtonTableCell-6f22273ede304c1caf3e6170dbcd3a50)
 final class RoundLabelWithButtonTableCell: UITableViewCell {
+    // MARK: - View Properties
     private let nameLabel: PaddingLabel = {
         let label: PaddingLabel = PaddingLabel(padding: .init(top: 1, left: 8, bottom: 1, right: 8))
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -42,6 +43,7 @@ final class RoundLabelWithButtonTableCell: UITableViewCell {
         return button
     }()
 
+    // MARK: - Properties
     var isSelectedCategory: Bool = false {
         didSet {
             selectedButton.backgroundColor = isSelectedCategory ? SwiftGenColors.black.color : SwiftGenColors.white.color

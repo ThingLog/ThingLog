@@ -24,7 +24,7 @@ final class ChoiceWritingView: UIView {
         return writeView
     }()
 
-    let selectedWriteTypeSubject: PublishSubject<WriteType> = PublishSubject<WriteType>()
+    let selectedWriteTypeSubject: PublishSubject<PageType> = PublishSubject<PageType>()
     private var heightConstraint: NSLayoutConstraint?
     private let heightMax: CGFloat = 90.0
     private let disposeBag: DisposeBag = DisposeBag()
@@ -60,7 +60,6 @@ final class ChoiceWritingView: UIView {
         ])
         heightConstraint?.isActive = true
 
-        
         clipsToBounds = true
         layer.cornerRadius = 17.0
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -103,7 +102,7 @@ extension ChoiceWritingView {
     /// - Parameter sender: sender를 이용해 tap한 뷰를 가려낸다.
     private func tappedWriteButton(_ sender: UITapGestureRecognizer) {
         guard let button: WriteTypeButton = sender.view as? WriteTypeButton,
-              let type: WriteType = button.type else {
+              let type: PageType = button.type else {
                   return
               }
         selectedWriteTypeSubject.onNext(type)

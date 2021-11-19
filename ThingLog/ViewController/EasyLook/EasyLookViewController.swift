@@ -59,6 +59,7 @@ final class EasyLookViewController: UIViewController {
         subscribeResultsWithDropBoxView()
         subscribeHorizontalCollectionView()
         subscribeBaseControllerScrollOffset()
+        subscribeContentViewControllerDidSelect()
         
         fetchAllPosts()
         fetchAllCategory()

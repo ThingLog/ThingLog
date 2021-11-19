@@ -91,6 +91,7 @@ final class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDarkMode()
         setupTableView()
         setupNavigationBar()
         setupBackgroundColor()
@@ -181,6 +182,7 @@ extension SettingViewController: UITableViewDataSource {
                             return
                         }
                         self?.userInformationViewModel.updateUserInformation(userInformation)
+                        self?.setDarkMode()
                     }
                     .disposed(by: cell.disposeBag)
                 
