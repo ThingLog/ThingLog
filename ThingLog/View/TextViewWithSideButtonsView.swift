@@ -147,7 +147,7 @@ extension TextViewWithSideButtonsView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == SwiftGenColors.gray2.color {
             textView.text = nil
-            textView.textColor = SwiftGenColors.black.color
+            textView.textColor = SwiftGenColors.primaryBlack.color
         }
     }
 

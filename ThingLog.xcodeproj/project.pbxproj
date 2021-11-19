@@ -42,6 +42,7 @@
 		874F52C9273E868200F79921 /* DropDownView+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874F52C8273E868200F79921 /* DropDownView+Delegate.swift */; };
 		875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */; };
 		875B8FFD273AAE850059DF2A /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B8FFC273AAE850059DF2A /* Collection+.swift */; };
+		875C09AA2747581D00ECE706 /* TextViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C09A92747581D00ECE706 /* TextViewCellDelegate.swift */; };
 		8761A88427296C0800EA8683 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761A88327296C0700EA8683 /* PhotosViewController.swift */; };
 		876243E22708704800BDA1DC /* WriteTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876243E12708704800BDA1DC /* WriteTypeButton.swift */; };
 		876C157927044BA0000C1C84 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157827044BA0000C1C84 /* RepositoryError.swift */; };
@@ -308,6 +309,7 @@
 		874F52C8273E868200F79921 /* DropDownView+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DropDownView+Delegate.swift"; sourceTree = "<group>"; };
 		875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		875B8FFC273AAE850059DF2A /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
+		875C09A92747581D00ECE706 /* TextViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCellDelegate.swift; sourceTree = "<group>"; };
 		8761A88327296C0700EA8683 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		876243E12708704800BDA1DC /* WriteTypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTypeButton.swift; sourceTree = "<group>"; };
 		876C157827044BA0000C1C84 /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
@@ -572,15 +574,16 @@
 		873EC00726D39055003C3525 /* ThingLog */ = {
 			isa = PBXGroup;
 			children = (
-				DBB862BA272BFE9200B72730 /* ThingLog.entitlements */,
-				DBAE8E9226FDB39C00F536AD /* Resource */,
-				DBAE8E9126FDAE7500F536AD /* SwiftGen */,
-				87F2188A26FB78B700C3FBCA /* Entity */,
-				87F2188726FB5E6000C3FBCA /* Repository */,
 				DB7C04A426F5F26B009F5C0A /* Coordinator */,
+				87F2188A26FB78B700C3FBCA /* Entity */,
 				DB7C04EA26FB19FE009F5C0A /* Extension */,
 				875A965E26F0E4DC001BF0D0 /* Model */,
+				875C09A82747580800ECE706 /* Protocol */,
+				87F2188726FB5E6000C3FBCA /* Repository */,
+				DBAE8E9226FDB39C00F536AD /* Resource */,
 				873EC05026D50825003C3525 /* SupportingFiles */,
+				DBAE8E9126FDAE7500F536AD /* SwiftGen */,
+				DBB862BA272BFE9200B72730 /* ThingLog.entitlements */,
 				DB7C04E626FB1990009F5C0A /* View */,
 				DB7C04DF26FB18F4009F5C0A /* ViewController */,
 				873EC00C26D39055003C3525 /* ViewController.swift */,
@@ -684,6 +687,14 @@
 				874F52C8273E868200F79921 /* DropDownView+Delegate.swift */,
 			);
 			path = DropDownView;
+			sourceTree = "<group>";
+		};
+		875C09A82747580800ECE706 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				875C09A92747581D00ECE706 /* TextViewCellDelegate.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		87A863C62740DCB10023FBE7 /* Comment */ = {
@@ -1401,6 +1412,7 @@
 				87EDCFD027311E9F002C98BE /* PostViewModel.swift in Sources */,
 				87DAEB1B270BEAE50038C487 /* CameraButtonCollectionCell.swift in Sources */,
 				DB73BB07273A61CE00719DF6 /* SplashCoordinator.swift in Sources */,
+				875C09AA2747581D00ECE706 /* TextViewCellDelegate.swift in Sources */,
 				DBD2244B27085DFB004C5184 /* SearchViewController.swift in Sources */,
 				873ED12B272AC8CB00C9F7F1 /* PhotosViewController+Albums.swift in Sources */,
 				DB7C04C726F9E693009F5C0A /* UserInformationUserDefaultsViewModel.swift in Sources */,

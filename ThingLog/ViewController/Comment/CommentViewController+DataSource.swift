@@ -43,8 +43,36 @@ extension CommentViewController {
             return CommentTableCell()
         }
 
+        cell.delegate = self
         cell.textView.text = "테스트"
+        cell.modifyButton.rx.tap
+            .bind { [weak self] in
+                cell.isEditable.toggle()
+                cell.textView.isEditable ? cell.textView.becomeFirstResponder() : cell.textView.resignFirstResponder()
+                self?.hideCommentInputView(cell.isEditable)
+            }.disposed(by: cell.disposeBag)
+
+        cell.deleteButton.rx.tap
+            .bind { [weak self] in
+                if cell.isEditable {
+                    cell.isEditable.toggle()
+                    cell.textView.resignFirstResponder()
+                } else {
+                    // TODO: 삭제 기능
+                }
+                self?.hideCommentInputView(cell.isEditable)
+            }.disposed(by: cell.disposeBag)
 
         return cell
+    }
+}
+
+extension CommentViewController: TextViewCellDelegate {
+    func updateTextViewHeight() {
+        DispatchQueue.main.async { [weak tableView] in
+            tableView?.beginUpdates()
+            tableView?.endUpdates()
+            tableView?.layoutIfNeeded()
+        }
     }
 }
