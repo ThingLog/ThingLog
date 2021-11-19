@@ -56,9 +56,9 @@ final class LoginViewController: UIViewController {
     let recommendList: [String] = ["나를 찾는 여정", "미니멀리즘", "건강한 소비 습관", "취향모음", "물건의 역사", "물건을 통해 나를 본다"]
     var disposeBag: DisposeBag = DisposeBag()
     
-    var userInformation: UserInformationable = UserInformation(userAliasName: "",
-                                                               userOneLineIntroduction: "",
-                                                               isAumatedDarkMode: false)
+    lazy var userInformation: UserInformationable = UserInformation(userAliasName: "",
+                                                                    userOneLineIntroduction: "",
+                                                                    isAumatedDarkMode: traitCollection.userInterfaceStyle == .dark)
     private let userInformationViewModel: UserInformationViewModelable = UserInformationiCloudViewModel()
     
     // MARK: - Init
