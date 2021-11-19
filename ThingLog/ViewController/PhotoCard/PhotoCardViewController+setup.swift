@@ -68,7 +68,6 @@ extension PhotoCardViewController {
         
         photoFrameView.setAllConstraintTo(photoContainerView)
         photoFrameLineView.setAllConstraintTo(photoContainerView)
-        // TODO: - ⚠️PostEntity 이미지
     }
     
     func setupLabel() {
@@ -84,9 +83,6 @@ extension PhotoCardViewController {
             nameLabel.centerXAnchor.constraint(equalTo: photoContainerView.centerXAnchor),
             nameLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 2)
         ])
-        // TODO: - ⚠️ PostEntity 물건이름, 날짜
-        dateLabel.text = "2021년 08월 27일"
-        nameLabel.text = "전기 자전거"
     }
     
     func setupLogoView() {
@@ -104,8 +100,6 @@ extension PhotoCardViewController {
     
     func setupRatingView() {
         photoContainerView.addSubviews(ratingView)
-        ratingView.changeSpacingInStackView(4)
-        ratingView.currentRating = 3 // TODO: - ⚠️ PostEntity로.
         NSLayoutConstraint.activate([
             ratingView.bottomAnchor.constraint(equalTo: photoContainerView.bottomAnchor,
                                                constant: -inset.bottomPaddingForRatingView),
@@ -144,8 +138,6 @@ extension PhotoCardViewController {
                 let image: UIImage = renderer.image { ctx in
                     self.photoContainerView.drawHierarchy(in: self.photoContainerView.bounds, afterScreenUpdates: true)
                 }
-                // TODO: - ⚠️ 2배 사이즈 키울 필요성을 못 느끼겠다.
-                //                guard let newImage = image.resizedImage(Size: CGSize(width: self.photoContainerView.bounds.size.width * 2, height: self.photoContainerView.bounds.size.height * 2)) else { return }
                 self.imageSaver.saveToPhotoAlbum(image: image)
             }
             .disposed(by: disposeBag)
@@ -154,5 +146,16 @@ extension PhotoCardViewController {
         let fixedSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         fixedSpace.width = 17
         navigationItem.rightBarButtonItems = [fixedSpace, editBarButton]
+    }
+    
+    func setupPhotoData() {
+        imageView.image = photoCardViewModel.selectImage
+        if let date: Date = photoCardViewModel.postEntity.createDate {
+            dateLabel.text = date.toString(.year) + "년 " +
+                date.toString(.month) + "월 " +
+                date.toString(.day) + "일"
+        }
+        nameLabel.text = photoCardViewModel.postEntity.title
+        ratingView.currentRating = Int(photoCardViewModel.postEntity.rating?.score ?? 0)
     }
 }

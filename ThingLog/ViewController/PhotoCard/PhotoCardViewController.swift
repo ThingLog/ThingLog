@@ -9,7 +9,7 @@ import UIKit
 
 /// 포토카드를 내보내기 위한 뷰 컨트롤러다.
 final class PhotoCardViewController: UIViewController {
-    var coordinator: SettingCoordinator?
+    var coordinator: PhotoCardCoordinatorProtocol?
     
     // MARK: - Views
     let emptyViewForTopDateLabel: UIView = {
@@ -80,7 +80,7 @@ final class PhotoCardViewController: UIViewController {
     }()
     
     lazy var imageView: UIImageView = {
-        let imageView: UIImageView = UIImageView(image: SwiftGenIcons.group.image)
+        let imageView: UIImageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -165,10 +165,17 @@ final class PhotoCardViewController: UIViewController {
         alert.hideTitleLabel()
         alert.hideRightButton()
         alert.hideTextField()
-        alert.changeContentsText(error == nil ? "저장했습니다" : "저장에 실패했습니다")
+        alert.changeContentsText(error == nil ? "저장했습니다" : "앨범에 접근을 허용해주세요.")
         alert.leftButton.setTitle("확인", for: .normal)
+        
         alert.leftButton.rx.tap.bind {
-            alert.dismiss(animated: false, completion: nil)
+            alert.dismiss(animated: false) {
+                if error != nil {
+                    self.coordinator?.moveAppSetting()
+                } else {
+                    DrawerCoreDataRepository(coreDataStack: CoreDataStack.shared).updateRightAward()
+                }
+            }
         }.disposed(by: self.disposeBag)
         self.present(alert, animated: false, completion: nil)
     }
@@ -203,6 +210,7 @@ final class PhotoCardViewController: UIViewController {
         setupLabel()
         setupLogoView()
         setupRatingView()
+        setupPhotoData()
         
         subscribeOptionView()
         subscribePhotoCardViewModel()
