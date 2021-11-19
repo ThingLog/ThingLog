@@ -297,13 +297,8 @@ final class PostTableCell: UITableViewCell {
         configureCategory(with: post.categories)
 
         // 제목
-        if (post.title ?? "").isEmpty {
-            nameLabel.text = "물건 이름"
-            nameLabel.configureLabel(isBlank: true)
-        } else {
-            nameLabel.text = post.title
-            nameLabel.configureLabel(isBlank: false)
-        }
+        nameLabel.text = (post.title ?? "").isEmpty ? "물건 이름" : post.title
+        nameLabel.configureLabel(isEmpty: (post.title ?? "").isEmpty)
 
         // 별점
         ratingView.currentRating = Int(post.rating?.score ?? 0)
@@ -339,13 +334,8 @@ extension PostTableCell {
     /// CategoryViewDataSource의 데이터를 구성한다. 카테고리가 선택되어있지 않는 경우, 기본값을 넣는다.
     private func configureCategory(with categories: NSSet?) {
         if let categories: [CategoryEntity] = categories?.allObjects as? [CategoryEntity] {
-            if categories.isEmpty {
-                categoryViewDataSource.items = ["카테고리"]
-                categoryViewDataSource.isEmpty = true
-            } else {
-                categoryViewDataSource.items = categories.compactMap { $0.title }
-                categoryViewDataSource.isEmpty = false
-            }
+            categoryViewDataSource.items = categories.isEmpty ? ["카테고리"] : categories.compactMap { $0.title }
+            categoryViewDataSource.isEmpty = categories.isEmpty
         }
     }
 
@@ -357,19 +347,13 @@ extension PostTableCell {
         case .bought, .wish:
             if (place ?? "").isEmpty {
                 placeLabel.text = type == .bought ? "구매처" : "판매처"
-                placeLabel.configureLabel(isBlank: true)
             } else {
                 placeLabel.text = place
-                placeLabel.configureLabel()
             }
+            placeLabel.configureLabel(isEmpty: (place ?? "").isEmpty)
         case .gift:
-            if (giver ?? "").isEmpty {
-                placeLabel.text = "선물 준 사람"
-                placeLabel.configureLabel(isBlank: true)
-            } else {
-                placeLabel.text = giver
-                placeLabel.configureLabel()
-            }
+            placeLabel.text = (giver ?? "").isEmpty ? "선물 준 사람" : giver
+            placeLabel.configureLabel(isEmpty: (giver ?? "").isEmpty)
         }
     }
 
@@ -381,26 +365,17 @@ extension PostTableCell {
             return
         }
 
-        if price == 0 {
-            priceLabel.text = "가격"
-            priceLabel.font = UIFont.Pretendard.body1
-            priceLabel.textColor = SwiftGenColors.gray2.color
-        } else {
-            priceLabel.text = "\(price)원"
-            priceLabel.font = UIFont.Pretendard.title1
-            priceLabel.textColor = SwiftGenColors.black.color
-        }
+        priceLabel.text = price == 0 ? "가격" : "\(price)원"
+        priceLabel.font = price == 0 ? UIFont.Pretendard.body1 : UIFont.Pretendard.title1
+        priceLabel.textColor = price == 0 ? SwiftGenColors.gray2.color : SwiftGenColors.black.color
     }
 
     /// contentTextView를 구성한다. 텍스트가 없는 경우 기본 값과 함께 색상을 변경한다.
     private func configureContents(text: String?) {
-        if let text: String = text, !text.isEmpty {
-            contentTextView.text = text
-            contentTextView.textColor = SwiftGenColors.primaryBlack.color
-        } else {
-            contentTextView.text = "물건에 대한 생각이나 감정을 자유롭게 기록해보세요."
-            contentTextView.textColor = SwiftGenColors.gray2.color
-        }
+        let isEmpty: Bool = text?.isEmpty ?? true
+
+        contentTextView.text = isEmpty ? "물건에 대한 생각이나 감정을 자유롭게 기록해보세요." : text
+        contentTextView.textColor = isEmpty ? SwiftGenColors.gray2.color : SwiftGenColors.primaryBlack.color
     }
 
     /// CommentMoreButton을 구성한다.

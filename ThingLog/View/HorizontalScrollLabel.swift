@@ -74,14 +74,9 @@ final class HorizontalScrollLabel: UIView {
     }
 
     /// Label 색상, 폰트를 변경한다.
-    /// - Parameter isBlank: isBlank 값에 따라 색상, 폰트를 변경한다.
-    func configureLabel(isBlank: Bool = false) {
-        if isBlank {
-            label.font = UIFont.Pretendard.body1
-            label.textColor = SwiftGenColors.gray2.color
-        } else {
-            label.font = UIFont.Pretendard.title1
-            label.textColor = SwiftGenColors.black.color
-        }
+    /// - Parameter isEmpty: isEmpty 값에 따라 색상, 폰트를 변경한다.
+    func configureLabel(isEmpty: Bool = false) {
+        label.font = isEmpty ? UIFont.Pretendard.body1 : UIFont.Pretendard.title1
+        label.textColor = isEmpty ? SwiftGenColors.gray2.color : SwiftGenColors.black.color
     }
 }
