@@ -96,4 +96,9 @@ extension RatingView {
             $0.tintColor = color
         }
     }
+    
+    /// StackView안의 spacing을 조절한다. 포토카드에서 기존에 구현된 것 보다 더 좁게 사용하기 위함.
+    func changeSpacingInStackView(_ spacing: CGFloat) {
+        self.stackView.spacing = spacing
+    }
 }

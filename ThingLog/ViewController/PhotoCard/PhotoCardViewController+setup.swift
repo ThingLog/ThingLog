@@ -104,6 +104,7 @@ extension PhotoCardViewController {
     
     func setupRatingView() {
         photoContainerView.addSubviews(ratingView)
+        ratingView.changeSpacingInStackView(4)
         ratingView.currentRating = 3 // TODO: - ⚠️ PostEntity로.
         NSLayoutConstraint.activate([
             ratingView.bottomAnchor.constraint(equalTo: photoContainerView.bottomAnchor,
