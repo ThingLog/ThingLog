@@ -40,17 +40,10 @@ final class SettingCoordinator: PostCoordinatorProtocol, PhotoCardCoordinatorPro
         loginViewController.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(loginViewController, animated: true)
     }
-
-    func showPostViewController() {
-        let postViewController: PostViewController = PostViewController()
-        postViewController.coordinator = self
-        postViewController.hidesBottomBarWhenPushed = true
-        navigationController.pushViewController(postViewController, animated: true)
-    }
     
     func showPhotoCardController(post: PostEntity, image: UIImage) {
-        let card = PhotoCardViewController(postEntity: post,
-                                           selectImage: image)
+        let card: PhotoCardViewController = PhotoCardViewController(postEntity: post,
+                                                                    selectImage: image)
         card.coordinator = self
         navigationController.pushViewController(card, animated: true)
     }

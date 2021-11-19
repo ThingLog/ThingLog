@@ -86,7 +86,7 @@ extension RatingView {
 
     /// currentRating 값 만큼 button의 색상을 채운다.
     private func updateCurrentRating() {
-        (0...currentRating - 1).forEach { buttons[$0].setImage(fillImage, for: .normal) }
+        (0..<currentRating).forEach { buttons[$0].setImage(fillImage, for: .normal) }
         (currentRating..<maxCount).forEach { buttons[$0].setImage(emptyImage, for: .normal) }
     }
     
