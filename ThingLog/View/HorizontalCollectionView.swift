@@ -32,7 +32,7 @@ final class HorizontalCollectionView: UIView {
     var completionBlock: ((Int) -> Void)?
     
     // 이전의 선택한 셀을 찾기 위한 프로퍼티입니다.
-    private var selectedIndexCell: (indexPath: IndexPath, cell: ButtonRoundCollectionCell) = (IndexPath(row: 0, section: 0), ButtonRoundCollectionCell())
+    private var selectedIndexPath: IndexPath = IndexPath(row: 0, section: 0)
     private let buttonHeight: CGFloat = 26
     
     // 특정 Category를 선택할 때 마다 전달하기 위한 subject입니다.
@@ -101,7 +101,7 @@ extension HorizontalCollectionView: UICollectionViewDataSource {
             return cell
         }
         
-        if selectedIndexCell.indexPath == indexPath {
+        if selectedIndexPath == indexPath {
             changeButtonColor(isSelected: true, cell: cell)
             categoryTitleSubject.onNext(item[indexPath.row].title ?? "")
         } else {
@@ -123,20 +123,9 @@ extension HorizontalCollectionView: UICollectionViewDataSource {
 
 extension HorizontalCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? ButtonRoundCollectionCell else {
-            return
-        }
-        changeButtonColor(isSelected: true, cell: cell)
+        collectionView.reloadData()
         
-        // 이전의 선택한 셀이 안보이는 경우에는 cellForItem(at) 으로 찾을 수 없기 때문에, 이전의 저장한 셀에서 색을 변경한다.
-        if selectedIndexCell.indexPath != indexPath {
-            changeButtonColor(isSelected: false, cell: selectedIndexCell.cell)
-            if let cell: ButtonRoundCollectionCell = collectionView.cellForItem(at: selectedIndexCell.indexPath) as? ButtonRoundCollectionCell {
-                changeButtonColor(isSelected: false, cell: cell)
-            }
-        }
-        
-        selectedIndexCell = (indexPath, cell)
+        selectedIndexPath = indexPath
         
         guard let item = fetchResultController?.fetchedObjects else {
             return
@@ -148,6 +137,7 @@ extension HorizontalCollectionView: UICollectionViewDelegate {
 
 extension HorizontalCollectionView: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        selectedIndexPath.item = 0 
         collectionView.reloadData()
         completionBlock?(controller.fetchedObjects?.count ?? 0)
     }

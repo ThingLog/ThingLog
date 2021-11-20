@@ -207,7 +207,7 @@ extension SettingViewController: UITableViewDelegate {
             case .darkMode:
                 return
             case .editCategory:
-                return
+                coordinator?.showCategoryViewController()
             case .trash:
                 coordinator?.showTrashViewController()
             case .login:
