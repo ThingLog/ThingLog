@@ -91,6 +91,7 @@ final class CommentTableCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        setupBinding()
     }
 
     // MARK: - Init
@@ -98,12 +99,14 @@ final class CommentTableCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
         setupKeyboardToolbar()
+        setupBinding()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
         setupKeyboardToolbar()
+        setupBinding()
     }
 
     // MARK: - Setup
@@ -169,6 +172,13 @@ final class CommentTableCell: UITableViewCell {
         isEditable ? modifyButton.setTitle("편집 완료", for: .normal) : modifyButton.setTitle("수정", for: .normal)
         isEditable ? modifyButton.setTitleColor(SwiftGenColors.systemGreen.color, for: .normal) : modifyButton.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         isEditable ? deleteButton.setTitle("취소", for: .normal) : deleteButton.setTitle("삭제", for: .normal)
+    }
+
+    private func setupBinding() {
+        textView.rx.didEndEditing
+            .bind { [weak self] in
+                self?.isEditable = false
+            }.disposed(by: disposeBag)
     }
 }
 
