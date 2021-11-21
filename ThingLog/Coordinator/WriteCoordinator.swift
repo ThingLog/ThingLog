@@ -35,7 +35,7 @@ final class WriteCoordinator: SystemSettingCoordinatorProtocol {
 
     /// CategoryViewController로 이동한다.
     func showCategoryViewController() {
-        let categoryViewController: CategoryViewController = CategoryViewController()
+        let categoryViewController: CategoryViewController = CategoryViewController(categoryViewType: .select)
         categoryViewController.coordinator = self
         navigationController.pushViewController(categoryViewController, animated: true)
     }

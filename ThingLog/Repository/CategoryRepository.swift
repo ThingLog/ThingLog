@@ -128,4 +128,16 @@ final class CategoryRepository: CategoryRepositoryProtocol {
             }
         }
     }
+    
+    /// CategoryEntity의 변경사항을 업데이트 한다.
+    func update() {
+        let context: NSManagedObjectContext = coreDataStack.mainContext
+        context.performAndWait {
+            do {
+                try context.save()
+            } catch {
+               fatalError()
+            }
+        }
+    }
 }

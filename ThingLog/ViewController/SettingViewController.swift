@@ -16,12 +16,8 @@ final class SettingViewController: UIViewController {
         case darkMode
         case editCategory
         case trash
-        case login
         case addDummyData
         case deleteDummyData
-        case alert1
-        case alert2
-        case alert3
         case resetUserInfor
         case clearDrawer
         case blackCard
@@ -37,18 +33,10 @@ final class SettingViewController: UIViewController {
                 return "카테고리 수정"
             case .trash:
                 return "휴지통"
-            case .login:
-                return "로그인 화면 ( 테스트 )"
             case .addDummyData:
                 return "랜덤 데이터 400개 추가"
             case .deleteDummyData:
                 return "랜덤 데이터 모두 삭제"
-            case .alert1:
-                return "기본 Alert"
-            case .alert2:
-                return "내용과 버튼 하나만 있는 Alert"
-            case .alert3:
-                return "제목과 텍스트필드, 두개의 버튼 있는 Alert"
             case .resetUserInfor:
                 return "유저정보 초기화 ( 앱 종료됩니다 )"
             case .clearDrawer:
@@ -186,7 +174,7 @@ extension SettingViewController: UITableViewDataSource {
                     }
                     .disposed(by: cell.disposeBag)
                 
-            case .editCategory, .trash, .login, .addDummyData, .deleteDummyData, .alert1, .alert2, .alert3, .resetUserInfor, .clearDrawer, .blackCard, .basket, .rightAward, .dragonball:
+            case .editCategory, .trash, .addDummyData, .deleteDummyData, .resetUserInfor, .clearDrawer, .blackCard, .basket, .rightAward, .dragonball:
                 cell.changeViewType(labelType: .withBody1,
                                     buttonType: .withChevronRight,
                                     borderLineHeight: .with05Height,
@@ -207,21 +195,13 @@ extension SettingViewController: UITableViewDelegate {
             case .darkMode:
                 return
             case .editCategory:
-                return
+                coordinator?.showCategoryViewController()
             case .trash:
                 coordinator?.showTrashViewController()
-            case .login:
-                coordinator?.showLoginViewController()
             case .addDummyData:
                 makeDummy()
             case .deleteDummyData:
                 deleteAllEntity()
-            case .alert1:
-                showAlert1()
-            case .alert2:
-                showAlert2()
-            case .alert3:
-                showAlert3()
             case .resetUserInfor:
                 UserInformationiCloudViewModel().resetUserInformation()
                 exit(1)
@@ -246,41 +226,6 @@ extension SettingViewController: UITableViewDelegate {
                 drawerRepo.updateRightAward()
             }
         }
-    }
-    func showAlert1() {
-        let alert = AlertViewController()
-        alert.modalPresentationStyle = .overFullScreen
-        alert.leftButton.rx.tap.bind {
-            alert.dismiss(animated: false, completion: nil)
-        }
-        present(alert, animated: false, completion: nil)
-    }
-    
-    func showAlert2() {
-        let alert = AlertViewController()
-        alert.modalPresentationStyle = .overFullScreen
-        alert.hideTitleLabel()
-        alert.hideRightButton()
-        alert.hideTextField()
-        alert.changeContentsText("이미지는 최대 10개까지 첨부할 수 있어요")
-        alert.leftButton.setTitle("확인", for: .normal)
-        alert.leftButton.rx.tap.bind {
-            alert.dismiss(animated: false, completion: nil)
-        }
-        present(alert, animated: false, completion: nil)
-    }
-    
-    func showAlert3() {
-        let alert = AlertViewController()
-        alert.hideContentsLabel()
-        alert.titleLabel.text = "카테고리 수정"
-        alert.leftButton.setTitle("취소", for: .normal)
-        alert.rightButton.setTitle("확인", for: .normal)
-        alert.modalPresentationStyle = .overFullScreen
-        alert.leftButton.rx.tap.bind {
-            alert.dismiss(animated: false, completion: nil)
-        }
-        present(alert, animated: false, completion: nil)
     }
 }
 
