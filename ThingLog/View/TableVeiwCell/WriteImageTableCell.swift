@@ -66,7 +66,7 @@ extension WriteImageTableCell {
             collectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingTopConstaint),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingBottomConstaint),
-            collectionView.heightAnchor.constraint(equalToConstant: thumbnailCellSize)
+            collectionView.heightAnchor.constraint(greaterThanOrEqualToConstant: collectionViewHeight)
         ])
 
         collectionView.register(CameraButtonCollectionCell.self, forCellWithReuseIdentifier: CameraButtonCollectionCell.reuseIdentifier)
@@ -84,11 +84,11 @@ extension WriteImageTableCell {
     }
 
     private func createLayout() -> UICollectionViewCompositionalLayout {
-        let itemSize: NSCollectionLayoutSize = .init(widthDimension: .absolute(thumbnailCellSize),
-                                                     heightDimension: .absolute(thumbnailCellSize))
+        let itemSize: NSCollectionLayoutSize = .init(widthDimension: .fractionalHeight(1),
+                                                     heightDimension: .fractionalHeight(1))
         let item: NSCollectionLayoutItem = .init(layoutSize: itemSize)
 
-        let groupSize: NSCollectionLayoutSize = .init(widthDimension: .estimated(1.0),
+        let groupSize: NSCollectionLayoutSize = .init(widthDimension: .estimated(80.0),
                                                       heightDimension: .fractionalHeight(1))
         let group: NSCollectionLayoutGroup = .horizontal(layoutSize: groupSize, subitems: [item])
 

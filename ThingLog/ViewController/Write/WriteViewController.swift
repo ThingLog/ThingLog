@@ -156,17 +156,8 @@ extension WriteViewController {
     /// indexPath.row의 위치로 이동한다.
     /// - Parameter indexPath: 이동하려는 셀의 IndexPath
     func scrollToCurrentRow(at indexPath: IndexPath) {
-        if indexPath.section == WriteViewModel.Section.type.rawValue {
-            let rowRect: CGRect = tableView.rectForRow(at: indexPath)
-            UIView.animate(withDuration: 0.3) {
-                self.tableView.scrollRectToVisible(rowRect, animated: false)
-            }
-        } else if indexPath.section == WriteViewModel.Section.contents.rawValue {
-            let bottomOffset: CGPoint = CGPoint(x: 0,
-                                                y: tableView.contentSize.height - tableView.bounds.height + tableView.contentInset.bottom)
-            UIView.animate(withDuration: 0.3) {
-                self.tableView.setContentOffset(bottomOffset, animated: false)
-            }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
     }
 }

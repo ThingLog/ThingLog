@@ -90,7 +90,6 @@ extension CameraButtonCollectionCell {
             stackView.translatesAutoresizingMaskIntoConstraints = false
             stackView.axis = .vertical
             stackView.alignment = .center
-            stackView.distribution = .equalCentering
             return stackView
         }()
 
@@ -102,13 +101,15 @@ extension CameraButtonCollectionCell {
 
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingTopTrailing),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -paddingTopTrailing),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor,
+                                           constant: paddingTopTrailing),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
+                                                constant: -paddingTopTrailing),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             emptyTopView.heightAnchor.constraint(equalToConstant: emptyViewHeight),
-            emptyBottomView.heightAnchor.constraint(equalToConstant: emptyViewHeight),
-            emptyTopView.widthAnchor.constraint(equalToConstant: emptyViewWidth),
-            emptyBottomView.widthAnchor.constraint(equalToConstant: emptyViewWidth),
+            emptyBottomView.heightAnchor.constraint(greaterThanOrEqualToConstant: 0),
+            emptyTopView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            emptyBottomView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             iconImageView.heightAnchor.constraint(equalToConstant: 18)
         ])
     }

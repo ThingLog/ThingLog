@@ -65,7 +65,7 @@ extension WriteTextViewCell {
             textView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingTopBottom),
             textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -paddingLeadingTrailing),
             textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -paddingTopBottom),
-            textView.heightAnchor.constraint(equalToConstant: minHeight)
+            textView.heightAnchor.constraint(greaterThanOrEqualToConstant: minHeight)
         ])
 
         textView.delegate = self
