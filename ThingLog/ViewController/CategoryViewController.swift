@@ -215,9 +215,11 @@ extension CategoryViewController {
 extension CategoryViewController {
     /// 카테고리 수정 및 삭제 기능뷰에서 삭제누를 때 나타나느 뷰,
     func showAlertViewController(indexPath: IndexPath) {
+        let category: CategoryEntity = repository.fetchedResultsController.object(at: indexPath)
+        
         let alert: AlertViewController = AlertViewController()
-        alert.hideTitleLabel()
         alert.hideTextField()
+        alert.titleLabel.text = "\(category.title ?? "")"
         alert.contentsLabel.text = "정말 삭제하시겠어요?\n이 동작은 취소할 수 없습니다."
         alert.leftButton.setTitle("취소", for: .normal)
         alert.rightButton.setTitle("삭제", for: .normal)

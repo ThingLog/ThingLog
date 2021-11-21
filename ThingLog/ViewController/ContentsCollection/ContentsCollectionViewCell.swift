@@ -24,22 +24,12 @@ import Photos
 /// cell.checkButton.isHidden = false
 /// ```
 class ContentsCollectionViewCell: UICollectionViewCell {
+    // MARK: - Views
     let imageView: UIImageView = {
         let imageview: UIImageView = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
         imageview.contentMode = .scaleAspectFill
         return imageview
-    }()
-    
-    // TODO: - ⚠️ 삭제할 에정인 lable
-    var testLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.textColor = SwiftGenColors.systemBlue.color
-        label.font = UIFont.systemFont(ofSize: 9)
-        label.backgroundColor = .clear
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
     }()
     
     // smallIconView는 이미지가 여러개인 경우에 표시한다.
@@ -91,6 +81,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         return button
     }()
 
+    // MARK: - Propertis
     /// 셀이 동일한 에셋을 표시하는 경우에만 썸네일 이미지를 설정하기 위한 프로퍼티
     var representedAssetIdentifier: String = ""
     var imageRequestID: PHImageRequestID?
@@ -98,15 +89,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
     private let paddingCheckButton: CGFloat = 8
     private let checkButtonSize: CGFloat = 20
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        disposeBag = DisposeBag()
-
-        guard let imageRequestID = imageRequestID else { return }
-        PHCachingImageManager.default().cancelImageRequest(imageRequestID)
-        self.imageRequestID = nil
-    }
-    
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -116,7 +99,29 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+
+        guard let imageRequestID = imageRequestID else { return }
+        PHCachingImageManager.default().cancelImageRequest(imageRequestID)
+        self.imageRequestID = nil
+    }
+    
+    /// 그라데이션 뷰의 크기를 결정하기 위해 구현한다.
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        bottomGradientView.frame = contentView.bounds
+        bottomGradientView.frame.size.height = contentView.bounds.height / 4
+        bottomGradientView.setGradient(startColor: .black,
+                                       endColor: .clear,
+                                       startPoint: CGPoint(x: 0.0, y: 1.0),
+                                       endPoint: CGPoint(x: 0.0, y: 0.0))
+    }
+    
+    // MARK: - Setup
     private func setupView() {
+        backgroundColor = SwiftGenColors.primaryBackground.color
         clipsToBounds = true
         contentView.addSubviews(imageView,
                                 smallIconView,
@@ -156,49 +161,20 @@ class ContentsCollectionViewCell: UICollectionViewCell {
             checkButton.widthAnchor.constraint(equalToConstant: checkButtonSize),
             checkButton.heightAnchor.constraint(equalToConstant: checkButtonSize)
         ])
-        testSetupLabel()
-    }
-    
-    func testSetupLabel() {
-        contentView.addSubview(testLabel)
-        NSLayoutConstraint.activate([
-            testLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            testLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            testLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            testLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
     }
     
     /// PostEntity를 기반으로 뷰를 업데이트한다.
     /// - Parameter postEntity: 특정 PostEntity를 주입한다.
     func updateView(_ postEntity: PostEntity) {
-        var text: String = ""
-        text += "제목: " + postEntity.title!
-        text += "\n카테고리: " + (postEntity.categories?.allObjects as? [CategoryEntity])!.map { $0.title! }.joined(separator: " - ") + "\(postEntity.categories?.count ?? 0)"
-        text += "\n가격: " + String(postEntity.price)
-        text += "\n" + (postEntity.isLike ? "좋아요" : "싫어요")
-        text += "\n날짜: " + (postEntity.createDate!.toString(.year)) + "." + (postEntity.createDate!.toString(.month)) + "." + (postEntity.createDate!.toString(.day))
-        text += "\n만족도: " + String(postEntity.rating!.score)
         if let imageData: Data = (postEntity.attachments?.allObjects as? [AttachmentEntity])?[0].thumbnail {
             imageView.image = UIImage(data: imageData)
         }
-        testLabel.text = text
         smallIconView.isHidden = postEntity.attachments?.allObjects.count == 1
     }
 
+    /// PostEntity가 아닌 `이미지`만으로 이미지뷰를 업데이트 한다 ( PhotosViewController 에서 )
     func update(image: UIImage?) {
         imageView.image = image
-    }
-    
-    /// 그라데이션 뷰의 크기를 결정하기 위해 구현한다.
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        bottomGradientView.frame = contentView.bounds
-        bottomGradientView.frame.size.height = contentView.bounds.height / 4
-        bottomGradientView.setGradient(startColor: .black,
-                                       endColor: .clear,
-                                       startPoint: CGPoint(x: 0.0, y: 1.0),
-                                       endPoint: CGPoint(x: 0.0, y: 0.0))
     }
 }
 
