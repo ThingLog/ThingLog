@@ -45,6 +45,14 @@
             <key>File</key>
             <string>FastlaneLicense</string>
         </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSChildPaneSpecifier</string>
+            <key>Title</key>
+            <string>Lottie</string>
+            <key>File</key>
+            <string>LottieLicense</string>
+        </dict>
 	</array>
 </dict>
 </plist>
