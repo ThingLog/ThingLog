@@ -35,8 +35,7 @@ extension TrashViewController: UICollectionViewDataSource {
         }
         cell.backgroundColor = .systemGray
         
-        if let item: PostEntity = fetchResultController?.fetchedObjects?[indexPath.item],
-           let data: Data = (item.attachments?.allObjects as? [AttachmentEntity])?.first?.thumbnail {
+        if let item: PostEntity = fetchResultController?.fetchedObjects?[indexPath.item] {
             cell.updateView(item)
             cell.bottomLabel.text = "\(29 - (item.deleteDate?.distanceFrom(Date()) ?? 0))일"
         }
