@@ -172,7 +172,7 @@ extension WriteViewController: UITableViewDelegate {
 }
 
 // MARK: - Delegate
-extension WriteViewController: WriteTextViewCellDelegate {
+extension WriteViewController: TextViewCellDelegate {
     func updateTextViewHeight() {
         DispatchQueue.main.async { [weak tableView] in
             tableView?.beginUpdates()

@@ -42,18 +42,24 @@
 		874F52C9273E868200F79921 /* DropDownView+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874F52C8273E868200F79921 /* DropDownView+Delegate.swift */; };
 		875A966026F0E4EB001BF0D0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */; };
 		875B8FFD273AAE850059DF2A /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B8FFC273AAE850059DF2A /* Collection+.swift */; };
+		875C09AA2747581D00ECE706 /* TextViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C09A92747581D00ECE706 /* TextViewCellDelegate.swift */; };
 		8761A88427296C0800EA8683 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761A88327296C0700EA8683 /* PhotosViewController.swift */; };
 		876243E22708704800BDA1DC /* WriteTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876243E12708704800BDA1DC /* WriteTypeButton.swift */; };
 		876C157927044BA0000C1C84 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157827044BA0000C1C84 /* RepositoryError.swift */; };
 		876C157B27044DFF000C1C84 /* CategoryEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157A27044DFF000C1C84 /* CategoryEntity.swift */; };
 		876C157D27047B19000C1C84 /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C157C27047B19000C1C84 /* CategoryRepository.swift */; };
 		877B659D273677EF00561DDF /* CommentTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877B659C273677EF00561DDF /* CommentTableCell.swift */; };
+		8789A19E272C5DCC00CFB16C /* Notification.Name+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8789A19D272C5DCC00CFB16C /* Notification.Name+.swift */; };
+		87A863C82740DCBE0023FBE7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A863C72740DCBE0023FBE7 /* CommentViewController.swift */; };
+		87A863CA2740DD4B0023FBE7 /* CommentViewController+setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A863C92740DD4B0023FBE7 /* CommentViewController+setup.swift */; };
+		87A863CC2740DDAD0023FBE7 /* CommentViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A863CB2740DDAD0023FBE7 /* CommentViewController+DataSource.swift */; };
 		87A86C8B2714139F008FB3F0 /* WriteTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8A2714139F008FB3F0 /* WriteTextFieldCell.swift */; };
 		87A86C8D271414D2008FB3F0 /* WriteRatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8C271414D2008FB3F0 /* WriteRatingCell.swift */; };
 		87A86C8F27141507008FB3F0 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C8E27141507008FB3F0 /* RatingView.swift */; };
 		87A86C9127141576008FB3F0 /* WriteTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A86C9027141576008FB3F0 /* WriteTextViewCell.swift */; };
 		87ACB0B227229A3000C78C86 /* CenterTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACB0B127229A3000C78C86 /* CenterTextButton.swift */; };
 		87ACB0B427229E2B00C78C86 /* WriteImageTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ACB0B327229E2B00C78C86 /* WriteImageTableCell.swift */; };
+		87AD860B2740066E0056C690 /* TextViewWithSideButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD860A2740066E0056C690 /* TextViewWithSideButtonsView.swift */; };
 		87B1B6552715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */; };
 		87B1B6572715E2F0001EA889 /* WriteCategoryTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1B6562715E2F0001EA889 /* WriteCategoryTableCell.swift */; };
 		87B9EEE8273BDE3B001F3FB4 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B9EEE7273BDE3B001F3FB4 /* DropDownView.swift */; };
@@ -304,6 +310,7 @@
 		874F52C8273E868200F79921 /* DropDownView+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DropDownView+Delegate.swift"; sourceTree = "<group>"; };
 		875A965F26F0E4EB001BF0D0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		875B8FFC273AAE850059DF2A /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
+		875C09A92747581D00ECE706 /* TextViewCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCellDelegate.swift; sourceTree = "<group>"; };
 		8761A88327296C0700EA8683 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		876243E12708704800BDA1DC /* WriteTypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTypeButton.swift; sourceTree = "<group>"; };
 		876C157827044BA0000C1C84 /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
@@ -311,12 +318,16 @@
 		876C157C27047B19000C1C84 /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
 		877B659C273677EF00561DDF /* CommentTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableCell.swift; sourceTree = "<group>"; };
 		8789A19D272C5DCC00CFB16C /* Notification.Name+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+.swift"; sourceTree = "<group>"; };
+		87A863C72740DCBE0023FBE7 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		87A863C92740DD4B0023FBE7 /* CommentViewController+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommentViewController+setup.swift"; sourceTree = "<group>"; };
+		87A863CB2740DDAD0023FBE7 /* CommentViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommentViewController+DataSource.swift"; sourceTree = "<group>"; };
 		87A86C8A2714139F008FB3F0 /* WriteTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTextFieldCell.swift; sourceTree = "<group>"; };
 		87A86C8C271414D2008FB3F0 /* WriteRatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRatingCell.swift; sourceTree = "<group>"; };
 		87A86C8E27141507008FB3F0 /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		87A86C9027141576008FB3F0 /* WriteTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteTextViewCell.swift; sourceTree = "<group>"; };
 		87ACB0B127229A3000C78C86 /* CenterTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterTextButton.swift; sourceTree = "<group>"; };
 		87ACB0B327229E2B00C78C86 /* WriteImageTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteImageTableCell.swift; sourceTree = "<group>"; };
+		87AD860A2740066E0056C690 /* TextViewWithSideButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewWithSideButtonsView.swift; sourceTree = "<group>"; };
 		87B1B6542715E252001EA889 /* LabelWithButtonRoundCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithButtonRoundCollectionCell.swift; sourceTree = "<group>"; };
 		87B1B6562715E2F0001EA889 /* WriteCategoryTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCategoryTableCell.swift; sourceTree = "<group>"; };
 		87B9EEE7273BDE3B001F3FB4 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
@@ -565,15 +576,16 @@
 		873EC00726D39055003C3525 /* ThingLog */ = {
 			isa = PBXGroup;
 			children = (
-				DBB862BA272BFE9200B72730 /* ThingLog.entitlements */,
-				DBAE8E9226FDB39C00F536AD /* Resource */,
-				DBAE8E9126FDAE7500F536AD /* SwiftGen */,
-				87F2188A26FB78B700C3FBCA /* Entity */,
-				87F2188726FB5E6000C3FBCA /* Repository */,
 				DB7C04A426F5F26B009F5C0A /* Coordinator */,
+				87F2188A26FB78B700C3FBCA /* Entity */,
 				DB7C04EA26FB19FE009F5C0A /* Extension */,
 				875A965E26F0E4DC001BF0D0 /* Model */,
+				875C09A82747580800ECE706 /* Protocol */,
+				87F2188726FB5E6000C3FBCA /* Repository */,
+				DBAE8E9226FDB39C00F536AD /* Resource */,
 				873EC05026D50825003C3525 /* SupportingFiles */,
+				DBAE8E9126FDAE7500F536AD /* SwiftGen */,
+				DBB862BA272BFE9200B72730 /* ThingLog.entitlements */,
 				DB7C04E626FB1990009F5C0A /* View */,
 				DB7C04DF26FB18F4009F5C0A /* ViewController */,
 				873EC00C26D39055003C3525 /* ViewController.swift */,
@@ -677,6 +689,24 @@
 				874F52C8273E868200F79921 /* DropDownView+Delegate.swift */,
 			);
 			path = DropDownView;
+			sourceTree = "<group>";
+		};
+		875C09A82747580800ECE706 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				875C09A92747581D00ECE706 /* TextViewCellDelegate.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		87A863C62740DCB10023FBE7 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				87A863C72740DCBE0023FBE7 /* CommentViewController.swift */,
+				87A863CB2740DDAD0023FBE7 /* CommentViewController+DataSource.swift */,
+				87A863C92740DD4B0023FBE7 /* CommentViewController+setup.swift */,
+			);
+			path = Comment;
 			sourceTree = "<group>";
 		};
 		87EDCFD527316E55002C98BE /* PostTableCell */ = {
@@ -809,6 +839,7 @@
 				DB2B8AFC272151A800A02090 /* AlertViewController.swift */,
 				873ED12C272AC96000C9F7F1 /* BaseViewController.swift */,
 				8738E1CA271705220069BB80 /* CategoryViewController.swift */,
+				87A863C62740DCB10023FBE7 /* Comment */,
 				DB7C04E026FB1900009F5C0A /* ContentsCollection */,
 				DB00D214272A8D1E003FC9C3 /* Drawer */,
 				DBE3E9C92730137200B3EB69 /* EasyLook */,
@@ -872,6 +903,7 @@
 				DB1745B62708700200EF083E /* SearchTextField.swift */,
 				DBA0F81A2709B37C009553FC /* TableVeiwCell */,
 				DB7C04FB26FB27A6009F5C0A /* TemplateImageButton.swift */,
+				87AD860A2740066E0056C690 /* TextViewWithSideButtonsView.swift */,
 				876243E12708704800BDA1DC /* WriteTypeButton.swift */,
 			);
 			path = View;
@@ -1281,6 +1313,7 @@
 				DBAB64A526FCC2F8006D95ED /* HomeCoordinator.swift in Sources */,
 				DBD545522703409300063C98 /* HorizontalCollectionView.swift in Sources */,
 				DBAB64A426FCC2C5006D95ED /* Coordinator.swift in Sources */,
+				87A863CA2740DD4B0023FBE7 /* CommentViewController+setup.swift in Sources */,
 				DBA0F81E2709BD41009553FC /* RecentSearchView.swift in Sources */,
 				DBD2244727085671004C5184 /* EasyLookViewController+subscribe.swift in Sources */,
 				8738E1CB271705220069BB80 /* CategoryViewController.swift in Sources */,
@@ -1295,6 +1328,7 @@
 				87B9EEE8273BDE3B001F3FB4 /* DropDownView.swift in Sources */,
 				DBD5454727032B1C00063C98 /* FilterType.swift in Sources */,
 				DB1111EE27352D2D00D02F99 /* SplashViewController.swift in Sources */,
+				87A863CC2740DDAD0023FBE7 /* CommentViewController+DataSource.swift in Sources */,
 				DBAB64A726FE2AFF006D95ED /* UIImage+.swift in Sources */,
 				DB3A516B27103DC4003B529D /* EmptyResultsView.swift in Sources */,
 				DB148C26270469B300FDC48F /* Date+.swift in Sources */,
@@ -1373,6 +1407,7 @@
 				DB8BF6792705D25700FD5FDB /* LogoView.swift in Sources */,
 				DBA0F829270B26A0009553FC /* SearchResultsViewController.swift in Sources */,
 				87078B5B26EA44B5007AE242 /* ThingLog.xcdatamodeld in Sources */,
+				87AD860B2740066E0056C690 /* TextViewWithSideButtonsView.swift in Sources */,
 				87EDCFCE2731166D002C98BE /* PhotosViewController+Caching.swift in Sources */,
 				877B659D273677EF00561DDF /* CommentTableCell.swift in Sources */,
 				DBD1054D2729560600632168 /* LoginCoordinator.swift in Sources */,
@@ -1381,6 +1416,7 @@
 				87EDCFD027311E9F002C98BE /* PostViewModel.swift in Sources */,
 				87DAEB1B270BEAE50038C487 /* CameraButtonCollectionCell.swift in Sources */,
 				DB73BB07273A61CE00719DF6 /* SplashCoordinator.swift in Sources */,
+				875C09AA2747581D00ECE706 /* TextViewCellDelegate.swift in Sources */,
 				DBD2244B27085DFB004C5184 /* SearchViewController.swift in Sources */,
 				873ED12B272AC8CB00C9F7F1 /* PhotosViewController+Albums.swift in Sources */,
 				DB7C04C726F9E693009F5C0A /* UserInformationUserDefaultsViewModel.swift in Sources */,
@@ -1413,6 +1449,7 @@
 				87EDCFDB273171BC002C98BE /* PostCategoryViewDataSouce.swift in Sources */,
 				874D92F9271AD672005FF8F3 /* DummyData.swift in Sources */,
 				8715B3AF273ABFB3007A3A88 /* PostViewController+setup.swift in Sources */,
+				87A863C82740DCBE0023FBE7 /* CommentViewController.swift in Sources */,
 				8736B3EF26FDC1AD000433E1 /* Comment.swift in Sources */,
 				8736B3E326FCB9F3000433E1 /* Rating.swift in Sources */,
 				DB00D211272A8A79003FC9C3 /* SelectingDrawerViewController.swift in Sources */,

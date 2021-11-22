@@ -10,11 +10,6 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-/// 글쓰기 화면에서 WriteTextViewCell의 높이를 동적으로 변경하기 위한 프로토콜
-protocol WriteTextViewCellDelegate: AnyObject {
-    func updateTextViewHeight()
-}
-
 /// 글쓰기 화면에서 자유 글쓰기를 입력할 때 사용하는 셀
 final class WriteTextViewCell: UITableViewCell {
     let textView: UITextView = {
@@ -30,7 +25,7 @@ final class WriteTextViewCell: UITableViewCell {
     }()
 
     var isEditingSubject: PublishSubject<Bool> = PublishSubject<Bool>()
-    weak var delegate: WriteTextViewCellDelegate?
+    weak var delegate: TextViewCellDelegate?
     private(set) var disposeBag: DisposeBag = DisposeBag()
     private let paddingLeadingTrailing: CGFloat = 23.0
     private let paddingTopBottom: CGFloat = 24.0
@@ -112,7 +107,7 @@ extension WriteTextViewCell: UITextViewDelegate {
     }
 
     func textViewDidChange(_ textView: UITextView) {
-        if let delegate: WriteTextViewCellDelegate = delegate {
+        if let delegate: TextViewCellDelegate = delegate {
             delegate.updateTextViewHeight()
         }
     }
