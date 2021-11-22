@@ -27,7 +27,7 @@ final class HorizontalScrollLabel: UIView {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.Pretendard.title1
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.text = "asdfasdf"
         return label
     }()
@@ -77,6 +77,6 @@ final class HorizontalScrollLabel: UIView {
     /// - Parameter isEmpty: isEmpty 값에 따라 색상, 폰트를 변경한다.
     func configureLabel(isEmpty: Bool = false) {
         label.font = isEmpty ? UIFont.Pretendard.body1 : UIFont.Pretendard.title1
-        label.textColor = isEmpty ? SwiftGenColors.gray2.color : SwiftGenColors.black.color
+        label.textColor = isEmpty ? SwiftGenColors.gray2.color : SwiftGenColors.primaryBlack.color
     }
 }

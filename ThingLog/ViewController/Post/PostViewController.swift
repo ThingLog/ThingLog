@@ -51,8 +51,7 @@ final class PostViewController: BaseViewController {
         navigationItem.titleView = logoView
 
         let backButton: UIButton = UIButton()
-        backButton.setImage(SwiftGenIcons.longArrowR.image, for: .normal)
-        backButton.tintColor = SwiftGenColors.primaryBlack.color
+        backButton.setImage(SwiftGenIcons.longArrowR.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .normal)
         backButton.rx.tap
             .bind { [weak self] in
                 self?.coordinator?.back()
