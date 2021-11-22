@@ -5,6 +5,7 @@
 //  Created by 이지원 on 2021/11/09.
 //
 
+import CoreData
 import UIKit
 
 /// 게시물을 표시하는 뷰 컨트롤러
@@ -35,6 +36,8 @@ final class PostViewController: BaseViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.fetchedResultsController.delegate = self
+        viewModel.fetchedResultsControllerDelegate = self
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -64,5 +67,37 @@ final class PostViewController: BaseViewController {
 
     override func setupView() {
         setupTableView()
+    }
+
+    // MARK: - Public
+    func showRemovePostAlert(post: PostEntity) {
+        let alert: AlertViewController = AlertViewController()
+        alert.hideTextField()
+        alert.hideTitleLabel()
+        alert.contentsLabel.text = "게시물을 정말 삭제하시겠어요?"
+        alert.leftButton.setTitle("취소", for: .normal)
+        alert.rightButton.setTitle("삭제", for: .normal)
+        alert.modalPresentationStyle = .overFullScreen
+        alert.leftButton.rx.tap.bind {
+            alert.dismiss(animated: false, completion: nil)
+        }.disposed(by: disposeBag)
+
+        alert.rightButton.rx.tap.bind { [weak self] in
+            self?.viewModel.delete(post)
+            alert.dismiss(animated: false, completion: nil)
+        }.disposed(by: disposeBag)
+
+        present(alert, animated: false, completion: nil)
+    }
+}
+
+extension PostViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
+
+        // 만약 표시할 수 있는 데이터가 없다면 이전 화면으로 이동한다.
+        if viewModel.fetchedResultsController.fetchedObjects?.count ?? 0 == 0 {
+            coordinator?.back()
+        }
     }
 }

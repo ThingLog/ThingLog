@@ -17,14 +17,13 @@ extension PostViewController: UITableViewDataSource {
             return PostTableCell()
         }
 
-        let repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
         let item: PostEntity = viewModel.fetchedResultsController.object(at: indexPath)
 
         cell.configure(with: item)
         cell.likeButton.rx.tap
-            .bind {
+            .bind { [weak self] in
                 item.isLike.toggle()
-                repository.update(item) { result in
+                self?.viewModel.repository.update(item) { result in
                     switch result {
                     case .success:
                         cell.likeButton.isSelected = item.isLike
@@ -33,6 +32,14 @@ extension PostViewController: UITableViewDataSource {
                     }
                 }
             }.disposed(by: cell.disposeBag)
+
+        cell.moreMenuButton.modifyPostCallback = {
+            // TODO: 수정 기능
+        }
+
+        cell.moreMenuButton.removePostCallback = { [weak self] in
+            self?.showRemovePostAlert(post: item)
+        }
 
         return cell
     }
