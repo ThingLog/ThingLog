@@ -17,6 +17,7 @@ extension CommentCoordinatorProtocol {
     func showCommentViewController(with entity: PostEntity) {
         // TODO: CommentViewController로 대체
         let commentViewController: TestCommentViewController = TestCommentViewController(postEntity: entity)
+        commentViewController.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(commentViewController, animated: true)
     }
 }
