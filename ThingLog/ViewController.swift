@@ -47,3 +47,41 @@ class TestPostViewController: UIViewController {
         testLabel.text = "총 Post 개수: \(postViewModel.fetchedResultsController.fetchedObjects?.count ?? 0)개 \n 시작 위치: \(postViewModel.startIndexPath.row + 1)번째"
     }
 }
+
+/// CommentViewController 테스트 용 뷰 컨트롤러입니다. 추후에 CommentViewController로 사용할 예정입니다.
+class TestCommentViewController: UIViewController {
+    var postEntity: PostEntity
+
+    let testLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.font = UIFont.Pretendard.body1
+        label.textColor = SwiftGenColors.primaryBlack.color
+        label.numberOfLines = 2
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    init(postEntity: PostEntity) {
+        self.postEntity = postEntity
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubviews(testLabel)
+        view.backgroundColor = SwiftGenColors.primaryBackground.color
+        NSLayoutConstraint.activate([
+            testLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            testLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+
+        testLabel.text = """
+        본문 : \(postEntity.contents ?? "")
+        코멘트 개수 : \(postEntity.comments?.count ?? 0)개
+        """
+    }
+}

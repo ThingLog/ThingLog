@@ -20,6 +20,7 @@ extension PostViewController: UITableViewDataSource {
         let item: PostEntity = viewModel.fetchedResultsController.object(at: indexPath)
 
         cell.configure(with: item)
+
         cell.likeButton.rx.tap
             .bind { [weak self] in
                 item.isLike.toggle()
@@ -47,6 +48,16 @@ extension PostViewController: UITableViewDataSource {
                     return
                 }
                 self?.coordinator?.showPhotoCardController(post: item, image: image)
+            }.disposed(by: cell.disposeBag)
+
+        cell.commentButton.rx.tap
+            .bind { [weak self] in
+                self?.coordinator?.showCommentViewController(with: item)
+            }.disposed(by: cell.disposeBag)
+
+        cell.commentMoreButton.rx.tap
+            .bind { [weak self] in
+                self?.coordinator?.showCommentViewController(with: item)
             }.disposed(by: cell.disposeBag)
 
         return cell

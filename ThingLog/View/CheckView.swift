@@ -20,7 +20,7 @@ final class CheckView: UIControl {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.Pretendard.overline
-        label.textColor = SwiftGenColors.white.color
+        label.textColor = .white
         return label
     }()
     

@@ -23,7 +23,7 @@ final class ImageWithVerticalTwoLabelCollectionCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.font = UIFont.Pretendard.title1
         return label
     }()

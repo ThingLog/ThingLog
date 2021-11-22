@@ -13,7 +13,7 @@ final class CameraButtonCollectionCell: UICollectionViewCell {
     private let iconImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = SwiftGenAssets.camera.image
+        imageView.image = SwiftGenIcons.camera.image.withTintColor(SwiftGenColors.primaryBlack.color)
         imageView.contentMode = .scaleAspectFit
         imageView.sizeToFit()
         imageView.setContentHuggingPriority(.required, for: .vertical)
@@ -26,7 +26,7 @@ final class CameraButtonCollectionCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "0/10"
         label.font = UIFont.Pretendard.caption
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.sizeToFit()
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentHuggingPriority(.required, for: .horizontal)
@@ -79,9 +79,11 @@ extension CameraButtonCollectionCell {
         let backgroundView: UIView = {
             let view: UIView = UIView()
             view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            view.backgroundColor = SwiftGenColors.gray6.color
+            view.backgroundColor = SwiftGenColors.primaryBackground.color
             view.clipsToBounds = true
             view.layer.cornerRadius = 4
+            view.layer.borderColor = SwiftGenColors.primaryBlack.color.cgColor
+            view.layer.borderWidth = 0.5
             return view
         }()
 
