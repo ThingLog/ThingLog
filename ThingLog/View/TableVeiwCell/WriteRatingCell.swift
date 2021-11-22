@@ -12,7 +12,7 @@ final class WriteRatingCell: UITableViewCell {
     private let label: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.font = UIFont.Pretendard.body1
         label.text = "만족도"
         label.setContentHuggingPriority(.required, for: .horizontal)

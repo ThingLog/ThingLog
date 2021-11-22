@@ -16,9 +16,9 @@ final class WriteTextFieldCell: UITableViewCell {
         let textField: DisableSelectionTextField = DisableSelectionTextField(isSelection: true)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont.Pretendard.body1
-        textField.textColor = SwiftGenColors.black.color
+        textField.textColor = SwiftGenColors.primaryBlack.color
         let clearButton: UIButton = UIButton(type: .custom)
-        clearButton.setImage(SwiftGenAssets.clear.image, for: .normal)
+        clearButton.setImage(SwiftGenAssets.clear.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .normal)
         clearButton.contentMode = .scaleAspectFit
         textField.rightView = clearButton
         textField.rightViewMode = .never

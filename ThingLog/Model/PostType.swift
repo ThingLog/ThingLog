@@ -21,11 +21,11 @@ extension PageType {
     var image: UIImage? {
         switch self {
         case .bought:
-            return SwiftGenIcons.buyVer1.image.withTintColor(SwiftGenColors.black.color)
+            return SwiftGenIcons.buyVer1.image.withRenderingMode(.alwaysTemplate)
         case .gift:
-            return SwiftGenIcons.giftVer1.image.withTintColor(SwiftGenColors.black.color)
+            return SwiftGenIcons.giftVer1.image.withRenderingMode(.alwaysTemplate)
         case .wish:
-            return SwiftGenIcons.wishVer1.image.withTintColor(SwiftGenColors.black.color)
+            return SwiftGenIcons.wishVer1.image.withRenderingMode(.alwaysTemplate)
         }
     }
 }

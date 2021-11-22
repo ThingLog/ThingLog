@@ -32,17 +32,20 @@ final class WriteViewController: BaseViewController {
          */
         return tableView
     }()
-    
-    let doneButton: CenterTextButton = {
-        let button: CenterTextButton = CenterTextButton(buttonHeight: 54.0, title: "작성 완료")
+
+    lazy var doneButton: RoundCenterTextButton = {
+        let button: RoundCenterTextButton = RoundCenterTextButton(cornerRadius: doneButtonHeight / 2)
+        button.setTitle("작성완료", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     // MARK: - Properties
+    let doneButtonHeight: CGFloat = 52.0
     var coordinator: WriteCoordinator?
     private(set) var viewModel: WriteViewModel
 
+    // MARK: - Init
     init(viewModel: WriteViewModel) {
         self.viewModel = viewModel
         
@@ -52,19 +55,14 @@ final class WriteViewController: BaseViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = SwiftGenColors.white.color
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        doneButton.heightAnchor.constraint(equalToConstant: doneButton.frame.height + view.safeAreaInsets.bottom).isActive = true
-        doneButton.titleEdgeInsets = UIEdgeInsets(top: -view.safeAreaInsets.bottom, left: 0, bottom: 0, right: 0)
-    }
-    
+
+    // MARK: - Setup
     override func setupNavigationBar() {
         setupBaseNavigationBar()
         

@@ -15,14 +15,14 @@ final class LabelWithButtonRoundCollectionCell: UICollectionViewCell {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.Pretendard.body1
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         return label
     }()
 
     private let removeButton: UIButton = {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(SwiftGenAssets.clear.image, for: .normal)
+        button.setImage(SwiftGenAssets.clear.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .normal)
         button.sizeThatFits(CGSize(width: 10, height: 10))
         return button
     }()

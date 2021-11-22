@@ -17,14 +17,14 @@ final class WriteCategoryTableCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "카테고리"
         label.font = UIFont.Pretendard.body1
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         return label
     }()
 
     private let indicatorButton: UIButton = {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(SwiftGenAssets.chevronRight.image, for: .normal)
+        button.setImage(SwiftGenAssets.chevronRight.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .normal)
         button.sizeToFit()
         return button
     }()

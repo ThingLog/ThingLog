@@ -35,7 +35,8 @@ extension WriteViewController {
         NSLayoutConstraint.activate([
             doneButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             doneButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            doneButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            doneButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            doneButton.heightAnchor.constraint(equalToConstant: doneButtonHeight)
         ])
     }
 
