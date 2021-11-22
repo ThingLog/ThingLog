@@ -86,7 +86,6 @@ final class PostTableCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.Pretendard.body2
         label.textColor = SwiftGenColors.black.color
-        label.text = "1/10"
         return label
     }()
 
@@ -245,15 +244,19 @@ final class PostTableCell: UITableViewCell {
     let categoryViewDataSource: PostCategoryViewDataSouce = PostCategoryViewDataSouce()
     let slideImageViewDataSource: PostSlideImageViewDataSource = PostSlideImageViewDataSource()
     /// 현재 보여지고 있는 이미지 위치를 저장한다.
-    var currentImagePage: Int = 0 {
+    var currentImagePage: Int = 1 {
         didSet { imageCountLabel.text = "\(currentImagePage)/\(imageCount)" }
     }
     var disposeBag: DisposeBag = DisposeBag()
-    private(set) var imageCount: Int = 0
+    private(set) var imageCount: Int = 0 {
+        didSet { imageCountLabel.text = "\(currentImagePage)/\(imageCount)" }
+    }
 
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        currentImagePage = 1
+        slideImageCollectionView.reloadData()
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -329,7 +332,7 @@ final class PostTableCell: UITableViewCell {
         if pageWidth <= 0.0 {
             return
         }
-        currentImagePage = Int(floor((slideImageCollectionView.contentOffset.x - pageWidth / 2) / pageWidth) + 1) + 1
+        currentImagePage = Int(slideImageCollectionView.contentOffset.x / pageWidth) + 1
     }
 }
 
@@ -341,7 +344,6 @@ extension PostTableCell {
             let imageDatas: [Data] = attachments.compactMap { $0.imageData?.originalImage }
             slideImageViewDataSource.images = imageDatas.compactMap { UIImage(data: $0) }
             imageCount = imageDatas.count
-            imageCountLabel.text = "1/\(imageCount)"
             slideImageCollectionView.reloadData()
         }
     }

@@ -190,6 +190,6 @@ extension PostTableCell {
 extension PostTableCell: UICollectionViewDelegate, UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageWidth: CGFloat = scrollView.frame.size.width
-        currentImagePage = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1) + 1
+        currentImagePage = Int(slideImageCollectionView.contentOffset.x / pageWidth) + 1
     }
 }
