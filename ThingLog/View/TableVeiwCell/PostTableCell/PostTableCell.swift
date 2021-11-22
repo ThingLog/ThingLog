@@ -247,6 +247,7 @@ final class PostTableCell: UITableViewCell {
     var disposeBag: DisposeBag = DisposeBag()
     private(set) var imageCount: Int = 0
 
+    // MARK: - Init
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
@@ -262,6 +263,7 @@ final class PostTableCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Setup
     func setupView() {
         backgroundColor = .clear
         contentView.addSubview(stackView)
@@ -278,6 +280,7 @@ final class PostTableCell: UITableViewCell {
         setupStackView()
     }
 
+    // MARK: - Public
     func configure(with post: PostEntity) {
         guard let type: PageType = post.postType?.pageType else {
             fatalError("\(#function): Not Found PageType")

@@ -20,7 +20,7 @@ final class PostViewController: BaseViewController {
     }()
 
     // MARK: - Properties
-    var coordinator: Coordinator?
+    var coordinator: PostCoordinatorProtocol?
     private(set) var viewModel: PostViewModel
 
     init(viewModel: PostViewModel) {
