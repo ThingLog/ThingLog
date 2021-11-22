@@ -19,6 +19,16 @@ extension PostViewController: UITableViewDataSource {
 
         let item: PostEntity = viewModel.fetchedResultsController.object(at: indexPath)
         cell.configure(with: item)
+
+        cell.commentButton.rx.tap
+            .bind { [weak self] in
+                self?.coordinator?.showCommentViewController(with: item)
+            }.disposed(by: cell.disposeBag)
+
+        cell.commentMoreButton.rx.tap
+            .bind { [weak self] in
+                self?.coordinator?.showCommentViewController(with: item)
+            }.disposed(by: cell.disposeBag)
         
         return cell
     }
