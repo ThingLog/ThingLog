@@ -64,7 +64,9 @@ extension ButtonRoundCollectionCell {
     }
     
     /// 버튼의 layer, background, text 컬러를 변경한다.
-    func changeColor(borderColor: UIColor, backgroundColor: UIColor, textColor: UIColor) {
+    func changeColor(borderColor: UIColor,
+                     backgroundColor: UIColor,
+                     textColor: UIColor) {
         button.backgroundColor = backgroundColor
         button.layer.borderColor = borderColor.cgColor
         button.setTitleColor(textColor, for: .normal)

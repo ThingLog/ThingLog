@@ -73,7 +73,8 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         label.font = UIFont.Pretendard.body3
         label.textColor = SwiftGenColors.primaryBlack.color
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return label
     }()
     
@@ -83,6 +84,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         label.text = "카테고리"
         label.textColor = SwiftGenColors.primaryBlack.color
         label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -93,7 +95,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
                                                     categoryLabel])
         stackView.axis = .horizontal
         stackView.spacing = 10
-        stackView.setContentHuggingPriority(.required, for: .horizontal)
+//        stackView.setContentHuggingPriority(.required, for: .horizontal)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -102,7 +104,8 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.body3
         label.textColor = SwiftGenColors.primaryBlack.color
-        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -113,6 +116,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         label.text = "물건이름"
         label.textColor = SwiftGenColors.primaryBlack.color
         label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -124,7 +128,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         stackView.axis = .horizontal
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+//        stackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return stackView
     }()
     
@@ -144,7 +148,9 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         label.font = UIFont.Pretendard.body3
         label.textColor = SwiftGenColors.primaryBlack.color
         label.numberOfLines = 3
+        label.lineBreakMode = .byCharWrapping
         label.setContentHuggingPriority(.defaultLow, for: .vertical)
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -158,7 +164,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         stackView.axis = .vertical
         stackView.spacing = 4
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+//        stackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return stackView
     }()
     
@@ -220,6 +226,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupView() {
+        imageView.clipsToBounds = true
         contentView.addSubview(stackView)
         NSLayoutConstraint.activate([
             topBorderLineView.heightAnchor.constraint(equalToConstant: 0.3),
@@ -233,7 +240,10 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
             imageView.heightAnchor.constraint(equalTo: imageWithRightStackView.heightAnchor),
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
                         
-            dateTopEmptyView.heightAnchor.constraint(equalToConstant: 4)
+            dateTopEmptyView.heightAnchor.constraint(equalToConstant: 4),
+            
+            categoryLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 80),
+            postTitleLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 80)
         ])
     }
     

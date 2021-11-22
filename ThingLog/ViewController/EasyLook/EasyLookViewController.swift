@@ -10,6 +10,7 @@ import UIKit
 final class EasyLookViewController: UIViewController {
     var coordinator: EasyLookCoordinator?
     
+    // MARK: - View
     lazy var easyLookTopView: EasyLookTopView = {
         let easyLookTopView: EasyLookTopView = EasyLookTopView(superView: view)
         easyLookTopView.translatesAutoresizingMaskIntoConstraints = false
@@ -38,6 +39,7 @@ final class EasyLookViewController: UIViewController {
     
     let contentsViewController: BaseContentsCollectionViewController = BaseContentsCollectionViewController(willHideFilterView: true)
     
+    // MARK: - Properties
     var viewModel: EasyLookViewModel = EasyLookViewModel()
     let categoryRepo: CategoryRepository = CategoryRepository(fetchedResultsControllerDelegate: nil)
     
@@ -66,6 +68,11 @@ final class EasyLookViewController: UIViewController {
         
         setupHorizontalColletionCompletion()
         setupContentsViewControllerCompletion()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        easyLookTopView.horizontalCollectionView.reloadData()
     }
 }
 
