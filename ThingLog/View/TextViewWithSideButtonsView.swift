@@ -85,7 +85,7 @@ final class TextViewWithSideButtonsView: UIView {
             let stackView: UIStackView = UIStackView(arrangedSubviews: [leftButton, textView, rightButton])
             stackView.translatesAutoresizingMaskIntoConstraints = false
             stackView.spacing = 12.0
-            stackView.alignment = .lastBaseline
+            stackView.alignment = .center
             return stackView
         }()
 

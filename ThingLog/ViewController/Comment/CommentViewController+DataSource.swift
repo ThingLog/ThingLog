@@ -45,6 +45,12 @@ extension CommentViewController {
 
         cell.delegate = self
         cell.textView.text = "테스트"
+
+        cell.toolbarCancleCallback = { [weak self] in
+            cell.isEditable = false
+            self?.hideCommentInputView(false)
+        }
+
         cell.modifyButton.rx.tap
             .bind { [weak self] in
                 cell.isEditable.toggle()

@@ -34,10 +34,12 @@ final class CommentViewController: BaseViewController {
     var commentInputViewBottomConstraint: NSLayoutConstraint?
     var coordinator: Coordinator?
 
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
+    // MARK: - Setup
     override func setupNavigationBar() {
         super.setupNavigationBar()
 
@@ -69,6 +71,7 @@ final class CommentViewController: BaseViewController {
         bindKeyboardWillHide()
     }
 
+    // MARK: - Public
     /// 댓글 편집 모드 여부에 따라 CommentInputView를 숨김/표시한다.
     func hideCommentInputView(_ bool: Bool) {
         DispatchQueue.main.async { [weak self] in

@@ -80,6 +80,7 @@ final class CommentTableCell: UITableViewCell {
     }()
 
     // MARK: - Properties
+    var toolbarCancleCallback: (() -> Void)?
     weak var delegate: TextViewCellDelegate?
     var isEditable: Bool = false {
         didSet { setEditMode() }
@@ -164,20 +165,23 @@ final class CommentTableCell: UITableViewCell {
     @objc
     private func dismissKeyboard() {
         textView.resignFirstResponder()
+        toolbarCancleCallback?()
     }
 
     private func setEditMode() {
         textView.isEditable = isEditable
         textView.isUserInteractionEnabled = isEditable
-        isEditable ? modifyButton.setTitle("편집 완료", for: .normal) : modifyButton.setTitle("수정", for: .normal)
-        isEditable ? modifyButton.setTitleColor(SwiftGenColors.systemGreen.color, for: .normal) : modifyButton.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
-        isEditable ? deleteButton.setTitle("취소", for: .normal) : deleteButton.setTitle("삭제", for: .normal)
+        modifyButton.setTitle(isEditable ? "편집 완료" : "수정", for: .normal)
+        modifyButton.setTitleColor(isEditable ? SwiftGenColors.systemGreen.color : SwiftGenColors.primaryBlack.color, for: .normal)
+        deleteButton.setTitle(isEditable ? "취소" : "삭제", for: .normal)
+        layoutIfNeeded()
     }
 
     private func setupBinding() {
         textView.rx.didEndEditing
             .bind { [weak self] in
-                self?.isEditable = false
+                guard let self = self else { return }
+                self.isEditable = false
             }.disposed(by: disposeBag)
     }
 }

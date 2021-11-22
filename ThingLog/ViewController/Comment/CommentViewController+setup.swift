@@ -40,21 +40,7 @@ extension CommentViewController {
         ])
     }
 
-    /// TableView 하단에 여백을 지정한다.
-    /// - Parameter height: 테이블 뷰 하단에 들어갈 높이
-    private func setupTableViewBottomInset(height: CGFloat, duration: TimeInterval) {
-        var inset: UIEdgeInsets = self.tableView.contentInset
-        inset.bottom = height
-        UIView.animate(withDuration: duration) {
-            self.tableView.contentInset = inset
-        }
-        inset = tableView.verticalScrollIndicatorInsets
-        inset.bottom = height
-        UIView.animate(withDuration: duration) {
-            self.tableView.scrollIndicatorInsets = inset
-        }
-    }
-
+    // MARK: - Bind
     /// 키보드가 올라왔을 때 commentInputView 위치 변경
     func bindKeyboardWillShow() {
         NotificationCenter.default.rx
@@ -86,6 +72,22 @@ extension CommentViewController {
                     self.setupTableViewBottomInset(height: 0, duration: duration)
                 }
             }.disposed(by: disposeBag)
+    }
+
+    // MARK: - Support Method for setup, bind
+    /// TableView 하단에 여백을 지정한다.
+    /// - Parameter height: 테이블 뷰 하단에 들어갈 높이
+    private func setupTableViewBottomInset(height: CGFloat, duration: TimeInterval) {
+        var inset: UIEdgeInsets = self.tableView.contentInset
+        inset.bottom = height
+        UIView.animate(withDuration: duration) {
+            self.tableView.contentInset = inset
+        }
+        inset = tableView.verticalScrollIndicatorInsets
+        inset.bottom = height
+        UIView.animate(withDuration: duration) {
+            self.tableView.scrollIndicatorInsets = inset
+        }
     }
 
     /// CommentInputView의 하단 constant를 설정한다.
