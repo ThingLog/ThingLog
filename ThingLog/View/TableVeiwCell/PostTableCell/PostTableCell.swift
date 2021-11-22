@@ -244,6 +244,7 @@ final class PostTableCell: UITableViewCell {
     // MARK: - Properties
     let categoryViewDataSource: PostCategoryViewDataSouce = PostCategoryViewDataSouce()
     let slideImageViewDataSource: PostSlideImageViewDataSource = PostSlideImageViewDataSource()
+    var currentImagePage: Int = 0
     var disposeBag: DisposeBag = DisposeBag()
     private(set) var imageCount: Int = 0
 

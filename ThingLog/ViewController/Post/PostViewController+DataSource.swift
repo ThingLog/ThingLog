@@ -41,6 +41,14 @@ extension PostViewController: UITableViewDataSource {
             self?.showRemovePostAlert(post: item)
         }
 
+        cell.photocardButton.rx.tap
+            .bind { [weak self] in
+                guard let image: UIImage = item.getImage(at: cell.currentImagePage) else {
+                    return
+                }
+                self?.coordinator?.showPhotoCardController(post: item, image: image)
+            }.disposed(by: cell.disposeBag)
+
         return cell
     }
 }

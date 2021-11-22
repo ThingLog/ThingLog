@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol PostCoordinatorProtocol: Coordinator {
+protocol PostCoordinatorProtocol: PhotoCardCoordinatorProtocol {
     /// `PostViewController`를 보여준다. `PostViewController`에서 데이터를 표시하기 위해 `PostViewModel`이 필요하다.
     func showPostViewController(with viewModel: PostViewModel)
 }
