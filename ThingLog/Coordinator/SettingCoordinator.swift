@@ -49,4 +49,11 @@ final class SettingCoordinator: PostCoordinatorProtocol,
         card.coordinator = self
         navigationController.pushViewController(card, animated: true)
     }
+
+    func showCommentViewController() {
+        let commentViewController: CommentViewController = CommentViewController()
+        commentViewController.coordinator = self
+        commentViewController.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(commentViewController, animated: true)
+    }
 }

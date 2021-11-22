@@ -7,6 +7,9 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 /// 댓글 화면에서 댓글을 표시할 때 사용하는 컬렉션뷰 셀
 /// [이미지](https://www.notion.so/CommentTableCell-79a4165aa5804c5e86875368b8d53705)
 final class CommentTableCell: UITableViewCell {
@@ -71,23 +74,45 @@ final class CommentTableCell: UITableViewCell {
         """
         textView.textContainer.lineFragmentPadding = .zero
         textView.textContainerInset = .zero
+        textView.backgroundColor = .clear
         textView.sizeToFit()
         return textView
     }()
+
+    // MARK: - Properties
+    var toolbarCancleCallback: (() -> Void)?
+    weak var delegate: TextViewCellDelegate?
+    var isEditable: Bool = false {
+        didSet { setEditMode() }
+    }
+
+    // MARK: - Rx
+    var disposeBag: DisposeBag = DisposeBag()
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+        setupBinding()
+    }
 
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
+        setupKeyboardToolbar()
+        setupBinding()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
+        setupKeyboardToolbar()
+        setupBinding()
     }
 
     // MARK: - Setup
     private func setupView() {
+        backgroundColor = .clear
         let leadingTrailingSpacing: CGFloat = 20.0
         let topBottomSpacing: CGFloat = 14.0
 
@@ -97,9 +122,7 @@ final class CommentTableCell: UITableViewCell {
             return stackView
         }()
 
-        contentView.addSubview(topLineView)
-        contentView.addSubview(headerStackView)
-        contentView.addSubview(textView)
+        contentView.addSubviews(topLineView, headerStackView, textView)
 
         NSLayoutConstraint.activate([
             topLineView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -116,5 +139,58 @@ final class CommentTableCell: UITableViewCell {
             textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -leadingTrailingSpacing),
             textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -topBottomSpacing)
         ])
+
+        textView.delegate = self
+    }
+
+    private func setupKeyboardToolbar() {
+        let keyboardToolBar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        keyboardToolBar.barStyle = .default
+        let cancleButton: UIButton = {
+            let button: UIButton = UIButton()
+            button.titleLabel?.font = UIFont.Pretendard.title2
+            button.setTitle("취소", for: .normal)
+            button.setTitleColor(SwiftGenColors.systemBlue.color, for: .normal)
+            button.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
+            return button
+        }()
+        let cancleBarButton: UIBarButtonItem = UIBarButtonItem(customView: cancleButton)
+        cancleBarButton.tintColor = SwiftGenColors.black.color
+        keyboardToolBar.barTintColor = SwiftGenColors.gray6.color
+        keyboardToolBar.items = [cancleBarButton, UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
+        keyboardToolBar.sizeToFit()
+        textView.inputAccessoryView = keyboardToolBar
+    }
+
+    @objc
+    private func dismissKeyboard() {
+        textView.resignFirstResponder()
+        toolbarCancleCallback?()
+    }
+
+    private func setEditMode() {
+        textView.isEditable = isEditable
+        textView.isUserInteractionEnabled = isEditable
+        modifyButton.setTitle(isEditable ? "편집 완료" : "수정", for: .normal)
+        modifyButton.setTitleColor(isEditable ? SwiftGenColors.systemGreen.color : SwiftGenColors.primaryBlack.color, for: .normal)
+        deleteButton.setTitle(isEditable ? "취소" : "삭제", for: .normal)
+        layoutIfNeeded()
+    }
+
+    private func setupBinding() {
+        textView.rx.didEndEditing
+            .bind { [weak self] in
+                guard let self = self else { return }
+                self.isEditable = false
+            }.disposed(by: disposeBag)
+    }
+}
+
+// MARK: - Delegate
+extension CommentTableCell: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        if let delegate: TextViewCellDelegate = delegate {
+            delegate.updateTextViewHeight()
+        }
     }
 }
