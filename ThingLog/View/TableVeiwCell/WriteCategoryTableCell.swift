@@ -34,7 +34,7 @@ final class WriteCategoryTableCell: UITableViewCell {
                                                      collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.isHidden = true
-        collectionView.backgroundColor = SwiftGenColors.white.color
+        collectionView.backgroundColor = .clear
         return collectionView
     }()
 
@@ -76,9 +76,8 @@ final class WriteCategoryTableCell: UITableViewCell {
 
     private func setupView() {
         selectionStyle = .none
-
-        contentView.addSubview(categoryLabel)
-        contentView.addSubview(indicatorButton)
+        contentView.backgroundColor = SwiftGenColors.primaryBackground.color
+        contentView.addSubviews(categoryLabel, indicatorButton, collectionView)
 
         NSLayoutConstraint.activate([
             categoryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: paddingLeading),
@@ -94,8 +93,6 @@ final class WriteCategoryTableCell: UITableViewCell {
     }
 
     private func setupCollectionView() {
-        contentView.addSubview(collectionView)
-
         collectionView.register(LabelWithButtonRoundCollectionCell.self, forCellWithReuseIdentifier: LabelWithButtonRoundCollectionCell.reuseIdentifier)
 
         NSLayoutConstraint.activate([

@@ -25,6 +25,7 @@ final class WriteTextViewCell: UITableViewCell {
         textView.font = UIFont.Pretendard.body1
         textView.textColor = SwiftGenColors.gray4.color
         textView.text = "물건에 대한 생각이나 감정을 자유롭게 기록해보세요."
+        textView.backgroundColor = .clear
         textView.sizeToFit()
         return textView
     }()
@@ -57,6 +58,7 @@ extension WriteTextViewCell {
     private func setupView() {
         selectionStyle = .none
         separatorInset = .zero
+        contentView.backgroundColor = SwiftGenColors.primaryBackground.color
 
         contentView.addSubview(textView)
 

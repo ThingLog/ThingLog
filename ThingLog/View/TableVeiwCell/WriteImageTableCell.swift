@@ -18,7 +18,7 @@ final class WriteImageTableCell: UITableViewCell {
                                                      collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.collectionViewLayout = createLayout()
-        collectionView.backgroundColor = SwiftGenColors.white.color
+        collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
@@ -58,7 +58,7 @@ final class WriteImageTableCell: UITableViewCell {
 extension WriteImageTableCell {
     private func setupView() {
         selectionStyle = .none
-
+        contentView.backgroundColor = SwiftGenColors.primaryBackground.color
         contentView.addSubview(collectionView)
 
         NSLayoutConstraint.activate([

@@ -16,6 +16,7 @@ final class WriteViewController: BaseViewController {
         let tableView: UITableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        tableView.backgroundColor = SwiftGenColors.primaryBackground.color
         
         let headerLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 29.0))
         headerLabel.font = UIFont.Pretendard.body2
@@ -59,7 +60,6 @@ final class WriteViewController: BaseViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = SwiftGenColors.white.color
     }
 
     // MARK: - Setup
@@ -85,8 +85,7 @@ final class WriteViewController: BaseViewController {
     }
     
     override func setupView() {
-        view.addSubview(tableView)
-        view.addSubview(doneButton)
+        view.addSubviews(tableView, doneButton)
         
         setupTableView()
         setupDoneButton()

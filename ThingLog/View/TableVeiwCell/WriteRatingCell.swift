@@ -56,9 +56,8 @@ final class WriteRatingCell: UITableViewCell {
 extension WriteRatingCell {
     private func setupView() {
         selectionStyle = .none
-
-        contentView.addSubview(label)
-        contentView.addSubview(ratingView)
+        contentView.backgroundColor = SwiftGenColors.primaryBackground.color
+        contentView.addSubviews(label, ratingView)
 
         let ratingViewLeadingConstraint: NSLayoutConstraint = ratingView.leadingAnchor.constraint(lessThanOrEqualTo: label.trailingAnchor, constant: paddingLabelTrailing)
         ratingViewLeadingConstraint.priority = .defaultHigh

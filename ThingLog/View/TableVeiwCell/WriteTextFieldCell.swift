@@ -65,7 +65,7 @@ final class WriteTextFieldCell: UITableViewCell {
 extension WriteTextFieldCell {
     private func setupView() {
         selectionStyle = .none
-
+        contentView.backgroundColor = SwiftGenColors.primaryBackground.color
         contentView.addSubview(textField)
 
         NSLayoutConstraint.activate([
