@@ -5,6 +5,7 @@
 //  Created by 이지원 on 2021/11/14.
 //
 
+import CoreData
 import UIKit
 
 /// 게시물 > 댓글 화면을 나타내는 뷰 컨트롤러
@@ -33,6 +34,18 @@ final class CommentViewController: BaseViewController {
     var tableViewBottomSafeAnchorConstraint: NSLayoutConstraint?
     var commentInputViewBottomConstraint: NSLayoutConstraint?
     var coordinator: Coordinator?
+    var viewModel: CommentViewModel
+    var repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
+
+    // MARK: - Init
+    init(viewModel: CommentViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
 
     // MARK: - Life Cycle
     override func viewDidLoad() {

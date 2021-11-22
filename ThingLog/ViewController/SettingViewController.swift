@@ -24,7 +24,6 @@ final class SettingViewController: UIViewController {
         case dragonball
         case basket
         case rightAward
-        case comment
 
         var title: String {
             switch self {
@@ -50,8 +49,6 @@ final class SettingViewController: UIViewController {
                 return "진열장 - 장바구니 획득"
             case .rightAward:
                 return "진열장 - 인의예지상 획득"
-            case .comment:
-                return "댓글 화면"
             }
         }
     }
@@ -176,7 +173,7 @@ extension SettingViewController: UITableViewDataSource {
                         self?.setDarkMode()
                     }
                     .disposed(by: cell.disposeBag)
-            case .editCategory, .trash, .addDummyData, .deleteDummyData, .resetUserInfor, .clearDrawer, .blackCard, .basket, .rightAward, .dragonball, .comment:
+            case .editCategory, .trash, .addDummyData, .deleteDummyData, .resetUserInfor, .clearDrawer, .blackCard, .basket, .rightAward, .dragonball:
                 cell.changeViewType(labelType: .withBody1,
                                     buttonType: .withChevronRight,
                                     borderLineHeight: .with05Height,
@@ -226,8 +223,6 @@ extension SettingViewController: UITableViewDelegate {
                 drawerRepo.updateBasket()
             case .rightAward:
                 drawerRepo.updateRightAward()
-            case .comment:
-                coordinator?.showCommentViewController()
             }
         }
     }

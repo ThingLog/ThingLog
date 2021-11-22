@@ -22,12 +22,14 @@ extension PostViewController: UITableViewDataSource {
 
         cell.commentButton.rx.tap
             .bind { [weak self] in
-                self?.coordinator?.showCommentViewController(with: item)
+                let viewModel: CommentViewModel = CommentViewModel(postEntity: item)
+                self?.coordinator?.showCommentViewController(with: viewModel)
             }.disposed(by: cell.disposeBag)
 
         cell.commentMoreButton.rx.tap
             .bind { [weak self] in
-                self?.coordinator?.showCommentViewController(with: item)
+                let viewModel: CommentViewModel = CommentViewModel(postEntity: item)
+                self?.coordinator?.showCommentViewController(with: viewModel)
             }.disposed(by: cell.disposeBag)
         
         return cell
