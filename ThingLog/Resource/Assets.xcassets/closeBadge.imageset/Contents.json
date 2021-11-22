@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "closeBadge.png",
+      "filename" : "photo_close_Light.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "closeBadge@2x.png",
+      "filename" : "photo_close_Light@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "closeBadge@3x.png",
+      "filename" : "photo_close_Light@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

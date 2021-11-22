@@ -12,7 +12,7 @@ final class WriteRatingCell: UITableViewCell {
     private let label: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.font = UIFont.Pretendard.body1
         label.text = "만족도"
         label.setContentHuggingPriority(.required, for: .horizontal)
@@ -56,9 +56,8 @@ final class WriteRatingCell: UITableViewCell {
 extension WriteRatingCell {
     private func setupView() {
         selectionStyle = .none
-
-        contentView.addSubview(label)
-        contentView.addSubview(ratingView)
+        contentView.backgroundColor = SwiftGenColors.primaryBackground.color
+        contentView.addSubviews(label, ratingView)
 
         let ratingViewLeadingConstraint: NSLayoutConstraint = ratingView.leadingAnchor.constraint(lessThanOrEqualTo: label.trailingAnchor, constant: paddingLabelTrailing)
         ratingViewLeadingConstraint.priority = .defaultHigh
