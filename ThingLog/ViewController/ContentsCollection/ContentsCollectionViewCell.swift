@@ -207,8 +207,7 @@ extension ContentsCollectionViewCell {
     /// 체크버튼을 강조하거나 강조하지 않도록 변경하는 메서드다
     func changeCheckButton(isSelected: Bool) {
         checkButton.imageView.isHidden = !isSelected
-        checkButton.backgroundColor = isSelected ? .white : .clear
-        checkButton.layer.borderColor = isSelected ? UIColor.clear.cgColor : SwiftGenColors.white.color.cgColor
+        checkButton.backgroundColor = isSelected ? SwiftGenColors.systemGreen.color : .clear
     }
 
     /// 체크 버튼의 `titleLabel`과 배경색을 변경한다.
