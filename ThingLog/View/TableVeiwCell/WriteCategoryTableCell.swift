@@ -24,7 +24,7 @@ final class WriteCategoryTableCell: UITableViewCell {
     private let indicatorButton: UIButton = {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(SwiftGenAssets.chevronRight.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .normal)
+        button.setImage(SwiftGenIcons.shortArrowRM.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .normal)
         button.sizeToFit()
         return button
     }()

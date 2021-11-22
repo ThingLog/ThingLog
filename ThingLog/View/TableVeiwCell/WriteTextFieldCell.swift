@@ -18,7 +18,7 @@ final class WriteTextFieldCell: UITableViewCell {
         textField.font = UIFont.Pretendard.body1
         textField.textColor = SwiftGenColors.primaryBlack.color
         let clearButton: UIButton = UIButton(type: .custom)
-        clearButton.setImage(SwiftGenAssets.clear.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .normal)
+        clearButton.setImage(SwiftGenIcons.close.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .normal)
         clearButton.contentMode = .scaleAspectFit
         textField.rightView = clearButton
         textField.rightViewMode = .never

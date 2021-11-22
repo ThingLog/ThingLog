@@ -22,7 +22,7 @@ final class LabelWithButtonRoundCollectionCell: UICollectionViewCell {
     private let removeButton: UIButton = {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(SwiftGenAssets.clear.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .normal)
+        button.setImage(SwiftGenIcons.close.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .normal)
         button.sizeThatFits(CGSize(width: 10, height: 10))
         return button
     }()

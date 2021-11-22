@@ -96,7 +96,7 @@ final class CategoryViewController: UIViewController {
         let logoView: LogoView = LogoView("카테고리")
         navigationItem.titleView = logoView
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: SwiftGenAssets.back.image.withRenderingMode(.alwaysTemplate),
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: SwiftGenIcons.longArrowR.image.withRenderingMode(.alwaysTemplate),
                                                            style: .plain,
                                                            target: self,
                                                            action: #selector(didTapBackButton))

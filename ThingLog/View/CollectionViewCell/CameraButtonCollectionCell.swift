@@ -13,7 +13,7 @@ final class CameraButtonCollectionCell: UICollectionViewCell {
     private let iconImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = SwiftGenAssets.camera.image.withTintColor(SwiftGenColors.primaryBlack.color)
+        imageView.image = SwiftGenIcons.camera.image.withTintColor(SwiftGenColors.primaryBlack.color)
         imageView.contentMode = .scaleAspectFit
         imageView.sizeToFit()
         imageView.setContentHuggingPriority(.required, for: .vertical)

@@ -31,7 +31,7 @@ final class PhotosViewController: BaseViewController {
         button.setTitle("사진첩 선택", for: .normal)
         button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.button
-        button.setImage(SwiftGenAssets.arrowDropDown.image.withRenderingMode(.alwaysTemplate),
+        button.setImage(SwiftGenIcons.arrowDropDown.image.withTintColor(SwiftGenColors.gray3.color),
                         for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
         return button
@@ -78,7 +78,7 @@ final class PhotosViewController: BaseViewController {
     private(set) var albumsViewController: AlbumsViewController = AlbumsViewController()
     private var isShowAlbumsViewController: Bool = false {
         didSet {
-            isShowAlbumsViewController ? titleButton.setImage(SwiftGenAssets.arrowDropUp.image, for: .normal) : titleButton.setImage(SwiftGenAssets.arrowDropDown.image, for: .normal)
+            titleButton.imageView?.transform = isShowAlbumsViewController ? .identity : CGAffineTransform(rotationAngle: .pi)
         }
     }
 
