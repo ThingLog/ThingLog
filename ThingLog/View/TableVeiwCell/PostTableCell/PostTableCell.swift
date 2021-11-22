@@ -329,6 +329,7 @@ extension PostTableCell {
             slideImageViewDataSource.images = imageDatas.compactMap { UIImage(data: $0) }
             imageCount = imageDatas.count
             imageCountLabel.text = "1/\(imageCount)"
+            slideImageCollectionView.reloadData()
         }
     }
 
