@@ -73,8 +73,8 @@ class ContentsCollectionViewCell: UICollectionViewCell {
     let checkButton: CheckView = {
         let button: CheckView = CheckView()
         button.layer.borderWidth = 1
-        button.imageView.tintColor = SwiftGenColors.white.color
-        button.layer.borderColor = SwiftGenColors.white.color.cgColor
+        button.imageView.tintColor = .white
+        button.layer.borderColor = UIColor.white.cgColor
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isHidden = true
         button.isUserInteractionEnabled = false

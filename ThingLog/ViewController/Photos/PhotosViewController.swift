@@ -29,9 +29,10 @@ final class PhotosViewController: BaseViewController {
     private let titleButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("사진첩 선택", for: .normal)
-        button.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.button
-        button.setImage(SwiftGenAssets.arrowDropDown.image, for: .normal)
+        button.setImage(SwiftGenAssets.arrowDropDown.image.withRenderingMode(.alwaysTemplate),
+                        for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
         return button
     }()
@@ -39,7 +40,7 @@ final class PhotosViewController: BaseViewController {
     private let selectedCountLabel: UILabel = {
         let label: UILabel = UILabel()
         label.font = UIFont.Pretendard.title2
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         label.sizeToFit()
         return label
     }()
@@ -47,7 +48,7 @@ final class PhotosViewController: BaseViewController {
     private let successButton: UIButton = {
         let button: UIButton = UIButton()
         button.setTitle("확인", for: .normal)
-        button.setTitleColor(SwiftGenColors.black.color, for: .normal)
+        button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         button.setTitleColor(SwiftGenColors.gray4.color, for: .disabled)
         button.titleLabel?.font = UIFont.Pretendard.body1
         button.sizeToFit()
@@ -123,7 +124,7 @@ final class PhotosViewController: BaseViewController {
     override func setupNavigationBar() {
         setupBaseNavigationBar()
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: SwiftGenAssets.closeBig.image.withRenderingMode(.alwaysOriginal),
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: SwiftGenIcons.close.image.withTintColor(SwiftGenColors.primaryBlack.color, renderingMode: .alwaysOriginal),
                                                            style: .plain,
                                                            target: self,
                                                            action: #selector(didTapBackButton))

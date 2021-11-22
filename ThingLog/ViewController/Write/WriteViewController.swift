@@ -72,7 +72,7 @@ final class WriteViewController: BaseViewController {
         let closeButton: UIButton = {
             let button: UIButton = UIButton()
             button.setTitle("닫기", for: .normal)
-            button.setTitleColor(SwiftGenColors.black.color, for: .normal)
+            button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
             button.titleLabel?.font = UIFont.Pretendard.body1
             return button
         }()
