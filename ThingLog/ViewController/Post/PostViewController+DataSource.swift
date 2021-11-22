@@ -19,6 +19,7 @@ extension PostViewController: UITableViewDataSource {
 
         let item: PostEntity = viewModel.fetchedResultsController.object(at: indexPath)
         cell.configure(with: item)
+        cell.updateCurrentImagePage()
         
         return cell
     }

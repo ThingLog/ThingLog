@@ -244,6 +244,10 @@ final class PostTableCell: UITableViewCell {
     // MARK: - Properties
     let categoryViewDataSource: PostCategoryViewDataSouce = PostCategoryViewDataSouce()
     let slideImageViewDataSource: PostSlideImageViewDataSource = PostSlideImageViewDataSource()
+    /// 현재 보여지고 있는 이미지 위치를 저장한다.
+    var currentImagePage: Int = 0 {
+        didSet { imageCountLabel.text = "\(currentImagePage)/\(imageCount)" }
+    }
     var disposeBag: DisposeBag = DisposeBag()
     private(set) var imageCount: Int = 0
 
@@ -317,6 +321,15 @@ final class PostTableCell: UITableViewCell {
         configureCommentMoreButton(with: post.comments?.allObjects.count)
         // SpecificAction (휴지통, 사고싶다)
         configureSpecificAction(type: type, isDelete: post.postType?.isDelete)
+    }
+
+    /// 현재 보여지고 있는 SlideImageCollectionView의 페이지 값을 업데이트한다.
+    func updateCurrentImagePage() {
+        let pageWidth: CGFloat = slideImageCollectionView.frame.size.width
+        if pageWidth <= 0.0 {
+            return
+        }
+        currentImagePage = Int(floor((slideImageCollectionView.contentOffset.x - pageWidth / 2) / pageWidth) + 1) + 1
     }
 }
 
