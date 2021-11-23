@@ -144,7 +144,23 @@ final class PostRepository: PostRepositoryProtocol {
             }
         }
     }
-    
+
+    /// PostEntity의 속성을 변경한다.
+    /// - Parameters:
+    ///   - updatePost: PostEntity의 속성을 담은 모델 객체, identifier 속성을 통해 PostEntity를 가져오고 변경 사항을 반영한다.
+    ///   - completion: 결과를 클로저 형태로 반환한다. 성공했을 경우 무조건 true를 반환하며, 실패했을 경우 PostRepositoryError 타입을 반환한다.
+    func update(_ updateEntity: PostEntity, completion: @escaping (Result<Bool, RepositoryError>) -> Void) {
+        let context: NSManagedObjectContext = coreDataStack.mainContext
+        context.performAndWait {
+            do {
+                try context.save()
+                completion(.success(true))
+            } catch {
+                completion(.failure(.failedUpdate))
+            }
+        }
+    }
+
     /// identifier 속성을 이용해 PostEntity 객체를 한 개 가져온다.
     /// - Parameters:
     ///   - identifier: PostEntity를 찾기 위한 UUID 속성

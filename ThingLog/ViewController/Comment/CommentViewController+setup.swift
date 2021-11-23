@@ -74,6 +74,17 @@ extension CommentViewController {
             }.disposed(by: disposeBag)
     }
 
+    /// 댓글을 입력하고 확인 버튼을 선택했을 때 댓글을 저장한다.
+    func bindCommentInputView() {
+        commentInputView.rightButton.rx.tap
+            .bind { [weak self] in
+                guard let self = self else { return }
+                self.viewModel.saveComment(self.commentInputView.textView.text) { _ in
+                    self.commentInputView.textView.text = ""
+                }
+            }.disposed(by: disposeBag)
+    }
+
     // MARK: - Support Method for setup, bind
     /// TableView 하단에 여백을 지정한다.
     /// - Parameter height: 테이블 뷰 하단에 들어갈 높이

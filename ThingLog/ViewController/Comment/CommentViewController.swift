@@ -35,7 +35,6 @@ final class CommentViewController: BaseViewController {
     var commentInputViewBottomConstraint: NSLayoutConstraint?
     var coordinator: Coordinator?
     var viewModel: CommentViewModel
-    var repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
 
     // MARK: - Init
     init(viewModel: CommentViewModel) {
@@ -44,12 +43,13 @@ final class CommentViewController: BaseViewController {
     }
 
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.repository.fetchedResultsController.delegate = self
     }
 
     // MARK: - Setup
@@ -82,6 +82,7 @@ final class CommentViewController: BaseViewController {
     override func setupBinding() {
         bindKeyboardWillShow()
         bindKeyboardWillHide()
+        bindCommentInputView()
     }
 
     // MARK: - Public
@@ -92,5 +93,13 @@ final class CommentViewController: BaseViewController {
             self?.tableViewBottomConstraint?.isActive = !bool
             self?.tableViewBottomSafeAnchorConstraint?.isActive = bool
         }
+    }
+}
+
+// MARK: - NSFetchedResultsControllerDelegate
+extension CommentViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("⚡️ \(#function): 호출")
+        tableView.reloadData()
     }
 }
