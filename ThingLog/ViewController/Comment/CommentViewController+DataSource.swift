@@ -46,12 +46,17 @@ extension CommentViewController {
         cell.toolbarCancleCallback = { [weak self] in
             cell.isEditable = false
             self?.hideCommentInputView(false)
+            self?.tableView.reloadData()
         }
 
         cell.modifyButton.rx.tap
             .bind { [weak self] in
                 cell.isEditable.toggle()
-                cell.textView.isEditable ? cell.textView.becomeFirstResponder() : cell.textView.resignFirstResponder()
+                cell.isEditable ? cell.textView.becomeFirstResponder() : cell.textView.resignFirstResponder()
+                if !cell.isEditable {
+                    self?.viewModel.updateComment(at: indexPath.row - 1,
+                                                  text: cell.textView.text)
+                }
                 self?.hideCommentInputView(cell.isEditable)
             }.disposed(by: cell.disposeBag)
 
@@ -60,6 +65,7 @@ extension CommentViewController {
                 if cell.isEditable {
                     cell.isEditable.toggle()
                     cell.textView.resignFirstResponder()
+                    self?.tableView.reloadData()
                 } else {
                     self?.showRemoveCommentAlert(at: indexPath.row - 1)
                 }

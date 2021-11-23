@@ -58,4 +58,14 @@ final class CommentViewModel {
             fatalError("\(#function): Failed to Remove Comment Entity")
         }
     }
+
+    /// 댓글을 수정한다.
+    func updateComment(at index: Int, text: String?) {
+        do {
+            comments[index].contents = text
+            try CoreDataStack.shared.mainContext.save()
+        } catch {
+            fatalError("\(#function): Failed to Update Comment Entity")
+        }
+    }
 }
