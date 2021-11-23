@@ -35,6 +35,15 @@ final class CommentViewModel {
         comments[index].contents
     }
 
+    /// 특정 위치의 댓글의 날짜를 반환한다.
+    func getCommentDate(at index: Int) -> String {
+        guard let date: Date = comments[index].createDate else {
+            let today: Date = Date()
+            return "\(today.toString(.year))년 \(today.toString(.month))월 \(today.toString(.day))일"
+        }
+        return "\(date.toString(.year))년 \(date.toString(.month))월 \(date.toString(.day))일"
+    }
+
     /// 댓글을 Core Data에 저장한다.
     func saveComment(_ text: String, completion: @escaping (Bool) -> Void) {
         let comment: Comment = Comment(contents: text)

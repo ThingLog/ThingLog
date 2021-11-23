@@ -42,6 +42,7 @@ extension CommentViewController {
 
         cell.delegate = self
         cell.textView.text = viewModel.getComment(at: indexPath.row - 1)
+        cell.dateLabel.text = viewModel.getCommentDate(at: indexPath.row - 1)
 
         cell.toolbarCancleCallback = { [weak self] in
             cell.isEditable = false
