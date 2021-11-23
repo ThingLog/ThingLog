@@ -61,7 +61,7 @@ extension CommentViewController {
                     cell.isEditable.toggle()
                     cell.textView.resignFirstResponder()
                 } else {
-                    // TODO: 삭제 기능
+                    self?.showRemoveCommentAlert(at: indexPath.row - 1)
                 }
                 self?.hideCommentInputView(cell.isEditable)
             }.disposed(by: cell.disposeBag)

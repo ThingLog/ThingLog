@@ -94,12 +94,32 @@ final class CommentViewController: BaseViewController {
             self?.tableViewBottomSafeAnchorConstraint?.isActive = bool
         }
     }
+
+    /// 댓글을 삭제하기 전에 사용자에게 경고 알럿을 띄운다.
+    func showRemoveCommentAlert(at index: Int) {
+        let alert: AlertViewController = AlertViewController()
+        alert.hideTextField()
+        alert.hideTitleLabel()
+        alert.contentsLabel.text = "댓글을 정말 삭제하시겠어요?"
+        alert.leftButton.setTitle("아니요", for: .normal)
+        alert.rightButton.setTitle("네", for: .normal)
+        alert.modalPresentationStyle = .overFullScreen
+        alert.leftButton.rx.tap.bind {
+            alert.dismiss(animated: false, completion: nil)
+        }.disposed(by: disposeBag)
+
+        alert.rightButton.rx.tap.bind { [weak self] in
+            self?.viewModel.removeComment(at: index)
+            alert.dismiss(animated: false, completion: nil)
+        }.disposed(by: disposeBag)
+
+        present(alert, animated: false, completion: nil)
+    }
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
 extension CommentViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        print("⚡️ \(#function): 호출")
         tableView.reloadData()
     }
 }

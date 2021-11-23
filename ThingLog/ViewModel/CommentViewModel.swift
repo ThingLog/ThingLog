@@ -14,6 +14,15 @@ final class CommentViewModel {
     var contents: String? { postEntity.contents }
     private(set) var postEntity: PostEntity
     private(set) var repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
+    private var comments: [CommentEntity] {
+        guard let commentEntities: [CommentEntity] = postEntity.comments?.allObjects as? [CommentEntity] else {
+            return []
+        }
+        let sortedComment: [CommentEntity] = commentEntities.sorted(by: {
+            $0.createDate ?? Date() < $1.createDate ?? Date()
+        })
+        return sortedComment
+    }
 
     // MARK: - Init
     init(postEntity: PostEntity) {
@@ -23,13 +32,7 @@ final class CommentViewModel {
     // MARK: - Public
     /// 특정 위치의 댓글을 반환한다.
     func getComment(at index: Int) -> String? {
-        guard let commentEntities: [CommentEntity] = postEntity.comments?.allObjects as? [CommentEntity] else {
-            return nil
-        }
-        let sortedComment: [CommentEntity] = commentEntities.sorted(by: {
-            $0.createDate ?? Date() < $1.createDate ?? Date()
-        })
-        return sortedComment[index].contents
+        comments[index].contents
     }
 
     /// 댓글을 Core Data에 저장한다.
@@ -43,6 +46,16 @@ final class CommentViewModel {
             case .failure(let error):
                 fatalError("\(#function): \(error.localizedDescription)")
             }
+        }
+    }
+
+    /// 댓글을 Core Data에서 삭제한다.
+    func removeComment(at index: Int) {
+        do {
+            CoreDataStack.shared.mainContext.delete(comments[index])
+            try CoreDataStack.shared.mainContext.save()
+        } catch {
+            fatalError("\(#function): Failed to Remove Comment Entity")
         }
     }
 }
