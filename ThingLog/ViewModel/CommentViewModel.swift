@@ -14,15 +14,9 @@ final class CommentViewModel {
     var contents: String? { postEntity.contents }
     private(set) var postEntity: PostEntity
     private(set) var repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
-    private var comments: [CommentEntity] {
-        guard let commentEntities: [CommentEntity] = postEntity.comments?.allObjects as? [CommentEntity] else {
-            return []
-        }
-        let sortedComment: [CommentEntity] = commentEntities.sorted(by: {
-            $0.createDate ?? Date() < $1.createDate ?? Date()
-        })
-        return sortedComment
-    }
+    private lazy var comments: [CommentEntity] = {
+        sortedComments()
+    }()
 
     // MARK: - Init
     init(postEntity: PostEntity) {
@@ -48,9 +42,11 @@ final class CommentViewModel {
     func saveComment(_ text: String, completion: @escaping (Bool) -> Void) {
         let comment: Comment = Comment(contents: text)
         postEntity.addToComments(comment.toEntity(in: CoreDataStack.shared.mainContext))
-        repository.update(postEntity) { result in
+        repository.update(postEntity) { [weak self] result in
             switch result {
             case .success:
+                guard let self = self else { return }
+                self.comments = self.sortedComments()
                 completion(true)
             case .failure(let error):
                 fatalError("\(#function): \(error.localizedDescription)")
@@ -63,6 +59,7 @@ final class CommentViewModel {
         do {
             CoreDataStack.shared.mainContext.delete(comments[index])
             try CoreDataStack.shared.mainContext.save()
+            comments = sortedComments()
         } catch {
             fatalError("\(#function): Failed to Remove Comment Entity")
         }
@@ -76,5 +73,17 @@ final class CommentViewModel {
         } catch {
             fatalError("\(#function): Failed to Update Comment Entity")
         }
+    }
+
+    /// 댓글을 정렬해서 반환한다.
+    private func sortedComments() -> [CommentEntity] {
+        print("\(#function): 호출")
+        guard let commentEntities: [CommentEntity] = postEntity.comments?.allObjects as? [CommentEntity] else {
+            return []
+        }
+        let sortedComment: [CommentEntity] = commentEntities.sorted(by: {
+            $0.createDate ?? Date() < $1.createDate ?? Date()
+        })
+        return commentEntities
     }
 }

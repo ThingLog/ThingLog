@@ -73,6 +73,7 @@
 		87CFA333273A5A1600D08824 /* WriteViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CFA332273A5A1600D08824 /* WriteViewController+DataSource.swift */; };
 		87DAEB1B270BEAE50038C487 /* CameraButtonCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DAEB1A270BEAE50038C487 /* CameraButtonCollectionCell.swift */; };
 		87DAEB1D270BEC170038C487 /* ThumbnailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */; };
+		87DD9E4D274F5569002CFB3A /* Int64+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DD9E4C274F5569002CFB3A /* Int64+.swift */; };
 		87E8E81927355EEB0042AA7E /* HorizontalScrollLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8E81827355EEB0042AA7E /* HorizontalScrollLabel.swift */; };
 		87EDCFCE2731166D002C98BE /* PhotosViewController+Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EDCFCD2731166D002C98BE /* PhotosViewController+Caching.swift */; };
 		87EDCFD027311E9F002C98BE /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EDCFCF27311E9F002C98BE /* PostViewModel.swift */; };
@@ -343,6 +344,7 @@
 		87CFA332273A5A1600D08824 /* WriteViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WriteViewController+DataSource.swift"; sourceTree = "<group>"; };
 		87DAEB1A270BEAE50038C487 /* CameraButtonCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButtonCollectionCell.swift; sourceTree = "<group>"; };
 		87DAEB1C270BEC170038C487 /* ThumbnailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCell.swift; sourceTree = "<group>"; };
+		87DD9E4C274F5569002CFB3A /* Int64+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+.swift"; sourceTree = "<group>"; };
 		87E8E81827355EEB0042AA7E /* HorizontalScrollLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollLabel.swift; sourceTree = "<group>"; };
 		87EDCFCD2731166D002C98BE /* PhotosViewController+Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosViewController+Caching.swift"; sourceTree = "<group>"; };
 		87EDCFCF27311E9F002C98BE /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
@@ -945,6 +947,7 @@
 				DB05B03F27185C500067DB17 /* UIViewController+.swift */,
 				DB7C04C926F9E69D009F5C0A /* UserDefaults+.swift */,
 				8789A19D272C5DCC00CFB16C /* Notification.Name+.swift */,
+				87DD9E4C274F5569002CFB3A /* Int64+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1476,6 +1479,7 @@
 				DB7B47002740FE7800426EF1 /* OnboardingStartViewController.swift in Sources */,
 				DB7B470927410CC800426EF1 /* OnboardingPage1ViewController.swift in Sources */,
 				876C157B27044DFF000C1C84 /* CategoryEntity.swift in Sources */,
+				87DD9E4D274F5569002CFB3A /* Int64+.swift in Sources */,
 				87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */,
 				8736B3F626FE245A000433E1 /* PostEntity+.swift in Sources */,
 				DB1745B72708700200EF083E /* SearchTextField.swift in Sources */,
