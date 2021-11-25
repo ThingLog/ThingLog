@@ -255,8 +255,6 @@ final class PostTableCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
-        currentImagePage = 1
-        slideImageCollectionView.reloadData()
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -345,6 +343,7 @@ extension PostTableCell {
             slideImageViewDataSource.images = imageDatas.compactMap { UIImage(data: $0) }
             imageCount = imageDatas.count
             slideImageCollectionView.reloadData()
+            currentImagePage = 1
         }
     }
 
