@@ -29,7 +29,7 @@ final class PostTableCell: UITableViewCell {
         let date: Date = Date()
         label.text = "\(date.toString(.year))년 \(date.toString(.month))월 \(date.toString(.day))일"
         label.font = UIFont.Pretendard.body2
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         return label
     }()
 
@@ -65,8 +65,8 @@ final class PostTableCell: UITableViewCell {
     let likeButton: UIButton = {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(SwiftGenIcons.likeStorke.image, for: .normal)
-        button.setImage(SwiftGenIcons.likeFill.image, for: .selected)
+        button.setImage(SwiftGenIcons.likeStorke.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .normal)
+        button.setImage(SwiftGenIcons.likeFill.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .selected)
         button.setContentHuggingPriority(.required, for: .horizontal)
         button.sizeToFit()
         return button
@@ -75,7 +75,7 @@ final class PostTableCell: UITableViewCell {
     let commentButton: UIButton = {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(SwiftGenIcons.comments.image, for: .normal)
+        button.setImage(SwiftGenIcons.comments.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .normal)
         button.setContentHuggingPriority(.required, for: .horizontal)
         button.sizeToFit()
         return button
@@ -85,14 +85,14 @@ final class PostTableCell: UITableViewCell {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.Pretendard.body2
-        label.textColor = SwiftGenColors.black.color
+        label.textColor = SwiftGenColors.primaryBlack.color
         return label
     }()
 
     let photocardButton: UIButton = {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(SwiftGenIcons.photoCard.image, for: .normal)
+        button.setImage(SwiftGenIcons.photoCard.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .normal)
         button.setContentHuggingPriority(.required, for: .horizontal)
         button.sizeToFit()
         return button
@@ -118,7 +118,6 @@ final class PostTableCell: UITableViewCell {
     let nameLabel: HorizontalScrollLabel = {
         let label: HorizontalScrollLabel = HorizontalScrollLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "화분"
         return label
     }()
 
@@ -142,7 +141,6 @@ final class PostTableCell: UITableViewCell {
     let placeLabel: HorizontalScrollLabel = {
         let label: HorizontalScrollLabel = HorizontalScrollLabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "제품 구매한 곳이 열 다섯 글자 이상이라면 이렇게 슬라이드 ㄱㄴ"
         return label
     }()
 
@@ -150,8 +148,7 @@ final class PostTableCell: UITableViewCell {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.Pretendard.title1
-        label.textColor = SwiftGenColors.black.color
-        label.text = "999,999,999 원"
+        label.textColor = SwiftGenColors.primaryBlack.color
         return label
     }()
 
@@ -174,7 +171,7 @@ final class PostTableCell: UITableViewCell {
         let textView: UITextView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = UIFont.Pretendard.body1
-        textView.textColor = SwiftGenColors.black.color
+        textView.textColor = SwiftGenColors.primaryBlack.color
         textView.backgroundColor = .clear
         textView.isEditable = false
         textView.isScrollEnabled = false
@@ -252,6 +249,7 @@ final class PostTableCell: UITableViewCell {
         didSet { imageCountLabel.text = "\(currentImagePage)/\(imageCount)" }
     }
 
+    // MARK: - Init
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
@@ -267,6 +265,7 @@ final class PostTableCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Setup
     func setupView() {
         backgroundColor = .clear
         contentView.addSubview(stackView)
@@ -283,6 +282,7 @@ final class PostTableCell: UITableViewCell {
         setupStackView()
     }
 
+    // MARK: - Public
     func configure(with post: PostEntity) {
         guard let type: PageType = post.postType?.pageType else {
             fatalError("\(#function): Not Found PageType")

@@ -21,7 +21,7 @@ extension PhotosViewController: UICollectionViewDataSource {
 
         // Camera Cell
         if indexPath.item == 0 {
-            cell.update(image: SwiftGenAssets.camera.image)
+            cell.update(image: SwiftGenIcons.camera.image)
             cell.setupDisplayOnlyImageView()
             return cell
         }

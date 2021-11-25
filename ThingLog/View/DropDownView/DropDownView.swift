@@ -17,7 +17,7 @@ final class DropDownView: UIView {
     let button: UIButton = {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(SwiftGenIcons.moreButton.image, for: .normal)
+        button.setImage(SwiftGenIcons.moreButton.image.withTintColor(SwiftGenColors.primaryBlack.color), for: .normal)
         button.sizeToFit()
         return button
     }()

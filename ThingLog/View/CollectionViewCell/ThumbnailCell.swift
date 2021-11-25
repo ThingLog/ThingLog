@@ -23,7 +23,7 @@ final class ThumbnailCell: UICollectionViewCell {
     private let closeButton: UIButton = {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(SwiftGenAssets.closeBadge.image, for: .normal)
+        button.setImage(SwiftGenIcons.photoClose.image, for: .normal)
         return button
     }()
 
