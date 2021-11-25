@@ -16,6 +16,7 @@ extension PostCoordinatorProtocol {
     func showPostViewController(with viewModel: PostViewModel) {
         let postViewController: PostViewController = PostViewController(viewModel: viewModel)
         postViewController.coordinator = self
+        postViewController.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(postViewController, animated: true)
     }
 }

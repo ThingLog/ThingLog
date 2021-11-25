@@ -21,23 +21,11 @@ protocol PostViewModelProtocol: AnyObject {
 final class PostViewModel: PostViewModelProtocol {
     var fetchedResultsController: NSFetchedResultsController<PostEntity>
     var startIndexPath: IndexPath
-    weak var fetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate?
-    lazy var repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: fetchedResultsControllerDelegate)
+    lazy var repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
 
     init(fetchedResultsController: NSFetchedResultsController<PostEntity>,
          startIndexPath: IndexPath) {
         self.fetchedResultsController = fetchedResultsController
         self.startIndexPath = startIndexPath
-    }
-
-    func delete(_ entity: PostEntity) {
-        repository.delete([entity]) { result in
-            switch result {
-            case .success:
-                print("삭제 성공")
-            case .failure(let error):
-                fatalError("\(#function): \(error.localizedDescription)")
-            }
-        }
     }
 }

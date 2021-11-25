@@ -36,8 +36,6 @@ final class PostViewController: BaseViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.fetchedResultsController.delegate = self
-        viewModel.fetchedResultsControllerDelegate = self
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -82,21 +80,21 @@ final class PostViewController: BaseViewController {
         }.disposed(by: disposeBag)
 
         alert.rightButton.rx.tap.bind { [weak self] in
-            self?.viewModel.delete(post)
+            self?.viewModel.repository.delete([post]) { result in
+                switch result {
+                case .success:
+                    self?.tableView.reloadData()
+                    // 표시할 수 있는 데이터가 없다면 이전 화면으로 이동한다.
+                    if self?.viewModel.fetchedResultsController.fetchedObjects?.count ?? 0 == 0 {
+                        self?.coordinator?.back()
+                    }
+                case .failure(let error):
+                    fatalError("\(#function): \(error.localizedDescription)")
+                }
+            }
             alert.dismiss(animated: false, completion: nil)
         }.disposed(by: disposeBag)
 
         present(alert, animated: false, completion: nil)
-    }
-}
-
-extension PostViewController: NSFetchedResultsControllerDelegate {
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.reloadData()
-
-        // 만약 표시할 수 있는 데이터가 없다면 이전 화면으로 이동한다.
-        if viewModel.fetchedResultsController.fetchedObjects?.count ?? 0 == 0 {
-            coordinator?.back()
-        }
     }
 }
