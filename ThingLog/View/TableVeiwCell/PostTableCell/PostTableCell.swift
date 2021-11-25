@@ -240,9 +240,14 @@ final class PostTableCell: UITableViewCell {
     // MARK: - Properties
     let categoryViewDataSource: PostCategoryViewDataSouce = PostCategoryViewDataSouce()
     let slideImageViewDataSource: PostSlideImageViewDataSource = PostSlideImageViewDataSource()
-    var currentImagePage: Int = 0
+    /// 현재 보여지고 있는 이미지 위치를 저장한다.
+    var currentImagePage: Int = 1 {
+        didSet { imageCountLabel.text = "\(currentImagePage)/\(imageCount)" }
+    }
     var disposeBag: DisposeBag = DisposeBag()
-    private(set) var imageCount: Int = 0
+    private(set) var imageCount: Int = 0 {
+        didSet { imageCountLabel.text = "\(currentImagePage)/\(imageCount)" }
+    }
 
     // MARK: - Init
     override func prepareForReuse() {
@@ -318,6 +323,15 @@ final class PostTableCell: UITableViewCell {
         // SpecificAction (휴지통, 사고싶다)
         configureSpecificAction(type: type, isDelete: post.postType?.isDelete)
     }
+
+    /// 현재 보여지고 있는 SlideImageCollectionView의 페이지 값을 업데이트한다.
+    func updateCurrentImagePage() {
+        let pageWidth: CGFloat = slideImageCollectionView.frame.size.width
+        if pageWidth <= 0.0 {
+            return
+        }
+        currentImagePage = Int(slideImageCollectionView.contentOffset.x / pageWidth) + 1
+    }
 }
 
 // MARK: Configure Method
@@ -328,8 +342,8 @@ extension PostTableCell {
             let imageDatas: [Data] = attachments.compactMap { $0.imageData?.originalImage }
             slideImageViewDataSource.images = imageDatas.compactMap { UIImage(data: $0) }
             imageCount = imageDatas.count
-            imageCountLabel.text = "1/\(imageCount)"
             slideImageCollectionView.reloadData()
+            currentImagePage = 1
         }
     }
 
