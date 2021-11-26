@@ -110,7 +110,11 @@ extension WriteViewController {
             }.disposed(by: cell.disposeBag)
         cell.textView.rx.text.orEmpty
             .subscribe(onNext: { [weak self] text in
-                self?.viewModel.contents = text
+                if cell.textView.textColor == SwiftGenColors.gray4.color {
+                    self?.viewModel.contents = ""
+                } else {
+                    self?.viewModel.contents = text
+                }
             }).disposed(by: cell.disposeBag)
 
         return cell
