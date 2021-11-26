@@ -54,9 +54,9 @@ final class WriteTextFieldCell: UITableViewCell {
     func configure(keyboardType: UIKeyboardType, placeholder: String) {
         textField.keyboardType = keyboardType
         textField.isSelection = keyboardType == .numberPad ? false : true
-        textField.attributedPlaceholder = NSAttributedString(string: placeholder ?? "",
+        textField.attributedPlaceholder = NSAttributedString(string: placeholder,
                                                              attributes: [
-                                                                NSAttributedString.Key.foregroundColor: SwiftGenColors.gray3.color,
+                                                                NSAttributedString.Key.foregroundColor: SwiftGenColors.gray2.color,
                                                                 NSAttributedString.Key.font: UIFont.Pretendard.body1
                                                              ])
     }
