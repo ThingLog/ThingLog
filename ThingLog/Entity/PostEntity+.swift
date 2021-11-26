@@ -7,6 +7,7 @@
 
 import CoreData
 import Foundation
+import UIKit.UIImage
 
 extension PostEntity {
     func update(with post: Post, in context: NSManagedObjectContext) {
@@ -27,5 +28,14 @@ extension PostEntity {
             self.addToCategories(categoryEntity)
         }
         self.deleteDate = post.deleteDate
+    }
+
+    /// 특정 인덱스에 이미지를 반환한다.
+    func getImage(at index: Int) -> UIImage? {
+        guard let attachments: [AttachmentEntity] = self.attachments?.allObjects as? [AttachmentEntity],
+           let imageData: Data = attachments[index].imageData?.originalImage else {
+            return nil
+        }
+        return UIImage(data: imageData)
     }
 }

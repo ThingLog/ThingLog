@@ -46,12 +46,17 @@ final class DropDownView: UIView {
             addOutsideTouchDetectView(isShowDropDown)
         }
     }
+    /// 수정을 선택했을 때 호출할 클로저
+    var modifyPostCallback: (() -> Void)?
+    /// 삭제를 선택했을 때 호출할 클로저
+    var removePostCallback: (() -> Void)?
     private var tableViewHeightConstraint: NSLayoutConstraint?
     private var tableViewHeight: CGFloat = 0
     private var tableViewWidth: CGFloat = 0
     private var superView: UIView?
     private let disposeBag: DisposeBag = DisposeBag()
 
+    // MARK: - Init
     init(superView: UIView? = nil, dropDownWidth: CGFloat = 64.0) {
         self.superView = superView
         self.tableViewWidth = dropDownWidth
@@ -74,6 +79,12 @@ final class DropDownView: UIView {
         setupBinding()
     }
 
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        setupTableView()
+    }
+
+    // MARK: - Setup
     private func setupView() {
         addSubviews(button)
         superView?.addSubview(tableView)
@@ -81,17 +92,12 @@ final class DropDownView: UIView {
         setupButton()
     }
 
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        setupTableView()
-    }
-
     private func setupBinding() {
         bindButton()
     }
 }
 
-// MARK: - Setup
+// MARK: - Support Method for Setup, Bind
 extension DropDownView {
     private func setupButton() {
         NSLayoutConstraint.activate([

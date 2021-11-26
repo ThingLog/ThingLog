@@ -14,3 +14,12 @@ protocol PhotoCardCoordinatorProtocol: SystemSettingCoordinatorProtocol {
                                  image: UIImage)
     
 }
+
+extension PhotoCardCoordinatorProtocol {
+    func showPhotoCardController(post: PostEntity, image: UIImage) {
+        let photoViewController: PhotoCardViewController = PhotoCardViewController(postEntity: post, selectImage: image)
+        photoViewController.coordinator = self
+        photoViewController.hidesBottomBarWhenPushed = true
+        navigationController.pushViewController(photoViewController, animated: true)
+    }
+}
