@@ -89,7 +89,9 @@ final class PostViewController: BaseViewController {
         }.disposed(by: disposeBag)
 
         alert.rightButton.rx.tap.bind { [weak self] in
-            self?.viewModel.repository.delete([post]) { result in
+            post.postType?.isDelete = true
+            post.deleteDate = Date()
+            self?.viewModel.repository.update(post, completion: { result in
                 switch result {
                 case .success:
                     self?.tableView.reloadData()
@@ -100,7 +102,7 @@ final class PostViewController: BaseViewController {
                 case .failure(let error):
                     fatalError("\(#function): \(error.localizedDescription)")
                 }
-            }
+            })
             alert.dismiss(animated: false, completion: nil)
         }.disposed(by: disposeBag)
 
