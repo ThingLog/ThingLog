@@ -175,12 +175,7 @@ final class PostTableCell: UITableViewCell {
         textView.backgroundColor = .clear
         textView.isEditable = false
         textView.isScrollEnabled = false
-        textView.text = """
-        Complaint that PorchCam can't pick up voices/speech when there's a loud fan running or other background noise (like a storm, etc.)
-        Complaint that PorchCam can't pick up voices/speech when there's a loud fan running or other background noise (like a storm, etc.)Complaint that PorchCam can't pick up voices/speech when there's a loud fan running or other background noise (like a storm,
-        """
         textView.textContainer.lineFragmentPadding = .zero
-        textView.textContainerInset = .zero
         textView.sizeToFit()
         return textView
     }()
@@ -189,7 +184,7 @@ final class PostTableCell: UITableViewCell {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("댓글 n개 모두 보기", for: .normal)
-        button.setTitleColor(SwiftGenColors.gray2.color, for: .normal)
+        button.setTitleColor(SwiftGenColors.systemGreen.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.title2
         return button
     }()
