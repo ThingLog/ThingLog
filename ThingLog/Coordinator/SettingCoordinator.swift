@@ -9,7 +9,6 @@ import UIKit
 
 /// 설정화면에서 뷰전환을 돕는 Coordinator이다.
 final class SettingCoordinator: PostCoordinatorProtocol,
-                                PhotoCardCoordinatorProtocol,
                                 ModifyCategoryCoordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController

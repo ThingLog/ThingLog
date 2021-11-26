@@ -59,7 +59,7 @@ final class PhotosViewController: BaseViewController {
     let imageManager: PHCachingImageManager = PHCachingImageManager.default() as! PHCachingImageManager
     var previousPreheatRect: CGRect = .zero
     let selectedMaxCount: Int = 10
-    var coordinator: WriteCoordinator?
+    var coordinator: WriteCoordinatorProtocol?
     var selectedIndexPath: [IndexPath] = [] {
         didSet {
             DispatchQueue.main.async { [weak self] in

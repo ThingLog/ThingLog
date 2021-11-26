@@ -43,7 +43,7 @@ final class WriteViewController: BaseViewController {
     
     // MARK: - Properties
     let doneButtonHeight: CGFloat = 52.0
-    var coordinator: WriteCoordinator?
+    var coordinator: WriteCoordinatorProtocol?
     private(set) var viewModel: WriteViewModel
 
     // MARK: - Init
