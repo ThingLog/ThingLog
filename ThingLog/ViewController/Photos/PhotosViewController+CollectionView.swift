@@ -83,8 +83,11 @@ extension PhotosViewController: UICollectionViewDataSource {
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 0 {
-            // TODO: 카메라 기능 구현
-            return
+            if AVCaptureDevice.authorizationStatus(for: .video) == .authorized {
+                present(imagePickerController, animated: true)
+            } else {
+                coordinator?.showMoveSettingAlert()
+            }
         }
     }
 }

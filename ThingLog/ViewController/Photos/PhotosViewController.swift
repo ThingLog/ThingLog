@@ -56,6 +56,13 @@ final class PhotosViewController: BaseViewController {
     }()
 
     // MARK: - Properties
+    lazy var imagePickerController: UIImagePickerController = {
+        let imagePickerController: UIImagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = .camera
+        imagePickerController.allowsEditing = true
+        imagePickerController.delegate = self
+        return imagePickerController
+    }()
     let imageManager: PHCachingImageManager = PHCachingImageManager.default() as! PHCachingImageManager
     var previousPreheatRect: CGRect = .zero
     let selectedMaxCount: Int = 10
@@ -304,5 +311,23 @@ extension PhotosViewController: PHPhotoLibraryChangeObserver {
             self?.assets = change.fetchResultAfterChanges
             self?.collectionView.reloadData()
         }
+    }
+}
+
+// MARK: - ImagePickerController
+extension PhotosViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        picker.dismiss(animated: true)
+
+        guard let image = info[.editedImage] as? UIImage else {
+            print("\(#function): No edited image were found.")
+            return
+        }
+
+        // print out the image size as a test
+        print(image.size)
+        // TODO: WriteViewModel로 편집된 이미지 전달
+        coordinator?.back()
     }
 }
