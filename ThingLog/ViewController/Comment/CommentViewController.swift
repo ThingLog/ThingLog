@@ -5,6 +5,7 @@
 //  Created by 이지원 on 2021/11/14.
 //
 
+import CoreData
 import UIKit
 
 /// 게시물 > 댓글 화면을 나타내는 뷰 컨트롤러
@@ -33,10 +34,22 @@ final class CommentViewController: BaseViewController {
     var tableViewBottomSafeAnchorConstraint: NSLayoutConstraint?
     var commentInputViewBottomConstraint: NSLayoutConstraint?
     var coordinator: Coordinator?
+    var viewModel: CommentViewModel
+
+    // MARK: - Init
+    init(viewModel: CommentViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.repository.fetchedResultsController.delegate = self
     }
 
     // MARK: - Setup
@@ -69,6 +82,7 @@ final class CommentViewController: BaseViewController {
     override func setupBinding() {
         bindKeyboardWillShow()
         bindKeyboardWillHide()
+        bindCommentInputView()
     }
 
     // MARK: - Public
@@ -79,5 +93,33 @@ final class CommentViewController: BaseViewController {
             self?.tableViewBottomConstraint?.isActive = !bool
             self?.tableViewBottomSafeAnchorConstraint?.isActive = bool
         }
+    }
+
+    /// 댓글을 삭제하기 전에 사용자에게 경고 알럿을 띄운다.
+    func showRemoveCommentAlert(at index: Int) {
+        let alert: AlertViewController = AlertViewController()
+        alert.hideTextField()
+        alert.hideTitleLabel()
+        alert.contentsLabel.text = "댓글을 정말 삭제하시겠어요?"
+        alert.leftButton.setTitle("아니요", for: .normal)
+        alert.rightButton.setTitle("네", for: .normal)
+        alert.modalPresentationStyle = .overFullScreen
+        alert.leftButton.rx.tap.bind {
+            alert.dismiss(animated: false, completion: nil)
+        }.disposed(by: disposeBag)
+
+        alert.rightButton.rx.tap.bind { [weak self] in
+            self?.viewModel.removeComment(at: index)
+            alert.dismiss(animated: false, completion: nil)
+        }.disposed(by: disposeBag)
+
+        present(alert, animated: false, completion: nil)
+    }
+}
+
+// MARK: - NSFetchedResultsControllerDelegate
+extension CommentViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
     }
 }

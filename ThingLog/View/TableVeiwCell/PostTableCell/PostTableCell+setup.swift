@@ -104,6 +104,7 @@ extension PostTableCell {
     }
 
     func setupContentsContainerView() {
+        let commentMoreButtonTopSpacing: CGFloat = 7.0
         let topSpacing: CGFloat = 14.0
         let bottomSpacing: CGFloat = 16.0
         let leadingTrailingSpacing: CGFloat = 20.0
@@ -120,14 +121,20 @@ extension PostTableCell {
             lineView.topAnchor.constraint(equalTo: contentsContainerView.topAnchor, constant: topSpacing),
             lineView.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor),
             lineView.trailingAnchor.constraint(equalTo: contentsContainerView.trailingAnchor),
-            contentTextView.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor, constant: leadingTrailingSpacing),
-            contentTextView.trailingAnchor.constraint(equalTo: contentsContainerView.trailingAnchor, constant: -leadingTrailingSpacing),
+            contentTextView.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor,
+                                                     constant: leadingTrailingSpacing),
+            contentTextView.trailingAnchor.constraint(equalTo: contentsContainerView.trailingAnchor,
+                                                      constant: -leadingTrailingSpacing),
             contentTextView.centerXAnchor.constraint(equalTo: contentsContainerView.centerXAnchor),
             contentTextView.centerYAnchor.constraint(equalTo: contentsContainerView.centerYAnchor),
-            commentMoreButton.topAnchor.constraint(equalTo: contentTextView.bottomAnchor),
-            commentMoreButton.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor, constant: leadingTrailingSpacing),
-            commentMoreButton.trailingAnchor.constraint(lessThanOrEqualTo: contentsContainerView.trailingAnchor, constant: -leadingTrailingSpacing),
-            commentMoreButton.bottomAnchor.constraint(equalTo: contentsContainerView.bottomAnchor, constant: -bottomSpacing)
+            commentMoreButton.topAnchor.constraint(equalTo: contentTextView.bottomAnchor,
+                                                   constant: commentMoreButtonTopSpacing),
+            commentMoreButton.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor,
+                                                       constant: leadingTrailingSpacing),
+            commentMoreButton.trailingAnchor.constraint(lessThanOrEqualTo: contentsContainerView.trailingAnchor,
+                                                        constant: -leadingTrailingSpacing),
+            commentMoreButton.bottomAnchor.constraint(equalTo: contentsContainerView.bottomAnchor,
+                                                      constant: -bottomSpacing)
         ])
     }
 

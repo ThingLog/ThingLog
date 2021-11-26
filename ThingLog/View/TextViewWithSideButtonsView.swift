@@ -31,7 +31,7 @@ final class TextViewWithSideButtonsView: UIView {
         return button
     }()
 
-    private let textView: UITextView = {
+    let textView: UITextView = {
         let textView: UITextView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isScrollEnabled = false
@@ -45,7 +45,7 @@ final class TextViewWithSideButtonsView: UIView {
         return textView
     }()
 
-    private let rightButton: UIButton = {
+    let rightButton: UIButton = {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("확인", for: .normal)

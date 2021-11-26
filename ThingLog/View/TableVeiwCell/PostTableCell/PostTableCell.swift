@@ -179,6 +179,8 @@ final class PostTableCell: UITableViewCell {
         Complaint that PorchCam can't pick up voices/speech when there's a loud fan running or other background noise (like a storm, etc.)
         Complaint that PorchCam can't pick up voices/speech when there's a loud fan running or other background noise (like a storm, etc.)Complaint that PorchCam can't pick up voices/speech when there's a loud fan running or other background noise (like a storm,
         """
+        textView.textContainer.lineFragmentPadding = .zero
+        textView.textContainerInset = .zero
         textView.sizeToFit()
         return textView
     }()
@@ -381,7 +383,12 @@ extension PostTableCell {
             return
         }
 
-        priceLabel.text = price == 0 ? "가격" : "\(price)원"
+        guard let formattedPrice: String = price.toStringWithComma() else {
+            priceLabel.text = ""
+            return
+        }
+
+        priceLabel.text = price == 0 ? "가격" : "\(formattedPrice) 원"
         priceLabel.font = price == 0 ? UIFont.Pretendard.body1 : UIFont.Pretendard.title1
         priceLabel.textColor = price == 0 ? SwiftGenColors.gray2.color : SwiftGenColors.black.color
     }

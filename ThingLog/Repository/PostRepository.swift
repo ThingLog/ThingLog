@@ -160,7 +160,7 @@ final class PostRepository: PostRepositoryProtocol {
             }
         }
     }
-    
+  
     /// identifier 속성을 이용해 PostEntity 객체를 한 개 가져온다.
     /// - Parameters:
     ///   - identifier: PostEntity를 찾기 위한 UUID 속성

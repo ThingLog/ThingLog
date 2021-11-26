@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20E241" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Attachment" representedClassName="AttachmentEntity" syncable="YES" codeGenerationType="class">
         <attribute name="identifier" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="thumbnail" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
@@ -13,7 +13,7 @@
     </entity>
     <entity name="Comment" representedClassName="CommentEntity" syncable="YES" codeGenerationType="class">
         <attribute name="contents" attributeType="String"/>
-        <attribute name="createDate" attributeType="Date" defaultDateTimeInterval="654164520" usesScalarValueType="NO"/>
+        <attribute name="createDate" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="identifier" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="post" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="comments" inverseEntity="Post"/>
     </entity>
@@ -61,7 +61,7 @@
     <elements>
         <element name="Attachment" positionX="-7253.027587890626" positionY="-4690.344833374023" width="128" height="103"/>
         <element name="Category" positionX="-7669.173278808594" positionY="-4417.294006347656" width="128" height="74"/>
-        <element name="Comment" positionX="-6921.718536376953" positionY="-4342.518676757812" width="128" height="103"/>
+        <element name="Comment" positionX="-6921.718536376953" positionY="-4342.518676757812" width="128" height="89"/>
         <element name="Drawer" positionX="-6919.932647705078" positionY="-4487.72053527832" width="128" height="134"/>
         <element name="ImageData" positionX="-7058.579223632812" positionY="-4674.90251159668" width="128" height="73"/>
         <element name="Post" positionX="-7234.070434570312" positionY="-4447.350189208984" width="128" height="268"/>

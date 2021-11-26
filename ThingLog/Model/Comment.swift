@@ -18,6 +18,7 @@ extension Comment {
         let entity: CommentEntity = CommentEntity(context: context)
         entity.identifier = identifier
         entity.contents = contents
+        entity.createDate = Date()
         return entity
     }
 }

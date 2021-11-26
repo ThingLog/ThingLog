@@ -10,7 +10,7 @@ import UIKit
 extension CommentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // TODO: 실제 데이터 바인딩 1 = 본문, 10 = 댓글
-        1 + 10
+        1 + viewModel.commentCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -26,10 +26,7 @@ extension CommentViewController {
     private func configureContentCell(with indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
 
-        cell.textLabel?.text = """
-        Complaint that PorchCam can't pick up voices/speech when there's a loud fan running or other background noise (like a storm, etc.)
-        Complaint that PorchCam can't pick up voices/speech when there's a loud fan running or other background noise (like a storm, etc.)Complaint that PorchCam can't pick up voices/speech when there's a loud fan running or other background noise (like a storm,
-        """
+        cell.textLabel?.text = viewModel.contents
         cell.backgroundColor = .clear
         cell.textLabel?.font = UIFont.Pretendard.body1
         cell.textLabel?.numberOfLines = 0
@@ -44,17 +41,23 @@ extension CommentViewController {
         }
 
         cell.delegate = self
-        cell.textView.text = "테스트"
+        cell.textView.text = viewModel.getComment(at: indexPath.row - 1)
+        cell.dateLabel.text = viewModel.getCommentDate(at: indexPath.row - 1)
 
         cell.toolbarCancleCallback = { [weak self] in
             cell.isEditable = false
             self?.hideCommentInputView(false)
+            self?.tableView.reloadData()
         }
 
         cell.modifyButton.rx.tap
             .bind { [weak self] in
                 cell.isEditable.toggle()
-                cell.textView.isEditable ? cell.textView.becomeFirstResponder() : cell.textView.resignFirstResponder()
+                cell.isEditable ? cell.textView.becomeFirstResponder() : cell.textView.resignFirstResponder()
+                if !cell.isEditable {
+                    self?.viewModel.updateComment(at: indexPath.row - 1,
+                                                  text: cell.textView.text)
+                }
                 self?.hideCommentInputView(cell.isEditable)
             }.disposed(by: cell.disposeBag)
 
@@ -63,8 +66,9 @@ extension CommentViewController {
                 if cell.isEditable {
                     cell.isEditable.toggle()
                     cell.textView.resignFirstResponder()
+                    self?.tableView.reloadData()
                 } else {
-                    // TODO: 삭제 기능
+                    self?.showRemoveCommentAlert(at: indexPath.row - 1)
                 }
                 self?.hideCommentInputView(cell.isEditable)
             }.disposed(by: cell.disposeBag)
