@@ -83,9 +83,21 @@ extension PhotosViewController: UICollectionViewDataSource {
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 0 {
-            if AVCaptureDevice.authorizationStatus(for: .video) == .authorized {
+            switch AVCaptureDevice.authorizationStatus(for: .video) {
+            case .authorized:
                 present(imagePickerController, animated: true)
-            } else {
+            case .notDetermined:
+                AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
+                    guard let self = self else { return }
+                    if granted {
+                        self.present(self.imagePickerController, animated: true)
+                    }
+                }
+            case .denied:
+                coordinator?.showMoveSettingAlert()
+            case .restricted:
+                coordinator?.showMoveSettingAlert()
+            @unknown default:
                 coordinator?.showMoveSettingAlert()
             }
         }
