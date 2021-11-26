@@ -170,7 +170,10 @@ extension PhotosViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
-        collectionView.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier)
+        collectionView.register(CenterIconCollectionCell.self,
+                                forCellWithReuseIdentifier: CenterIconCollectionCell.reuseIdentifier)
+        collectionView.register(ContentsCollectionViewCell.self,
+                                forCellWithReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
     }

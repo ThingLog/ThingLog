@@ -15,15 +15,15 @@ extension PhotosViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsCollectionViewCell else {
-            fatalError("Unable to dequeue PhotoCollectionViewCell")
+        if indexPath.item == 0 {
+            guard let cell: CenterIconCollectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: CenterIconCollectionCell.reuseIdentifier, for: indexPath) as? CenterIconCollectionCell else {
+                return CenterIconCollectionCell()
+            }
+            return cell
         }
 
-        // Camera Cell
-        if indexPath.item == 0 {
-            cell.update(image: SwiftGenIcons.camera.image)
-            cell.setupDisplayOnlyImageView()
-            return cell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsCollectionViewCell else {
+            fatalError("Unable to dequeue PhotoCollectionViewCell")
         }
 
         setupContentsCell(cell: cell, at: indexPath)
