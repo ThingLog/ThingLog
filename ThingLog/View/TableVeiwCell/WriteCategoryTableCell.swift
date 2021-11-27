@@ -38,6 +38,13 @@ final class WriteCategoryTableCell: UITableViewCell {
         return collectionView
     }()
 
+    private let trailingGradientView: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        return view
+    }()
+
     // MARK: - Properties
     var indicatorButtonDidTappedCallback: (() -> Void)?
     private let paddingLeading: CGFloat = 26.0
@@ -45,6 +52,7 @@ final class WriteCategoryTableCell: UITableViewCell {
     private let paddingTopBottom: CGFloat = 20.0
     private let indicatorButtonSize: CGFloat = 40.0
     private let indicatorButtonTopBottom: CGFloat = 8.0
+    private let trailingGradientViewWidth: CGFloat = 20.0
     private var categories: [Category] = [] {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -63,6 +71,7 @@ final class WriteCategoryTableCell: UITableViewCell {
         bindCategorySubject()
     }
 
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
@@ -74,10 +83,21 @@ final class WriteCategoryTableCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        trailingGradientView.frame = contentView.bounds
+        trailingGradientView.frame.size.width = trailingGradientViewWidth
+        trailingGradientView.setGradient(startColor: SwiftGenColors.primaryBackground.color,
+                                         endColor: .white.withAlphaComponent(0),
+                                         startPoint: CGPoint(x: 1.0, y: 1.0),
+                                         endPoint: CGPoint(x: 0.0, y: 1.0))
+    }
+
+    // MARK: - Setup
     private func setupView() {
         selectionStyle = .none
         contentView.backgroundColor = SwiftGenColors.primaryBackground.color
-        contentView.addSubviews(categoryLabel, indicatorButton, collectionView)
+        contentView.addSubviews(categoryLabel, indicatorButton, collectionView, trailingGradientView)
 
         NSLayoutConstraint.activate([
             categoryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: paddingLeading),
@@ -99,7 +119,11 @@ final class WriteCategoryTableCell: UITableViewCell {
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: paddingLeading),
             collectionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: paddingTopBottom),
             collectionView.trailingAnchor.constraint(equalTo: indicatorButton.leadingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -indicatorButtonTopBottom)
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -indicatorButtonTopBottom),
+            trailingGradientView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            trailingGradientView.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor),
+            trailingGradientView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            trailingGradientView.widthAnchor.constraint(equalToConstant: trailingGradientViewWidth)
         ])
 
         collectionView.dataSource = self
