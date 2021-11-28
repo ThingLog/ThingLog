@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>글쓰기에서 사진 촬영 기능을 이용하기 위해 필요합니다.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>포토카드 사진을 저장하기 위해 권한이 필요합니다.</string>
 	<key>CFBundleDevelopmentRegion</key>
