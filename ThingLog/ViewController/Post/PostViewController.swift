@@ -44,11 +44,15 @@ final class PostViewController: BaseViewController {
         if isMovingToParent {
             let startIndexPath: IndexPath = IndexPath(row: viewModel.startIndexPath.row, section: 0)
             tableView.scrollToRow(at: startIndexPath, at: .top, animated: false)
+            UIView.performWithoutAnimation {
+                tableView.reloadRows(at: [startIndexPath], with: .automatic)
+            }
         } else {
-            if let indexPaths: [IndexPath] = tableView.indexPathsForVisibleRows {
+            if viewModel.fetchedResultsController.fetchedObjects?.count ?? 0 > 0,
+               let indexPaths: [IndexPath] = tableView.indexPathsForVisibleRows {
                 tableView.reloadRows(at: indexPaths, with: .none)
             } else {
-                tableView.reloadData()
+                coordinator?.back()
             }
         }
     }

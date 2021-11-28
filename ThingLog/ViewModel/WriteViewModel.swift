@@ -80,14 +80,25 @@ final class WriteViewModel {
             return
         }
 
-        let newPost: Post = createNewPost()
-
-        repository.create(newPost) { result in
-            switch result {
-            case .success:
-                completion(true)
-            case .failure(let error):
-                fatalError(error.localizedDescription)
+        if let modifyEntity: PostEntity = modifyEntity {
+            updatePost()
+            repository.update(modifyEntity) { result in
+                switch result {
+                case .success:
+                    completion(true)
+                case .failure(let error):
+                    fatalError(error.localizedDescription)
+                }
+            }
+        } else {
+            let newPost: Post = createNewPost()
+            repository.create(newPost) { result in
+                switch result {
+                case .success:
+                    completion(true)
+                case .failure(let error):
+                    fatalError(error.localizedDescription)
+                }
             }
         }
     }
@@ -133,6 +144,36 @@ final class WriteViewModel {
             }
         }
         return attachments
+    }
+
+    private func updatePost() {
+        guard let modifyEntity = modifyEntity else {
+            return
+        }
+
+        modifyEntity.title = typeValues[0]
+        modifyEntity.price = Int64(typeValues[1]?.filter("0123456789".contains) ?? "") ?? 0
+        modifyEntity.purchasePlace = typeValues[2]
+        modifyEntity.postType?.pageType = .bought
+
+        if let attachmentEntities: NSSet = modifyEntity.attachments {
+            modifyEntity.removeFromAttachments(attachmentEntities)
+        }
+        let attachments: [Attachment] = createAttachment()
+        attachments.forEach { attachment in
+            let attachmentEntity: AttachmentEntity = attachment.toEntity(in: CoreDataStack.shared.mainContext)
+            modifyEntity.addToAttachments(attachmentEntity)
+        }
+
+        if let categoryEntities: NSSet = modifyEntity.categories {
+            modifyEntity.removeFromCategories(categoryEntities)
+        }
+        categories.forEach { category in
+            let categoryEntity: CategoryEntity = category.toEntity(in: CoreDataStack.shared.mainContext)
+            modifyEntity.addToCategories(categoryEntity)
+        }
+
+        modifyEntity.contents = contents
     }
 }
 
