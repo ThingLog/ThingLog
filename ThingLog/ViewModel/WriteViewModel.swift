@@ -45,6 +45,7 @@ final class WriteViewModel {
     lazy var typeValues: [String?] = Array(repeating: "", count: typeInfo.count)
     private(set) var originalImages: [UIImage] = []
     private var categories: [Category] = []
+    private var modifyEntity: PostEntity?
 
     // MARK: - Rx
     private(set) var thumbnailImagesSubject: BehaviorSubject<[UIImage]> = BehaviorSubject<[UIImage]>(value: [])
@@ -52,8 +53,9 @@ final class WriteViewModel {
     private let disposeBag: DisposeBag = DisposeBag()
 
     // MARK: - Init
-    init(pageType: PageType) {
+    init(pageType: PageType, modifyEntity: PostEntity? = nil) {
         self.pageType = pageType
+        self.modifyEntity = modifyEntity
 
         setupBinding()
     }

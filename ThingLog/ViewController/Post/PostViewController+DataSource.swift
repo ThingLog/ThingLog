@@ -34,8 +34,9 @@ extension PostViewController: UITableViewDataSource {
                 }
             }.disposed(by: cell.disposeBag)
 
-        cell.moreMenuButton.modifyPostCallback = {
-            // TODO: 수정 기능
+        cell.moreMenuButton.modifyPostCallback = { [weak self] in
+            let viewModel: WriteViewModel = WriteViewModel(pageType: .bought, modifyEntity: item)
+            self?.coordinator?.showWriteViewController(with: viewModel)
         }
 
         cell.moreMenuButton.removePostCallback = { [weak self] in

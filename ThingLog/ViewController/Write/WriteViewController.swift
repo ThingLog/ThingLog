@@ -80,7 +80,8 @@ final class WriteViewController: BaseViewController {
         closeButton.rx.tap.bind { [weak self] in
             self?.closeWithAlert()
         }.disposed(by: disposeBag)
-        
+
+        navigationItem.hidesBackButton = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: closeButton)
     }
     
