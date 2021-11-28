@@ -33,6 +33,7 @@ final class WriteViewModel {
             return [(.default, "물건 이름"), (.default, "선물 준 사람")]
         }
     }
+    var createDate: String = "\(Date().toString(.year))년 \(Date().toString(.month))월 \(Date().toString(.day))일"
     /// Section 마다 표시할 항목의 개수
     lazy var itemCount: [Int] = [1, 1, typeInfo.count, 1, 1]
     private let repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
@@ -45,7 +46,7 @@ final class WriteViewModel {
     lazy var typeValues: [String?] = Array(repeating: "", count: typeInfo.count)
     private(set) var originalImages: [UIImage] = []
     private var categories: [Category] = []
-    private var modifyEntity: PostEntity?
+    private(set) var modifyEntity: PostEntity?
 
     // MARK: - Rx
     private(set) var thumbnailImagesSubject: BehaviorSubject<[UIImage]> = BehaviorSubject<[UIImage]>(value: [])
@@ -68,6 +69,7 @@ final class WriteViewModel {
         bindCategorySubject()
         
         bindNotificationPassSelectImages()
+        bindModifyEntity()
     }
 
     /// Core Data에 게시물을 저장한다.
@@ -158,7 +160,7 @@ extension WriteViewModel {
                 let originals: [UIImage] = images.map { $0.original }
                 self?.thumbnailImagesSubject.onNext(thumbnails)
                 self?.originalImages = originals
-            }.disposed(by: disposeBag) 
+            }.disposed(by: disposeBag)
     }
 
     /// 이미지가 선택되어 있는 지 여부를 `isSelectImages` 에 갱신한다.
@@ -188,5 +190,44 @@ extension WriteViewModel {
             .bind { [weak self] categories in
                 self?.categories = categories
             }.disposed(by: disposeBag)
+    }
+
+    /// modifyEntity가 있다면(게시물을 수정 중이라면), 뷰를 위한 프로퍼티에 갱신한다.
+    private func bindModifyEntity() {
+        guard let entity: PostEntity = modifyEntity,
+              let date: Date = entity.createDate else {
+                  return
+              }
+
+        // 날짜
+        createDate = "\(date.toString(.year))년 \(date.toString(.month))월 \(date.toString(.day))일"
+
+        // 이미지
+        if let attachmentEntities: [AttachmentEntity] = entity.attachments?.allObjects as? [AttachmentEntity] {
+            let thumnailDatas: [Data] = attachmentEntities.compactMap { $0.thumbnail }
+            let imageDatas: [Data] = attachmentEntities.compactMap { $0.imageData?.originalImage }
+            let thumnails: [UIImage] = thumnailDatas.compactMap { UIImage(data: $0) }
+            let images: [UIImage] = imageDatas.compactMap { UIImage(data: $0) }
+            thumbnailImagesSubject.onNext(thumnails)
+            originalImages = images
+        }
+
+        // 카테고리 (현재 동작X)
+        if let categoryEntities: [CategoryEntity] = entity.categories?.allObjects as? [CategoryEntity] {
+            categorySubject.onNext(categoryEntities.map { $0.toModel() })
+        }
+        // 제목
+        typeValues[0] = entity.title
+        // 가격, 판매처/구매처/선물받은사람
+        if pageType == .bought || pageType == .wish {
+            typeValues[1] = "\(entity.price)"
+            typeValues[2] = entity.purchasePlace
+        } else {
+            typeValues[1] = entity.giftGiver
+        }
+        // 별점
+        rating = Int(entity.rating?.score ?? 0)
+        // 본문
+        contents = entity.contents ?? ""
     }
 }

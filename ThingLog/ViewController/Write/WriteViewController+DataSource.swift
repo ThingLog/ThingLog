@@ -72,7 +72,8 @@ extension WriteViewController {
         }
 
         cell.configure(keyboardType: viewModel.typeInfo[indexPath.row].keyboardType,
-                       placeholder: viewModel.typeInfo[indexPath.row].placeholder)
+                       placeholder: viewModel.typeInfo[indexPath.row].placeholder,
+                       text: viewModel.typeValues[indexPath.row])
         cell.isEditingSubject
             .bind { [weak self] _ in
                 self?.scrollToCurrentRow(at: indexPath)
@@ -90,6 +91,7 @@ extension WriteViewController {
             fatalError("Unable to downcast the cell in dequeueReusableCell to WriteRatingCell")
         }
 
+        cell.setCurrentRating(viewModel.rating)
         cell.selectRatingBlock = { [weak self] in
             self?.viewModel.rating = cell.currentRating
             self?.view.endEditing(true)
@@ -104,6 +106,10 @@ extension WriteViewController {
         }
 
         cell.delegate = self
+        if viewModel.contents.isNotEmpty {
+            cell.textView.text = viewModel.contents
+            cell.textView.textColor = SwiftGenColors.primaryBlack.color
+        }
         cell.textView.rx.didBeginEditing
             .bind { [weak self] in
                 self?.scrollToCurrentRow(at: indexPath)
