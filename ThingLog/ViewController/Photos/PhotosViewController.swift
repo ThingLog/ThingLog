@@ -211,7 +211,6 @@ extension PhotosViewController {
 }
 // MARK: - Bind
 extension PhotosViewController {
-    
     private func bindNavigationButton() {
         successButton.rx.tap
             .bind { [weak self] in
@@ -382,9 +381,12 @@ extension PhotosViewController: UINavigationControllerDelegate, UIImagePickerCon
             return
         }
 
-        // print out the image size as a test
-        print(image.size)
-        // TODO: WriteViewModel로 편집된 이미지 전달
+        let indexPath: IndexPath = IndexPath(row: 0, section: 0)
+        self.selectedIndexPath = [(indexPath, image)]
+
+        NotificationCenter.default.post(name: .passSelectImages,
+                                        object: nil,
+                                        userInfo: [Notification.Name.passSelectImages: self.convertIndexPathToImages()])
         coordinator?.back()
     }
 }
