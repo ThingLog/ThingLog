@@ -35,7 +35,7 @@ final class WriteViewModel {
     }
     var createDate: String = "\(Date().toString(.year))년 \(Date().toString(.month))월 \(Date().toString(.day))일"
     /// Section 마다 표시할 항목의 개수
-    lazy var itemCount: [Int] = [1, 1, typeInfo.count, 1, 1]
+    lazy var itemCount: [Int] = [1, 1, typeInfo.count, pageType == .wish ? 0 : 1, 1]
     private let repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
     private var isSelectImages: Bool = false
 
@@ -174,6 +174,7 @@ final class WriteViewModel {
         }
 
         modifyEntity.contents = contents
+        modifyEntity.rating?.scoreType = ScoreType(rawValue: Int16(rating)) ?? ScoreType.unrated
     }
 }
 

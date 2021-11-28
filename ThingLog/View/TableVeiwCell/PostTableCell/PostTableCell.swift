@@ -349,6 +349,7 @@ extension PostTableCell {
         if let categories: [CategoryEntity] = categories?.allObjects as? [CategoryEntity] {
             categoryViewDataSource.items = categories.isEmpty ? ["카테고리"] : categories.compactMap { $0.title }
             categoryViewDataSource.isEmpty = categories.isEmpty
+            categoryCollectionView.reloadData()
         }
     }
 
