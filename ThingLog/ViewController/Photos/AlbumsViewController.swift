@@ -150,7 +150,14 @@ extension AlbumsViewController: UICollectionViewDataSource {
         let sectionType: AlbumSectionType = sections[indexPath.section]
         switch sectionType {
         case .all:
-            allPhotos.firstObject?.toImage(targetSize: thumbnailSize, options: defaultImageRequestOptions) { [weak self] image in
+            guard let firstAsset: PHAsset = allPhotos.firstObject else {
+                cell.configure(image: nil,
+                               title: "최근 항목",
+                               description: "0")
+                return cell
+            }
+
+            firstAsset.toImage(targetSize: thumbnailSize, options: defaultImageRequestOptions) { [weak self] image in
                 cell.configure(image: image,
                                title: "최근 항목",
                                description: "\(self?.allPhotos.count ?? 0)")

@@ -18,7 +18,7 @@ final class WriteTextViewCell: UITableViewCell {
         textView.isEditable = true
         textView.isScrollEnabled = false
         textView.font = UIFont.Pretendard.body1
-        textView.textColor = SwiftGenColors.gray4.color
+        textView.textColor = SwiftGenColors.gray2.color
         textView.text = "물건에 대한 생각이나 감정을 자유롭게 기록해보세요."
         textView.backgroundColor = .clear
         textView.sizeToFit()
@@ -95,16 +95,16 @@ extension WriteTextViewCell {
 
 extension WriteTextViewCell: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == SwiftGenColors.gray4.color {
+        if textView.textColor == SwiftGenColors.gray2.color {
             textView.text = nil
-            textView.textColor = SwiftGenColors.black.color
+            textView.textColor = SwiftGenColors.primaryBlack.color
         }
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "물건에 대한 생각이나 감정을 자유롭게 기록해보세요."
-            textView.textColor = SwiftGenColors.gray4.color
+            textView.textColor = SwiftGenColors.gray2.color
         }
     }
 

@@ -15,7 +15,7 @@ final class CheckView: UIControl {
         imageView.isHidden = true
         return imageView
     }()
-
+    
     let label: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -23,6 +23,11 @@ final class CheckView: UIControl {
         label.textColor = .white
         return label
     }()
+    
+    // 터치 영역 더 크게 한다.
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        bounds.insetBy(dx: -10, dy: -10).contains(point)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,7 +40,7 @@ final class CheckView: UIControl {
     func setupView() {
         addSubview(imageView)
         addSubview(label)
-
+        
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -2),
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 2),

@@ -84,6 +84,6 @@ final class CommentViewModel {
         let sortedComment: [CommentEntity] = commentEntities.sorted(by: {
             $0.createDate ?? Date() < $1.createDate ?? Date()
         })
-        return commentEntities
+        return sortedComment
     }
 }

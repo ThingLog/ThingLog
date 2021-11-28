@@ -175,12 +175,7 @@ final class PostTableCell: UITableViewCell {
         textView.backgroundColor = .clear
         textView.isEditable = false
         textView.isScrollEnabled = false
-        textView.text = """
-        Complaint that PorchCam can't pick up voices/speech when there's a loud fan running or other background noise (like a storm, etc.)
-        Complaint that PorchCam can't pick up voices/speech when there's a loud fan running or other background noise (like a storm, etc.)Complaint that PorchCam can't pick up voices/speech when there's a loud fan running or other background noise (like a storm,
-        """
         textView.textContainer.lineFragmentPadding = .zero
-        textView.textContainerInset = .zero
         textView.sizeToFit()
         return textView
     }()
@@ -189,7 +184,7 @@ final class PostTableCell: UITableViewCell {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("댓글 n개 모두 보기", for: .normal)
-        button.setTitleColor(SwiftGenColors.gray2.color, for: .normal)
+        button.setTitleColor(SwiftGenColors.systemGreen.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.title2
         return button
     }()
@@ -318,7 +313,7 @@ final class PostTableCell: UITableViewCell {
         configurePriceLabel(type: type, price: post.price)
 
         // 본문
-        configureContents(text: post.contents)
+        contentTextView.text = post.contents
 
         // 댓글 n개 모두 보기
         configureCommentMoreButton(with: post.comments?.allObjects.count)
@@ -391,14 +386,6 @@ extension PostTableCell {
         priceLabel.text = price == 0 ? "가격" : "\(formattedPrice) 원"
         priceLabel.font = price == 0 ? UIFont.Pretendard.body1 : UIFont.Pretendard.title1
         priceLabel.textColor = price == 0 ? SwiftGenColors.gray2.color : SwiftGenColors.black.color
-    }
-
-    /// contentTextView를 구성한다. 텍스트가 없는 경우 기본 값과 함께 색상을 변경한다.
-    private func configureContents(text: String?) {
-        let isEmpty: Bool = text?.isEmpty ?? true
-
-        contentTextView.text = isEmpty ? "물건에 대한 생각이나 감정을 자유롭게 기록해보세요." : text
-        contentTextView.textColor = isEmpty ? SwiftGenColors.gray2.color : SwiftGenColors.primaryBlack.color
     }
 
     /// CommentMoreButton을 구성한다.

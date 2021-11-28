@@ -209,6 +209,7 @@
 		DBAE8E9826FDB3EE00F536AD /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */; };
 		DBAE8EB126FDBEAE00F536AD /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */; };
 		DBAE8EBB26FDCA7B00F536AD /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */; };
+		DBB36395275067AC00BB3DFC /* CropInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB36394275067AC00BB3DFC /* CropInset.swift */; };
 		DBC45A9C270F24B800AB9499 /* DummyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC45A9B270F24B800AB9499 /* DummyProtocol.swift */; };
 		DBC45A9E270F25E400AB9499 /* ThingLogPostCategoryRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC45A9D270F25E400AB9499 /* ThingLogPostCategoryRequestTests.swift */; };
 		DBC45AA0270F266800AB9499 /* ThingLogPostSearchRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC45A9F270F266800AB9499 /* ThingLogPostSearchRequestTests.swift */; };
@@ -229,6 +230,8 @@
 		DBD5454C27032C6600063C98 /* EasyLookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454B27032C6600063C98 /* EasyLookViewModel.swift */; };
 		DBD5455027033D9A00063C98 /* ButtonRoundCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD5454F27033D9A00063C98 /* ButtonRoundCollectionCell.swift */; };
 		DBD545522703409300063C98 /* HorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD545512703409300063C98 /* HorizontalCollectionView.swift */; };
+		DBDA84C1274CD863009CC7AD /* CropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA84C0274CD863009CC7AD /* CropViewController.swift */; };
+		DBDA84C3274F5936009CC7AD /* PhotosViewController+Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA84C2274F5936009CC7AD /* PhotosViewController+Crop.swift */; };
 		DBE3E9C1272FB9BB00B3EB69 /* TrashViewController+Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE3E9C0272FB9BB00B3EB69 /* TrashViewController+Collection.swift */; };
 		DBE3E9C3272FD6B300B3EB69 /* UserInformationViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE3E9C2272FD6B300B3EB69 /* UserInformationViewModelable.swift */; };
 		DBE3E9C6272FF25A00B3EB69 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBE3E9C5272FF25A00B3EB69 /* Icons.xcassets */; };
@@ -478,6 +481,7 @@
 		DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		DBAE8EBA26FDCA7B00F536AD /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		DBB36394275067AC00BB3DFC /* CropInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropInset.swift; sourceTree = "<group>"; };
 		DBB862BA272BFE9200B72730 /* ThingLog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ThingLog.entitlements; sourceTree = "<group>"; };
 		DBC45A9B270F24B800AB9499 /* DummyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyProtocol.swift; sourceTree = "<group>"; };
 		DBC45A9D270F25E400AB9499 /* ThingLogPostCategoryRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogPostCategoryRequestTests.swift; sourceTree = "<group>"; };
@@ -499,6 +503,8 @@
 		DBD5454B27032C6600063C98 /* EasyLookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookViewModel.swift; sourceTree = "<group>"; };
 		DBD5454F27033D9A00063C98 /* ButtonRoundCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonRoundCollectionCell.swift; sourceTree = "<group>"; };
 		DBD545512703409300063C98 /* HorizontalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionView.swift; sourceTree = "<group>"; };
+		DBDA84C0274CD863009CC7AD /* CropViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewController.swift; sourceTree = "<group>"; };
+		DBDA84C2274F5936009CC7AD /* PhotosViewController+Crop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosViewController+Crop.swift"; sourceTree = "<group>"; };
 		DBE3E9C0272FB9BB00B3EB69 /* TrashViewController+Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrashViewController+Collection.swift"; sourceTree = "<group>"; };
 		DBE3E9C2272FD6B300B3EB69 /* UserInformationViewModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationViewModelable.swift; sourceTree = "<group>"; };
 		DBE3E9C5272FF25A00B3EB69 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
@@ -555,6 +561,7 @@
 				873ED12A272AC8CB00C9F7F1 /* PhotosViewController+Albums.swift */,
 				873ED12E272ACD3000C9F7F1 /* PhotosViewController+CollectionView.swift */,
 				87EDCFCD2731166D002C98BE /* PhotosViewController+Caching.swift */,
+				DBDA84C2274F5936009CC7AD /* PhotosViewController+Crop.swift */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -852,6 +859,7 @@
 				8738E1CA271705220069BB80 /* CategoryViewController.swift */,
 				87A863C62740DCB10023FBE7 /* Comment */,
 				DB7C04E026FB1900009F5C0A /* ContentsCollection */,
+				DBB363932750679500BB3DFC /* Crop */,
 				DB00D214272A8D1E003FC9C3 /* Drawer */,
 				DBE3E9C92730137200B3EB69 /* EasyLook */,
 				DB7B470C274137F600426EF1 /* Home */,
@@ -1078,6 +1086,15 @@
 				DBAE8E9526FDB3EE00F536AD /* Pretendard-SemiBold.otf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		DBB363932750679500BB3DFC /* Crop */ = {
+			isa = PBXGroup;
+			children = (
+				DBB36394275067AC00BB3DFC /* CropInset.swift */,
+				DBDA84C0274CD863009CC7AD /* CropViewController.swift */,
+			);
+			path = Crop;
 			sourceTree = "<group>";
 		};
 		DBE3E9BF272FB9AB00B3EB69 /* Trash */ = {
@@ -1347,6 +1364,7 @@
 				DB3A516B27103DC4003B529D /* EmptyResultsView.swift in Sources */,
 				DB148C26270469B300FDC48F /* Date+.swift in Sources */,
 				DB22327E27183378002ED30D /* TwoLabelVerticalHeaderView.swift in Sources */,
+				DBDA84C1274CD863009CC7AD /* CropViewController.swift in Sources */,
 				873EC00D26D39055003C3525 /* ViewController.swift in Sources */,
 				DB7B470B27410CD700426EF1 /* OnboardingPage2ViewController.swift in Sources */,
 				DB32B28B272D0532009074AF /* DrawerEntity+.swift in Sources */,
@@ -1418,6 +1436,7 @@
 				DB00D21E272ADB68003FC9C3 /* DrawerCollectionCell.swift in Sources */,
 				876C157927044BA0000C1C84 /* RepositoryError.swift in Sources */,
 				874D92F7271AD0A9005FF8F3 /* DisableSelectionTextField.swift in Sources */,
+				DBDA84C3274F5936009CC7AD /* PhotosViewController+Crop.swift in Sources */,
 				DB8BF6792705D25700FD5FDB /* LogoView.swift in Sources */,
 				DBA0F829270B26A0009553FC /* SearchResultsViewController.swift in Sources */,
 				87078B5B26EA44B5007AE242 /* ThingLog.xcdatamodeld in Sources */,
@@ -1481,6 +1500,7 @@
 				87F2188E26FB8ACA00C3FBCA /* PostType.swift in Sources */,
 				87A1F947274B301D00268194 /* CommentCoordinator.swift in Sources */,
 				87DAEB1D270BEC170038C487 /* ThumbnailCell.swift in Sources */,
+				DBB36395275067AC00BB3DFC /* CropInset.swift in Sources */,
 				87EDCFDD273174E1002C98BE /* PostSlideImageViewDataSource.swift in Sources */,
 				8738E1CD271708F80069BB80 /* PaddingLabel.swift in Sources */,
 				87B9EEEA273BE0D2001F3FB4 /* DropDownView+DataSource.swift in Sources */,

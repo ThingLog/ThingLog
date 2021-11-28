@@ -16,52 +16,54 @@ final class ThumbnailCell: UICollectionViewCell {
         imageView.layer.borderWidth = 1
         imageView.layer.cornerRadius = 4
         imageView.layer.borderColor = SwiftGenColors.gray5.color.cgColor
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-
+    
     private let closeButton: UIButton = {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(SwiftGenIcons.photoClose.image, for: .normal)
         return button
     }()
-
+    
     // MARK: Properties
     var closeButtonDidTappedCallback: (() -> Void)?
     private let thumbnailImageViewWidth: CGFloat = 62.0
     private let closeButtonWidth: CGFloat = 16.0
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         setupView()
         closeButton.addTarget(self, action: #selector(tappedCloseButton), for: .touchUpInside)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not beem implemented")
     }
-
+    
     func configure(image: UIImage?) {
-        imageView.image = image
+        DispatchQueue.main.async {
+            self.imageView.image = image
+        }
     }
 }
 
 extension ThumbnailCell {
     private func setupView() {
         closeButton.layer.cornerRadius = closeButtonWidth / 2
-
+        
         let containerView: UIView = {
             let view: UIView = UIView()
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
-
+        
         containerView.addSubview(imageView)
         containerView.addSubview(closeButton)
         contentView.addSubview(containerView)
-
+        
         NSLayoutConstraint.activate([
             // containerView
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -80,7 +82,7 @@ extension ThumbnailCell {
             closeButton.topAnchor.constraint(equalTo: containerView.topAnchor)
         ])
     }
-
+    
     @objc
     private func tappedCloseButton() {
         closeButtonDidTappedCallback?()
