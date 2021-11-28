@@ -35,11 +35,11 @@ final class CenterIconCollectionCell: UICollectionViewCell {
 
     private func setupView() {
         backgroundColor = SwiftGenColors.primaryBackground.color
-        addSubview(iconView)
+        contentView.addSubview(iconView)
 
         NSLayoutConstraint.activate([
-            iconView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            iconView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            iconView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            iconView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             iconView.widthAnchor.constraint(equalToConstant: iconSize),
             iconView.heightAnchor.constraint(equalTo: iconView.widthAnchor)
         ])

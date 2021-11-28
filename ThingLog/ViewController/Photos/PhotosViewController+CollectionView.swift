@@ -90,7 +90,9 @@ extension PhotosViewController: UICollectionViewDelegate {
                 AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
                     guard let self = self else { return }
                     if granted {
-                        self.present(self.imagePickerController, animated: true)
+                        DispatchQueue.main.async {
+                            self.present(self.imagePickerController, animated: true)
+                        }
                     }
                 }
             case .denied:
