@@ -41,6 +41,8 @@ final class LoginViewController: UIViewController {
     private lazy var loginButton: RoundCenterTextButton = {
         let button: RoundCenterTextButton = RoundCenterTextButton(cornerRadius: loginButtonHeight / 2)
         button.setTitle("로그인하기", for: .normal)
+        button.setTitleColor(SwiftGenColors.white.color.withAlphaComponent(0.5), for: .disabled)
+        button.backgroundColor = button.backgroundColor?.withAlphaComponent(0.5)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -58,7 +60,18 @@ final class LoginViewController: UIViewController {
     
     lazy var userInformation: UserInformationable = UserInformation(userAliasName: "",
                                                                     userOneLineIntroduction: "",
-                                                                    isAumatedDarkMode: traitCollection.userInterfaceStyle == .dark)
+                                                                    isAumatedDarkMode: traitCollection.userInterfaceStyle == .dark) {
+        didSet {
+            if userInformation.userAliasName.isEmpty && userInformation.userOneLineIntroduction.isEmpty {
+                loginButton.backgroundColor = SwiftGenColors.primaryBlack.color.withAlphaComponent(0.5)
+                loginButton.isEnabled = false
+            } else {
+                loginButton.backgroundColor = SwiftGenColors.primaryBlack.color
+                loginButton.isEnabled = true
+            }
+        }
+    }
+    
     private let userInformationViewModel: UserInformationViewModelable = UserInformationiCloudViewModel()
     
     // MARK: - Init
