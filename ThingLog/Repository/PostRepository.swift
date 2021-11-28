@@ -205,7 +205,6 @@ final class PostRepository: PostRepositoryProtocol {
             do {
                 let request: NSFetchRequest = PostEntity.fetchRequest()
                 let result: [PostEntity] = try context.fetch(request)
-                print(result.count, "삭제에정개수")
                 result.forEach { context.delete($0) }
                 try context.save()
                 completion(.success(true))

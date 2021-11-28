@@ -43,7 +43,6 @@ extension PhotosViewController: UICollectionViewDataSource {
             if indexPath.item == 0 { return }
             if cell.representedAssetIdentifier == asset.localIdentifier {
                 cell.update(image: image)
-                print(image?.size)
             }
         }
         

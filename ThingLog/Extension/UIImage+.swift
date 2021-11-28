@@ -32,7 +32,7 @@ extension UIImage {
         return resizedImage?.withRenderingMode(.alwaysTemplate)
     }
     
-    func resize(size: CGSize) -> UIImage {
+    func resize(to size: CGSize) -> UIImage {
         let render = UIGraphicsImageRenderer(size: size)
         return render.image { context in
             self.draw(in: CGRect(origin: .zero, size: size))

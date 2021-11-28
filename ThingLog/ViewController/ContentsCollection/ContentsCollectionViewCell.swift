@@ -70,13 +70,6 @@ class ContentsCollectionViewCell: UICollectionViewCell {
     }()
     
     /// 우측 상단에 체크하기 위한 버튼이다. ( 주로 휴지통 화면에서 삭제 또는 복구하기 위해 사용되는 버튼이다. )
-    
-//    let checkButton: UIButton = {
-//        let button: UIButton = UIButton()
-//        button.backgroundColor = .clear
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        return button
-//    }()
     let checkButton: CheckView = {
         let button: CheckView = CheckView()
         button.layer.borderWidth = 1

@@ -342,7 +342,7 @@ extension PhotosViewController {
             guard let original = selectedOriginalImage.last else {
                 continue
             }
-            let thumbnail: UIImage = original.resize(size: thumbnailSize)
+            let thumbnail: UIImage = original.resize(to: thumbnailSize)
             selectedThumnailImage.append(thumbnail)
         }
         return zip(selectedOriginalImage, selectedThumnailImage).map { ($0, $1) }

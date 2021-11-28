@@ -96,7 +96,6 @@ class CropViewController: UIViewController {
     func setupImageConatinerView() {
         view.addSubview(imageContainerView)
         imageContainerView.addSubviews(scrollView)
-        imageContainerView.layer.borderColor = UIColor.white.cgColor
         scrollView.addSubviews(imageView)
         scrollView.delegate = self
         
@@ -155,12 +154,13 @@ class CropViewController: UIViewController {
     }
     
     func setupZoomButton() {
-        view.addSubview(zoomButton)
         let width: CGFloat? = imageView.image?.size.width
         let height: CGFloat? = imageView.image?.size.height
         if width == height {
-            zoomButton.isHidden = true
+            // 뷰를 아예 추가하지 않는다.
+            return
         }
+        view.addSubview(zoomButton)
         
         NSLayoutConstraint.activate([
             zoomButton.bottomAnchor.constraint(equalTo: bottomView.topAnchor,
