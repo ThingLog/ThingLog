@@ -35,10 +35,6 @@ final class WriteViewModel {
     }
     /// Section 마다 표시할 항목의 개수
     lazy var itemCount: [Int] = [1, 1, typeInfo.count, 1, 1]
-    /// 썸네일 크기
-    private let thumbnailSize: CGSize = CGSize(width: 100, height: 100)
-    /// 이미지가 저장될 크기
-    private let imageSize: CGSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
     private let repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
     private var isSelectImages: Bool = false
 
@@ -65,10 +61,11 @@ final class WriteViewModel {
     // MARK: - setup
     private func setupBinding() {
         bindNotificationPassToSelectedCategories()
-        bindNotificationPassSelectPHAssets()
-        bindThumbnailImagesSubject()
+        bindNotificationThumbnailImagesSubject()
         bindNotificationRemoveSelectedThumbnail()
         bindCategorySubject()
+        
+        bindNotificationPassSelectImages()
     }
 
     /// Core Data에 게시물을 저장한다.
@@ -146,22 +143,24 @@ extension WriteViewModel {
                 self?.categorySubject.onNext(categories)
             }.disposed(by: disposeBag)
     }
-
-    /// PhotosViewController 에서 전달받은 데이터를 바인딩한다.
-    private func bindNotificationPassSelectPHAssets() {
+    
+    /// PhotosViewController 에서 전달받은 이미지를 바인딩한다.
+    private func bindNotificationPassSelectImages() {
         NotificationCenter.default.rx
-            .notification(.passSelectAssets, object: nil)
-            .map { notification -> [PHAsset] in
-                notification.userInfo?[Notification.Name.passSelectAssets] as? [PHAsset] ?? []
+            .notification(.passSelectImages, object: nil)
+            .map { notification -> [(original: UIImage, thumbnail: UIImage)] in
+                notification.userInfo?[Notification.Name.passSelectImages] as? [(original: UIImage, thumbnail: UIImage)] ?? []
             }
-            .bind { [weak self] assets in
-                self?.requestThumbnailImages(with: assets)
-                self?.requestOriginalImages(with: assets)
-            }.disposed(by: disposeBag)
+            .bind { [weak self] images in
+                let thumbnails: [UIImage] = images.map { $0.thumbnail }
+                let originals: [UIImage] = images.map { $0.original }
+                self?.thumbnailImagesSubject.onNext(thumbnails)
+                self?.originalImages = originals
+            }.disposed(by: disposeBag) 
     }
 
     /// 이미지가 선택되어 있는 지 여부를 `isSelectImages` 에 갱신한다.
-    private func bindThumbnailImagesSubject() {
+    private func bindNotificationThumbnailImagesSubject() {
         thumbnailImagesSubject
             .map { $0.isNotEmpty }
             .bind { [weak self] isNotEmpty in
@@ -187,44 +186,5 @@ extension WriteViewModel {
             .bind { [weak self] categories in
                 self?.categories = categories
             }.disposed(by: disposeBag)
-    }
-
-    /// 파라미터로 전달받은 `PHAsset`을 `UIImage`로 변환하여 `thumbnailImagesSubject`에 저장한다.
-    /// - Parameter assets: 가져올 데이터
-    private func requestThumbnailImages(with assets: [PHAsset]) {
-        var images: [UIImage] = []
-        let options: PHImageRequestOptions = PHImageRequestOptions()
-        options.isSynchronous = true
-
-        assets.forEach { asset in
-            asset.toImage(targetSize: self.thumbnailSize, options: options) { image in
-                guard let image = image else { return }
-                images.append(image)
-                if images.count == assets.count {
-                    self.thumbnailImagesSubject.onNext(images)
-                }
-            }
-        }
-    }
-
-    /// 파라미터로 받은 `PHAsset`을 `UIImage`로 변환하여 originalImages에 저장한다. 비동기로 동작한다.
-    /// - Parameter assets: UIImage로 변환할 [PHAsset]
-    private func requestOriginalImages(with assets: [PHAsset]) {
-        var images: [UIImage] = []
-        let options: PHImageRequestOptions = PHImageRequestOptions()
-        options.isSynchronous = true
-
-        DispatchQueue.global().async { [weak self] in
-            guard let self = self else { return }
-            assets.forEach { asset in
-                asset.toImage(targetSize: self.imageSize, options: options) { image in
-                    guard let image = image else { return }
-                    images.append(image)
-                    if images.count == assets.count {
-                        self.originalImages = images
-                    }
-                }
-            }
-        }
     }
 }
