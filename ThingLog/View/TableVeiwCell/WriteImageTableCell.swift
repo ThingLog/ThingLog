@@ -32,7 +32,7 @@ final class WriteImageTableCell: UITableViewCell {
     private let paddingTopConstaint: CGFloat = 12.0
     private let paddingBottomConstaint: CGFloat = 20.0
     private var thumbnailCount: Int = 0
-    var coordinator: WriteCoordinator?
+    var coordinator: WriteCoordinatorProtocol?
 
     // MARK: - Rx
     var thumbnailSubject: BehaviorSubject<[UIImage]> = BehaviorSubject<[UIImage]>(value: [])
