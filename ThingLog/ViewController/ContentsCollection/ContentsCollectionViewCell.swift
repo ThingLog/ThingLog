@@ -142,8 +142,8 @@ class ContentsCollectionViewCell: UICollectionViewCell {
             
             smallIconView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7),
             smallIconView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -7),
-            smallIconView.widthAnchor.constraint(equalToConstant: 10),
-            smallIconView.heightAnchor.constraint(equalToConstant: 10),
+            smallIconView.widthAnchor.constraint(equalToConstant: 12),
+            smallIconView.heightAnchor.constraint(equalToConstant: 12),
             
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
             
