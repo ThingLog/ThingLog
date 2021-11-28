@@ -96,8 +96,7 @@ final class PhotosViewController: BaseViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = SwiftGenColors.white.color
+
         selectedIndexPath = []
         isShowAlbumsViewController = false
         resetCachedAssets()
