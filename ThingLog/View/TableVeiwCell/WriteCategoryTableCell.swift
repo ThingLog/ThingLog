@@ -88,7 +88,7 @@ final class WriteCategoryTableCell: UITableViewCell {
         trailingGradientView.frame = contentView.bounds
         trailingGradientView.frame.size.width = trailingGradientViewWidth
         trailingGradientView.setGradient(startColor: SwiftGenColors.primaryBackground.color,
-                                         endColor: .white.withAlphaComponent(0),
+                                         endColor: SwiftGenColors.primaryBackground.color.withAlphaComponent(0),
                                          startPoint: CGPoint(x: 1.0, y: 1.0),
                                          endPoint: CGPoint(x: 0.0, y: 1.0))
     }
