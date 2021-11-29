@@ -128,7 +128,6 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         stackView.axis = .horizontal
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
         return stackView
     }()
     
@@ -219,6 +218,11 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        contentsLabel.attributedText = nil 
+    }
+    
     // MARK: - Setup
     private func setBackgroundColor() {
         topBorderLineView.backgroundColor = SwiftGenColors.gray4.color
@@ -243,7 +247,10 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
             dateTopEmptyView.heightAnchor.constraint(equalToConstant: 4),
             
             categoryLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 80),
-            postTitleLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 80)
+            postTitleLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 80),
+            
+            rightStackViewTrailing.widthAnchor.constraint(equalToConstant: 10),
+            rightStackViewTrailing.heightAnchor.constraint(equalToConstant: 10)
         ])
     }
     
@@ -282,7 +289,7 @@ final class ContentsDetailCollectionViewCell: UICollectionViewCell {
         
         let attributedStr: NSMutableAttributedString = NSMutableAttributedString(string: newContents)
         attributedStr.addAttribute(NSAttributedString.Key.foregroundColor,
-                                   value: UIColor.systemRed,
+                                   value: SwiftGenColors.systemRed.color,
                                    range: (newContents as NSString).range(of: keyWord))
         contentsLabel.attributedText = attributedStr
     }
