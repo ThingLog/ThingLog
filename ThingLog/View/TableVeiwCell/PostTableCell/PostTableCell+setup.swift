@@ -186,7 +186,7 @@ extension PostTableCell {
         let section: NSCollectionLayoutSection = .init(group: group)
         section.orthogonalScrollingBehavior = .continuous
         section.interGroupSpacing = 10
-        section.contentInsets = .init(top: 8, leading: 10, bottom: 8, trailing: 10)
+        section.contentInsets = .init(top: 8, leading: 16, bottom: 8, trailing: 16)
 
         let layout: UICollectionViewCompositionalLayout = .init(section: section)
 

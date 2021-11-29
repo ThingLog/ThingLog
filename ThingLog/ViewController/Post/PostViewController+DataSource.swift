@@ -44,7 +44,7 @@ extension PostViewController: UITableViewDataSource {
 
         cell.photocardButton.rx.tap
             .bind { [weak self] in
-                guard let image: UIImage = item.getImage(at: cell.currentImagePage) else {
+                guard let image: UIImage = item.getImage(at: cell.currentImagePage - 1) else {
                     return
                 }
                 self?.coordinator?.showPhotoCardController(post: item, image: image)

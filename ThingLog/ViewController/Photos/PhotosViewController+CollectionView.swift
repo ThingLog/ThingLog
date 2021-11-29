@@ -15,17 +15,17 @@ extension PhotosViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.item == 0 {
+            guard let cell: CenterIconCollectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: CenterIconCollectionCell.reuseIdentifier, for: indexPath) as? CenterIconCollectionCell else {
+                return CenterIconCollectionCell()
+            }
+            return cell
+        }
+
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsCollectionViewCell else {
             fatalError("Unable to dequeue PhotoCollectionViewCell")
         }
-        
-        // Camera Cell
-        if indexPath.item == 0 {
-            cell.update(image: SwiftGenIcons.camera.image)
-            cell.setupDisplayOnlyImageView()
-            return cell
-        }
-        
+
         setupContentsCell(cell: cell, at: indexPath)
         
         return cell
@@ -83,8 +83,25 @@ extension PhotosViewController: UICollectionViewDataSource {
 extension PhotosViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == 0 {
-            // TODO: 카메라 기능 구현
-            return
+            switch AVCaptureDevice.authorizationStatus(for: .video) {
+              case .authorized:
+                  present(imagePickerController, animated: true)
+              case .notDetermined:
+                  AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
+                      guard let self = self else { return }
+                      if granted {
+                          DispatchQueue.main.async {
+                              self.present(self.imagePickerController, animated: true)
+                          }
+                      }
+                  }
+              case .denied:
+                  coordinator?.showMoveSettingAlert()
+              case .restricted:
+                  coordinator?.showMoveSettingAlert()
+              @unknown default:
+                  coordinator?.showMoveSettingAlert()
+            }
         } else {
             let asset: PHAsset = assets.object(at: indexPath.item - 1)
             let option: PHImageRequestOptions = PHImageRequestOptions()

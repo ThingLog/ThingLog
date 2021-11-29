@@ -20,7 +20,7 @@ final class WriteViewController: BaseViewController {
         
         let headerLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 29.0))
         headerLabel.font = UIFont.Pretendard.body2
-        headerLabel.textColor = SwiftGenColors.gray3.color
+        headerLabel.textColor = SwiftGenColors.gray2.color
         headerLabel.text = "\(Date().toString(.year))년 \(Date().toString(.month))월 \(Date().toString(.day))일"
         headerLabel.textAlignment = .center
         
@@ -43,7 +43,7 @@ final class WriteViewController: BaseViewController {
     
     // MARK: - Properties
     let doneButtonHeight: CGFloat = 52.0
-    var coordinator: WriteCoordinator?
+    var coordinator: WriteCoordinatorProtocol?
     private(set) var viewModel: WriteViewModel
 
     // MARK: - Init
