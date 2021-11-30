@@ -152,9 +152,18 @@ final class WriteViewModel {
         }
 
         modifyEntity.title = typeValues[0]
-        modifyEntity.price = Int64(typeValues[1]?.filter("0123456789".contains) ?? "") ?? 0
-        modifyEntity.purchasePlace = typeValues[2]
-        modifyEntity.postType?.pageType = .bought
+        switch pageType {
+        case .bought:
+            modifyEntity.price = Int64(typeValues[1]?.filter("0123456789".contains) ?? "") ?? 0
+            modifyEntity.purchasePlace = typeValues[2]
+        case .wish:
+            modifyEntity.price = Int64(typeValues[1]?.filter("0123456789".contains) ?? "") ?? 0
+            modifyEntity.purchasePlace = typeValues[2]
+        case .gift:
+            modifyEntity.giftGiver = typeValues[1]
+        }
+
+        modifyEntity.postType?.pageType = pageType
 
         if let attachmentEntities: NSSet = modifyEntity.attachments {
             modifyEntity.removeFromAttachments(attachmentEntities)

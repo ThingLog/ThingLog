@@ -106,10 +106,9 @@ extension WriteViewController {
         }
 
         cell.delegate = self
-        if viewModel.contents.isNotEmpty {
-            cell.textView.text = viewModel.contents
-            cell.textView.textColor = SwiftGenColors.primaryBlack.color
-        }
+        cell.textView.text = viewModel.contents.isNotEmpty ? viewModel.contents : "물건에 대한 생각이나 감정을 자유롭게 기록해보세요."
+        cell.textView.textColor = viewModel.contents.isNotEmpty ? SwiftGenColors.primaryBlack.color : SwiftGenColors.gray2.color
+
         cell.textView.rx.didBeginEditing
             .bind { [weak self] in
                 self?.scrollToCurrentRow(at: indexPath)

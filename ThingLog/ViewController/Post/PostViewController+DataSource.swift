@@ -25,19 +25,7 @@ extension PostViewController: UITableViewDataSource {
         bindCommentButton(cell, with: item)
         bindCommentMoreButton(cell, with: item)
         bindBoughtButton(cell, with: item)
-
-        cell.moreMenuButton.modifyPostCallback = { [weak self] in
-            guard let type: PageType = item.postType?.pageType else {
-                fatalError("\(#function): not found page type")
-            }
-
-            let viewModel: WriteViewModel = WriteViewModel(pageType: type, modifyEntity: item)
-            self?.coordinator?.showWriteViewController(with: viewModel)
-        }
-
-        cell.moreMenuButton.removePostCallback = { [weak self] in
-            self?.showRemovePostAlert(post: item)
-        }
+        setupMoreMenuCallback(cell, item)
 
         return cell
     }
@@ -90,5 +78,20 @@ extension PostViewController: UITableViewDataSource {
                                                                modifyEntity: item)
                 self?.coordinator?.showWriteViewController(with: viewModel)
             }.disposed(by: cell.disposeBag)
+    }
+
+    private func setupMoreMenuCallback(_ cell: PostTableCell, _ item: PostEntity) {
+        cell.moreMenuButton.modifyPostCallback = { [weak self] in
+            guard let type: PageType = item.postType?.pageType else {
+                fatalError("\(#function): not found page type")
+            }
+
+            let viewModel: WriteViewModel = WriteViewModel(pageType: type, modifyEntity: item)
+            self?.coordinator?.showWriteViewController(with: viewModel)
+        }
+
+        cell.moreMenuButton.removePostCallback = { [weak self] in
+            self?.showRemovePostAlert(post: item)
+        }
     }
 }
