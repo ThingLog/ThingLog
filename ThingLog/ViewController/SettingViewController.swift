@@ -16,14 +16,6 @@ final class SettingViewController: UIViewController {
         case darkMode
         case editCategory
         case trash
-        case addDummyData
-        case deleteDummyData
-        case resetUserInfor
-        case clearDrawer
-        case blackCard
-        case dragonball
-        case basket
-        case rightAward
 
         var title: String {
             switch self {
@@ -33,22 +25,6 @@ final class SettingViewController: UIViewController {
                 return "카테고리 수정"
             case .trash:
                 return "휴지통"
-            case .addDummyData:
-                return "랜덤 데이터 400개 추가"
-            case .deleteDummyData:
-                return "랜덤 데이터 모두 삭제"
-            case .resetUserInfor:
-                return "유저정보 초기화 ( 앱 종료됩니다 )"
-            case .clearDrawer:
-                return "진열장 아이템 초기화"
-            case .blackCard:
-                return "진열장 - 블랙카드 획득"
-            case .dragonball:
-                return "진열장 - 드래곤볼 획득"
-            case .basket:
-                return "진열장 - 장바구니 획득"
-            case .rightAward:
-                return "진열장 - 인의예지상 획득"
             }
         }
     }
@@ -173,7 +149,7 @@ extension SettingViewController: UITableViewDataSource {
                         self?.setDarkMode()
                     }
                     .disposed(by: cell.disposeBag)
-            case .editCategory, .trash, .addDummyData, .deleteDummyData, .resetUserInfor, .clearDrawer, .blackCard, .basket, .rightAward, .dragonball:
+            case .editCategory, .trash:
                 cell.changeViewType(labelType: .withBody1,
                                     buttonType: .withChevronRight,
                                     borderLineHeight: .with05Height,
@@ -187,9 +163,6 @@ extension SettingViewController: UITableViewDataSource {
 extension SettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cellType: TableViewCellType = TableViewCellType(rawValue: indexPath.row) {
-            let drawerRepo = DrawerCoreDataRepository(coreDataStack: CoreDataStack.shared,
-                                                      defaultDrawers: DefaultDrawerModel().drawers)
-            
             switch cellType {
             case .darkMode:
                 return
@@ -197,32 +170,6 @@ extension SettingViewController: UITableViewDelegate {
                 coordinator?.showCategoryViewController()
             case .trash:
                 coordinator?.showTrashViewController()
-            case .addDummyData:
-                makeDummy()
-            case .deleteDummyData:
-                deleteAllEntity()
-            case .resetUserInfor:
-                UserInformationiCloudViewModel().resetUserInformation()
-                exit(1)
-            case .clearDrawer:
-                drawerRepo.deleteAllDrawers()
-                coordinator?.navigationController.viewControllers.forEach {
-                    guard let homeViewController = $0 as? HomeViewController else { return }
-                    homeViewController.fetchRepresentativeDrawer()
-                    
-                }
-            case .blackCard:
-                drawerRepo.updateVIP(by: 1_000_000)
-            case .dragonball:
-                drawerRepo.updateDragonBall(rating: 1)
-                drawerRepo.updateDragonBall(rating: 2)
-                drawerRepo.updateDragonBall(rating: 3)
-                drawerRepo.updateDragonBall(rating: 4)
-                drawerRepo.updateDragonBall(rating: 5)
-            case .basket:
-                drawerRepo.updateBasket()
-            case .rightAward:
-                drawerRepo.updateRightAward()
             }
         }
     }
