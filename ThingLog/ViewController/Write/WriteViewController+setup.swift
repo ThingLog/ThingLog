@@ -91,6 +91,7 @@ extension WriteViewController {
                 guard let self = self else { return }
                 self.viewModel.save { isSave in
                     if isSave {
+                        self.checkIsFromBoughtButton()
                         self.close()
                     } else {
                         self.showRequiredAlert()
@@ -115,7 +116,10 @@ extension WriteViewController {
             }).disposed(by: disposeBag)
     }
     
-    
-    
-    
+    /// 게시글의 샀어요 버튼에서 온 경우인지 판단하는 메서드이다. 만약 맞다면 장바구니 진열장을 업데이트한다.
+    func checkIsFromBoughtButton() {
+        if viewModel.pageType == .bought {
+            DrawerCoreDataRepository(coreDataStack: CoreDataStack.shared).updateBasket()
+        }
+    }
 }
