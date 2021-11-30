@@ -18,9 +18,19 @@ extension PostViewController: UITableViewDataSource {
         }
 
         let item: PostEntity = viewModel.fetchedResultsController.object(at: indexPath)
-
         cell.configure(with: item)
 
+        bindLikeButton(cell, with: item)
+        bindPhotocardButton(cell, with: item)
+        bindCommentButton(cell, with: item)
+        bindCommentMoreButton(cell, with: item)
+        bindBoughtButton(cell, with: item)
+        setupMoreMenuCallback(cell, item)
+
+        return cell
+    }
+
+    private func bindLikeButton(_ cell: PostTableCell, with item: PostEntity) {
         cell.likeButton.rx.tap
             .bind { [weak self] in
                 item.isLike.toggle()
@@ -33,15 +43,9 @@ extension PostViewController: UITableViewDataSource {
                     }
                 }
             }.disposed(by: cell.disposeBag)
+    }
 
-        cell.moreMenuButton.modifyPostCallback = {
-            // TODO: 수정 기능
-        }
-
-        cell.moreMenuButton.removePostCallback = { [weak self] in
-            self?.showRemovePostAlert(post: item)
-        }
-
+    private func bindPhotocardButton(_ cell: PostTableCell, with item: PostEntity) {
         cell.photocardButton.rx.tap
             .bind { [weak self] in
                 guard let image: UIImage = item.getImage(at: cell.currentImagePage - 1) else {
@@ -49,19 +53,45 @@ extension PostViewController: UITableViewDataSource {
                 }
                 self?.coordinator?.showPhotoCardController(post: item, image: image)
             }.disposed(by: cell.disposeBag)
+    }
 
+    private func bindCommentButton(_ cell: PostTableCell, with item: PostEntity) {
         cell.commentButton.rx.tap
             .bind { [weak self] in
                 let viewModel: CommentViewModel = CommentViewModel(postEntity: item)
                 self?.coordinator?.showCommentViewController(with: viewModel)
             }.disposed(by: cell.disposeBag)
+    }
 
+    private func bindCommentMoreButton(_ cell: PostTableCell, with item: PostEntity) {
         cell.commentMoreButton.rx.tap
             .bind { [weak self] in
                 let viewModel: CommentViewModel = CommentViewModel(postEntity: item)
                 self?.coordinator?.showCommentViewController(with: viewModel)
             }.disposed(by: cell.disposeBag)
+    }
 
-        return cell
+    private func bindBoughtButton(_ cell: PostTableCell, with item: PostEntity) {
+        cell.boughtButton.rx.tap
+            .bind { [weak self] in
+                let viewModel: WriteViewModel = WriteViewModel(pageType: .bought,
+                                                               modifyEntity: item)
+                self?.coordinator?.showWriteViewController(with: viewModel)
+            }.disposed(by: cell.disposeBag)
+    }
+
+    private func setupMoreMenuCallback(_ cell: PostTableCell, _ item: PostEntity) {
+        cell.moreMenuButton.modifyPostCallback = { [weak self] in
+            guard let type: PageType = item.postType?.pageType else {
+                fatalError("\(#function): not found page type")
+            }
+
+            let viewModel: WriteViewModel = WriteViewModel(pageType: type, modifyEntity: item)
+            self?.coordinator?.showWriteViewController(with: viewModel)
+        }
+
+        cell.moreMenuButton.removePostCallback = { [weak self] in
+            self?.showRemovePostAlert(post: item)
+        }
     }
 }

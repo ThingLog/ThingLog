@@ -349,6 +349,7 @@ extension PostTableCell {
         if let categories: [CategoryEntity] = categories?.allObjects as? [CategoryEntity] {
             categoryViewDataSource.items = categories.isEmpty ? ["카테고리"] : categories.compactMap { $0.title }
             categoryViewDataSource.isEmpty = categories.isEmpty
+            categoryCollectionView.reloadData()
         }
     }
 
@@ -385,7 +386,7 @@ extension PostTableCell {
 
         priceLabel.text = price == 0 ? "가격" : "\(formattedPrice) 원"
         priceLabel.font = price == 0 ? UIFont.Pretendard.body1 : UIFont.Pretendard.title1
-        priceLabel.textColor = price == 0 ? SwiftGenColors.gray2.color : SwiftGenColors.black.color
+        priceLabel.textColor = price == 0 ? SwiftGenColors.gray2.color : SwiftGenColors.primaryBlack.color
     }
 
     /// CommentMoreButton을 구성한다.

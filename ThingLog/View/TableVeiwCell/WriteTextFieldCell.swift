@@ -51,7 +51,7 @@ final class WriteTextFieldCell: UITableViewCell {
     }
 
     /// 텍스트 필드의 키보드 타입과 플레이스 홀더를 구성한다.
-    func configure(keyboardType: UIKeyboardType, placeholder: String) {
+    func configure(keyboardType: UIKeyboardType, placeholder: String, text: String?) {
         textField.keyboardType = keyboardType
         textField.isSelection = keyboardType == .numberPad ? false : true
         textField.attributedPlaceholder = NSAttributedString(string: placeholder,
@@ -59,6 +59,12 @@ final class WriteTextFieldCell: UITableViewCell {
                                                                 NSAttributedString.Key.foregroundColor: SwiftGenColors.gray2.color,
                                                                 NSAttributedString.Key.font: UIFont.Pretendard.body1
                                                              ])
+        if keyboardType == .numberPad,
+           let priceText: String = Int64(text ?? "")?.toStringWithComma() {
+            textField.text = "\(priceText) 원"
+        } else {
+            textField.text = text
+        }
     }
 }
 

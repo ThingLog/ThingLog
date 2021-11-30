@@ -12,7 +12,7 @@ import RxSwift
 /// 글쓰기 화면(샀다, 사고싶다, 선물받았다)를 담당하는 ViewController
 final class WriteViewController: BaseViewController {
     // MARK: - View Properties
-    let tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView: UITableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
@@ -21,7 +21,7 @@ final class WriteViewController: BaseViewController {
         let headerLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 29.0))
         headerLabel.font = UIFont.Pretendard.body2
         headerLabel.textColor = SwiftGenColors.gray2.color
-        headerLabel.text = "\(Date().toString(.year))년 \(Date().toString(.month))월 \(Date().toString(.day))일"
+        headerLabel.text = viewModel.createDate
         headerLabel.textAlignment = .center
         
         tableView.tableHeaderView = headerLabel
@@ -62,6 +62,21 @@ final class WriteViewController: BaseViewController {
         super.viewDidLoad()
     }
 
+    // 게시물 수정일 때 썸네일과 카테고리가 제대로 표시되지 않는 문제를 해결하기 위해 해당 섹션만 별도로 reload
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if viewModel.modifyEntity != nil {
+            let imageSection: Int = WriteViewModel.Section.image.rawValue
+            let categorySection: Int = WriteViewModel.Section.category.rawValue
+            UIView.performWithoutAnimation {
+                tableView.reloadRows(at: [IndexPath(row: 0, section: imageSection)],
+                                     with: .none)
+                tableView.reloadRows(at: [IndexPath(row: 0, section: categorySection)],
+                                     with: .none)
+            }
+        }
+    }
+
     // MARK: - Setup
     override func setupNavigationBar() {
         setupBaseNavigationBar()
@@ -80,7 +95,8 @@ final class WriteViewController: BaseViewController {
         closeButton.rx.tap.bind { [weak self] in
             self?.closeWithAlert()
         }.disposed(by: disposeBag)
-        
+
+        navigationItem.hidesBackButton = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: closeButton)
     }
     
