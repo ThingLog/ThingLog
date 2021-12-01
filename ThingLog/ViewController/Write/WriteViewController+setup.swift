@@ -91,6 +91,7 @@ extension WriteViewController {
                 guard let self = self else { return }
                 self.viewModel.save { isSave in
                     if isSave {
+                        self.viewModel.checkIsFromBoughtButton()
                         self.close()
                     } else {
                         self.showRequiredAlert()
@@ -114,8 +115,4 @@ extension WriteViewController {
                 self?.tableView.reloadData()
             }).disposed(by: disposeBag)
     }
-    
-    
-    
-    
 }

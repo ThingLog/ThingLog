@@ -47,6 +47,8 @@ final class WriteViewModel {
     private(set) var originalImages: [UIImage] = []
     private var categories: [Category] = []
     private(set) var modifyEntity: PostEntity?
+    /// 수정할 entity의 변하지 않는 PageType이다.
+    private(set) var modifyEntityPageType: PageType?
 
     // MARK: - Rx
     private(set) var thumbnailImagesSubject: BehaviorSubject<[UIImage]> = BehaviorSubject<[UIImage]>(value: [])
@@ -57,7 +59,7 @@ final class WriteViewModel {
     init(pageType: PageType, modifyEntity: PostEntity? = nil) {
         self.pageType = pageType
         self.modifyEntity = modifyEntity
-
+        self.modifyEntityPageType = modifyEntity?.postType?.pageType
         setupBinding()
     }
 
@@ -280,5 +282,12 @@ extension WriteViewModel {
         rating = Int(entity.rating?.score ?? 0)
         // 본문
         contents = entity.contents ?? ""
+    }
+    
+    /// 게시글의 샀어요 버튼에서 온 경우인지 판단하는 메서드이다. 만약 맞다면 장바구니 진열장을 업데이트한다.
+    func checkIsFromBoughtButton() {
+        if modifyEntityPageType == .wish && pageType == .bought {
+            DrawerCoreDataRepository(coreDataStack: CoreDataStack.shared).updateBasket()
+        }
     }
 }
