@@ -26,6 +26,7 @@ extension PostViewController: UITableViewDataSource {
         bindCommentMoreButton(cell, with: item)
         bindBoughtButton(cell, with: item)
         setupMoreMenuCallback(cell, item)
+        bindTrashButton(cell, with: item)
 
         return cell
     }
@@ -33,6 +34,14 @@ extension PostViewController: UITableViewDataSource {
     private func bindLikeButton(_ cell: PostTableCell, with item: PostEntity) {
         cell.likeButton.rx.tap
             .bind { [weak self] in
+                guard let isDelete: Bool = item.postType?.isDelete else {
+                    return
+                }
+                // 휴지통인 경우 복구 알럿을 띄운다. 그 외 동작은 하지 않는다.
+                if isDelete {
+                    self?.showRecoverAlert(with: item)
+                    return
+                }
                 item.isLike.toggle()
                 self?.viewModel.repository.update(item) { result in
                     switch result {
@@ -48,7 +57,14 @@ extension PostViewController: UITableViewDataSource {
     private func bindPhotocardButton(_ cell: PostTableCell, with item: PostEntity) {
         cell.photocardButton.rx.tap
             .bind { [weak self] in
-                guard let image: UIImage = item.getImage(at: cell.currentImagePage - 1) else {
+                guard let isDelete: Bool = item.postType?.isDelete,
+                      let image: UIImage = item.getImage(at: cell.currentImagePage - 1) else {
+                    return
+                }
+
+                // 휴지통인 경우 복구 알럿을 띄운다. 그 외 동작은 하지 않는다.
+                if isDelete {
+                    self?.showRecoverAlert(with: item)
                     return
                 }
                 self?.coordinator?.showPhotoCardController(post: item, image: image)
@@ -58,6 +74,14 @@ extension PostViewController: UITableViewDataSource {
     private func bindCommentButton(_ cell: PostTableCell, with item: PostEntity) {
         cell.commentButton.rx.tap
             .bind { [weak self] in
+                guard let isDelete: Bool = item.postType?.isDelete else {
+                    return
+                }
+                // 휴지통인 경우 복구 알럿을 띄운다. 그 외 동작은 하지 않는다.
+                if isDelete {
+                    self?.showRecoverAlert(with: item)
+                    return
+                }
                 let viewModel: CommentViewModel = CommentViewModel(postEntity: item)
                 self?.coordinator?.showCommentViewController(with: viewModel)
             }.disposed(by: cell.disposeBag)
@@ -66,6 +90,15 @@ extension PostViewController: UITableViewDataSource {
     private func bindCommentMoreButton(_ cell: PostTableCell, with item: PostEntity) {
         cell.commentMoreButton.rx.tap
             .bind { [weak self] in
+                // 휴지통인 경우 복구 알럿을 띄운다. 그 외 동작은 하지 않는다.
+                guard let isDelete: Bool = item.postType?.isDelete else {
+                    return
+                }
+
+                if isDelete {
+                    self?.showRecoverAlert(with: item)
+                    return
+                }
                 let viewModel: CommentViewModel = CommentViewModel(postEntity: item)
                 self?.coordinator?.showCommentViewController(with: viewModel)
             }.disposed(by: cell.disposeBag)
@@ -82,8 +115,15 @@ extension PostViewController: UITableViewDataSource {
 
     private func setupMoreMenuCallback(_ cell: PostTableCell, _ item: PostEntity) {
         cell.moreMenuButton.modifyPostCallback = { [weak self] in
-            guard let type: PageType = item.postType?.pageType else {
-                fatalError("\(#function): not found page type")
+            // 휴지통인 경우 복구 알럿을 띄운다. 그 외 동작은 하지 않는다.
+            guard let isDelete: Bool = item.postType?.isDelete,
+                  let type: PageType = item.postType?.pageType else {
+                return
+            }
+
+            if isDelete {
+                self?.showRecoverAlert(with: item)
+                return
             }
 
             let viewModel: WriteViewModel = WriteViewModel(pageType: type, modifyEntity: item)
@@ -91,7 +131,48 @@ extension PostViewController: UITableViewDataSource {
         }
 
         cell.moreMenuButton.removePostCallback = { [weak self] in
-            self?.showRemovePostAlert(post: item)
+            guard let isDelete: Bool = item.postType?.isDelete else {
+                return
+            }
+            // 휴지통에서 삭제를 누른 경우 실제 삭제로 이어진다.
+            if isDelete {
+                self?.showRemoveAlert(with: item)
+            } else {
+                self?.showTrashPostAlert(post: item)
+            }
         }
+    }
+
+    private func bindTrashButton(_ cell: PostTableCell, with item: PostEntity) {
+        cell.trashActionButton.leftButton.rx.tap
+            .bind { [weak self] in
+                if cell.identifier == item.identifier?.uuidString ?? "" {
+                    self?.showRemoveAlert(with: item)
+                }
+            }.disposed(by: disposeBag)
+
+        cell.trashActionButton.rightButton.rx.tap
+            .bind { [weak self] in
+                guard let self = self else { return }
+                if cell.identifier == item.identifier?.uuidString ?? "" {
+                    self.viewModel.repository.recover([item], completion: { result in
+                        switch result {
+                        case .success:
+                            do {
+                                try self.viewModel.fetchedResultsController.performFetch()
+                                self.tableView.reloadData()
+                                // 보여줄 수 있는 게시물이 없다면 이전 화면으로 돌아간다.
+                                if !self.canShowPosts {
+                                    self.coordinator?.back()
+                                }
+                            } catch {
+                                print("\(#function): \(error.localizedDescription)")
+                            }
+                        case .failure(let error):
+                            fatalError("\(#function): \(error.localizedDescription)")
+                        }
+                    })
+                }
+            }.disposed(by: disposeBag)
     }
 }

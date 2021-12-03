@@ -9,12 +9,11 @@ import UIKit
 
 extension CommentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // TODO: 실제 데이터 바인딩 1 = 본문, 10 = 댓글
-        1 + viewModel.commentCount
+        (viewModel.contents.isEmpty ? 0 : 1) + viewModel.commentCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
+        if indexPath.row == 0 && viewModel.contents.isNotEmpty {
             return configureContentCell(with: indexPath)
         } else {
             return configureCommentCell(with: indexPath)
@@ -40,9 +39,11 @@ extension CommentViewController {
             return CommentTableCell()
         }
 
+        let commentIndex: Int = viewModel.contents.isEmpty ? indexPath.row : indexPath.row - 1
+
         cell.delegate = self
-        cell.textView.text = viewModel.getComment(at: indexPath.row - 1)
-        cell.dateLabel.text = viewModel.getCommentDate(at: indexPath.row - 1)
+        cell.textView.text = viewModel.getComment(at: commentIndex)
+        cell.dateLabel.text = viewModel.getCommentDate(at: commentIndex)
 
         cell.toolbarCancleCallback = { [weak self] in
             cell.isEditable = false
@@ -55,7 +56,7 @@ extension CommentViewController {
                 cell.isEditable.toggle()
                 cell.isEditable ? cell.textView.becomeFirstResponder() : cell.textView.resignFirstResponder()
                 if !cell.isEditable {
-                    self?.viewModel.updateComment(at: indexPath.row - 1,
+                    self?.viewModel.updateComment(at: commentIndex,
                                                   text: cell.textView.text)
                 }
                 self?.hideCommentInputView(cell.isEditable)
@@ -68,7 +69,7 @@ extension CommentViewController {
                     cell.textView.resignFirstResponder()
                     self?.tableView.reloadData()
                 } else {
-                    self?.showRemoveCommentAlert(at: indexPath.row - 1)
+                    self?.showRemoveCommentAlert(at: commentIndex)
                 }
                 self?.hideCommentInputView(cell.isEditable)
             }.disposed(by: cell.disposeBag)

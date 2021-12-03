@@ -11,7 +11,7 @@ import Foundation
 final class CommentViewModel {
     // MARK: - Properties
     var commentCount: Int { postEntity.comments?.count ?? 0 }
-    var contents: String? { postEntity.contents }
+    var contents: String { postEntity.contents ?? "" }
     private(set) var postEntity: PostEntity
     private(set) var repository: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
     private lazy var comments: [CommentEntity] = {
@@ -77,7 +77,6 @@ final class CommentViewModel {
 
     /// 댓글을 정렬해서 반환한다.
     private func sortedComments() -> [CommentEntity] {
-        print("\(#function): 호출")
         guard let commentEntities: [CommentEntity] = postEntity.comments?.allObjects as? [CommentEntity] else {
             return []
         }

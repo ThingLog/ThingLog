@@ -266,7 +266,7 @@ extension TrashViewController {
     }
     
     private func fetchTrashPosts() {
-        let postRepo: PostRepository = PostRepository(fetchedResultsControllerDelegate: nil)
+        let postRepo: PostRepository = PostRepository(fetchedResultsControllerDelegate: self)
         fetchResultController = postRepo.fetchResultsController(by: .fromTrash)
         collectionView.reloadData()
     }
@@ -326,5 +326,11 @@ extension TrashViewController {
         }
         .disposed(by: alert.disposeBag)
         self.present(alert, animated: false)
+    }
+}
+
+extension TrashViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        collectionView.reloadData()
     }
 }
