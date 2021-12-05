@@ -36,7 +36,7 @@ final class HomeViewController: UIViewController {
     // MARK: - Properties
     
     var coordinator: HomeCoordinator?
-    let userInformationViewModel: UserInformationViewModelable = UserInformationiCloudViewModel()
+    let userInformationViewModel: UserInformationViewModelable = UserInformationUserDefaultsViewModel()
     var drawerRespository: DrawerRepositoryable = DrawerCoreDataRepository(coreDataStack: CoreDataStack.shared)
     var heightAnchorProfileView: NSLayoutConstraint?
     let profileViewHeight: CGFloat = 3 + 80 + 11

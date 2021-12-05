@@ -26,7 +26,7 @@ extension UIViewController {
     }
     
     func setDarkMode() {
-        let userInformationViewModel: UserInformationViewModelable = UserInformationiCloudViewModel()
+        let userInformationViewModel: UserInformationViewModelable = UserInformationUserDefaultsViewModel()
         userInformationViewModel.fetchUserInformation { userInfor in
             guard let userInfor = userInfor else {
                 return

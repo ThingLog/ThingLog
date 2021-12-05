@@ -160,8 +160,8 @@ extension DrawerViewController: UICollectionViewDataSource, UICollectionViewDele
            let imageData: Data = representative.imageData,
            let drawerImage: UIImage = UIImage(data: imageData) {
             headerView.drawerView.setImage(drawerImage)
-            headerView.drawerView.setSubLabel(fontType: UIFont.Pretendard.body2,
-                                              color: SwiftGenColors.gray2.color,
+            headerView.drawerView.setSubLabel(fontType: UIFont.Pretendard.title2,
+                                              color: SwiftGenColors.primaryBlack.color,
                                               text: representative.title)
         } else {
             headerView.drawerView.setImage(SwiftGenDrawerList.emptyRepresentative.image.withRenderingMode(.alwaysTemplate))

@@ -21,7 +21,7 @@ class OnboardingCoordinator: Coordinator {
     
     func start() {
         // 이미 유저정보가 있는 경우에는 온보딩을 스킵하고, TabBar를 보여준다. 
-        UserInformationiCloudViewModel().fetchUserInformation { userInformation in
+        UserInformationUserDefaultsViewModel().fetchUserInformation { userInformation in
             if let _ = userInformation {
                 self.window?.rootViewController = TabBarController()
             } else {

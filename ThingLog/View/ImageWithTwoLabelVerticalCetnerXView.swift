@@ -28,7 +28,7 @@ final class ImageWithTwoLabelVerticalCetnerXView: UIView {
     
     private let titleLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "문구세트"
+        label.text = "대표 물건"
         label.textAlignment = .center
         label.font = UIFont.Pretendard.title1
         label.textColor = SwiftGenColors.primaryBlack.color

@@ -72,7 +72,7 @@ final class LoginViewController: UIViewController {
         }
     }
     
-    private let userInformationViewModel: UserInformationViewModelable = UserInformationiCloudViewModel()
+    private let userInformationViewModel: UserInformationViewModelable = UserInformationUserDefaultsViewModel()
     
     // MARK: - Init
     /// 로그인이 포함된 화면인지 아닌지를 주입하는 이니셜라이저다.
