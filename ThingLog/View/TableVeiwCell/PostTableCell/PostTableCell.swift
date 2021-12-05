@@ -320,6 +320,7 @@ final class PostTableCell: UITableViewCell {
 
         // 별점
         ratingView.currentRating = Int(post.rating?.score ?? 0)
+        ratingView.isHidden = type == .wish ? true : false
 
         // 판매처/구매처
         configurePurchasePlaceLabel(type: type, place: post.purchasePlace, giver: post.giftGiver)
