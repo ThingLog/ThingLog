@@ -106,6 +106,10 @@ extension PhotoCardViewController {
             ratingView.centerXAnchor.constraint(equalTo: photoContainerView.centerXAnchor),
             ratingView.heightAnchor.constraint(equalToConstant: inset.heightForRatingView)
         ])
+        
+        if photoCardViewModel.postEntity.postType?.pageType == .wish {
+            ratingView.isHidden = true
+        }
     }
     
     func setupNavigationBar() {

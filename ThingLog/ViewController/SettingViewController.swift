@@ -48,7 +48,7 @@ final class SettingViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let userInformationViewModel: UserInformationViewModelable = UserInformationiCloudViewModel()
+    private let userInformationViewModel: UserInformationViewModelable = UserInformationUserDefaultsViewModel()
     private var userInformation: UserInformationable?
     
     var disposeBag: DisposeBag = DisposeBag()

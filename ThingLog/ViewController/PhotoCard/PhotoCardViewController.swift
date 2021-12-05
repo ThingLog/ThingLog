@@ -45,6 +45,7 @@ final class PhotoCardViewController: UIViewController {
     let ratingView: RatingView = {
         let ratingView: RatingView = RatingView()
         ratingView.tintButton(.white)
+        ratingView.isUserInteractionEnabled = false 
         ratingView.translatesAutoresizingMaskIntoConstraints = false
         return ratingView
     }()
@@ -215,6 +216,7 @@ final class PhotoCardViewController: UIViewController {
         subscribeOptionView()
         subscribePhotoCardViewModel()
 
-        imageGestureModel.startObserving()
+        // 원래는 사진 이동이 가능했지만, 기획자의 제안에 따라 취소함.
+//        imageGestureModel.startObserving()
     }
 }

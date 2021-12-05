@@ -71,6 +71,10 @@ class CropViewController: UIViewController {
     var inset: CropInset = CropInset()
     var disposeBag: DisposeBag = DisposeBag()
     
+    /// ScreenEdgePanGesture는 여러번 호출될 수 있어서, 한번만 실행되도록 flag변수를 이용함.
+    var gestureFlag: Bool = true
+    var backCompletion: (() -> Void)?
+    
     // MARK: - Init
     init(selectedIndexImage: (index: IndexPath, image: UIImage?)) {
         self.selectedIndexImage = selectedIndexImage
@@ -90,6 +94,7 @@ class CropViewController: UIViewController {
         setupBottomView()
         setupNumberView()
         setupZoomButton()
+        setupScreenPanGesture()
     }
     
     // MARK: - Setup
@@ -177,6 +182,27 @@ class CropViewController: UIViewController {
                 self?.imageView.contentMode = .scaleAspectFit
             }
         }.disposed(by: disposeBag)
+    }
+    
+    /// 왼쪽 가장 끝지점에서 제스쳐를 인식하여, 뒤로가도록 한다.
+    func setupScreenPanGesture() {
+        let gesture: UIScreenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(back))
+        gesture.edges = .left
+        self.view.addGestureRecognizer(gesture)
+    }
+    
+    @objc
+    func back() {
+        DispatchQueue.main.async {
+            // ScreenEdgePanGesture는 여러번 호출될 수 있어서, 한번만 실행되도록 flag변수를 이용함.
+            if self.gestureFlag {
+                self.gestureFlag = false
+                self.backCompletion?()
+                DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+                    self.gestureFlag = true
+                }
+            }
+        }
     }
 }
 

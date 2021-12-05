@@ -38,6 +38,11 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         let imageView: UIImageView = UIImageView(image: image)
         imageView.transform = CGAffineTransform(rotationAngle: .pi)
         imageView.tintColor = .white
+        imageView.layer.shadowColor = UIColor.black.cgColor
+        imageView.layer.masksToBounds = false
+        imageView.layer.shadowOffset = CGSize(width: -2, height: -2)
+        imageView.layer.shadowRadius = 5
+        imageView.layer.shadowOpacity = 0.3
         imageView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         imageView.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -142,8 +147,8 @@ class ContentsCollectionViewCell: UICollectionViewCell {
             
             smallIconView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7),
             smallIconView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -7),
-            smallIconView.widthAnchor.constraint(equalToConstant: 12),
-            smallIconView.heightAnchor.constraint(equalToConstant: 12),
+            smallIconView.widthAnchor.constraint(equalToConstant: 15),
+            smallIconView.heightAnchor.constraint(equalToConstant: 15),
             
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
             

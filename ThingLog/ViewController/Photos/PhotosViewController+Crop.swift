@@ -12,6 +12,7 @@ extension PhotosViewController {
     func showCropViewController(selectedIndexImage: (index: IndexPath, image: UIImage?)) {
         cropViewController = CropViewController(selectedIndexImage: selectedIndexImage)
         cropViewController?.numberView.label.text = "\(selectedIndexPath.count)"
+        cropViewController?.backCompletion = dismissCropViewController
         guard let cropViewController: CropViewController = cropViewController else { return }
         let cropView: UIView = cropViewController.view
         cropView.translatesAutoresizingMaskIntoConstraints = false
@@ -33,6 +34,7 @@ extension PhotosViewController {
             cropViewController.view.layer.add(transition, forKey: "showCrop")
         } completion: { _ in
             cropViewController.view.layer.removeAnimation(forKey: "showCrop")
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
             self.changeNavigationBar()
         }
     }
@@ -53,6 +55,7 @@ extension PhotosViewController {
                 crop.removeFromParent()
                 self.cropViewController = nil
                 self.setupNavigationBar()
+                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
             }
         }
     }

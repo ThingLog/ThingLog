@@ -197,7 +197,7 @@ final class ProfileView: UIView {
     
     /// 다크모드 설정 여부에 따라 애니메이션 뷰의 색을 변경해준다. AnimationView는 다른 아이콘과 다르게 다크모드 라이트모드에 대응하는 쌍이 없기 때문에, 따로 로직을 추가했다. 
     func setupDarkModeForAnimation() {
-        let userInformationViewModel: UserInformationViewModelable = UserInformationiCloudViewModel()
+        let userInformationViewModel: UserInformationViewModelable = UserInformationUserDefaultsViewModel()
         userInformationViewModel.fetchUserInformation { userInfor in
             if let userInfor: UserInformationable = userInfor {
                 let darkMode: Bool = userInfor.isAumatedDarkMode
