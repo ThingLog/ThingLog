@@ -47,7 +47,9 @@ final class PostTableCell: UITableViewCell {
         flowLayout.sectionInset = .zero
         flowLayout.minimumLineSpacing = .zero
         flowLayout.minimumInteritemSpacing = .zero
-        let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        let collectionView: UICollectionView = UICollectionView(frame: .zero,
+                                                                collectionViewLayout: flowLayout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isPagingEnabled = true
         collectionView.backgroundColor = .clear
@@ -133,7 +135,7 @@ final class PostTableCell: UITableViewCell {
     lazy var secondInfoContainerView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = .clear
-        view.addSubviews(placeLabel, priceLabel)
+        view.addSubviews(placeLabel, priceLabel, lineView)
         return view
     }()
 
@@ -152,19 +154,28 @@ final class PostTableCell: UITableViewCell {
         return label
     }()
 
-    /// 본문, 댓글 n개 모두 보기를 포함한 뷰
-    lazy var contentsContainerView: UIView = {
-        let view: UIView = UIView()
-        view.backgroundColor = .clear
-        view.addSubviews(lineView, contentTextView, commentMoreButton)
-        return view
-    }()
-
     let lineView: UIView = {
         let view: UIView = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = SwiftGenColors.gray4.color
         return view
+    }()
+
+    /// 본문, 댓글 n개 모두 보기를 포함한 뷰
+    lazy var contentsContainerView: UIStackView = {
+        let stackView: UIStackView = UIStackView(arrangedSubviews: [contentTextView, commentMoreButton])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .leading
+        stackView.backgroundColor = .clear
+        stackView.spacing = 7.0
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 14.0,
+                                                                     leading: 20.0,
+                                                                     bottom: 14.0,
+                                                                     trailing: 20.0)
+        return stackView
     }()
 
     let contentTextView: UITextView = {
@@ -175,6 +186,7 @@ final class PostTableCell: UITableViewCell {
         textView.backgroundColor = .clear
         textView.isEditable = false
         textView.isScrollEnabled = false
+        textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = .zero
         textView.sizeToFit()
         return textView
@@ -235,6 +247,7 @@ final class PostTableCell: UITableViewCell {
     }()
 
     // MARK: - Properties
+    var identifier: String = ""
     let categoryViewDataSource: PostCategoryViewDataSouce = PostCategoryViewDataSouce()
     let slideImageViewDataSource: PostSlideImageViewDataSource = PostSlideImageViewDataSource()
     /// 현재 보여지고 있는 이미지 위치를 저장한다.
@@ -250,6 +263,7 @@ final class PostTableCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
+        identifier = ""
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -272,7 +286,6 @@ final class PostTableCell: UITableViewCell {
         setupCategoryCollectionView()
         setupFirstInfoView()
         setupSecondInfoView()
-        setupContentsContainerView()
         setupSpecificActionContainerView()
         setupOtherView()
 
@@ -284,6 +297,8 @@ final class PostTableCell: UITableViewCell {
         guard let type: PageType = post.postType?.pageType else {
             fatalError("\(#function): Not Found PageType")
         }
+
+        identifier = post.identifier?.uuidString ?? ""
 
         // 날짜
         if let createDate: Date = post.createDate {
@@ -305,6 +320,7 @@ final class PostTableCell: UITableViewCell {
 
         // 별점
         ratingView.currentRating = Int(post.rating?.score ?? 0)
+        ratingView.isHidden = type == .wish ? true : false
 
         // 판매처/구매처
         configurePurchasePlaceLabel(type: type, place: post.purchasePlace, giver: post.giftGiver)
@@ -314,9 +330,16 @@ final class PostTableCell: UITableViewCell {
 
         // 본문
         contentTextView.text = post.contents
+        contentTextView.isHidden = contentTextView.text.isEmpty
 
         // 댓글 n개 모두 보기
         configureCommentMoreButton(with: post.comments?.allObjects.count)
+
+        // 본문과 댓글이 없는 경우 뷰를 숨김 처리
+        let hasContentAndComment: Bool = contentTextView.text.isEmpty && (post.comments?.allObjects.count ?? 0) == 0
+        contentsContainerView.isHidden = hasContentAndComment
+        lineView.isHidden = hasContentAndComment
+
         // SpecificAction (휴지통, 사고싶다)
         configureSpecificAction(type: type, isDelete: post.postType?.isDelete)
     }

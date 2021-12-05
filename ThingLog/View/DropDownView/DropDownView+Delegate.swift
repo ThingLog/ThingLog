@@ -10,14 +10,6 @@ import UIKit
 extension DropDownView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         isShowDropDown.toggle()
-        if indexPath.row == 0 {
-            // TODO: 수정
-            print("\(#function) 수정!")
-            modifyPostCallback?()
-        } else {
-            // TODO: 삭제
-            print("\(#function) 삭제!")
-            removePostCallback?()
-        }
+        indexPath.row == 0 ? modifyPostCallback?() : removePostCallback?()
     }
 }

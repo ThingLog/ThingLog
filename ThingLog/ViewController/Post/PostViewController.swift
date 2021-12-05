@@ -22,6 +22,9 @@ final class PostViewController: BaseViewController {
 
     // MARK: - Properties
     var coordinator: PostCoordinatorProtocol?
+    var canShowPosts: Bool {
+        viewModel.fetchedResultsController.fetchedObjects?.count ?? 0 > 0
+    }
     private(set) var viewModel: PostViewModel
 
     init(viewModel: PostViewModel) {
@@ -48,9 +51,12 @@ final class PostViewController: BaseViewController {
                 tableView.reloadRows(at: [startIndexPath], with: .automatic)
             }
         } else {
-            if viewModel.fetchedResultsController.fetchedObjects?.count ?? 0 > 0,
-               let indexPaths: [IndexPath] = tableView.indexPathsForVisibleRows {
-                tableView.reloadRows(at: indexPaths, with: .none)
+            if canShowPosts {
+                UIView.performWithoutAnimation {
+                    let contentOffset: CGPoint = tableView.contentOffset
+                    tableView.reloadData()
+                    tableView.contentOffset = contentOffset
+                }
             } else {
                 coordinator?.back()
             }
@@ -80,7 +86,8 @@ final class PostViewController: BaseViewController {
     }
 
     // MARK: - Public
-    func showRemovePostAlert(post: PostEntity) {
+    /// 일반 게시물에서 삭제 버튼을 누른 경우 휴지통으로 이동하기 전 표시하는 알럿
+    func showTrashPostAlert(post: PostEntity) {
         let alert: AlertViewController = AlertViewController()
         alert.hideTextField()
         alert.hideTitleLabel()
@@ -93,15 +100,87 @@ final class PostViewController: BaseViewController {
         }.disposed(by: disposeBag)
 
         alert.rightButton.rx.tap.bind { [weak self] in
+            guard let self = self else { return }
             post.postType?.isDelete = true
             post.deleteDate = Date()
-            self?.viewModel.repository.update(post, completion: { result in
+            self.viewModel.repository.update(post, completion: { result in
                 switch result {
                 case .success:
-                    self?.tableView.reloadData()
+                    self.tableView.reloadData()
                     // 표시할 수 있는 데이터가 없다면 이전 화면으로 이동한다.
-                    if self?.viewModel.fetchedResultsController.fetchedObjects?.count ?? 0 == 0 {
-                        self?.coordinator?.back()
+                    if !self.canShowPosts {
+                        self.coordinator?.back()
+                    }
+                case .failure(let error):
+                    fatalError("\(#function): \(error.localizedDescription)")
+                }
+            })
+            alert.dismiss(animated: false, completion: nil)
+        }.disposed(by: disposeBag)
+
+        present(alert, animated: false, completion: nil)
+    }
+
+    /// 휴지통>게시물에서 삭제 버튼을 누른 경우 표시하는 알럿
+    func showRemoveAlert(with item: PostEntity) {
+        let alert: AlertViewController = AlertViewController()
+        alert.hideTextField()
+        alert.hideTitleLabel()
+        alert.contentsLabel.text = "정말 삭제하시겠어요?\n이 동작은 취소할 수 없습니다."
+        alert.leftButton.setTitle("취소", for: .normal)
+        alert.rightButton.setTitle("삭제", for: .normal)
+        alert.modalPresentationStyle = .overFullScreen
+        alert.leftButton.rx.tap.bind {
+            alert.dismiss(animated: false, completion: nil)
+        }.disposed(by: disposeBag)
+
+        alert.rightButton.rx.tap.bind { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.repository.delete([item]) { result in
+                switch result {
+                case .success:
+                    self.tableView.reloadData()
+                    // 보여줄 수 있는 게시물이 없다면 이전 화면으로 돌아간다.
+                    if !self.canShowPosts {
+                        self.coordinator?.back()
+                    }
+                case .failure(let error):
+                    fatalError("\(#function): \(error.localizedDescription)")
+                }
+            }
+            alert.dismiss(animated: false, completion: nil)
+        }.disposed(by: disposeBag)
+
+        present(alert, animated: false, completion: nil)
+    }
+
+    /// 휴지통>게시물에서 복구 버튼을 누른 경우 표시하는 알럿
+    func showRecoverAlert(with item: PostEntity) {
+        let alert: AlertViewController = AlertViewController()
+        alert.hideTextField()
+        alert.hideTitleLabel()
+        alert.contentsLabel.text = "해당 게시물을 복구하시겠어요?"
+        alert.leftButton.setTitle("취소", for: .normal)
+        alert.rightButton.setTitle("복구", for: .normal)
+        alert.modalPresentationStyle = .overFullScreen
+        alert.leftButton.rx.tap.bind {
+            alert.dismiss(animated: false, completion: nil)
+        }.disposed(by: disposeBag)
+
+        alert.rightButton.rx.tap.bind { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.repository.recover([item], completion: { result in
+                switch result {
+                case .success:
+                    do {
+                        try self.viewModel.fetchedResultsController.performFetch()
+                        self.tableView.reloadData()
+                        // 보여줄 수 있는 게시물이 없다면 이전 화면으로 돌아간다.
+                        if !self.canShowPosts {
+                            self.coordinator?.back()
+                        }
+                    } catch {
+                        print("\(#function): \(error.localizedDescription)")
                     }
                 case .failure(let error):
                     fatalError("\(#function): \(error.localizedDescription)")

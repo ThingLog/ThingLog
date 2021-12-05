@@ -41,7 +41,7 @@ extension PostTableCell {
 
         NSLayoutConstraint.activate([
             slideImageCollectionView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            slideImageCollectionView.heightAnchor.constraint(equalTo: slideImageCollectionView.widthAnchor)
+            slideImageCollectionView.heightAnchor.constraint(equalTo: contentView.widthAnchor)
         ])
     }
 
@@ -97,44 +97,13 @@ extension PostTableCell {
             placeLabel.leadingAnchor.constraint(equalTo: secondInfoContainerView.leadingAnchor, constant: leadingTrailingSpacing),
             placeLabel.topAnchor.constraint(equalTo: secondInfoContainerView.topAnchor),
             placeLabel.trailingAnchor.constraint(lessThanOrEqualTo: priceLabel.leadingAnchor, constant: -leadingTrailingSpacing),
-            placeLabel.bottomAnchor.constraint(equalTo: secondInfoContainerView.bottomAnchor),
+            placeLabel.bottomAnchor.constraint(equalTo: lineView.topAnchor),
             priceLabel.centerYAnchor.constraint(equalTo: placeLabel.centerYAnchor),
-            priceLabel.trailingAnchor.constraint(equalTo: secondInfoContainerView.trailingAnchor, constant: -leadingTrailingSpacing)
-        ])
-    }
-
-    func setupContentsContainerView() {
-        let commentMoreButtonTopSpacing: CGFloat = 7.0
-        let topSpacing: CGFloat = 14.0
-        let bottomSpacing: CGFloat = 16.0
-        let leadingTrailingSpacing: CGFloat = 20.0
-
-        let lineViewHeightConstraint: NSLayoutConstraint = lineView.heightAnchor.constraint(equalToConstant: 0.5)
-        lineViewHeightConstraint.priority = .defaultHigh
-        lineViewHeightConstraint.isActive = true
-
-        let contentTextViewTopConstraint: NSLayoutConstraint = contentTextView.topAnchor.constraint(equalTo: lineView.bottomAnchor, constant: topSpacing)
-        contentTextViewTopConstraint.priority = .defaultHigh
-        contentTextViewTopConstraint.isActive = true
-
-        NSLayoutConstraint.activate([
-            lineView.topAnchor.constraint(equalTo: contentsContainerView.topAnchor, constant: topSpacing),
-            lineView.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor),
-            lineView.trailingAnchor.constraint(equalTo: contentsContainerView.trailingAnchor),
-            contentTextView.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor,
-                                                     constant: leadingTrailingSpacing),
-            contentTextView.trailingAnchor.constraint(equalTo: contentsContainerView.trailingAnchor,
-                                                      constant: -leadingTrailingSpacing),
-            contentTextView.centerXAnchor.constraint(equalTo: contentsContainerView.centerXAnchor),
-            contentTextView.centerYAnchor.constraint(equalTo: contentsContainerView.centerYAnchor),
-            commentMoreButton.topAnchor.constraint(equalTo: contentTextView.bottomAnchor,
-                                                   constant: commentMoreButtonTopSpacing),
-            commentMoreButton.leadingAnchor.constraint(equalTo: contentsContainerView.leadingAnchor,
-                                                       constant: leadingTrailingSpacing),
-            commentMoreButton.trailingAnchor.constraint(lessThanOrEqualTo: contentsContainerView.trailingAnchor,
-                                                        constant: -leadingTrailingSpacing),
-            commentMoreButton.bottomAnchor.constraint(equalTo: contentsContainerView.bottomAnchor,
-                                                      constant: -bottomSpacing)
+            priceLabel.trailingAnchor.constraint(equalTo: secondInfoContainerView.trailingAnchor, constant: -leadingTrailingSpacing),
+            lineView.heightAnchor.constraint(equalToConstant: 0.5),
+            lineView.leadingAnchor.constraint(equalTo: secondInfoContainerView.leadingAnchor),
+            lineView.trailingAnchor.constraint(equalTo: secondInfoContainerView.trailingAnchor),
+            lineView.bottomAnchor.constraint(equalTo: secondInfoContainerView.bottomAnchor)
         ])
     }
 
@@ -142,8 +111,11 @@ extension PostTableCell {
         let buttonHeight: CGFloat = 52.0
         let boughtButtonLeadingTrailingSpacing: CGFloat = 20.0
 
+        let heightConstraint: NSLayoutConstraint = specificActionContainerView.heightAnchor.constraint(equalToConstant: buttonHeight)
+        heightConstraint.priority = .defaultHigh
+        heightConstraint.isActive = true
+
         NSLayoutConstraint.activate([
-            specificActionContainerView.heightAnchor.constraint(equalToConstant: buttonHeight),
             boughtButton.leadingAnchor.constraint(equalTo: specificActionContainerView.leadingAnchor, constant: boughtButtonLeadingTrailingSpacing),
             boughtButton.topAnchor.constraint(equalTo: specificActionContainerView.topAnchor),
             boughtButton.trailingAnchor.constraint(equalTo: specificActionContainerView.trailingAnchor, constant: -boughtButtonLeadingTrailingSpacing),
