@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Attachment" representedClassName="AttachmentEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="createDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="identifier" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="thumbnail" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <relationship name="imageData" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ImageData" inverseName="attachment" inverseEntity="ImageData"/>
@@ -59,7 +60,7 @@
         <relationship name="post" maxCount="1" deletionRule="Deny" destinationEntity="Post" inverseName="rating" inverseEntity="Post"/>
     </entity>
     <elements>
-        <element name="Attachment" positionX="-7253.027587890626" positionY="-4690.344833374023" width="128" height="103"/>
+        <element name="Attachment" positionX="-7253.027587890626" positionY="-4690.344833374023" width="128" height="104"/>
         <element name="Category" positionX="-7669.173278808594" positionY="-4417.294006347656" width="128" height="74"/>
         <element name="Comment" positionX="-6921.718536376953" positionY="-4342.518676757812" width="128" height="89"/>
         <element name="Drawer" positionX="-6919.932647705078" positionY="-4487.72053527832" width="128" height="134"/>
