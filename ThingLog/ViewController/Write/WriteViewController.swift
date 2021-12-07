@@ -179,7 +179,12 @@ extension WriteViewController {
 extension WriteViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == WriteViewModel.Section.category.rawValue {
-            coordinator?.showCategoryViewController()
+            guard let categories: [Category] = try? viewModel.categorySubject.value() else {
+                return
+            }
+
+            let entities: [CategoryEntity] = categories.map { $0.toEntity(in: CoreDataStack.shared.mainContext) }
+            coordinator?.showCategoryViewController(entities: entities)
         }
     }
 }

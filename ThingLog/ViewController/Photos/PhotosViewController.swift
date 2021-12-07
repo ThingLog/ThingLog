@@ -34,6 +34,7 @@ final class PhotosViewController: BaseViewController {
         button.setImage(SwiftGenIcons.arrowDropDown.image.withTintColor(SwiftGenColors.gray3.color),
                         for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
+        button.sizeToFit()
         return button
     }()
     
