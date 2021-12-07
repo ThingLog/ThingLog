@@ -381,8 +381,8 @@ extension PhotosViewController: UINavigationControllerDelegate, UIImagePickerCon
             return
         }
 
-        let indexPath: IndexPath = IndexPath(row: 0, section: 0)
-        self.selectedIndexPath = [(indexPath, image)]
+        let indexPath: IndexPath = IndexPath(row: -1, section: -1)
+        self.selectedIndexPath.append((indexPath, image))
 
         NotificationCenter.default.post(name: .passSelectImages,
                                         object: nil,
