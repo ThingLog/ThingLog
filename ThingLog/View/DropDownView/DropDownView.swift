@@ -27,6 +27,9 @@ final class DropDownView: UIView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         tableView.backgroundColor = SwiftGenColors.primaryBackground.color
+        tableView.layer.cornerRadius = 5
+        tableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        tableView.clipsToBounds = true
         return tableView
     }()
 
