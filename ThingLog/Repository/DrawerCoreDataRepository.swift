@@ -48,6 +48,7 @@ protocol DrawerRepositoryable {
 class DrawerCoreDataRepository: DrawerRepositoryable {
     private let coreDataStack: CoreDataStack
     var defaultDrawers: [Drawerable]?
+    var keyValueStorage: KeyValueStoragable = UserDefaultKeyValueStorage.shared
     
     /// 초기화를 진행하는데, fetchDrawers가 필요한 경우는 `DefaultDrawerModle`의 `drawers` 프로퍼티를 넣는다. 그렇지 않은 경우는 넘어간다. 불필요하게 defaultDrawers의 메모리를 가지고 있을 필요는 없기 때문이다.
     init(coreDataStack: CoreDataStack = CoreDataStack.shared,
@@ -72,7 +73,7 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
     
     func fetchRepresentative() -> Drawerable? {
         /// 대표 진열장을 선정한 경우 찾고, 없다면 nil을 반환합니다.
-        guard let representative: String = NSUbiquitousKeyValueStore.default.string(forKey: KeyStoreName.representativeDrawer.name) else {
+        guard let representative: String = keyValueStorage.string(forKey: KeyStoreName.representativeDrawer.name) else {
             return nil
         }
         
@@ -99,7 +100,7 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
         // 수학의 정석 업데이트
         updateLoginCount(currentDate: Date())
         
-        let loginCount: Int64 = NSUbiquitousKeyValueStore.default.longLong(forKey: KeyStoreName.userLoginCount.name)
+        let loginCount: Int64 = keyValueStorage.int(forKey: KeyStoreName.userLoginCount.name)
         
         if loginCount >= 3 {
             acquireDrawer(by: SwiftGenDrawerList.math.imageName)
@@ -110,7 +111,7 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
         // 30일 접속 문구세트 업데이트
         updateLoginCount(currentDate: Date())
         
-        let loginCount: Int64 = NSUbiquitousKeyValueStore.default.longLong(forKey: KeyStoreName.userLoginCount.name)
+        let loginCount: Int64 = keyValueStorage.int(forKey: KeyStoreName.userLoginCount.name)
         
         if loginCount >= 30 {
             acquireDrawer(by: SwiftGenDrawerList.stationery.imageName)
@@ -119,12 +120,10 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
     
     func updateRepresentative(drawer: Drawerable?) {
         if let drawer: Drawerable = drawer {
-            NSUbiquitousKeyValueStore.default.set(drawer.imageName, forKey: KeyStoreName.representativeDrawer.name)
+            keyValueStorage.set(drawer.imageName, forKey: KeyStoreName.representativeDrawer.name)
         } else {
-            NSUbiquitousKeyValueStore.default.removeObject(forKey: KeyStoreName.representativeDrawer.name)
+            keyValueStorage.removeObject(forKey: KeyStoreName.representativeDrawer.name)
         }
-        
-        NSUbiquitousKeyValueStore.default.synchronize()
     }
     
     func updateBasket() {
@@ -139,12 +138,11 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
         
         // 만족도 1-5개 기록 모으기
         // 배열을 이용하여 중복값이 없는 경우에만 추가하여, 판별한다.
-        var dragonBallArray: [Int16] = NSUbiquitousKeyValueStore.default.array(forKey: KeyStoreName.dragonBallArray.name) as? [Int16] ?? []
+        var dragonBallArray: [Int16] = keyValueStorage.array(forKey: KeyStoreName.dragonBallArray.name) as? [Int16] ?? []
         if dragonBallArray.contains(rating) == false {
             dragonBallArray.append(rating)
         }
-        NSUbiquitousKeyValueStore.default.set(dragonBallArray, forKey: KeyStoreName.dragonBallArray.name)
-        NSUbiquitousKeyValueStore.default.synchronize()
+        keyValueStorage.set(dragonBallArray, forKey: KeyStoreName.dragonBallArray.name)
         
         if dragonBallArray.count == 5 {
             acquireDrawer(by: SwiftGenDrawerList.dragonball.imageName)
@@ -158,14 +156,13 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
     }
     
     func isNewEvent(_ completion: @escaping ((Bool) -> Void)) {
-        let isNewEvent: Bool = NSUbiquitousKeyValueStore.default.bool(forKey: KeyStoreName.isNewEvent.name)
+        let isNewEvent: Bool = keyValueStorage.bool(forKey: KeyStoreName.isNewEvent.name)
         completion(isNewEvent)
     }
     
     func completeNewEvent() {
         // 획득이벤트를 확인처리하고,
-        NSUbiquitousKeyValueStore.default.set(false, forKey: KeyStoreName.isNewEvent.name)
-        NSUbiquitousKeyValueStore.default.synchronize()
+        keyValueStorage.set(false, forKey: KeyStoreName.isNewEvent.name)
 
         // 진열장아이템들을 모두 확인처리한다.
         fetchDrawers { drawers in
@@ -177,8 +174,7 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
                     if let drawer: DrawerEntity = try self.coreDataStack.mainContext.fetch(request).first {
                         drawer.isNewDrawer = false
                         // 새로운 진열장 아이템을 획득 했다 이벤트 발생.
-                        NSUbiquitousKeyValueStore.default.set(false, forKey: KeyStoreName.isNewEvent.name)
-                        NSUbiquitousKeyValueStore.default.synchronize()
+                        self.keyValueStorage.set(false, forKey: KeyStoreName.isNewEvent.name)
                         try self.coreDataStack.mainContext.save()
                     } else {
                         return
@@ -233,8 +229,7 @@ extension DrawerCoreDataRepository {
                 drawer.isAcquired = true
                 drawer.isNewDrawer = true
                 // 새로운 진열장 아이템을 획득 했다 이벤트 발생.
-                NSUbiquitousKeyValueStore.default.set(true, forKey: KeyStoreName.isNewEvent.name)
-                NSUbiquitousKeyValueStore.default.synchronize()
+                keyValueStorage.set(true, forKey: KeyStoreName.isNewEvent.name)
                 try coreDataStack.mainContext.save()
             } else {
                 return
@@ -252,23 +247,21 @@ extension DrawerCoreDataRepository {
                 $0.toString(.day)
         }
         
-        let nextLoginCount: Int64 = NSUbiquitousKeyValueStore.default.longLong(forKey: KeyStoreName.userLoginCount.name) + 1
+        let nextLoginCount: Int64 = keyValueStorage.int(forKey: KeyStoreName.userLoginCount.name) + 1
         let currentDateString: String = changeStringClosure(currentDate)
         
         // 이전날짜String과 다른 경우에만 업데이트한다.
-        let beforeDateString: String = NSUbiquitousKeyValueStore.default.string(forKey: KeyStoreName.userRecentLoginDate.name) ?? ""
+        let beforeDateString: String = keyValueStorage.string(forKey: KeyStoreName.userRecentLoginDate.name) ?? ""
         if beforeDateString != currentDateString {
-            NSUbiquitousKeyValueStore.default.set(currentDateString, forKey: KeyStoreName.userRecentLoginDate.name)
-            NSUbiquitousKeyValueStore.default.set(nextLoginCount, forKey: KeyStoreName.userLoginCount.name)
-            NSUbiquitousKeyValueStore.default.synchronize()
+            keyValueStorage.set(currentDateString, forKey: KeyStoreName.userRecentLoginDate.name)
+            keyValueStorage.set(nextLoginCount, forKey: KeyStoreName.userLoginCount.name)
         }
     }
     
     func deleteAllDrawers() {
-        NSUbiquitousKeyValueStore.default.removeObject(forKey: KeyStoreName.representativeDrawer.name)
-        NSUbiquitousKeyValueStore.default.removeObject(forKey: KeyStoreName.dragonBallArray.name)
-        NSUbiquitousKeyValueStore.default.set(false, forKey: KeyStoreName.isNewEvent.name)
-        NSUbiquitousKeyValueStore.default.synchronize()
+        keyValueStorage.removeObject(forKey: KeyStoreName.representativeDrawer.name)
+        keyValueStorage.removeObject(forKey: KeyStoreName.dragonBallArray.name)
+        keyValueStorage.set(false, forKey: KeyStoreName.isNewEvent.name)
         
         let request: NSFetchRequest<DrawerEntity> = DrawerEntity.fetchRequest()
         do {

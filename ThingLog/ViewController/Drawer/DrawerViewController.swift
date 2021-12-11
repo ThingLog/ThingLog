@@ -85,6 +85,7 @@ final class DrawerViewController: UIViewController {
         backButton.rx.tap
             .bind { [weak self] in
                 // 대표진열장이 변경됐어도 다시 되돌린다.
+                self?.drawerRespository.completeNewEvent()
                 self?.drawerRespository.updateRepresentative(drawer: self?.representativeDrawer)
                 self?.coordinator?.back()
             }
@@ -100,6 +101,7 @@ final class DrawerViewController: UIViewController {
         editButton.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         editButton.rx.tap
             .bind { [weak self] in
+                self?.drawerRespository.completeNewEvent()
                 self?.coordinator?.back()
             }
             .disposed(by: disposeBag)
