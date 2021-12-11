@@ -5,6 +5,7 @@
 //  Created by 이지원 on 2021/10/03.
 //
 
+import CoreData
 import UIKit
 
 protocol WriteCoordinatorProtocol: SystemSettingCoordinatorProtocol {
@@ -13,7 +14,8 @@ protocol WriteCoordinatorProtocol: SystemSettingCoordinatorProtocol {
     func showWriteViewController(with viewModel: WriteViewModel)
 
     /// CategoryViewController로 이동한다.
-    func showCategoryViewController(with type: CategoryViewController.CategoryViewType)
+    func showCategoryViewController(with type: CategoryViewController.CategoryViewType,
+                                    entities: [CategoryEntity])
 
     /// PhotosViewController로 이동한다.
     func showPhotosViewController()
@@ -24,9 +26,11 @@ protocol WriteCoordinatorProtocol: SystemSettingCoordinatorProtocol {
 
 extension WriteCoordinatorProtocol {
     /// CategoryViewController로 이동한다.
-    func showCategoryViewController(with type: CategoryViewController.CategoryViewType = .select) {
+    func showCategoryViewController(with type: CategoryViewController.CategoryViewType = .select,
+                                    entities: [CategoryEntity] = []) {
         let categoryViewController: CategoryViewController = CategoryViewController(categoryViewType: type)
         categoryViewController.coordinator = self
+        categoryViewController.selectedCategory = entities
         navigationController.pushViewController(categoryViewController, animated: true)
     }
 

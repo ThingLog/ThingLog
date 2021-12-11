@@ -12,6 +12,7 @@ import UIKit.UIImage
 struct Attachment {
     let identifier: UUID = UUID()
     let thumbnail: UIImage
+    let createDate: Date = Date()
 
     // MARK: Relationship
     let imageData: ImageData
@@ -27,6 +28,7 @@ extension Attachment {
         entity.identifier = identifier
         entity.thumbnail = thumbnail.jpegData(compressionQuality: 0.8)
         entity.imageData = imageData.toEntity(in: context)
+        entity.createDate = createDate
         return entity
     }
 }

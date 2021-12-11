@@ -41,7 +41,7 @@ final class CategoryViewController: UIViewController {
         textField.font = UIFont.Pretendard.body1
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.returnKeyType = .done
-        textField.attributedPlaceholder = NSAttributedString(string: "카테고리를 만들어보세요! (최대 20자)", attributes: [NSAttributedString.Key.foregroundColor: SwiftGenColors.gray2.color])
+        textField.attributedPlaceholder = NSAttributedString(string: "이곳을 눌러 카테고리를 만들어보세요! (최대 20자)", attributes: [NSAttributedString.Key.foregroundColor: SwiftGenColors.gray2.color])
         return textField
     }()
     private let bottomLineView: UIView = {
@@ -66,7 +66,7 @@ final class CategoryViewController: UIViewController {
     private let disposeBag: DisposeBag = DisposeBag()
     private let leadingTrailingConstant: CGFloat = 18.0
     private let topBottomConstant: CGFloat = 12.0
-    private var selectedCategory: [CategoryEntity] = [] {
+    var selectedCategory: [CategoryEntity] = [] {
         didSet { successButton.isEnabled = selectedCategory.isNotEmpty }
     }
     private let textFieldMaxLength: Int = 21
@@ -107,7 +107,7 @@ final class CategoryViewController: UIViewController {
         
         if categoryViewType == .modify { return }
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: successButton)
-        successButton.isEnabled = false
+        successButton.isEnabled = selectedCategory.isNotEmpty
     }
     
     private func setupView() {

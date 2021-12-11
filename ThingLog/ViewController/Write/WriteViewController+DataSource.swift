@@ -60,7 +60,12 @@ extension WriteViewController {
 
         cell.categorySubject = viewModel.categorySubject
         cell.indicatorButtonDidTappedCallback = { [weak self] in
-            self?.coordinator?.showCategoryViewController()
+            guard let categories: [Category] = try? self?.viewModel.categorySubject.value() else {
+                return
+            }
+
+            let entities: [CategoryEntity] = categories.map { $0.toEntity(in: CoreDataStack.shared.mainContext) }
+            self?.coordinator?.showCategoryViewController(entities: entities)
         }
 
         return cell

@@ -359,7 +359,9 @@ extension PostTableCell {
     /// SlideImageView의 데이터를 구성한다.
     private func configureSlideImageView(with attachments: NSSet?) {
         if let attachments: [AttachmentEntity] = attachments?.allObjects as? [AttachmentEntity] {
-            let imageDatas: [Data] = attachments.compactMap { $0.imageData?.originalImage }
+            let imageDatas: [Data] = attachments.sorted(by: {
+                $0.createDate ?? Date() < $1.createDate ?? Date()
+            }).compactMap { $0.imageData?.originalImage }
             slideImageViewDataSource.images = imageDatas.compactMap { UIImage(data: $0) }
             imageCount = imageDatas.count
             slideImageCollectionView.reloadData()
