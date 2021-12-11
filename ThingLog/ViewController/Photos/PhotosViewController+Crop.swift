@@ -9,9 +9,9 @@ import UIKit
 
 extension PhotosViewController {
     /// 오른쪽에서 왼쪽으로 나타나는 애니메이션과 함께 CropViewController를 표시한다.
-    func showCropViewController(selectedIndexImage: (index: IndexPath, image: UIImage?)) {
-        cropViewController = CropViewController(selectedIndexImage: selectedIndexImage)
-        cropViewController?.numberView.label.text = "\(selectedIndexPath.count)"
+    func showCropViewController(selectedImage: ImageEditInfo) {
+        cropViewController = CropViewController(selectedImage: selectedImage)
+        cropViewController?.numberView.label.text = "\(selectedImages.count)"
         cropViewController?.backCompletion = dismissCropViewController
         guard let cropViewController: CropViewController = cropViewController else { return }
         let cropView: UIView = cropViewController.view
@@ -71,11 +71,14 @@ extension PhotosViewController {
         backButton.rx.tap
             .bind { [weak self] in
                 guard let image = self?.cropViewController?.cropImage(),
-                      let index = self?.cropViewController?.selectedIndexImage.index,
-                      let firstIndex = self?.selectedIndexPath.firstIndex(where: { $0.index == index }) else {
+                      let index = self?.cropViewController?.selectedImage.indexPath,
+                      let firstIndex = self?.selectedImages.firstIndex(where: { $0.indexPath == index }) else {
                     return
                 }
-                self?.selectedIndexPath[firstIndex].image = image
+                self?.selectedImages[firstIndex].image = nil
+                self?.selectedImages[firstIndex].cropImage = image
+                self?.selectedImages[firstIndex].zoomScale = self?.cropViewController?.zoomScale
+                self?.selectedImages[firstIndex].contentOffset = self?.cropViewController?.contentOffset
                 self?.dismissCropViewController()
             }
             .disposed(by: disposeBag)

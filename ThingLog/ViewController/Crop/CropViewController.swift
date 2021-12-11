@@ -46,7 +46,7 @@ class CropViewController: UIViewController {
     }()
     
     lazy var imageView: UIImageView = {
-        let imageView: UIImageView = UIImageView(image: selectedIndexImage.image)
+        let imageView: UIImageView = UIImageView(image: selectedImage.image)
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -67,22 +67,24 @@ class CropViewController: UIViewController {
     }()
     
     // MARK: - Properties
-    var selectedIndexImage: (index: IndexPath, image: UIImage?)
+    var selectedImage: ImageEditInfo
     var inset: CropInset = CropInset()
     var disposeBag: DisposeBag = DisposeBag()
+    var contentOffset: CGPoint { scrollView.contentOffset }
+    var zoomScale: CGFloat { scrollView.zoomScale }
     
     /// ScreenEdgePanGesture는 여러번 호출될 수 있어서, 한번만 실행되도록 flag변수를 이용함.
     var gestureFlag: Bool = true
     var backCompletion: (() -> Void)?
     
     // MARK: - Init
-    init(selectedIndexImage: (index: IndexPath, image: UIImage?)) {
-        self.selectedIndexImage = selectedIndexImage
+    init(selectedImage: ImageEditInfo) {
+        self.selectedImage = selectedImage
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Life Cycle
@@ -95,6 +97,8 @@ class CropViewController: UIViewController {
         setupNumberView()
         setupZoomButton()
         setupScreenPanGesture()
+        setupZoomScale()
+        setupContentOffset()
     }
     
     // MARK: - Setup
@@ -184,6 +188,22 @@ class CropViewController: UIViewController {
         }.disposed(by: disposeBag)
     }
     
+    func setupZoomScale() {
+        guard let zoomScale = selectedImage.zoomScale else {
+            scrollView.setZoomScale(1.0, animated: false)
+            return
+        }
+        scrollView.setZoomScale(zoomScale, animated: false)
+    }
+    
+    func setupContentOffset() {
+        guard let contentOffset = selectedImage.contentOffset else {
+            scrollView.setContentOffset(.zero, animated: false)
+            return
+        }
+        scrollView.setContentOffset(contentOffset, animated: false)
+    }
+    
     /// 왼쪽 가장 끝지점에서 제스쳐를 인식하여, 뒤로가도록 한다.
     func setupScreenPanGesture() {
         let gesture: UIScreenEdgePanGestureRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(back))
@@ -216,7 +236,7 @@ extension CropViewController {
     func cropImage() -> UIImage {
         imageContainerView.layer.borderColor = UIColor.black.cgColor
         let renderer: UIGraphicsImageRenderer = UIGraphicsImageRenderer(size: self.imageContainerView.bounds.size)
-        return renderer.image { ctx in
+        return renderer.image { _ in
             self.imageContainerView.drawHierarchy(in: self.imageContainerView.bounds, afterScreenUpdates: true)
         }
     }

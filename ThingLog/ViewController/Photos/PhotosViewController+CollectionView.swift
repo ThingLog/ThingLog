@@ -53,7 +53,7 @@ extension PhotosViewController: UICollectionViewDataSource {
             }.disposed(by: cell.disposeBag)
         cell.setupImageViewWithCheckButton()
         cell.updateCheckButton(string: "", backgroundColor: .clear)
-        if let firstIndex: Int = selectedIndexPath.firstIndex(where: {$0.index == indexPath}) {
+        if let firstIndex: Int = selectedImages.firstIndex(where: {$0.indexPath == indexPath}) {
             cell.updateCheckButton(string: "\(firstIndex + 1)", backgroundColor: SwiftGenColors.systemGreen.color)
         }
     }
@@ -63,15 +63,15 @@ extension PhotosViewController: UICollectionViewDataSource {
     ///   - cell: 업데이트 하기 위한 셀
     ///   - indexPath: 선택한 셀의 IndexPath
     private func tappedCheckButton(_ cell: ContentsCollectionViewCell, at indexPath: IndexPath) {
-        if let firstIndex: Int = self.selectedIndexPath.firstIndex(where: {$0.index == indexPath})  {
-            selectedIndexPath.remove(at: firstIndex)
+        if let firstIndex: Int = selectedImages.firstIndex(where: {$0.indexPath == indexPath})  {
+            selectedImages.remove(at: firstIndex)
             DispatchQueue.main.async {
                 cell.updateCheckButton(string: "", backgroundColor: .clear)
                 cell.layoutIfNeeded()
             }
         } else {
-            if selectedIndexPath.count < selectedMaxCount {
-                selectedIndexPath.append((indexPath, nil))
+            if selectedImages.count < selectedMaxCount {
+                selectedImages.append(ImageEditInfo(indexPath: indexPath, image: nil))
             } else {
                 showMaxSelectedAlert()
             }
@@ -112,20 +112,20 @@ extension PhotosViewController: UICollectionViewDelegate {
                 guard let image: UIImage = image,
                       let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: indexPath) as? ContentsCollectionViewCell else { return }
                 DispatchQueue.main.async {
-                    var indexPathAndImage: (index: IndexPath, image: UIImage?)
-                    if let firstIndex: Int = self.selectedIndexPath.firstIndex(where: { $0.index == indexPath }) {
+                    var imageInfo: ImageEditInfo
+                    if let firstIndex: Int = self.selectedImages.firstIndex(where: { $0.indexPath == indexPath }) {
                         cell.updateCheckButton(string: "\(firstIndex + 1)", backgroundColor: SwiftGenColors.systemGreen.color)
-                        indexPathAndImage = self.selectedIndexPath[firstIndex]
-                        if indexPathAndImage.image == nil {
-                            indexPathAndImage.image = image
+                        imageInfo = self.selectedImages[firstIndex]
+                        if imageInfo.image == nil {
+                            imageInfo.image = image
                         }
-                        self.showCropViewController(selectedIndexImage: indexPathAndImage)
+                        self.showCropViewController(selectedImage: imageInfo)
                     } else {
-                        if self.selectedIndexPath.count < self.selectedMaxCount {
-                            indexPathAndImage = (indexPath, image)
-                            self.selectedIndexPath.append(indexPathAndImage)
-                            cell.updateCheckButton(string: "\(self.selectedIndexPath.count)", backgroundColor: SwiftGenColors.systemGreen.color)
-                            self.showCropViewController(selectedIndexImage: indexPathAndImage)
+                        if self.selectedImages.count < self.selectedMaxCount {
+                            imageInfo = ImageEditInfo(indexPath: indexPath, image: image)
+                            self.selectedImages.append(imageInfo)
+                            cell.updateCheckButton(string: "\(self.selectedImages.count)", backgroundColor: SwiftGenColors.systemGreen.color)
+                            self.showCropViewController(selectedImage: imageInfo)
                         } else {
                             self.showMaxSelectedAlert()
                         }
