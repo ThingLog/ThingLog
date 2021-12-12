@@ -153,7 +153,13 @@ final class PostRepository: PostRepositoryProtocol {
         let context: NSManagedObjectContext = coreDataStack.mainContext
         context.performAndWait {
             do {
+                // 진열장 아이템 조건 ( 드래곤볼, VIP )
+                if updateEntity.postType?.pageType == .bought {
+                    self.drawerRepository.updateVIP(by: Int(updateEntity.price))
+                }
+                self.drawerRepository.updateDragonBall(rating: updateEntity.rating?.scoreType.rawValue ?? 0)
                 try context.save()
+
                 completion(.success(true))
             } catch {
                 completion(.failure(.failedUpdate))

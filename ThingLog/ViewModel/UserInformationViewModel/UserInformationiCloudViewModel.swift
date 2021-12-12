@@ -8,14 +8,15 @@ import Foundation
 
 /// `KeyValueStorage`를 이용하여 유저정보를 가져오고 업데이트하는 ViewModel
 final class UserInformationiCloudViewModel: UserInformationViewModelable {
+    var keyValueStorage: KeyValueStoragable = CloudKeyValueStorage.shared
     func fetchUserInformation(completion: @escaping (UserInformationable?) -> Void) {
-        if NSUbiquitousKeyValueStore.default.string(forKey: KeyStoreName.userAliasName.name) == nil {
+        if keyValueStorage.string(forKey: KeyStoreName.userAliasName.name) == nil {
             completion(nil)
             return
         }
-        let userName: String = NSUbiquitousKeyValueStore.default.string(forKey: KeyStoreName.userAliasName.name) ?? ""
-        let userOneLine: String = NSUbiquitousKeyValueStore.default.string(forKey: KeyStoreName.userOneLineIntroduction.name) ?? ""
-        let darkMode: Bool = NSUbiquitousKeyValueStore.default.bool(forKey: KeyStoreName.isAutomatedDarkMode.name)
+        let userName: String = keyValueStorage.string(forKey: KeyStoreName.userAliasName.name) ?? ""
+        let userOneLine: String = keyValueStorage.string(forKey: KeyStoreName.userOneLineIntroduction.name) ?? ""
+        let darkMode: Bool = keyValueStorage.bool(forKey: KeyStoreName.isAutomatedDarkMode.name)
         
         let userInformation: UserInformation = UserInformation(userAliasName: userName,
                                                                userOneLineIntroduction: userOneLine,
@@ -24,23 +25,19 @@ final class UserInformationiCloudViewModel: UserInformationViewModelable {
     }
     
     func updateUserInformation(_ user: UserInformationable) {
-        
-        NSUbiquitousKeyValueStore.default.set(user.userAliasName,
+        keyValueStorage.set(user.userAliasName,
                                               forKey: KeyStoreName.userAliasName.name)
-        NSUbiquitousKeyValueStore.default.set(user.userOneLineIntroduction,
+        keyValueStorage.set(user.userOneLineIntroduction,
                                               forKey: KeyStoreName.userOneLineIntroduction.name)
-        NSUbiquitousKeyValueStore.default.set(user.isAumatedDarkMode,
+        keyValueStorage.set(user.isAumatedDarkMode,
                                               forKey: KeyStoreName.isAutomatedDarkMode.name)
-        NSUbiquitousKeyValueStore.default.synchronize()
-        // TODO: - ⚠️ name 이름 변경 예정 - Notification extension하여
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "userInformation"), object: nil)
     }
     
     func resetUserInformation() {
-        NSUbiquitousKeyValueStore.default.removeObject(forKey: KeyStoreName.userAliasName.name)
-        NSUbiquitousKeyValueStore.default.removeObject(forKey: KeyStoreName.userOneLineIntroduction.name)
-        NSUbiquitousKeyValueStore.default.removeObject(forKey: KeyStoreName.isAutomatedDarkMode.name)
-        NSUbiquitousKeyValueStore.default.synchronize()
+        keyValueStorage.removeObject(forKey: KeyStoreName.userAliasName.name)
+        keyValueStorage.removeObject(forKey: KeyStoreName.userOneLineIntroduction.name)
+        keyValueStorage.removeObject(forKey: KeyStoreName.isAutomatedDarkMode.name)
     }
     
     func subscribeUserInformationChange(completion: @escaping (UserInformationable?) -> Void) {
