@@ -115,7 +115,7 @@ final class DropBoxView: UIView {
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: bottomAnchor, constant: 1)
+            tableView.topAnchor.constraint(equalTo: bottomAnchor)
         ])
         tableView.layer.cornerRadius = 5
         tableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
@@ -123,7 +123,6 @@ final class DropBoxView: UIView {
         
         superView?.layoutIfNeeded()
         tableView.selectRow(at: selectedIndexPath, animated: false, scrollPosition: .top)
-        
     }
 }
 
