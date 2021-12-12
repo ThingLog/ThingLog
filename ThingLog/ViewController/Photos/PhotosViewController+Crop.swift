@@ -11,7 +11,7 @@ extension PhotosViewController {
     /// 오른쪽에서 왼쪽으로 나타나는 애니메이션과 함께 CropViewController를 표시한다.
     func showCropViewController(selectedIndexImage: (index: IndexPath, image: UIImage?)) {
         cropViewController = CropViewController(selectedIndexImage: selectedIndexImage)
-        cropViewController?.numberView.label.text = "\(selectedIndexPath.count)"
+//        cropViewController?.numberView.label.text = "\(selectedIndexPath.count)" // 기능 없애기로 함.
         cropViewController?.backCompletion = dismissCropViewController
         guard let cropViewController: CropViewController = cropViewController else { return }
         let cropView: UIView = cropViewController.view
