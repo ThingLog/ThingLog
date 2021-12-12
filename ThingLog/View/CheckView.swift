@@ -8,9 +8,15 @@
 import UIKit
 /// 내부에 `ImageView`의 `checkmark.circle`을 가지는 액션이 가능한 뷰다. [이미지](https://www.notion.so/CheckView-f3a180f503b64187998ef72a77367f97)
 final class CheckView: UIControl {
+    let containerView: UIImageView = {
+        let imageView: UIImageView = UIImageView(image: SwiftGenIcons.checkBoxS.image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
     let imageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.image = UIImage(systemName: "checkmark.circle")
+        imageView.image = UIImage(systemName: "checkmark")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isHidden = true
         return imageView
@@ -23,6 +29,12 @@ final class CheckView: UIControl {
         label.textColor = .white
         return label
     }()
+
+    var isSelect: Bool = false {
+        didSet {
+            containerView.image = isSelect ? SwiftGenIcons.checkBoxS.image : SwiftGenIcons.checkBoxSSelected.image
+        }
+    }
     
     // 터치 영역 더 크게 한다.
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
@@ -36,18 +48,26 @@ final class CheckView: UIControl {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     func setupView() {
-        addSubview(imageView)
-        addSubview(label)
-        
+        let checkSpacing: CGFloat = 6.5
+
+        containerView.addSubviews(imageView, label)
+        addSubview(containerView)
+
         NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: -2),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 2),
-            imageView.topAnchor.constraint(equalTo: topAnchor, constant: -2),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 2),
-            label.centerXAnchor.constraint(equalTo: centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: centerYAnchor)
+            containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            containerView.topAnchor.constraint(equalTo: topAnchor),
+            containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
+
+            imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: checkSpacing),
+            imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: checkSpacing),
+            imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -(checkSpacing + 1)),
+            imageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -checkSpacing),
+
+            label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor, constant: -0.5),
+            label.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: -1)
         ])
     }
 }

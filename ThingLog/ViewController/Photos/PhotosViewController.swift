@@ -269,7 +269,7 @@ extension PhotosViewController {
             guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: indexPath.index) as? ContentsCollectionViewCell else {
                 return
             }
-            cell.updateCheckButton(string: "\(index + 1)", backgroundColor: SwiftGenColors.systemGreen.color)
+            cell.updateCheckButton(string: "\(index + 1)")
             cell.layoutIfNeeded()
         }
     }
