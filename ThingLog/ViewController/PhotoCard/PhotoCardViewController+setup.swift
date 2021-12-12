@@ -132,7 +132,7 @@ extension PhotoCardViewController {
     
     func setupRightNavigationBarItem() {
         let editButton: UIButton = UIButton()
-        editButton.setTitle("완료", for: .normal)
+        editButton.setTitle("저장", for: .normal)
         editButton.titleLabel?.font = UIFont.Pretendard.body1
         editButton.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         editButton.rx.tap

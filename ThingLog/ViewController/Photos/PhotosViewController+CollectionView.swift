@@ -52,9 +52,9 @@ extension PhotosViewController: UICollectionViewDataSource {
                 self.tappedCheckButton(cell, at: indexPath)
             }.disposed(by: cell.disposeBag)
         cell.setupImageViewWithCheckButton()
-        cell.updateCheckButton(string: "", backgroundColor: .clear)
+        cell.updateCheckButton(string: "")
         if let firstIndex: Int = selectedIndexPath.firstIndex(where: {$0.index == indexPath}) {
-            cell.updateCheckButton(string: "\(firstIndex + 1)", backgroundColor: SwiftGenColors.systemGreen.color)
+            cell.updateCheckButton(string: "\(firstIndex + 1)")
         }
     }
     
@@ -66,7 +66,7 @@ extension PhotosViewController: UICollectionViewDataSource {
         if let firstIndex: Int = self.selectedIndexPath.firstIndex(where: {$0.index == indexPath})  {
             selectedIndexPath.remove(at: firstIndex)
             DispatchQueue.main.async {
-                cell.updateCheckButton(string: "", backgroundColor: .clear)
+                cell.updateCheckButton(string: "")
                 cell.layoutIfNeeded()
             }
         } else {
@@ -114,7 +114,7 @@ extension PhotosViewController: UICollectionViewDelegate {
                 DispatchQueue.main.async {
                     var indexPathAndImage: (index: IndexPath, image: UIImage?)
                     if let firstIndex: Int = self.selectedIndexPath.firstIndex(where: { $0.index == indexPath }) {
-                        cell.updateCheckButton(string: "\(firstIndex + 1)", backgroundColor: SwiftGenColors.systemGreen.color)
+                        cell.updateCheckButton(string: "\(firstIndex + 1)")
                         indexPathAndImage = self.selectedIndexPath[firstIndex]
                         if indexPathAndImage.image == nil {
                             indexPathAndImage.image = image
@@ -124,7 +124,7 @@ extension PhotosViewController: UICollectionViewDelegate {
                         if self.selectedIndexPath.count < self.selectedMaxCount {
                             indexPathAndImage = (indexPath, image)
                             self.selectedIndexPath.append(indexPathAndImage)
-                            cell.updateCheckButton(string: "\(self.selectedIndexPath.count)", backgroundColor: SwiftGenColors.systemGreen.color)
+                            cell.updateCheckButton(string: "\(self.selectedIndexPath.count)")
                             self.showCropViewController(selectedIndexImage: indexPathAndImage)
                         } else {
                             self.showMaxSelectedAlert()

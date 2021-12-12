@@ -11,7 +11,7 @@ import Foundation
 /// 각 탭에 대하여 필요한 `FilterType`들을 제공한다.
 enum EasyLookTabType: String, CaseIterable {
     case total = "전체"
-    case date = "년도"
+    case date = "연도"
     case category = "카테고리"
     case like = "좋아요"
     case preference = "만족도"
@@ -19,9 +19,9 @@ enum EasyLookTabType: String, CaseIterable {
     
     var filterTypes: [FilterType] {
         switch self {
-        case .like, .preference, .price:
+        case .preference, .price:
             return [.preference]
-        case .total, .category:
+        case .total, .category, .like:
             return [.latest]
         case .date:
             return [.year, .month, .latest]

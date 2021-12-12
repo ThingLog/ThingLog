@@ -55,12 +55,16 @@ final class EasyLookViewModel {
             predicates.append(NSPredicate(format: "ANY categories.title == %@", subType))
         }
         var yearMonth: String = ""
-        
+
         currentFilterType.forEach {
             switch $0.type {
             case .latest:
                 let isAscending: Bool = $0.value == "최신순" ? false : true
                 request.sortDescriptors = [NSSortDescriptor(key: "createDate", ascending: isAscending)]
+                // 좋아요 탭인 경우 좋아요를 선택한 게시물만 표시
+                if currentTopCategoryType == .like {
+                    predicates.append(NSPredicate(format: "isLike == true"))
+                }
             case .month:
                 if $0.value.count == 2 {
                     yearMonth += "0"+$0.value
@@ -70,10 +74,8 @@ final class EasyLookViewModel {
             case .year:
                 yearMonth += $0.value
             case .preference:
-                // 높은순, 낮은순은 최상단 탭이 좋아요, 만족도, 가격 탭일 경우에만 해당한다.
+                // 높은순, 낮은순은 최상단 탭이 만족도, 가격 탭일 경우에만 해당한다.
                 switch currentTopCategoryType {
-                case .like:
-                request.sortDescriptors = [NSSortDescriptor(key: "isLike", ascending: $0.value == "낮은순")]
                 case .preference:
                     request.sortDescriptors = [NSSortDescriptor(key: "rating.score", ascending: $0.value == "낮은순")]
                 case .price:
