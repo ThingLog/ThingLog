@@ -115,6 +115,7 @@ final class SearchTextField: UIView {
         super.init(frame: .zero)
         setupView()
         setupTextFieldCloseButton()
+        setDarkMode()
     }
     
     required init?(coder: NSCoder) {
@@ -229,6 +230,22 @@ extension SearchTextField {
     
     private func setupTextField() {
         textField.delegate = self
+    }
+    
+    /// 강제적으로 다크모드를 안하고자 할 때, textFieldView의 layer의 색이 반영되지 않는 점을 해결하기 위한 메소드. 아무래도 cgColor여서 그런것 같기도 하고...
+    private func setDarkMode() {
+        let userInformationViewModel: UserInformationViewModelable = UserInformationUserDefaultsViewModel()
+        userInformationViewModel.fetchUserInformation { userInfor in
+            guard let userInfor = userInfor else {
+                return
+            }
+            let darkMode: Bool = userInfor.isAumatedDarkMode
+            if darkMode {
+                self.textFieldView.layer.borderColor = UIColor(red: 255, green: 247, blue: 237, alpha: 1).cgColor
+            } else {
+                self.textFieldView.layer.borderColor = UIColor.black.cgColor
+            }
+        }
     }
 }
 

@@ -33,6 +33,7 @@ final class PhotosViewController: BaseViewController {
         button.titleLabel?.font = UIFont.Pretendard.button
         button.setImage(SwiftGenIcons.arrowDropDown.image.withTintColor(SwiftGenColors.gray3.color),
                         for: .normal)
+        button.imageView?.transform = CGAffineTransform(rotationAngle: .pi)
         button.semanticContentAttribute = .forceRightToLeft
         button.sizeToFit()
         return button
@@ -97,7 +98,7 @@ final class PhotosViewController: BaseViewController {
     private(set) var albumsViewController: AlbumsViewController = AlbumsViewController()
     private var isShowAlbumsViewController: Bool = false {
         didSet {
-            titleButton.imageView?.transform = isShowAlbumsViewController ? .identity : CGAffineTransform(rotationAngle: .pi)
+            titleButton.imageView?.transform = isShowAlbumsViewController ? CGAffineTransform(rotationAngle: .pi) : .identity
         }
     }
     
@@ -271,7 +272,7 @@ extension PhotosViewController {
             guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: imageInfo.indexPath) as? ContentsCollectionViewCell else {
                 return
             }
-            cell.updateCheckButton(string: "\(index + 1)", backgroundColor: SwiftGenColors.systemGreen.color)
+            cell.updateCheckButton(string: "\(index + 1)")
             cell.layoutIfNeeded()
         }
     }

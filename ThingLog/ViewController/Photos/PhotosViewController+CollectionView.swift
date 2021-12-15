@@ -21,11 +21,11 @@ extension PhotosViewController: UICollectionViewDataSource {
             }
             return cell
         }
-
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsCollectionViewCell else {
             fatalError("Unable to dequeue PhotoCollectionViewCell")
         }
-
+        
         setupContentsCell(cell: cell, at: indexPath)
         
         return cell
@@ -37,9 +37,9 @@ extension PhotosViewController: UICollectionViewDataSource {
         cell.representedAssetIdentifier = asset.localIdentifier
         
         cell.imageRequestID = imageManager.requestImage(for: asset,
-                                                        targetSize: thumbnailSize,
-                                                        contentMode: .aspectFill,
-                                                        options: nil) { image, _ in
+                                                           targetSize: thumbnailSize,
+                                                           contentMode: .aspectFill,
+                                                           options: nil) { image, _ in
             if indexPath.item == 0 { return }
             if cell.representedAssetIdentifier == asset.localIdentifier {
                 cell.update(image: image)
@@ -52,9 +52,9 @@ extension PhotosViewController: UICollectionViewDataSource {
                 self.tappedCheckButton(cell, at: indexPath)
             }.disposed(by: cell.disposeBag)
         cell.setupImageViewWithCheckButton()
-        cell.updateCheckButton(string: "", backgroundColor: .clear)
+        cell.updateCheckButton(string: "")
         if let firstIndex: Int = selectedImages.firstIndex(where: {$0.indexPath == indexPath}) {
-            cell.updateCheckButton(string: "\(firstIndex + 1)", backgroundColor: SwiftGenColors.systemGreen.color)
+            cell.updateCheckButton(string: "\(firstIndex + 1)")
         }
     }
     
@@ -66,7 +66,7 @@ extension PhotosViewController: UICollectionViewDataSource {
         if let firstIndex: Int = selectedImages.firstIndex(where: {$0.indexPath == indexPath})  {
             selectedImages.remove(at: firstIndex)
             DispatchQueue.main.async {
-                cell.updateCheckButton(string: "", backgroundColor: .clear)
+                cell.updateCheckButton(string: "")
                 cell.layoutIfNeeded()
             }
         } else {
@@ -114,7 +114,7 @@ extension PhotosViewController: UICollectionViewDelegate {
                 DispatchQueue.main.async {
                     var imageInfo: ImageEditInfo
                     if let firstIndex: Int = self.selectedImages.firstIndex(where: { $0.indexPath == indexPath }) {
-                        cell.updateCheckButton(string: "\(firstIndex + 1)", backgroundColor: SwiftGenColors.systemGreen.color)
+                        cell.updateCheckButton(string: "\(firstIndex + 1)")
                         imageInfo = self.selectedImages[firstIndex]
                         if imageInfo.image == nil {
                             imageInfo.image = image
@@ -124,7 +124,7 @@ extension PhotosViewController: UICollectionViewDelegate {
                         if self.selectedImages.count < self.selectedMaxCount {
                             imageInfo = ImageEditInfo(indexPath: indexPath, image: image)
                             self.selectedImages.append(imageInfo)
-                            cell.updateCheckButton(string: "\(self.selectedImages.count)", backgroundColor: SwiftGenColors.systemGreen.color)
+                            cell.updateCheckButton(string: "\(self.selectedImages.count)")
                             self.showCropViewController(selectedImage: imageInfo)
                         } else {
                             self.showMaxSelectedAlert()

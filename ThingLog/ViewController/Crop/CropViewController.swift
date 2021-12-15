@@ -94,11 +94,11 @@ class CropViewController: UIViewController {
         setupImageConatinerView()
         setupTopView()
         setupBottomView()
-        setupNumberView()
-        setupZoomButton()
         setupScreenPanGesture()
         setupZoomScale()
         setupContentOffset()
+//        setupZoomButton() // 기능 없애기로 함
+//        setupNumberView() // 기능 없애기로 함
     }
     
     // MARK: - Setup
@@ -126,7 +126,7 @@ class CropViewController: UIViewController {
             imageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
         ])
     }
-
+    
     func setupTopView() {
         view.addSubview(topView)
         
@@ -227,7 +227,7 @@ class CropViewController: UIViewController {
 }
 
 extension CropViewController: UIScrollViewDelegate {
-  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         imageView
     }
 }

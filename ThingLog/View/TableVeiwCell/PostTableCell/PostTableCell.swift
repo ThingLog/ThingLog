@@ -264,6 +264,8 @@ final class PostTableCell: UITableViewCell {
         super.prepareForReuse()
         disposeBag = DisposeBag()
         identifier = ""
+        currentImagePage = 1
+        slideImageCollectionView.reloadData()
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

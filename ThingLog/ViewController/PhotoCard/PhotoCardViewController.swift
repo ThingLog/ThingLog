@@ -166,7 +166,7 @@ final class PhotoCardViewController: UIViewController {
         alert.hideTitleLabel()
         alert.hideRightButton()
         alert.hideTextField()
-        alert.changeContentsText(error == nil ? "저장했습니다" : "앨범에 접근을 허용해주세요.")
+        alert.changeContentsText(error == nil ? "사진이 앨범에 저장되었습니다." : "앨범에 접근을 허용해주세요.")
         alert.leftButton.setTitle("확인", for: .normal)
         
         alert.leftButton.rx.tap.bind {

@@ -234,6 +234,9 @@
 		DBD545522703409300063C98 /* HorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD545512703409300063C98 /* HorizontalCollectionView.swift */; };
 		DBDA84C1274CD863009CC7AD /* CropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA84C0274CD863009CC7AD /* CropViewController.swift */; };
 		DBDA84C3274F5936009CC7AD /* PhotosViewController+Crop.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDA84C2274F5936009CC7AD /* PhotosViewController+Crop.swift */; };
+		DBDB30DD27645D7A00996D20 /* KeyValueStoragable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB30DC27645D7A00996D20 /* KeyValueStoragable.swift */; };
+		DBDB30E02764612400996D20 /* UserDefaultKeyValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB30DF2764612400996D20 /* UserDefaultKeyValueStorage.swift */; };
+		DBDB30E22764612F00996D20 /* CloudKeyValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDB30E12764612F00996D20 /* CloudKeyValueStorage.swift */; };
 		DBE3E9C1272FB9BB00B3EB69 /* TrashViewController+Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE3E9C0272FB9BB00B3EB69 /* TrashViewController+Collection.swift */; };
 		DBE3E9C3272FD6B300B3EB69 /* UserInformationViewModelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE3E9C2272FD6B300B3EB69 /* UserInformationViewModelable.swift */; };
 		DBE3E9C6272FF25A00B3EB69 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBE3E9C5272FF25A00B3EB69 /* Icons.xcassets */; };
@@ -509,6 +512,9 @@
 		DBD545512703409300063C98 /* HorizontalCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionView.swift; sourceTree = "<group>"; };
 		DBDA84C0274CD863009CC7AD /* CropViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewController.swift; sourceTree = "<group>"; };
 		DBDA84C2274F5936009CC7AD /* PhotosViewController+Crop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosViewController+Crop.swift"; sourceTree = "<group>"; };
+		DBDB30DC27645D7A00996D20 /* KeyValueStoragable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueStoragable.swift; sourceTree = "<group>"; };
+		DBDB30DF2764612400996D20 /* UserDefaultKeyValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKeyValueStorage.swift; sourceTree = "<group>"; };
+		DBDB30E12764612F00996D20 /* CloudKeyValueStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKeyValueStorage.swift; sourceTree = "<group>"; };
 		DBE3E9C0272FB9BB00B3EB69 /* TrashViewController+Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrashViewController+Collection.swift"; sourceTree = "<group>"; };
 		DBE3E9C2272FD6B300B3EB69 /* UserInformationViewModelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationViewModelable.swift; sourceTree = "<group>"; };
 		DBE3E9C5272FF25A00B3EB69 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
@@ -744,6 +750,7 @@
 		87F2188726FB5E6000C3FBCA /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				DBDB30DE2764610900996D20 /* KeyValueStorage */,
 				876C157C27047B19000C1C84 /* CategoryRepository.swift */,
 				DBA883B5272BEF9B0089643B /* DrawerCoreDataRepository.swift */,
 				87F2188826FB5E9500C3FBCA /* PostRepository.swift */,
@@ -1103,6 +1110,16 @@
 			path = Crop;
 			sourceTree = "<group>";
 		};
+		DBDB30DE2764610900996D20 /* KeyValueStorage */ = {
+			isa = PBXGroup;
+			children = (
+				DBDB30DC27645D7A00996D20 /* KeyValueStoragable.swift */,
+				DBDB30DF2764612400996D20 /* UserDefaultKeyValueStorage.swift */,
+				DBDB30E12764612F00996D20 /* CloudKeyValueStorage.swift */,
+			);
+			path = KeyValueStorage;
+			sourceTree = "<group>";
+		};
 		DBE3E9BF272FB9AB00B3EB69 /* Trash */ = {
 			isa = PBXGroup;
 			children = (
@@ -1364,6 +1381,7 @@
 				DBD105512729726400632168 /* RoundCenterTextButton.swift in Sources */,
 				DB05B056271FEAFA0067DB17 /* LoginViewController+subscribe.swift in Sources */,
 				DB331DAA26FDD00A00A629F5 /* ImageAssets.swift in Sources */,
+				DBDB30DD27645D7A00996D20 /* KeyValueStoragable.swift in Sources */,
 				87B9EEE8273BDE3B001F3FB4 /* DropDownView.swift in Sources */,
 				DBD5454727032B1C00063C98 /* FilterType.swift in Sources */,
 				DB1111EE27352D2D00D02F99 /* SplashViewController.swift in Sources */,
@@ -1480,6 +1498,7 @@
 				878FEA952750F47C00D9E2F3 /* CenterIconCollectionCell.swift in Sources */,
 				87A86C8F27141507008FB3F0 /* RatingView.swift in Sources */,
 				DB05B04E271F09260067DB17 /* LoginTopHeaderView.swift in Sources */,
+				DBDB30E02764612400996D20 /* UserDefaultKeyValueStorage.swift in Sources */,
 				DB7C04F026FB1EFF009F5C0A /* HomeViewController.swift in Sources */,
 				DBFF2C602744C5F400A2CEE9 /* PhotoCardCoordinator.swift in Sources */,
 				DB148C2027043CFC00FDC48F /* DropBoxView.swift in Sources */,
@@ -1494,6 +1513,7 @@
 				8715B3AF273ABFB3007A3A88 /* PostViewController+setup.swift in Sources */,
 				87A863C82740DCBE0023FBE7 /* CommentViewController.swift in Sources */,
 				8736B3EF26FDC1AD000433E1 /* Comment.swift in Sources */,
+				DBDB30E22764612F00996D20 /* CloudKeyValueStorage.swift in Sources */,
 				878FEA932750F18200D9E2F3 /* UIImagePickerController+.swift in Sources */,
 				8736B3E326FCB9F3000433E1 /* Rating.swift in Sources */,
 				DB00D211272A8A79003FC9C3 /* SelectingDrawerViewController.swift in Sources */,
