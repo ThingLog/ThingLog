@@ -78,7 +78,7 @@ final class PhotosViewController: BaseViewController {
     var previousPreheatRect: CGRect = .zero
     let selectedMaxCount: Int = 10
     var coordinator: WriteCoordinatorProtocol?
-    var selectedIndexPath: [(index: IndexPath, image: UIImage?)] = [] {
+    var selectedImages: [ImageEditInfo] = [] {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.updateSelectedOrder()
@@ -106,7 +106,7 @@ final class PhotosViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        selectedIndexPath = []
+        selectedImages = []
         isShowAlbumsViewController = false
         resetCachedAssets()
         
@@ -218,9 +218,11 @@ extension PhotosViewController {
             .bind { [weak self] in
                 guard let self = self else { return }
                 if let image: UIImage = self.cropViewController?.cropImage(),
-                   let index: IndexPath = self.cropViewController?.selectedIndexImage.index,
-                   let firstIndex: Int = self.selectedIndexPath.firstIndex(where: { $0.index == index }) {
-                    self.selectedIndexPath[firstIndex].image = image
+                   let index: IndexPath = self.cropViewController?.selectedImage.indexPath,
+                   let firstIndex: Int = self.selectedImages.firstIndex(where: { $0.indexPath == index }) {
+                    self.selectedImages[firstIndex].cropImage = image
+                    self.selectedImages[firstIndex].zoomScale = self.cropViewController?.zoomScale
+                    self.selectedImages[firstIndex].contentOffset = self.cropViewController?.contentOffset
                 }
                 
                 NotificationCenter.default.post(name: .passSelectImages,
@@ -245,7 +247,7 @@ extension PhotosViewController {
             }
             .bind { [weak self] assetCollection in
                 guard let self = self else { return }
-                self.resetSelectedIndexPath()
+                self.resetSelectedImages()
                 self.assets = self.fetchAssets(assetCollection: assetCollection)
                 self.titleButton.sendActions(for: .touchUpInside)
             }.disposed(by: disposeBag)
@@ -258,16 +260,16 @@ extension PhotosViewController {
 }
 
 extension PhotosViewController {
-    /// `selectedIndexPath`을 초기화한다.
-    func resetSelectedIndexPath() {
-        selectedIndexPath = []
+    /// `selectedImages`을 초기화한다.
+    func resetSelectedImages() {
+        selectedImages = []
         collectionView.reloadData()
     }
     
     /// `selectedIndexPath`에 데이터가 변경될 때 기존에 있는 항목의 checkButton 문자열을 업데이트한다.
     func updateSelectedOrder() {
-        selectedIndexPath.enumerated().forEach { index, indexPath in
-            guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: indexPath.index) as? ContentsCollectionViewCell else {
+        selectedImages.enumerated().forEach { index, imageInfo in
+            guard let cell: ContentsCollectionViewCell = collectionView.cellForItem(at: imageInfo.indexPath) as? ContentsCollectionViewCell else {
                 return
             }
             cell.updateCheckButton(string: "\(index + 1)")
@@ -292,12 +294,12 @@ extension PhotosViewController {
     
     /// 네비게이션 우측 상단에 있는 확인 버튼에 선택한 개수를 변경한다. 선택한 항목이 없으면 "확인"으로 변경한다.
     private func updateSelectedCountLabel() {
-        if selectedIndexPath.isEmpty {
+        if selectedImages.isEmpty {
             selectedCountLabel.text = ""
         } else {
-            selectedCountLabel.text = "\(selectedIndexPath.count)"
+            selectedCountLabel.text = "\(selectedImages.count)"
         }
-        successButton.isEnabled = !selectedIndexPath.isEmpty
+        successButton.isEnabled = selectedImages.isNotEmpty
     }
     
     /// selectedMaxCount < selectedIndexPath.count 인 경우 사용자에게 Alert을 띄운다.
@@ -319,7 +321,7 @@ extension PhotosViewController {
         present(alert, animated: false, completion: nil)
     }
     
-    /// `selectedIndexPath`를  오리지널, 썸네일 각각 `UIImage`으로 변환하여 반환한다.
+    /// `selectedImages`를  오리지널, 썸네일 각각 `UIImage`으로 변환하여 반환한다.
     private func convertIndexPathToImages() -> [(original: UIImage, thumbnail: UIImage)] {
         var selectedOriginalImage: [UIImage] = []
         var selectedThumnailImage: [UIImage] = []
@@ -329,11 +331,11 @@ extension PhotosViewController {
         options.isSynchronous = true
         options.deliveryMode = .highQualityFormat
         
-        for indexPath in selectedIndexPath {
-            if let image: UIImage = indexPath.image {
+        for imageInfo in selectedImages {
+            if let image: UIImage = imageInfo.cropImage {
                 selectedOriginalImage.append(image)
             } else {
-                let asset: PHAsset = assets.object(at: indexPath.index.item - 1)
+                let asset: PHAsset = assets.object(at: imageInfo.indexPath.item - 1)
                 asset.toImage(targetSize: CGSize(width: asset.pixelWidth,
                                                  height: asset.pixelHeight),
                               options: options) { image in
@@ -342,7 +344,7 @@ extension PhotosViewController {
                     // 360보다 큰 이미지 사이즈는 targetSize만으로 적용이 안되어, 뷰를 이용하여 contentMode를 적용시켜 이미지를 변환한다.
                     self.imageViewForSave.image = image
                     let renderer: UIGraphicsImageRenderer = UIGraphicsImageRenderer(size: self.imageViewForSave.bounds.size)
-                    let scaledImage = renderer.image { ctx in
+                    let scaledImage: UIImage = renderer.image { _ in
                         self.imageViewForSave.drawHierarchy(in: self.imageViewForSave.bounds, afterScreenUpdates: true)
                     }
                     selectedOriginalImage.append(scaledImage)
@@ -384,7 +386,8 @@ extension PhotosViewController: UINavigationControllerDelegate, UIImagePickerCon
         }
 
         let indexPath: IndexPath = IndexPath(row: -1, section: -1)
-        self.selectedIndexPath.append((indexPath, image))
+        let newImageInfo: ImageEditInfo = ImageEditInfo(indexPath: indexPath, image: image, cropImage: image)
+        selectedImages.append(newImageInfo)
 
         NotificationCenter.default.post(name: .passSelectImages,
                                         object: nil,

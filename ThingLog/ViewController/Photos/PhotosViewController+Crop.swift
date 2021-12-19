@@ -9,9 +9,9 @@ import UIKit
 
 extension PhotosViewController {
     /// 오른쪽에서 왼쪽으로 나타나는 애니메이션과 함께 CropViewController를 표시한다.
-    func showCropViewController(selectedIndexImage: (index: IndexPath, image: UIImage?)) {
-        cropViewController = CropViewController(selectedIndexImage: selectedIndexImage)
-//        cropViewController?.numberView.label.text = "\(selectedIndexPath.count)" // 기능 없애기로 함.
+    func showCropViewController(selectedImage: ImageEditInfo) {
+        cropViewController = CropViewController(selectedImage: selectedImage)
+        //        cropViewController?.numberView.label.text = "\(selectedImages.count)"
         cropViewController?.backCompletion = dismissCropViewController
         guard let cropViewController: CropViewController = cropViewController else { return }
         let cropView: UIView = cropViewController.view
@@ -42,6 +42,7 @@ extension PhotosViewController {
     /// 왼쪽에서 오른쪽으로 사라지는 애니메이션과 함께 CropViewController를 숨긴다.
     func dismissCropViewController() {
         guard let crop: CropViewController = cropViewController else { return }
+        saveCropImageInfo()
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
             let transition: CATransition = CATransition()
             transition.type = .push
@@ -70,16 +71,22 @@ extension PhotosViewController {
         backButton.tintColor = SwiftGenColors.primaryBlack.color
         backButton.rx.tap
             .bind { [weak self] in
-                guard let image = self?.cropViewController?.cropImage(),
-                      let index = self?.cropViewController?.selectedIndexImage.index,
-                      let firstIndex = self?.selectedIndexPath.firstIndex(where: { $0.index == index }) else {
-                    return
-                }
-                self?.selectedIndexPath[firstIndex].image = image
                 self?.dismissCropViewController()
             }
             .disposed(by: disposeBag)
         let backBarButton: UIBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.leftBarButtonItem = backBarButton
+    }
+    
+    func saveCropImageInfo() {
+        guard let image = cropViewController?.cropImage(),
+              let index = cropViewController?.selectedImage.indexPath,
+              let firstIndex = selectedImages.firstIndex(where: { $0.indexPath == index }) else {
+                  return
+              }
+        selectedImages[firstIndex].image = nil
+        selectedImages[firstIndex].cropImage = image
+        selectedImages[firstIndex].zoomScale = cropViewController?.zoomScale
+        selectedImages[firstIndex].contentOffset = cropViewController?.contentOffset
     }
 }
