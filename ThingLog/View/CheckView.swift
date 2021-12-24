@@ -66,8 +66,8 @@ final class CheckView: UIControl {
             imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -(checkSpacing + 1)),
             imageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -checkSpacing),
 
-            label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor, constant: -0.5),
-            label.centerYAnchor.constraint(equalTo: containerView.centerYAnchor, constant: -1)
+            label.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: imageView.centerYAnchor, constant: -1)
         ])
     }
 }
