@@ -8,12 +8,15 @@
 import CoreData
 import UIKit
 
+import Firebase
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         DrawerCoreDataRepository(coreDataStack: CoreDataStack.shared,
                                  defaultDrawers: DefaultDrawerModel().drawers).fetchDrawers(nil)
+        FirebaseApp.configure()
         return true
     }
 
