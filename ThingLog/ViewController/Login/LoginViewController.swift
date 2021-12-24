@@ -40,7 +40,7 @@ final class LoginViewController: UIViewController {
     
     private lazy var loginButton: RoundCenterTextButton = {
         let button: RoundCenterTextButton = RoundCenterTextButton(cornerRadius: loginButtonHeight / 2)
-        button.setTitle("로그인하기", for: .normal)
+        button.setTitle("입장하기", for: .normal)
         button.setTitleColor(SwiftGenColors.white.color.withAlphaComponent(0.5), for: .disabled)
         button.backgroundColor = button.backgroundColor?.withAlphaComponent(0.5)
         button.translatesAutoresizingMaskIntoConstraints = false
