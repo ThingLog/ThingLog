@@ -55,7 +55,7 @@ final class LoginViewController: UIViewController {
     
     private let loginButtonHeight: CGFloat = 56
     
-    let recommendList: [String] = ["나를 찾는 여정", "미니멀리즘", "건강한 소비 습관", "취향모음", "물건의 역사", "물건을 통해 나를 본다"]
+    let recommendList: [String] = ["나를 찾는 여정", "미니멀리즘", "건강한 소비 습관", "취향모음", "그만 사, 그만 먹어"]
     var disposeBag: DisposeBag = DisposeBag()
     
     lazy var userInformation: UserInformationable = UserInformation(userAliasName: "",
