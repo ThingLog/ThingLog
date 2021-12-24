@@ -41,8 +41,8 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         imageView.layer.shadowColor = UIColor.black.cgColor
         imageView.layer.masksToBounds = false
         imageView.layer.shadowOffset = CGSize(width: -2, height: -2)
-        imageView.layer.shadowRadius = 5
-        imageView.layer.shadowOpacity = 0.3
+        imageView.layer.shadowRadius = 6
+        imageView.layer.shadowOpacity = 0.25
         imageView.layer.shadowPath = UIBezierPath(roundedRect: imageView.bounds,
                                                   cornerRadius: imageView.layer.cornerRadius).cgPath
         imageView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
