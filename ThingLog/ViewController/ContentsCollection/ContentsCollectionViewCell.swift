@@ -41,8 +41,10 @@ class ContentsCollectionViewCell: UICollectionViewCell {
         imageView.layer.shadowColor = UIColor.black.cgColor
         imageView.layer.masksToBounds = false
         imageView.layer.shadowOffset = CGSize(width: -2, height: -2)
-        imageView.layer.shadowRadius = 5
-        imageView.layer.shadowOpacity = 0.3
+        imageView.layer.shadowRadius = 6
+        imageView.layer.shadowOpacity = 0.25
+        imageView.layer.shadowPath = UIBezierPath(roundedRect: imageView.bounds,
+                                                  cornerRadius: imageView.layer.cornerRadius).cgPath
         imageView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         imageView.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         imageView.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -90,7 +92,7 @@ class ContentsCollectionViewCell: UICollectionViewCell {
     var imageRequestID: PHImageRequestID?
     var disposeBag: DisposeBag = DisposeBag()
     private let paddingCheckButton: CGFloat = 6
-    private let checkButtonSize: CGFloat = 24
+    private let checkButtonSize: CGFloat = 30
 
     // MARK: - Init
     override init(frame: CGRect) {
