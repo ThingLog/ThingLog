@@ -53,6 +53,14 @@
             <key>File</key>
             <string>LottieLicense</string>
         </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSChildPaneSpecifier</string>
+            <key>Title</key>
+            <string>Firebase</string>
+            <key>File</key>
+            <string>FirebaseLicense</string>
+        </dict>
 	</array>
 </dict>
 </plist>
