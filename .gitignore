@@ -2,6 +2,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/macos,git,xcode,swift,carthage
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,git,xcode,swift,carthage
 
+### googleService 
+GoogleService-Info.plist
+
 ### Carthage ###
 # Carthage
 #

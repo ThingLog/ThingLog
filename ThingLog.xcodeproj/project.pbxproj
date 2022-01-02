@@ -88,7 +88,6 @@
 		87EF81B7277021A300A41B9F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 87EF81B6277021A300A41B9F /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		87EF81B9277021A300A41B9F /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 87EF81B8277021A300A41B9F /* FirebaseCrashlytics */; };
 		87EF81BB277021A300A41B9F /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 87EF81BA277021A300A41B9F /* FirebasePerformance */; };
-		87EF81BD277021DC00A41B9F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87EF81BC277021DB00A41B9F /* GoogleService-Info.plist */; };
 		87F2188326FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188226FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift */; };
 		87F2188626FB5DFB00C3FBCA /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188526FB5DFB00C3FBCA /* Post.swift */; };
 		87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188826FB5E9500C3FBCA /* PostRepository.swift */; };
@@ -181,6 +180,7 @@
 		DB8BF6812706D89E00FD5FDB /* ResultsWithDropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6802706D89E00FD5FDB /* ResultsWithDropBoxView.swift */; };
 		DB8BF6832706DA7900FD5FDB /* EasyLookTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6822706DA7900FD5FDB /* EasyLookTopView.swift */; };
 		DB8F078027462ADF00F708E2 /* AnimationJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8F077F27462ADF00F708E2 /* AnimationJson.swift */; };
+		DB98235F2781953200744167 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB98235E2781953200744167 /* GoogleService-Info.plist */; };
 		DB98FBC32744E596002409BF /* PhotoCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBC22744E596002409BF /* PhotoCardViewController.swift */; };
 		DB98FBC62744E5BC002409BF /* LabelWithUnderLineVerticalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBC52744E5BC002409BF /* LabelWithUnderLineVerticalView.swift */; };
 		DB98FBC82744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBC72744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift */; };
@@ -370,7 +370,6 @@
 		87EDCFD827316F8A002C98BE /* PostTableCell+setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostTableCell+setup.swift"; sourceTree = "<group>"; };
 		87EDCFDA273171BC002C98BE /* PostCategoryViewDataSouce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategoryViewDataSouce.swift; sourceTree = "<group>"; };
 		87EDCFDC273174E1002C98BE /* PostSlideImageViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSlideImageViewDataSource.swift; sourceTree = "<group>"; };
-		87EF81BC277021DB00A41B9F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		87F2188226FB5B4100C3FBCA /* ThingLogPostRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingLogPostRepositoryTests.swift; sourceTree = "<group>"; };
 		87F2188526FB5DFB00C3FBCA /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		87F2188826FB5E9500C3FBCA /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
@@ -459,6 +458,7 @@
 		DB8BF6802706D89E00FD5FDB /* ResultsWithDropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsWithDropBoxView.swift; sourceTree = "<group>"; };
 		DB8BF6822706DA7900FD5FDB /* EasyLookTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookTopView.swift; sourceTree = "<group>"; };
 		DB8F077F27462ADF00F708E2 /* AnimationJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationJson.swift; sourceTree = "<group>"; };
+		DB98235E2781953200744167 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DB98FBC22744E596002409BF /* PhotoCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCardViewController.swift; sourceTree = "<group>"; };
 		DB98FBC52744E5BC002409BF /* LabelWithUnderLineVerticalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithUnderLineVerticalView.swift; sourceTree = "<group>"; };
 		DB98FBC72744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewWithSelectViewCollectionCell.swift; sourceTree = "<group>"; };
@@ -589,6 +589,7 @@
 			children = (
 				873EC04D26D5068F003C3525 /* .swiftlint.yml */,
 				DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */,
+				DB98235E2781953200744167 /* GoogleService-Info.plist */,
 				873EC00726D39055003C3525 /* ThingLog */,
 				873EC02126D39057003C3525 /* ThingLogTests */,
 				873EC02C26D39057003C3525 /* ThingLogUITests */,
@@ -610,7 +611,6 @@
 		873EC00726D39055003C3525 /* ThingLog */ = {
 			isa = PBXGroup;
 			children = (
-				87EF81BC277021DB00A41B9F /* GoogleService-Info.plist */,
 				DB7C04A426F5F26B009F5C0A /* Coordinator */,
 				87F2188A26FB78B700C3FBCA /* Entity */,
 				DB7C04EA26FB19FE009F5C0A /* Extension */,
@@ -1294,7 +1294,7 @@
 				DBD37BD9274255F2000FDDBC /* onboarding1Dark.json in Resources */,
 				DBD37BD6274253D1000FDDBC /* splash.json in Resources */,
 				873EC01526D39057003C3525 /* Assets.xcassets in Resources */,
-				87EF81BD277021DC00A41B9F /* GoogleService-Info.plist in Resources */,
+				DB98235F2781953200744167 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
