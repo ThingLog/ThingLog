@@ -180,6 +180,7 @@
 		DB8BF6812706D89E00FD5FDB /* ResultsWithDropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6802706D89E00FD5FDB /* ResultsWithDropBoxView.swift */; };
 		DB8BF6832706DA7900FD5FDB /* EasyLookTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8BF6822706DA7900FD5FDB /* EasyLookTopView.swift */; };
 		DB8F078027462ADF00F708E2 /* AnimationJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8F077F27462ADF00F708E2 /* AnimationJson.swift */; };
+		DB98235F2781953200744167 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB98235E2781953200744167 /* GoogleService-Info.plist */; };
 		DB98FBC32744E596002409BF /* PhotoCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBC22744E596002409BF /* PhotoCardViewController.swift */; };
 		DB98FBC62744E5BC002409BF /* LabelWithUnderLineVerticalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBC52744E5BC002409BF /* LabelWithUnderLineVerticalView.swift */; };
 		DB98FBC82744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98FBC72744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift */; };
@@ -457,6 +458,7 @@
 		DB8BF6802706D89E00FD5FDB /* ResultsWithDropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsWithDropBoxView.swift; sourceTree = "<group>"; };
 		DB8BF6822706DA7900FD5FDB /* EasyLookTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLookTopView.swift; sourceTree = "<group>"; };
 		DB8F077F27462ADF00F708E2 /* AnimationJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationJson.swift; sourceTree = "<group>"; };
+		DB98235E2781953200744167 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DB98FBC22744E596002409BF /* PhotoCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCardViewController.swift; sourceTree = "<group>"; };
 		DB98FBC52744E5BC002409BF /* LabelWithUnderLineVerticalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithUnderLineVerticalView.swift; sourceTree = "<group>"; };
 		DB98FBC72744E5EF002409BF /* ImageViewWithSelectViewCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewWithSelectViewCollectionCell.swift; sourceTree = "<group>"; };
@@ -587,6 +589,7 @@
 			children = (
 				873EC04D26D5068F003C3525 /* .swiftlint.yml */,
 				DBAE8EB026FDBEAE00F536AD /* swiftgen.yml */,
+				DB98235E2781953200744167 /* GoogleService-Info.plist */,
 				873EC00726D39055003C3525 /* ThingLog */,
 				873EC02126D39057003C3525 /* ThingLogTests */,
 				873EC02C26D39057003C3525 /* ThingLogUITests */,
@@ -1291,6 +1294,7 @@
 				DBD37BD9274255F2000FDDBC /* onboarding1Dark.json in Resources */,
 				DBD37BD6274253D1000FDDBC /* splash.json in Resources */,
 				873EC01526D39057003C3525 /* Assets.xcassets in Resources */,
+				DB98235F2781953200744167 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
