@@ -206,9 +206,10 @@ GEM
 
 PLATFORMS
   universal-darwin-20
+  universal-darwin-21
 
 DEPENDENCIES
   fastlane
 
 BUNDLED WITH
-   2.2.27
+   2.2.29
