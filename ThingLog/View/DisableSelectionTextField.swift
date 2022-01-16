@@ -32,7 +32,11 @@ final class DisableSelectionTextField: UITextField {
 
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         if isSelection {
-            return action == #selector(select(_:)) || action == #selector(selectAll(_:))
+            return action == #selector(select(_:)) ||
+                   action == #selector(selectAll(_:)) ||
+                   action == #selector(paste(_:)) ||
+                   action == #selector(cut(_:)) ||
+                   action == #selector(copy(_:))
         }
         return isSelection
     }
