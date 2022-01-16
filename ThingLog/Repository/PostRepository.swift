@@ -107,7 +107,7 @@ final class PostRepository: PostRepositoryProtocol {
                 
                 // 진열장 아이템 조건 ( VIP, 드래곤볼 )
                 if newPost.postType.type == .bought {
-                    self.drawerRepository.updateVIP(by: newPost.price)
+                    self.updateVIP()
                 }
                 self.drawerRepository.updateDragonBall(rating: newPost.rating.score.rawValue)
                 
@@ -155,7 +155,7 @@ final class PostRepository: PostRepositoryProtocol {
             do {
                 // 진열장 아이템 조건 ( 드래곤볼, VIP )
                 if updateEntity.postType?.pageType == .bought {
-                    self.drawerRepository.updateVIP(by: Int(updateEntity.price))
+                    self.updateVIP()
                 }
                 self.drawerRepository.updateDragonBall(rating: updateEntity.rating?.scoreType.rawValue ?? 0)
                 try context.save()
@@ -163,6 +163,37 @@ final class PostRepository: PostRepositoryProtocol {
                 completion(.success(true))
             } catch {
                 completion(.failure(.failedUpdate))
+            }
+        }
+    }
+    
+    /// 이미 VIP를 획득했다면 종료한다.
+    /// VIP를 획득하지 않았다면, 샀다 게시물의 모든 가격의 합을 구한 뒤, drawerRepository.updateVIP를 호출한다.
+    private func updateVIP() {
+        let defaultDrawerModel: DefaultDrawerModel = DefaultDrawerModel()
+        if let blackCard: Drawerable = defaultDrawerModel.drawers.first(where: { $0.imageName == SwiftGenDrawerList.blackCard.imageName }) {
+            drawerRepository.hasItem(for: blackCard) { [weak self] isAcquired in
+                if isAcquired { return }
+                self?.getSumAllPriceofBought { price in
+                    self?.drawerRepository.updateVIP(by: price)
+                }
+            }
+        }
+    }
+    
+    /// 모든 샀다 게시물의 가격 합을 구한다.
+    private func getSumAllPriceofBought(_ completion: @escaping (Int) -> Void) {
+        let context: NSManagedObjectContext = coreDataStack.mainContext
+        let request: NSFetchRequest = PostEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "postType.isDelete == false AND postType.type == %d", PageType.bought.rawValue)
+        
+        context.perform {
+            do {
+                let result: [PostEntity] = try request.execute()
+                let sum: Int = result.compactMap { Int($0.price) }.reduce(0, +)
+                completion(sum)
+            } catch {
+                completion(0)
             }
         }
     }
