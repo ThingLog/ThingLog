@@ -32,7 +32,8 @@ extension PostEntity {
 
     /// 특정 인덱스에 이미지를 반환한다.
     func getImage(at index: Int) -> UIImage? {
-        guard let attachments: [AttachmentEntity] = self.attachments?.allObjects as? [AttachmentEntity],
+        guard let attachments: [AttachmentEntity] = self.attachments?.sortedArray(using: [NSSortDescriptor(key: "createDate",
+                                                                                                           ascending: true)]) as? [AttachmentEntity],
            let imageData: Data = attachments[index].imageData?.originalImage else {
             return nil
         }
