@@ -55,7 +55,7 @@ class CropViewController: UIViewController {
     let scrollView: UIScrollView = {
         let scrollView: UIScrollView = UIScrollView()
         scrollView.minimumZoomScale = 1.0
-        scrollView.maximumZoomScale = 2.0
+        scrollView.maximumZoomScale = 3.0
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
