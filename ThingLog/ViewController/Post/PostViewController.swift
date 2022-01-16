@@ -47,9 +47,6 @@ final class PostViewController: BaseViewController {
         if isMovingToParent {
             let startIndexPath: IndexPath = IndexPath(row: viewModel.startIndexPath.row, section: 0)
             tableView.scrollToRow(at: startIndexPath, at: .top, animated: false)
-            UIView.performWithoutAnimation {
-                tableView.reloadRows(at: [startIndexPath], with: .automatic)
-            }
         } else {
             if canShowPosts {
                 UIView.performWithoutAnimation {
