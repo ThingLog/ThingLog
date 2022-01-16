@@ -42,6 +42,9 @@ protocol DrawerRepositoryable {
     
     /// 새로 획득한 진열장 아이템의 이벤트를 확인처리합니다.
     func completeNewEvent()
+    
+    /// 파라미터로 들어온 아이템의 획득 여부를 반환합니다.
+    func hasItem(for item: Drawerable, _ completion: @escaping((Bool)) -> Void)
 }
 
 /// `CoreData`를 이용하여 `Drawer`를 가져오고 업데이트 하는 객체다.
@@ -182,6 +185,16 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
                 } catch {
                     return
                 }
+            }
+        }
+    }
+    
+    /// 파라미터로 들어온 아이템의 획득 여부를 반환합니다.
+    func hasItem(for item: Drawerable, _ completion: @escaping((Bool)) -> Void) {
+        fetchDrawers { drawers in
+            if let drawers: [Drawerable] = drawers,
+               let index: Int = drawers.firstIndex(where: { $0.imageName == item.imageName }) {
+                completion(drawers[index].isAcquired)
             }
         }
     }
