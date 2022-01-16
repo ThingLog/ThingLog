@@ -161,8 +161,7 @@ extension BaseContentsCollectionViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        if let item: PostEntity = fetchResultController?.fetchedObjects?[indexPath.item],
-           let data: Data = (item.attachments?.allObjects as? [AttachmentEntity])?.first?.thumbnail {
+        if let item: PostEntity = fetchResultController?.fetchedObjects?[indexPath.item] {
             cell.updateView(item)
         }
         

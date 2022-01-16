@@ -5,11 +5,11 @@
 //  Created by hyunsu on 2021/09/22.
 //
 import CoreData
+import Photos
 import UIKit
 
 import RxCocoa
 import RxSwift
-import Photos
 
 /// 기본적인 이미지만을 보여주기 위한 cell이다.
 ///
@@ -170,7 +170,8 @@ class ContentsCollectionViewCell: UICollectionViewCell {
     /// PostEntity를 기반으로 뷰를 업데이트한다.
     /// - Parameter postEntity: 특정 PostEntity를 주입한다.
     func updateView(_ postEntity: PostEntity) {
-        if let imageData: Data = (postEntity.attachments?.allObjects as? [AttachmentEntity])?[0].thumbnail {
+        if let thumbnailData: AttachmentEntity = postEntity.attachments?.sortedArray(using: [NSSortDescriptor(key: "createDate", ascending: true)]).first as? AttachmentEntity,
+           let imageData: Data = thumbnailData.thumbnail {
             imageView.image = UIImage(data: imageData)
         }
         smallIconView.isHidden = postEntity.attachments?.allObjects.count == 1
