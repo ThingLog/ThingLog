@@ -37,7 +37,8 @@ extension PostTableCell {
     func setupSlideImageCollectionView() {
         slideImageCollectionView.delegate = self
         slideImageCollectionView.dataSource = slideImageViewDataSource
-        slideImageCollectionView.register(ContentsCollectionViewCell.self, forCellWithReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier)
+        slideImageCollectionView.register(ZoomableCollectionCell.self,
+                                          forCellWithReuseIdentifier: ZoomableCollectionCell.reuseIdentifier)
 
         NSLayoutConstraint.activate([
             slideImageCollectionView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
@@ -170,5 +171,11 @@ extension PostTableCell: UICollectionViewDelegate, UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageWidth: CGFloat = scrollView.frame.size.width
         currentImagePage = Int(slideImageCollectionView.contentOffset.x / pageWidth) + 1
+    }
+}
+
+extension PostTableCell: ZoomableCollectionCellDelegate {
+    func zooming(started: Bool) {
+        slideImageCollectionView.isScrollEnabled = !started
     }
 }

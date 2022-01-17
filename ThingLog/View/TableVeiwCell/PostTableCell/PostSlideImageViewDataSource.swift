@@ -17,12 +17,11 @@ extension PostSlideImageViewDataSource: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell: ContentsCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentsCollectionViewCell.reuseIdentifier, for: indexPath) as? ContentsCollectionViewCell else {
-            return ContentsCollectionViewCell()
+        guard let cell: ZoomableCollectionCell = collectionView.dequeueReusableCell(withReuseIdentifier: ZoomableCollectionCell.reuseIdentifier, for: indexPath) as? ZoomableCollectionCell else {
+            return ZoomableCollectionCell()
         }
 
         cell.imageView.image = images[indexPath.item]
-        cell.setupDisplayOnlyImageView()
 
         return cell
     }
