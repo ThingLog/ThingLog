@@ -115,7 +115,10 @@ final class ZoomableCollectionCell: UICollectionViewCell, UIGestureRecognizerDel
                                                         .translatedBy(x: pinchCenter.x, y: pinchCenter.y)
                                                         .scaledBy(x: zoomScale, y: zoomScale)
                                                         .translatedBy(x: -centerXDif, y: -centerYDif)
-        windowImageView.transform = transform
+        UIView.animate(withDuration: 0.1) {
+            self.windowImageView.transform = transform
+        }
+        
         sender.scale = 1
     }
     
