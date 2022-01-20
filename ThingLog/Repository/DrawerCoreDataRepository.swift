@@ -34,6 +34,10 @@ protocol DrawerRepositoryable {
     /// VIP를 업데이트 합니다. `PostErpository`의 `create`, `update`메소드에 추가한다.
     func updateVIP(by money: Int)
     
+    /// 띵로그 코드를 업데이트 합니다.
+    /// TODO: Setting > Share 시 추가한다.
+    func updateThingLogCode()
+    
     /// 대표 진열장 물건을 업데이트 합니다. `SelectingDrawerViewController`의 `대표설정`버튼 들어가는 로직에 추가한다.
     func updateRepresentative(drawer: Drawerable?)
     
@@ -156,6 +160,10 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
         if money >= 1_000_000 {
             acquireDrawer(by: SwiftGenDrawerList.blackCard.imageName)
         }
+    }
+    
+    func updateThingLogCode() {
+        acquireDrawer(by: SwiftGenDrawerList.thingLogCode.imageName)
     }
     
     func isNewEvent(_ completion: @escaping ((Bool) -> Void)) {

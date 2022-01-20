@@ -185,7 +185,11 @@ extension HomeViewController {
         if let representative: Drawerable = drawerRespository.fetchRepresentative(),
            let imageData: Data = representative.imageData,
            let drawerImage: UIImage = UIImage(data: imageData) {
-            profileView.updateBadgeView(image: drawerImage)
+            if representative.imageName == SwiftGenDrawerList.welcomeBadge.imageName {
+                profileView.updateBadgeView(image: drawerImage.withRenderingMode(.alwaysTemplate))
+            } else {
+                profileView.updateBadgeView(image: drawerImage)
+            }
         } else {
             profileView.updateBadgeView(image: SwiftGenDrawerList.emptyRepresentative.image.withRenderingMode(.alwaysTemplate))
         }
