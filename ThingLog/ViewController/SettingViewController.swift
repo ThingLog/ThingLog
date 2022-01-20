@@ -118,7 +118,12 @@ final class SettingViewController: UIViewController {
     }
     
     func shareAppstoreLink() {
-        print("touch")
+        let share: [String] = ["https://itunes.apple.com/app/1586982199"]
+        
+        let activityVC: UIActivityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = self.view
+
+        present(activityVC, animated: true, completion: nil)
     }
 }
 
