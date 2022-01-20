@@ -70,7 +70,9 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
         setupDrawers()
         
         let request: NSFetchRequest<DrawerEntity> = DrawerEntity.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(key: "title",
+                                                    ascending: true,
+                                                    selector: #selector(NSString.localizedCompare(_:)))]
         do {
             completion?(try coreDataStack.mainContext.fetch(request))
         } catch {
