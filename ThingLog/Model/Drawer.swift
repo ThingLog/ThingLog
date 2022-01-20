@@ -40,6 +40,8 @@ enum SwiftGenDrawerList {
     case dragonball // 드래곤볼
     case basket // 장바구니
     case blackCard // 블랙카드
+    case welcomeBadge // 웰컴 배지
+    case thingLogCode // 띵로그 코드
     case emptyRepresentative // 대표물건이 없는 경우
     
     var imageName: String {
@@ -56,7 +58,9 @@ enum SwiftGenDrawerList {
             return SwiftGenDrawers.basket.name
         case .blackCard:
             return SwiftGenDrawers.blackCard.name
-        case .emptyRepresentative:
+        case .thingLogCode:
+            return SwiftGenDrawers.thingLogCode.name
+        case .welcomeBadge, .emptyRepresentative:
             return SwiftGenDrawers.representativeEmpty.name
         }
     }
@@ -75,7 +79,9 @@ enum SwiftGenDrawerList {
             return SwiftGenDrawers.basket.image
         case .blackCard:
             return SwiftGenDrawers.blackCard.image
-        case .emptyRepresentative:
+        case .thingLogCode:
+            return SwiftGenDrawers.thingLogCode.image
+        case .welcomeBadge, .emptyRepresentative:
             return SwiftGenDrawers.representativeEmpty.image
         }
     }
@@ -135,6 +141,20 @@ struct DefaultDrawerModel {
                information: "모든 만족도가 모였어요! 소원을 빌어보세요!",
                imageData: SwiftGenDrawerList.dragonball.image.pngData(),
                imageName: SwiftGenDrawerList.dragonball.imageName,
+               isAcquired: false,
+               isNewDrawer: false),
+        Drawer(title: "웰컴 배지",
+               subTitle: "띵로그 입장",
+               information: "어서오세요 띵로그입니다! 환영의 의미로 배지를 드려요.",
+               imageData: SwiftGenDrawerList.emptyRepresentative.image.pngData(),
+               imageName: SwiftGenDrawerList.emptyRepresentative.imageName,
+               isAcquired: true,
+               isNewDrawer: false),
+        Drawer(title: "띵로그 코드",
+               subTitle: "띵로그 앱에 친구 초대하기",
+               information: "*띵익인간 : 띵로그를 알려 세상을 이롭게! 띵로그 건앱 이념*\n띵로그를 알려 세상이 이로워졌어요. 앞으로의 띵로그를 믿고 맡깁니다!",
+               imageData: SwiftGenDrawerList.thingLogCode.image.pngData(),
+               imageName: SwiftGenDrawerList.thingLogCode.imageName,
                isAcquired: false,
                isNewDrawer: false)
     ]

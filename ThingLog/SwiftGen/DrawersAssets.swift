@@ -28,6 +28,7 @@ internal enum SwiftGenDrawers {
   internal static let rightAward = DrawerImageSwiftGen(name: "rightAward")
   internal static let sampleDrawer = DrawerImageSwiftGen(name: "sampleDrawer")
   internal static let stationery = DrawerImageSwiftGen(name: "stationery")
+  internal static let thingLogCode = DrawerImageSwiftGen(name: "thingLogCode")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 

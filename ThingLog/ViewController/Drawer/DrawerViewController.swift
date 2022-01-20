@@ -145,7 +145,7 @@ extension DrawerViewController: UICollectionViewDataSource, UICollectionViewDele
               var drawerImage: UIImage = UIImage(data: imageData) else {
             return UICollectionViewCell()
         }
-        if drawer.isAcquired == false {
+        if drawer.isAcquired == false || drawer.imageName == SwiftGenDrawerList.welcomeBadge.imageName {
             drawerImage = drawerImage.withRenderingMode(.alwaysTemplate)
         }
         cell.drawerView.setImage(drawerImage)
