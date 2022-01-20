@@ -123,7 +123,10 @@ final class SettingViewController: UIViewController {
         let activityVC: UIActivityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = self.view
 
-        present(activityVC, animated: true, completion: nil)
+        present(activityVC, animated: true) {
+            let drawerRespository: DrawerRepositoryable = DrawerCoreDataRepository(coreDataStack: CoreDataStack.shared)
+            drawerRespository.updateThingLogCode()
+        }
     }
 }
 
