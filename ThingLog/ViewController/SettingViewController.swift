@@ -16,6 +16,7 @@ final class SettingViewController: UIViewController {
         case darkMode
         case editCategory
         case trash
+        case share
 
         var title: String {
             switch self {
@@ -25,6 +26,8 @@ final class SettingViewController: UIViewController {
                 return "카테고리 수정"
             case .trash:
                 return "휴지통"
+            case .share:
+                return "초대하기"
             }
         }
     }
@@ -113,6 +116,10 @@ final class SettingViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
+    
+    func shareAppstoreLink() {
+        print("touch")
+    }
 }
 
 extension SettingViewController: UITableViewDataSource {
@@ -149,7 +156,7 @@ extension SettingViewController: UITableViewDataSource {
                         self?.setDarkMode()
                     }
                     .disposed(by: cell.disposeBag)
-            case .editCategory, .trash:
+            case .editCategory, .trash, .share:
                 cell.changeViewType(labelType: .withBody1,
                                     buttonType: .withChevronRight,
                                     borderLineHeight: .with05Height,
@@ -170,6 +177,8 @@ extension SettingViewController: UITableViewDelegate {
                 coordinator?.showCategoryViewController()
             case .trash:
                 coordinator?.showTrashViewController()
+            case .share:
+                shareAppstoreLink()
             }
         }
     }
