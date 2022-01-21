@@ -22,6 +22,7 @@ enum AnalyticsEvents: String {
     case writeWish = "write_wish" // 사고싶다 게시물 작성
     case writeGift = "write_gift" // 선물받았다 게시물 작성
     case invite = "invite" // 초대하기
+    case createCategory = "create_category" // 카테고리 생성
     
     func logging() {
         switch self {
@@ -39,6 +40,8 @@ enum AnalyticsEvents: String {
                 "event_name": "write_post",
                 "write_type": self.rawValue
             ])
+        case .createCategory:
+            AnalyticsEvents.logging(withCategory: "")
         }
     }
     
@@ -52,5 +55,12 @@ enum AnalyticsEvents: String {
         case .gift:
             AnalyticsEvents.writeGift.logging()
         }
+    }
+    
+    static func logging(withCategory category: String) {
+        Analytics.logEvent(createCategory.rawValue, parameters: [
+            "event_name": createCategory.rawValue,
+            "item_category": category
+        ])
     }
 }

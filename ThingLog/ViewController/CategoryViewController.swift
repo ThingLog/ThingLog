@@ -331,12 +331,15 @@ extension CategoryViewController: UITextFieldDelegate {
             return false
         }
         
-        repository.create(Category(title: name)) { result in
+        repository.create(Category(title: name)) { [weak self] result in
             switch result {
             case .success:
                 textField.text = ""
                 textField.sendActions(for: .valueChanged)
                 textField.resignFirstResponder()
+                if self?.categoryViewType == .select {
+                    AnalyticsEvents.logging(withCategory: name)
+                }
             case .failure(let error):
                 fatalError(error.localizedDescription)
             }
