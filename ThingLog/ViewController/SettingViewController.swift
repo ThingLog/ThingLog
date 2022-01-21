@@ -126,6 +126,7 @@ final class SettingViewController: UIViewController {
         present(activityVC, animated: true) {
             let drawerRespository: DrawerRepositoryable = DrawerCoreDataRepository(coreDataStack: CoreDataStack.shared)
             drawerRespository.updateThingLogCode()
+            AnalyticsEvents.invite.logging()
         }
     }
 }
