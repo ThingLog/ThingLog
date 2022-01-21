@@ -35,7 +35,6 @@ protocol DrawerRepositoryable {
     func updateVIP(by money: Int)
     
     /// 띵로그 코드를 업데이트 합니다.
-    /// TODO: Setting > Share 시 추가한다.
     func updateThingLogCode()
     
     /// 대표 진열장 물건을 업데이트 합니다. `SelectingDrawerViewController`의 `대표설정`버튼 들어가는 로직에 추가한다.
@@ -103,6 +102,7 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
     func updateRightAward() {
         // 포토카드로 선물 인사 보낸경우
         acquireDrawer(by: SwiftGenDrawerList.rightAward.imageName)
+        AnalyticsEvents.acquireRightAward.logging()
     }
     
     func updateMath() {
@@ -113,6 +113,7 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
         
         if loginCount >= 3 {
             acquireDrawer(by: SwiftGenDrawerList.math.imageName)
+            AnalyticsEvents.acquireMath.logging()
         }
     }
     
@@ -124,6 +125,7 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
         
         if loginCount >= 30 {
             acquireDrawer(by: SwiftGenDrawerList.stationery.imageName)
+            AnalyticsEvents.acquireStationery.logging()
         }
     }
     
@@ -137,6 +139,7 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
     
     func updateBasket() {
         acquireDrawer(by: SwiftGenDrawerList.basket.imageName)
+        AnalyticsEvents.acquireBasket.logging()
     }
     
     func updateDragonBall(rating: Int16) {
@@ -155,17 +158,20 @@ class DrawerCoreDataRepository: DrawerRepositoryable {
         
         if dragonBallArray.count == 5 {
             acquireDrawer(by: SwiftGenDrawerList.dragonball.imageName)
+            AnalyticsEvents.acquireDragonball.logging()
         }
     }
     
     func updateVIP(by money: Int) {
         if money >= 1_000_000 {
             acquireDrawer(by: SwiftGenDrawerList.blackCard.imageName)
+            AnalyticsEvents.acquireBlackCard.logging()
         }
     }
     
     func updateThingLogCode() {
         acquireDrawer(by: SwiftGenDrawerList.thingLogCode.imageName)
+        AnalyticsEvents.acquireThingLogCode.logging()
     }
     
     func isNewEvent(_ completion: @escaping ((Bool) -> Void)) {

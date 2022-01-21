@@ -17,9 +17,7 @@ final class ImageSaver: NSObject {
         UIImageWriteToSavedPhotosAlbum(image,
                                        self,
                                        #selector(saveError(_:didFinishSavingWithError:contextInfo:)), nil)
-        Analytics.logEvent(AnalyticsEvents.savePhotocard.rawValue, parameters: [
-            "event_name": AnalyticsEvents.savePhotocard.rawValue
-        ])
+        AnalyticsEvents.savePhotocard.logging()
     }
     
     init(completion: ((Error?) -> Void)? = nil ) {
