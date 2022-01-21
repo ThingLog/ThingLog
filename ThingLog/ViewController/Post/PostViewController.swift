@@ -26,6 +26,7 @@ final class PostViewController: BaseViewController {
         viewModel.fetchedResultsController.fetchedObjects?.count ?? 0 > 0
     }
     private(set) var viewModel: PostViewModel
+    private var isFirstLoad: Bool = true
 
     init(viewModel: PostViewModel) {
         self.viewModel = viewModel
@@ -40,23 +41,30 @@ final class PostViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if isFirstLoad {
+            let startIndexPath: IndexPath = IndexPath(row: viewModel.startIndexPath.row, section: 0)
+            tableView.scrollToRow(at: startIndexPath, at: .top, animated: false)
+            isFirstLoad = false
+        }
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        if isMovingToParent {
-            let startIndexPath: IndexPath = IndexPath(row: viewModel.startIndexPath.row, section: 0)
-            tableView.scrollToRow(at: startIndexPath, at: .top, animated: false)
-        } else {
-            if canShowPosts {
-                UIView.performWithoutAnimation {
-                    let contentOffset: CGPoint = tableView.contentOffset
-                    tableView.reloadData()
-                    tableView.contentOffset = contentOffset
-                }
-            } else {
-                coordinator?.back()
+        
+        if isFirstLoad == true { return }
+        
+        if canShowPosts {
+            UIView.performWithoutAnimation {
+                let contentOffset: CGPoint = tableView.contentOffset
+                tableView.reloadData()
+                tableView.contentOffset = contentOffset
             }
+        } else {
+            coordinator?.back()
         }
     }
 
