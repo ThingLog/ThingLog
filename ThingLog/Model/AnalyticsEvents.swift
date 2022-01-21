@@ -21,10 +21,11 @@ enum AnalyticsEvents: String {
     case writeBought = "write_bought" // 샀다 게시물 작성
     case writeWish = "write_wish" // 사고싶다 게시물 작성
     case writeGift = "write_gift" // 선물받았다 게시물 작성
+    case invite = "invite" // 초대하기
     
     func logging() {
         switch self {
-        case .savePhotocard:
+        case .savePhotocard, .invite:
             Analytics.logEvent(self.rawValue, parameters: [
                 "event_name": self.rawValue
             ])
