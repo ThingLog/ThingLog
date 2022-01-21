@@ -94,6 +94,7 @@
 		87F2188926FB5E9500C3FBCA /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188826FB5E9500C3FBCA /* PostRepository.swift */; };
 		87F2188E26FB8ACA00C3FBCA /* PostType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188D26FB8ACA00C3FBCA /* PostType.swift */; };
 		87F2189026FB8D6A00C3FBCA /* PostTypeEntity+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */; };
+		87FDAB0B279AC84B00A31CCD /* AnalyticsEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FDAB0A279AC84B00A31CCD /* AnalyticsEvents.swift */; };
 		DB00D211272A8A79003FC9C3 /* SelectingDrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D210272A8A79003FC9C3 /* SelectingDrawerViewController.swift */; };
 		DB00D216272A8D2F003FC9C3 /* DrawerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D215272A8D2F003FC9C3 /* DrawerViewController.swift */; };
 		DB00D218272A8DB0003FC9C3 /* DrawerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB00D217272A8DB0003FC9C3 /* DrawerCoordinator.swift */; };
@@ -377,6 +378,7 @@
 		87F2188826FB5E9500C3FBCA /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		87F2188D26FB8ACA00C3FBCA /* PostType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostType.swift; sourceTree = "<group>"; };
 		87F2188F26FB8D6A00C3FBCA /* PostTypeEntity+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostTypeEntity+.swift"; sourceTree = "<group>"; };
+		87FDAB0A279AC84B00A31CCD /* AnalyticsEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvents.swift; sourceTree = "<group>"; };
 		DB00D210272A8A79003FC9C3 /* SelectingDrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingDrawerViewController.swift; sourceTree = "<group>"; };
 		DB00D215272A8D2F003FC9C3 /* DrawerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerViewController.swift; sourceTree = "<group>"; };
 		DB00D217272A8DB0003FC9C3 /* DrawerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerCoordinator.swift; sourceTree = "<group>"; };
@@ -705,6 +707,7 @@
 				8736B3E226FCB9F3000433E1 /* Rating.swift */,
 				DBA0F81F270AF0A4009553FC /* ResultCollectionSection.swift */,
 				DB9FBDB6272E9A11005E64AF /* UserInformation.swift */,
+				87FDAB0A279AC84B00A31CCD /* AnalyticsEvents.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1584,6 +1587,7 @@
 				DB1745B72708700200EF083E /* SearchTextField.swift in Sources */,
 				DB87730C270B430C00401961 /* RecentSearchDataViewModelProtocol.swift in Sources */,
 				87F2189026FB8D6A00C3FBCA /* PostTypeEntity+.swift in Sources */,
+				87FDAB0B279AC84B00A31CCD /* AnalyticsEvents.swift in Sources */,
 				DB98FBDA2745ADA9002409BF /* PhotoCardInset.swift in Sources */,
 				DBA0F81C2709B390009553FC /* LeftLabelRightButtonTableCell.swift in Sources */,
 				DBD3A21D2743AEF50001F9BF /* HomeViewController+subscribe.swift in Sources */,

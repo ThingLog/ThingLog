@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Firebase
+
 /// 사용자 앨범에 사진을 저장하는 기능을 하는 객체다.
 final class ImageSaver: NSObject {
     private var completion: ((Error?) -> Void)?
@@ -15,6 +17,9 @@ final class ImageSaver: NSObject {
         UIImageWriteToSavedPhotosAlbum(image,
                                        self,
                                        #selector(saveError(_:didFinishSavingWithError:contextInfo:)), nil)
+        Analytics.logEvent(AnalyticsEvents.savePhotocard.rawValue, parameters: [
+            "event_name": AnalyticsEvents.savePhotocard.rawValue
+        ])
     }
     
     init(completion: ((Error?) -> Void)? = nil ) {
