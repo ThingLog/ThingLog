@@ -27,12 +27,14 @@ final class EasyLookViewController: UIViewController {
     }()
     
     // 아래로 스크롤 할 시 나타나는 버튼으로, 누르면 최상단으로 스크롤해주는 기능을 가지는 Button이다.
-    var topButton: UIButton = {
+    lazy var topButton: UIButton = {
         let button: UIButton = UIButton()
         button.setImage(SwiftGenIcons.topButton.image, for: .normal)
         button.alpha = 0
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.borderColor = SwiftGenColors.primaryBlack.color.cgColor
+        button.layer.borderWidth = 0.5
         button.addTarget(self, action: #selector(clickTopButton), for: .touchUpInside)
         return button
     }()

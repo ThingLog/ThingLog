@@ -30,6 +30,8 @@ final class DropDownView: UIView {
         tableView.layer.cornerRadius = 5
         tableView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         tableView.clipsToBounds = true
+        tableView.layer.borderColor = SwiftGenColors.primaryBlack.color.cgColor
+        tableView.layer.borderWidth = 0.5
         return tableView
     }()
 
@@ -116,7 +118,7 @@ extension DropDownView {
         tableViewHeightConstraint?.isActive = true
 
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: button.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 6.0),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.widthAnchor.constraint(equalToConstant: tableViewWidth)
         ])
