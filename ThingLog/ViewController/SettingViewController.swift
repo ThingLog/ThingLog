@@ -118,7 +118,7 @@ final class SettingViewController: UIViewController {
     }
     
     func shareAppstoreLink() {
-        let share: [String] = ["https://itunes.apple.com/app/1586982199"]
+        let share: [String] = ["welcome!! ٩( ᐛ )و \n물건 기록앱 띵로그에 초대합니다.\n", "https://itunes.apple.com/app/1586982199"]
         
         let activityVC: UIActivityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = self.view
