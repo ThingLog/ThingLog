@@ -18,6 +18,9 @@ enum AnalyticsEvents: String {
     case acquireBasket = "acquire_basket" // 장바구니 획득
     case acquireBlackCard = "acquire_blackCard"// 블랙카드 획득
     case acquireThingLogCode = "acquire_thingLogCode" // 띵로그 코드 획득
+    case writeBought = "write_bought" // 샀다 게시물 작성
+    case writeWish = "write_wish" // 사고싶다 게시물 작성
+    case writeGift = "write_gift" // 선물받았다 게시물 작성
     
     func logging() {
         switch self {
@@ -30,6 +33,23 @@ enum AnalyticsEvents: String {
                 "event_name": "acquire",
                 "badge": self.rawValue
             ])
+        case .writeBought, .writeGift, .writeWish:
+            Analytics.logEvent(self.rawValue, parameters: [
+                "event_name": "write_post",
+                "write_type": self.rawValue
+            ])
+        }
+    }
+    
+    static func logging(withPageType type: PageType?) {
+        guard let type = type else { return }
+        switch type {
+        case .bought:
+            AnalyticsEvents.writeBought.logging()
+        case .wish:
+            AnalyticsEvents.writeWish.logging()
+        case .gift:
+            AnalyticsEvents.writeGift.logging()
         }
     }
 }
