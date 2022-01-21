@@ -94,9 +94,10 @@ final class WriteViewModel {
             }
         } else {
             let newPost: Post = createNewPost()
-            repository.create(newPost) { result in
+            repository.create(newPost) { [weak self] result in
                 switch result {
                 case .success:
+                    AnalyticsEvents.logging(withPageType: self?.pageType)
                     completion(true)
                 case .failure(let error):
                     fatalError(error.localizedDescription)
