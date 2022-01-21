@@ -12,7 +12,7 @@ import UIKit
 /// ⚠️DropBoxView는 자신이 부모 뷰 계층구조에 속한 이후에 addSubView를 해야한다.
 final class DropBoxView: UIView {
     // MARK: - View
-    var titleButton: InsetButton = {
+    lazy var titleButton: InsetButton = {
         let button: InsetButton = InsetButton()
         button.setTitleColor(SwiftGenColors.primaryBlack.color, for: .normal)
         button.titleLabel?.font = UIFont.Pretendard.body3
@@ -35,6 +35,8 @@ final class DropBoxView: UIView {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
         tableView.clipsToBounds = true
         tableView.showsVerticalScrollIndicator = false
+        tableView.layer.borderColor = SwiftGenColors.primaryBlack.color.cgColor
+        tableView.layer.borderWidth = 0.5
         return tableView
     }()
     
