@@ -72,14 +72,14 @@ final class AlertViewController: UIViewController {
     /// 좌측에 있는 강조되어 있는 button이다.
     let leftButton: UIButton = {
         let button: UIButton = UIButton()
-        button.titleLabel?.font = UIFont.Pretendard.title1
+        button.titleLabel?.font = UIFont.Pretendard.body1
         button.setTitle("취소", for: .normal)
         return button
     }()
     /// 우측에 강조되어 있지 않은 button이다.
     let rightButton: UIButton = {
         let button: UIButton = UIButton()
-        button.titleLabel?.font = UIFont.Pretendard.body1
+        button.titleLabel?.font = UIFont.Pretendard.title1
         button.setTitle("삭제", for: .normal)
         return button
     }()
