@@ -74,7 +74,9 @@ final class EasyLookViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        view.layoutIfNeeded()
+        DispatchQueue.main.async { [weak self] in
+            self?.view.layoutIfNeeded()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
