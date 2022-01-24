@@ -26,10 +26,10 @@ final class OnboardingStartViewController: UIViewController {
         
         let bottomLabel: UILabel = UILabel()
         bottomLabel.font = UIFont.Pretendard.body1
-        bottomLabel.text = "물건 기록 어플"
+        bottomLabel.text = "물건을 기록하는 공간"
         bottomLabel.textColor = SwiftGenColors.primaryBlack.color
         
-        let stackView: UIStackView = UIStackView(arrangedSubviews: [imageView, bottomLabel])
+        let stackView: UIStackView = UIStackView(arrangedSubviews: [bottomLabel, imageView])
         stackView.axis = .vertical
         stackView.spacing = 4
         stackView.alignment = .center
@@ -37,7 +37,7 @@ final class OnboardingStartViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-
+    
     let logoView: UIImageView = {
         let imageView: UIImageView = UIImageView(image: SwiftGenIcons.group.image)
         imageView.contentMode = .scaleAspectFit
@@ -78,18 +78,19 @@ final class OnboardingStartViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             topEmptyView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            topEmptyView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.14),
+            topEmptyView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.24),
             topEmptyView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             topEmptyView.widthAnchor.constraint(equalToConstant: 1),
             
-            titleView.topAnchor.constraint(equalTo: topEmptyView.bottomAnchor),
-            titleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            logoView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: topPaddingForLogo),
-            logoView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.26),
+            logoView.topAnchor.constraint(equalTo: topEmptyView.bottomAnchor),
+            logoView.widthAnchor.constraint(equalToConstant: Constants.OnboardingStart.logoViewWidth),
             logoView.heightAnchor.constraint(equalTo: logoView.widthAnchor),
             logoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-
+            
+            titleView.topAnchor.constraint(equalTo: logoView.bottomAnchor,
+                                           constant: Constants.OnboardingStart.titleViewTopMargin),
+            titleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
             startButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: startButtonPadding),
             startButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -startButtonPadding),
             startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -startButtonPadding),
