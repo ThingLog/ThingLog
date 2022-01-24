@@ -85,19 +85,6 @@ extension PhotoCardViewController {
         ])
     }
     
-    func setupLogoView() {
-        photoContainerView.addSubviews(logoView)
-        
-        NSLayoutConstraint.activate([
-            logoView.bottomAnchor.constraint(equalTo: photoContainerView.bottomAnchor,
-                                             constant: -inset.bottomPaddingForLogoView),
-            logoView.trailingAnchor.constraint(equalTo: photoContainerView.trailingAnchor,
-                                               constant: -inset.trailingPaddingForLogoView),
-            logoView.heightAnchor.constraint(equalToConstant: inset.heightForLogoView),
-            logoView.widthAnchor.constraint(equalTo: logoView.heightAnchor)
-        ])
-    }
-    
     func setupRatingView() {
         photoContainerView.addSubviews(ratingView)
         NSLayoutConstraint.activate([
