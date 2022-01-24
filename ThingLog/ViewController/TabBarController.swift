@@ -46,8 +46,26 @@ final class TabBarController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if isFirstOpen == false { return }
-        
+        if isFirstOpen {
+            checkVersion()
+            isFirstOpen = false
+        }
+    }
+    
+    /// 현재 설치된 앱의 버전과 앱 스토어에 올라와있는 최신 버전을 비교한다.
+    private func checkVersion() {
+        guard let currentVersion: String = Constants.System.appVersion,
+              let latestVersion: String = Constants.System.latestVersion() else {
+                  return
+              }
+        let compareVersion: ComparisonResult = currentVersion.compare(latestVersion, options: .numeric)
+        if compareVersion == .orderedAscending {
+            presentUpdateGuideAlert()
+        }
+    }
+    
+    /// 업데이트 안내 알럿을 띄운다.
+    private func presentUpdateGuideAlert() {
         let alert: AlertViewController = .makeAlertWithoutTextField(title: "업데이트 안내",
                                                                     description: "버그를 고치고, 성능을 개선했어요\n지금 업데이트하고 즐겨보세요!",
                                                                     leftButtonTitle: "나중에",
@@ -56,12 +74,23 @@ final class TabBarController: UITabBarController {
             alert.dismiss(animated: false, completion: nil)
         }.disposed(by: disposeBag)
         
-        alert.rightButton.rx.tap.bind {
-            print("app store go")
+        alert.rightButton.rx.tap.bind { [weak self] in
+            self?.openAppStore(urlString: Constants.System.appstoreLink)
         }.disposed(by: disposeBag)
-
-        present(alert, animated: false) { [weak self] in
-            self?.isFirstOpen = false
+        
+        present(alert, animated: false)
+    }
+    
+    /// 앱스토어로 이동한다.
+    private func openAppStore(urlString: String) {
+        guard let url: URL = URL(string: urlString) else {
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            print("can't open app store url")
         }
     }
     

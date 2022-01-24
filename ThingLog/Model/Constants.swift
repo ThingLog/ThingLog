@@ -12,10 +12,10 @@ enum Constants {
         static let appVersion: String? = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         static let bundleIdentifier: String? = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String
         static let buildNumber: String? = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        static let appstoreLink: String = "itms-apps://itunes.apple.com/app/1586982199"
         
         static func latestVersion() -> String? {
-            let appleID: String = "1586982199"
-            guard let url: URL = URL(string: "http://itunes.apple.com/lookup?id=\(appleID)"),
+            guard let url: URL = URL(string: appstoreLink),
                   let data: Data = try? Data(contentsOf: url),
                   let json: [String: Any] = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
                   let results: [[String: Any]] = json["results"] as? [[String: Any]],
