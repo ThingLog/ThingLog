@@ -265,7 +265,11 @@ final class PostTableCell: UITableViewCell {
         disposeBag = DisposeBag()
         identifier = ""
         currentImagePage = 1
-        slideImageCollectionView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.slideImageCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0),
+                                                        at: .top,
+                                                        animated: false)
+        }
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
