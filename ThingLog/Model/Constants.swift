@@ -5,7 +5,7 @@
 //  Created by 이지원 on 2022/01/24.
 //
 
-import Foundation
+import UIKit
 
 enum Constants {
     enum System {
@@ -24,5 +24,10 @@ enum Constants {
                   }
             return appStoreVersion
         }
+    }
+    
+    enum OnboardingStart {
+        static let logoViewWidth: CGFloat = 80.0
+        static let titleViewTopMargin: CGFloat = 12.0
     }
 }
