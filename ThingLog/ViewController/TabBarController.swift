@@ -31,6 +31,7 @@ final class TabBarController: UITabBarController {
     
     // MARK: - Properties
     private let disposeBag: DisposeBag = DisposeBag()
+    private var isFirstOpen: Bool = true
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -40,6 +41,28 @@ final class TabBarController: UITabBarController {
         setupWriteView()
         setupDimmedView()
         bindWriteType()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if isFirstOpen == false { return }
+        
+        let alert: AlertViewController = .makeAlertWithoutTextField(title: "업데이트 안내",
+                                                                    description: "버그를 고치고, 성능을 개선했어요\n지금 업데이트하고 즐겨보세요!",
+                                                                    leftButtonTitle: "나중에",
+                                                                    rightButtonTitle: "지금 업데이트")
+        alert.leftButton.rx.tap.bind {
+            alert.dismiss(animated: false, completion: nil)
+        }.disposed(by: disposeBag)
+        
+        alert.rightButton.rx.tap.bind {
+            print("app store go")
+        }.disposed(by: disposeBag)
+
+        present(alert, animated: false) { [weak self] in
+            self?.isFirstOpen = false
+        }
     }
     
     // MARK: - Setup
