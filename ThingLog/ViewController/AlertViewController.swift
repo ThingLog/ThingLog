@@ -312,6 +312,20 @@ extension AlertViewController {
                                 range: NSRange(location: 0, length: attrString.length))
         contentsLabel.attributedText = attrString
     }
+    
+    static func makeAlertWithoutTextField(title: String?,
+                                   description: String?,
+                                   leftButtonTitle: String?,
+                                   rightButtonTitle: String?) -> AlertViewController {
+        let alertViewController: AlertViewController = AlertViewController()
+        alertViewController.hideTextField()
+        alertViewController.titleLabel.text = title
+        alertViewController.contentsLabel.text = description
+        alertViewController.leftButton.setTitle(leftButtonTitle, for: .normal)
+        alertViewController.rightButton.setTitle(rightButtonTitle, for: .normal)
+        alertViewController.modalPresentationStyle = .overFullScreen
+        return alertViewController
+    }
 }
 
 // MARK: - Private Method
