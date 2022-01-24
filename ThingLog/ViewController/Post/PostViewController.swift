@@ -46,9 +46,12 @@ final class PostViewController: BaseViewController {
         super.viewDidLayoutSubviews()
         
         if isFirstLoad {
-            let startIndexPath: IndexPath = IndexPath(row: viewModel.startIndexPath.row, section: 0)
-            tableView.scrollToRow(at: startIndexPath, at: .top, animated: false)
-            isFirstLoad = false
+            DispatchQueue.main.async { [weak self] in
+                let startIndexPath: IndexPath = IndexPath(row: self?.viewModel.startIndexPath.row ?? 0,
+                                                          section: 0)
+                self?.tableView.scrollToRow(at: startIndexPath, at: .top, animated: false)
+                self?.isFirstLoad = false
+            }
         }
     }
 
