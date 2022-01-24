@@ -35,13 +35,6 @@ final class PhotoCardViewController: UIViewController {
         return label
     }()
     
-    let logoView: UIImageView = {
-        let view: UIImageView = UIImageView(image: SwiftGenIcons.cardLogo.image)
-        view.contentMode = .scaleAspectFit
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     let ratingView: RatingView = {
         let ratingView: RatingView = RatingView()
         ratingView.tintButton(.white)
@@ -209,7 +202,6 @@ final class PhotoCardViewController: UIViewController {
         setupOptionView()
         setupPhotoView()
         setupLabel()
-        setupLogoView()
         setupRatingView()
         setupPhotoData()
         
