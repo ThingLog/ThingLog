@@ -108,17 +108,14 @@ final class ZoomableCollectionCell: UICollectionViewCell, UIGestureRecognizerDel
         
         let pinchCenter: CGPoint = CGPoint(x: sender.location(in: currentWindow).x - (currentWindow.bounds.midX),
                                            y: sender.location(in: currentWindow).y - (currentWindow.bounds.midY))
-        let centerXDif: CGFloat = initialCenter.x - sender.location(in: currentWindow).x
-        let centerYDif: CGFloat = initialCenter.y - sender.location(in: currentWindow).y
+        let centerXDif: CGFloat = (initialCenter.x - sender.location(in: currentWindow).x) / 10
+        let centerYDif: CGFloat = (initialCenter.y - sender.location(in: currentWindow).y) / 10
         let zoomScale: CGFloat = (newScale * windowImageWidth >= imageView.frame.width) ? newScale : currentScale
         let transform: CGAffineTransform = currentWindow.transform
                                                         .translatedBy(x: pinchCenter.x, y: pinchCenter.y)
                                                         .scaledBy(x: zoomScale, y: zoomScale)
                                                         .translatedBy(x: -centerXDif, y: -centerYDif)
-        UIView.animate(withDuration: 0.1) {
-            self.windowImageView.transform = transform
-        }
-        
+        windowImageView.transform = transform
         sender.scale = 1
     }
     
